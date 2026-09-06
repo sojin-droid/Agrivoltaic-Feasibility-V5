@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>PLANiT · 지역별 우선 후보 — 시군별 종합 검토</title>
+<title>PLANiT · 지역별 우선 검토 후보 — 시군별 종합 검토</title>
 <meta name="description" content="각 시군에서 규모·계통·지역 전력수요를 종합해 우선 검토할 영농형 태양광 후보지를 제시.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -122,7 +122,7 @@ input[type=range]{accent-color:var(--navy)}
       <a href="index.html" data-i18n="nav-index">한눈에 보기</a>
       <a href="finder.html" data-i18n="nav-finder">후보지 찾기</a>
       <a href="scenarios.html" data-i18n="nav-scn">정책 시나리오</a>
-      <a class="active" href="regions.html" data-i18n="nav-regions">지역별 우선 후보</a>
+      <a class="active" href="regions.html" data-i18n="nav-regions">지역별 우선 검토 후보</a>
       <a href="method.html" data-i18n="nav-method">근거와 방법</a>
     </nav>
     <div style="display:flex;gap:12px;align-items:center">
@@ -137,8 +137,8 @@ input[type=range]{accent-color:var(--navy)}
 </header>
 <div class="page-hero">
   <div class="wrap" style="max-width:900px">
-    <p class="eyebrow">Regions · 지역별 우선 후보</p>
-    <h1>지역별 우선 후보</h1>
+    <p class="eyebrow">Regions · 지역별 우선 검토 후보</p>
+    <h1>지역별 우선 검토 후보</h1>
     <p class="lede">각 시군에서 규모·계통·지역수요 및 주요 입지 조건을 종합해 우선
     검토할 후보지를 보여줌.<br>후보 풀 = 세 축(면적·계통 여유·산단 거리) 모두에서
     지지 않는 구획 전원(<b>우선 후보 비교 — 비지배 집합</b>)이고, 그 옆에 가중
@@ -152,8 +152,14 @@ input[type=range]{accent-color:var(--navy)}
 <article>
 <div class="wrap art" style="max-width:860px">
 
-  <h2 class="art-h" id="rank">1. 시군별 우선 후보 — 우선 후보 비교 (비지배 집합)</h2>
+  <h2 class="art-h" id="rank">1. 시군별 우선 검토 후보 — 우선 후보 비교 (비지배 집합)</h2>
 
+  <p><b>어떤 후보가 우선인가</b> — 면적이 크고, 계통 여유가 크며, 산업단지와 가까운
+  후보를 비교함. 시군을 고르면 그 시군에서 세 조건 모두 다른 구획에 지지 않는 후보
+  전원이 표시됨.</p>
+
+  <details style="margin:10px 0 16px">
+    <summary style="cursor:pointer;font-size:13px;font-weight:700;color:var(--leaf-deep)">선정 방법 자세히 보기</summary>
   <div class="figbox" style="display:grid;grid-template-columns:1fr 200px;gap:14px;align-items:center;margin:12px 0 16px">
     <div style="font-size:13px;line-height:2">
       <span style="font-family:var(--mono);font-size:11px;color:var(--leaf-deep);letter-spacing:.1em">FORMULATION</span><br>
@@ -176,6 +182,7 @@ input[type=range]{accent-color:var(--navy)}
   거리</b> 세 축 모두 다른 구획에 지지 않는 <b>공동 1등 전원</b>을 보인다.
   가중치도, 우선순위도, 관문도 없다 — 단독 1등을 정하지 않으며, 집합 안에서
   무엇을 고를지는 보는 쪽의 우선순위다. 축별 순위 세 열이 그 선택을 돕는다.</p>
+  </details>
 
   <figure class="figure-v4">
     <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:8px">

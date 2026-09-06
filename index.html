@@ -65,7 +65,7 @@
       <a class="active" href="index.html" data-i18n="nav-index">한눈에 보기</a>
       <a href="finder.html" data-i18n="nav-finder">후보지 찾기</a>
       <a href="scenarios.html" data-i18n="nav-scn">정책 시나리오</a>
-      <a href="regions.html" data-i18n="nav-regions">지역별 우선 후보</a>
+      <a href="regions.html" data-i18n="nav-regions">지역별 우선 검토 후보</a>
       <a href="method.html" data-i18n="nav-method">근거와 방법</a>
     </nav>
     <div style="display:flex;gap:12px;align-items:center">
@@ -93,16 +93,15 @@
       <a class="btn btn-primary" href="scenarios.html" data-i18n="hero-btn1">전체 수치 보기</a>
       <a class="btn btn-ghost" href="scenarios.html#decree" data-i18n="hero-btn2">시행령 제정안 영향 →</a>
     </div>
-    <p style="font-size:12.5px;color:var(--muted);margin-top:14px">처음이라면 이 페이지의
-    기본 개념 → <a href="method.html" style="color:var(--leaf-deep);font-weight:700">방법·자료</a> →
-    <a href="scenarios.html" style="color:var(--leaf-deep);font-weight:700">근거</a> 순서를 권장함.</p>
+    <p style="font-size:12.5px;color:var(--muted);margin-top:14px">처음이라면 아래
+    <a href="#flow" style="color:var(--leaf-deep);font-weight:700">분석 흐름</a>부터 확인하세요.</p>
 
     <!-- 지표 밴드 — 값은 data_v4에서 -->
     <div class="statband reveal" aria-label="핵심 지표" id="statband">
       <div class="st"><div class="v"><span id="sb1">—</span><small> km²</small></div><div class="k">현재 적격 면적 — 전·답·과수원 중 물리·법적 1차 통과 (분석 기준 필지 = 법인·국공유)</div></div>
       <div class="st"><div class="v"><span class="lf" id="sb2">—</span><small> km²</small></div><div class="k">제도 변경 시 추가 면적 (보호+진흥 개방)</div></div>
       <div class="st"><div class="v"><span class="lf" id="sb3">—</span><small> 곳</small></div><div class="k">50MW 이상 대규모 후보지 (진흥 개방 시 · 특구급 = 분석상 표현)</div></div>
-      <div class="st"><div class="v"><span id="sb4">—</span><small> 곳</small></div><div class="k">우선 검토 후보 — 시군별 공동 1등 (209개 시군)</div></div>
+      <div class="st"><div class="v"><span id="sb4">—</span><small> 곳</small></div><div class="k">시군별 우선 후보 — 공동 1등<br><span style="font-size:11px;opacity:.75">209개 시군에서 도출</span></div></div>
     </div>
   </div>
 </div>
@@ -294,6 +293,9 @@
 <!-- ═══════════ 입문 안내 (처음 읽는 독자용) ═══════════ -->
 <section style="padding:44px 0 36px">
   <div class="wrap">
+    <details id="primer-fold" style="border:1px solid var(--line);border-radius:12px;background:var(--white);padding:0 18px 6px">
+      <summary style="cursor:pointer;padding:16px 2px;font-weight:700;color:var(--navy);font-size:15px;word-break:keep-all">기본 개념과 농업진흥지역 구조 — 펼쳐 보기
+        <span style="font-weight:400;font-size:12.5px;color:var(--muted)"> · 영농형 태양광 / 필지 / 연접 구획 / 분석 기준 필지 / 진흥·보호구역</span></summary>
 
     <figure class="art-fig" style="margin:6px 0 22px">
       <div class="figbox" style="padding:10px 14px;background:#fff">
@@ -394,6 +396,7 @@
         </div>
       </div>
     </div>
+    </details>
   </div>
 </section>
 
@@ -463,7 +466,7 @@
       </a>
       <a class="card reveal" href="regions.html">
         <div class="meta"><span class="tag">REGIONS</span><span>시군별 · 종합</span></div>
-        <h3>지역별 우선 후보</h3>
+        <h3>지역별 우선 검토 후보</h3>
         <p>각 시군의 우선 검토 후보 — 규모·계통·거리 종합(우선 후보 비교)과
         지역 전력수요 대비, 제도 경로 판독.</p>
         <div class="foot"><span>시군별 보기</span><span>→</span></div>

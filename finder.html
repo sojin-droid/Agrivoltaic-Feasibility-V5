@@ -122,7 +122,7 @@ input[type=range]{accent-color:var(--navy)}
       <a href="index.html" data-i18n="nav-index">한눈에 보기</a>
       <a class="active" href="finder.html" data-i18n="nav-finder">후보지 찾기</a>
       <a href="scenarios.html" data-i18n="nav-scn">정책 시나리오</a>
-      <a href="regions.html" data-i18n="nav-regions">지역별 우선 후보</a>
+      <a href="regions.html" data-i18n="nav-regions">지역별 우선 검토 후보</a>
       <a href="method.html" data-i18n="nav-method">근거와 방법</a>
     </nav>
     <div style="display:flex;gap:12px;align-items:center">
@@ -140,8 +140,10 @@ input[type=range]{accent-color:var(--navy)}
   <div class="wrap" style="max-width:860px">
     <p class="eyebrow">Proximity · 수요·계통 연계</p>
     <h1>후보지 찾기</h1>
-    <p class="lede">대규모 영농형 태양광 사업을 검토할 수 있는 후보 구획을 탐색함.<br>
-    폴리곤 = 약 50MW 이상(특구급 — 분석상 규모 표현) 후보 25곳(분석 기준 필지 =
+    <p class="lede">이 페이지는 약 50MW 이상 규모가 되는 <b>대규모 후보지</b>를 찾고,
+    다음 단계(<a href="regions.html" style="color:inherit;font-weight:700">지역별 우선 검토
+    후보</a>)에서 계통·거리·수요를 비교함.<br>
+    폴리곤 = 약 50MW 이상(특구급 — 분석상 규모 표현) 대규모 후보지 25곳(분석 기준 필지 =
     법인·국공유 소유, 농업진흥구역 개방 기준) · 겹칠 수 있는 레이어 = 산업단지 전국
     1,363곳<sup class="fnref">[23]</sup> · 읍면동 계통 여유<sup class="fnref">[22]</sup>.</p>
     <p style="font-family:var(--mono);font-size:11.5px;color:var(--muted);margin-top:14px"
@@ -211,13 +213,13 @@ input[type=range]{accent-color:var(--navy)}
       <span class="dot" style="background:#0C356A;border:2px solid #fff;box-shadow:0 0 0 1px #0C356A"></span>산업단지 경계·중심점 (색 = 유형: 빨강 국가 · 남색 일반 · 보라 도시첨단 · 청록 농공) ·
       금색 점선 원 = 선택 후보의 반경 버퍼 · 금색 테두리 = 버퍼 안 산업단지
     </div>
-    <figcaption style="font-size:12px;color:var(--muted);margin-top:6px">그림 2. 특구급 후보 25곳 ×
+    <figcaption style="font-size:12px;color:var(--muted);margin-top:6px">그림 2. 대규모 후보지 25곳 ×
     산업단지 전국 <span id="p-ind3">—</span>곳 × 읍면동 단위 계통 여유 전국 — 위성 배경 © Esri<sup class="fnref">[19]</sup> ·
     구획 지오메트리 15m 간소화(표시용)<sup class="fnref">[12]</sup> ·
     계통<sup class="fnref">[22]</sup>·산업단지<sup class="fnref">[23]</sup>는 참고 레이어(성격·한계는 방법·자료 탭).</figcaption>
   </figure>
 
-  <h2 class="art-h" id="candtbl">3. 특구급 후보 25곳 — 소재·최근접 산업단지·계통</h2>
+  <h2 class="art-h" id="candtbl">3. 대규모 후보지 25곳 — 소재·최근접 산업단지·계통</h2>
   <p style="margin-bottom:8px">이 25곳은 파레토가 아니라 <b>조건 선별</b> — 다음 세 조건을
   전부 만족하는 구획 전량(규모순 표시):</p>
   <p style="margin:0 0 10px">
@@ -231,18 +233,18 @@ input[type=range]{accent-color:var(--navy)}
   <figure class="art-fig">
     <div class="figbox">
       <div style="overflow-x:auto"><table class="v4" id="t-prox"></table></div>
-      <div class="figcap">표 1. 특구급 후보 25곳의 최근접 산업단지·직선거리·소재 읍면동 계통 여유 —
+      <div class="figcap">표 1. 대규모 후보지 25곳의 최근접 산업단지·직선거리·소재 읍면동 계통 여유 —
       행 클릭 = 지도 이동. 거리·계통 여유는 표시용 참고값(방법·자료 탭 참조).</div>
     </div>
   </figure>
 
   <div class="callout-v4" id="p-read">—</div>
 
-  <h2 class="art-h" id="jisan">4. 후보 25곳 요약 — 다섯 값</h2>
-  <p>후보 25곳 안의 최대·최소 — 규모·계통·거리(비지배 세 축)와 지역 전력수요 대비의
+  <h2 class="art-h" id="jisan">4. 대규모 후보지 25곳 요약 — 다섯 값</h2>
+  <p>대규모 후보지 25곳 안의 최대·최소 — 규모·계통·거리(비지배 세 축)와 지역 전력수요 대비의
   양 끝. 지역 전력수요 대비는 참고지표로, 실제 지역 내 전력 자립이나 직접거래
   가능성을 의미하지 않음<sup class="fnref">[28]</sup>. 시군별 종합 비교는
-  <a href="regions.html" style="color:var(--leaf-deep);font-weight:700">지역별 우선 후보 탭</a>.</p>
+  <a href="regions.html" style="color:var(--leaf-deep);font-weight:700">지역별 우선 검토 후보 탭</a>.</p>
   <div class="jsi" id="jsi"></div>
   <div style="font-size:12px;color:var(--muted);margin:-12px 0 10px">계통·수요 값은
   참고 표기 · 판정·선별 불사용<sup class="fnref">[28]</sup><sup class="fnref">[29]</sup>.</div>

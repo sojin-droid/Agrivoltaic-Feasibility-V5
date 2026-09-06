@@ -45,7 +45,7 @@
       <a href="index.html" data-i18n="nav-index">한눈에 보기</a>
       <a href="finder.html" data-i18n="nav-finder">후보지 찾기</a>
       <a href="scenarios.html" data-i18n="nav-scn">정책 시나리오</a>
-      <a href="regions.html" data-i18n="nav-regions">지역별 우선 후보</a>
+      <a href="regions.html" data-i18n="nav-regions">지역별 우선 검토 후보</a>
       <a class="active" href="method.html" data-i18n="nav-method">근거와 방법</a>
     </nav>
     <div style="display:flex;gap:12px;align-items:center">
@@ -170,30 +170,30 @@
     <div class="sec-head"><div><p class="eyebrow">Verification</p><h2>재현·검증 체계</h2></div></div>
     <div class="grid two">
       <div class="card reveal vcard" data-k="single">
-        <div class="meta"><span class="tag">SINGLE SOURCE</span></div>
         <h3>단일 출처 원칙 — 모든 수치는 한 곳에서</h3>
+        <div class="meta"><span class="tag">SINGLE SOURCE</span></div>
         <p>모든 수치는 정본 DB의 표준 질의 모듈에서만 나옴.<br>이 사이트의 데이터 파일도
         그 모듈을 직접 불러 생성 — 판정 SQL이 두 곳에 존재하지 않음.</p>
         <div class="foot"><span>자세히 보기</span><span>＋</span></div>
       </div>
       <div class="card reveal vcard" data-k="touch">
-        <div class="meta"><span class="tag">TOUCHSTONE</span></div>
         <h3>기준값 자동 검증 (시금석)</h3>
+        <div class="meta"><span class="tag">TOUCHSTONE</span></div>
         <p>진흥✕·보호✕(R0) 기준값(필지 수·㎡)이 상수로 박혀 있고, export 시 재조회값과 정확 일치하지
         않으면 파일 생성이 중단됨.</p>
         <div class="foot"><span>자세히 보기</span><span>＋</span></div>
       </div>
       <div class="card reveal vcard" data-k="add">
-        <div class="meta"><span class="tag">ADDITIVITY</span></div>
         <h3>합계 검증 (가산성)</h3>
+        <div class="meta"><span class="tag">ADDITIVITY</span></div>
         <p>세 부분(농업진흥지역 밖 · 보호구역 · 진흥구역)이 서로 겹치지 않으므로,
         진흥✕·보호✕ 값에 두 증분을 더한 합이 "둘 다 개방" 값과 정확히 일치해야 함 —
         어긋나면 게이트가 차단함.</p>
         <div class="foot"><span>자세히 보기 — 실제 수치로 검산</span><span>＋</span></div>
       </div>
       <div class="card reveal vcard" data-k="gate">
-        <div class="meta"><span class="tag">SITE GATE</span></div>
         <h3>공개 전 품질검사 (Site Gate)</h3>
+        <div class="meta"><span class="tag">SITE GATE</span></div>
         <p>무효·구세대 수치, 금지 표현, 외부 자원 로드, 본문 하드코딩 수치를 공개 전에
         자동 검사함.<br>새 함정이 발견되면 문서보다 먼저 검사 코드에 추가.</p>
         <div class="foot"><span>자세히 보기 — 검사 목록과 실전 적발</span><span>＋</span></div>
@@ -311,7 +311,7 @@
   const c0n = M.R0['대조군'].n, c3n = M.R3['대조군'].n;
   const cpn = P['보호구역']['대조군'].n, cmn = P['진흥구역']['대조군'].n;
   const DETAIL = {
-    single: `<span class="mtag">SINGLE SOURCE</span><h3>정본 질의 — 단일 출처</h3>
+    single: `<h3>단일 출처 원칙 — 표준 질의 모듈</h3><span class="mtag">SINGLE SOURCE</span>
       <p>수치가 흐르는 길은 하나뿐:</p>
       <div class="mbox mono">정본 DB (원장·판정 테이블) → 표준 질의 모듈 (판정 SQL의 유일한 소재지)
       → 사이트 데이터 파일(JSON) → 페이지 렌더</div>
@@ -320,7 +320,7 @@
       보고서의 같은 항목이 서로 다른 값을 보일 수 없는 구조.</p>
       <div class="case">실전 사례 — 질의 모듈 안의 용어 규정 위반이 사이트 데이터까지 흘러온 것을
       자동 게이트가 적발해, 사이트가 아니라 원천(질의 모듈)에서 수정 (2026-08-25).</div>`,
-    touch: `<span class="mtag">TOUCHSTONE</span><h3>시금석 — 기준값 상수</h3>
+    touch: `<h3>기준값 자동 검증 — 상수 대조 (시금석)</h3><span class="mtag">TOUCHSTONE</span>
       <p>진흥✕·보호✕(R0) 기준값이 코드에 상수로 박혀 있음:</p>
       <div class="mbox"><b>${V4.n(s.anchor.n)}필지 · ${V4.n(Math.round(s.anchor.m2))} ㎡</b>
       (${V4.km2(s.anchor.km2, 2)} km²)</div>
@@ -333,7 +333,7 @@
       구 기준값(3,272,555필지·4,099.64km²)은 회귀 검증용으로만 유지</li>
       <li>용도지역 미상 ${s.anchor.pending_zone_null ? V4.n(s.anchor.pending_zone_null.n) : ''}필지는
       판정 보류로 별도 병기 — 기준값에 불포함</li></ul>`,
-    add: `<span class="mtag">ADDITIVITY</span><h3>가산성 검사 — 실제 수치로 검산</h3>
+    add: `<h3>합계 검증 — 실제 수치로 검산 (가산성)</h3><span class="mtag">ADDITIVITY</span>
       <p>세 풀이 서로 겹치지 않으므로 다음 항등식이 필지 수로 정확히 성립해야 함:</p>
       <div class="mbox mono">정본(법인·국공유)<br>
       진흥✕·보호✕ ${V4.n(r0n)}<br>
@@ -350,7 +350,7 @@
         : '경고: 항등식이 성립하지 않음 — 데이터 파일 오염 가능성.'}</p>
       <p>면적 표기(km²)는 반올림 때문에 소수 첫째 자리에서 어긋나 보일 수 있어,
       검사는 반올림 없는 필지 수와 ㎡ 원값으로 수행함.</p>`,
-    gate: `<span class="mtag">SITE GATE</span><h3>공개 전 자동 게이트 — 검사 목록</h3>
+    gate: `<h3>공개 전 품질검사 — 검사 목록 (Site Gate)</h3><span class="mtag">SITE GATE</span>
       <ul>
       <li><b>무효·구세대 수치 스캔</b> — 폐기된 판의 값이 한 글자라도 남으면 차단</li>
       <li><b>금지 표현 스캔</b> — 임의 축약어·은유·물결표 범위 등 용어 규정 위반</li>
