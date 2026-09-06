@@ -1,0 +1,8 @@
+{
+ "generated": "2026-08-31 19:15",
+ "basis": "전국등록공장현황 2024-12-31 (FactoryOn 등록분)",
+ "n_source": 84111,
+ "n_matched": 79424,
+ "n_unmatched": 4687,
+ "n_dans": 788
+}

@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PLANiT · 영농형 태양광 — 전국 설치 가능 농지</title>
+<meta name="description" content="전국 필지 전수 분석 — 개방 전(진흥✕·보호✕) 기준의 설치 가능 농지와, 규모를 결정하는 제도 변수 두 가지(농업보호구역·농업진흥구역).">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=Inter:wght@400;500;700&family=Noto+Sans+KR:wght@400;500;700&family=JetBrains+Mono:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<script src="assets/v4.js"></script>
+<style>
+/* 3D 레이어 스테이지 (구판 ls-* 모듈 이식 — 데이터는 1판 당진 실측) */
+.ls-rig{display:grid;grid-template-columns:1.5fr .92fr;gap:22px;align-items:center;margin-top:8px}
+@media(max-width:820px){.ls-rig{grid-template-columns:1fr}}
+.ls-stage3d{position:relative;height:520px;perspective:1500px;perspective-origin:50% 42%}
+@media(max-width:820px){.ls-stage3d{height:420px}}
+.ls-floor{position:absolute;left:50%;top:50%;width:560px;height:400px;margin:-150px 0 0 -280px;
+  transform:rotateX(59deg) rotateZ(-31deg);
+  background:repeating-linear-gradient(0deg,rgba(12,53,106,.05) 0 1px,transparent 1px 40px),
+  repeating-linear-gradient(90deg,rgba(12,53,106,.05) 0 1px,transparent 1px 40px);
+  border:1px dashed rgba(12,53,106,.15);border-radius:6px}
+.ls-plane{position:absolute;left:50%;top:50%;width:560px;height:400px;margin:-150px 0 0 -280px;
+  transform-origin:center;opacity:0;transition:transform .7s cubic-bezier(.2,.75,.25,1),opacity .5s ease;pointer-events:none}
+.ls-plane svg{width:100%;height:100%;display:block;filter:drop-shadow(0 18px 22px rgba(8,37,72,.18))}
+.ls-plane .sheet{fill:#fff;fill-opacity:.78;stroke:rgba(12,53,106,.35);stroke-width:1.2}
+.ls-plane.show{opacity:1}
+.ls-plane.active .sheet{stroke:var(--gold);stroke-width:2.4}
+.ls-panel{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 16px 18px}
+.ls-steps{display:flex;flex-direction:column;gap:6px;margin-bottom:14px}
+.ls-step{display:flex;gap:11px;align-items:flex-start;text-align:left;background:none;border:1px solid transparent;
+  border-radius:9px;padding:7px 9px;cursor:pointer;font:inherit;color:var(--muted);transition:.2s}
+.ls-step:hover{background:var(--sky)}
+.ls-step.on{background:#fff;border-color:var(--line);color:var(--ink);box-shadow:0 1px 6px rgba(8,37,72,.07)}
+.ls-step .dot{flex:none;width:22px;height:22px;border-radius:50%;background:var(--line);color:#fff;
+  font-family:var(--mono);font-size:11px;font-weight:700;display:grid;place-items:center;margin-top:1px}
+.ls-step.on .dot{background:var(--leaf)}.ls-step.done .dot{background:var(--leaf-deep)}
+.ls-step .nm{font-weight:700;font-size:13.5px;line-height:1.25}
+.ls-step .ds{font-size:11px;color:var(--muted);margin-top:1px}.ls-step.on .ds{color:var(--leaf-deep)}
+.ls-play{margin-top:5px;display:flex;gap:8px}
+.ls-play button{flex:1;font:inherit;font-size:13px;font-weight:700;padding:8px;border-radius:8px;cursor:pointer;
+  border:1px solid var(--navy);background:var(--navy);color:#fff}
+.ls-play button.ghost{background:#fff;color:var(--navy)}
+.ls-cap{font-family:var(--mono);font-size:11px;color:var(--muted);letter-spacing:.05em;margin:14px 0 0;text-align:center}
+@media(max-width:820px){#primer-grid{grid-template-columns:1fr !important}}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="wrap">
+    <span data-i18n="tb-tag">Agrivoltaic · PLANiT Institute의 영농형 태양광 섹터</span>
+    <span><a href="https://planit.institute/" data-i18n="tb-link">← planit.institute 메인으로</a></span>
+  </div>
+</div>
+
+<header class="nav">
+  <div class="wrap">
+    <a class="brand" href="index.html" aria-label="PLANiT 영농형 태양광 홈">
+      <img class="mark-img" src="assets/planit_logo.png" alt="PLANiT">
+      <span class="sector" data-i18n="brand-sector">영농형 태양광</span>
+    </a>
+    <nav class="menu" id="menu">
+      <a class="active" href="index.html" data-i18n="nav-index">한눈에 보기</a>
+      <a href="finder.html" data-i18n="nav-finder">후보지 찾기</a>
+      <a href="scenarios.html" data-i18n="nav-scn">정책 시나리오</a>
+      <a href="regions.html" data-i18n="nav-regions">지역별 우선 후보</a>
+      <a href="method.html" data-i18n="nav-method">근거와 방법</a>
+    </nav>
+    <div style="display:flex;gap:12px;align-items:center">
+      <div class="lang-toggle" role="group" aria-label="Language">
+        <button type="button" data-lang="ko">KO</button>
+        <button type="button" data-lang="en">EN</button>
+      </div>
+      <a class="nav-cta" href="method.html#contact">Contact</a>
+      <button class="hamburger" aria-label="메뉴 열기" onclick="document.getElementById('menu').classList.toggle('open')">☰</button>
+    </div>
+  </div>
+</header>
+
+<!-- ═══════════ 히어로 ═══════════ -->
+<div style="border-bottom:1px solid var(--line)">
+  <div class="wrap" style="padding:76px 24px 60px;max-width:900px">
+    <p class="eyebrow" data-i18n="hero-eyebrow">영농형 태양광 · 전국 설치 가능 농지 분석</p>
+    <h1 data-i18n="hero-h1">영농형 태양광 입지·잠재량 분석</h1>
+    <p class="lede" data-i18n="hero-lede">
+      전국 농지를 필지 단위로 분석하여<sup class="fnref">[1]</sup> 현재 적격농지,
+      제도 변화에 따른 추가 가능 면적<sup class="fnref">[5]</sup>, 대규모 사업
+      후보지를 분석함.<br>1차 단위는 면적(km²) — MW는 환산 참고값<sup class="fnref">[13]</sup>.
+    </p>
+    <div style="display:flex;gap:14px;margin-top:30px;flex-wrap:wrap">
+      <a class="btn btn-primary" href="scenarios.html" data-i18n="hero-btn1">전체 수치 보기</a>
+      <a class="btn btn-ghost" href="scenarios.html#decree" data-i18n="hero-btn2">시행령 제정안 영향 →</a>
+    </div>
+    <p style="font-size:12.5px;color:var(--muted);margin-top:14px">처음이라면 이 페이지의
+    기본 개념 → <a href="method.html" style="color:var(--leaf-deep);font-weight:700">방법·자료</a> →
+    <a href="scenarios.html" style="color:var(--leaf-deep);font-weight:700">근거</a> 순서를 권장함.</p>
+
+    <!-- 지표 밴드 — 값은 data_v4에서 -->
+    <div class="statband reveal" aria-label="핵심 지표" id="statband">
+      <div class="st"><div class="v"><span id="sb1">—</span><small> km²</small></div><div class="k">현재 적격 면적 — 전·답·과수원 중 물리·법적 1차 통과 (분석 기준 필지 = 법인·국공유)</div></div>
+      <div class="st"><div class="v"><span class="lf" id="sb2">—</span><small> km²</small></div><div class="k">제도 변경 시 추가 면적 (보호+진흥 개방)</div></div>
+      <div class="st"><div class="v"><span class="lf" id="sb3">—</span><small> 곳</small></div><div class="k">50MW 이상 대규모 후보지 (진흥 개방 시 · 특구급 = 분석상 표현)</div></div>
+      <div class="st"><div class="v"><span id="sb4">—</span><small> 곳</small></div><div class="k">우선 검토 후보 — 시군별 공동 1등 (209개 시군)</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ 다섯 단계로 읽는 결론 (전량 narrative_v4·summary_v4 렌더) ═══════════ -->
+
+
+<section style="padding:34px 0 6px" id="flow">
+  <div class="wrap" style="max-width:1080px">
+    <div class="sec-head"><div><p class="eyebrow">Pipeline · 분석 흐름</p>
+    <h2>전국 필지에서 우선 후보까지</h2></div>
+    <span style="font-size:12.5px;color:var(--muted)">각 단계 클릭 = 해당 탭</span></div>
+    <style>
+    .flow7{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;align-items:stretch}
+    @media(max-width:900px){.flow7{grid-template-columns:repeat(2,1fr)}}
+    .flow7 a{display:block;text-decoration:none;color:var(--ink);background:var(--white);
+      border:1px solid var(--line);border-radius:10px;padding:10px 8px;text-align:center;position:relative}
+    .flow7 a:hover{border-color:var(--leaf-deep)}
+    .flow7 b{display:block;font-family:var(--serif);font-size:17px;color:var(--navy);margin:2px 0}
+    .flow7 span{font-size:11px;color:var(--muted);line-height:1.4;word-break:keep-all}
+    .flow7 a:not(:last-child)::after{content:"\2192";position:absolute;right:-11px;top:42%;color:#9aa3ae;font-size:13px}
+    @media(max-width:900px){.flow7 a::after{display:none}}
+    </style>
+    <div class="flow7">
+      <a href="method.html"><span>전국 필지</span><b id="fl1">—</b><span>지적 원장 전수<sup class="fnref">[1]</sup></span></a>
+      <a href="method.html"><span>전·답·과수원</span><b id="fl2">—</b><span>지목 농지</span></a>
+      <a href="method.html"><span>물리·법적 1차 적격</span><b id="fl3">—</b><span>구조·경사·용도 통과<br>(법인·국공유 <span id="fl3b">—</span>)</span></a>
+      <a href="finder.html"><span>연접 구획</span><b id="fl4">—</b><span>21m 이내 병합 · 전량<br>(진흥구역 개방 기준)</span></a>
+      <a href="finder.html"><span>대규모 후보지</span><b id="fl5">—</b><span>약 50MW 이상<br>(분석상 규모 표현)</span></a>
+      <a href="regions.html"><span>소유·계통·지역수요</span><b>3축+α</b><span>규모·계통 여유·산단 거리<br>+ 지역 전력수요 비교</span></a>
+      <a href="regions.html"><span>우선 검토 후보</span><b id="fl7">—</b><span>시군별 공동 1등<br>(209개 시군)</span></a>
+    </div>
+    <p style="font-size:12px;color:var(--muted);margin-top:8px">필지·구획 수 기준 —
+    면적·조건 상세는 근거와 방법 탭. 세부 알고리즘은 이 화면에서 설명하지 않음.</p>
+  </div>
+</section>
+
+<section style="padding:34px 0 8px">
+  <div class="wrap" style="max-width:1080px">
+    <figure class="art-fig" style="margin:0">
+      <div class="figbox" style="padding:0;overflow:hidden">
+        <svg id="agv-hero" viewBox="0 0 980 300" style="width:100%;height:auto;display:block;cursor:ew-resize">
+          <defs>
+            <linearGradient id="agvSky" x1="0" y1="0" x2="0" y2="1">
+              <stop id="agvSky1" offset="0" stop-color="#BFE0F5"/>
+              <stop id="agvSky2" offset="1" stop-color="#EAF4E4"/>
+            </linearGradient>
+          </defs>
+          <rect width="980" height="120" fill="url(#agvSky)"/>
+          <circle id="agvSun" cx="200" cy="70" r="16" fill="#FFC436"/>
+          <g id="agvFld"></g>
+          <rect x="330" y="128" width="420" height="160" rx="10" fill="none"
+                stroke="var(--leaf-deep)" stroke-width="2" stroke-dasharray="8 6"/>
+          <text x="338" y="118" font-family="var(--mono)" font-size="12" fill="var(--leaf-deep)"
+                font-weight="700">농업진흥지역 · 영농형 — 패널 아래에서 농사는 계속됨</text>
+          <g id="agvPn"></g><g id="agvCr"></g>
+          <g id="agvInd">
+            <rect x="790" y="120" width="190" height="180" fill="#E3E4DE"/>
+            <rect x="790" y="196" width="190" height="10" fill="#CACBC4"/>
+            <g stroke="#9aa" stroke-width="1">
+              <rect x="806" y="140" width="66" height="44" fill="#CDD2D8"/>
+              <rect x="884" y="132" width="80" height="52" fill="#C2C8CF"/>
+              <rect x="812" y="218" width="58" height="60" fill="#CDD2D8"/>
+              <rect x="886" y="214" width="78" height="64" fill="#C2C8CF"/>
+              <path d="M806,140 l10,-12 h14 l10,12" fill="#B7BEC6"/>
+              <path d="M884,132 l12,-14 h20 l12,14" fill="#B7BEC6"/>
+            </g>
+            <g id="agvWin" fill="#FFD84D" opacity="0">
+              <rect x="814" y="150" width="10" height="8"/><rect x="832" y="150" width="10" height="8"/>
+              <rect x="850" y="150" width="10" height="8"/><rect x="894" y="144" width="12" height="9"/>
+              <rect x="914" y="144" width="12" height="9"/><rect x="936" y="144" width="12" height="9"/>
+              <rect x="822" y="230" width="10" height="8"/><rect x="842" y="230" width="10" height="8"/>
+              <rect x="896" y="226" width="12" height="9"/><rect x="918" y="226" width="12" height="9"/>
+            </g>
+            <text x="885" y="296" text-anchor="middle" font-family="var(--mono)"
+                  font-size="11.5" fill="#6C757D" font-weight="700">산업단지 — 전력 수요처</text>
+          </g>
+          <g id="agvGridline">
+            <path id="agvWire" d="M752,170 C 776,150 790,178 806,166 S 850,150 884,158"
+                  fill="none" stroke="#FFC436" stroke-width="3" stroke-dasharray="10 9"/>
+            <line x1="758" y1="170" x2="758" y2="196" stroke="#556" stroke-width="3"/>
+            <line x1="806" y1="166" x2="806" y2="196" stroke="#556" stroke-width="3"/>
+          </g>
+          <rect id="agvNight" width="980" height="300" fill="#0A1E3C" opacity="0" pointer-events="none"/>
+          <g><rect x="836" y="16" width="128" height="30" rx="8" fill="#fff" opacity=".92"/>
+             <text id="agvPct" x="900" y="36" text-anchor="middle" font-family="var(--mono)"
+                   font-size="13" font-weight="700" fill="var(--navy)">발전율 0%</text></g>
+        </svg>
+      </div>
+      <figcaption>개념도 — 해가 뜨고 지면 패널이 발전해 이웃 산업단지로 흐르고(선의 흐름 = 발전율), 이랑의 작물은 그대로 자람. 밤에는 도시의 불이 켜짐
+      (마우스로 해를 끌 수 있음). 수치 아님 · 규모·소재는 아래 결론과 각 탭의 정본 값.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<script>
+(() => {   // 구 사이트 위젯 17/17-B(태양-발전 연동 항공뷰) 재구성 — 자족형, 데이터 무의존
+  const $ = id => document.getElementById(id);
+  const PALS = ['#CDE0AE', '#C2D8A0', '#D6E6BC', '#BFD49A', '#D9E3AC', '#E4DCA0', '#CFE2B4'];
+  let f = '<rect y="120" width="980" height="180" fill="#B9C89A"/>';
+  for (let r = 0; r < 3; r++) for (let c = 0; c < 7; c++) {
+    const px = c * 112 - 8, py = 124 + r * 60, col = PALS[(r * 9 + c * 3) % 7];
+    f += `<rect x="${px}" y="${py}" width="105" height="54" rx="4" fill="${col}"/>`;
+    for (let ly = py + 8; ly < py + 50; ly += 8)
+      f += `<line x1="${px + 5}" y1="${ly}" x2="${px + 100}" y2="${ly}" stroke="rgba(90,110,60,.2)" stroke-width="2"/>`;
+  }
+  $('agvFld').innerHTML = f;
+  let pn = '', cr = '';
+  for (let r = 0; r < 4; r++) for (let c = 0; c < 7; c++) {
+    const x = 348 + c * 58, y = 142 + r * 36;
+    pn += `<g transform="translate(${x},${y}) skewX(-14)">
+      <rect class="cell" width="40" height="16" rx="2" fill="#1c2b4a" stroke="#3d5a80" stroke-width="1"/>
+      <rect class="glow" width="40" height="16" rx="2" fill="#FFD84D" opacity="0"/></g>
+      <line x1="${x + 18}" y1="${y + 16}" x2="${x + 18}" y2="${y + 24}" stroke="#556" stroke-width="2"/>`;
+    cr += `<circle cx="${x + 48}" cy="${y + 22}" r="4" fill="#7FBF5A"/>
+           <circle cx="${x + 52}" cy="${y + 24}" r="3" fill="#E4C64B"/>`;
+  }
+  $('agvPn').innerHTML = pn; $('agvCr').innerHTML = cr;
+  const svg = $('agv-hero'), glows = svg.querySelectorAll('.glow');
+  let p = 0.32, auto = true, t = 0, wireOff = 0;
+  svg.addEventListener('pointermove', e => {
+    auto = false;
+    const r = svg.getBoundingClientRect();
+    p = Math.min(1, Math.max(0, (e.clientX - r.left) / r.width));
+  });
+  svg.addEventListener('pointerleave', () => auto = true);
+  const lerp = (a, b, u) => a + (b - a) * u;
+  function frame() {
+    if (auto) { t += 0.0016; p = (t % 1); }
+    const e = Math.max(0, Math.sin(p * Math.PI));          // 고도 0~1
+    $('agvSun').setAttribute('cx', 60 + p * 860);
+    $('agvSun').setAttribute('cy', 100 - e * 72);
+    $('agvSun').setAttribute('r', 12 + e * 7);
+    $('agvSky1').setAttribute('stop-color', e > .02
+      ? `rgb(${lerp(240, 130, e)},${lerp(190, 200, e)},${lerp(170, 235, e)})` : '#16294a');
+    glows.forEach(g => g.setAttribute('opacity', (e * .8).toFixed(2)));
+    $('agvNight').setAttribute('opacity', ((1 - e) * .55).toFixed(2));
+    $('agvPct').textContent = `발전율 ${Math.round(e * 100)}%`;
+    wireOff -= e * 1.6;                                     // 송전 흐름 속도 ∝ 발전율
+    $('agvWire').setAttribute('stroke-dashoffset', wireOff.toFixed(1));
+    $('agvWire').setAttribute('opacity', (.25 + e * .75).toFixed(2));
+    $('agvWin').setAttribute('opacity', ((1 - e) * .95).toFixed(2));  // 밤 창불빛
+    requestAnimationFrame(frame);
+  }
+  frame();
+})();
+</script>
+
+<section class="alt" id="story" style="padding:48px 0 40px">
+  <div class="wrap">
+    <div class="sec-head"><div><p class="eyebrow">Conclusion · 다섯 단계</p>
+    <h2>다섯 단계로 읽는 결론</h2></div>
+    <span style="font-size:12.5px;color:var(--muted)">모든 수치는 정본 산출<sup class="fnref">[12]</sup> —
+    각 단계에서 해당 상세 탭으로 이동 가능</span></div>
+
+    <div class="verdict reveal" style="margin-bottom:20px">
+      <span class="vh">한 줄 결론</span>
+      <span id="one-liner" style="font-size:15px;line-height:1.8">—</span>
+    </div>
+
+
+<style>
+.strip5{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin:14px 0 20px}
+@media(max-width:760px){.strip5{grid-template-columns:repeat(2,1fr)}}
+.strip5 a{display:block;text-align:center;text-decoration:none;color:var(--ink);
+ background:var(--white);border:1px solid var(--line);border-radius:10px;padding:10px 6px 8px}
+.strip5 a:hover{border-color:var(--leaf-deep)}
+.strip5 .no{font-family:var(--serif);font-weight:700;color:var(--gold);font-size:15px}
+.strip5 .lb{font-size:11.5px;color:var(--muted);word-break:keep-all;line-height:1.4}
+</style>
+<div class="strip5">
+  <a href="#s1"><svg viewBox="0 0 120 74" style="width:100%;height:auto"><g transform="translate(60,10)"><path d="M0,26 L46,0 L92,26 L46,52 Z" transform="translate(-46,0)" fill="#DCE8C8" stroke="#9DB27E" stroke-width="1.4"/><text x="0" y="32" text-anchor="middle" font-size="20" fill="#9DB27E" font-weight="700">?</text></g></svg><div class="no">①</div><div class="lb">진흥✕·보호✕ — 법인·국공유<br>50MW 이상 1곳</div></a>
+  <a href="#s2"><svg viewBox="0 0 120 74" style="width:100%;height:auto"><g transform="translate(60,10)"><path d="M0,26 L46,0 L92,26 L46,52 Z" transform="translate(-46,0)" fill="#DCE8C8" stroke="#9DB27E" stroke-width="1.4"/><circle cx="-28" cy="20" r="3" fill="#C96A00"/><circle cx="-17" cy="27" r="3" fill="#C96A00"/><circle cx="-6" cy="34" r="3" fill="#C96A00"/><circle cx="5" cy="20" r="3" fill="#C96A00"/><circle cx="16" cy="27" r="3" fill="#C96A00"/><circle cx="27" cy="34" r="3" fill="#C96A00"/></g></svg><div class="no">②</div><div class="lb">개인 소유 92% —<br>동의 조직이 벽</div></a>
+  <a href="#s3"><svg viewBox="0 0 120 74" style="width:100%;height:auto"><g transform="translate(60,10)"><path d="M0,26 L46,0 L92,26 L46,52 Z" transform="translate(-46,0)" fill="#DCE8C8" stroke="#9DB27E" stroke-width="1.4"/><rect x="-30" y="16" width="11" height="6" rx="1" fill="#1c2b4a" transform="skewX(-12)"/><rect x="-14" y="19" width="11" height="6" rx="1" fill="#1c2b4a" transform="skewX(-12)"/><rect x="2" y="16" width="11" height="6" rx="1" fill="#1c2b4a" transform="skewX(-12)"/><rect x="18" y="19" width="11" height="6" rx="1" fill="#1c2b4a" transform="skewX(-12)"/></g></svg><div class="no">③</div><div class="lb">진흥구역 개방 —<br>25곳 · 2,450MW</div></a>
+  <a href="#s4"><svg viewBox="0 0 120 74" style="width:100%;height:auto"><g transform="translate(60,10)"><path d="M0,26 L46,0 L92,26 L46,52 Z" transform="translate(-46,0)" fill="#DCE8C8" stroke="#9DB27E" stroke-width="1.4"/><rect x="-30" y="16" width="11" height="6" rx="1" fill="#1c2b4a" transform="skewX(-12)"/><rect x="-14" y="19" width="11" height="6" rx="1" fill="#1c2b4a" transform="skewX(-12)"/><rect x="2" y="16" width="11" height="6" rx="1" fill="#1c2b4a" transform="skewX(-12)"/><rect x="18" y="19" width="11" height="6" rx="1" fill="#1c2b4a" transform="skewX(-12)"/><ellipse cx="0" cy="26" rx="52" ry="30" fill="none" stroke="#B3261E" stroke-width="1.6" stroke-dasharray="5 4"/></g></svg><div class="no">④</div><div class="lb">이격 200m 얹어도<br>24곳 잔존</div></a>
+  <a href="#s5"><svg viewBox="0 0 120 74" style="width:100%;height:auto"><g transform="translate(60,10)"><path d="M-46,26 L0,0 L46,26 L0,52 Z" fill="#CFE2E8" stroke="#8FB4BF" stroke-width="1.4"/><path d="M0,26 L46,0 L92,26 L46,52 Z" transform="translate(-38,-6) scale(.84)" fill="#DCE8C8" stroke="#9DB27E" stroke-width="1.4"/><rect x="18" y="10" width="18" height="14" fill="#C2C8CF" stroke="#9aa"/><path d="M18,10 l4,-5 h10 l4,5" fill="#B7BEC6"/></g></svg><div class="no">⑤</div><div class="lb">간척 평야가 1차 후보 —<br>산단 수요 인접</div></a>
+</div>
+    <div id="story-steps" style="display:flex;flex-direction:column;gap:12px"></div>
+
+    <div class="fn" style="margin-top:14px">특구급 = 재생에너지지구급 사업 규모 50–100MW
+    = 연접 농지 <span id="th50">—</span>–<span id="th100">—</span>㎡
+    (환산 0.045 kW/㎡ = 설치밀도 0.225 × 모듈효율 0.20<sup class="fnref">[13]</sup>) ·
+    소유 필터 = 법인·국공유 필지만 병합(개인·종중 등 배제, 결재 확정 정의)<sup class="fnref">[12]</sup> ·
+    이격 = 주거 200m 상한의 보수 하한<sup class="fnref">[11]</sup> ·
+    법인의 농업법인 여부·간척지 임차 가능성은 미확인(방법·자료 탭).</div>
+  </div>
+</section>
+
+<!-- ═══════════ 입문 안내 (처음 읽는 독자용) ═══════════ -->
+<section style="padding:44px 0 36px">
+  <div class="wrap">
+
+    <figure class="art-fig" style="margin:6px 0 22px">
+      <div class="figbox" style="padding:10px 14px;background:#fff">
+        <svg viewBox="0 0 960 240" style="width:100%;height:auto;display:block" font-family="var(--sans)">
+          <g stroke="#1c2b4a" stroke-width="2" fill="none" stroke-linecap="round">
+            <path d="M20,206 Q 480,198 940,206"/>
+          </g>
+          <path d="M60,196 q 20,-58 52,-64 q 40,-8 52,-40 q 30,26 8,58 q 28,2 20,26 q -10,24 -52,22 z"
+                fill="#BFDB9A" opacity=".85"/>
+          <path d="M96,196 l6,-58" stroke="#1c2b4a" stroke-width="3" fill="none"/>
+          <g fill="#7FBF5A">
+            <path d="M200,206 q6,-26 12,0 M216,206 q6,-30 12,0 M232,206 q6,-24 12,0" stroke="#5A9E43" stroke-width="3" fill="none"/>
+            <path d="M560,206 q6,-26 12,0 M576,206 q6,-30 12,0 M592,206 q6,-24 12,0" stroke="#5A9E43" stroke-width="3" fill="none"/>
+            <path d="M380,206 q6,-22 12,0 M396,206 q6,-26 12,0" stroke="#E4C64B" stroke-width="3" fill="none"/>
+            <path d="M700,206 q6,-22 12,0 M716,206 q6,-26 12,0" stroke="#E4C64B" stroke-width="3" fill="none"/>
+          </g>
+          <g stroke="#1c2b4a" stroke-width="2.4">
+            <line x1="300" y1="206" x2="300" y2="120"/><line x1="470" y1="206" x2="470" y2="108"/>
+            <line x1="640" y1="206" x2="640" y2="120"/>
+          </g>
+          <g transform="rotate(-12 470 96)">
+            <rect x="270" y="88" width="400" height="16" rx="3" fill="#1c2b4a"/>
+            <g stroke="#3d5a80" stroke-width="1.4">
+              <line x1="320" y1="88" x2="320" y2="104"/><line x1="370" y1="88" x2="370" y2="104"/>
+              <line x1="420" y1="88" x2="420" y2="104"/><line x1="470" y1="88" x2="470" y2="104"/>
+              <line x1="520" y1="88" x2="520" y2="104"/><line x1="570" y1="88" x2="570" y2="104"/>
+              <line x1="620" y1="88" x2="620" y2="104"/>
+            </g>
+          </g>
+          <circle cx="880" cy="46" r="20" fill="#FFC436"/>
+          <g stroke="#FFC436" stroke-width="2.4"><line x1="880" y1="14" x2="880" y2="4"/>
+            <line x1="908" y1="24" x2="916" y2="16"/><line x1="912" y1="46" x2="924" y2="46"/></g>
+          <g stroke="#1c2b4a" stroke-width="2.4" fill="none" stroke-linecap="round">
+            <circle cx="770" cy="160" r="7" fill="#1c2b4a"/>
+            <path d="M770,167 v20 M770,174 l-9,8 M770,174 l10,6 M770,187 l-7,16 M770,187 l8,15"/>
+          </g>
+          <g font-size="12.5" fill="#6C757D">
+            <text x="330" y="150">패널 아래 통과 높이 — 농기계·사람</text>
+            <text x="200" y="230">벼·밭작물 이랑은 그대로</text>
+            <text x="700" y="230">일반 태양광과 달리 농지가 농지로 유지됨</text>
+          </g>
+        </svg>
+      </div>
+      <figcaption>개념 단면 — 영농형 태양광: 기둥 위 패널, 그 아래에서 영농 병행. 수치 아님.</figcaption>
+    </figure>
+    <div class="sec-head"><div><p class="eyebrow">Primer · 기본 개념</p>
+    <h2>처음 읽는 분을 위한 네 가지 개념</h2></div>
+    <span style="font-size:12.5px;color:var(--muted)">이 네 가지만 알면 모든 탭을 읽을 수 있음</span></div>
+    <div id="primer-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:18px;align-items:stretch">
+      <div>
+        <div class="figbox" style="height:100%">
+          <p style="font-size:13.5px;margin:0 0 10px;word-break:keep-all"><b>영농형 태양광</b> —
+          농지에서 농사를 계속 지으면서 그 위 공간에 태양광 설비를 함께 운영하는 방식.<br>
+          발전만 하는 일반 태양광과 달리 농지가 농지로 유지됨<sup class="fnref">[10]</sup>.</p>
+          <p style="font-size:13.5px;margin:0 0 10px;word-break:keep-all"><b>필지</b> —
+          토지의 등록 단위.<br>지번 하나가 필지 하나이며, 이 분석은 전국 <b id="i-nparcel">—</b>개 필지를
+          하나씩 판정함<sup class="fnref">[1]</sup>.</p>
+          <p style="font-size:13.5px;margin:0;word-break:keep-all"><b>연접 구획</b> —
+          서로 21m 이내로 이어진 필지들을 하나로 병합한 덩어리.<br>크기 문턱을 두지 않고
+          <b>전량</b>을 집계함<sup class="fnref">[12]</sup> — 법에 규모 숫자가 없기 때문.<br>
+          "이 정도는 돼야 사업"이라는 기준이 필요할 때만 눈금(50MW 등가 = 1,111,111㎡ 등)을
+          붙여 읽고, 그 기준을 함께 적음.</p>
+          <p style="font-size:13.5px;margin:10px 0 0;word-break:keep-all"><b>정본 우주</b> —
+          이 분석이 세는 땅은 <b>법인·국공유 소유 농지</b>임<sup class="fnref">[12]</sup>.<br>
+          개인 필지는 수백 명의 동의를 조직해야 해서, 그것 없이 성립하는 물량을 보기 위함.<br>
+          개인을 포함한 <b>대조군</b>을 늘 함께 표시함 — 정본이 전체의 몇 %인지 알아야
+          정본 값을 읽을 수 있기 때문.</p>
+        </div>
+      </div>
+      <div>
+        <div class="figbox" style="height:100%">
+          <p style="font-size:13.5px;margin:0 0 12px;word-break:keep-all"><b>농업진흥지역의 구조</b> —
+          이 사이트의 뼈대.<br>농지는 <b>농업진흥지역</b> 안팎으로 나뉘고, 진흥지역 안은 다시
+          <b>농업진흥구역</b>(우량 농지 핵심부)과 <b>농업보호구역</b>(주로 수자원 인접부)으로
+          나뉨<sup class="fnref">[5]</sup>:</p>
+          <div style="border:2px dashed var(--line);border-radius:10px;padding:12px;font-size:12.5px">
+            <div style="color:var(--muted);margin-bottom:8px">전국의 농지</div>
+            <div style="border:2px solid var(--navy);border-radius:8px;padding:10px;background:#fff">
+              <div style="color:var(--navy);font-weight:700;margin-bottom:8px">농업진흥지역</div>
+              <div style="display:flex;gap:8px">
+                <div style="flex:2.9;border:1.6px solid #B3261E;border-radius:6px;padding:8px;background:#fdf1f0">
+                  <b style="color:#B3261E">농업진흥구역</b><br>진흥✕ — 설치 불가</div>
+                <div style="flex:1;border:1.6px solid #C96A00;border-radius:6px;padding:8px;background:#fdf6ec">
+                  <b style="color:#C96A00">농업<br>보호구역</b><br>보호✕ — 불가</div>
+              </div>
+            </div>
+            <div style="border:2px solid var(--leaf-deep);border-radius:8px;padding:10px;margin-top:8px;background:var(--sky)">
+              <b style="color:var(--leaf-deep)">농업진흥지역 밖의 농지</b> — 지금은 여기만 설치 가능
+              = <b>진흥✕·보호✕ 기준값</b><sup class="fnref">[14]</sup></div>
+          </div>
+          <p style="font-size:13.5px;margin:12px 0 0;word-break:keep-all">여는 법적 통로는
+          이미 마련됨 — 영농형태양광법 제6조제1항은 발전 부지를 ①농업진흥지역 밖의 농지,
+          ②<b>재생에너지지구로 지정된 농지</b>의 두 갈래로 정함<sup class="fnref">[5]</sup>.
+          ②의 지정 범위를 보호구역·진흥구역 어디까지 허용하느냐가 하위법령에 남은 설계
+          변수.<br>그래서 이 분석의 질문은 하나 — 두 스위치(보호 개방 ○/✕ × 진흥 개방
+          ○/✕)를 어떻게 두느냐에 따라 설치 가능 농지가 얼마나 달라지는가. 아래 네 조합
+          (R0–R3)이 그 답.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ 조합 매트릭스 ═══════════ -->
+<section class="alt" id="matrix">
+  <div class="wrap">
+    <div class="sec-head">
+      <div><p class="eyebrow">Combinations · 제도 조합</p>
+      <h2>제도 조합별 설치 가능 면적 (독립 조합 4)</h2></div>
+      <a class="more" href="scenarios.html">정책 시나리오 전체 →</a>
+    </div>
+    <div class="figbox reveal">
+      <div id="bars"></div>
+      <div class="figcap">그림 1. 제도 조합별 설치 가능 면적 — 네 독립 조합의 필지 면적.
+      세 부분(농업진흥지역 밖·보호구역·진흥구역)은 서로 겹치지 않아 정확히 더해짐.<br>
+      정본 DB 조회값<sup class="fnref">[12]</sup>, 단위 km².
+      참고 발전용량 환산은 <span id="mw-note"></span> — 환산은 가정이 얹힌 파생값<sup class="fnref">[13]</sup>.</div>
+    </div>
+    <div class="callout-v4 reveal" id="co-reclaim"></div>
+  </div>
+</section>
+
+<!-- ═══════════ 3D 레이어 스테이지 ═══════════ -->
+<section id="pipe">
+  <div class="wrap">
+    <div class="sec-head">
+      <div><p class="eyebrow">Layers · 판정 단계</p>
+      <h2>판정 단계별 적격 규모 변화 — 충남 당진시</h2></div>
+      <a class="more" href="method.html">판정 조건 전체 보기 →</a>
+    </div>
+    <div class="ls-rig">
+      <div class="ls-stage3d" id="ls-stage"><div class="ls-floor"></div></div>
+      <div class="ls-panel">
+        <div class="ls-steps" id="ls-steps"></div>
+        <div class="ls-play">
+          <button id="ls-playbtn">처음부터 재생</button>
+          <button class="ghost" id="ls-allbtn">전부 쌓기</button>
+        </div>
+      </div>
+    </div>
+    <p class="ls-cap" id="ls-cap"></p>
+    <div class="figcap" style="max-width:860px;margin:10px auto 0">그림 2. 판정 단계별 적격 규모 변화 —
+    충남 당진시의 다섯 층: 지목 농지<sup class="fnref">[1]</sup> → 물리·경사 통과
+    → 진흥✕·보호✕ 적격 → 법인·국공유(정본 우주) → 진흥지역 전체 개방 시 연접 구획. 표시 지오메트리는 간소화본이며
+    단계별 수치는 정본 DB 조회값<sup class="fnref">[12]</sup>, 단위 필지 수·km².</div>
+  </div>
+</section>
+
+<!-- ═══════════ 더 보기 카드 ═══════════ -->
+<section id="explore">
+  <div class="wrap">
+    <div class="sec-head"><div><p class="eyebrow">Explore</p><h2>더 깊이 보기</h2></div></div>
+    <div class="grid">
+      <a class="card reveal" href="finder.html">
+        <div class="meta"><span class="tag">FINDER</span><span>지도 · 후보 25곳</span></div>
+        <h3>후보지 찾기</h3>
+        <p>대규모 후보 구획을 지도에서 탐색 — 산업단지·계통 여유 레이어와
+        반경 판독, 입주기업 검색까지.</p>
+        <div class="foot"><span>후보 탐색</span><span>→</span></div>
+      </a>
+      <a class="card reveal" href="scenarios.html">
+        <div class="meta"><span class="tag">SCENARIOS</span><span>R0–R3 · 시행령</span></div>
+        <h3>정책 시나리오</h3>
+        <p>제도가 바뀌면 얼마나 달라지는가 — 네 조합의 면적·후보 수 비교,
+        시군별 조회, 시행령 제정안의 영향.</p>
+        <div class="foot"><span>시나리오 비교</span><span>→</span></div>
+      </a>
+      <a class="card reveal" href="regions.html">
+        <div class="meta"><span class="tag">REGIONS</span><span>시군별 · 종합</span></div>
+        <h3>지역별 우선 후보</h3>
+        <p>각 시군의 우선 검토 후보 — 규모·계통·거리 종합(우선 후보 비교)과
+        지역 전력수요 대비, 제도 경로 판독.</p>
+        <div class="foot"><span>시군별 보기</span><span>→</span></div>
+      </a>
+      <a class="card reveal" href="method.html">
+        <div class="meta"><span class="tag">METHOD</span><span>데이터 · 검증</span></div>
+        <h3>근거와 방법</h3>
+        <p>데이터 출처와 판정 기준, 기준값 자동 검증·합계 검증·공개 전
+        품질검사 — 전 과정이 코드로 재현됨.</p>
+        <div class="foot"><span>과정 들여다보기</span><span>→</span></div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer class="v4"><div class="wrap"></div></footer>
+
+<script>
+(async () => {
+  const s = await V4.data('summary_v4');
+  const M = s.matrix['전국'], K = s.matrix['간척'], P = s.pools['전국'];
+
+  V4.countup(document.getElementById('sb1'), M.R0['정본'].km2, 1);
+  V4.countup(document.getElementById('sb2'), M.R3['정본'].km2 - M.R0['정본'].km2, 1);
+  // sb3(대규모 후보)·sb4(우선 후보)는 narrative·recommend 로드 뒤 아래에서 채움
+
+  const cells = [
+    ['R0', '진흥✕·보호✕'], ['R1', '농업보호구역 개방 시'],
+    ['R2', '농업진흥구역 개방 시'], ['R3', '둘 다 개방 시'],
+  ];
+  const max = M.R3['정본'].km2;
+  document.getElementById('bars').innerHTML = cells.map(([c, k]) => `
+    <div class="bar-row"><div><b>${k}</b><div class="bar-sub">${M[c].name}</div></div>
+      <div class="bar-track">
+        <div class="bar-post" style="width:${100 * M[c]['정본'].km2 / max}%"></div>
+      </div>
+      <div class="bar-num">${V4.km2(M[c]['정본'].km2)} km²
+        <div class="bar-sub">${V4.n(M[c]['정본'].n)}필지</div></div>
+    </div>`).join('');
+
+  document.getElementById('mw-note').textContent =
+    `개방 전 ${V4.km2(M.R0['정본'].km2)} km² ≈ ${V4.mw(M.R0['정본'].m2)} MW (0.045 kW/㎡ 가정)`;
+
+  document.getElementById('co-reclaim').innerHTML =
+    `<b>간척 농지는 진흥구역 개방과 함께 움직임.</b><br>간척 확정 농지의 설치 가능 면적은
+     개방 전 ${V4.km2(K.R0['정본'].km2)} km² → 농업진흥구역 개방 시 ${V4.km2(K.R2['정본'].km2)} km²
+     (${V4.n(K.R2['정본'].n)}필지)<sup class="fnref">[3]</sup>.<br>간척 농지 대부분이 농업진흥구역 안에 있기 때문.
+     <a href="scenarios.html#decree"><b>시행령 제정안의 부지 한정 분석 →</b></a>`;
+
+  // ── 다섯 단계로 읽는 결론 — narrative_v4(구획 크기 분포·소유 필터·소유×이격) 렌더 ──
+  const F = await V4.data('funnel_v4');
+  document.getElementById('i-nparcel').textContent = V4.n(F.national['전체 필지']);
+  const N = await V4.data('narrative_v4');
+  const R = N.runs;
+  const mwK = k => V4.n(Math.round(k * 45));                         // km² → MW (0.045 kW/㎡)
+  const og = k => N.owner_setback.find(g => g.group === k);
+  const outC = og('간척지 외 법인'), inC = og('간척지 내 법인'), inO = og('간척지 내 비법인');
+  const kk = m2 => V4.km2(m2 / 1e6);
+  const cpBigRec = N.cp_big.filter(b => b.reclaim_pct >= 50).length;
+  const cpAnchorTop = N.cp_big_anchor[0] || {mw: 0};
+  // 이격 감소율 — 런 쌍에서 산출 (하드코딩 금지: 판이 바뀌면 값도 바뀐다)
+  const drop = k => Math.round(100 * (R[k].component_km2 - R[k + '_SB'].component_km2)
+                              / R[k].component_km2);
+  const cut = (a, b) => Math.round(100 * (a - b) / a);        // 접근 면적 축소율
+  document.getElementById('th50').textContent = V4.n(N.threshold.mw50_m2);
+  document.getElementById('th100').textContent = V4.n(N.threshold.mw100_m2);
+
+  document.getElementById('one-liner').innerHTML =
+    `농업진흥구역이 재생에너지지구로 개방되면, <b>법인·국공유 농지만으로</b> 50MW 이상 구획이
+     전국 <b>${V4.n(R.R0_current.ge50)}곳에서 ${V4.n(R.R2_promo.ge50)}곳
+     (합 ${V4.n(R.R2_promo.ge50_mw)}MW)</b>이 되며, 그중 ${V4.n(cpBigRec)}곳이 <b>간척 지구</b>다.`;
+
+  const STEPS = [
+    ['①', '현재 수준', `개방 전(진흥✕·보호✕ — 농업진흥지역 밖 한정)에서 <b>법인·국공유</b> 농지는
+      <b>${V4.km2(M.R0['정본'].km2)} km²</b> —
+      전체(개인 포함) ${V4.km2(M.R0['대조군'].km2)} km²의
+      <b>${(100*M.R0['정본'].km2/M.R0['대조군'].km2).toFixed(1)}%</b>.
+      50MW 이상 구획은 <b>${V4.n(R.R0_current.ge50)}곳</b>뿐임.`,
+     'scenarios.html#t32', '근거 표 5'],
+    ['②', '왜 늘려야 하는가', `개인 포함 50MW 이상 구획은 ${V4.n(R['R0_current@all'].ge50)}곳이지만 면적의
+      <b>${V4.n(N.big_composition['R0_current@all'].indiv_share_pct)}%가 개인 소유</b> —
+      수백 명의 동의 조직이 전제. 동의 없이 성립하는 법인·국공유만 세면
+      <b>전국 ${V4.n(R.R0_current.ge50)}곳</b>(제주 서귀포 ${V4.n(cpAnchorTop.mw)}MW).`,
+     'finder.html#own', '입지 추천 탭 — 소유 구성 상세'],
+    ['③', '두 수단의 증분', `보호구역 개방 +${V4.km2((M.R1['정본'].m2 - M.R0['정본'].m2)/1e6)} km² ·
+      진흥구역 개방 <b>+${V4.km2((M.R2['정본'].m2 - M.R0['정본'].m2)/1e6)} km²</b> —
+      규모가 열 배 이상 다름. 진흥구역 개방 시 50MW 이상은
+      <b>${V4.n(R.R2_promo.ge50)}곳(합 ${V4.n(R.R2_promo.ge50_mw)}MW)</b>,
+      그중 ${V4.n(cpBigRec)}곳이 간척 지구.`,
+     'finder.html#candtbl', `입지 추천 탭 — ${V4.n(R.R2_promo.ge50)}곳의 소재와 지도`],
+    ['④', '이격 단서', `주거 이격 200m 보수 적용 시 개방 전 분은 −${drop('R0_current')}%,
+      진흥구역 개방분은 −${drop('R2_promo')}% —
+      <b>50MW 이상은 ${V4.n(R.R2_promo.ge50)} → ${V4.n(R.R2_promo_SB.ge50)}곳으로 하나만
+      줄어듦</b>(간척 평야는 주거에서 멂). 그 외 이격 17종은 공간 분해 전(하한).`,
+     'scenarios.html#t32', '근거 표 5 · 지도의 이격 토글'],
+    ['⑤', '간척·법인 갭', `시행령 제정안은 <b>농업회사법인</b>의 부지를 매립지등(미매각 간척지 등)으로
+      한정함 — 현행 접근 가능 면적이 <b>${kk(outC.anchor_m2)} → ${kk(inC.anchor_m2)} km²</b>로
+      ${cut(outC.anchor_m2, inC.anchor_m2)}% 축소. 진흥구역 개방이 동반돼야 간척 내 법인
+      ${kk(inC.all_m2)} km² + 임차 풀 ${kk(inO.all_m2)} km²(사용승낙 필요)가 열림.
+      간척지가 1차 후보인 이유 — 법인·국공유 비중이 전국
+      ${(100*M.R2['정본'].km2/M.R2['대조군'].km2).toFixed(1)}% 대
+      <b>간척지 ${(100*K.R2['정본'].km2/K.R2['대조군'].km2).toFixed(1)}%</b>.`,
+     'scenarios.html#decree', '시행령 제정안 영향 — 부지 한정 조문·수치'],
+  ];
+  document.getElementById('story-steps').innerHTML = STEPS.map(([no, t, body, href, lk], _i) => `
+    <div class="figbox reveal" id="s${_i + 1}" style="display:grid;grid-template-columns:44px 1fr;gap:14px;align-items:start">
+      <div style="font-family:var(--serif);font-size:26px;font-weight:700;color:var(--gold);line-height:1.2">${no}</div>
+      <div style="font-size:13.5px;line-height:1.85;word-break:keep-all">
+        <b style="font-family:var(--serif);font-size:15px;color:var(--navy)">${t}</b><br>${body}
+        <div style="margin-top:6px"><a href="${href}" style="color:var(--leaf-deep);font-weight:700;font-size:12.5px">${lk} →</a></div>
+      </div>
+    </div>`).join('');
+
+  // ── V5: 흐름 도식·KPI 3·4 채우기 (funnel·narrative·recommend 재렌더 — 새 산정 없음) ──
+  {
+    document.getElementById('fl1').textContent = V4.n(F.national['전체 필지']);
+    document.getElementById('fl2').textContent = V4.n(F.national['지목 전·답·과수원']);
+    document.getElementById('fl3').textContent = V4.n(F.national['현행법 적격(무필터 대조군)']);
+    document.getElementById('fl3b').textContent = V4.n(M.R0['정본'].n);
+    document.getElementById('fl4').textContent = V4.n(R.R2_promo.n_component);
+    document.getElementById('fl5').textContent = V4.n(N.cp_big.length) + '곳';
+    V4.countup(document.getElementById('sb3'), N.cp_big.length, 0);
+    try {
+      const rr = await fetch('data_v4/recommend_v4.json.gz');
+      const ds = rr.body.pipeThrough(new DecompressionStream('gzip'));
+      const RC = JSON.parse(await new Response(ds).text());
+      const nf = Object.values(RC.sgg).reduce((a, x) => a + x.frontier.length, 0);
+      document.getElementById('fl7').textContent = V4.n(nf) + '곳';
+      V4.countup(document.getElementById('sb4'), nf, 0);
+    } catch (e) {
+      document.getElementById('fl7').textContent = '—';
+    }
+  }
+  V4.footer();
+
+  // ── 3D 레이어 스테이지 — 당진 판정 층위 (data_v4/stage_44270.json) ──
+  const st = await V4.data('stage_44270');
+  const STYLE = {
+    L1: 'fill="#E4EFD6" stroke="#B7CC93" stroke-width="1"',
+    L2: 'fill="#CBDCBF" stroke="#9DBE8C" stroke-width="1"',
+    L3: 'fill="#F4F7F4" stroke="#0C356A" stroke-width="1.1" stroke-opacity=".6"',
+    L4: 'fill="#5A9E43" fill-opacity=".92" stroke="#3E7A2E" stroke-width="1.2"',
+    L5: 'fill="#FFC436" fill-opacity=".4" stroke="#B8860B" stroke-width="1.6"',
+  };
+  const stage = document.getElementById('ls-stage');
+  const planes = st.layers.map((ly) => {
+    const d = document.createElement('div');
+    d.className = 'ls-plane';
+    d.innerHTML = `<svg viewBox="0 0 ${st.w} ${st.h}">
+      <rect class="sheet" x="0" y="0" width="${st.w}" height="${st.h}" rx="6"/>
+      <path d="${ly.path}" ${STYLE[ly.k]} fill-rule="evenodd"/></svg>`;
+    stage.appendChild(d);
+    return d;
+  });
+  const stepsEl = document.getElementById('ls-steps');
+  stepsEl.innerHTML = st.layers.map((ly, i) => `
+    <button class="ls-step" data-i="${i}"><span class="dot">${i + 1}</span>
+      <span><span class="nm">${ly.t}</span><br><span class="ds">${ly.d}</span></span></button>`).join('');
+  const stepBtns = [...stepsEl.querySelectorAll('.ls-step')];
+  let timer = null;
+  function setStep(k) {
+    planes.forEach((p, i) => {
+      const show = i <= k;
+      p.classList.toggle('show', show);
+      p.classList.toggle('active', i === k);
+      p.style.transform = `rotateX(59deg) rotateZ(-31deg) translateZ(${show ? i * 30 : i * 30 - 60}px)`;
+    });
+    stepBtns.forEach((b, i) => {
+      b.classList.toggle('on', i === k);
+      b.classList.toggle('done', i < k);
+    });
+    document.getElementById('ls-cap').textContent =
+      `${st.name} · ${st.layers[k].t} — ${st.layers[k].d} (표시 지오메트리는 간소화본, 수치는 정본 조회값)`;
+  }
+  function stopPlay() { if (timer) { clearInterval(timer); timer = null; } }
+  function play() {
+    stopPlay();
+    let k = 0;
+    setStep(0);
+    timer = setInterval(() => { k += 1; if (k >= planes.length) return stopPlay(); setStep(k); }, 1400);
+  }
+  stepBtns.forEach((b, i) => b.onclick = () => { stopPlay(); setStep(i); });
+  document.getElementById('ls-playbtn').onclick = play;
+  document.getElementById('ls-allbtn').onclick = () => { stopPlay(); setStep(planes.length - 1); };
+  const pio = new IntersectionObserver(es => {
+    es.forEach(e => { if (e.isIntersecting) { pio.disconnect(); play(); } });
+  }, {threshold: .35});
+  pio.observe(stage);
+})();
+</script>
+<script src="site.js"></script>
+</body>
+</html>

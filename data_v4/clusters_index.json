@@ -1,0 +1,16457 @@
+{
+"generated": "2026-08-29 23:53",
+"cells": [
+"R0_current",
+"R0_current_SB",
+"R1_protect",
+"R1_protect_SB",
+"R2_promo",
+"R2_promo_SB",
+"R3_zone_all",
+"R3_zone_all_SB",
+"R0_current@all",
+"R0_current_SB@all",
+"R1_protect@all",
+"R1_protect_SB@all",
+"R2_promo@all",
+"R2_promo_SB@all",
+"R3_zone_all@all",
+"R3_zone_all_SB@all"
+],
+"sgg": {
+"11110": {
+"R0_current": {
+"k": 34,
+"km2": 0.0
+},
+"R0_current_SB": {
+"k": 0,
+"km2": 0.0
+},
+"R1_protect": {
+"k": 34,
+"km2": 0.0
+},
+"R1_protect_SB": {
+"k": 0,
+"km2": 0.0
+},
+"R2_promo": {
+"k": 34,
+"km2": 0.0
+},
+"R2_promo_SB": {
+"k": 0,
+"km2": 0.0
+},
+"R3_zone_all": {
+"k": 34,
+"km2": 0.0
+},
+"R3_zone_all_SB": {
+"k": 0,
+"km2": 0.0
+},
+"R0_current@all": {
+"k": 56,
+"km2": 0.1
+},
+"R0_current_SB@all": {
+"k": 0,
+"km2": 0.0
+},
+"R1_protect@all": {
+"k": 56,
+"km2": 0.1
+},
+"R1_protect_SB@all": {
+"k": 0,
+"km2": 0.0
+},
+"R2_promo@all": {
+"k": 56,
+"km2": 0.1
+},
+"R2_promo_SB@all": {
+"k": 0,
+"km2": 0.0
+},
+"R3_zone_all@all": {
+"k": 56,
+"km2": 0.1
+},
+"R3_zone_all_SB@all": {
+"k": 0,
+"km2": 0.0
+}
+},
+"11170": {
+"R0_current": {
+"k": 34,
+"km2": 0.0
+},
+"R0_current_SB": {
+"k": 0,
+"km2": 0.0
+},
+"R1_protect": {
+"k": 34,
+"km2": 0.0
+},
+"R1_protect_SB": {
+"k": 0,
+"km2": 0.0
+},
+"R2_promo": {
+"k": 34,
+"km2": 0.0
+},
+"R2_promo_SB": {
+"k": 0,
+"km2": 0.0
+},
+"R3_zone_all": {
+"k": 34,
+"km2": 0.0
+},
+"R3_zone_all_SB": {
+"k": 0,
+"km2": 0.0
+},
+"R0_current@all": {
+"k": 17,
+"km2": 0.0
+},
+"R0_current_SB@all": {
+"k": 0,
+"km2": 0.0
+},
+"R1_protect@all": {
+"k": 17,
+"km2": 0.0
+},
+"R1_protect_SB@all": {
+"k": 0,
+"km2": 0.0
+},
+"R2_promo@all": {
+"k": 17,
+"km2": 0.0
+},
+"R2_promo_SB@all": {
+"k": 0,
+"km2": 0.0
+},
+"R3_zone_all@all": {
+"k": 17,
+"km2": 0.0
+},
+"R3_zone_all_SB@all": {
+"k": 0,
+"km2": 0.0
+}
+},
+"11200": {
+"R0_current": {
+"k": 54,
+"km2": 0.1
+},
+"R0_current_SB": {
+"k": 13,
+"km2": 0.0
+},
+"R1_protect": {
+"k": 54,
+"km2": 0.1
+},
+"R1_protect_SB": {
+"k": 13,
+"km2": 0.0
+},
+"R2_promo": {
+"k": 54,
+"km2": 0.1
+},
+"R2_promo_SB": {
+"k": 13,
+"km2": 0.0
+},
+"R3_zone_all": {
+"k": 54,
+"km2": 0.1
+},
+"R3_zone_all_SB": {
+"k": 13,
+"km2": 0.0
+},
+"R0_current@all": {
+"k": 36,
+"km2": 0.1
+},
+"R0_current_SB@all": {
+"k": 11,
+"km2": 0.0
+},
+"R1_protect@all": {
+"k": 36,
+"km2": 0.1
+},
+"R1_protect_SB@all": {
+"k": 11,
+"km2": 0.0
+},
+"R2_promo@all": {
+"k": 36,
+"km2": 0.1
+},
+"R2_promo_SB@all": {
+"k": 11,
+"km2": 0.0
+},
+"R3_zone_all@all": {
+"k": 36,
+"km2": 0.1
+},
+"R3_zone_all_SB@all": {
+"k": 11,
+"km2": 0.0
+}
+},
+"11215": {
+"R0_current": {
+"k": 13,
+"km2": 0.0
+},
+"R0_current_SB": {
+"k": 0,
+"km2": 0.0
+},
+"R1_protect": {
+"k": 13,
+"km2": 0.0
+},
+"R1_protect_SB": {
+"k": 0,
+"km2": 0.0
+},
+"R2_promo": {
+"k": 13,
+"km2": 0.0
+},
+"R2_promo_SB": {
+"k": 0,
+"km2": 0.0
+},
+"R3_zone_all": {
+"k": 13,
+"km2": 0.0
+},
+"R3_zone_all_SB": {
+"k": 0,
+"km2": 0.0
+},
+"R0_current@all": {
+"k": 9,
+"km2": 0.0
+},
+"R0_current_SB@all": {
+"k": 0,
+"km2": 0.0
+},
+"R1_protect@all": {
+"k": 9,
+"km2": 0.0
+},
+"R1_protect_SB@all": {
+"k": 0,
+"km2": 0.0
+},
+"R2_promo@all": {
+"k": 9,
+"km2": 0.0
+},
+"R2_promo_SB@all": {
+"k": 0,
+"km2": 0.0
+},
+"R3_zone_all@all": {
+"k": 9,
+"km2": 0.0
+},
+"R3_zone_all_SB@all": {
+"k": 0,
+"km2": 0.0
+}
+},
+"11230": {
+"R0_current": {
+"k": 60,
+"km2": 0.0
+},
+"R0_current_SB": {
+"k": 0,
+"km2": 0.0
+},
+"R1_protect": {
+"k": 60,
+"km2": 0.0
+},
+"R1_protect_SB": {
+"k": 0,
+"km2": 0.0
+},
+"R2_promo": {
+"k": 60,
+"km2": 0.0
+},
+"R2_promo_SB": {
+"k": 0,
+"km2": 0.0
+},
+"R3_zone_all": {
+"k": 60,
+"km2": 0.0
+},
+"R3_zone_all_SB": {
+"k": 0,
+"km2": 0.0
+},
+"R0_current@all": {
+"k": 35,
+"km2": 0.0
+},
+"R0_current_SB@all": {
+"k": 0,
+"km2": 0.0
+},
+"R1_protect@all": {
+"k": 35,
+"km2": 0.0
+},
+"R1_protect_SB@all": {
+"k": 0,
+"km2": 0.0
+},
+"R2_promo@all": {
+"k": 35,
+"km2": 0.0
+},
+"R2_promo_SB@all": {
+"k": 0,
+"km2": 0.0
+},
+"R3_zone_all@all": {
+"k": 35,
+"km2": 0.0
+},
+"R3_zone_all_SB@all": {
+"k": 0,
+"km2": 0.0
+}
+},
+"11260": {
+"R0_current": {
+"k": 48,
+"km2": 0.0
+},
+"R0_current_SB": {
+"k": 3,
+"km2": 0.0
+},
+"R1_protect": {
+"k": 48,
+"km2": 0.0
+},
+"R1_protect_SB": {
+"k": 3,
+"km2": 0.0
+},
+"R2_promo": {
+"k": 48,
+"km2": 0.0
+},
+"R2_promo_SB": {
+"k": 3,
+"km2": 0.0
+},
+"R3_zone_all": {
+"k": 48,
+"km2": 0.0
+},
+"R3_zone_all_SB": {
+"k": 3,
+"km2": 0.0
+},
+"R0_current@all": {
+"k": 48,
+"km2": 0.0
+},
+"R0_current_SB@all": {
+"k": 7,
+"km2": 0.0
+},
+"R1_protect@all": {
+"k": 48,
+"km2": 0.0
+},
+"R1_protect_SB@all": {
+"k": 7,
+"km2": 0.0
+},
+"R2_promo@all": {
+"k": 48,
+"km2": 0.0
+},
+"R2_promo_SB@all": {
+"k": 7,
+"km2": 0.0
+},
+"R3_zone_all@all": {
+"k": 48,
+"km2": 0.0
+},
+"R3_zone_all_SB@all": {
+"k": 7,
+"km2": 0.0
+}
+},
+"11290": {
+"R0_current": {
+"k": 28,
+"km2": 0.0
+},
+"R0_current_SB": {
+"k": 2,
+"km2": 0.0
+},
+"R1_protect": {
+"k": 28,
+"km2": 0.0
+},
+"R1_protect_SB": {
+"k": 2,
+"km2": 0.0
+},
+"R2_promo": {
+"k": 28,
+"km2": 0.0
+},
+"R2_promo_SB": {
+"k": 2,
+"km2": 0.0
+},
+"R3_zone_all": {
+"k": 28,
+"km2": 0.0
+},
+"R3_zone_all_SB": {
+"k": 2,
+"km2": 0.0
+},
+"R0_current@all": {
+"k": 29,
+"km2": 0.0
+},
+"R0_current_SB@all": {
+"k": 1,
+"km2": 0.0
+},
+"R1_protect@all": {
+"k": 29,
+"km2": 0.0
+},
+"R1_protect_SB@all": {
+"k": 1,
+"km2": 0.0
+},
+"R2_promo@all": {
+"k": 29,
+"km2": 0.0
+},
+"R2_promo_SB@all": {
+"k": 1,
+"km2": 0.0
+},
+"R3_zone_all@all": {
+"k": 29,
+"km2": 0.0
+},
+"R3_zone_all_SB@all": {
+"k": 1,
+"km2": 0.0
+}
+},
+"11305": {
+"R0_current": {
+"k": 19,
+"km2": 0.0
+},
+"R0_current_SB": {
+"k": 0,
+"km2": 0.0
+},
+"R1_protect": {
+"k": 19,
+"km2": 0.0
+},
+"R1_protect_SB": {
+"k": 0,
+"km2": 0.0
+},
+"R2_promo": {
+"k": 19,
+"km2": 0.0
+},
+"R2_promo_SB": {
+"k": 0,
+"km2": 0.0
+},
+"R3_zone_all": {
+"k": 19,
+"km2": 0.0
+},
+"R3_zone_all_SB": {
+"k": 0,
+"km2": 0.0
+},
+"R0_current@all": {
+"k": 22,
+"km2": 0.0
+},
+"R0_current_SB@all": {
+"k": 0,
+"km2": 0.0
+},
+"R1_protect@all": {
+"k": 22,
+"km2": 0.0
+},
+"R1_protect_SB@all": {
+"k": 0,
+"km2": 0.0
+},
+"R2_promo@all": {
+"k": 22,
+"km2": 0.0
+},
+"R2_promo_SB@all": {
+"k": 0,
+"km2": 0.0
+},
+"R3_zone_all@all": {
+"k": 22,
+"km2": 0.0
+},
+"R3_zone_all_SB@all": {
+"k": 0,
+"km2": 0.0
+}
+},
+"11320": {
+"R0_current": {
+"k": 61,
+"km2": 0.0
+},
+"R0_current_SB": {
+"k": 4,
+"km2": 0.0
+},
+"R1_protect": {
+"k": 61,
+"km2": 0.0
+},
+"R1_protect_SB": {
+"k": 4,
+"km2": 0.0
+},
+"R2_promo": {
+"k": 61,
+"km2": 0.0
+},
+"R2_promo_SB": {
+"k": 4,
+"km2": 0.0
+},
+"R3_zone_all": {
+"k": 61,
+"km2": 0.0
+},
+"R3_zone_all_SB": {
+"k": 4,
+"km2": 0.0
+},
+"R0_current@all": {
+"k": 57,
+"km2": 0.0
+},
+"R0_current_SB@all": {
+"k": 4,
+"km2": 0.0
+},
+"R1_protect@all": {
+"k": 57,
+"km2": 0.0
+},
+"R1_protect_SB@all": {
+"k": 4,
+"km2": 0.0
+},
+"R2_promo@all": {
+"k": 57,
+"km2": 0.0
+},
+"R2_promo_SB@all": {
+"k": 4,
+"km2": 0.0
+},
+"R3_zone_all@all": {
+"k": 57,
+"km2": 0.0
+},
+"R3_zone_all_SB@all": {
+"k": 4,
+"km2": 0.0
+}
+},
+"11350": {
+"R0_current": {
+"k": 106,
+"km2": 0.1
+},
+"R0_current_SB": {
+"k": 12,
+"km2": 0.0
+},
+"R1_protect": {
+"k": 106,
+"km2": 0.1
+},
+"R1_protect_SB": {
+"k": 12,
+"km2": 0.0
+},
+"R2_promo": {
+"k": 106,
+"km2": 0.1
+},
+"R2_promo_SB": {
+"k": 12,
+"km2": 0.0
+},
+"R3_zone_all": {
+"k": 106,
+"km2": 0.1
+},
+"R3_zone_all_SB": {
+"k": 12,
+"km2": 0.0
+},
+"R0_current@all": {
+"k": 89,
+"km2": 0.1
+},
+"R0_current_SB@all": {
+"k": 10,
+"km2": 0.0
+},
+"R1_protect@all": {
+"k": 89,
+"km2": 0.1
+},
+"R1_protect_SB@all": {
+"k": 10,
+"km2": 0.0
+},
+"R2_promo@all": {
+"k": 89,
+"km2": 0.1
+},
+"R2_promo_SB@all": {
+"k": 10,
+"km2": 0.0
+},
+"R3_zone_all@all": {
+"k": 89,
+"km2": 0.1
+},
+"R3_zone_all_SB@all": {
+"k": 10,
+"km2": 0.0
+}
+},
+"11380": {
+"R0_current": {
+"k": 35,
+"km2": 0.0
+},
+"R0_current_SB": {
+"k": 0,
+"km2": 0.0
+},
+"R1_protect": {
+"k": 35,
+"km2": 0.0
+},
+"R1_protect_SB": {
+"k": 0,
+"km2": 0.0
+},
+"R2_promo": {
+"k": 35,
+"km2": 0.0
+},
+"R2_promo_SB": {
+"k": 0,
+"km2": 0.0
+},
+"R3_zone_all": {
+"k": 35,
+"km2": 0.0
+},
+"R3_zone_all_SB": {
+"k": 0,
+"km2": 0.0
+},
+"R0_current@all": {
+"k": 31,
+"km2": 0.0
+},
+"R0_current_SB@all": {
+"k": 0,
+"km2": 0.0
+},
+"R1_protect@all": {
+"k": 31,
+"km2": 0.0
+},
+"R1_protect_SB@all": {
+"k": 0,
+"km2": 0.0
+},
+"R2_promo@all": {
+"k": 31,
+"km2": 0.0
+},
+"R2_promo_SB@all": {
+"k": 0,
+"km2": 0.0
+},
+"R3_zone_all@all": {
+"k": 31,
+"km2": 0.0
+},
+"R3_zone_all_SB@all": {
+"k": 0,
+"km2": 0.0
+}
+},
+"11410": {
+"R0_current": {
+"k": 18,
+"km2": 0.0
+},
+"R0_current_SB": {
+"k": 0,
+"km2": 0.0
+},
+"R1_protect": {
+"k": 18,
+"km2": 0.0
+},
+"R1_protect_SB": {
+"k": 0,
+"km2": 0.0
+},
+"R2_promo": {
+"k": 18,
+"km2": 0.0
+},
+"R2_promo_SB": {
+"k": 0,
+"km2": 0.0
+},
+"R3_zone_all": {
+"k": 18,
+"km2": 0.0
+},
+"R3_zone_all_SB": {
+"k": 0,
+"km2": 0.0
+},
+"R0_current@all": {
+"k": 22,
+"km2": 0.0
+},
+"R0_current_SB@all": {
+"k": 0,
+"km2": 0.0
+},
+"R1_protect@all": {
+"k": 22,
+"km2": 0.0
+},
+"R1_protect_SB@all": {
+"k": 0,
+"km2": 0.0
+},
+"R2_promo@all": {
+"k": 22,
+"km2": 0.0
+},
+"R2_promo_SB@all": {
+"k": 0,
+"km2": 0.0
+},
+"R3_zone_all@all": {
+"k": 22,
+"km2": 0.0
+},
+"R3_zone_all_SB@all": {
+"k": 0,
+"km2": 0.0
+}
+},
+"11440": {
+"R0_current": {
+"k": 87,
+"km2": 0.1
+},
+"R0_current_SB": {
+"k": 19,
+"km2": 0.1
+},
+"R1_protect": {
+"k": 87,
+"km2": 0.1
+},
+"R1_protect_SB": {
+"k": 19,
+"km2": 0.1
+},
+"R2_promo": {
+"k": 87,
+"km2": 0.1
+},
+"R2_promo_SB": {
+"k": 19,
+"km2": 0.1
+},
+"R3_zone_all": {
+"k": 87,
+"km2": 0.1
+},
+"R3_zone_all_SB": {
+"k": 19,
+"km2": 0.1
+},
+"R0_current@all": {
+"k": 59,
+"km2": 0.1
+},
+"R0_current_SB@all": {
+"k": 16,
+"km2": 0.1
+},
+"R1_protect@all": {
+"k": 59,
+"km2": 0.1
+},
+"R1_protect_SB@all": {
+"k": 16,
+"km2": 0.1
+},
+"R2_promo@all": {
+"k": 59,
+"km2": 0.1
+},
+"R2_promo_SB@all": {
+"k": 16,
+"km2": 0.1
+},
+"R3_zone_all@all": {
+"k": 59,
+"km2": 0.1
+},
+"R3_zone_all_SB@all": {
+"k": 16,
+"km2": 0.1
+}
+},
+"11470": {
+"R0_current": {
+"k": 7,
+"km2": 0.0
+},
+"R0_current_SB": {
+"k": 0,
+"km2": 0.0
+},
+"R1_protect": {
+"k": 7,
+"km2": 0.0
+},
+"R1_protect_SB": {
+"k": 0,
+"km2": 0.0
+},
+"R2_promo": {
+"k": 7,
+"km2": 0.0
+},
+"R2_promo_SB": {
+"k": 0,
+"km2": 0.0
+},
+"R3_zone_all": {
+"k": 7,
+"km2": 0.0
+},
+"R3_zone_all_SB": {
+"k": 0,
+"km2": 0.0
+},
+"R0_current@all": {
+"k": 12,
+"km2": 0.0
+},
+"R0_current_SB@all": {
+"k": 0,
+"km2": 0.0
+},
+"R1_protect@all": {
+"k": 12,
+"km2": 0.0
+},
+"R1_protect_SB@all": {
+"k": 0,
+"km2": 0.0
+},
+"R2_promo@all": {
+"k": 12,
+"km2": 0.0
+},
+"R2_promo_SB@all": {
+"k": 0,
+"km2": 0.0
+},
+"R3_zone_all@all": {
+"k": 12,
+"km2": 0.0
+},
+"R3_zone_all_SB@all": {
+"k": 0,
+"km2": 0.0
+}
+},
+"11500": {
+"R0_current": {
+"k": 81,
+"km2": 0.2
+},
+"R0_current_SB": {
+"k": 18,
+"km2": 0.1
+},
+"R1_protect": {
+"k": 81,
+"km2": 0.2
+},
+"R1_protect_SB": {
+"k": 18,
+"km2": 0.1
+},
+"R2_promo": {
+"k": 81,
+"km2": 0.2
+},
+"R2_promo_SB": {
+"k": 18,
+"km2": 0.1
+},
+"R3_zone_all": {
+"k": 81,
+"km2": 0.2
+},
+"R3_zone_all_SB": {
+"k": 18,
+"km2": 0.1
+},
+"R0_current@all": {
+"k": 63,
+"km2": 0.2
+},
+"R0_current_SB@all": {
+"k": 14,
+"km2": 0.1
+},
+"R1_protect@all": {
+"k": 63,
+"km2": 0.2
+},
+"R1_protect_SB@all": {
+"k": 14,
+"km2": 0.1
+},
+"R2_promo@all": {
+"k": 63,
+"km2": 0.2
+},
+"R2_promo_SB@all": {
+"k": 14,
+"km2": 0.1
+},
+"R3_zone_all@all": {
+"k": 63,
+"km2": 0.2
+},
+"R3_zone_all_SB@all": {
+"k": 14,
+"km2": 0.1
+}
+},
+"11530": {
+"R0_current": {
+"k": 108,
+"km2": 0.0
+},
+"R0_current_SB": {
+"k": 2,
+"km2": 0.0
+},
+"R1_protect": {
+"k": 108,
+"km2": 0.0
+},
+"R1_protect_SB": {
+"k": 2,
+"km2": 0.0
+},
+"R2_promo": {
+"k": 108,
+"km2": 0.0
+},
+"R2_promo_SB": {
+"k": 2,
+"km2": 0.0
+},
+"R3_zone_all": {
+"k": 108,
+"km2": 0.0
+},
+"R3_zone_all_SB": {
+"k": 2,
+"km2": 0.0
+},
+"R0_current@all": {
+"k": 102,
+"km2": 0.0
+},
+"R0_current_SB@all": {
+"k": 1,
+"km2": 0.0
+},
+"R1_protect@all": {
+"k": 102,
+"km2": 0.0
+},
+"R1_protect_SB@all": {
+"k": 1,
+"km2": 0.0
+},
+"R2_promo@all": {
+"k": 102,
+"km2": 0.0
+},
+"R2_promo_SB@all": {
+"k": 1,
+"km2": 0.0
+},
+"R3_zone_all@all": {
+"k": 102,
+"km2": 0.0
+},
+"R3_zone_all_SB@all": {
+"k": 1,
+"km2": 0.0
+}
+},
+"11545": {
+"R0_current": {
+"k": 13,
+"km2": 0.0
+},
+"R0_current_SB": {
+"k": 1,
+"km2": 0.0
+},
+"R1_protect": {
+"k": 13,
+"km2": 0.0
+},
+"R1_protect_SB": {
+"k": 1,
+"km2": 0.0
+},
+"R2_promo": {
+"k": 13,
+"km2": 0.0
+},
+"R2_promo_SB": {
+"k": 1,
+"km2": 0.0
+},
+"R3_zone_all": {
+"k": 13,
+"km2": 0.0
+},
+"R3_zone_all_SB": {
+"k": 1,
+"km2": 0.0
+},
+"R0_current@all": {
+"k": 10,
+"km2": 0.0
+},
+"R0_current_SB@all": {
+"k": 1,
+"km2": 0.0
+},
+"R1_protect@all": {
+"k": 10,
+"km2": 0.0
+},
+"R1_protect_SB@all": {
+"k": 1,
+"km2": 0.0
+},
+"R2_promo@all": {
+"k": 10,
+"km2": 0.0
+},
+"R2_promo_SB@all": {
+"k": 1,
+"km2": 0.0
+},
+"R3_zone_all@all": {
+"k": 10,
+"km2": 0.0
+},
+"R3_zone_all_SB@all": {
+"k": 1,
+"km2": 0.0
+}
+},
+"11560": {
+"R0_current": {
+"k": 47,
+"km2": 0.0
+},
+"R0_current_SB": {
+"k": 3,
+"km2": 0.0
+},
+"R1_protect": {
+"k": 47,
+"km2": 0.0
+},
+"R1_protect_SB": {
+"k": 3,
+"km2": 0.0
+},
+"R2_promo": {
+"k": 47,
+"km2": 0.0
+},
+"R2_promo_SB": {
+"k": 3,
+"km2": 0.0
+},
+"R3_zone_all": {
+"k": 47,
+"km2": 0.0
+},
+"R3_zone_all_SB": {
+"k": 3,
+"km2": 0.0
+},
+"R0_current@all": {
+"k": 53,
+"km2": 0.0
+},
+"R0_current_SB@all": {
+"k": 2,
+"km2": 0.0
+},
+"R1_protect@all": {
+"k": 53,
+"km2": 0.0
+},
+"R1_protect_SB@all": {
+"k": 2,
+"km2": 0.0
+},
+"R2_promo@all": {
+"k": 53,
+"km2": 0.0
+},
+"R2_promo_SB@all": {
+"k": 2,
+"km2": 0.0
+},
+"R3_zone_all@all": {
+"k": 53,
+"km2": 0.0
+},
+"R3_zone_all_SB@all": {
+"k": 2,
+"km2": 0.0
+}
+},
+"11590": {
+"R0_current": {
+"k": 27,
+"km2": 0.0
+},
+"R0_current_SB": {
+"k": 0,
+"km2": 0.0
+},
+"R1_protect": {
+"k": 27,
+"km2": 0.0
+},
+"R1_protect_SB": {
+"k": 0,
+"km2": 0.0
+},
+"R2_promo": {
+"k": 27,
+"km2": 0.0
+},
+"R2_promo_SB": {
+"k": 0,
+"km2": 0.0
+},
+"R3_zone_all": {
+"k": 27,
+"km2": 0.0
+},
+"R3_zone_all_SB": {
+"k": 0,
+"km2": 0.0
+},
+"R0_current@all": {
+"k": 26,
+"km2": 0.0
+},
+"R0_current_SB@all": {
+"k": 0,
+"km2": 0.0
+},
+"R1_protect@all": {
+"k": 26,
+"km2": 0.0
+},
+"R1_protect_SB@all": {
+"k": 0,
+"km2": 0.0
+},
+"R2_promo@all": {
+"k": 26,
+"km2": 0.0
+},
+"R2_promo_SB@all": {
+"k": 0,
+"km2": 0.0
+},
+"R3_zone_all@all": {
+"k": 26,
+"km2": 0.0
+},
+"R3_zone_all_SB@all": {
+"k": 0,
+"km2": 0.0
+}
+},
+"11620": {
+"R0_current": {
+"k": 32,
+"km2": 0.0
+},
+"R0_current_SB": {
+"k": 0,
+"km2": 0.0
+},
+"R1_protect": {
+"k": 32,
+"km2": 0.0
+},
+"R1_protect_SB": {
+"k": 0,
+"km2": 0.0
+},
+"R2_promo": {
+"k": 32,
+"km2": 0.0
+},
+"R2_promo_SB": {
+"k": 0,
+"km2": 0.0
+},
+"R3_zone_all": {
+"k": 32,
+"km2": 0.0
+},
+"R3_zone_all_SB": {
+"k": 0,
+"km2": 0.0
+},
+"R0_current@all": {
+"k": 36,
+"km2": 0.0
+},
+"R0_current_SB@all": {
+"k": 2,
+"km2": 0.0
+},
+"R1_protect@all": {
+"k": 36,
+"km2": 0.0
+},
+"R1_protect_SB@all": {
+"k": 2,
+"km2": 0.0
+},
+"R2_promo@all": {
+"k": 36,
+"km2": 0.0
+},
+"R2_promo_SB@all": {
+"k": 2,
+"km2": 0.0
+},
+"R3_zone_all@all": {
+"k": 36,
+"km2": 0.0
+},
+"R3_zone_all_SB@all": {
+"k": 2,
+"km2": 0.0
+}
+},
+"11650": {
+"R0_current": {
+"k": 47,
+"km2": 0.1
+},
+"R0_current_SB": {
+"k": 8,
+"km2": 0.0
+},
+"R1_protect": {
+"k": 47,
+"km2": 0.1
+},
+"R1_protect_SB": {
+"k": 8,
+"km2": 0.0
+},
+"R2_promo": {
+"k": 47,
+"km2": 0.1
+},
+"R2_promo_SB": {
+"k": 8,
+"km2": 0.0
+},
+"R3_zone_all": {
+"k": 47,
+"km2": 0.1
+},
+"R3_zone_all_SB": {
+"k": 8,
+"km2": 0.0
+},
+"R0_current@all": {
+"k": 52,
+"km2": 0.1
+},
+"R0_current_SB@all": {
+"k": 5,
+"km2": 0.0
+},
+"R1_protect@all": {
+"k": 52,
+"km2": 0.1
+},
+"R1_protect_SB@all": {
+"k": 5,
+"km2": 0.0
+},
+"R2_promo@all": {
+"k": 52,
+"km2": 0.1
+},
+"R2_promo_SB@all": {
+"k": 5,
+"km2": 0.0
+},
+"R3_zone_all@all": {
+"k": 52,
+"km2": 0.1
+},
+"R3_zone_all_SB@all": {
+"k": 5,
+"km2": 0.0
+}
+},
+"11680": {
+"R0_current": {
+"k": 102,
+"km2": 0.1
+},
+"R0_current_SB": {
+"k": 64,
+"km2": 0.0
+},
+"R1_protect": {
+"k": 102,
+"km2": 0.1
+},
+"R1_protect_SB": {
+"k": 64,
+"km2": 0.0
+},
+"R2_promo": {
+"k": 102,
+"km2": 0.1
+},
+"R2_promo_SB": {
+"k": 64,
+"km2": 0.0
+},
+"R3_zone_all": {
+"k": 102,
+"km2": 0.1
+},
+"R3_zone_all_SB": {
+"k": 64,
+"km2": 0.0
+},
+"R0_current@all": {
+"k": 87,
+"km2": 0.1
+},
+"R0_current_SB@all": {
+"k": 61,
+"km2": 0.1
+},
+"R1_protect@all": {
+"k": 87,
+"km2": 0.1
+},
+"R1_protect_SB@all": {
+"k": 61,
+"km2": 0.1
+},
+"R2_promo@all": {
+"k": 87,
+"km2": 0.1
+},
+"R2_promo_SB@all": {
+"k": 61,
+"km2": 0.1
+},
+"R3_zone_all@all": {
+"k": 87,
+"km2": 0.1
+},
+"R3_zone_all_SB@all": {
+"k": 61,
+"km2": 0.1
+}
+},
+"11710": {
+"R0_current": {
+"k": 27,
+"km2": 0.0
+},
+"R0_current_SB": {
+"k": 14,
+"km2": 0.0
+},
+"R1_protect": {
+"k": 27,
+"km2": 0.0
+},
+"R1_protect_SB": {
+"k": 14,
+"km2": 0.0
+},
+"R2_promo": {
+"k": 27,
+"km2": 0.0
+},
+"R2_promo_SB": {
+"k": 14,
+"km2": 0.0
+},
+"R3_zone_all": {
+"k": 27,
+"km2": 0.0
+},
+"R3_zone_all_SB": {
+"k": 14,
+"km2": 0.0
+},
+"R0_current@all": {
+"k": 28,
+"km2": 0.0
+},
+"R0_current_SB@all": {
+"k": 14,
+"km2": 0.0
+},
+"R1_protect@all": {
+"k": 28,
+"km2": 0.0
+},
+"R1_protect_SB@all": {
+"k": 14,
+"km2": 0.0
+},
+"R2_promo@all": {
+"k": 28,
+"km2": 0.0
+},
+"R2_promo_SB@all": {
+"k": 14,
+"km2": 0.0
+},
+"R3_zone_all@all": {
+"k": 28,
+"km2": 0.0
+},
+"R3_zone_all_SB@all": {
+"k": 14,
+"km2": 0.0
+}
+},
+"11740": {
+"R0_current": {
+"k": 24,
+"km2": 0.0
+},
+"R0_current_SB": {
+"k": 3,
+"km2": 0.0
+},
+"R1_protect": {
+"k": 24,
+"km2": 0.0
+},
+"R1_protect_SB": {
+"k": 3,
+"km2": 0.0
+},
+"R2_promo": {
+"k": 24,
+"km2": 0.0
+},
+"R2_promo_SB": {
+"k": 3,
+"km2": 0.0
+},
+"R3_zone_all": {
+"k": 24,
+"km2": 0.0
+},
+"R3_zone_all_SB": {
+"k": 3,
+"km2": 0.0
+},
+"R0_current@all": {
+"k": 23,
+"km2": 0.0
+},
+"R0_current_SB@all": {
+"k": 3,
+"km2": 0.0
+},
+"R1_protect@all": {
+"k": 23,
+"km2": 0.0
+},
+"R1_protect_SB@all": {
+"k": 3,
+"km2": 0.0
+},
+"R2_promo@all": {
+"k": 23,
+"km2": 0.0
+},
+"R2_promo_SB@all": {
+"k": 3,
+"km2": 0.0
+},
+"R3_zone_all@all": {
+"k": 23,
+"km2": 0.0
+},
+"R3_zone_all_SB@all": {
+"k": 3,
+"km2": 0.0
+}
+},
+"26140": {
+"R0_current": {
+"k": 51,
+"km2": 0.0
+},
+"R0_current_SB": {
+"k": 2,
+"km2": 0.0
+},
+"R1_protect": {
+"k": 51,
+"km2": 0.0
+},
+"R1_protect_SB": {
+"k": 2,
+"km2": 0.0
+},
+"R2_promo": {
+"k": 51,
+"km2": 0.0
+},
+"R2_promo_SB": {
+"k": 2,
+"km2": 0.0
+},
+"R3_zone_all": {
+"k": 51,
+"km2": 0.0
+},
+"R3_zone_all_SB": {
+"k": 2,
+"km2": 0.0
+},
+"R0_current@all": {
+"k": 40,
+"km2": 0.1
+},
+"R0_current_SB@all": {
+"k": 7,
+"km2": 0.0
+},
+"R1_protect@all": {
+"k": 40,
+"km2": 0.1
+},
+"R1_protect_SB@all": {
+"k": 7,
+"km2": 0.0
+},
+"R2_promo@all": {
+"k": 40,
+"km2": 0.1
+},
+"R2_promo_SB@all": {
+"k": 7,
+"km2": 0.0
+},
+"R3_zone_all@all": {
+"k": 40,
+"km2": 0.1
+},
+"R3_zone_all_SB@all": {
+"k": 7,
+"km2": 0.0
+}
+},
+"26170": {
+"R0_current": {
+"k": 11,
+"km2": 0.0
+},
+"R0_current_SB": {
+"k": 0,
+"km2": 0.0
+},
+"R1_protect": {
+"k": 11,
+"km2": 0.0
+},
+"R1_protect_SB": {
+"k": 0,
+"km2": 0.0
+},
+"R2_promo": {
+"k": 11,
+"km2": 0.0
+},
+"R2_promo_SB": {
+"k": 0,
+"km2": 0.0
+},
+"R3_zone_all": {
+"k": 11,
+"km2": 0.0
+},
+"R3_zone_all_SB": {
+"k": 0,
+"km2": 0.0
+},
+"R0_current@all": {
+"k": 12,
+"km2": 0.0
+},
+"R0_current_SB@all": {
+"k": 1,
+"km2": 0.0
+},
+"R1_protect@all": {
+"k": 12,
+"km2": 0.0
+},
+"R1_protect_SB@all": {
+"k": 1,
+"km2": 0.0
+},
+"R2_promo@all": {
+"k": 12,
+"km2": 0.0
+},
+"R2_promo_SB@all": {
+"k": 1,
+"km2": 0.0
+},
+"R3_zone_all@all": {
+"k": 12,
+"km2": 0.0
+},
+"R3_zone_all_SB@all": {
+"k": 1,
+"km2": 0.0
+}
+},
+"26200": {
+"R0_current": {
+"k": 152,
+"km2": 0.0
+},
+"R0_current_SB": {
+"k": 3,
+"km2": 0.0
+},
+"R1_protect": {
+"k": 152,
+"km2": 0.0
+},
+"R1_protect_SB": {
+"k": 3,
+"km2": 0.0
+},
+"R2_promo": {
+"k": 152,
+"km2": 0.0
+},
+"R2_promo_SB": {
+"k": 3,
+"km2": 0.0
+},
+"R3_zone_all": {
+"k": 152,
+"km2": 0.0
+},
+"R3_zone_all_SB": {
+"k": 3,
+"km2": 0.0
+},
+"R0_current@all": {
+"k": 111,
+"km2": 0.1
+},
+"R0_current_SB@all": {
+"k": 4,
+"km2": 0.0
+},
+"R1_protect@all": {
+"k": 111,
+"km2": 0.1
+},
+"R1_protect_SB@all": {
+"k": 4,
+"km2": 0.0
+},
+"R2_promo@all": {
+"k": 111,
+"km2": 0.1
+},
+"R2_promo_SB@all": {
+"k": 4,
+"km2": 0.0
+},
+"R3_zone_all@all": {
+"k": 111,
+"km2": 0.1
+},
+"R3_zone_all_SB@all": {
+"k": 4,
+"km2": 0.0
+}
+},
+"26230": {
+"R0_current": {
+"k": 160,
+"km2": 0.1
+},
+"R0_current_SB": {
+"k": 10,
+"km2": 0.0
+},
+"R1_protect": {
+"k": 160,
+"km2": 0.1
+},
+"R1_protect_SB": {
+"k": 10,
+"km2": 0.0
+},
+"R2_promo": {
+"k": 160,
+"km2": 0.1
+},
+"R2_promo_SB": {
+"k": 10,
+"km2": 0.0
+},
+"R3_zone_all": {
+"k": 160,
+"km2": 0.1
+},
+"R3_zone_all_SB": {
+"k": 10,
+"km2": 0.0
+},
+"R0_current@all": {
+"k": 125,
+"km2": 0.1
+},
+"R0_current_SB@all": {
+"k": 12,
+"km2": 0.0
+},
+"R1_protect@all": {
+"k": 125,
+"km2": 0.1
+},
+"R1_protect_SB@all": {
+"k": 12,
+"km2": 0.0
+},
+"R2_promo@all": {
+"k": 125,
+"km2": 0.1
+},
+"R2_promo_SB@all": {
+"k": 12,
+"km2": 0.0
+},
+"R3_zone_all@all": {
+"k": 125,
+"km2": 0.1
+},
+"R3_zone_all_SB@all": {
+"k": 12,
+"km2": 0.0
+}
+},
+"26260": {
+"R0_current": {
+"k": 70,
+"km2": 0.0
+},
+"R0_current_SB": {
+"k": 0,
+"km2": 0.0
+},
+"R1_protect": {
+"k": 70,
+"km2": 0.0
+},
+"R1_protect_SB": {
+"k": 0,
+"km2": 0.0
+},
+"R2_promo": {
+"k": 70,
+"km2": 0.0
+},
+"R2_promo_SB": {
+"k": 0,
+"km2": 0.0
+},
+"R3_zone_all": {
+"k": 70,
+"km2": 0.0
+},
+"R3_zone_all_SB": {
+"k": 0,
+"km2": 0.0
+},
+"R0_current@all": {
+"k": 66,
+"km2": 0.1
+},
+"R0_current_SB@all": {
+"k": 3,
+"km2": 0.0
+},
+"R1_protect@all": {
+"k": 66,
+"km2": 0.1
+},
+"R1_protect_SB@all": {
+"k": 3,
+"km2": 0.0
+},
+"R2_promo@all": {
+"k": 66,
+"km2": 0.1
+},
+"R2_promo_SB@all": {
+"k": 3,
+"km2": 0.0
+},
+"R3_zone_all@all": {
+"k": 66,
+"km2": 0.1
+},
+"R3_zone_all_SB@all": {
+"k": 3,
+"km2": 0.0
+}
+},
+"26290": {
+"R0_current": {
+"k": 218,
+"km2": 0.0
+},
+"R0_current_SB": {
+"k": 2,
+"km2": 0.0
+},
+"R1_protect": {
+"k": 218,
+"km2": 0.0
+},
+"R1_protect_SB": {
+"k": 2,
+"km2": 0.0
+},
+"R2_promo": {
+"k": 218,
+"km2": 0.0
+},
+"R2_promo_SB": {
+"k": 2,
+"km2": 0.0
+},
+"R3_zone_all": {
+"k": 218,
+"km2": 0.0
+},
+"R3_zone_all_SB": {
+"k": 2,
+"km2": 0.0
+},
+"R0_current@all": {
+"k": 144,
+"km2": 0.1
+},
+"R0_current_SB@all": {
+"k": 2,
+"km2": 0.0
+},
+"R1_protect@all": {
+"k": 144,
+"km2": 0.1
+},
+"R1_protect_SB@all": {
+"k": 2,
+"km2": 0.0
+},
+"R2_promo@all": {
+"k": 144,
+"km2": 0.1
+},
+"R2_promo_SB@all": {
+"k": 2,
+"km2": 0.0
+},
+"R3_zone_all@all": {
+"k": 144,
+"km2": 0.1
+},
+"R3_zone_all_SB@all": {
+"k": 2,
+"km2": 0.0
+}
+},
+"26320": {
+"R0_current": {
+"k": 63,
+"km2": 0.0
+},
+"R0_current_SB": {
+"k": 4,
+"km2": 0.0
+},
+"R1_protect": {
+"k": 63,
+"km2": 0.0
+},
+"R1_protect_SB": {
+"k": 4,
+"km2": 0.0
+},
+"R2_promo": {
+"k": 63,
+"km2": 0.0
+},
+"R2_promo_SB": {
+"k": 4,
+"km2": 0.0
+},
+"R3_zone_all": {
+"k": 63,
+"km2": 0.0
+},
+"R3_zone_all_SB": {
+"k": 4,
+"km2": 0.0
+},
+"R0_current@all": {
+"k": 98,
+"km2": 0.1
+},
+"R0_current_SB@all": {
+"k": 15,
+"km2": 0.0
+},
+"R1_protect@all": {
+"k": 98,
+"km2": 0.1
+},
+"R1_protect_SB@all": {
+"k": 15,
+"km2": 0.0
+},
+"R2_promo@all": {
+"k": 98,
+"km2": 0.1
+},
+"R2_promo_SB@all": {
+"k": 15,
+"km2": 0.0
+},
+"R3_zone_all@all": {
+"k": 98,
+"km2": 0.1
+},
+"R3_zone_all_SB@all": {
+"k": 15,
+"km2": 0.0
+}
+},
+"26350": {
+"R0_current": {
+"k": 211,
+"km2": 0.1
+},
+"R0_current_SB": {
+"k": 8,
+"km2": 0.0
+},
+"R1_protect": {
+"k": 211,
+"km2": 0.1
+},
+"R1_protect_SB": {
+"k": 8,
+"km2": 0.0
+},
+"R2_promo": {
+"k": 211,
+"km2": 0.1
+},
+"R2_promo_SB": {
+"k": 8,
+"km2": 0.0
+},
+"R3_zone_all": {
+"k": 211,
+"km2": 0.1
+},
+"R3_zone_all_SB": {
+"k": 8,
+"km2": 0.0
+},
+"R0_current@all": {
+"k": 220,
+"km2": 0.3
+},
+"R0_current_SB@all": {
+"k": 9,
+"km2": 0.0
+},
+"R1_protect@all": {
+"k": 220,
+"km2": 0.3
+},
+"R1_protect_SB@all": {
+"k": 9,
+"km2": 0.0
+},
+"R2_promo@all": {
+"k": 220,
+"km2": 0.3
+},
+"R2_promo_SB@all": {
+"k": 9,
+"km2": 0.0
+},
+"R3_zone_all@all": {
+"k": 220,
+"km2": 0.3
+},
+"R3_zone_all_SB@all": {
+"k": 9,
+"km2": 0.0
+}
+},
+"26380": {
+"R0_current": {
+"k": 125,
+"km2": 0.0
+},
+"R0_current_SB": {
+"k": 4,
+"km2": 0.0
+},
+"R1_protect": {
+"k": 125,
+"km2": 0.0
+},
+"R1_protect_SB": {
+"k": 4,
+"km2": 0.0
+},
+"R2_promo": {
+"k": 125,
+"km2": 0.0
+},
+"R2_promo_SB": {
+"k": 4,
+"km2": 0.0
+},
+"R3_zone_all": {
+"k": 125,
+"km2": 0.0
+},
+"R3_zone_all_SB": {
+"k": 4,
+"km2": 0.0
+},
+"R0_current@all": {
+"k": 173,
+"km2": 0.1
+},
+"R0_current_SB@all": {
+"k": 20,
+"km2": 0.0
+},
+"R1_protect@all": {
+"k": 173,
+"km2": 0.1
+},
+"R1_protect_SB@all": {
+"k": 20,
+"km2": 0.0
+},
+"R2_promo@all": {
+"k": 173,
+"km2": 0.1
+},
+"R2_promo_SB@all": {
+"k": 20,
+"km2": 0.0
+},
+"R3_zone_all@all": {
+"k": 173,
+"km2": 0.1
+},
+"R3_zone_all_SB@all": {
+"k": 20,
+"km2": 0.0
+}
+},
+"26410": {
+"R0_current": {
+"k": 109,
+"km2": 0.0
+},
+"R0_current_SB": {
+"k": 8,
+"km2": 0.0
+},
+"R1_protect": {
+"k": 109,
+"km2": 0.0
+},
+"R1_protect_SB": {
+"k": 8,
+"km2": 0.0
+},
+"R2_promo": {
+"k": 109,
+"km2": 0.0
+},
+"R2_promo_SB": {
+"k": 8,
+"km2": 0.0
+},
+"R3_zone_all": {
+"k": 109,
+"km2": 0.0
+},
+"R3_zone_all_SB": {
+"k": 8,
+"km2": 0.0
+},
+"R0_current@all": {
+"k": 174,
+"km2": 0.2
+},
+"R0_current_SB@all": {
+"k": 10,
+"km2": 0.0
+},
+"R1_protect@all": {
+"k": 174,
+"km2": 0.2
+},
+"R1_protect_SB@all": {
+"k": 10,
+"km2": 0.0
+},
+"R2_promo@all": {
+"k": 174,
+"km2": 0.2
+},
+"R2_promo_SB@all": {
+"k": 10,
+"km2": 0.0
+},
+"R3_zone_all@all": {
+"k": 174,
+"km2": 0.2
+},
+"R3_zone_all_SB@all": {
+"k": 10,
+"km2": 0.0
+}
+},
+"26440": {
+"R0_current": {
+"k": 770,
+"km2": 0.5
+},
+"R0_current_SB": {
+"k": 90,
+"km2": 0.1
+},
+"R1_protect": {
+"k": 770,
+"km2": 0.5
+},
+"R1_protect_SB": {
+"k": 90,
+"km2": 0.1
+},
+"R2_promo": {
+"k": 770,
+"km2": 0.5
+},
+"R2_promo_SB": {
+"k": 90,
+"km2": 0.1
+},
+"R3_zone_all": {
+"k": 770,
+"km2": 0.5
+},
+"R3_zone_all_SB": {
+"k": 90,
+"km2": 0.1
+},
+"R0_current@all": {
+"k": 691,
+"km2": 4.3
+},
+"R0_current_SB@all": {
+"k": 109,
+"km2": 1.5
+},
+"R1_protect@all": {
+"k": 691,
+"km2": 4.3
+},
+"R1_protect_SB@all": {
+"k": 109,
+"km2": 1.5
+},
+"R2_promo@all": {
+"k": 691,
+"km2": 4.3
+},
+"R2_promo_SB@all": {
+"k": 109,
+"km2": 1.5
+},
+"R3_zone_all@all": {
+"k": 691,
+"km2": 4.3
+},
+"R3_zone_all_SB@all": {
+"k": 109,
+"km2": 1.5
+}
+},
+"26470": {
+"R0_current": {
+"k": 36,
+"km2": 0.0
+},
+"R0_current_SB": {
+"k": 6,
+"km2": 0.0
+},
+"R1_protect": {
+"k": 36,
+"km2": 0.0
+},
+"R1_protect_SB": {
+"k": 6,
+"km2": 0.0
+},
+"R2_promo": {
+"k": 36,
+"km2": 0.0
+},
+"R2_promo_SB": {
+"k": 6,
+"km2": 0.0
+},
+"R3_zone_all": {
+"k": 36,
+"km2": 0.0
+},
+"R3_zone_all_SB": {
+"k": 6,
+"km2": 0.0
+},
+"R0_current@all": {
+"k": 21,
+"km2": 0.0
+},
+"R0_current_SB@all": {
+"k": 4,
+"km2": 0.0
+},
+"R1_protect@all": {
+"k": 21,
+"km2": 0.0
+},
+"R1_protect_SB@all": {
+"k": 4,
+"km2": 0.0
+},
+"R2_promo@all": {
+"k": 21,
+"km2": 0.0
+},
+"R2_promo_SB@all": {
+"k": 4,
+"km2": 0.0
+},
+"R3_zone_all@all": {
+"k": 21,
+"km2": 0.0
+},
+"R3_zone_all_SB@all": {
+"k": 4,
+"km2": 0.0
+}
+},
+"26500": {
+"R0_current": {
+"k": 27,
+"km2": 0.0
+},
+"R0_current_SB": {
+"k": 2,
+"km2": 0.0
+},
+"R1_protect": {
+"k": 27,
+"km2": 0.0
+},
+"R1_protect_SB": {
+"k": 2,
+"km2": 0.0
+},
+"R2_promo": {
+"k": 27,
+"km2": 0.0
+},
+"R2_promo_SB": {
+"k": 2,
+"km2": 0.0
+},
+"R3_zone_all": {
+"k": 27,
+"km2": 0.0
+},
+"R3_zone_all_SB": {
+"k": 2,
+"km2": 0.0
+},
+"R0_current@all": {
+"k": 26,
+"km2": 0.0
+},
+"R0_current_SB@all": {
+"k": 3,
+"km2": 0.0
+},
+"R1_protect@all": {
+"k": 26,
+"km2": 0.0
+},
+"R1_protect_SB@all": {
+"k": 3,
+"km2": 0.0
+},
+"R2_promo@all": {
+"k": 26,
+"km2": 0.0
+},
+"R2_promo_SB@all": {
+"k": 3,
+"km2": 0.0
+},
+"R3_zone_all@all": {
+"k": 26,
+"km2": 0.0
+},
+"R3_zone_all_SB@all": {
+"k": 3,
+"km2": 0.0
+}
+},
+"26530": {
+"R0_current": {
+"k": 137,
+"km2": 0.1
+},
+"R0_current_SB": {
+"k": 28,
+"km2": 0.0
+},
+"R1_protect": {
+"k": 137,
+"km2": 0.1
+},
+"R1_protect_SB": {
+"k": 28,
+"km2": 0.0
+},
+"R2_promo": {
+"k": 137,
+"km2": 0.1
+},
+"R2_promo_SB": {
+"k": 28,
+"km2": 0.0
+},
+"R3_zone_all": {
+"k": 137,
+"km2": 0.1
+},
+"R3_zone_all_SB": {
+"k": 28,
+"km2": 0.0
+},
+"R0_current@all": {
+"k": 143,
+"km2": 0.1
+},
+"R0_current_SB@all": {
+"k": 38,
+"km2": 0.1
+},
+"R1_protect@all": {
+"k": 143,
+"km2": 0.1
+},
+"R1_protect_SB@all": {
+"k": 38,
+"km2": 0.1
+},
+"R2_promo@all": {
+"k": 143,
+"km2": 0.1
+},
+"R2_promo_SB@all": {
+"k": 38,
+"km2": 0.1
+},
+"R3_zone_all@all": {
+"k": 143,
+"km2": 0.1
+},
+"R3_zone_all_SB@all": {
+"k": 38,
+"km2": 0.1
+}
+},
+"26710": {
+"R0_current": {
+"k": 1064,
+"km2": 1.5
+},
+"R0_current_SB": {
+"k": 271,
+"km2": 0.5
+},
+"R1_protect": {
+"k": 1068,
+"km2": 1.5
+},
+"R1_protect_SB": {
+"k": 272,
+"km2": 0.5
+},
+"R2_promo": {
+"k": 1062,
+"km2": 1.5
+},
+"R2_promo_SB": {
+"k": 269,
+"km2": 0.5
+},
+"R3_zone_all": {
+"k": 1066,
+"km2": 1.5
+},
+"R3_zone_all_SB": {
+"k": 270,
+"km2": 0.5
+},
+"R0_current@all": {
+"k": 979,
+"km2": 8.7
+},
+"R0_current_SB@all": {
+"k": 423,
+"km2": 2.4
+},
+"R1_protect@all": {
+"k": 985,
+"km2": 8.8
+},
+"R1_protect_SB@all": {
+"k": 424,
+"km2": 2.4
+},
+"R2_promo@all": {
+"k": 977,
+"km2": 8.9
+},
+"R2_promo_SB@all": {
+"k": 420,
+"km2": 2.5
+},
+"R3_zone_all@all": {
+"k": 983,
+"km2": 8.9
+},
+"R3_zone_all_SB@all": {
+"k": 421,
+"km2": 2.5
+}
+},
+"27140": {
+"R0_current": {
+"k": 269,
+"km2": 0.2
+},
+"R0_current_SB": {
+"k": 22,
+"km2": 0.0
+},
+"R1_protect": {
+"k": 269,
+"km2": 0.2
+},
+"R1_protect_SB": {
+"k": 22,
+"km2": 0.0
+},
+"R2_promo": {
+"k": 269,
+"km2": 0.2
+},
+"R2_promo_SB": {
+"k": 22,
+"km2": 0.0
+},
+"R3_zone_all": {
+"k": 269,
+"km2": 0.2
+},
+"R3_zone_all_SB": {
+"k": 22,
+"km2": 0.0
+},
+"R0_current@all": {
+"k": 622,
+"km2": 3.9
+},
+"R0_current_SB@all": {
+"k": 65,
+"km2": 0.7
+},
+"R1_protect@all": {
+"k": 622,
+"km2": 3.9
+},
+"R1_protect_SB@all": {
+"k": 65,
+"km2": 0.7
+},
+"R2_promo@all": {
+"k": 622,
+"km2": 3.9
+},
+"R2_promo_SB@all": {
+"k": 65,
+"km2": 0.7
+},
+"R3_zone_all@all": {
+"k": 622,
+"km2": 3.9
+},
+"R3_zone_all_SB@all": {
+"k": 65,
+"km2": 0.7
+}
+},
+"27170": {
+"R0_current": {
+"k": 105,
+"km2": 0.1
+},
+"R0_current_SB": {
+"k": 19,
+"km2": 0.1
+},
+"R1_protect": {
+"k": 105,
+"km2": 0.1
+},
+"R1_protect_SB": {
+"k": 19,
+"km2": 0.1
+},
+"R2_promo": {
+"k": 105,
+"km2": 0.1
+},
+"R2_promo_SB": {
+"k": 19,
+"km2": 0.1
+},
+"R3_zone_all": {
+"k": 105,
+"km2": 0.1
+},
+"R3_zone_all_SB": {
+"k": 19,
+"km2": 0.1
+},
+"R0_current@all": {
+"k": 111,
+"km2": 0.2
+},
+"R0_current_SB@all": {
+"k": 21,
+"km2": 0.1
+},
+"R1_protect@all": {
+"k": 111,
+"km2": 0.2
+},
+"R1_protect_SB@all": {
+"k": 21,
+"km2": 0.1
+},
+"R2_promo@all": {
+"k": 111,
+"km2": 0.2
+},
+"R2_promo_SB@all": {
+"k": 21,
+"km2": 0.1
+},
+"R3_zone_all@all": {
+"k": 111,
+"km2": 0.2
+},
+"R3_zone_all_SB@all": {
+"k": 21,
+"km2": 0.1
+}
+},
+"27200": {
+"R0_current": {
+"k": 13,
+"km2": 0.0
+},
+"R0_current_SB": {
+"k": 0,
+"km2": 0.0
+},
+"R1_protect": {
+"k": 13,
+"km2": 0.0
+},
+"R1_protect_SB": {
+"k": 0,
+"km2": 0.0
+},
+"R2_promo": {
+"k": 13,
+"km2": 0.0
+},
+"R2_promo_SB": {
+"k": 0,
+"km2": 0.0
+},
+"R3_zone_all": {
+"k": 13,
+"km2": 0.0
+},
+"R3_zone_all_SB": {
+"k": 0,
+"km2": 0.0
+},
+"R0_current@all": {
+"k": 20,
+"km2": 0.0
+},
+"R0_current_SB@all": {
+"k": 0,
+"km2": 0.0
+},
+"R1_protect@all": {
+"k": 20,
+"km2": 0.0
+},
+"R1_protect_SB@all": {
+"k": 0,
+"km2": 0.0
+},
+"R2_promo@all": {
+"k": 20,
+"km2": 0.0
+},
+"R2_promo_SB@all": {
+"k": 0,
+"km2": 0.0
+},
+"R3_zone_all@all": {
+"k": 20,
+"km2": 0.0
+},
+"R3_zone_all_SB@all": {
+"k": 0,
+"km2": 0.0
+}
+},
+"27230": {
+"R0_current": {
+"k": 256,
+"km2": 0.4
+},
+"R0_current_SB": {
+"k": 50,
+"km2": 0.1
+},
+"R1_protect": {
+"k": 256,
+"km2": 0.4
+},
+"R1_protect_SB": {
+"k": 50,
+"km2": 0.1
+},
+"R2_promo": {
+"k": 256,
+"km2": 0.4
+},
+"R2_promo_SB": {
+"k": 50,
+"km2": 0.1
+},
+"R3_zone_all": {
+"k": 256,
+"km2": 0.4
+},
+"R3_zone_all_SB": {
+"k": 50,
+"km2": 0.1
+},
+"R0_current@all": {
+"k": 335,
+"km2": 1.0
+},
+"R0_current_SB@all": {
+"k": 46,
+"km2": 0.3
+},
+"R1_protect@all": {
+"k": 335,
+"km2": 1.0
+},
+"R1_protect_SB@all": {
+"k": 46,
+"km2": 0.3
+},
+"R2_promo@all": {
+"k": 335,
+"km2": 1.0
+},
+"R2_promo_SB@all": {
+"k": 46,
+"km2": 0.3
+},
+"R3_zone_all@all": {
+"k": 335,
+"km2": 1.0
+},
+"R3_zone_all_SB@all": {
+"k": 46,
+"km2": 0.3
+}
+},
+"27260": {
+"R0_current": {
+"k": 110,
+"km2": 0.1
+},
+"R0_current_SB": {
+"k": 5,
+"km2": 0.0
+},
+"R1_protect": {
+"k": 110,
+"km2": 0.1
+},
+"R1_protect_SB": {
+"k": 5,
+"km2": 0.0
+},
+"R2_promo": {
+"k": 110,
+"km2": 0.1
+},
+"R2_promo_SB": {
+"k": 5,
+"km2": 0.0
+},
+"R3_zone_all": {
+"k": 110,
+"km2": 0.1
+},
+"R3_zone_all_SB": {
+"k": 5,
+"km2": 0.0
+},
+"R0_current@all": {
+"k": 193,
+"km2": 0.3
+},
+"R0_current_SB@all": {
+"k": 6,
+"km2": 0.0
+},
+"R1_protect@all": {
+"k": 193,
+"km2": 0.3
+},
+"R1_protect_SB@all": {
+"k": 6,
+"km2": 0.0
+},
+"R2_promo@all": {
+"k": 193,
+"km2": 0.3
+},
+"R2_promo_SB@all": {
+"k": 6,
+"km2": 0.0
+},
+"R3_zone_all@all": {
+"k": 193,
+"km2": 0.3
+},
+"R3_zone_all_SB@all": {
+"k": 6,
+"km2": 0.0
+}
+},
+"27290": {
+"R0_current": {
+"k": 110,
+"km2": 0.1
+},
+"R0_current_SB": {
+"k": 20,
+"km2": 0.0
+},
+"R1_protect": {
+"k": 110,
+"km2": 0.1
+},
+"R1_protect_SB": {
+"k": 20,
+"km2": 0.0
+},
+"R2_promo": {
+"k": 110,
+"km2": 0.1
+},
+"R2_promo_SB": {
+"k": 20,
+"km2": 0.0
+},
+"R3_zone_all": {
+"k": 110,
+"km2": 0.1
+},
+"R3_zone_all_SB": {
+"k": 20,
+"km2": 0.0
+},
+"R0_current@all": {
+"k": 152,
+"km2": 0.2
+},
+"R0_current_SB@all": {
+"k": 18,
+"km2": 0.1
+},
+"R1_protect@all": {
+"k": 152,
+"km2": 0.2
+},
+"R1_protect_SB@all": {
+"k": 18,
+"km2": 0.1
+},
+"R2_promo@all": {
+"k": 152,
+"km2": 0.2
+},
+"R2_promo_SB@all": {
+"k": 18,
+"km2": 0.1
+},
+"R3_zone_all@all": {
+"k": 152,
+"km2": 0.2
+},
+"R3_zone_all_SB@all": {
+"k": 18,
+"km2": 0.1
+}
+},
+"27710": {
+"R0_current": {
+"k": 1422,
+"km2": 2.7
+},
+"R0_current_SB": {
+"k": 475,
+"km2": 1.7
+},
+"R1_protect": {
+"k": 1446,
+"km2": 2.7
+},
+"R1_protect_SB": {
+"k": 496,
+"km2": 1.8
+},
+"R2_promo": {
+"k": 1517,
+"km2": 2.8
+},
+"R2_promo_SB": {
+"k": 561,
+"km2": 1.9
+},
+"R3_zone_all": {
+"k": 1534,
+"km2": 2.9
+},
+"R3_zone_all_SB": {
+"k": 575,
+"km2": 1.9
+},
+"R0_current@all": {
+"k": 1637,
+"km2": 18.4
+},
+"R0_current_SB@all": {
+"k": 558,
+"km2": 8.0
+},
+"R1_protect@all": {
+"k": 1636,
+"km2": 19.0
+},
+"R1_protect_SB@all": {
+"k": 567,
+"km2": 8.3
+},
+"R2_promo@all": {
+"k": 1584,
+"km2": 34.8
+},
+"R2_promo_SB@all": {
+"k": 542,
+"km2": 15.0
+},
+"R3_zone_all@all": {
+"k": 1581,
+"km2": 36.0
+},
+"R3_zone_all_SB@all": {
+"k": 549,
+"km2": 15.3
+}
+},
+"27720": {
+"R0_current": {
+"k": 1386,
+"km2": 1.3
+},
+"R0_current_SB": {
+"k": 681,
+"km2": 0.8
+},
+"R1_protect": {
+"k": 1522,
+"km2": 1.4
+},
+"R1_protect_SB": {
+"k": 770,
+"km2": 0.9
+},
+"R2_promo": {
+"k": 2236,
+"km2": 2.8
+},
+"R2_promo_SB": {
+"k": 1240,
+"km2": 1.7
+},
+"R3_zone_all": {
+"k": 2350,
+"km2": 2.9
+},
+"R3_zone_all_SB": {
+"k": 1319,
+"km2": 1.7
+},
+"R0_current@all": {
+"k": 2421,
+"km2": 24.7
+},
+"R0_current_SB@all": {
+"k": 1591,
+"km2": 13.5
+},
+"R1_protect@all": {
+"k": 2504,
+"km2": 27.3
+},
+"R1_protect_SB@all": {
+"k": 1704,
+"km2": 15.1
+},
+"R2_promo@all": {
+"k": 2108,
+"km2": 52.6
+},
+"R2_promo_SB@all": {
+"k": 1726,
+"km2": 28.3
+},
+"R3_zone_all@all": {
+"k": 2112,
+"km2": 55.4
+},
+"R3_zone_all_SB@all": {
+"k": 1780,
+"km2": 29.9
+}
+},
+"28110": {
+"R0_current": {
+"k": 360,
+"km2": 0.6
+},
+"R0_current_SB": {
+"k": 73,
+"km2": 0.2
+},
+"R1_protect": {
+"k": 360,
+"km2": 0.6
+},
+"R1_protect_SB": {
+"k": 73,
+"km2": 0.2
+},
+"R2_promo": {
+"k": 360,
+"km2": 0.6
+},
+"R2_promo_SB": {
+"k": 73,
+"km2": 0.2
+},
+"R3_zone_all": {
+"k": 360,
+"km2": 0.6
+},
+"R3_zone_all_SB": {
+"k": 73,
+"km2": 0.2
+},
+"R0_current@all": {
+"k": 376,
+"km2": 5.8
+},
+"R0_current_SB@all": {
+"k": 131,
+"km2": 0.8
+},
+"R1_protect@all": {
+"k": 376,
+"km2": 5.8
+},
+"R1_protect_SB@all": {
+"k": 131,
+"km2": 0.8
+},
+"R2_promo@all": {
+"k": 376,
+"km2": 5.8
+},
+"R2_promo_SB@all": {
+"k": 131,
+"km2": 0.8
+},
+"R3_zone_all@all": {
+"k": 376,
+"km2": 5.8
+},
+"R3_zone_all_SB@all": {
+"k": 131,
+"km2": 0.8
+}
+},
+"28140": {
+"R0_current": {
+"k": 1,
+"km2": 0.0
+},
+"R0_current_SB": {
+"k": 0,
+"km2": 0.0
+},
+"R1_protect": {
+"k": 1,
+"km2": 0.0
+},
+"R1_protect_SB": {
+"k": 0,
+"km2": 0.0
+},
+"R2_promo": {
+"k": 1,
+"km2": 0.0
+},
+"R2_promo_SB": {
+"k": 0,
+"km2": 0.0
+},
+"R3_zone_all": {
+"k": 1,
+"km2": 0.0
+},
+"R3_zone_all_SB": {
+"k": 0,
+"km2": 0.0
+},
+"R0_current@all": {
+"k": 0,
+"km2": 0.0
+},
+"R0_current_SB@all": {
+"k": 0,
+"km2": 0.0
+},
+"R1_protect@all": {
+"k": 0,
+"km2": 0.0
+},
+"R1_protect_SB@all": {
+"k": 0,
+"km2": 0.0
+},
+"R2_promo@all": {
+"k": 0,
+"km2": 0.0
+},
+"R2_promo_SB@all": {
+"k": 0,
+"km2": 0.0
+},
+"R3_zone_all@all": {
+"k": 0,
+"km2": 0.0
+},
+"R3_zone_all_SB@all": {
+"k": 0,
+"km2": 0.0
+}
+},
+"28177": {
+"R0_current": {
+"k": 51,
+"km2": 0.0
+},
+"R0_current_SB": {
+"k": 0,
+"km2": 0.0
+},
+"R1_protect": {
+"k": 51,
+"km2": 0.0
+},
+"R1_protect_SB": {
+"k": 0,
+"km2": 0.0
+},
+"R2_promo": {
+"k": 51,
+"km2": 0.0
+},
+"R2_promo_SB": {
+"k": 0,
+"km2": 0.0
+},
+"R3_zone_all": {
+"k": 51,
+"km2": 0.0
+},
+"R3_zone_all_SB": {
+"k": 0,
+"km2": 0.0
+},
+"R0_current@all": {
+"k": 39,
+"km2": 0.0
+},
+"R0_current_SB@all": {
+"k": 0,
+"km2": 0.0
+},
+"R1_protect@all": {
+"k": 39,
+"km2": 0.0
+},
+"R1_protect_SB@all": {
+"k": 0,
+"km2": 0.0
+},
+"R2_promo@all": {
+"k": 39,
+"km2": 0.0
+},
+"R2_promo_SB@all": {
+"k": 0,
+"km2": 0.0
+},
+"R3_zone_all@all": {
+"k": 39,
+"km2": 0.0
+},
+"R3_zone_all_SB@all": {
+"k": 0,
+"km2": 0.0
+}
+},
+"28185": {
+"R0_current": {
+"k": 58,
+"km2": 0.0
+},
+"R0_current_SB": {
+"k": 3,
+"km2": 0.0
+},
+"R1_protect": {
+"k": 58,
+"km2": 0.0
+},
+"R1_protect_SB": {
+"k": 3,
+"km2": 0.0
+},
+"R2_promo": {
+"k": 58,
+"km2": 0.0
+},
+"R2_promo_SB": {
+"k": 3,
+"km2": 0.0
+},
+"R3_zone_all": {
+"k": 58,
+"km2": 0.0
+},
+"R3_zone_all_SB": {
+"k": 3,
+"km2": 0.0
+},
+"R0_current@all": {
+"k": 50,
+"km2": 0.0
+},
+"R0_current_SB@all": {
+"k": 2,
+"km2": 0.0
+},
+"R1_protect@all": {
+"k": 50,
+"km2": 0.0
+},
+"R1_protect_SB@all": {
+"k": 2,
+"km2": 0.0
+},
+"R2_promo@all": {
+"k": 50,
+"km2": 0.0
+},
+"R2_promo_SB@all": {
+"k": 2,
+"km2": 0.0
+},
+"R3_zone_all@all": {
+"k": 50,
+"km2": 0.0
+},
+"R3_zone_all_SB@all": {
+"k": 2,
+"km2": 0.0
+}
+},
+"28200": {
+"R0_current": {
+"k": 128,
+"km2": 0.1
+},
+"R0_current_SB": {
+"k": 14,
+"km2": 0.0
+},
+"R1_protect": {
+"k": 128,
+"km2": 0.1
+},
+"R1_protect_SB": {
+"k": 14,
+"km2": 0.0
+},
+"R2_promo": {
+"k": 128,
+"km2": 0.1
+},
+"R2_promo_SB": {
+"k": 14,
+"km2": 0.0
+},
+"R3_zone_all": {
+"k": 128,
+"km2": 0.1
+},
+"R3_zone_all_SB": {
+"k": 14,
+"km2": 0.0
+},
+"R0_current@all": {
+"k": 168,
+"km2": 0.2
+},
+"R0_current_SB@all": {
+"k": 18,
+"km2": 0.0
+},
+"R1_protect@all": {
+"k": 168,
+"km2": 0.2
+},
+"R1_protect_SB@all": {
+"k": 18,
+"km2": 0.0
+},
+"R2_promo@all": {
+"k": 168,
+"km2": 0.2
+},
+"R2_promo_SB@all": {
+"k": 18,
+"km2": 0.0
+},
+"R3_zone_all@all": {
+"k": 168,
+"km2": 0.2
+},
+"R3_zone_all_SB@all": {
+"k": 18,
+"km2": 0.0
+}
+},
+"28237": {
+"R0_current": {
+"k": 231,
+"km2": 0.1
+},
+"R0_current_SB": {
+"k": 22,
+"km2": 0.0
+},
+"R1_protect": {
+"k": 231,
+"km2": 0.1
+},
+"R1_protect_SB": {
+"k": 22,
+"km2": 0.0
+},
+"R2_promo": {
+"k": 231,
+"km2": 0.1
+},
+"R2_promo_SB": {
+"k": 22,
+"km2": 0.0
+},
+"R3_zone_all": {
+"k": 231,
+"km2": 0.1
+},
+"R3_zone_all_SB": {
+"k": 22,
+"km2": 0.0
+},
+"R0_current@all": {
+"k": 159,
+"km2": 0.6
+},
+"R0_current_SB@all": {
+"k": 9,
+"km2": 0.4
+},
+"R1_protect@all": {
+"k": 159,
+"km2": 0.6
+},
+"R1_protect_SB@all": {
+"k": 9,
+"km2": 0.4
+},
+"R2_promo@all": {
+"k": 159,
+"km2": 0.6
+},
+"R2_promo_SB@all": {
+"k": 9,
+"km2": 0.4
+},
+"R3_zone_all@all": {
+"k": 159,
+"km2": 0.6
+},
+"R3_zone_all_SB@all": {
+"k": 9,
+"km2": 0.4
+}
+},
+"28245": {
+"R0_current": {
+"k": 144,
+"km2": 0.0
+},
+"R0_current_SB": {
+"k": 4,
+"km2": 0.0
+},
+"R1_protect": {
+"k": 144,
+"km2": 0.0
+},
+"R1_protect_SB": {
+"k": 4,
+"km2": 0.0
+},
+"R2_promo": {
+"k": 144,
+"km2": 0.0
+},
+"R2_promo_SB": {
+"k": 4,
+"km2": 0.0
+},
+"R3_zone_all": {
+"k": 144,
+"km2": 0.0
+},
+"R3_zone_all_SB": {
+"k": 4,
+"km2": 0.0
+},
+"R0_current@all": {
+"k": 169,
+"km2": 0.2
+},
+"R0_current_SB@all": {
+"k": 3,
+"km2": 0.0
+},
+"R1_protect@all": {
+"k": 169,
+"km2": 0.2
+},
+"R1_protect_SB@all": {
+"k": 3,
+"km2": 0.0
+},
+"R2_promo@all": {
+"k": 169,
+"km2": 0.2
+},
+"R2_promo_SB@all": {
+"k": 3,
+"km2": 0.0
+},
+"R3_zone_all@all": {
+"k": 169,
+"km2": 0.2
+},
+"R3_zone_all_SB@all": {
+"k": 3,
+"km2": 0.0
+}
+},
+"28260": {
+"R0_current": {
+"k": 253,
+"km2": 0.4
+},
+"R0_current_SB": {
+"k": 38,
+"km2": 0.2
+},
+"R1_protect": {
+"k": 256,
+"km2": 0.4
+},
+"R1_protect_SB": {
+"k": 38,
+"km2": 0.2
+},
+"R2_promo": {
+"k": 263,
+"km2": 0.8
+},
+"R2_promo_SB": {
+"k": 49,
+"km2": 0.5
+},
+"R3_zone_all": {
+"k": 263,
+"km2": 0.8
+},
+"R3_zone_all_SB": {
+"k": 49,
+"km2": 0.5
+},
+"R0_current@all": {
+"k": 320,
+"km2": 1.3
+},
+"R0_current_SB@all": {
+"k": 58,
+"km2": 0.3
+},
+"R1_protect@all": {
+"k": 322,
+"km2": 1.3
+},
+"R1_protect_SB@all": {
+"k": 58,
+"km2": 0.3
+},
+"R2_promo@all": {
+"k": 306,
+"km2": 3.3
+},
+"R2_promo_SB@all": {
+"k": 65,
+"km2": 1.3
+},
+"R3_zone_all@all": {
+"k": 305,
+"km2": 3.3
+},
+"R3_zone_all_SB@all": {
+"k": 65,
+"km2": 1.3
+}
+},
+"28710": {
+"R0_current": {
+"k": 771,
+"km2": 0.7
+},
+"R0_current_SB": {
+"k": 31,
+"km2": 0.0
+},
+"R1_protect": {
+"k": 823,
+"km2": 0.7
+},
+"R1_protect_SB": {
+"k": 38,
+"km2": 0.1
+},
+"R2_promo": {
+"k": 1052,
+"km2": 4.5
+},
+"R2_promo_SB": {
+"k": 225,
+"km2": 3.4
+},
+"R3_zone_all": {
+"k": 1094,
+"km2": 4.5
+},
+"R3_zone_all_SB": {
+"k": 230,
+"km2": 3.4
+},
+"R0_current@all": {
+"k": 1415,
+"km2": 14.2
+},
+"R0_current_SB@all": {
+"k": 165,
+"km2": 0.7
+},
+"R1_protect@all": {
+"k": 1450,
+"km2": 15.6
+},
+"R1_protect_SB@all": {
+"k": 180,
+"km2": 0.8
+},
+"R2_promo@all": {
+"k": 1224,
+"km2": 49.9
+},
+"R2_promo_SB@all": {
+"k": 263,
+"km2": 24.2
+},
+"R3_zone_all@all": {
+"k": 1211,
+"km2": 51.3
+},
+"R3_zone_all_SB@all": {
+"k": 268,
+"km2": 24.3
+}
+},
+"28720": {
+"R0_current": {
+"k": 426,
+"km2": 0.5
+},
+"R0_current_SB": {
+"k": 110,
+"km2": 0.2
+},
+"R1_protect": {
+"k": 434,
+"km2": 0.5
+},
+"R1_protect_SB": {
+"k": 112,
+"km2": 0.2
+},
+"R2_promo": {
+"k": 437,
+"km2": 0.5
+},
+"R2_promo_SB": {
+"k": 115,
+"km2": 0.3
+},
+"R3_zone_all": {
+"k": 444,
+"km2": 0.5
+},
+"R3_zone_all_SB": {
+"k": 116,
+"km2": 0.3
+},
+"R0_current@all": {
+"k": 757,
+"km2": 8.9
+},
+"R0_current_SB@all": {
+"k": 331,
+"km2": 2.1
+},
+"R1_protect@all": {
+"k": 743,
+"km2": 9.3
+},
+"R1_protect_SB@all": {
+"k": 335,
+"km2": 2.3
+},
+"R2_promo@all": {
+"k": 705,
+"km2": 11.4
+},
+"R2_promo_SB@all": {
+"k": 319,
+"km2": 3.6
+},
+"R3_zone_all@all": {
+"k": 686,
+"km2": 11.9
+},
+"R3_zone_all_SB@all": {
+"k": 320,
+"km2": 3.8
+}
+},
+"29110": {
+"R0_current": {
+"k": 114,
+"km2": 0.1
+},
+"R0_current_SB": {
+"k": 14,
+"km2": 0.0
+},
+"R1_protect": {
+"k": 114,
+"km2": 0.1
+},
+"R1_protect_SB": {
+"k": 14,
+"km2": 0.0
+},
+"R2_promo": {
+"k": 114,
+"km2": 0.1
+},
+"R2_promo_SB": {
+"k": 14,
+"km2": 0.0
+},
+"R3_zone_all": {
+"k": 114,
+"km2": 0.1
+},
+"R3_zone_all_SB": {
+"k": 14,
+"km2": 0.0
+},
+"R0_current@all": {
+"k": 132,
+"km2": 0.3
+},
+"R0_current_SB@all": {
+"k": 19,
+"km2": 0.0
+},
+"R1_protect@all": {
+"k": 132,
+"km2": 0.3
+},
+"R1_protect_SB@all": {
+"k": 19,
+"km2": 0.0
+},
+"R2_promo@all": {
+"k": 132,
+"km2": 0.3
+},
+"R2_promo_SB@all": {
+"k": 19,
+"km2": 0.0
+},
+"R3_zone_all@all": {
+"k": 132,
+"km2": 0.3
+},
+"R3_zone_all_SB@all": {
+"k": 19,
+"km2": 0.0
+}
+},
+"29140": {
+"R0_current": {
+"k": 383,
+"km2": 0.6
+},
+"R0_current_SB": {
+"k": 61,
+"km2": 0.3
+},
+"R1_protect": {
+"k": 383,
+"km2": 0.6
+},
+"R1_protect_SB": {
+"k": 61,
+"km2": 0.3
+},
+"R2_promo": {
+"k": 383,
+"km2": 0.6
+},
+"R2_promo_SB": {
+"k": 61,
+"km2": 0.3
+},
+"R3_zone_all": {
+"k": 383,
+"km2": 0.6
+},
+"R3_zone_all_SB": {
+"k": 61,
+"km2": 0.3
+},
+"R0_current@all": {
+"k": 390,
+"km2": 3.0
+},
+"R0_current_SB@all": {
+"k": 49,
+"km2": 1.1
+},
+"R1_protect@all": {
+"k": 390,
+"km2": 3.0
+},
+"R1_protect_SB@all": {
+"k": 49,
+"km2": 1.1
+},
+"R2_promo@all": {
+"k": 390,
+"km2": 3.0
+},
+"R2_promo_SB@all": {
+"k": 49,
+"km2": 1.1
+},
+"R3_zone_all@all": {
+"k": 390,
+"km2": 3.0
+},
+"R3_zone_all_SB@all": {
+"k": 49,
+"km2": 1.1
+}
+},
+"29155": {
+"R0_current": {
+"k": 261,
+"km2": 0.3
+},
+"R0_current_SB": {
+"k": 16,
+"km2": 0.0
+},
+"R1_protect": {
+"k": 261,
+"km2": 0.3
+},
+"R1_protect_SB": {
+"k": 16,
+"km2": 0.0
+},
+"R2_promo": {
+"k": 261,
+"km2": 0.3
+},
+"R2_promo_SB": {
+"k": 16,
+"km2": 0.0
+},
+"R3_zone_all": {
+"k": 261,
+"km2": 0.3
+},
+"R3_zone_all_SB": {
+"k": 16,
+"km2": 0.0
+},
+"R0_current@all": {
+"k": 384,
+"km2": 1.2
+},
+"R0_current_SB@all": {
+"k": 20,
+"km2": 0.1
+},
+"R1_protect@all": {
+"k": 384,
+"km2": 1.2
+},
+"R1_protect_SB@all": {
+"k": 20,
+"km2": 0.1
+},
+"R2_promo@all": {
+"k": 384,
+"km2": 1.2
+},
+"R2_promo_SB@all": {
+"k": 20,
+"km2": 0.1
+},
+"R3_zone_all@all": {
+"k": 384,
+"km2": 1.2
+},
+"R3_zone_all_SB@all": {
+"k": 20,
+"km2": 0.1
+}
+},
+"29170": {
+"R0_current": {
+"k": 597,
+"km2": 0.7
+},
+"R0_current_SB": {
+"k": 114,
+"km2": 0.3
+},
+"R1_protect": {
+"k": 597,
+"km2": 0.7
+},
+"R1_protect_SB": {
+"k": 114,
+"km2": 0.3
+},
+"R2_promo": {
+"k": 597,
+"km2": 0.7
+},
+"R2_promo_SB": {
+"k": 114,
+"km2": 0.3
+},
+"R3_zone_all": {
+"k": 597,
+"km2": 0.7
+},
+"R3_zone_all_SB": {
+"k": 114,
+"km2": 0.3
+},
+"R0_current@all": {
+"k": 625,
+"km2": 4.4
+},
+"R0_current_SB@all": {
+"k": 95,
+"km2": 1.7
+},
+"R1_protect@all": {
+"k": 625,
+"km2": 4.4
+},
+"R1_protect_SB@all": {
+"k": 95,
+"km2": 1.7
+},
+"R2_promo@all": {
+"k": 625,
+"km2": 4.4
+},
+"R2_promo_SB@all": {
+"k": 95,
+"km2": 1.7
+},
+"R3_zone_all@all": {
+"k": 625,
+"km2": 4.4
+},
+"R3_zone_all_SB@all": {
+"k": 95,
+"km2": 1.7
+}
+},
+"29200": {
+"R0_current": {
+"k": 865,
+"km2": 2.1
+},
+"R0_current_SB": {
+"k": 157,
+"km2": 0.8
+},
+"R1_protect": {
+"k": 865,
+"km2": 2.1
+},
+"R1_protect_SB": {
+"k": 157,
+"km2": 0.8
+},
+"R2_promo": {
+"k": 865,
+"km2": 2.1
+},
+"R2_promo_SB": {
+"k": 157,
+"km2": 0.8
+},
+"R3_zone_all": {
+"k": 865,
+"km2": 2.1
+},
+"R3_zone_all_SB": {
+"k": 157,
+"km2": 0.8
+},
+"R0_current@all": {
+"k": 1184,
+"km2": 12.7
+},
+"R0_current_SB@all": {
+"k": 198,
+"km2": 3.9
+},
+"R1_protect@all": {
+"k": 1184,
+"km2": 12.8
+},
+"R1_protect_SB@all": {
+"k": 198,
+"km2": 3.9
+},
+"R2_promo@all": {
+"k": 1182,
+"km2": 16.6
+},
+"R2_promo_SB@all": {
+"k": 197,
+"km2": 5.1
+},
+"R3_zone_all@all": {
+"k": 1182,
+"km2": 25.4
+},
+"R3_zone_all_SB@all": {
+"k": 197,
+"km2": 5.1
+}
+},
+"30110": {
+"R0_current": {
+"k": 172,
+"km2": 0.1
+},
+"R0_current_SB": {
+"k": 7,
+"km2": 0.0
+},
+"R1_protect": {
+"k": 172,
+"km2": 0.1
+},
+"R1_protect_SB": {
+"k": 7,
+"km2": 0.0
+},
+"R2_promo": {
+"k": 172,
+"km2": 0.1
+},
+"R2_promo_SB": {
+"k": 7,
+"km2": 0.0
+},
+"R3_zone_all": {
+"k": 172,
+"km2": 0.1
+},
+"R3_zone_all_SB": {
+"k": 7,
+"km2": 0.0
+},
+"R0_current@all": {
+"k": 289,
+"km2": 0.7
+},
+"R0_current_SB@all": {
+"k": 27,
+"km2": 0.0
+},
+"R1_protect@all": {
+"k": 289,
+"km2": 0.7
+},
+"R1_protect_SB@all": {
+"k": 27,
+"km2": 0.0
+},
+"R2_promo@all": {
+"k": 289,
+"km2": 0.7
+},
+"R2_promo_SB@all": {
+"k": 27,
+"km2": 0.0
+},
+"R3_zone_all@all": {
+"k": 289,
+"km2": 0.7
+},
+"R3_zone_all_SB@all": {
+"k": 27,
+"km2": 0.0
+}
+},
+"30140": {
+"R0_current": {
+"k": 142,
+"km2": 0.2
+},
+"R0_current_SB": {
+"k": 11,
+"km2": 0.1
+},
+"R1_protect": {
+"k": 142,
+"km2": 0.2
+},
+"R1_protect_SB": {
+"k": 11,
+"km2": 0.1
+},
+"R2_promo": {
+"k": 142,
+"km2": 0.2
+},
+"R2_promo_SB": {
+"k": 11,
+"km2": 0.1
+},
+"R3_zone_all": {
+"k": 142,
+"km2": 0.2
+},
+"R3_zone_all_SB": {
+"k": 11,
+"km2": 0.1
+},
+"R0_current@all": {
+"k": 170,
+"km2": 0.5
+},
+"R0_current_SB@all": {
+"k": 25,
+"km2": 0.1
+},
+"R1_protect@all": {
+"k": 170,
+"km2": 0.5
+},
+"R1_protect_SB@all": {
+"k": 25,
+"km2": 0.1
+},
+"R2_promo@all": {
+"k": 170,
+"km2": 0.5
+},
+"R2_promo_SB@all": {
+"k": 25,
+"km2": 0.1
+},
+"R3_zone_all@all": {
+"k": 170,
+"km2": 0.5
+},
+"R3_zone_all_SB@all": {
+"k": 25,
+"km2": 0.1
+}
+},
+"30170": {
+"R0_current": {
+"k": 109,
+"km2": 0.1
+},
+"R0_current_SB": {
+"k": 26,
+"km2": 0.0
+},
+"R1_protect": {
+"k": 109,
+"km2": 0.1
+},
+"R1_protect_SB": {
+"k": 26,
+"km2": 0.0
+},
+"R2_promo": {
+"k": 109,
+"km2": 0.1
+},
+"R2_promo_SB": {
+"k": 26,
+"km2": 0.0
+},
+"R3_zone_all": {
+"k": 109,
+"km2": 0.1
+},
+"R3_zone_all_SB": {
+"k": 26,
+"km2": 0.0
+},
+"R0_current@all": {
+"k": 215,
+"km2": 1.9
+},
+"R0_current_SB@all": {
+"k": 76,
+"km2": 0.6
+},
+"R1_protect@all": {
+"k": 215,
+"km2": 1.9
+},
+"R1_protect_SB@all": {
+"k": 76,
+"km2": 0.6
+},
+"R2_promo@all": {
+"k": 215,
+"km2": 2.1
+},
+"R2_promo_SB@all": {
+"k": 76,
+"km2": 0.6
+},
+"R3_zone_all@all": {
+"k": 215,
+"km2": 2.1
+},
+"R3_zone_all_SB@all": {
+"k": 76,
+"km2": 0.6
+}
+},
+"30200": {
+"R0_current": {
+"k": 168,
+"km2": 0.7
+},
+"R0_current_SB": {
+"k": 22,
+"km2": 0.1
+},
+"R1_protect": {
+"k": 168,
+"km2": 0.7
+},
+"R1_protect_SB": {
+"k": 22,
+"km2": 0.1
+},
+"R2_promo": {
+"k": 168,
+"km2": 0.7
+},
+"R2_promo_SB": {
+"k": 22,
+"km2": 0.1
+},
+"R3_zone_all": {
+"k": 168,
+"km2": 0.7
+},
+"R3_zone_all_SB": {
+"k": 22,
+"km2": 0.1
+},
+"R0_current@all": {
+"k": 236,
+"km2": 1.4
+},
+"R0_current_SB@all": {
+"k": 28,
+"km2": 0.2
+},
+"R1_protect@all": {
+"k": 236,
+"km2": 1.4
+},
+"R1_protect_SB@all": {
+"k": 28,
+"km2": 0.2
+},
+"R2_promo@all": {
+"k": 236,
+"km2": 1.4
+},
+"R2_promo_SB@all": {
+"k": 28,
+"km2": 0.2
+},
+"R3_zone_all@all": {
+"k": 236,
+"km2": 1.4
+},
+"R3_zone_all_SB@all": {
+"k": 28,
+"km2": 0.2
+}
+},
+"30230": {
+"R0_current": {
+"k": 247,
+"km2": 0.3
+},
+"R0_current_SB": {
+"k": 41,
+"km2": 0.0
+},
+"R1_protect": {
+"k": 247,
+"km2": 0.3
+},
+"R1_protect_SB": {
+"k": 41,
+"km2": 0.0
+},
+"R2_promo": {
+"k": 247,
+"km2": 0.3
+},
+"R2_promo_SB": {
+"k": 41,
+"km2": 0.0
+},
+"R3_zone_all": {
+"k": 247,
+"km2": 0.3
+},
+"R3_zone_all_SB": {
+"k": 41,
+"km2": 0.0
+},
+"R0_current@all": {
+"k": 283,
+"km2": 0.5
+},
+"R0_current_SB@all": {
+"k": 43,
+"km2": 0.1
+},
+"R1_protect@all": {
+"k": 283,
+"km2": 0.5
+},
+"R1_protect_SB@all": {
+"k": 43,
+"km2": 0.1
+},
+"R2_promo@all": {
+"k": 283,
+"km2": 0.5
+},
+"R2_promo_SB@all": {
+"k": 43,
+"km2": 0.1
+},
+"R3_zone_all@all": {
+"k": 283,
+"km2": 0.5
+},
+"R3_zone_all_SB@all": {
+"k": 43,
+"km2": 0.1
+}
+},
+"31110": {
+"R0_current": {
+"k": 118,
+"km2": 0.0
+},
+"R0_current_SB": {
+"k": 8,
+"km2": 0.0
+},
+"R1_protect": {
+"k": 118,
+"km2": 0.0
+},
+"R1_protect_SB": {
+"k": 8,
+"km2": 0.0
+},
+"R2_promo": {
+"k": 118,
+"km2": 0.0
+},
+"R2_promo_SB": {
+"k": 8,
+"km2": 0.0
+},
+"R3_zone_all": {
+"k": 118,
+"km2": 0.0
+},
+"R3_zone_all_SB": {
+"k": 8,
+"km2": 0.0
+},
+"R0_current@all": {
+"k": 132,
+"km2": 0.1
+},
+"R0_current_SB@all": {
+"k": 10,
+"km2": 0.0
+},
+"R1_protect@all": {
+"k": 132,
+"km2": 0.1
+},
+"R1_protect_SB@all": {
+"k": 10,
+"km2": 0.0
+},
+"R2_promo@all": {
+"k": 132,
+"km2": 0.1
+},
+"R2_promo_SB@all": {
+"k": 10,
+"km2": 0.0
+},
+"R3_zone_all@all": {
+"k": 132,
+"km2": 0.1
+},
+"R3_zone_all_SB@all": {
+"k": 10,
+"km2": 0.0
+}
+},
+"31140": {
+"R0_current": {
+"k": 277,
+"km2": 0.3
+},
+"R0_current_SB": {
+"k": 39,
+"km2": 0.1
+},
+"R1_protect": {
+"k": 277,
+"km2": 0.3
+},
+"R1_protect_SB": {
+"k": 39,
+"km2": 0.1
+},
+"R2_promo": {
+"k": 277,
+"km2": 0.3
+},
+"R2_promo_SB": {
+"k": 39,
+"km2": 0.1
+},
+"R3_zone_all": {
+"k": 277,
+"km2": 0.3
+},
+"R3_zone_all_SB": {
+"k": 39,
+"km2": 0.1
+},
+"R0_current@all": {
+"k": 325,
+"km2": 1.2
+},
+"R0_current_SB@all": {
+"k": 70,
+"km2": 0.2
+},
+"R1_protect@all": {
+"k": 325,
+"km2": 1.2
+},
+"R1_protect_SB@all": {
+"k": 70,
+"km2": 0.2
+},
+"R2_promo@all": {
+"k": 325,
+"km2": 1.2
+},
+"R2_promo_SB@all": {
+"k": 70,
+"km2": 0.2
+},
+"R3_zone_all@all": {
+"k": 325,
+"km2": 1.2
+},
+"R3_zone_all_SB@all": {
+"k": 70,
+"km2": 0.2
+}
+},
+"31170": {
+"R0_current": {
+"k": 60,
+"km2": 0.0
+},
+"R0_current_SB": {
+"k": 7,
+"km2": 0.0
+},
+"R1_protect": {
+"k": 60,
+"km2": 0.0
+},
+"R1_protect_SB": {
+"k": 7,
+"km2": 0.0
+},
+"R2_promo": {
+"k": 60,
+"km2": 0.0
+},
+"R2_promo_SB": {
+"k": 7,
+"km2": 0.0
+},
+"R3_zone_all": {
+"k": 60,
+"km2": 0.0
+},
+"R3_zone_all_SB": {
+"k": 7,
+"km2": 0.0
+},
+"R0_current@all": {
+"k": 91,
+"km2": 0.1
+},
+"R0_current_SB@all": {
+"k": 24,
+"km2": 0.0
+},
+"R1_protect@all": {
+"k": 91,
+"km2": 0.1
+},
+"R1_protect_SB@all": {
+"k": 24,
+"km2": 0.0
+},
+"R2_promo@all": {
+"k": 91,
+"km2": 0.1
+},
+"R2_promo_SB@all": {
+"k": 24,
+"km2": 0.0
+},
+"R3_zone_all@all": {
+"k": 91,
+"km2": 0.1
+},
+"R3_zone_all_SB@all": {
+"k": 24,
+"km2": 0.0
+}
+},
+"31200": {
+"R0_current": {
+"k": 431,
+"km2": 0.4
+},
+"R0_current_SB": {
+"k": 78,
+"km2": 0.1
+},
+"R1_protect": {
+"k": 432,
+"km2": 0.4
+},
+"R1_protect_SB": {
+"k": 79,
+"km2": 0.1
+},
+"R2_promo": {
+"k": 448,
+"km2": 0.5
+},
+"R2_promo_SB": {
+"k": 91,
+"km2": 0.1
+},
+"R3_zone_all": {
+"k": 449,
+"km2": 0.5
+},
+"R3_zone_all_SB": {
+"k": 92,
+"km2": 0.1
+},
+"R0_current@all": {
+"k": 590,
+"km2": 2.6
+},
+"R0_current_SB@all": {
+"k": 193,
+"km2": 0.9
+},
+"R1_protect@all": {
+"k": 592,
+"km2": 2.6
+},
+"R1_protect_SB@all": {
+"k": 195,
+"km2": 0.9
+},
+"R2_promo@all": {
+"k": 580,
+"km2": 3.7
+},
+"R2_promo_SB@all": {
+"k": 195,
+"km2": 1.6
+},
+"R3_zone_all@all": {
+"k": 582,
+"km2": 3.8
+},
+"R3_zone_all_SB@all": {
+"k": 197,
+"km2": 1.6
+}
+},
+"31710": {
+"R0_current": {
+"k": 2389,
+"km2": 2.9
+},
+"R0_current_SB": {
+"k": 738,
+"km2": 1.2
+},
+"R1_protect": {
+"k": 2439,
+"km2": 3.0
+},
+"R1_protect_SB": {
+"k": 767,
+"km2": 1.2
+},
+"R2_promo": {
+"k": 2553,
+"km2": 3.5
+},
+"R2_promo_SB": {
+"k": 840,
+"km2": 1.3
+},
+"R3_zone_all": {
+"k": 2601,
+"km2": 3.6
+},
+"R3_zone_all_SB": {
+"k": 868,
+"km2": 1.4
+},
+"R0_current@all": {
+"k": 3159,
+"km2": 33.9
+},
+"R0_current_SB@all": {
+"k": 1640,
+"km2": 10.6
+},
+"R1_protect@all": {
+"k": 3145,
+"km2": 36.8
+},
+"R1_protect_SB@all": {
+"k": 1676,
+"km2": 11.9
+},
+"R2_promo@all": {
+"k": 2941,
+"km2": 44.5
+},
+"R2_promo_SB@all": {
+"k": 1638,
+"km2": 15.0
+},
+"R3_zone_all@all": {
+"k": 2916,
+"km2": 47.3
+},
+"R3_zone_all_SB@all": {
+"k": 1668,
+"km2": 16.3
+}
+},
+"36110": {
+"R0_current": {
+"k": 1810,
+"km2": 2.6
+},
+"R0_current_SB": {
+"k": 660,
+"km2": 1.1
+},
+"R1_protect": {
+"k": 1860,
+"km2": 2.7
+},
+"R1_protect_SB": {
+"k": 679,
+"km2": 1.2
+},
+"R2_promo": {
+"k": 2118,
+"km2": 3.9
+},
+"R2_promo_SB": {
+"k": 864,
+"km2": 2.0
+},
+"R3_zone_all": {
+"k": 2155,
+"km2": 4.0
+},
+"R3_zone_all_SB": {
+"k": 877,
+"km2": 2.0
+},
+"R0_current@all": {
+"k": 2753,
+"km2": 33.5
+},
+"R0_current_SB@all": {
+"k": 1457,
+"km2": 11.9
+},
+"R1_protect@all": {
+"k": 2791,
+"km2": 35.3
+},
+"R1_protect_SB@all": {
+"k": 1509,
+"km2": 12.5
+},
+"R2_promo@all": {
+"k": 2375,
+"km2": 57.7
+},
+"R2_promo_SB@all": {
+"k": 1468,
+"km2": 23.9
+},
+"R3_zone_all@all": {
+"k": 2361,
+"km2": 60.0
+},
+"R3_zone_all_SB@all": {
+"k": 1496,
+"km2": 24.6
+}
+},
+"41111": {
+"R0_current": {
+"k": 196,
+"km2": 0.1
+},
+"R0_current_SB": {
+"k": 12,
+"km2": 0.0
+},
+"R1_protect": {
+"k": 196,
+"km2": 0.1
+},
+"R1_protect_SB": {
+"k": 12,
+"km2": 0.0
+},
+"R2_promo": {
+"k": 196,
+"km2": 0.1
+},
+"R2_promo_SB": {
+"k": 12,
+"km2": 0.0
+},
+"R3_zone_all": {
+"k": 196,
+"km2": 0.1
+},
+"R3_zone_all_SB": {
+"k": 12,
+"km2": 0.0
+},
+"R0_current@all": {
+"k": 176,
+"km2": 0.3
+},
+"R0_current_SB@all": {
+"k": 26,
+"km2": 0.1
+},
+"R1_protect@all": {
+"k": 176,
+"km2": 0.3
+},
+"R1_protect_SB@all": {
+"k": 26,
+"km2": 0.1
+},
+"R2_promo@all": {
+"k": 176,
+"km2": 0.3
+},
+"R2_promo_SB@all": {
+"k": 26,
+"km2": 0.1
+},
+"R3_zone_all@all": {
+"k": 176,
+"km2": 0.3
+},
+"R3_zone_all_SB@all": {
+"k": 26,
+"km2": 0.1
+}
+},
+"41113": {
+"R0_current": {
+"k": 388,
+"km2": 0.5
+},
+"R0_current_SB": {
+"k": 66,
+"km2": 0.2
+},
+"R1_protect": {
+"k": 388,
+"km2": 0.5
+},
+"R1_protect_SB": {
+"k": 66,
+"km2": 0.2
+},
+"R2_promo": {
+"k": 387,
+"km2": 0.5
+},
+"R2_promo_SB": {
+"k": 65,
+"km2": 0.2
+},
+"R3_zone_all": {
+"k": 387,
+"km2": 0.5
+},
+"R3_zone_all_SB": {
+"k": 65,
+"km2": 0.2
+},
+"R0_current@all": {
+"k": 339,
+"km2": 3.1
+},
+"R0_current_SB@all": {
+"k": 57,
+"km2": 1.1
+},
+"R1_protect@all": {
+"k": 339,
+"km2": 3.2
+},
+"R1_protect_SB@all": {
+"k": 57,
+"km2": 1.1
+},
+"R2_promo@all": {
+"k": 336,
+"km2": 3.4
+},
+"R2_promo_SB@all": {
+"k": 55,
+"km2": 1.8
+},
+"R3_zone_all@all": {
+"k": 336,
+"km2": 3.5
+},
+"R3_zone_all_SB@all": {
+"k": 55,
+"km2": 1.8
+}
+},
+"41115": {
+"R0_current": {
+"k": 88,
+"km2": 0.1
+},
+"R0_current_SB": {
+"k": 16,
+"km2": 0.0
+},
+"R1_protect": {
+"k": 88,
+"km2": 0.1
+},
+"R1_protect_SB": {
+"k": 16,
+"km2": 0.0
+},
+"R2_promo": {
+"k": 88,
+"km2": 0.1
+},
+"R2_promo_SB": {
+"k": 16,
+"km2": 0.0
+},
+"R3_zone_all": {
+"k": 88,
+"km2": 0.1
+},
+"R3_zone_all_SB": {
+"k": 16,
+"km2": 0.0
+},
+"R0_current@all": {
+"k": 64,
+"km2": 0.1
+},
+"R0_current_SB@all": {
+"k": 14,
+"km2": 0.0
+},
+"R1_protect@all": {
+"k": 64,
+"km2": 0.1
+},
+"R1_protect_SB@all": {
+"k": 14,
+"km2": 0.0
+},
+"R2_promo@all": {
+"k": 64,
+"km2": 0.1
+},
+"R2_promo_SB@all": {
+"k": 14,
+"km2": 0.0
+},
+"R3_zone_all@all": {
+"k": 64,
+"km2": 0.1
+},
+"R3_zone_all_SB@all": {
+"k": 14,
+"km2": 0.0
+}
+},
+"41117": {
+"R0_current": {
+"k": 161,
+"km2": 0.1
+},
+"R0_current_SB": {
+"k": 20,
+"km2": 0.0
+},
+"R1_protect": {
+"k": 161,
+"km2": 0.1
+},
+"R1_protect_SB": {
+"k": 20,
+"km2": 0.0
+},
+"R2_promo": {
+"k": 161,
+"km2": 0.1
+},
+"R2_promo_SB": {
+"k": 20,
+"km2": 0.0
+},
+"R3_zone_all": {
+"k": 161,
+"km2": 0.1
+},
+"R3_zone_all_SB": {
+"k": 20,
+"km2": 0.0
+},
+"R0_current@all": {
+"k": 141,
+"km2": 0.2
+},
+"R0_current_SB@all": {
+"k": 30,
+"km2": 0.1
+},
+"R1_protect@all": {
+"k": 141,
+"km2": 0.2
+},
+"R1_protect_SB@all": {
+"k": 30,
+"km2": 0.1
+},
+"R2_promo@all": {
+"k": 140,
+"km2": 2.0
+},
+"R2_promo_SB@all": {
+"k": 30,
+"km2": 1.9
+},
+"R3_zone_all@all": {
+"k": 140,
+"km2": 2.1
+},
+"R3_zone_all_SB@all": {
+"k": 30,
+"km2": 1.9
+}
+},
+"41131": {
+"R0_current": {
+"k": 169,
+"km2": 0.2
+},
+"R0_current_SB": {
+"k": 6,
+"km2": 0.0
+},
+"R1_protect": {
+"k": 169,
+"km2": 0.2
+},
+"R1_protect_SB": {
+"k": 6,
+"km2": 0.0
+},
+"R2_promo": {
+"k": 169,
+"km2": 0.2
+},
+"R2_promo_SB": {
+"k": 6,
+"km2": 0.0
+},
+"R3_zone_all": {
+"k": 169,
+"km2": 0.2
+},
+"R3_zone_all_SB": {
+"k": 6,
+"km2": 0.0
+},
+"R0_current@all": {
+"k": 156,
+"km2": 0.2
+},
+"R0_current_SB@all": {
+"k": 4,
+"km2": 0.0
+},
+"R1_protect@all": {
+"k": 156,
+"km2": 0.2
+},
+"R1_protect_SB@all": {
+"k": 4,
+"km2": 0.0
+},
+"R2_promo@all": {
+"k": 156,
+"km2": 0.2
+},
+"R2_promo_SB@all": {
+"k": 4,
+"km2": 0.0
+},
+"R3_zone_all@all": {
+"k": 156,
+"km2": 0.2
+},
+"R3_zone_all_SB@all": {
+"k": 4,
+"km2": 0.0
+}
+},
+"41133": {
+"R0_current": {
+"k": 36,
+"km2": 0.0
+},
+"R0_current_SB": {
+"k": 1,
+"km2": 0.0
+},
+"R1_protect": {
+"k": 36,
+"km2": 0.0
+},
+"R1_protect_SB": {
+"k": 1,
+"km2": 0.0
+},
+"R2_promo": {
+"k": 36,
+"km2": 0.0
+},
+"R2_promo_SB": {
+"k": 1,
+"km2": 0.0
+},
+"R3_zone_all": {
+"k": 36,
+"km2": 0.0
+},
+"R3_zone_all_SB": {
+"k": 1,
+"km2": 0.0
+},
+"R0_current@all": {
+"k": 27,
+"km2": 0.0
+},
+"R0_current_SB@all": {
+"k": 1,
+"km2": 0.0
+},
+"R1_protect@all": {
+"k": 27,
+"km2": 0.0
+},
+"R1_protect_SB@all": {
+"k": 1,
+"km2": 0.0
+},
+"R2_promo@all": {
+"k": 27,
+"km2": 0.0
+},
+"R2_promo_SB@all": {
+"k": 1,
+"km2": 0.0
+},
+"R3_zone_all@all": {
+"k": 27,
+"km2": 0.0
+},
+"R3_zone_all_SB@all": {
+"k": 1,
+"km2": 0.0
+}
+},
+"41135": {
+"R0_current": {
+"k": 45,
+"km2": 0.1
+},
+"R0_current_SB": {
+"k": 9,
+"km2": 0.0
+},
+"R1_protect": {
+"k": 45,
+"km2": 0.1
+},
+"R1_protect_SB": {
+"k": 9,
+"km2": 0.0
+},
+"R2_promo": {
+"k": 45,
+"km2": 0.1
+},
+"R2_promo_SB": {
+"k": 9,
+"km2": 0.0
+},
+"R3_zone_all": {
+"k": 45,
+"km2": 0.1
+},
+"R3_zone_all_SB": {
+"k": 9,
+"km2": 0.0
+},
+"R0_current@all": {
+"k": 48,
+"km2": 0.1
+},
+"R0_current_SB@all": {
+"k": 8,
+"km2": 0.0
+},
+"R1_protect@all": {
+"k": 48,
+"km2": 0.1
+},
+"R1_protect_SB@all": {
+"k": 8,
+"km2": 0.0
+},
+"R2_promo@all": {
+"k": 48,
+"km2": 0.1
+},
+"R2_promo_SB@all": {
+"k": 8,
+"km2": 0.0
+},
+"R3_zone_all@all": {
+"k": 48,
+"km2": 0.1
+},
+"R3_zone_all_SB@all": {
+"k": 8,
+"km2": 0.0
+}
+},
+"41150": {
+"R0_current": {
+"k": 302,
+"km2": 0.3
+},
+"R0_current_SB": {
+"k": 9,
+"km2": 0.0
+},
+"R1_protect": {
+"k": 302,
+"km2": 0.3
+},
+"R1_protect_SB": {
+"k": 9,
+"km2": 0.0
+},
+"R2_promo": {
+"k": 302,
+"km2": 0.3
+},
+"R2_promo_SB": {
+"k": 9,
+"km2": 0.0
+},
+"R3_zone_all": {
+"k": 302,
+"km2": 0.3
+},
+"R3_zone_all_SB": {
+"k": 9,
+"km2": 0.0
+},
+"R0_current@all": {
+"k": 286,
+"km2": 0.4
+},
+"R0_current_SB@all": {
+"k": 9,
+"km2": 0.0
+},
+"R1_protect@all": {
+"k": 286,
+"km2": 0.4
+},
+"R1_protect_SB@all": {
+"k": 9,
+"km2": 0.0
+},
+"R2_promo@all": {
+"k": 286,
+"km2": 0.4
+},
+"R2_promo_SB@all": {
+"k": 9,
+"km2": 0.0
+},
+"R3_zone_all@all": {
+"k": 286,
+"km2": 0.4
+},
+"R3_zone_all_SB@all": {
+"k": 9,
+"km2": 0.0
+}
+},
+"41171": {
+"R0_current": {
+"k": 117,
+"km2": 0.1
+},
+"R0_current_SB": {
+"k": 3,
+"km2": 0.0
+},
+"R1_protect": {
+"k": 117,
+"km2": 0.1
+},
+"R1_protect_SB": {
+"k": 3,
+"km2": 0.0
+},
+"R2_promo": {
+"k": 117,
+"km2": 0.1
+},
+"R2_promo_SB": {
+"k": 3,
+"km2": 0.0
+},
+"R3_zone_all": {
+"k": 117,
+"km2": 0.1
+},
+"R3_zone_all_SB": {
+"k": 3,
+"km2": 0.0
+},
+"R0_current@all": {
+"k": 112,
+"km2": 0.1
+},
+"R0_current_SB@all": {
+"k": 6,
+"km2": 0.0
+},
+"R1_protect@all": {
+"k": 112,
+"km2": 0.1
+},
+"R1_protect_SB@all": {
+"k": 6,
+"km2": 0.0
+},
+"R2_promo@all": {
+"k": 112,
+"km2": 0.1
+},
+"R2_promo_SB@all": {
+"k": 6,
+"km2": 0.0
+},
+"R3_zone_all@all": {
+"k": 112,
+"km2": 0.1
+},
+"R3_zone_all_SB@all": {
+"k": 6,
+"km2": 0.0
+}
+},
+"41173": {
+"R0_current": {
+"k": 87,
+"km2": 0.0
+},
+"R0_current_SB": {
+"k": 7,
+"km2": 0.0
+},
+"R1_protect": {
+"k": 87,
+"km2": 0.0
+},
+"R1_protect_SB": {
+"k": 7,
+"km2": 0.0
+},
+"R2_promo": {
+"k": 87,
+"km2": 0.0
+},
+"R2_promo_SB": {
+"k": 7,
+"km2": 0.0
+},
+"R3_zone_all": {
+"k": 87,
+"km2": 0.0
+},
+"R3_zone_all_SB": {
+"k": 7,
+"km2": 0.0
+},
+"R0_current@all": {
+"k": 71,
+"km2": 0.1
+},
+"R0_current_SB@all": {
+"k": 7,
+"km2": 0.0
+},
+"R1_protect@all": {
+"k": 71,
+"km2": 0.1
+},
+"R1_protect_SB@all": {
+"k": 7,
+"km2": 0.0
+},
+"R2_promo@all": {
+"k": 71,
+"km2": 0.1
+},
+"R2_promo_SB@all": {
+"k": 7,
+"km2": 0.0
+},
+"R3_zone_all@all": {
+"k": 71,
+"km2": 0.1
+},
+"R3_zone_all_SB@all": {
+"k": 7,
+"km2": 0.0
+}
+},
+"41192": {
+"R0_current": {
+"k": 54,
+"km2": 0.1
+},
+"R0_current_SB": {
+"k": 6,
+"km2": 0.0
+},
+"R1_protect": {
+"k": 54,
+"km2": 0.1
+},
+"R1_protect_SB": {
+"k": 6,
+"km2": 0.0
+},
+"R2_promo": {
+"k": 54,
+"km2": 0.1
+},
+"R2_promo_SB": {
+"k": 6,
+"km2": 0.0
+},
+"R3_zone_all": {
+"k": 54,
+"km2": 0.1
+},
+"R3_zone_all_SB": {
+"k": 6,
+"km2": 0.0
+},
+"R0_current@all": {
+"k": 52,
+"km2": 0.1
+},
+"R0_current_SB@all": {
+"k": 5,
+"km2": 0.0
+},
+"R1_protect@all": {
+"k": 52,
+"km2": 0.1
+},
+"R1_protect_SB@all": {
+"k": 5,
+"km2": 0.0
+},
+"R2_promo@all": {
+"k": 52,
+"km2": 0.1
+},
+"R2_promo_SB@all": {
+"k": 5,
+"km2": 0.0
+},
+"R3_zone_all@all": {
+"k": 52,
+"km2": 0.1
+},
+"R3_zone_all_SB@all": {
+"k": 5,
+"km2": 0.0
+}
+},
+"41194": {
+"R0_current": {
+"k": 40,
+"km2": 0.0
+},
+"R0_current_SB": {
+"k": 1,
+"km2": 0.0
+},
+"R1_protect": {
+"k": 40,
+"km2": 0.0
+},
+"R1_protect_SB": {
+"k": 1,
+"km2": 0.0
+},
+"R2_promo": {
+"k": 40,
+"km2": 0.0
+},
+"R2_promo_SB": {
+"k": 1,
+"km2": 0.0
+},
+"R3_zone_all": {
+"k": 40,
+"km2": 0.0
+},
+"R3_zone_all_SB": {
+"k": 1,
+"km2": 0.0
+},
+"R0_current@all": {
+"k": 46,
+"km2": 0.1
+},
+"R0_current_SB@all": {
+"k": 0,
+"km2": 0.0
+},
+"R1_protect@all": {
+"k": 46,
+"km2": 0.1
+},
+"R1_protect_SB@all": {
+"k": 0,
+"km2": 0.0
+},
+"R2_promo@all": {
+"k": 46,
+"km2": 0.1
+},
+"R2_promo_SB@all": {
+"k": 0,
+"km2": 0.0
+},
+"R3_zone_all@all": {
+"k": 46,
+"km2": 0.1
+},
+"R3_zone_all_SB@all": {
+"k": 0,
+"km2": 0.0
+}
+},
+"41196": {
+"R0_current": {
+"k": 91,
+"km2": 1.1
+},
+"R0_current_SB": {
+"k": 29,
+"km2": 1.0
+},
+"R1_protect": {
+"k": 91,
+"km2": 1.1
+},
+"R1_protect_SB": {
+"k": 29,
+"km2": 1.0
+},
+"R2_promo": {
+"k": 91,
+"km2": 1.1
+},
+"R2_promo_SB": {
+"k": 29,
+"km2": 1.0
+},
+"R3_zone_all": {
+"k": 91,
+"km2": 1.1
+},
+"R3_zone_all_SB": {
+"k": 29,
+"km2": 1.0
+},
+"R0_current@all": {
+"k": 97,
+"km2": 1.2
+},
+"R0_current_SB@all": {
+"k": 23,
+"km2": 1.0
+},
+"R1_protect@all": {
+"k": 97,
+"km2": 1.2
+},
+"R1_protect_SB@all": {
+"k": 23,
+"km2": 1.0
+},
+"R2_promo@all": {
+"k": 97,
+"km2": 1.2
+},
+"R2_promo_SB@all": {
+"k": 23,
+"km2": 1.0
+},
+"R3_zone_all@all": {
+"k": 97,
+"km2": 1.2
+},
+"R3_zone_all_SB@all": {
+"k": 23,
+"km2": 1.0
+}
+},
+"41210": {
+"R0_current": {
+"k": 143,
+"km2": 0.3
+},
+"R0_current_SB": {
+"k": 52,
+"km2": 0.1
+},
+"R1_protect": {
+"k": 143,
+"km2": 0.3
+},
+"R1_protect_SB": {
+"k": 52,
+"km2": 0.1
+},
+"R2_promo": {
+"k": 143,
+"km2": 0.3
+},
+"R2_promo_SB": {
+"k": 52,
+"km2": 0.1
+},
+"R3_zone_all": {
+"k": 143,
+"km2": 0.3
+},
+"R3_zone_all_SB": {
+"k": 52,
+"km2": 0.1
+},
+"R0_current@all": {
+"k": 226,
+"km2": 1.7
+},
+"R0_current_SB@all": {
+"k": 87,
+"km2": 0.9
+},
+"R1_protect@all": {
+"k": 226,
+"km2": 1.7
+},
+"R1_protect_SB@all": {
+"k": 87,
+"km2": 0.9
+},
+"R2_promo@all": {
+"k": 226,
+"km2": 1.7
+},
+"R2_promo_SB@all": {
+"k": 87,
+"km2": 0.9
+},
+"R3_zone_all@all": {
+"k": 226,
+"km2": 1.7
+},
+"R3_zone_all_SB@all": {
+"k": 87,
+"km2": 0.9
+}
+},
+"41220": {
+"R0_current": {
+"k": 2870,
+"km2": 5.0
+},
+"R0_current_SB": {
+"k": 629,
+"km2": 1.0
+},
+"R1_protect": {
+"k": 2925,
+"km2": 5.2
+},
+"R1_protect_SB": {
+"k": 660,
+"km2": 1.1
+},
+"R2_promo": {
+"k": 4097,
+"km2": 18.0
+},
+"R2_promo_SB": {
+"k": 1613,
+"km2": 11.0
+},
+"R3_zone_all": {
+"k": 4118,
+"km2": 18.2
+},
+"R3_zone_all_SB": {
+"k": 1622,
+"km2": 11.1
+},
+"R0_current@all": {
+"k": 3180,
+"km2": 34.2
+},
+"R0_current_SB@all": {
+"k": 854,
+"km2": 7.1
+},
+"R1_protect@all": {
+"k": 3136,
+"km2": 36.7
+},
+"R1_protect_SB@all": {
+"k": 879,
+"km2": 7.8
+},
+"R2_promo@all": {
+"k": 2248,
+"km2": 171.7
+},
+"R2_promo_SB@all": {
+"k": 907,
+"km2": 80.0
+},
+"R3_zone_all@all": {
+"k": 2147,
+"km2": 177.9
+},
+"R3_zone_all_SB@all": {
+"k": 897,
+"km2": 81.2
+}
+},
+"41250": {
+"R0_current": {
+"k": 523,
+"km2": 0.5
+},
+"R0_current_SB": {
+"k": 52,
+"km2": 0.1
+},
+"R1_protect": {
+"k": 523,
+"km2": 0.5
+},
+"R1_protect_SB": {
+"k": 52,
+"km2": 0.1
+},
+"R2_promo": {
+"k": 525,
+"km2": 0.5
+},
+"R2_promo_SB": {
+"k": 53,
+"km2": 0.1
+},
+"R3_zone_all": {
+"k": 525,
+"km2": 0.5
+},
+"R3_zone_all_SB": {
+"k": 53,
+"km2": 0.1
+},
+"R0_current@all": {
+"k": 708,
+"km2": 3.6
+},
+"R0_current_SB@all": {
+"k": 109,
+"km2": 0.5
+},
+"R1_protect@all": {
+"k": 708,
+"km2": 3.6
+},
+"R1_protect_SB@all": {
+"k": 109,
+"km2": 0.5
+},
+"R2_promo@all": {
+"k": 706,
+"km2": 4.0
+},
+"R2_promo_SB@all": {
+"k": 110,
+"km2": 0.6
+},
+"R3_zone_all@all": {
+"k": 706,
+"km2": 4.0
+},
+"R3_zone_all_SB@all": {
+"k": 110,
+"km2": 0.6
+}
+},
+"41271": {
+"R0_current": {
+"k": 190,
+"km2": 0.4
+},
+"R0_current_SB": {
+"k": 42,
+"km2": 0.2
+},
+"R1_protect": {
+"k": 190,
+"km2": 0.4
+},
+"R1_protect_SB": {
+"k": 42,
+"km2": 0.2
+},
+"R2_promo": {
+"k": 190,
+"km2": 0.4
+},
+"R2_promo_SB": {
+"k": 42,
+"km2": 0.2
+},
+"R3_zone_all": {
+"k": 190,
+"km2": 0.4
+},
+"R3_zone_all_SB": {
+"k": 42,
+"km2": 0.2
+},
+"R0_current@all": {
+"k": 183,
+"km2": 0.5
+},
+"R0_current_SB@all": {
+"k": 35,
+"km2": 0.2
+},
+"R1_protect@all": {
+"k": 183,
+"km2": 0.5
+},
+"R1_protect_SB@all": {
+"k": 35,
+"km2": 0.2
+},
+"R2_promo@all": {
+"k": 183,
+"km2": 0.5
+},
+"R2_promo_SB@all": {
+"k": 35,
+"km2": 0.2
+},
+"R3_zone_all@all": {
+"k": 183,
+"km2": 0.5
+},
+"R3_zone_all_SB@all": {
+"k": 35,
+"km2": 0.2
+}
+},
+"41273": {
+"R0_current": {
+"k": 332,
+"km2": 0.5
+},
+"R0_current_SB": {
+"k": 49,
+"km2": 0.1
+},
+"R1_protect": {
+"k": 332,
+"km2": 0.5
+},
+"R1_protect_SB": {
+"k": 49,
+"km2": 0.1
+},
+"R2_promo": {
+"k": 332,
+"km2": 0.5
+},
+"R2_promo_SB": {
+"k": 49,
+"km2": 0.1
+},
+"R3_zone_all": {
+"k": 332,
+"km2": 0.5
+},
+"R3_zone_all_SB": {
+"k": 49,
+"km2": 0.1
+},
+"R0_current@all": {
+"k": 433,
+"km2": 7.3
+},
+"R0_current_SB@all": {
+"k": 108,
+"km2": 0.5
+},
+"R1_protect@all": {
+"k": 433,
+"km2": 7.3
+},
+"R1_protect_SB@all": {
+"k": 108,
+"km2": 0.5
+},
+"R2_promo@all": {
+"k": 433,
+"km2": 7.3
+},
+"R2_promo_SB@all": {
+"k": 108,
+"km2": 0.5
+},
+"R3_zone_all@all": {
+"k": 433,
+"km2": 7.3
+},
+"R3_zone_all_SB@all": {
+"k": 108,
+"km2": 0.5
+}
+},
+"41281": {
+"R0_current": {
+"k": 572,
+"km2": 0.8
+},
+"R0_current_SB": {
+"k": 85,
+"km2": 0.2
+},
+"R1_protect": {
+"k": 572,
+"km2": 0.8
+},
+"R1_protect_SB": {
+"k": 85,
+"km2": 0.2
+},
+"R2_promo": {
+"k": 587,
+"km2": 0.8
+},
+"R2_promo_SB": {
+"k": 89,
+"km2": 0.3
+},
+"R3_zone_all": {
+"k": 587,
+"km2": 0.8
+},
+"R3_zone_all_SB": {
+"k": 89,
+"km2": 0.3
+},
+"R0_current@all": {
+"k": 826,
+"km2": 1.8
+},
+"R0_current_SB@all": {
+"k": 78,
+"km2": 0.3
+},
+"R1_protect@all": {
+"k": 826,
+"km2": 1.8
+},
+"R1_protect_SB@all": {
+"k": 78,
+"km2": 0.3
+},
+"R2_promo@all": {
+"k": 827,
+"km2": 2.6
+},
+"R2_promo_SB@all": {
+"k": 89,
+"km2": 0.5
+},
+"R3_zone_all@all": {
+"k": 827,
+"km2": 2.7
+},
+"R3_zone_all_SB@all": {
+"k": 89,
+"km2": 0.5
+}
+},
+"41285": {
+"R0_current": {
+"k": 227,
+"km2": 0.2
+},
+"R0_current_SB": {
+"k": 13,
+"km2": 0.0
+},
+"R1_protect": {
+"k": 227,
+"km2": 0.2
+},
+"R1_protect_SB": {
+"k": 13,
+"km2": 0.0
+},
+"R2_promo": {
+"k": 293,
+"km2": 0.6
+},
+"R2_promo_SB": {
+"k": 33,
+"km2": 0.2
+},
+"R3_zone_all": {
+"k": 293,
+"km2": 0.6
+},
+"R3_zone_all_SB": {
+"k": 33,
+"km2": 0.2
+},
+"R0_current@all": {
+"k": 540,
+"km2": 1.2
+},
+"R0_current_SB@all": {
+"k": 14,
+"km2": 0.0
+},
+"R1_protect@all": {
+"k": 545,
+"km2": 1.2
+},
+"R1_protect_SB@all": {
+"k": 14,
+"km2": 0.0
+},
+"R2_promo@all": {
+"k": 557,
+"km2": 6.7
+},
+"R2_promo_SB@all": {
+"k": 42,
+"km2": 1.6
+},
+"R3_zone_all@all": {
+"k": 558,
+"km2": 6.8
+},
+"R3_zone_all_SB@all": {
+"k": 42,
+"km2": 1.6
+}
+},
+"41287": {
+"R0_current": {
+"k": 169,
+"km2": 0.3
+},
+"R0_current_SB": {
+"k": 21,
+"km2": 0.1
+},
+"R1_protect": {
+"k": 169,
+"km2": 0.3
+},
+"R1_protect_SB": {
+"k": 21,
+"km2": 0.1
+},
+"R2_promo": {
+"k": 278,
+"km2": 0.7
+},
+"R2_promo_SB": {
+"k": 93,
+"km2": 0.3
+},
+"R3_zone_all": {
+"k": 278,
+"km2": 0.7
+},
+"R3_zone_all_SB": {
+"k": 93,
+"km2": 0.3
+},
+"R0_current@all": {
+"k": 261,
+"km2": 0.6
+},
+"R0_current_SB@all": {
+"k": 22,
+"km2": 0.1
+},
+"R1_protect@all": {
+"k": 266,
+"km2": 0.7
+},
+"R1_protect_SB@all": {
+"k": 22,
+"km2": 0.1
+},
+"R2_promo@all": {
+"k": 262,
+"km2": 9.7
+},
+"R2_promo_SB@all": {
+"k": 74,
+"km2": 4.3
+},
+"R3_zone_all@all": {
+"k": 267,
+"km2": 9.7
+},
+"R3_zone_all_SB@all": {
+"k": 74,
+"km2": 4.3
+}
+},
+"41290": {
+"R0_current": {
+"k": 102,
+"km2": 0.2
+},
+"R0_current_SB": {
+"k": 15,
+"km2": 0.1
+},
+"R1_protect": {
+"k": 102,
+"km2": 0.2
+},
+"R1_protect_SB": {
+"k": 15,
+"km2": 0.1
+},
+"R2_promo": {
+"k": 102,
+"km2": 0.2
+},
+"R2_promo_SB": {
+"k": 15,
+"km2": 0.1
+},
+"R3_zone_all": {
+"k": 102,
+"km2": 0.2
+},
+"R3_zone_all_SB": {
+"k": 15,
+"km2": 0.1
+},
+"R0_current@all": {
+"k": 100,
+"km2": 0.2
+},
+"R0_current_SB@all": {
+"k": 12,
+"km2": 0.1
+},
+"R1_protect@all": {
+"k": 100,
+"km2": 0.2
+},
+"R1_protect_SB@all": {
+"k": 12,
+"km2": 0.1
+},
+"R2_promo@all": {
+"k": 100,
+"km2": 0.2
+},
+"R2_promo_SB@all": {
+"k": 12,
+"km2": 0.1
+},
+"R3_zone_all@all": {
+"k": 100,
+"km2": 0.2
+},
+"R3_zone_all_SB@all": {
+"k": 12,
+"km2": 0.1
+}
+},
+"41310": {
+"R0_current": {
+"k": 142,
+"km2": 0.1
+},
+"R0_current_SB": {
+"k": 8,
+"km2": 0.0
+},
+"R1_protect": {
+"k": 142,
+"km2": 0.1
+},
+"R1_protect_SB": {
+"k": 8,
+"km2": 0.0
+},
+"R2_promo": {
+"k": 142,
+"km2": 0.1
+},
+"R2_promo_SB": {
+"k": 8,
+"km2": 0.0
+},
+"R3_zone_all": {
+"k": 142,
+"km2": 0.1
+},
+"R3_zone_all_SB": {
+"k": 8,
+"km2": 0.0
+},
+"R0_current@all": {
+"k": 140,
+"km2": 0.2
+},
+"R0_current_SB@all": {
+"k": 8,
+"km2": 0.0
+},
+"R1_protect@all": {
+"k": 140,
+"km2": 0.2
+},
+"R1_protect_SB@all": {
+"k": 8,
+"km2": 0.0
+},
+"R2_promo@all": {
+"k": 140,
+"km2": 0.2
+},
+"R2_promo_SB@all": {
+"k": 8,
+"km2": 0.0
+},
+"R3_zone_all@all": {
+"k": 140,
+"km2": 0.2
+},
+"R3_zone_all_SB@all": {
+"k": 8,
+"km2": 0.0
+}
+},
+"41360": {
+"R0_current": {
+"k": 1948,
+"km2": 4.1
+},
+"R0_current_SB": {
+"k": 278,
+"km2": 1.2
+},
+"R1_protect": {
+"k": 1954,
+"km2": 4.1
+},
+"R1_protect_SB": {
+"k": 278,
+"km2": 1.2
+},
+"R2_promo": {
+"k": 1952,
+"km2": 4.2
+},
+"R2_promo_SB": {
+"k": 279,
+"km2": 1.2
+},
+"R3_zone_all": {
+"k": 1958,
+"km2": 4.2
+},
+"R3_zone_all_SB": {
+"k": 279,
+"km2": 1.2
+},
+"R0_current@all": {
+"k": 2949,
+"km2": 12.1
+},
+"R0_current_SB@all": {
+"k": 423,
+"km2": 1.8
+},
+"R1_protect@all": {
+"k": 2944,
+"km2": 12.2
+},
+"R1_protect_SB@all": {
+"k": 424,
+"km2": 1.8
+},
+"R2_promo@all": {
+"k": 2909,
+"km2": 12.6
+},
+"R2_promo_SB@all": {
+"k": 420,
+"km2": 1.8
+},
+"R3_zone_all@all": {
+"k": 2904,
+"km2": 12.7
+},
+"R3_zone_all_SB@all": {
+"k": 421,
+"km2": 1.8
+}
+},
+"41370": {
+"R0_current": {
+"k": 551,
+"km2": 1.1
+},
+"R0_current_SB": {
+"k": 134,
+"km2": 0.3
+},
+"R1_protect": {
+"k": 566,
+"km2": 1.1
+},
+"R1_protect_SB": {
+"k": 136,
+"km2": 0.3
+},
+"R2_promo": {
+"k": 559,
+"km2": 1.1
+},
+"R2_promo_SB": {
+"k": 141,
+"km2": 0.4
+},
+"R3_zone_all": {
+"k": 574,
+"km2": 1.1
+},
+"R3_zone_all_SB": {
+"k": 143,
+"km2": 0.4
+},
+"R0_current@all": {
+"k": 546,
+"km2": 4.6
+},
+"R0_current_SB@all": {
+"k": 142,
+"km2": 0.9
+},
+"R1_protect@all": {
+"k": 550,
+"km2": 4.8
+},
+"R1_protect_SB@all": {
+"k": 146,
+"km2": 0.9
+},
+"R2_promo@all": {
+"k": 534,
+"km2": 8.5
+},
+"R2_promo_SB@all": {
+"k": 141,
+"km2": 3.0
+},
+"R3_zone_all@all": {
+"k": 535,
+"km2": 8.8
+},
+"R3_zone_all_SB@all": {
+"k": 145,
+"km2": 3.1
+}
+},
+"41390": {
+"R0_current": {
+"k": 355,
+"km2": 0.3
+},
+"R0_current_SB": {
+"k": 48,
+"km2": 0.1
+},
+"R1_protect": {
+"k": 355,
+"km2": 0.3
+},
+"R1_protect_SB": {
+"k": 48,
+"km2": 0.1
+},
+"R2_promo": {
+"k": 355,
+"km2": 0.3
+},
+"R2_promo_SB": {
+"k": 48,
+"km2": 0.1
+},
+"R3_zone_all": {
+"k": 355,
+"km2": 0.3
+},
+"R3_zone_all_SB": {
+"k": 48,
+"km2": 0.1
+},
+"R0_current@all": {
+"k": 455,
+"km2": 0.9
+},
+"R0_current_SB@all": {
+"k": 45,
+"km2": 0.1
+},
+"R1_protect@all": {
+"k": 455,
+"km2": 0.9
+},
+"R1_protect_SB@all": {
+"k": 45,
+"km2": 0.1
+},
+"R2_promo@all": {
+"k": 455,
+"km2": 0.9
+},
+"R2_promo_SB@all": {
+"k": 45,
+"km2": 0.1
+},
+"R3_zone_all@all": {
+"k": 455,
+"km2": 0.9
+},
+"R3_zone_all_SB@all": {
+"k": 45,
+"km2": 0.1
+}
+},
+"41410": {
+"R0_current": {
+"k": 80,
+"km2": 0.1
+},
+"R0_current_SB": {
+"k": 3,
+"km2": 0.0
+},
+"R1_protect": {
+"k": 80,
+"km2": 0.1
+},
+"R1_protect_SB": {
+"k": 3,
+"km2": 0.0
+},
+"R2_promo": {
+"k": 80,
+"km2": 0.1
+},
+"R2_promo_SB": {
+"k": 3,
+"km2": 0.0
+},
+"R3_zone_all": {
+"k": 80,
+"km2": 0.1
+},
+"R3_zone_all_SB": {
+"k": 3,
+"km2": 0.0
+},
+"R0_current@all": {
+"k": 63,
+"km2": 0.1
+},
+"R0_current_SB@all": {
+"k": 3,
+"km2": 0.0
+},
+"R1_protect@all": {
+"k": 63,
+"km2": 0.1
+},
+"R1_protect_SB@all": {
+"k": 3,
+"km2": 0.0
+},
+"R2_promo@all": {
+"k": 63,
+"km2": 0.1
+},
+"R2_promo_SB@all": {
+"k": 3,
+"km2": 0.0
+},
+"R3_zone_all@all": {
+"k": 63,
+"km2": 0.1
+},
+"R3_zone_all_SB@all": {
+"k": 3,
+"km2": 0.0
+}
+},
+"41430": {
+"R0_current": {
+"k": 154,
+"km2": 0.1
+},
+"R0_current_SB": {
+"k": 15,
+"km2": 0.0
+},
+"R1_protect": {
+"k": 154,
+"km2": 0.1
+},
+"R1_protect_SB": {
+"k": 15,
+"km2": 0.0
+},
+"R2_promo": {
+"k": 154,
+"km2": 0.1
+},
+"R2_promo_SB": {
+"k": 15,
+"km2": 0.0
+},
+"R3_zone_all": {
+"k": 154,
+"km2": 0.1
+},
+"R3_zone_all_SB": {
+"k": 15,
+"km2": 0.0
+},
+"R0_current@all": {
+"k": 168,
+"km2": 0.2
+},
+"R0_current_SB@all": {
+"k": 11,
+"km2": 0.0
+},
+"R1_protect@all": {
+"k": 168,
+"km2": 0.2
+},
+"R1_protect_SB@all": {
+"k": 11,
+"km2": 0.0
+},
+"R2_promo@all": {
+"k": 168,
+"km2": 0.2
+},
+"R2_promo_SB@all": {
+"k": 11,
+"km2": 0.0
+},
+"R3_zone_all@all": {
+"k": 168,
+"km2": 0.2
+},
+"R3_zone_all_SB@all": {
+"k": 11,
+"km2": 0.0
+}
+},
+"41450": {
+"R0_current": {
+"k": 222,
+"km2": 0.0
+},
+"R0_current_SB": {
+"k": 2,
+"km2": 0.0
+},
+"R1_protect": {
+"k": 222,
+"km2": 0.0
+},
+"R1_protect_SB": {
+"k": 2,
+"km2": 0.0
+},
+"R2_promo": {
+"k": 222,
+"km2": 0.0
+},
+"R2_promo_SB": {
+"k": 2,
+"km2": 0.0
+},
+"R3_zone_all": {
+"k": 222,
+"km2": 0.0
+},
+"R3_zone_all_SB": {
+"k": 2,
+"km2": 0.0
+},
+"R0_current@all": {
+"k": 336,
+"km2": 0.2
+},
+"R0_current_SB@all": {
+"k": 1,
+"km2": 0.0
+},
+"R1_protect@all": {
+"k": 336,
+"km2": 0.2
+},
+"R1_protect_SB@all": {
+"k": 1,
+"km2": 0.0
+},
+"R2_promo@all": {
+"k": 336,
+"km2": 0.2
+},
+"R2_promo_SB@all": {
+"k": 1,
+"km2": 0.0
+},
+"R3_zone_all@all": {
+"k": 336,
+"km2": 0.2
+},
+"R3_zone_all_SB@all": {
+"k": 1,
+"km2": 0.0
+}
+},
+"41461": {
+"R0_current": {
+"k": 2487,
+"km2": 4.8
+},
+"R0_current_SB": {
+"k": 635,
+"km2": 1.3
+},
+"R1_protect": {
+"k": 2556,
+"km2": 5.0
+},
+"R1_protect_SB": {
+"k": 649,
+"km2": 1.3
+},
+"R2_promo": {
+"k": 2893,
+"km2": 6.8
+},
+"R2_promo_SB": {
+"k": 919,
+"km2": 2.6
+},
+"R3_zone_all": {
+"k": 2958,
+"km2": 7.0
+},
+"R3_zone_all_SB": {
+"k": 931,
+"km2": 2.7
+},
+"R0_current@all": {
+"k": 3449,
+"km2": 32.1
+},
+"R0_current_SB@all": {
+"k": 1363,
+"km2": 8.6
+},
+"R1_protect@all": {
+"k": 3504,
+"km2": 34.4
+},
+"R1_protect_SB@all": {
+"k": 1403,
+"km2": 9.2
+},
+"R2_promo@all": {
+"k": 3127,
+"km2": 56.4
+},
+"R2_promo_SB@all": {
+"k": 1365,
+"km2": 21.4
+},
+"R3_zone_all@all": {
+"k": 3152,
+"km2": 58.7
+},
+"R3_zone_all_SB@all": {
+"k": 1395,
+"km2": 22.1
+}
+},
+"41463": {
+"R0_current": {
+"k": 735,
+"km2": 1.0
+},
+"R0_current_SB": {
+"k": 721,
+"km2": 0.9
+},
+"R1_protect": {
+"k": 735,
+"km2": 1.0
+},
+"R1_protect_SB": {
+"k": 721,
+"km2": 0.9
+},
+"R2_promo": {
+"k": 730,
+"km2": 1.2
+},
+"R2_promo_SB": {
+"k": 716,
+"km2": 1.1
+},
+"R3_zone_all": {
+"k": 730,
+"km2": 1.2
+},
+"R3_zone_all_SB": {
+"k": 716,
+"km2": 1.1
+},
+"R0_current@all": {
+"k": 770,
+"km2": 2.2
+},
+"R0_current_SB@all": {
+"k": 755,
+"km2": 2.1
+},
+"R1_protect@all": {
+"k": 770,
+"km2": 2.2
+},
+"R1_protect_SB@all": {
+"k": 755,
+"km2": 2.1
+},
+"R2_promo@all": {
+"k": 768,
+"km2": 2.4
+},
+"R2_promo_SB@all": {
+"k": 753,
+"km2": 2.3
+},
+"R3_zone_all@all": {
+"k": 768,
+"km2": 2.4
+},
+"R3_zone_all_SB@all": {
+"k": 753,
+"km2": 2.3
+}
+},
+"41465": {
+"R0_current": {
+"k": 227,
+"km2": 0.3
+},
+"R0_current_SB": {
+"k": 12,
+"km2": 0.0
+},
+"R1_protect": {
+"k": 227,
+"km2": 0.3
+},
+"R1_protect_SB": {
+"k": 12,
+"km2": 0.0
+},
+"R2_promo": {
+"k": 227,
+"km2": 0.3
+},
+"R2_promo_SB": {
+"k": 12,
+"km2": 0.0
+},
+"R3_zone_all": {
+"k": 227,
+"km2": 0.3
+},
+"R3_zone_all_SB": {
+"k": 12,
+"km2": 0.0
+},
+"R0_current@all": {
+"k": 296,
+"km2": 0.6
+},
+"R0_current_SB@all": {
+"k": 23,
+"km2": 0.0
+},
+"R1_protect@all": {
+"k": 296,
+"km2": 0.6
+},
+"R1_protect_SB@all": {
+"k": 23,
+"km2": 0.0
+},
+"R2_promo@all": {
+"k": 296,
+"km2": 0.6
+},
+"R2_promo_SB@all": {
+"k": 23,
+"km2": 0.0
+},
+"R3_zone_all@all": {
+"k": 296,
+"km2": 0.6
+},
+"R3_zone_all_SB@all": {
+"k": 23,
+"km2": 0.0
+}
+},
+"41480": {
+"R0_current": {
+"k": 2020,
+"km2": 3.9
+},
+"R0_current_SB": {
+"k": 524,
+"km2": 1.2
+},
+"R1_protect": {
+"k": 2068,
+"km2": 4.0
+},
+"R1_protect_SB": {
+"k": 550,
+"km2": 1.3
+},
+"R2_promo": {
+"k": 2245,
+"km2": 5.5
+},
+"R2_promo_SB": {
+"k": 703,
+"km2": 2.3
+},
+"R3_zone_all": {
+"k": 2287,
+"km2": 5.6
+},
+"R3_zone_all_SB": {
+"k": 727,
+"km2": 2.3
+},
+"R0_current@all": {
+"k": 2314,
+"km2": 20.9
+},
+"R0_current_SB@all": {
+"k": 747,
+"km2": 5.5
+},
+"R1_protect@all": {
+"k": 2355,
+"km2": 21.7
+},
+"R1_protect_SB@all": {
+"k": 782,
+"km2": 5.6
+},
+"R2_promo@all": {
+"k": 2094,
+"km2": 39.9
+},
+"R2_promo_SB@all": {
+"k": 723,
+"km2": 15.8
+},
+"R3_zone_all@all": {
+"k": 2128,
+"km2": 40.9
+},
+"R3_zone_all_SB@all": {
+"k": 751,
+"km2": 16.0
+}
+},
+"41500": {
+"R0_current": {
+"k": 2925,
+"km2": 5.5
+},
+"R0_current_SB": {
+"k": 1147,
+"km2": 2.7
+},
+"R1_protect": {
+"k": 3082,
+"km2": 6.0
+},
+"R1_protect_SB": {
+"k": 1228,
+"km2": 2.9
+},
+"R2_promo": {
+"k": 4277,
+"km2": 12.5
+},
+"R2_promo_SB": {
+"k": 2094,
+"km2": 7.2
+},
+"R3_zone_all": {
+"k": 4381,
+"km2": 13.0
+},
+"R3_zone_all_SB": {
+"k": 2154,
+"km2": 7.5
+},
+"R0_current@all": {
+"k": 3849,
+"km2": 59.3
+},
+"R0_current_SB@all": {
+"k": 1931,
+"km2": 22.6
+},
+"R1_protect@all": {
+"k": 3878,
+"km2": 65.9
+},
+"R1_protect_SB@all": {
+"k": 2037,
+"km2": 25.8
+},
+"R2_promo@all": {
+"k": 2909,
+"km2": 143.1
+},
+"R2_promo_SB@all": {
+"k": 1853,
+"km2": 67.3
+},
+"R3_zone_all@all": {
+"k": 2774,
+"km2": 151.1
+},
+"R3_zone_all_SB@all": {
+"k": 1828,
+"km2": 70.6
+}
+},
+"41550": {
+"R0_current": {
+"k": 2879,
+"km2": 5.4
+},
+"R0_current_SB": {
+"k": 1070,
+"km2": 1.9
+},
+"R1_protect": {
+"k": 3128,
+"km2": 6.2
+},
+"R1_protect_SB": {
+"k": 1174,
+"km2": 2.3
+},
+"R2_promo": {
+"k": 3744,
+"km2": 10.1
+},
+"R2_promo_SB": {
+"k": 1711,
+"km2": 5.1
+},
+"R3_zone_all": {
+"k": 3963,
+"km2": 10.9
+},
+"R3_zone_all_SB": {
+"k": 1801,
+"km2": 5.4
+},
+"R0_current@all": {
+"k": 3813,
+"km2": 51.1
+},
+"R0_current_SB@all": {
+"k": 1997,
+"km2": 16.8
+},
+"R1_protect@all": {
+"k": 3952,
+"km2": 57.9
+},
+"R1_protect_SB@all": {
+"k": 2158,
+"km2": 18.8
+},
+"R2_promo@all": {
+"k": 3163,
+"km2": 122.0
+},
+"R2_promo_SB@all": {
+"k": 2042,
+"km2": 56.0
+},
+"R3_zone_all@all": {
+"k": 3181,
+"km2": 131.8
+},
+"R3_zone_all_SB@all": {
+"k": 2141,
+"km2": 58.4
+}
+},
+"41570": {
+"R0_current": {
+"k": 698,
+"km2": 0.9
+},
+"R0_current_SB": {
+"k": 61,
+"km2": 0.1
+},
+"R1_protect": {
+"k": 704,
+"km2": 0.9
+},
+"R1_protect_SB": {
+"k": 61,
+"km2": 0.1
+},
+"R2_promo": {
+"k": 943,
+"km2": 2.1
+},
+"R2_promo_SB": {
+"k": 200,
+"km2": 0.6
+},
+"R3_zone_all": {
+"k": 948,
+"km2": 2.1
+},
+"R3_zone_all_SB": {
+"k": 200,
+"km2": 0.6
+},
+"R0_current@all": {
+"k": 1239,
+"km2": 5.1
+},
+"R0_current_SB@all": {
+"k": 78,
+"km2": 0.4
+},
+"R1_protect@all": {
+"k": 1244,
+"km2": 5.4
+},
+"R1_protect_SB@all": {
+"k": 78,
+"km2": 0.4
+},
+"R2_promo@all": {
+"k": 1187,
+"km2": 25.1
+},
+"R2_promo_SB@all": {
+"k": 171,
+"km2": 9.4
+},
+"R3_zone_all@all": {
+"k": 1185,
+"km2": 25.4
+},
+"R3_zone_all_SB@all": {
+"k": 171,
+"km2": 9.4
+}
+},
+"41590": {
+"R0_current": {
+"k": 4133,
+"km2": 7.5
+},
+"R0_current_SB": {
+"k": 4105,
+"km2": 7.4
+},
+"R1_protect": {
+"k": 4261,
+"km2": 7.8
+},
+"R1_protect_SB": {
+"k": 4233,
+"km2": 7.6
+},
+"R2_promo": {
+"k": 4930,
+"km2": 14.6
+},
+"R2_promo_SB": {
+"k": 4901,
+"km2": 14.4
+},
+"R3_zone_all": {
+"k": 5029,
+"km2": 14.9
+},
+"R3_zone_all_SB": {
+"k": 5000,
+"km2": 14.7
+},
+"R0_current@all": {
+"k": 6176,
+"km2": 63.0
+},
+"R0_current_SB@all": {
+"k": 6162,
+"km2": 61.3
+},
+"R1_protect@all": {
+"k": 6222,
+"km2": 66.6
+},
+"R1_protect_SB@all": {
+"k": 6207,
+"km2": 64.8
+},
+"R2_promo@all": {
+"k": 5066,
+"km2": 144.8
+},
+"R2_promo_SB@all": {
+"k": 5057,
+"km2": 140.1
+},
+"R3_zone_all@all": {
+"k": 5059,
+"km2": 148.5
+},
+"R3_zone_all_SB@all": {
+"k": 5048,
+"km2": 143.6
+}
+},
+"41610": {
+"R0_current": {
+"k": 2247,
+"km2": 2.2
+},
+"R0_current_SB": {
+"k": 269,
+"km2": 0.4
+},
+"R1_protect": {
+"k": 2247,
+"km2": 2.2
+},
+"R1_protect_SB": {
+"k": 270,
+"km2": 0.4
+},
+"R2_promo": {
+"k": 2322,
+"km2": 2.6
+},
+"R2_promo_SB": {
+"k": 300,
+"km2": 0.5
+},
+"R3_zone_all": {
+"k": 2318,
+"km2": 2.6
+},
+"R3_zone_all_SB": {
+"k": 299,
+"km2": 0.5
+},
+"R0_current@all": {
+"k": 3221,
+"km2": 17.8
+},
+"R0_current_SB@all": {
+"k": 633,
+"km2": 2.6
+},
+"R1_protect@all": {
+"k": 3218,
+"km2": 18.0
+},
+"R1_protect_SB@all": {
+"k": 635,
+"km2": 2.6
+},
+"R2_promo@all": {
+"k": 3119,
+"km2": 21.8
+},
+"R2_promo_SB@all": {
+"k": 654,
+"km2": 3.4
+},
+"R3_zone_all@all": {
+"k": 3102,
+"km2": 22.1
+},
+"R3_zone_all_SB@all": {
+"k": 654,
+"km2": 3.4
+}
+},
+"41630": {
+"R0_current": {
+"k": 1735,
+"km2": 2.9
+},
+"R0_current_SB": {
+"k": 278,
+"km2": 0.6
+},
+"R1_protect": {
+"k": 1785,
+"km2": 3.0
+},
+"R1_protect_SB": {
+"k": 292,
+"km2": 0.6
+},
+"R2_promo": {
+"k": 1891,
+"km2": 3.7
+},
+"R2_promo_SB": {
+"k": 364,
+"km2": 0.8
+},
+"R3_zone_all": {
+"k": 1935,
+"km2": 3.7
+},
+"R3_zone_all_SB": {
+"k": 378,
+"km2": 0.8
+},
+"R0_current@all": {
+"k": 2416,
+"km2": 16.2
+},
+"R0_current_SB@all": {
+"k": 446,
+"km2": 2.1
+},
+"R1_protect@all": {
+"k": 2425,
+"km2": 17.2
+},
+"R1_protect_SB@all": {
+"k": 471,
+"km2": 2.2
+},
+"R2_promo@all": {
+"k": 2291,
+"km2": 25.0
+},
+"R2_promo_SB@all": {
+"k": 495,
+"km2": 5.2
+},
+"R3_zone_all@all": {
+"k": 2282,
+"km2": 26.1
+},
+"R3_zone_all_SB@all": {
+"k": 517,
+"km2": 5.3
+}
+},
+"41650": {
+"R0_current": {
+"k": 3405,
+"km2": 5.7
+},
+"R0_current_SB": {
+"k": 919,
+"km2": 2.1
+},
+"R1_protect": {
+"k": 3471,
+"km2": 5.9
+},
+"R1_protect_SB": {
+"k": 946,
+"km2": 2.2
+},
+"R2_promo": {
+"k": 3985,
+"km2": 8.5
+},
+"R2_promo_SB": {
+"k": 1308,
+"km2": 3.6
+},
+"R3_zone_all": {
+"k": 4032,
+"km2": 8.7
+},
+"R3_zone_all_SB": {
+"k": 1329,
+"km2": 3.6
+},
+"R0_current@all": {
+"k": 5049,
+"km2": 42.1
+},
+"R0_current_SB@all": {
+"k": 1884,
+"km2": 11.2
+},
+"R1_protect@all": {
+"k": 5049,
+"km2": 43.5
+},
+"R1_protect_SB@all": {
+"k": 1913,
+"km2": 11.6
+},
+"R2_promo@all": {
+"k": 4529,
+"km2": 74.5
+},
+"R2_promo_SB@all": {
+"k": 1988,
+"km2": 26.8
+},
+"R3_zone_all@all": {
+"k": 4497,
+"km2": 75.9
+},
+"R3_zone_all_SB@all": {
+"k": 2001,
+"km2": 27.2
+}
+},
+"41670": {
+"R0_current": {
+"k": 2667,
+"km2": 5.2
+},
+"R0_current_SB": {
+"k": 1215,
+"km2": 2.8
+},
+"R1_protect": {
+"k": 2841,
+"km2": 5.8
+},
+"R1_protect_SB": {
+"k": 1302,
+"km2": 3.0
+},
+"R2_promo": {
+"k": 3906,
+"km2": 10.8
+},
+"R2_promo_SB": {
+"k": 2037,
+"km2": 6.6
+},
+"R3_zone_all": {
+"k": 4051,
+"km2": 11.3
+},
+"R3_zone_all_SB": {
+"k": 2110,
+"km2": 6.9
+},
+"R0_current@all": {
+"k": 3989,
+"km2": 57.0
+},
+"R0_current_SB@all": {
+"k": 2359,
+"km2": 24.6
+},
+"R1_protect@all": {
+"k": 3961,
+"km2": 66.1
+},
+"R1_protect_SB@all": {
+"k": 2422,
+"km2": 29.0
+},
+"R2_promo@all": {
+"k": 3274,
+"km2": 130.8
+},
+"R2_promo_SB@all": {
+"k": 2394,
+"km2": 59.4
+},
+"R3_zone_all@all": {
+"k": 3085,
+"km2": 139.7
+},
+"R3_zone_all_SB@all": {
+"k": 2355,
+"km2": 65.1
+}
+},
+"41800": {
+"R0_current": {
+"k": 1104,
+"km2": 2.8
+},
+"R0_current_SB": {
+"k": 532,
+"km2": 1.5
+},
+"R1_protect": {
+"k": 1120,
+"km2": 2.8
+},
+"R1_protect_SB": {
+"k": 541,
+"km2": 1.5
+},
+"R2_promo": {
+"k": 1217,
+"km2": 4.1
+},
+"R2_promo_SB": {
+"k": 631,
+"km2": 2.3
+},
+"R3_zone_all": {
+"k": 1226,
+"km2": 4.1
+},
+"R3_zone_all_SB": {
+"k": 638,
+"km2": 2.3
+},
+"R0_current@all": {
+"k": 1173,
+"km2": 14.8
+},
+"R0_current_SB@all": {
+"k": 739,
+"km2": 6.9
+},
+"R1_protect@all": {
+"k": 1168,
+"km2": 15.3
+},
+"R1_protect_SB@all": {
+"k": 742,
+"km2": 7.0
+},
+"R2_promo@all": {
+"k": 1041,
+"km2": 24.2
+},
+"R2_promo_SB@all": {
+"k": 718,
+"km2": 11.9
+},
+"R3_zone_all@all": {
+"k": 1021,
+"km2": 24.6
+},
+"R3_zone_all_SB@all": {
+"k": 712,
+"km2": 12.1
+}
+},
+"41820": {
+"R0_current": {
+"k": 1988,
+"km2": 3.5
+},
+"R0_current_SB": {
+"k": 348,
+"km2": 0.9
+},
+"R1_protect": {
+"k": 2004,
+"km2": 3.5
+},
+"R1_protect_SB": {
+"k": 351,
+"km2": 0.9
+},
+"R2_promo": {
+"k": 2067,
+"km2": 3.7
+},
+"R2_promo_SB": {
+"k": 371,
+"km2": 0.9
+},
+"R3_zone_all": {
+"k": 2081,
+"km2": 3.7
+},
+"R3_zone_all_SB": {
+"k": 374,
+"km2": 0.9
+},
+"R0_current@all": {
+"k": 3353,
+"km2": 26.6
+},
+"R0_current_SB@all": {
+"k": 876,
+"km2": 4.0
+},
+"R1_protect@all": {
+"k": 3353,
+"km2": 27.0
+},
+"R1_protect_SB@all": {
+"k": 882,
+"km2": 4.1
+},
+"R2_promo@all": {
+"k": 3284,
+"km2": 30.4
+},
+"R2_promo_SB@all": {
+"k": 909,
+"km2": 4.5
+},
+"R3_zone_all@all": {
+"k": 3272,
+"km2": 30.9
+},
+"R3_zone_all_SB@all": {
+"k": 910,
+"km2": 4.5
+}
+},
+"41830": {
+"R0_current": {
+"k": 2210,
+"km2": 2.5
+},
+"R0_current_SB": {
+"k": 373,
+"km2": 0.5
+},
+"R1_protect": {
+"k": 2344,
+"km2": 2.8
+},
+"R1_protect_SB": {
+"k": 403,
+"km2": 0.5
+},
+"R2_promo": {
+"k": 2941,
+"km2": 5.0
+},
+"R2_promo_SB": {
+"k": 611,
+"km2": 1.3
+},
+"R3_zone_all": {
+"k": 3053,
+"km2": 5.3
+},
+"R3_zone_all_SB": {
+"k": 637,
+"km2": 1.3
+},
+"R0_current@all": {
+"k": 5016,
+"km2": 32.5
+},
+"R0_current_SB@all": {
+"k": 1273,
+"km2": 5.2
+},
+"R1_protect@all": {
+"k": 5026,
+"km2": 36.9
+},
+"R1_protect_SB@all": {
+"k": 1338,
+"km2": 5.8
+},
+"R2_promo@all": {
+"k": 4630,
+"km2": 64.7
+},
+"R2_promo_SB@all": {
+"k": 1474,
+"km2": 11.8
+},
+"R3_zone_all@all": {
+"k": 4521,
+"km2": 69.2
+},
+"R3_zone_all_SB@all": {
+"k": 1502,
+"km2": 12.5
+}
+},
+"43111": {
+"R0_current": {
+"k": 993,
+"km2": 1.4
+},
+"R0_current_SB": {
+"k": 313,
+"km2": 0.6
+},
+"R1_protect": {
+"k": 1053,
+"km2": 1.5
+},
+"R1_protect_SB": {
+"k": 334,
+"km2": 0.6
+},
+"R2_promo": {
+"k": 1379,
+"km2": 2.9
+},
+"R2_promo_SB": {
+"k": 569,
+"km2": 1.4
+},
+"R3_zone_all": {
+"k": 1431,
+"km2": 3.0
+},
+"R3_zone_all_SB": {
+"k": 588,
+"km2": 1.4
+},
+"R0_current@all": {
+"k": 1748,
+"km2": 20.9
+},
+"R0_current_SB@all": {
+"k": 949,
+"km2": 7.3
+},
+"R1_protect@all": {
+"k": 1742,
+"km2": 22.7
+},
+"R1_protect_SB@all": {
+"k": 970,
+"km2": 7.8
+},
+"R2_promo@all": {
+"k": 1415,
+"km2": 38.7
+},
+"R2_promo_SB@all": {
+"k": 925,
+"km2": 16.3
+},
+"R3_zone_all@all": {
+"k": 1376,
+"km2": 40.4
+},
+"R3_zone_all_SB@all": {
+"k": 937,
+"km2": 16.8
+}
+},
+"43112": {
+"R0_current": {
+"k": 703,
+"km2": 1.0
+},
+"R0_current_SB": {
+"k": 177,
+"km2": 0.4
+},
+"R1_protect": {
+"k": 707,
+"km2": 1.0
+},
+"R1_protect_SB": {
+"k": 178,
+"km2": 0.4
+},
+"R2_promo": {
+"k": 757,
+"km2": 1.1
+},
+"R2_promo_SB": {
+"k": 205,
+"km2": 0.5
+},
+"R3_zone_all": {
+"k": 761,
+"km2": 1.1
+},
+"R3_zone_all_SB": {
+"k": 206,
+"km2": 0.5
+},
+"R0_current@all": {
+"k": 1045,
+"km2": 12.3
+},
+"R0_current_SB@all": {
+"k": 410,
+"km2": 3.6
+},
+"R1_protect@all": {
+"k": 1047,
+"km2": 12.4
+},
+"R1_protect_SB@all": {
+"k": 417,
+"km2": 3.7
+},
+"R2_promo@all": {
+"k": 1019,
+"km2": 15.2
+},
+"R2_promo_SB@all": {
+"k": 405,
+"km2": 4.6
+},
+"R3_zone_all@all": {
+"k": 1013,
+"km2": 15.3
+},
+"R3_zone_all_SB@all": {
+"k": 408,
+"km2": 4.7
+}
+},
+"43113": {
+"R0_current": {
+"k": 1121,
+"km2": 2.1
+},
+"R0_current_SB": {
+"k": 376,
+"km2": 1.1
+},
+"R1_protect": {
+"k": 1163,
+"km2": 2.2
+},
+"R1_protect_SB": {
+"k": 407,
+"km2": 1.1
+},
+"R2_promo": {
+"k": 1382,
+"km2": 3.0
+},
+"R2_promo_SB": {
+"k": 561,
+"km2": 1.7
+},
+"R3_zone_all": {
+"k": 1417,
+"km2": 3.0
+},
+"R3_zone_all_SB": {
+"k": 588,
+"km2": 1.7
+},
+"R0_current@all": {
+"k": 1486,
+"km2": 24.4
+},
+"R0_current_SB@all": {
+"k": 642,
+"km2": 11.2
+},
+"R1_protect@all": {
+"k": 1490,
+"km2": 25.6
+},
+"R1_protect_SB@all": {
+"k": 671,
+"km2": 11.9
+},
+"R2_promo@all": {
+"k": 1352,
+"km2": 44.8
+},
+"R2_promo_SB@all": {
+"k": 701,
+"km2": 22.8
+},
+"R3_zone_all@all": {
+"k": 1332,
+"km2": 46.1
+},
+"R3_zone_all_SB@all": {
+"k": 712,
+"km2": 23.5
+}
+},
+"43114": {
+"R0_current": {
+"k": 1443,
+"km2": 2.0
+},
+"R0_current_SB": {
+"k": 566,
+"km2": 1.0
+},
+"R1_protect": {
+"k": 1506,
+"km2": 2.1
+},
+"R1_protect_SB": {
+"k": 610,
+"km2": 1.0
+},
+"R2_promo": {
+"k": 1784,
+"km2": 3.4
+},
+"R2_promo_SB": {
+"k": 814,
+"km2": 2.1
+},
+"R3_zone_all": {
+"k": 1836,
+"km2": 3.5
+},
+"R3_zone_all_SB": {
+"k": 854,
+"km2": 2.1
+},
+"R0_current@all": {
+"k": 1787,
+"km2": 25.8
+},
+"R0_current_SB@all": {
+"k": 871,
+"km2": 9.8
+},
+"R1_protect@all": {
+"k": 1802,
+"km2": 28.0
+},
+"R1_protect_SB@all": {
+"k": 911,
+"km2": 11.0
+},
+"R2_promo@all": {
+"k": 1596,
+"km2": 46.9
+},
+"R2_promo_SB@all": {
+"k": 853,
+"km2": 24.3
+},
+"R3_zone_all@all": {
+"k": 1584,
+"km2": 49.1
+},
+"R3_zone_all_SB@all": {
+"k": 872,
+"km2": 25.5
+}
+},
+"43130": {
+"R0_current": {
+"k": 3139,
+"km2": 6.3
+},
+"R0_current_SB": {
+"k": 1190,
+"km2": 2.8
+},
+"R1_protect": {
+"k": 3276,
+"km2": 6.5
+},
+"R1_protect_SB": {
+"k": 1253,
+"km2": 2.9
+},
+"R2_promo": {
+"k": 3993,
+"km2": 10.4
+},
+"R2_promo_SB": {
+"k": 1758,
+"km2": 4.9
+},
+"R3_zone_all": {
+"k": 4097,
+"km2": 10.7
+},
+"R3_zone_all_SB": {
+"k": 1814,
+"km2": 5.0
+},
+"R0_current@all": {
+"k": 4535,
+"km2": 71.7
+},
+"R0_current_SB@all": {
+"k": 2575,
+"km2": 23.6
+},
+"R1_protect@all": {
+"k": 4607,
+"km2": 75.7
+},
+"R1_protect_SB@all": {
+"k": 2688,
+"km2": 24.9
+},
+"R2_promo@all": {
+"k": 3883,
+"km2": 106.6
+},
+"R2_promo_SB@all": {
+"k": 2643,
+"km2": 39.4
+},
+"R3_zone_all@all": {
+"k": 3877,
+"km2": 110.8
+},
+"R3_zone_all_SB@all": {
+"k": 2724,
+"km2": 40.7
+}
+},
+"43150": {
+"R0_current": {
+"k": 2469,
+"km2": 4.4
+},
+"R0_current_SB": {
+"k": 1019,
+"km2": 2.2
+},
+"R1_protect": {
+"k": 2524,
+"km2": 4.6
+},
+"R1_protect_SB": {
+"k": 1040,
+"km2": 2.3
+},
+"R2_promo": {
+"k": 2740,
+"km2": 5.5
+},
+"R2_promo_SB": {
+"k": 1166,
+"km2": 2.8
+},
+"R3_zone_all": {
+"k": 2785,
+"km2": 5.6
+},
+"R3_zone_all_SB": {
+"k": 1182,
+"km2": 2.8
+},
+"R0_current@all": {
+"k": 4259,
+"km2": 58.4
+},
+"R0_current_SB@all": {
+"k": 2747,
+"km2": 23.3
+},
+"R1_protect@all": {
+"k": 4261,
+"km2": 59.9
+},
+"R1_protect_SB@all": {
+"k": 2780,
+"km2": 23.9
+},
+"R2_promo@all": {
+"k": 3929,
+"km2": 71.9
+},
+"R2_promo_SB@all": {
+"k": 2766,
+"km2": 27.9
+},
+"R3_zone_all@all": {
+"k": 3900,
+"km2": 73.8
+},
+"R3_zone_all_SB@all": {
+"k": 2787,
+"km2": 28.4
+}
+},
+"43720": {
+"R0_current": {
+"k": 1199,
+"km2": 1.8
+},
+"R0_current_SB": {
+"k": 575,
+"km2": 1.0
+},
+"R1_protect": {
+"k": 1314,
+"km2": 2.1
+},
+"R1_protect_SB": {
+"k": 661,
+"km2": 1.1
+},
+"R2_promo": {
+"k": 2106,
+"km2": 4.8
+},
+"R2_promo_SB": {
+"k": 1219,
+"km2": 2.9
+},
+"R3_zone_all": {
+"k": 2194,
+"km2": 5.1
+},
+"R3_zone_all_SB": {
+"k": 1296,
+"km2": 3.1
+},
+"R0_current@all": {
+"k": 2268,
+"km2": 28.3
+},
+"R0_current_SB@all": {
+"k": 1442,
+"km2": 14.1
+},
+"R1_protect@all": {
+"k": 2295,
+"km2": 32.0
+},
+"R1_protect_SB@all": {
+"k": 1541,
+"km2": 16.0
+},
+"R2_promo@all": {
+"k": 1729,
+"km2": 68.8
+},
+"R2_promo_SB@all": {
+"k": 1380,
+"km2": 37.9
+},
+"R3_zone_all@all": {
+"k": 1676,
+"km2": 72.9
+},
+"R3_zone_all_SB@all": {
+"k": 1423,
+"km2": 39.9
+}
+},
+"43730": {
+"R0_current": {
+"k": 957,
+"km2": 1.2
+},
+"R0_current_SB": {
+"k": 319,
+"km2": 0.5
+},
+"R1_protect": {
+"k": 1112,
+"km2": 1.5
+},
+"R1_protect_SB": {
+"k": 407,
+"km2": 0.7
+},
+"R2_promo": {
+"k": 1432,
+"km2": 3.0
+},
+"R2_promo_SB": {
+"k": 684,
+"km2": 1.8
+},
+"R3_zone_all": {
+"k": 1551,
+"km2": 3.3
+},
+"R3_zone_all_SB": {
+"k": 746,
+"km2": 1.9
+},
+"R0_current@all": {
+"k": 1768,
+"km2": 19.3
+},
+"R0_current_SB@all": {
+"k": 879,
+"km2": 8.1
+},
+"R1_protect@all": {
+"k": 1832,
+"km2": 23.6
+},
+"R1_protect_SB@all": {
+"k": 989,
+"km2": 10.2
+},
+"R2_promo@all": {
+"k": 1571,
+"km2": 40.2
+},
+"R2_promo_SB@all": {
+"k": 935,
+"km2": 19.0
+},
+"R3_zone_all@all": {
+"k": 1552,
+"km2": 44.6
+},
+"R3_zone_all_SB@all": {
+"k": 966,
+"km2": 21.1
+}
+},
+"43740": {
+"R0_current": {
+"k": 1936,
+"km2": 2.5
+},
+"R0_current_SB": {
+"k": 1041,
+"km2": 1.4
+},
+"R1_protect": {
+"k": 2101,
+"km2": 2.8
+},
+"R1_protect_SB": {
+"k": 1138,
+"km2": 1.6
+},
+"R2_promo": {
+"k": 2540,
+"km2": 5.1
+},
+"R2_promo_SB": {
+"k": 1467,
+"km2": 3.3
+},
+"R3_zone_all": {
+"k": 2677,
+"km2": 5.4
+},
+"R3_zone_all_SB": {
+"k": 1548,
+"km2": 3.4
+},
+"R0_current@all": {
+"k": 3246,
+"km2": 35.8
+},
+"R0_current_SB@all": {
+"k": 2415,
+"km2": 19.9
+},
+"R1_protect@all": {
+"k": 3309,
+"km2": 40.2
+},
+"R1_protect_SB@all": {
+"k": 2534,
+"km2": 22.2
+},
+"R2_promo@all": {
+"k": 2939,
+"km2": 59.4
+},
+"R2_promo_SB@all": {
+"k": 2426,
+"km2": 33.2
+},
+"R3_zone_all@all": {
+"k": 2930,
+"km2": 63.8
+},
+"R3_zone_all_SB@all": {
+"k": 2498,
+"km2": 35.4
+}
+},
+"43745": {
+"R0_current": {
+"k": 438,
+"km2": 0.9
+},
+"R0_current_SB": {
+"k": 188,
+"km2": 0.4
+},
+"R1_protect": {
+"k": 460,
+"km2": 0.9
+},
+"R1_protect_SB": {
+"k": 202,
+"km2": 0.5
+},
+"R2_promo": {
+"k": 593,
+"km2": 1.6
+},
+"R2_promo_SB": {
+"k": 297,
+"km2": 0.9
+},
+"R3_zone_all": {
+"k": 604,
+"km2": 1.7
+},
+"R3_zone_all_SB": {
+"k": 304,
+"km2": 0.9
+},
+"R0_current@all": {
+"k": 580,
+"km2": 9.4
+},
+"R0_current_SB@all": {
+"k": 367,
+"km2": 3.3
+},
+"R1_protect@all": {
+"k": 591,
+"km2": 9.9
+},
+"R1_protect_SB@all": {
+"k": 386,
+"km2": 3.6
+},
+"R2_promo@all": {
+"k": 452,
+"km2": 23.2
+},
+"R2_promo_SB@all": {
+"k": 340,
+"km2": 9.0
+},
+"R3_zone_all@all": {
+"k": 447,
+"km2": 24.0
+},
+"R3_zone_all_SB@all": {
+"k": 344,
+"km2": 9.3
+}
+},
+"43750": {
+"R0_current": {
+"k": 1679,
+"km2": 2.4
+},
+"R0_current_SB": {
+"k": 674,
+"km2": 1.0
+},
+"R1_protect": {
+"k": 1833,
+"km2": 2.7
+},
+"R1_protect_SB": {
+"k": 753,
+"km2": 1.2
+},
+"R2_promo": {
+"k": 2409,
+"km2": 5.4
+},
+"R2_promo_SB": {
+"k": 1222,
+"km2": 3.1
+},
+"R3_zone_all": {
+"k": 2540,
+"km2": 5.7
+},
+"R3_zone_all_SB": {
+"k": 1289,
+"km2": 3.2
+},
+"R0_current@all": {
+"k": 2109,
+"km2": 23.2
+},
+"R0_current_SB@all": {
+"k": 1144,
+"km2": 9.1
+},
+"R1_protect@all": {
+"k": 2208,
+"km2": 26.2
+},
+"R1_protect_SB@all": {
+"k": 1246,
+"km2": 10.4
+},
+"R2_promo@all": {
+"k": 1783,
+"km2": 63.8
+},
+"R2_promo_SB@all": {
+"k": 1185,
+"km2": 33.9
+},
+"R3_zone_all@all": {
+"k": 1807,
+"km2": 66.8
+},
+"R3_zone_all_SB@all": {
+"k": 1247,
+"km2": 35.1
+}
+},
+"43760": {
+"R0_current": {
+"k": 1724,
+"km2": 3.2
+},
+"R0_current_SB": {
+"k": 773,
+"km2": 1.4
+},
+"R1_protect": {
+"k": 1922,
+"km2": 3.6
+},
+"R1_protect_SB": {
+"k": 902,
+"km2": 1.7
+},
+"R2_promo": {
+"k": 2667,
+"km2": 7.1
+},
+"R2_promo_SB": {
+"k": 1327,
+"km2": 3.7
+},
+"R3_zone_all": {
+"k": 2818,
+"km2": 7.5
+},
+"R3_zone_all_SB": {
+"k": 1440,
+"km2": 3.9
+},
+"R0_current@all": {
+"k": 3077,
+"km2": 40.5
+},
+"R0_current_SB@all": {
+"k": 1925,
+"km2": 16.8
+},
+"R1_protect@all": {
+"k": 3140,
+"km2": 45.8
+},
+"R1_protect_SB@all": {
+"k": 2062,
+"km2": 19.3
+},
+"R2_promo@all": {
+"k": 2489,
+"km2": 77.9
+},
+"R2_promo_SB@all": {
+"k": 1992,
+"km2": 35.0
+},
+"R3_zone_all@all": {
+"k": 2447,
+"km2": 85.1
+},
+"R3_zone_all_SB@all": {
+"k": 2066,
+"km2": 37.4
+}
+},
+"43770": {
+"R0_current": {
+"k": 2425,
+"km2": 5.5
+},
+"R0_current_SB": {
+"k": 1126,
+"km2": 3.0
+},
+"R1_protect": {
+"k": 2645,
+"km2": 6.0
+},
+"R1_protect_SB": {
+"k": 1256,
+"km2": 3.2
+},
+"R2_promo": {
+"k": 3138,
+"km2": 9.0
+},
+"R2_promo_SB": {
+"k": 1622,
+"km2": 5.0
+},
+"R3_zone_all": {
+"k": 3322,
+"km2": 9.5
+},
+"R3_zone_all_SB": {
+"k": 1732,
+"km2": 5.2
+},
+"R0_current@all": {
+"k": 3281,
+"km2": 52.7
+},
+"R0_current_SB@all": {
+"k": 2172,
+"km2": 22.1
+},
+"R1_protect@all": {
+"k": 3355,
+"km2": 59.3
+},
+"R1_protect_SB@all": {
+"k": 2334,
+"km2": 24.7
+},
+"R2_promo@all": {
+"k": 2667,
+"km2": 99.0
+},
+"R2_promo_SB@all": {
+"k": 2132,
+"km2": 42.2
+},
+"R3_zone_all@all": {
+"k": 2657,
+"km2": 110.6
+},
+"R3_zone_all_SB@all": {
+"k": 2238,
+"km2": 44.8
+}
+},
+"43800": {
+"R0_current": {
+"k": 1863,
+"km2": 3.1
+},
+"R0_current_SB": {
+"k": 897,
+"km2": 1.6
+},
+"R1_protect": {
+"k": 1866,
+"km2": 3.2
+},
+"R1_protect_SB": {
+"k": 912,
+"km2": 1.7
+},
+"R2_promo": {
+"k": 1874,
+"km2": 3.3
+},
+"R2_promo_SB": {
+"k": 902,
+"km2": 1.6
+},
+"R3_zone_all": {
+"k": 1874,
+"km2": 3.4
+},
+"R3_zone_all_SB": {
+"k": 916,
+"km2": 1.7
+},
+"R0_current@all": {
+"k": 2606,
+"km2": 28.9
+},
+"R0_current_SB@all": {
+"k": 1887,
+"km2": 14.0
+},
+"R1_protect@all": {
+"k": 2573,
+"km2": 29.8
+},
+"R1_protect_SB@all": {
+"k": 1882,
+"km2": 14.3
+},
+"R2_promo@all": {
+"k": 2542,
+"km2": 30.8
+},
+"R2_promo_SB@all": {
+"k": 1878,
+"km2": 14.5
+},
+"R3_zone_all@all": {
+"k": 2505,
+"km2": 31.7
+},
+"R3_zone_all_SB@all": {
+"k": 1868,
+"km2": 14.8
+}
+},
+"44131": {
+"R0_current": {
+"k": 1915,
+"km2": 3.9
+},
+"R0_current_SB": {
+"k": 647,
+"km2": 1.4
+},
+"R1_protect": {
+"k": 2006,
+"km2": 4.1
+},
+"R1_protect_SB": {
+"k": 707,
+"km2": 1.6
+},
+"R2_promo": {
+"k": 2291,
+"km2": 5.5
+},
+"R2_promo_SB": {
+"k": 932,
+"km2": 2.5
+},
+"R3_zone_all": {
+"k": 2359,
+"km2": 5.8
+},
+"R3_zone_all_SB": {
+"k": 983,
+"km2": 2.6
+},
+"R0_current@all": {
+"k": 3055,
+"km2": 32.7
+},
+"R0_current_SB@all": {
+"k": 1520,
+"km2": 11.6
+},
+"R1_protect@all": {
+"k": 3043,
+"km2": 36.3
+},
+"R1_protect_SB@all": {
+"k": 1587,
+"km2": 13.3
+},
+"R2_promo@all": {
+"k": 2609,
+"km2": 61.2
+},
+"R2_promo_SB@all": {
+"k": 1506,
+"km2": 27.4
+},
+"R3_zone_all@all": {
+"k": 2550,
+"km2": 64.7
+},
+"R3_zone_all_SB@all": {
+"k": 1536,
+"km2": 29.2
+}
+},
+"44133": {
+"R0_current": {
+"k": 1441,
+"km2": 3.3
+},
+"R0_current_SB": {
+"k": 1391,
+"km2": 3.1
+},
+"R1_protect": {
+"k": 1517,
+"km2": 3.6
+},
+"R1_protect_SB": {
+"k": 1467,
+"km2": 3.5
+},
+"R2_promo": {
+"k": 1810,
+"km2": 4.9
+},
+"R2_promo_SB": {
+"k": 1759,
+"km2": 4.7
+},
+"R3_zone_all": {
+"k": 1879,
+"km2": 5.3
+},
+"R3_zone_all_SB": {
+"k": 1828,
+"km2": 5.1
+},
+"R0_current@all": {
+"k": 1661,
+"km2": 21.7
+},
+"R0_current_SB@all": {
+"k": 1624,
+"km2": 21.0
+},
+"R1_protect@all": {
+"k": 1632,
+"km2": 26.5
+},
+"R1_protect_SB@all": {
+"k": 1597,
+"km2": 24.9
+},
+"R2_promo@all": {
+"k": 1401,
+"km2": 60.4
+},
+"R2_promo_SB@all": {
+"k": 1376,
+"km2": 49.3
+},
+"R3_zone_all@all": {
+"k": 1340,
+"km2": 66.8
+},
+"R3_zone_all_SB@all": {
+"k": 1318,
+"km2": 53.7
+}
+},
+"44150": {
+"R0_current": {
+"k": 2633,
+"km2": 6.3
+},
+"R0_current_SB": {
+"k": 1183,
+"km2": 3.1
+},
+"R1_protect": {
+"k": 2812,
+"km2": 6.7
+},
+"R1_protect_SB": {
+"k": 1286,
+"km2": 3.2
+},
+"R2_promo": {
+"k": 3408,
+"km2": 11.5
+},
+"R2_promo_SB": {
+"k": 1761,
+"km2": 6.0
+},
+"R3_zone_all": {
+"k": 3512,
+"km2": 12.0
+},
+"R3_zone_all_SB": {
+"k": 1830,
+"km2": 6.2
+},
+"R0_current@all": {
+"k": 5227,
+"km2": 56.7
+},
+"R0_current_SB@all": {
+"k": 2986,
+"km2": 21.3
+},
+"R1_protect@all": {
+"k": 5252,
+"km2": 62.3
+},
+"R1_protect_SB@all": {
+"k": 3099,
+"km2": 23.3
+},
+"R2_promo@all": {
+"k": 4400,
+"km2": 133.6
+},
+"R2_promo_SB@all": {
+"k": 3035,
+"km2": 47.0
+},
+"R3_zone_all@all": {
+"k": 4261,
+"km2": 149.6
+},
+"R3_zone_all_SB@all": {
+"k": 3061,
+"km2": 49.0
+}
+},
+"44180": {
+"R0_current": {
+"k": 1939,
+"km2": 3.6
+},
+"R0_current_SB": {
+"k": 438,
+"km2": 1.1
+},
+"R1_protect": {
+"k": 2170,
+"km2": 3.9
+},
+"R1_protect_SB": {
+"k": 505,
+"km2": 1.2
+},
+"R2_promo": {
+"k": 3032,
+"km2": 12.4
+},
+"R2_promo_SB": {
+"k": 1059,
+"km2": 7.3
+},
+"R3_zone_all": {
+"k": 3216,
+"km2": 12.7
+},
+"R3_zone_all_SB": {
+"k": 1112,
+"km2": 7.4
+},
+"R0_current@all": {
+"k": 4105,
+"km2": 34.3
+},
+"R0_current_SB@all": {
+"k": 1239,
+"km2": 7.8
+},
+"R1_protect@all": {
+"k": 4145,
+"km2": 40.9
+},
+"R1_protect_SB@all": {
+"k": 1363,
+"km2": 9.3
+},
+"R2_promo@all": {
+"k": 2907,
+"km2": 107.3
+},
+"R2_promo_SB@all": {
+"k": 1359,
+"km2": 45.7
+},
+"R3_zone_all@all": {
+"k": 2776,
+"km2": 114.6
+},
+"R3_zone_all_SB@all": {
+"k": 1422,
+"km2": 47.2
+}
+},
+"44200": {
+"R0_current": {
+"k": 2964,
+"km2": 8.6
+},
+"R0_current_SB": {
+"k": 1037,
+"km2": 3.4
+},
+"R1_protect": {
+"k": 3223,
+"km2": 9.2
+},
+"R1_protect_SB": {
+"k": 1142,
+"km2": 3.5
+},
+"R2_promo": {
+"k": 3693,
+"km2": 16.9
+},
+"R2_promo_SB": {
+"k": 1614,
+"km2": 9.0
+},
+"R3_zone_all": {
+"k": 3922,
+"km2": 17.5
+},
+"R3_zone_all_SB": {
+"k": 1700,
+"km2": 9.1
+},
+"R0_current@all": {
+"k": 3950,
+"km2": 53.1
+},
+"R0_current_SB@all": {
+"k": 1794,
+"km2": 15.4
+},
+"R1_protect@all": {
+"k": 4002,
+"km2": 60.9
+},
+"R1_protect_SB@all": {
+"k": 1929,
+"km2": 17.9
+},
+"R2_promo@all": {
+"k": 3027,
+"km2": 149.3
+},
+"R2_promo_SB@all": {
+"k": 1754,
+"km2": 65.5
+},
+"R3_zone_all@all": {
+"k": 2979,
+"km2": 158.5
+},
+"R3_zone_all_SB@all": {
+"k": 1821,
+"km2": 74.2
+}
+},
+"44210": {
+"R0_current": {
+"k": 2500,
+"km2": 6.8
+},
+"R0_current_SB": {
+"k": 572,
+"km2": 3.2
+},
+"R1_protect": {
+"k": 2711,
+"km2": 7.3
+},
+"R1_protect_SB": {
+"k": 625,
+"km2": 3.3
+},
+"R2_promo": {
+"k": 3787,
+"km2": 32.8
+},
+"R2_promo_SB": {
+"k": 1384,
+"km2": 26.6
+},
+"R3_zone_all": {
+"k": 3932,
+"km2": 33.2
+},
+"R3_zone_all_SB": {
+"k": 1425,
+"km2": 26.7
+},
+"R0_current@all": {
+"k": 4560,
+"km2": 64.8
+},
+"R0_current_SB@all": {
+"k": 1745,
+"km2": 14.0
+},
+"R1_protect@all": {
+"k": 4527,
+"km2": 73.5
+},
+"R1_protect_SB@all": {
+"k": 1855,
+"km2": 15.1
+},
+"R2_promo@all": {
+"k": 3372,
+"km2": 215.5
+},
+"R2_promo_SB@all": {
+"k": 1872,
+"km2": 114.8
+},
+"R3_zone_all@all": {
+"k": 3115,
+"km2": 228.5
+},
+"R3_zone_all_SB@all": {
+"k": 1915,
+"km2": 115.9
+}
+},
+"44230": {
+"R0_current": {
+"k": 2982,
+"km2": 4.1
+},
+"R0_current_SB": {
+"k": 784,
+"km2": 1.2
+},
+"R1_protect": {
+"k": 3267,
+"km2": 4.8
+},
+"R1_protect_SB": {
+"k": 923,
+"km2": 1.5
+},
+"R2_promo": {
+"k": 4583,
+"km2": 13.3
+},
+"R2_promo_SB": {
+"k": 1927,
+"km2": 6.8
+},
+"R3_zone_all": {
+"k": 4811,
+"km2": 14.0
+},
+"R3_zone_all_SB": {
+"k": 2041,
+"km2": 7.1
+},
+"R0_current@all": {
+"k": 3440,
+"km2": 57.9
+},
+"R0_current_SB@all": {
+"k": 1457,
+"km2": 15.5
+},
+"R1_protect@all": {
+"k": 3370,
+"km2": 66.6
+},
+"R1_protect_SB@all": {
+"k": 1578,
+"km2": 18.6
+},
+"R2_promo@all": {
+"k": 2420,
+"km2": 199.4
+},
+"R2_promo_SB@all": {
+"k": 1526,
+"km2": 83.3
+},
+"R3_zone_all@all": {
+"k": 2264,
+"km2": 209.7
+},
+"R3_zone_all_SB@all": {
+"k": 1562,
+"km2": 88.8
+}
+},
+"44250": {
+"R0_current": {
+"k": 291,
+"km2": 1.0
+},
+"R0_current_SB": {
+"k": 140,
+"km2": 0.5
+},
+"R1_protect": {
+"k": 291,
+"km2": 1.0
+},
+"R1_protect_SB": {
+"k": 140,
+"km2": 0.5
+},
+"R2_promo": {
+"k": 291,
+"km2": 1.0
+},
+"R2_promo_SB": {
+"k": 140,
+"km2": 0.5
+},
+"R3_zone_all": {
+"k": 291,
+"km2": 1.0
+},
+"R3_zone_all_SB": {
+"k": 140,
+"km2": 0.5
+},
+"R0_current@all": {
+"k": 326,
+"km2": 4.0
+},
+"R0_current_SB@all": {
+"k": 180,
+"km2": 1.3
+},
+"R1_protect@all": {
+"k": 326,
+"km2": 4.0
+},
+"R1_protect_SB@all": {
+"k": 180,
+"km2": 1.3
+},
+"R2_promo@all": {
+"k": 326,
+"km2": 4.1
+},
+"R2_promo_SB@all": {
+"k": 180,
+"km2": 1.3
+},
+"R3_zone_all@all": {
+"k": 326,
+"km2": 4.1
+},
+"R3_zone_all_SB@all": {
+"k": 180,
+"km2": 1.3
+}
+},
+"44270": {
+"R0_current": {
+"k": 2703,
+"km2": 3.8
+},
+"R0_current_SB": {
+"k": 548,
+"km2": 1.0
+},
+"R1_protect": {
+"k": 2793,
+"km2": 4.1
+},
+"R1_protect_SB": {
+"k": 592,
+"km2": 1.1
+},
+"R2_promo": {
+"k": 4106,
+"km2": 35.1
+},
+"R2_promo_SB": {
+"k": 1497,
+"km2": 29.3
+},
+"R3_zone_all": {
+"k": 4173,
+"km2": 35.3
+},
+"R3_zone_all_SB": {
+"k": 1533,
+"km2": 29.3
+},
+"R0_current@all": {
+"k": 5954,
+"km2": 71.4
+},
+"R0_current_SB@all": {
+"k": 1965,
+"km2": 9.6
+},
+"R1_protect@all": {
+"k": 5887,
+"km2": 76.2
+},
+"R1_protect_SB@all": {
+"k": 2059,
+"km2": 10.5
+},
+"R2_promo@all": {
+"k": 4265,
+"km2": 243.6
+},
+"R2_promo_SB@all": {
+"k": 2056,
+"km2": 119.0
+},
+"R3_zone_all@all": {
+"k": 4073,
+"km2": 266.6
+},
+"R3_zone_all_SB@all": {
+"k": 2085,
+"km2": 120.0
+}
+},
+"44710": {
+"R0_current": {
+"k": 1693,
+"km2": 2.4
+},
+"R0_current_SB": {
+"k": 789,
+"km2": 1.3
+},
+"R1_protect": {
+"k": 1811,
+"km2": 2.6
+},
+"R1_protect_SB": {
+"k": 862,
+"km2": 1.4
+},
+"R2_promo": {
+"k": 2213,
+"km2": 3.8
+},
+"R2_promo_SB": {
+"k": 1103,
+"km2": 2.0
+},
+"R3_zone_all": {
+"k": 2313,
+"km2": 4.0
+},
+"R3_zone_all_SB": {
+"k": 1170,
+"km2": 2.1
+},
+"R0_current@all": {
+"k": 3059,
+"km2": 43.7
+},
+"R0_current_SB@all": {
+"k": 2347,
+"km2": 21.0
+},
+"R1_protect@all": {
+"k": 3051,
+"km2": 47.3
+},
+"R1_protect_SB@all": {
+"k": 2394,
+"km2": 22.9
+},
+"R2_promo@all": {
+"k": 2617,
+"km2": 67.8
+},
+"R2_promo_SB@all": {
+"k": 2264,
+"km2": 33.5
+},
+"R3_zone_all@all": {
+"k": 2559,
+"km2": 71.4
+},
+"R3_zone_all_SB@all": {
+"k": 2269,
+"km2": 35.4
+}
+},
+"44760": {
+"R0_current": {
+"k": 1814,
+"km2": 3.4
+},
+"R0_current_SB": {
+"k": 647,
+"km2": 1.5
+},
+"R1_protect": {
+"k": 2051,
+"km2": 3.9
+},
+"R1_protect_SB": {
+"k": 792,
+"km2": 1.7
+},
+"R2_promo": {
+"k": 3068,
+"km2": 11.1
+},
+"R2_promo_SB": {
+"k": 1579,
+"km2": 6.4
+},
+"R3_zone_all": {
+"k": 3233,
+"km2": 11.7
+},
+"R3_zone_all_SB": {
+"k": 1697,
+"km2": 6.7
+},
+"R0_current@all": {
+"k": 4245,
+"km2": 41.7
+},
+"R0_current_SB@all": {
+"k": 1725,
+"km2": 13.3
+},
+"R1_protect@all": {
+"k": 4216,
+"km2": 49.7
+},
+"R1_protect_SB@all": {
+"k": 1940,
+"km2": 16.5
+},
+"R2_promo@all": {
+"k": 2872,
+"km2": 143.5
+},
+"R2_promo_SB@all": {
+"k": 1792,
+"km2": 73.7
+},
+"R3_zone_all@all": {
+"k": 2710,
+"km2": 152.6
+},
+"R3_zone_all_SB@all": {
+"k": 1914,
+"km2": 77.0
+}
+},
+"44770": {
+"R0_current": {
+"k": 1236,
+"km2": 1.9
+},
+"R0_current_SB": {
+"k": 281,
+"km2": 0.3
+},
+"R1_protect": {
+"k": 1448,
+"km2": 2.4
+},
+"R1_protect_SB": {
+"k": 377,
+"km2": 0.5
+},
+"R2_promo": {
+"k": 2054,
+"km2": 9.7
+},
+"R2_promo_SB": {
+"k": 787,
+"km2": 6.6
+},
+"R3_zone_all": {
+"k": 2208,
+"km2": 10.2
+},
+"R3_zone_all_SB": {
+"k": 864,
+"km2": 6.7
+},
+"R0_current@all": {
+"k": 3108,
+"km2": 28.7
+},
+"R0_current_SB@all": {
+"k": 869,
+"km2": 5.1
+},
+"R1_protect@all": {
+"k": 2997,
+"km2": 36.0
+},
+"R1_protect_SB@all": {
+"k": 976,
+"km2": 7.1
+},
+"R2_promo@all": {
+"k": 2172,
+"km2": 109.0
+},
+"R2_promo_SB@all": {
+"k": 989,
+"km2": 49.1
+},
+"R3_zone_all@all": {
+"k": 1924,
+"km2": 116.6
+},
+"R3_zone_all_SB@all": {
+"k": 1015,
+"km2": 51.0
+}
+},
+"44790": {
+"R0_current": {
+"k": 1492,
+"km2": 2.5
+},
+"R0_current_SB": {
+"k": 581,
+"km2": 1.0
+},
+"R1_protect": {
+"k": 1661,
+"km2": 2.9
+},
+"R1_protect_SB": {
+"k": 671,
+"km2": 1.2
+},
+"R2_promo": {
+"k": 2046,
+"km2": 5.8
+},
+"R2_promo_SB": {
+"k": 962,
+"km2": 2.7
+},
+"R3_zone_all": {
+"k": 2170,
+"km2": 6.1
+},
+"R3_zone_all_SB": {
+"k": 1039,
+"km2": 2.9
+},
+"R0_current@all": {
+"k": 3662,
+"km2": 37.0
+},
+"R0_current_SB@all": {
+"k": 1978,
+"km2": 12.7
+},
+"R1_protect@all": {
+"k": 3612,
+"km2": 42.6
+},
+"R1_protect_SB@all": {
+"k": 2092,
+"km2": 14.5
+},
+"R2_promo@all": {
+"k": 2718,
+"km2": 78.6
+},
+"R2_promo_SB@all": {
+"k": 1954,
+"km2": 32.0
+},
+"R3_zone_all@all": {
+"k": 2598,
+"km2": 87.1
+},
+"R3_zone_all_SB@all": {
+"k": 2020,
+"km2": 33.7
+}
+},
+"44800": {
+"R0_current": {
+"k": 1916,
+"km2": 3.1
+},
+"R0_current_SB": {
+"k": 526,
+"km2": 0.8
+},
+"R1_protect": {
+"k": 2113,
+"km2": 3.6
+},
+"R1_protect_SB": {
+"k": 606,
+"km2": 1.0
+},
+"R2_promo": {
+"k": 2839,
+"km2": 10.5
+},
+"R2_promo_SB": {
+"k": 1053,
+"km2": 5.9
+},
+"R3_zone_all": {
+"k": 3011,
+"km2": 11.0
+},
+"R3_zone_all_SB": {
+"k": 1125,
+"km2": 6.1
+},
+"R0_current@all": {
+"k": 4274,
+"km2": 52.6
+},
+"R0_current_SB@all": {
+"k": 1591,
+"km2": 10.7
+},
+"R1_protect@all": {
+"k": 4158,
+"km2": 61.8
+},
+"R1_protect_SB@all": {
+"k": 1711,
+"km2": 12.7
+},
+"R2_promo@all": {
+"k": 2940,
+"km2": 124.5
+},
+"R2_promo_SB@all": {
+"k": 1659,
+"km2": 42.9
+},
+"R3_zone_all@all": {
+"k": 2694,
+"km2": 142.4
+},
+"R3_zone_all_SB@all": {
+"k": 1714,
+"km2": 44.9
+}
+},
+"44810": {
+"R0_current": {
+"k": 2060,
+"km2": 3.1
+},
+"R0_current_SB": {
+"k": 429,
+"km2": 0.9
+},
+"R1_protect": {
+"k": 2298,
+"km2": 3.8
+},
+"R1_protect_SB": {
+"k": 523,
+"km2": 1.1
+},
+"R2_promo": {
+"k": 3476,
+"km2": 11.2
+},
+"R2_promo_SB": {
+"k": 1314,
+"km2": 5.4
+},
+"R3_zone_all": {
+"k": 3680,
+"km2": 11.9
+},
+"R3_zone_all_SB": {
+"k": 1395,
+"km2": 5.7
+},
+"R0_current@all": {
+"k": 4403,
+"km2": 47.5
+},
+"R0_current_SB@all": {
+"k": 1516,
+"km2": 10.3
+},
+"R1_protect@all": {
+"k": 4212,
+"km2": 57.1
+},
+"R1_protect_SB@all": {
+"k": 1615,
+"km2": 12.7
+},
+"R2_promo@all": {
+"k": 3323,
+"km2": 167.5
+},
+"R2_promo_SB@all": {
+"k": 1786,
+"km2": 63.5
+},
+"R3_zone_all@all": {
+"k": 2999,
+"km2": 180.0
+},
+"R3_zone_all_SB@all": {
+"k": 1822,
+"km2": 65.9
+}
+},
+"44825": {
+"R0_current": {
+"k": 2443,
+"km2": 4.9
+},
+"R0_current_SB": {
+"k": 538,
+"km2": 1.5
+},
+"R1_protect": {
+"k": 2591,
+"km2": 5.3
+},
+"R1_protect_SB": {
+"k": 582,
+"km2": 1.6
+},
+"R2_promo": {
+"k": 3055,
+"km2": 15.2
+},
+"R2_promo_SB": {
+"k": 924,
+"km2": 10.3
+},
+"R3_zone_all": {
+"k": 3180,
+"km2": 15.6
+},
+"R3_zone_all_SB": {
+"k": 954,
+"km2": 10.5
+},
+"R0_current@all": {
+"k": 3762,
+"km2": 50.3
+},
+"R0_current_SB@all": {
+"k": 1584,
+"km2": 8.2
+},
+"R1_protect@all": {
+"k": 3728,
+"km2": 56.0
+},
+"R1_protect_SB@all": {
+"k": 1688,
+"km2": 9.3
+},
+"R2_promo@all": {
+"k": 2804,
+"km2": 111.1
+},
+"R2_promo_SB@all": {
+"k": 1600,
+"km2": 44.8
+},
+"R3_zone_all@all": {
+"k": 2681,
+"km2": 129.3
+},
+"R3_zone_all_SB@all": {
+"k": 1640,
+"km2": 45.9
+}
+},
+"46110": {
+"R0_current": {
+"k": 529,
+"km2": 0.6
+},
+"R0_current_SB": {
+"k": 102,
+"km2": 0.2
+},
+"R1_protect": {
+"k": 529,
+"km2": 0.6
+},
+"R1_protect_SB": {
+"k": 102,
+"km2": 0.2
+},
+"R2_promo": {
+"k": 530,
+"km2": 0.6
+},
+"R2_promo_SB": {
+"k": 102,
+"km2": 0.2
+},
+"R3_zone_all": {
+"k": 530,
+"km2": 0.6
+},
+"R3_zone_all_SB": {
+"k": 102,
+"km2": 0.2
+},
+"R0_current@all": {
+"k": 454,
+"km2": 4.4
+},
+"R0_current_SB@all": {
+"k": 106,
+"km2": 1.5
+},
+"R1_protect@all": {
+"k": 454,
+"km2": 4.4
+},
+"R1_protect_SB@all": {
+"k": 106,
+"km2": 1.5
+},
+"R2_promo@all": {
+"k": 453,
+"km2": 5.6
+},
+"R2_promo_SB@all": {
+"k": 106,
+"km2": 1.6
+},
+"R3_zone_all@all": {
+"k": 453,
+"km2": 5.7
+},
+"R3_zone_all_SB@all": {
+"k": 106,
+"km2": 1.6
+}
+},
+"46130": {
+"R0_current": {
+"k": 1808,
+"km2": 3.4
+},
+"R0_current_SB": {
+"k": 636,
+"km2": 1.5
+},
+"R1_protect": {
+"k": 1834,
+"km2": 3.4
+},
+"R1_protect_SB": {
+"k": 654,
+"km2": 1.5
+},
+"R2_promo": {
+"k": 1933,
+"km2": 4.1
+},
+"R2_promo_SB": {
+"k": 720,
+"km2": 2.0
+},
+"R3_zone_all": {
+"k": 1957,
+"km2": 4.1
+},
+"R3_zone_all_SB": {
+"k": 738,
+"km2": 2.0
+},
+"R0_current@all": {
+"k": 2540,
+"km2": 41.3
+},
+"R0_current_SB@all": {
+"k": 1436,
+"km2": 14.5
+},
+"R1_protect@all": {
+"k": 2522,
+"km2": 43.1
+},
+"R1_protect_SB@all": {
+"k": 1449,
+"km2": 15.3
+},
+"R2_promo@all": {
+"k": 2433,
+"km2": 50.3
+},
+"R2_promo_SB@all": {
+"k": 1426,
+"km2": 19.1
+},
+"R3_zone_all@all": {
+"k": 2401,
+"km2": 52.0
+},
+"R3_zone_all_SB@all": {
+"k": 1433,
+"km2": 19.9
+}
+},
+"46150": {
+"R0_current": {
+"k": 3297,
+"km2": 4.6
+},
+"R0_current_SB": {
+"k": 1260,
+"km2": 2.2
+},
+"R1_protect": {
+"k": 3409,
+"km2": 4.8
+},
+"R1_protect_SB": {
+"k": 1324,
+"km2": 2.3
+},
+"R2_promo": {
+"k": 3764,
+"km2": 6.1
+},
+"R2_promo_SB": {
+"k": 1589,
+"km2": 3.1
+},
+"R3_zone_all": {
+"k": 3864,
+"km2": 6.2
+},
+"R3_zone_all_SB": {
+"k": 1645,
+"km2": 3.1
+},
+"R0_current@all": {
+"k": 4376,
+"km2": 62.3
+},
+"R0_current_SB@all": {
+"k": 2515,
+"km2": 25.8
+},
+"R1_protect@all": {
+"k": 4440,
+"km2": 64.8
+},
+"R1_protect_SB@all": {
+"k": 2608,
+"km2": 27.1
+},
+"R2_promo@all": {
+"k": 3992,
+"km2": 94.0
+},
+"R2_promo_SB@all": {
+"k": 2532,
+"km2": 44.7
+},
+"R3_zone_all@all": {
+"k": 4009,
+"km2": 97.6
+},
+"R3_zone_all_SB@all": {
+"k": 2592,
+"km2": 46.0
+}
+},
+"46170": {
+"R0_current": {
+"k": 1870,
+"km2": 3.0
+},
+"R0_current_SB": {
+"k": 654,
+"km2": 1.4
+},
+"R1_protect": {
+"k": 2226,
+"km2": 4.0
+},
+"R1_protect_SB": {
+"k": 879,
+"km2": 2.1
+},
+"R2_promo": {
+"k": 2982,
+"km2": 7.1
+},
+"R2_promo_SB": {
+"k": 1453,
+"km2": 4.3
+},
+"R3_zone_all": {
+"k": 3305,
+"km2": 8.1
+},
+"R3_zone_all_SB": {
+"k": 1653,
+"km2": 5.0
+},
+"R0_current@all": {
+"k": 2933,
+"km2": 46.6
+},
+"R0_current_SB@all": {
+"k": 1309,
+"km2": 16.4
+},
+"R1_protect@all": {
+"k": 3091,
+"km2": 60.2
+},
+"R1_protect_SB@all": {
+"k": 1603,
+"km2": 23.4
+},
+"R2_promo@all": {
+"k": 2271,
+"km2": 157.8
+},
+"R2_promo_SB@all": {
+"k": 1346,
+"km2": 80.2
+},
+"R3_zone_all@all": {
+"k": 2307,
+"km2": 180.6
+},
+"R3_zone_all_SB@all": {
+"k": 1543,
+"km2": 88.0
+}
+},
+"46230": {
+"R0_current": {
+"k": 1244,
+"km2": 1.7
+},
+"R0_current_SB": {
+"k": 460,
+"km2": 0.7
+},
+"R1_protect": {
+"k": 1289,
+"km2": 1.7
+},
+"R1_protect_SB": {
+"k": 482,
+"km2": 0.7
+},
+"R2_promo": {
+"k": 1429,
+"km2": 2.5
+},
+"R2_promo_SB": {
+"k": 592,
+"km2": 1.1
+},
+"R3_zone_all": {
+"k": 1455,
+"km2": 2.6
+},
+"R3_zone_all_SB": {
+"k": 609,
+"km2": 1.1
+},
+"R0_current@all": {
+"k": 1744,
+"km2": 18.7
+},
+"R0_current_SB@all": {
+"k": 1018,
+"km2": 6.9
+},
+"R1_protect@all": {
+"k": 1749,
+"km2": 19.8
+},
+"R1_protect_SB@all": {
+"k": 1035,
+"km2": 7.4
+},
+"R2_promo@all": {
+"k": 1664,
+"km2": 31.3
+},
+"R2_promo_SB@all": {
+"k": 1054,
+"km2": 13.5
+},
+"R3_zone_all@all": {
+"k": 1646,
+"km2": 32.4
+},
+"R3_zone_all_SB@all": {
+"k": 1059,
+"km2": 14.0
+}
+},
+"46710": {
+"R0_current": {
+"k": 1016,
+"km2": 1.2
+},
+"R0_current_SB": {
+"k": 306,
+"km2": 0.6
+},
+"R1_protect": {
+"k": 1172,
+"km2": 1.6
+},
+"R1_protect_SB": {
+"k": 384,
+"km2": 0.8
+},
+"R2_promo": {
+"k": 1397,
+"km2": 2.1
+},
+"R2_promo_SB": {
+"k": 523,
+"km2": 1.0
+},
+"R3_zone_all": {
+"k": 1534,
+"km2": 2.4
+},
+"R3_zone_all_SB": {
+"k": 593,
+"km2": 1.2
+},
+"R0_current@all": {
+"k": 1961,
+"km2": 18.3
+},
+"R0_current_SB@all": {
+"k": 814,
+"km2": 7.1
+},
+"R1_protect@all": {
+"k": 2016,
+"km2": 23.3
+},
+"R1_protect_SB@all": {
+"k": 926,
+"km2": 9.4
+},
+"R2_promo@all": {
+"k": 1653,
+"km2": 48.4
+},
+"R2_promo_SB@all": {
+"k": 838,
+"km2": 21.3
+},
+"R3_zone_all@all": {
+"k": 1655,
+"km2": 53.8
+},
+"R3_zone_all_SB@all": {
+"k": 910,
+"km2": 23.6
+}
+},
+"46720": {
+"R0_current": {
+"k": 1021,
+"km2": 1.6
+},
+"R0_current_SB": {
+"k": 543,
+"km2": 0.8
+},
+"R1_protect": {
+"k": 1202,
+"km2": 1.9
+},
+"R1_protect_SB": {
+"k": 661,
+"km2": 1.1
+},
+"R2_promo": {
+"k": 1542,
+"km2": 3.3
+},
+"R2_promo_SB": {
+"k": 935,
+"km2": 2.0
+},
+"R3_zone_all": {
+"k": 1701,
+"km2": 3.6
+},
+"R3_zone_all_SB": {
+"k": 1040,
+"km2": 2.2
+},
+"R0_current@all": {
+"k": 1850,
+"km2": 27.0
+},
+"R0_current_SB@all": {
+"k": 1406,
+"km2": 14.2
+},
+"R1_protect@all": {
+"k": 1920,
+"km2": 33.4
+},
+"R1_protect_SB@all": {
+"k": 1534,
+"km2": 18.1
+},
+"R2_promo@all": {
+"k": 1470,
+"km2": 64.2
+},
+"R2_promo_SB@all": {
+"k": 1353,
+"km2": 35.8
+},
+"R3_zone_all@all": {
+"k": 1459,
+"km2": 71.8
+},
+"R3_zone_all_SB@all": {
+"k": 1419,
+"km2": 40.1
+}
+},
+"46730": {
+"R0_current": {
+"k": 800,
+"km2": 1.0
+},
+"R0_current_SB": {
+"k": 288,
+"km2": 0.4
+},
+"R1_protect": {
+"k": 872,
+"km2": 1.1
+},
+"R1_protect_SB": {
+"k": 322,
+"km2": 0.4
+},
+"R2_promo": {
+"k": 1124,
+"km2": 2.3
+},
+"R2_promo_SB": {
+"k": 503,
+"km2": 1.1
+},
+"R3_zone_all": {
+"k": 1178,
+"km2": 2.4
+},
+"R3_zone_all_SB": {
+"k": 528,
+"km2": 1.2
+},
+"R0_current@all": {
+"k": 1453,
+"km2": 15.7
+},
+"R0_current_SB@all": {
+"k": 827,
+"km2": 5.9
+},
+"R1_protect@all": {
+"k": 1504,
+"km2": 17.6
+},
+"R1_protect_SB@all": {
+"k": 892,
+"km2": 6.6
+},
+"R2_promo@all": {
+"k": 1250,
+"km2": 36.2
+},
+"R2_promo_SB@all": {
+"k": 831,
+"km2": 17.2
+},
+"R3_zone_all@all": {
+"k": 1244,
+"km2": 38.1
+},
+"R3_zone_all_SB@all": {
+"k": 853,
+"km2": 18.0
+}
+},
+"46770": {
+"R0_current": {
+"k": 2419,
+"km2": 4.9
+},
+"R0_current_SB": {
+"k": 1010,
+"km2": 2.6
+},
+"R1_protect": {
+"k": 2689,
+"km2": 5.5
+},
+"R1_protect_SB": {
+"k": 1187,
+"km2": 2.9
+},
+"R2_promo": {
+"k": 3454,
+"km2": 28.5
+},
+"R2_promo_SB": {
+"k": 1785,
+"km2": 25.0
+},
+"R3_zone_all": {
+"k": 3670,
+"km2": 29.1
+},
+"R3_zone_all_SB": {
+"k": 1936,
+"km2": 25.3
+},
+"R0_current@all": {
+"k": 4368,
+"km2": 63.2
+},
+"R0_current_SB@all": {
+"k": 2720,
+"km2": 26.2
+},
+"R1_protect@all": {
+"k": 4410,
+"km2": 72.0
+},
+"R1_protect_SB@all": {
+"k": 2947,
+"km2": 31.2
+},
+"R2_promo@all": {
+"k": 3445,
+"km2": 166.4
+},
+"R2_promo_SB@all": {
+"k": 2562,
+"km2": 101.9
+},
+"R3_zone_all@all": {
+"k": 3394,
+"km2": 176.0
+},
+"R3_zone_all_SB@all": {
+"k": 2684,
+"km2": 106.9
+}
+},
+"46780": {
+"R0_current": {
+"k": 2324,
+"km2": 3.8
+},
+"R0_current_SB": {
+"k": 1009,
+"km2": 1.9
+},
+"R1_protect": {
+"k": 2691,
+"km2": 4.5
+},
+"R1_protect_SB": {
+"k": 1193,
+"km2": 2.4
+},
+"R2_promo": {
+"k": 3389,
+"km2": 8.2
+},
+"R2_promo_SB": {
+"k": 1724,
+"km2": 4.6
+},
+"R3_zone_all": {
+"k": 3696,
+"km2": 8.9
+},
+"R3_zone_all_SB": {
+"k": 1874,
+"km2": 5.1
+},
+"R0_current@all": {
+"k": 3026,
+"km2": 39.4
+},
+"R0_current_SB@all": {
+"k": 1759,
+"km2": 16.8
+},
+"R1_protect@all": {
+"k": 3116,
+"km2": 47.2
+},
+"R1_protect_SB@all": {
+"k": 1945,
+"km2": 20.8
+},
+"R2_promo@all": {
+"k": 2358,
+"km2": 115.9
+},
+"R2_promo_SB@all": {
+"k": 1845,
+"km2": 61.8
+},
+"R3_zone_all@all": {
+"k": 2305,
+"km2": 124.7
+},
+"R3_zone_all_SB@all": {
+"k": 1927,
+"km2": 66.0
+}
+},
+"46790": {
+"R0_current": {
+"k": 1865,
+"km2": 3.8
+},
+"R0_current_SB": {
+"k": 858,
+"km2": 2.1
+},
+"R1_protect": {
+"k": 2154,
+"km2": 4.3
+},
+"R1_protect_SB": {
+"k": 1060,
+"km2": 2.4
+},
+"R2_promo": {
+"k": 2505,
+"km2": 5.8
+},
+"R2_promo_SB": {
+"k": 1302,
+"km2": 3.4
+},
+"R3_zone_all": {
+"k": 2775,
+"km2": 6.4
+},
+"R3_zone_all_SB": {
+"k": 1497,
+"km2": 3.7
+},
+"R0_current@all": {
+"k": 3145,
+"km2": 30.8
+},
+"R0_current_SB@all": {
+"k": 2197,
+"km2": 14.8
+},
+"R1_protect@all": {
+"k": 3277,
+"km2": 37.8
+},
+"R1_protect_SB@all": {
+"k": 2407,
+"km2": 19.0
+},
+"R2_promo@all": {
+"k": 2894,
+"km2": 64.3
+},
+"R2_promo_SB@all": {
+"k": 2266,
+"km2": 35.8
+},
+"R3_zone_all@all": {
+"k": 2945,
+"km2": 71.3
+},
+"R3_zone_all_SB@all": {
+"k": 2420,
+"km2": 40.0
+}
+},
+"46800": {
+"R0_current": {
+"k": 1019,
+"km2": 1.5
+},
+"R0_current_SB": {
+"k": 420,
+"km2": 0.7
+},
+"R1_protect": {
+"k": 1209,
+"km2": 1.9
+},
+"R1_protect_SB": {
+"k": 547,
+"km2": 0.9
+},
+"R2_promo": {
+"k": 1968,
+"km2": 7.0
+},
+"R2_promo_SB": {
+"k": 1100,
+"km2": 5.0
+},
+"R3_zone_all": {
+"k": 2132,
+"km2": 7.3
+},
+"R3_zone_all_SB": {
+"k": 1212,
+"km2": 5.2
+},
+"R0_current@all": {
+"k": 2170,
+"km2": 22.4
+},
+"R0_current_SB@all": {
+"k": 1246,
+"km2": 9.6
+},
+"R1_protect@all": {
+"k": 2327,
+"km2": 27.8
+},
+"R1_protect_SB@all": {
+"k": 1415,
+"km2": 12.5
+},
+"R2_promo@all": {
+"k": 1854,
+"km2": 89.9
+},
+"R2_promo_SB@all": {
+"k": 1398,
+"km2": 54.9
+},
+"R3_zone_all@all": {
+"k": 1860,
+"km2": 96.1
+},
+"R3_zone_all_SB@all": {
+"k": 1482,
+"km2": 57.9
+}
+},
+"46810": {
+"R0_current": {
+"k": 1010,
+"km2": 1.9
+},
+"R0_current_SB": {
+"k": 381,
+"km2": 0.9
+},
+"R1_protect": {
+"k": 1205,
+"km2": 2.2
+},
+"R1_protect_SB": {
+"k": 495,
+"km2": 1.1
+},
+"R2_promo": {
+"k": 2034,
+"km2": 6.1
+},
+"R2_promo_SB": {
+"k": 1061,
+"km2": 3.6
+},
+"R3_zone_all": {
+"k": 2196,
+"km2": 6.4
+},
+"R3_zone_all_SB": {
+"k": 1165,
+"km2": 3.8
+},
+"R0_current@all": {
+"k": 1981,
+"km2": 20.3
+},
+"R0_current_SB@all": {
+"k": 1070,
+"km2": 8.1
+},
+"R1_protect@all": {
+"k": 2217,
+"km2": 25.8
+},
+"R1_protect_SB@all": {
+"k": 1285,
+"km2": 11.0
+},
+"R2_promo@all": {
+"k": 1402,
+"km2": 94.6
+},
+"R2_promo_SB@all": {
+"k": 1133,
+"km2": 53.4
+},
+"R3_zone_all@all": {
+"k": 1403,
+"km2": 100.1
+},
+"R3_zone_all_SB@all": {
+"k": 1223,
+"km2": 56.3
+}
+},
+"46820": {
+"R0_current": {
+"k": 1910,
+"km2": 4.0
+},
+"R0_current_SB": {
+"k": 979,
+"km2": 2.7
+},
+"R1_protect": {
+"k": 2484,
+"km2": 5.0
+},
+"R1_protect_SB": {
+"k": 1359,
+"km2": 3.3
+},
+"R2_promo": {
+"k": 4145,
+"km2": 63.4
+},
+"R2_promo_SB": {
+"k": 2628,
+"km2": 58.8
+},
+"R3_zone_all": {
+"k": 4655,
+"km2": 64.4
+},
+"R3_zone_all_SB": {
+"k": 2976,
+"km2": 59.4
+},
+"R0_current@all": {
+"k": 3435,
+"km2": 50.5
+},
+"R0_current_SB@all": {
+"k": 2047,
+"km2": 23.6
+},
+"R1_protect@all": {
+"k": 3911,
+"km2": 70.2
+},
+"R1_protect_SB@all": {
+"k": 2634,
+"km2": 34.5
+},
+"R2_promo@all": {
+"k": 2874,
+"km2": 253.0
+},
+"R2_promo_SB@all": {
+"k": 2442,
+"km2": 173.3
+},
+"R3_zone_all@all": {
+"k": 2995,
+"km2": 273.0
+},
+"R3_zone_all_SB@all": {
+"k": 2762,
+"km2": 184.2
+}
+},
+"46830": {
+"R0_current": {
+"k": 2020,
+"km2": 6.3
+},
+"R0_current_SB": {
+"k": 915,
+"km2": 4.2
+},
+"R1_protect": {
+"k": 2216,
+"km2": 6.9
+},
+"R1_protect_SB": {
+"k": 1044,
+"km2": 4.6
+},
+"R2_promo": {
+"k": 3368,
+"km2": 17.5
+},
+"R2_promo_SB": {
+"k": 1939,
+"km2": 13.7
+},
+"R3_zone_all": {
+"k": 3525,
+"km2": 18.0
+},
+"R3_zone_all_SB": {
+"k": 2050,
+"km2": 14.1
+},
+"R0_current@all": {
+"k": 2450,
+"km2": 52.1
+},
+"R0_current_SB@all": {
+"k": 1590,
+"km2": 26.6
+},
+"R1_protect@all": {
+"k": 2525,
+"km2": 60.3
+},
+"R1_protect_SB@all": {
+"k": 1743,
+"km2": 31.6
+},
+"R2_promo@all": {
+"k": 1720,
+"km2": 183.6
+},
+"R2_promo_SB@all": {
+"k": 1466,
+"km2": 124.6
+},
+"R3_zone_all@all": {
+"k": 1622,
+"km2": 193.0
+},
+"R3_zone_all_SB@all": {
+"k": 1464,
+"km2": 130.3
+}
+},
+"46840": {
+"R0_current": {
+"k": 2369,
+"km2": 3.0
+},
+"R0_current_SB": {
+"k": 912,
+"km2": 1.4
+},
+"R1_protect": {
+"k": 2704,
+"km2": 3.5
+},
+"R1_protect_SB": {
+"k": 1104,
+"km2": 1.6
+},
+"R2_promo": {
+"k": 4130,
+"km2": 11.3
+},
+"R2_promo_SB": {
+"k": 2153,
+"km2": 7.3
+},
+"R3_zone_all": {
+"k": 4390,
+"km2": 11.8
+},
+"R3_zone_all_SB": {
+"k": 2307,
+"km2": 7.6
+},
+"R0_current@all": {
+"k": 2618,
+"km2": 39.5
+},
+"R0_current_SB@all": {
+"k": 1408,
+"km2": 15.2
+},
+"R1_protect@all": {
+"k": 2717,
+"km2": 47.3
+},
+"R1_protect_SB@all": {
+"k": 1603,
+"km2": 18.7
+},
+"R2_promo@all": {
+"k": 2047,
+"km2": 118.6
+},
+"R2_promo_SB@all": {
+"k": 1531,
+"km2": 64.2
+},
+"R3_zone_all@all": {
+"k": 1993,
+"km2": 126.6
+},
+"R3_zone_all_SB@all": {
+"k": 1624,
+"km2": 68.0
+}
+},
+"46860": {
+"R0_current": {
+"k": 1832,
+"km2": 3.6
+},
+"R0_current_SB": {
+"k": 712,
+"km2": 1.7
+},
+"R1_protect": {
+"k": 2132,
+"km2": 4.4
+},
+"R1_protect_SB": {
+"k": 906,
+"km2": 2.1
+},
+"R2_promo": {
+"k": 2745,
+"km2": 7.5
+},
+"R2_promo_SB": {
+"k": 1368,
+"km2": 4.2
+},
+"R3_zone_all": {
+"k": 2992,
+"km2": 8.3
+},
+"R3_zone_all_SB": {
+"k": 1543,
+"km2": 4.6
+},
+"R0_current@all": {
+"k": 1891,
+"km2": 36.5
+},
+"R0_current_SB@all": {
+"k": 1085,
+"km2": 12.2
+},
+"R1_protect@all": {
+"k": 1920,
+"km2": 47.2
+},
+"R1_protect_SB@all": {
+"k": 1255,
+"km2": 17.5
+},
+"R2_promo@all": {
+"k": 1302,
+"km2": 99.3
+},
+"R2_promo_SB@all": {
+"k": 1100,
+"km2": 50.4
+},
+"R3_zone_all@all": {
+"k": 1226,
+"km2": 112.7
+},
+"R3_zone_all_SB@all": {
+"k": 1178,
+"km2": 56.0
+}
+},
+"46870": {
+"R0_current": {
+"k": 2021,
+"km2": 2.9
+},
+"R0_current_SB": {
+"k": 582,
+"km2": 0.8
+},
+"R1_protect": {
+"k": 2439,
+"km2": 3.6
+},
+"R1_protect_SB": {
+"k": 782,
+"km2": 1.2
+},
+"R2_promo": {
+"k": 2973,
+"km2": 7.3
+},
+"R2_promo_SB": {
+"k": 1160,
+"km2": 3.7
+},
+"R3_zone_all": {
+"k": 3348,
+"km2": 8.0
+},
+"R3_zone_all_SB": {
+"k": 1350,
+"km2": 4.1
+},
+"R0_current@all": {
+"k": 2085,
+"km2": 42.4
+},
+"R0_current_SB@all": {
+"k": 1088,
+"km2": 11.7
+},
+"R1_protect@all": {
+"k": 2126,
+"km2": 54.3
+},
+"R1_protect_SB@all": {
+"k": 1339,
+"km2": 16.6
+},
+"R2_promo@all": {
+"k": 1489,
+"km2": 132.9
+},
+"R2_promo_SB@all": {
+"k": 1101,
+"km2": 62.6
+},
+"R3_zone_all@all": {
+"k": 1458,
+"km2": 159.4
+},
+"R3_zone_all_SB@all": {
+"k": 1283,
+"km2": 67.5
+}
+},
+"46880": {
+"R0_current": {
+"k": 1786,
+"km2": 3.2
+},
+"R0_current_SB": {
+"k": 675,
+"km2": 1.2
+},
+"R1_protect": {
+"k": 2021,
+"km2": 3.7
+},
+"R1_protect_SB": {
+"k": 832,
+"km2": 1.5
+},
+"R2_promo": {
+"k": 2222,
+"km2": 5.0
+},
+"R2_promo_SB": {
+"k": 998,
+"km2": 2.2
+},
+"R3_zone_all": {
+"k": 2423,
+"km2": 5.6
+},
+"R3_zone_all_SB": {
+"k": 1140,
+"km2": 2.6
+},
+"R0_current@all": {
+"k": 2458,
+"km2": 34.2
+},
+"R0_current_SB@all": {
+"k": 1266,
+"km2": 13.7
+},
+"R1_protect@all": {
+"k": 2475,
+"km2": 41.2
+},
+"R1_protect_SB@all": {
+"k": 1408,
+"km2": 17.2
+},
+"R2_promo@all": {
+"k": 2107,
+"km2": 68.4
+},
+"R2_promo_SB@all": {
+"k": 1261,
+"km2": 29.3
+},
+"R3_zone_all@all": {
+"k": 2053,
+"km2": 79.2
+},
+"R3_zone_all_SB@all": {
+"k": 1354,
+"km2": 32.7
+}
+},
+"46890": {
+"R0_current": {
+"k": 973,
+"km2": 1.4
+},
+"R0_current_SB": {
+"k": 328,
+"km2": 0.5
+},
+"R1_protect": {
+"k": 1014,
+"km2": 1.4
+},
+"R1_protect_SB": {
+"k": 348,
+"km2": 0.6
+},
+"R2_promo": {
+"k": 1166,
+"km2": 2.5
+},
+"R2_promo_SB": {
+"k": 451,
+"km2": 1.3
+},
+"R3_zone_all": {
+"k": 1206,
+"km2": 2.5
+},
+"R3_zone_all_SB": {
+"k": 470,
+"km2": 1.3
+},
+"R0_current@all": {
+"k": 2127,
+"km2": 34.2
+},
+"R0_current_SB@all": {
+"k": 1347,
+"km2": 12.3
+},
+"R1_protect@all": {
+"k": 2112,
+"km2": 35.3
+},
+"R1_protect_SB@all": {
+"k": 1365,
+"km2": 12.8
+},
+"R2_promo@all": {
+"k": 1887,
+"km2": 47.8
+},
+"R2_promo_SB@all": {
+"k": 1283,
+"km2": 21.2
+},
+"R3_zone_all@all": {
+"k": 1865,
+"km2": 48.9
+},
+"R3_zone_all_SB@all": {
+"k": 1295,
+"km2": 21.7
+}
+},
+"46900": {
+"R0_current": {
+"k": 1596,
+"km2": 2.7
+},
+"R0_current_SB": {
+"k": 899,
+"km2": 1.8
+},
+"R1_protect": {
+"k": 1829,
+"km2": 3.5
+},
+"R1_protect_SB": {
+"k": 1067,
+"km2": 2.3
+},
+"R2_promo": {
+"k": 2289,
+"km2": 9.4
+},
+"R2_promo_SB": {
+"k": 1428,
+"km2": 7.5
+},
+"R3_zone_all": {
+"k": 2513,
+"km2": 10.2
+},
+"R3_zone_all_SB": {
+"k": 1591,
+"km2": 8.1
+},
+"R0_current@all": {
+"k": 2392,
+"km2": 32.1
+},
+"R0_current_SB@all": {
+"k": 1763,
+"km2": 16.3
+},
+"R1_protect@all": {
+"k": 2391,
+"km2": 38.5
+},
+"R1_protect_SB@all": {
+"k": 1848,
+"km2": 20.5
+},
+"R2_promo@all": {
+"k": 1990,
+"km2": 82.0
+},
+"R2_promo_SB@all": {
+"k": 1636,
+"km2": 53.9
+},
+"R3_zone_all@all": {
+"k": 1974,
+"km2": 88.3
+},
+"R3_zone_all_SB@all": {
+"k": 1704,
+"km2": 58.1
+}
+},
+"46910": {
+"R0_current": {
+"k": 3293,
+"km2": 5.9
+},
+"R0_current_SB": {
+"k": 1689,
+"km2": 3.3
+},
+"R1_protect": {
+"k": 3573,
+"km2": 6.7
+},
+"R1_protect_SB": {
+"k": 1881,
+"km2": 3.9
+},
+"R2_promo": {
+"k": 4321,
+"km2": 12.7
+},
+"R2_promo_SB": {
+"k": 2483,
+"km2": 8.5
+},
+"R3_zone_all": {
+"k": 4533,
+"km2": 13.6
+},
+"R3_zone_all_SB": {
+"k": 2634,
+"km2": 9.2
+},
+"R0_current@all": {
+"k": 4190,
+"km2": 63.1
+},
+"R0_current_SB@all": {
+"k": 3065,
+"km2": 32.5
+},
+"R1_protect@all": {
+"k": 4224,
+"km2": 70.6
+},
+"R1_protect_SB@all": {
+"k": 3183,
+"km2": 37.2
+},
+"R2_promo@all": {
+"k": 3300,
+"km2": 141.4
+},
+"R2_promo_SB@all": {
+"k": 2958,
+"km2": 87.0
+},
+"R3_zone_all@all": {
+"k": 3189,
+"km2": 148.9
+},
+"R3_zone_all_SB@all": {
+"k": 2943,
+"km2": 91.8
+}
+},
+"47111": {
+"R0_current": {
+"k": 1736,
+"km2": 4.2
+},
+"R0_current_SB": {
+"k": 635,
+"km2": 2.0
+},
+"R1_protect": {
+"k": 1748,
+"km2": 4.3
+},
+"R1_protect_SB": {
+"k": 640,
+"km2": 2.0
+},
+"R2_promo": {
+"k": 1839,
+"km2": 4.7
+},
+"R2_promo_SB": {
+"k": 737,
+"km2": 2.2
+},
+"R3_zone_all": {
+"k": 1848,
+"km2": 4.7
+},
+"R3_zone_all_SB": {
+"k": 741,
+"km2": 2.2
+},
+"R0_current@all": {
+"k": 2346,
+"km2": 25.6
+},
+"R0_current_SB@all": {
+"k": 1470,
+"km2": 11.5
+},
+"R1_protect@all": {
+"k": 2337,
+"km2": 26.2
+},
+"R1_protect_SB@all": {
+"k": 1481,
+"km2": 11.7
+},
+"R2_promo@all": {
+"k": 2203,
+"km2": 35.0
+},
+"R2_promo_SB@all": {
+"k": 1466,
+"km2": 17.0
+},
+"R3_zone_all@all": {
+"k": 2192,
+"km2": 35.6
+},
+"R3_zone_all_SB@all": {
+"k": 1474,
+"km2": 17.2
+}
+},
+"47113": {
+"R0_current": {
+"k": 2154,
+"km2": 3.8
+},
+"R0_current_SB": {
+"k": 914,
+"km2": 1.7
+},
+"R1_protect": {
+"k": 2280,
+"km2": 4.2
+},
+"R1_protect_SB": {
+"k": 980,
+"km2": 1.9
+},
+"R2_promo": {
+"k": 3019,
+"km2": 8.6
+},
+"R2_promo_SB": {
+"k": 1543,
+"km2": 4.8
+},
+"R3_zone_all": {
+"k": 3110,
+"km2": 8.9
+},
+"R3_zone_all_SB": {
+"k": 1591,
+"km2": 5.0
+},
+"R0_current@all": {
+"k": 3303,
+"km2": 40.6
+},
+"R0_current_SB@all": {
+"k": 2233,
+"km2": 19.3
+},
+"R1_protect@all": {
+"k": 3366,
+"km2": 43.8
+},
+"R1_protect_SB@all": {
+"k": 2341,
+"km2": 20.9
+},
+"R2_promo@all": {
+"k": 2864,
+"km2": 79.2
+},
+"R2_promo_SB@all": {
+"k": 2217,
+"km2": 41.2
+},
+"R3_zone_all@all": {
+"k": 2866,
+"km2": 82.4
+},
+"R3_zone_all_SB@all": {
+"k": 2279,
+"km2": 42.7
+}
+},
+"47130": {
+"R0_current": {
+"k": 3726,
+"km2": 4.6
+},
+"R0_current_SB": {
+"k": 1157,
+"km2": 1.9
+},
+"R1_protect": {
+"k": 3929,
+"km2": 5.1
+},
+"R1_protect_SB": {
+"k": 1276,
+"km2": 2.1
+},
+"R2_promo": {
+"k": 5182,
+"km2": 9.7
+},
+"R2_promo_SB": {
+"k": 2200,
+"km2": 5.4
+},
+"R3_zone_all": {
+"k": 5353,
+"km2": 10.1
+},
+"R3_zone_all_SB": {
+"k": 2305,
+"km2": 5.5
+},
+"R0_current@all": {
+"k": 5461,
+"km2": 72.5
+},
+"R0_current_SB@all": {
+"k": 3047,
+"km2": 26.7
+},
+"R1_protect@all": {
+"k": 5591,
+"km2": 78.7
+},
+"R1_protect_SB@all": {
+"k": 3272,
+"km2": 29.5
+},
+"R2_promo@all": {
+"k": 4868,
+"km2": 134.2
+},
+"R2_promo_SB@all": {
+"k": 3166,
+"km2": 64.7
+},
+"R3_zone_all@all": {
+"k": 4908,
+"km2": 140.4
+},
+"R3_zone_all_SB@all": {
+"k": 3319,
+"km2": 67.4
+}
+},
+"47150": {
+"R0_current": {
+"k": 2908,
+"km2": 4.0
+},
+"R0_current_SB": {
+"k": 1432,
+"km2": 2.1
+},
+"R1_protect": {
+"k": 3071,
+"km2": 4.2
+},
+"R1_protect_SB": {
+"k": 1528,
+"km2": 2.2
+},
+"R2_promo": {
+"k": 3915,
+"km2": 6.5
+},
+"R2_promo_SB": {
+"k": 2182,
+"km2": 4.0
+},
+"R3_zone_all": {
+"k": 4059,
+"km2": 6.7
+},
+"R3_zone_all_SB": {
+"k": 2267,
+"km2": 4.2
+},
+"R0_current@all": {
+"k": 5650,
+"km2": 83.2
+},
+"R0_current_SB@all": {
+"k": 4509,
+"km2": 44.5
+},
+"R1_protect@all": {
+"k": 5561,
+"km2": 88.2
+},
+"R1_protect_SB@all": {
+"k": 4529,
+"km2": 47.1
+},
+"R2_promo@all": {
+"k": 5165,
+"km2": 144.4
+},
+"R2_promo_SB@all": {
+"k": 4474,
+"km2": 79.1
+},
+"R3_zone_all@all": {
+"k": 5003,
+"km2": 155.5
+},
+"R3_zone_all_SB@all": {
+"k": 4428,
+"km2": 81.8
+}
+},
+"47170": {
+"R0_current": {
+"k": 1656,
+"km2": 2.5
+},
+"R0_current_SB": {
+"k": 932,
+"km2": 1.6
+},
+"R1_protect": {
+"k": 1733,
+"km2": 2.7
+},
+"R1_protect_SB": {
+"k": 989,
+"km2": 1.7
+},
+"R2_promo": {
+"k": 2387,
+"km2": 4.9
+},
+"R2_promo_SB": {
+"k": 1437,
+"km2": 3.2
+},
+"R3_zone_all": {
+"k": 2456,
+"km2": 5.2
+},
+"R3_zone_all_SB": {
+"k": 1488,
+"km2": 3.3
+},
+"R0_current@all": {
+"k": 7877,
+"km2": 83.7
+},
+"R0_current_SB@all": {
+"k": 5901,
+"km2": 52.3
+},
+"R1_protect@all": {
+"k": 7775,
+"km2": 88.5
+},
+"R1_protect_SB@all": {
+"k": 5886,
+"km2": 55.1
+},
+"R2_promo@all": {
+"k": 6994,
+"km2": 137.7
+},
+"R2_promo_SB@all": {
+"k": 5691,
+"km2": 78.3
+},
+"R3_zone_all@all": {
+"k": 6817,
+"km2": 146.0
+},
+"R3_zone_all_SB@all": {
+"k": 5629,
+"km2": 81.2
+}
+},
+"47190": {
+"R0_current": {
+"k": 1796,
+"km2": 1.7
+},
+"R0_current_SB": {
+"k": 653,
+"km2": 0.9
+},
+"R1_protect": {
+"k": 1936,
+"km2": 1.9
+},
+"R1_protect_SB": {
+"k": 741,
+"km2": 1.0
+},
+"R2_promo": {
+"k": 2910,
+"km2": 5.0
+},
+"R2_promo_SB": {
+"k": 1511,
+"km2": 3.4
+},
+"R3_zone_all": {
+"k": 3026,
+"km2": 5.3
+},
+"R3_zone_all_SB": {
+"k": 1587,
+"km2": 3.6
+},
+"R0_current@all": {
+"k": 3081,
+"km2": 30.7
+},
+"R0_current_SB@all": {
+"k": 1666,
+"km2": 13.9
+},
+"R1_protect@all": {
+"k": 3153,
+"km2": 33.8
+},
+"R1_protect_SB@all": {
+"k": 1772,
+"km2": 15.6
+},
+"R2_promo@all": {
+"k": 2736,
+"km2": 85.8
+},
+"R2_promo_SB@all": {
+"k": 1672,
+"km2": 53.9
+},
+"R3_zone_all@all": {
+"k": 2700,
+"km2": 89.3
+},
+"R3_zone_all_SB@all": {
+"k": 1697,
+"km2": 55.6
+}
+},
+"47210": {
+"R0_current": {
+"k": 1649,
+"km2": 3.4
+},
+"R0_current_SB": {
+"k": 803,
+"km2": 2.0
+},
+"R1_protect": {
+"k": 1773,
+"km2": 3.7
+},
+"R1_protect_SB": {
+"k": 869,
+"km2": 2.2
+},
+"R2_promo": {
+"k": 2335,
+"km2": 7.0
+},
+"R2_promo_SB": {
+"k": 1251,
+"km2": 4.4
+},
+"R3_zone_all": {
+"k": 2431,
+"km2": 7.4
+},
+"R3_zone_all_SB": {
+"k": 1306,
+"km2": 4.5
+},
+"R0_current@all": {
+"k": 4316,
+"km2": 48.6
+},
+"R0_current_SB@all": {
+"k": 2941,
+"km2": 27.5
+},
+"R1_protect@all": {
+"k": 4400,
+"km2": 53.0
+},
+"R1_protect_SB@all": {
+"k": 3049,
+"km2": 29.8
+},
+"R2_promo@all": {
+"k": 3794,
+"km2": 83.4
+},
+"R2_promo_SB@all": {
+"k": 2928,
+"km2": 46.9
+},
+"R3_zone_all@all": {
+"k": 3756,
+"km2": 87.9
+},
+"R3_zone_all_SB@all": {
+"k": 2952,
+"km2": 49.2
+}
+},
+"47230": {
+"R0_current": {
+"k": 1989,
+"km2": 2.6
+},
+"R0_current_SB": {
+"k": 859,
+"km2": 1.4
+},
+"R1_protect": {
+"k": 2343,
+"km2": 3.1
+},
+"R1_protect_SB": {
+"k": 1038,
+"km2": 1.7
+},
+"R2_promo": {
+"k": 2963,
+"km2": 4.8
+},
+"R2_promo_SB": {
+"k": 1409,
+"km2": 2.6
+},
+"R3_zone_all": {
+"k": 3279,
+"km2": 5.3
+},
+"R3_zone_all_SB": {
+"k": 1576,
+"km2": 2.9
+},
+"R0_current@all": {
+"k": 4642,
+"km2": 41.6
+},
+"R0_current_SB@all": {
+"k": 2989,
+"km2": 18.3
+},
+"R1_protect@all": {
+"k": 4844,
+"km2": 51.2
+},
+"R1_protect_SB@all": {
+"k": 3223,
+"km2": 23.3
+},
+"R2_promo@all": {
+"k": 4325,
+"km2": 88.1
+},
+"R2_promo_SB@all": {
+"k": 3211,
+"km2": 40.7
+},
+"R3_zone_all@all": {
+"k": 4332,
+"km2": 97.7
+},
+"R3_zone_all_SB@all": {
+"k": 3358,
+"km2": 45.6
+}
+},
+"47250": {
+"R0_current": {
+"k": 2848,
+"km2": 4.9
+},
+"R0_current_SB": {
+"k": 1397,
+"km2": 2.8
+},
+"R1_protect": {
+"k": 3126,
+"km2": 5.6
+},
+"R1_protect_SB": {
+"k": 1575,
+"km2": 3.3
+},
+"R2_promo": {
+"k": 4608,
+"km2": 12.1
+},
+"R2_promo_SB": {
+"k": 2658,
+"km2": 7.9
+},
+"R3_zone_all": {
+"k": 4825,
+"km2": 12.8
+},
+"R3_zone_all_SB": {
+"k": 2802,
+"km2": 8.4
+},
+"R0_current@all": {
+"k": 5915,
+"km2": 79.4
+},
+"R0_current_SB@all": {
+"k": 3798,
+"km2": 40.1
+},
+"R1_protect@all": {
+"k": 6071,
+"km2": 90.7
+},
+"R1_protect_SB@all": {
+"k": 4091,
+"km2": 46.6
+},
+"R2_promo@all": {
+"k": 4587,
+"km2": 196.4
+},
+"R2_promo_SB@all": {
+"k": 3734,
+"km2": 109.3
+},
+"R3_zone_all@all": {
+"k": 4479,
+"km2": 208.5
+},
+"R3_zone_all_SB@all": {
+"k": 3829,
+"km2": 116.6
+}
+},
+"47280": {
+"R0_current": {
+"k": 1081,
+"km2": 1.6
+},
+"R0_current_SB": {
+"k": 433,
+"km2": 0.9
+},
+"R1_protect": {
+"k": 1196,
+"km2": 1.8
+},
+"R1_protect_SB": {
+"k": 500,
+"km2": 1.0
+},
+"R2_promo": {
+"k": 1642,
+"km2": 3.2
+},
+"R2_promo_SB": {
+"k": 775,
+"km2": 1.8
+},
+"R3_zone_all": {
+"k": 1745,
+"km2": 3.4
+},
+"R3_zone_all_SB": {
+"k": 836,
+"km2": 1.9
+},
+"R0_current@all": {
+"k": 4210,
+"km2": 45.7
+},
+"R0_current_SB@all": {
+"k": 2742,
+"km2": 21.4
+},
+"R1_protect@all": {
+"k": 4230,
+"km2": 51.4
+},
+"R1_protect_SB@all": {
+"k": 2847,
+"km2": 24.1
+},
+"R2_promo@all": {
+"k": 3443,
+"km2": 89.9
+},
+"R2_promo_SB@all": {
+"k": 2584,
+"km2": 45.0
+},
+"R3_zone_all@all": {
+"k": 3364,
+"km2": 99.4
+},
+"R3_zone_all_SB@all": {
+"k": 2615,
+"km2": 47.9
+}
+},
+"47290": {
+"R0_current": {
+"k": 1457,
+"km2": 1.3
+},
+"R0_current_SB": {
+"k": 360,
+"km2": 0.4
+},
+"R1_protect": {
+"k": 1682,
+"km2": 1.5
+},
+"R1_protect_SB": {
+"k": 464,
+"km2": 0.5
+},
+"R2_promo": {
+"k": 1840,
+"km2": 1.9
+},
+"R2_promo_SB": {
+"k": 570,
+"km2": 0.7
+},
+"R3_zone_all": {
+"k": 2053,
+"km2": 2.2
+},
+"R3_zone_all_SB": {
+"k": 666,
+"km2": 0.8
+},
+"R0_current@all": {
+"k": 2672,
+"km2": 21.9
+},
+"R0_current_SB@all": {
+"k": 926,
+"km2": 6.0
+},
+"R1_protect@all": {
+"k": 2674,
+"km2": 28.0
+},
+"R1_protect_SB@all": {
+"k": 1100,
+"km2": 8.1
+},
+"R2_promo@all": {
+"k": 2331,
+"km2": 51.3
+},
+"R2_promo_SB@all": {
+"k": 999,
+"km2": 20.9
+},
+"R3_zone_all@all": {
+"k": 2232,
+"km2": 57.4
+},
+"R3_zone_all_SB@all": {
+"k": 1100,
+"km2": 23.0
+}
+},
+"47730": {
+"R0_current": {
+"k": 1790,
+"km2": 2.6
+},
+"R0_current_SB": {
+"k": 1016,
+"km2": 1.7
+},
+"R1_protect": {
+"k": 2116,
+"km2": 3.2
+},
+"R1_protect_SB": {
+"k": 1241,
+"km2": 2.0
+},
+"R2_promo": {
+"k": 3442,
+"km2": 7.9
+},
+"R2_promo_SB": {
+"k": 2183,
+"km2": 5.3
+},
+"R3_zone_all": {
+"k": 3715,
+"km2": 8.5
+},
+"R3_zone_all_SB": {
+"k": 2377,
+"km2": 5.7
+},
+"R0_current@all": {
+"k": 6849,
+"km2": 56.5
+},
+"R0_current_SB@all": {
+"k": 5084,
+"km2": 33.9
+},
+"R1_protect@all": {
+"k": 7014,
+"km2": 69.6
+},
+"R1_protect_SB@all": {
+"k": 5403,
+"km2": 42.5
+},
+"R2_promo@all": {
+"k": 5626,
+"km2": 150.5
+},
+"R2_promo_SB@all": {
+"k": 4884,
+"km2": 95.0
+},
+"R3_zone_all@all": {
+"k": 5528,
+"km2": 164.2
+},
+"R3_zone_all_SB@all": {
+"k": 4995,
+"km2": 103.5
+}
+},
+"47750": {
+"R0_current": {
+"k": 1205,
+"km2": 2.7
+},
+"R0_current_SB": {
+"k": 584,
+"km2": 1.5
+},
+"R1_protect": {
+"k": 1327,
+"km2": 3.2
+},
+"R1_protect_SB": {
+"k": 655,
+"km2": 1.7
+},
+"R2_promo": {
+"k": 1676,
+"km2": 4.8
+},
+"R2_promo_SB": {
+"k": 867,
+"km2": 2.5
+},
+"R3_zone_all": {
+"k": 1787,
+"km2": 5.3
+},
+"R3_zone_all_SB": {
+"k": 932,
+"km2": 2.8
+},
+"R0_current@all": {
+"k": 2659,
+"km2": 27.1
+},
+"R0_current_SB@all": {
+"k": 1988,
+"km2": 14.5
+},
+"R1_protect@all": {
+"k": 2746,
+"km2": 31.0
+},
+"R1_protect_SB@all": {
+"k": 2124,
+"km2": 16.4
+},
+"R2_promo@all": {
+"k": 2450,
+"km2": 46.2
+},
+"R2_promo_SB@all": {
+"k": 2101,
+"km2": 23.6
+},
+"R3_zone_all@all": {
+"k": 2466,
+"km2": 50.1
+},
+"R3_zone_all_SB@all": {
+"k": 2199,
+"km2": 25.5
+}
+},
+"47760": {
+"R0_current": {
+"k": 1013,
+"km2": 1.5
+},
+"R0_current_SB": {
+"k": 585,
+"km2": 1.0
+},
+"R1_protect": {
+"k": 1077,
+"km2": 1.7
+},
+"R1_protect_SB": {
+"k": 628,
+"km2": 1.1
+},
+"R2_promo": {
+"k": 1364,
+"km2": 2.9
+},
+"R2_promo_SB": {
+"k": 798,
+"km2": 1.8
+},
+"R3_zone_all": {
+"k": 1416,
+"km2": 3.1
+},
+"R3_zone_all_SB": {
+"k": 835,
+"km2": 1.9
+},
+"R0_current@all": {
+"k": 2037,
+"km2": 17.9
+},
+"R0_current_SB@all": {
+"k": 1490,
+"km2": 9.6
+},
+"R1_protect@all": {
+"k": 2076,
+"km2": 19.4
+},
+"R1_protect_SB@all": {
+"k": 1543,
+"km2": 10.4
+},
+"R2_promo@all": {
+"k": 1976,
+"km2": 29.0
+},
+"R2_promo_SB@all": {
+"k": 1590,
+"km2": 14.9
+},
+"R3_zone_all@all": {
+"k": 1960,
+"km2": 30.4
+},
+"R3_zone_all_SB@all": {
+"k": 1611,
+"km2": 15.6
+}
+},
+"47770": {
+"R0_current": {
+"k": 1679,
+"km2": 2.4
+},
+"R0_current_SB": {
+"k": 786,
+"km2": 1.2
+},
+"R1_protect": {
+"k": 1751,
+"km2": 2.6
+},
+"R1_protect_SB": {
+"k": 828,
+"km2": 1.3
+},
+"R2_promo": {
+"k": 2254,
+"km2": 4.9
+},
+"R2_promo_SB": {
+"k": 1172,
+"km2": 2.8
+},
+"R3_zone_all": {
+"k": 2309,
+"km2": 5.0
+},
+"R3_zone_all_SB": {
+"k": 1204,
+"km2": 2.9
+},
+"R0_current@all": {
+"k": 2999,
+"km2": 22.3
+},
+"R0_current_SB@all": {
+"k": 2158,
+"km2": 12.0
+},
+"R1_protect@all": {
+"k": 3043,
+"km2": 23.8
+},
+"R1_protect_SB@all": {
+"k": 2212,
+"km2": 12.9
+},
+"R2_promo@all": {
+"k": 2750,
+"km2": 42.1
+},
+"R2_promo_SB@all": {
+"k": 2194,
+"km2": 23.2
+},
+"R3_zone_all@all": {
+"k": 2753,
+"km2": 43.6
+},
+"R3_zone_all_SB@all": {
+"k": 2215,
+"km2": 24.1
+}
+},
+"47820": {
+"R0_current": {
+"k": 1562,
+"km2": 1.5
+},
+"R0_current_SB": {
+"k": 455,
+"km2": 0.5
+},
+"R1_protect": {
+"k": 1785,
+"km2": 1.7
+},
+"R1_protect_SB": {
+"k": 568,
+"km2": 0.6
+},
+"R2_promo": {
+"k": 2392,
+"km2": 3.0
+},
+"R2_promo_SB": {
+"k": 928,
+"km2": 1.3
+},
+"R3_zone_all": {
+"k": 2590,
+"km2": 3.2
+},
+"R3_zone_all_SB": {
+"k": 1032,
+"km2": 1.4
+},
+"R0_current@all": {
+"k": 2287,
+"km2": 26.7
+},
+"R0_current_SB@all": {
+"k": 1162,
+"km2": 7.8
+},
+"R1_protect@all": {
+"k": 2335,
+"km2": 32.1
+},
+"R1_protect_SB@all": {
+"k": 1305,
+"km2": 10.0
+},
+"R2_promo@all": {
+"k": 1986,
+"km2": 57.0
+},
+"R2_promo_SB@all": {
+"k": 1270,
+"km2": 22.7
+},
+"R3_zone_all@all": {
+"k": 1954,
+"km2": 62.4
+},
+"R3_zone_all_SB@all": {
+"k": 1350,
+"km2": 24.9
+}
+},
+"47830": {
+"R0_current": {
+"k": 694,
+"km2": 0.6
+},
+"R0_current_SB": {
+"k": 273,
+"km2": 0.3
+},
+"R1_protect": {
+"k": 778,
+"km2": 0.7
+},
+"R1_protect_SB": {
+"k": 311,
+"km2": 0.3
+},
+"R2_promo": {
+"k": 1348,
+"km2": 2.3
+},
+"R2_promo_SB": {
+"k": 720,
+"km2": 1.5
+},
+"R3_zone_all": {
+"k": 1419,
+"km2": 2.3
+},
+"R3_zone_all_SB": {
+"k": 753,
+"km2": 1.5
+},
+"R0_current@all": {
+"k": 1731,
+"km2": 10.7
+},
+"R0_current_SB@all": {
+"k": 785,
+"km2": 4.7
+},
+"R1_protect@all": {
+"k": 1735,
+"km2": 12.1
+},
+"R1_protect_SB@all": {
+"k": 809,
+"km2": 5.4
+},
+"R2_promo@all": {
+"k": 1610,
+"km2": 35.3
+},
+"R2_promo_SB@all": {
+"k": 903,
+"km2": 20.3
+},
+"R3_zone_all@all": {
+"k": 1566,
+"km2": 36.7
+},
+"R3_zone_all_SB@all": {
+"k": 904,
+"km2": 20.9
+}
+},
+"47840": {
+"R0_current": {
+"k": 1945,
+"km2": 2.5
+},
+"R0_current_SB": {
+"k": 810,
+"km2": 1.1
+},
+"R1_protect": {
+"k": 2110,
+"km2": 2.9
+},
+"R1_protect_SB": {
+"k": 916,
+"km2": 1.3
+},
+"R2_promo": {
+"k": 2784,
+"km2": 5.2
+},
+"R2_promo_SB": {
+"k": 1410,
+"km2": 2.7
+},
+"R3_zone_all": {
+"k": 2910,
+"km2": 5.6
+},
+"R3_zone_all_SB": {
+"k": 1502,
+"km2": 2.9
+},
+"R0_current@all": {
+"k": 3019,
+"km2": 38.9
+},
+"R0_current_SB@all": {
+"k": 2000,
+"km2": 15.9
+},
+"R1_protect@all": {
+"k": 2900,
+"km2": 44.5
+},
+"R1_protect_SB@all": {
+"k": 2030,
+"km2": 18.3
+},
+"R2_promo@all": {
+"k": 2358,
+"km2": 82.6
+},
+"R2_promo_SB@all": {
+"k": 1976,
+"km2": 40.0
+},
+"R3_zone_all@all": {
+"k": 2164,
+"km2": 88.2
+},
+"R3_zone_all_SB@all": {
+"k": 1944,
+"km2": 42.4
+}
+},
+"47850": {
+"R0_current": {
+"k": 1956,
+"km2": 2.0
+},
+"R0_current_SB": {
+"k": 423,
+"km2": 0.5
+},
+"R1_protect": {
+"k": 2030,
+"km2": 2.0
+},
+"R1_protect_SB": {
+"k": 454,
+"km2": 0.5
+},
+"R2_promo": {
+"k": 2178,
+"km2": 2.5
+},
+"R2_promo_SB": {
+"k": 569,
+"km2": 0.6
+},
+"R3_zone_all": {
+"k": 2250,
+"km2": 2.6
+},
+"R3_zone_all_SB": {
+"k": 599,
+"km2": 0.6
+},
+"R0_current@all": {
+"k": 2221,
+"km2": 26.9
+},
+"R0_current_SB@all": {
+"k": 953,
+"km2": 7.6
+},
+"R1_protect@all": {
+"k": 2235,
+"km2": 28.5
+},
+"R1_protect_SB@all": {
+"k": 980,
+"km2": 8.1
+},
+"R2_promo@all": {
+"k": 2055,
+"km2": 39.9
+},
+"R2_promo_SB@all": {
+"k": 983,
+"km2": 13.5
+},
+"R3_zone_all@all": {
+"k": 2038,
+"km2": 41.5
+},
+"R3_zone_all_SB@all": {
+"k": 997,
+"km2": 14.0
+}
+},
+"47900": {
+"R0_current": {
+"k": 1059,
+"km2": 1.9
+},
+"R0_current_SB": {
+"k": 515,
+"km2": 1.2
+},
+"R1_protect": {
+"k": 1136,
+"km2": 2.1
+},
+"R1_protect_SB": {
+"k": 557,
+"km2": 1.3
+},
+"R2_promo": {
+"k": 1701,
+"km2": 4.0
+},
+"R2_promo_SB": {
+"k": 984,
+"km2": 2.8
+},
+"R3_zone_all": {
+"k": 1771,
+"km2": 4.2
+},
+"R3_zone_all_SB": {
+"k": 1021,
+"km2": 2.9
+},
+"R0_current@all": {
+"k": 4003,
+"km2": 65.6
+},
+"R0_current_SB@all": {
+"k": 2826,
+"km2": 37.0
+},
+"R1_protect@all": {
+"k": 3961,
+"km2": 72.8
+},
+"R1_protect_SB@all": {
+"k": 2892,
+"km2": 40.9
+},
+"R2_promo@all": {
+"k": 2926,
+"km2": 139.7
+},
+"R2_promo_SB@all": {
+"k": 2503,
+"km2": 80.5
+},
+"R3_zone_all@all": {
+"k": 2791,
+"km2": 147.7
+},
+"R3_zone_all_SB@all": {
+"k": 2471,
+"km2": 84.6
+}
+},
+"47920": {
+"R0_current": {
+"k": 1492,
+"km2": 2.3
+},
+"R0_current_SB": {
+"k": 844,
+"km2": 1.4
+},
+"R1_protect": {
+"k": 1539,
+"km2": 2.5
+},
+"R1_protect_SB": {
+"k": 872,
+"km2": 1.5
+},
+"R2_promo": {
+"k": 1824,
+"km2": 3.6
+},
+"R2_promo_SB": {
+"k": 1045,
+"km2": 2.0
+},
+"R3_zone_all": {
+"k": 1864,
+"km2": 3.7
+},
+"R3_zone_all_SB": {
+"k": 1073,
+"km2": 2.1
+},
+"R0_current@all": {
+"k": 4996,
+"km2": 48.2
+},
+"R0_current_SB@all": {
+"k": 3856,
+"km2": 30.5
+},
+"R1_protect@all": {
+"k": 4905,
+"km2": 50.6
+},
+"R1_protect_SB@all": {
+"k": 3821,
+"km2": 31.9
+},
+"R2_promo@all": {
+"k": 4386,
+"km2": 65.0
+},
+"R2_promo_SB@all": {
+"k": 3647,
+"km2": 38.3
+},
+"R3_zone_all@all": {
+"k": 4233,
+"km2": 67.4
+},
+"R3_zone_all_SB@all": {
+"k": 3591,
+"km2": 39.7
+}
+},
+"47930": {
+"R0_current": {
+"k": 1965,
+"km2": 4.2
+},
+"R0_current_SB": {
+"k": 868,
+"km2": 2.3
+},
+"R1_protect": {
+"k": 2030,
+"km2": 4.4
+},
+"R1_protect_SB": {
+"k": 909,
+"km2": 2.4
+},
+"R2_promo": {
+"k": 2213,
+"km2": 4.9
+},
+"R2_promo_SB": {
+"k": 1033,
+"km2": 2.7
+},
+"R3_zone_all": {
+"k": 2267,
+"km2": 5.1
+},
+"R3_zone_all_SB": {
+"k": 1068,
+"km2": 2.9
+},
+"R0_current@all": {
+"k": 3370,
+"km2": 30.1
+},
+"R0_current_SB@all": {
+"k": 2293,
+"km2": 16.7
+},
+"R1_protect@all": {
+"k": 3367,
+"km2": 31.9
+},
+"R1_protect_SB@all": {
+"k": 2319,
+"km2": 17.7
+},
+"R2_promo@all": {
+"k": 3228,
+"km2": 40.8
+},
+"R2_promo_SB@all": {
+"k": 2321,
+"km2": 22.5
+},
+"R3_zone_all@all": {
+"k": 3195,
+"km2": 42.5
+},
+"R3_zone_all_SB@all": {
+"k": 2320,
+"km2": 23.4
+}
+},
+"47940": {
+"R0_current": {
+"k": 106,
+"km2": 0.1
+},
+"R0_current_SB": {
+"k": 9,
+"km2": 0.0
+},
+"R1_protect": {
+"k": 106,
+"km2": 0.1
+},
+"R1_protect_SB": {
+"k": 9,
+"km2": 0.0
+},
+"R2_promo": {
+"k": 106,
+"km2": 0.1
+},
+"R2_promo_SB": {
+"k": 9,
+"km2": 0.0
+},
+"R3_zone_all": {
+"k": 106,
+"km2": 0.1
+},
+"R3_zone_all_SB": {
+"k": 9,
+"km2": 0.0
+},
+"R0_current@all": {
+"k": 136,
+"km2": 0.8
+},
+"R0_current_SB@all": {
+"k": 25,
+"km2": 0.0
+},
+"R1_protect@all": {
+"k": 136,
+"km2": 0.8
+},
+"R1_protect_SB@all": {
+"k": 25,
+"km2": 0.0
+},
+"R2_promo@all": {
+"k": 136,
+"km2": 0.8
+},
+"R2_promo_SB@all": {
+"k": 25,
+"km2": 0.0
+},
+"R3_zone_all@all": {
+"k": 136,
+"km2": 0.8
+},
+"R3_zone_all_SB@all": {
+"k": 25,
+"km2": 0.0
+}
+},
+"48121": {
+"R0_current": {
+"k": 580,
+"km2": 1.1
+},
+"R0_current_SB": {
+"k": 138,
+"km2": 0.6
+},
+"R1_protect": {
+"k": 621,
+"km2": 1.1
+},
+"R1_protect_SB": {
+"k": 164,
+"km2": 0.6
+},
+"R2_promo": {
+"k": 956,
+"km2": 3.1
+},
+"R2_promo_SB": {
+"k": 431,
+"km2": 2.1
+},
+"R3_zone_all": {
+"k": 992,
+"km2": 3.2
+},
+"R3_zone_all_SB": {
+"k": 452,
+"km2": 2.2
+},
+"R0_current@all": {
+"k": 998,
+"km2": 7.1
+},
+"R0_current_SB@all": {
+"k": 345,
+"km2": 2.1
+},
+"R1_protect@all": {
+"k": 1040,
+"km2": 7.8
+},
+"R1_protect_SB@all": {
+"k": 395,
+"km2": 2.4
+},
+"R2_promo@all": {
+"k": 854,
+"km2": 37.8
+},
+"R2_promo_SB@all": {
+"k": 372,
+"km2": 22.1
+},
+"R3_zone_all@all": {
+"k": 885,
+"km2": 38.6
+},
+"R3_zone_all_SB@all": {
+"k": 413,
+"km2": 22.4
+}
+},
+"48123": {
+"R0_current": {
+"k": 74,
+"km2": 0.0
+},
+"R0_current_SB": {
+"k": 22,
+"km2": 0.0
+},
+"R1_protect": {
+"k": 74,
+"km2": 0.0
+},
+"R1_protect_SB": {
+"k": 22,
+"km2": 0.0
+},
+"R2_promo": {
+"k": 74,
+"km2": 0.0
+},
+"R2_promo_SB": {
+"k": 22,
+"km2": 0.0
+},
+"R3_zone_all": {
+"k": 74,
+"km2": 0.0
+},
+"R3_zone_all_SB": {
+"k": 22,
+"km2": 0.0
+},
+"R0_current@all": {
+"k": 61,
+"km2": 0.2
+},
+"R0_current_SB@all": {
+"k": 20,
+"km2": 0.1
+},
+"R1_protect@all": {
+"k": 61,
+"km2": 0.2
+},
+"R1_protect_SB@all": {
+"k": 20,
+"km2": 0.1
+},
+"R2_promo@all": {
+"k": 61,
+"km2": 0.2
+},
+"R2_promo_SB@all": {
+"k": 20,
+"km2": 0.1
+},
+"R3_zone_all@all": {
+"k": 61,
+"km2": 0.2
+},
+"R3_zone_all_SB@all": {
+"k": 20,
+"km2": 0.1
+}
+},
+"48125": {
+"R0_current": {
+"k": 818,
+"km2": 1.5
+},
+"R0_current_SB": {
+"k": 299,
+"km2": 0.6
+},
+"R1_protect": {
+"k": 831,
+"km2": 1.6
+},
+"R1_protect_SB": {
+"k": 310,
+"km2": 0.7
+},
+"R2_promo": {
+"k": 907,
+"km2": 1.7
+},
+"R2_promo_SB": {
+"k": 362,
+"km2": 0.7
+},
+"R3_zone_all": {
+"k": 917,
+"km2": 1.8
+},
+"R3_zone_all_SB": {
+"k": 370,
+"km2": 0.8
+},
+"R0_current@all": {
+"k": 1127,
+"km2": 12.2
+},
+"R0_current_SB@all": {
+"k": 569,
+"km2": 3.6
+},
+"R1_protect@all": {
+"k": 1116,
+"km2": 12.9
+},
+"R1_protect_SB@all": {
+"k": 584,
+"km2": 4.0
+},
+"R2_promo@all": {
+"k": 975,
+"km2": 18.6
+},
+"R2_promo_SB@all": {
+"k": 551,
+"km2": 6.4
+},
+"R3_zone_all@all": {
+"k": 957,
+"km2": 19.4
+},
+"R3_zone_all_SB@all": {
+"k": 557,
+"km2": 6.8
+}
+},
+"48127": {
+"R0_current": {
+"k": 363,
+"km2": 0.4
+},
+"R0_current_SB": {
+"k": 41,
+"km2": 0.1
+},
+"R1_protect": {
+"k": 363,
+"km2": 0.4
+},
+"R1_protect_SB": {
+"k": 41,
+"km2": 0.1
+},
+"R2_promo": {
+"k": 364,
+"km2": 0.4
+},
+"R2_promo_SB": {
+"k": 42,
+"km2": 0.1
+},
+"R3_zone_all": {
+"k": 364,
+"km2": 0.4
+},
+"R3_zone_all_SB": {
+"k": 42,
+"km2": 0.1
+},
+"R0_current@all": {
+"k": 399,
+"km2": 1.5
+},
+"R0_current_SB@all": {
+"k": 89,
+"km2": 0.3
+},
+"R1_protect@all": {
+"k": 399,
+"km2": 1.5
+},
+"R1_protect_SB@all": {
+"k": 89,
+"km2": 0.3
+},
+"R2_promo@all": {
+"k": 399,
+"km2": 1.6
+},
+"R2_promo_SB@all": {
+"k": 90,
+"km2": 0.3
+},
+"R3_zone_all@all": {
+"k": 399,
+"km2": 1.6
+},
+"R3_zone_all_SB@all": {
+"k": 90,
+"km2": 0.3
+}
+},
+"48129": {
+"R0_current": {
+"k": 595,
+"km2": 0.6
+},
+"R0_current_SB": {
+"k": 114,
+"km2": 0.2
+},
+"R1_protect": {
+"k": 595,
+"km2": 0.6
+},
+"R1_protect_SB": {
+"k": 114,
+"km2": 0.2
+},
+"R2_promo": {
+"k": 595,
+"km2": 0.6
+},
+"R2_promo_SB": {
+"k": 114,
+"km2": 0.2
+},
+"R3_zone_all": {
+"k": 595,
+"km2": 0.6
+},
+"R3_zone_all_SB": {
+"k": 114,
+"km2": 0.2
+},
+"R0_current@all": {
+"k": 500,
+"km2": 3.1
+},
+"R0_current_SB@all": {
+"k": 146,
+"km2": 0.8
+},
+"R1_protect@all": {
+"k": 500,
+"km2": 3.1
+},
+"R1_protect_SB@all": {
+"k": 146,
+"km2": 0.8
+},
+"R2_promo@all": {
+"k": 500,
+"km2": 3.1
+},
+"R2_promo_SB@all": {
+"k": 146,
+"km2": 0.8
+},
+"R3_zone_all@all": {
+"k": 500,
+"km2": 3.1
+},
+"R3_zone_all_SB@all": {
+"k": 146,
+"km2": 0.8
+}
+},
+"48170": {
+"R0_current": {
+"k": 1749,
+"km2": 3.1
+},
+"R0_current_SB": {
+"k": 678,
+"km2": 1.4
+},
+"R1_protect": {
+"k": 1833,
+"km2": 3.2
+},
+"R1_protect_SB": {
+"k": 740,
+"km2": 1.5
+},
+"R2_promo": {
+"k": 2584,
+"km2": 6.4
+},
+"R2_promo_SB": {
+"k": 1246,
+"km2": 3.7
+},
+"R3_zone_all": {
+"k": 2654,
+"km2": 6.5
+},
+"R3_zone_all_SB": {
+"k": 1298,
+"km2": 3.8
+},
+"R0_current@all": {
+"k": 4532,
+"km2": 37.7
+},
+"R0_current_SB@all": {
+"k": 2463,
+"km2": 16.8
+},
+"R1_protect@all": {
+"k": 4619,
+"km2": 41.0
+},
+"R1_protect_SB@all": {
+"k": 2614,
+"km2": 18.9
+},
+"R2_promo@all": {
+"k": 3912,
+"km2": 83.6
+},
+"R2_promo_SB@all": {
+"k": 2518,
+"km2": 43.8
+},
+"R3_zone_all@all": {
+"k": 3948,
+"km2": 87.2
+},
+"R3_zone_all_SB@all": {
+"k": 2632,
+"km2": 46.0
+}
+},
+"48220": {
+"R0_current": {
+"k": 791,
+"km2": 0.9
+},
+"R0_current_SB": {
+"k": 143,
+"km2": 0.2
+},
+"R1_protect": {
+"k": 805,
+"km2": 0.9
+},
+"R1_protect_SB": {
+"k": 150,
+"km2": 0.2
+},
+"R2_promo": {
+"k": 819,
+"km2": 1.0
+},
+"R2_promo_SB": {
+"k": 158,
+"km2": 0.3
+},
+"R3_zone_all": {
+"k": 832,
+"km2": 1.0
+},
+"R3_zone_all_SB": {
+"k": 165,
+"km2": 0.3
+},
+"R0_current@all": {
+"k": 1155,
+"km2": 12.2
+},
+"R0_current_SB@all": {
+"k": 391,
+"km2": 2.6
+},
+"R1_protect@all": {
+"k": 1163,
+"km2": 12.5
+},
+"R1_protect_SB@all": {
+"k": 409,
+"km2": 2.8
+},
+"R2_promo@all": {
+"k": 1123,
+"km2": 13.6
+},
+"R2_promo_SB@all": {
+"k": 398,
+"km2": 2.8
+},
+"R3_zone_all@all": {
+"k": 1128,
+"km2": 14.0
+},
+"R3_zone_all_SB@all": {
+"k": 415,
+"km2": 3.0
+}
+},
+"48240": {
+"R0_current": {
+"k": 2122,
+"km2": 2.6
+},
+"R0_current_SB": {
+"k": 660,
+"km2": 1.0
+},
+"R1_protect": {
+"k": 2267,
+"km2": 2.8
+},
+"R1_protect_SB": {
+"k": 742,
+"km2": 1.1
+},
+"R2_promo": {
+"k": 2678,
+"km2": 4.3
+},
+"R2_promo_SB": {
+"k": 1015,
+"km2": 2.0
+},
+"R3_zone_all": {
+"k": 2804,
+"km2": 4.5
+},
+"R3_zone_all_SB": {
+"k": 1091,
+"km2": 2.1
+},
+"R0_current@all": {
+"k": 2800,
+"km2": 31.1
+},
+"R0_current_SB@all": {
+"k": 1490,
+"km2": 10.8
+},
+"R1_protect@all": {
+"k": 2867,
+"km2": 34.4
+},
+"R1_protect_SB@all": {
+"k": 1604,
+"km2": 12.4
+},
+"R2_promo@all": {
+"k": 2480,
+"km2": 56.5
+},
+"R2_promo_SB@all": {
+"k": 1543,
+"km2": 23.1
+},
+"R3_zone_all@all": {
+"k": 2468,
+"km2": 60.3
+},
+"R3_zone_all_SB@all": {
+"k": 1608,
+"km2": 24.8
+}
+},
+"48250": {
+"R0_current": {
+"k": 2380,
+"km2": 3.4
+},
+"R0_current_SB": {
+"k": 635,
+"km2": 1.3
+},
+"R1_protect": {
+"k": 2419,
+"km2": 3.5
+},
+"R1_protect_SB": {
+"k": 651,
+"km2": 1.4
+},
+"R2_promo": {
+"k": 2692,
+"km2": 5.5
+},
+"R2_promo_SB": {
+"k": 882,
+"km2": 2.8
+},
+"R3_zone_all": {
+"k": 2722,
+"km2": 5.6
+},
+"R3_zone_all_SB": {
+"k": 894,
+"km2": 2.8
+},
+"R0_current@all": {
+"k": 3138,
+"km2": 15.8
+},
+"R0_current_SB@all": {
+"k": 1068,
+"km2": 4.1
+},
+"R1_protect@all": {
+"k": 3155,
+"km2": 16.3
+},
+"R1_protect_SB@all": {
+"k": 1084,
+"km2": 4.3
+},
+"R2_promo@all": {
+"k": 2958,
+"km2": 37.5
+},
+"R2_promo_SB@all": {
+"k": 1106,
+"km2": 17.8
+},
+"R3_zone_all@all": {
+"k": 2950,
+"km2": 38.2
+},
+"R3_zone_all_SB@all": {
+"k": 1114,
+"km2": 18.0
+}
+},
+"48270": {
+"R0_current": {
+"k": 2318,
+"km2": 3.8
+},
+"R0_current_SB": {
+"k": 641,
+"km2": 1.3
+},
+"R1_protect": {
+"k": 2463,
+"km2": 4.0
+},
+"R1_protect_SB": {
+"k": 697,
+"km2": 1.3
+},
+"R2_promo": {
+"k": 3352,
+"km2": 8.5
+},
+"R2_promo_SB": {
+"k": 1386,
+"km2": 4.4
+},
+"R3_zone_all": {
+"k": 3467,
+"km2": 8.7
+},
+"R3_zone_all_SB": {
+"k": 1428,
+"km2": 4.5
+},
+"R0_current@all": {
+"k": 3291,
+"km2": 40.1
+},
+"R0_current_SB@all": {
+"k": 1629,
+"km2": 9.6
+},
+"R1_protect@all": {
+"k": 3352,
+"km2": 43.2
+},
+"R1_protect_SB@all": {
+"k": 1706,
+"km2": 10.4
+},
+"R2_promo@all": {
+"k": 2736,
+"km2": 112.1
+},
+"R2_promo_SB@all": {
+"k": 1740,
+"km2": 54.7
+},
+"R3_zone_all@all": {
+"k": 2713,
+"km2": 115.2
+},
+"R3_zone_all_SB@all": {
+"k": 1783,
+"km2": 55.5
+}
+},
+"48310": {
+"R0_current": {
+"k": 1477,
+"km2": 1.5
+},
+"R0_current_SB": {
+"k": 330,
+"km2": 0.5
+},
+"R1_protect": {
+"k": 1565,
+"km2": 1.6
+},
+"R1_protect_SB": {
+"k": 377,
+"km2": 0.6
+},
+"R2_promo": {
+"k": 1593,
+"km2": 1.9
+},
+"R2_promo_SB": {
+"k": 390,
+"km2": 0.6
+},
+"R3_zone_all": {
+"k": 1670,
+"km2": 2.0
+},
+"R3_zone_all_SB": {
+"k": 433,
+"km2": 0.7
+},
+"R0_current@all": {
+"k": 1855,
+"km2": 16.5
+},
+"R0_current_SB@all": {
+"k": 748,
+"km2": 4.2
+},
+"R1_protect@all": {
+"k": 1878,
+"km2": 18.8
+},
+"R1_protect_SB@all": {
+"k": 825,
+"km2": 5.1
+},
+"R2_promo@all": {
+"k": 1657,
+"km2": 23.2
+},
+"R2_promo_SB@all": {
+"k": 765,
+"km2": 5.8
+},
+"R3_zone_all@all": {
+"k": 1666,
+"km2": 25.5
+},
+"R3_zone_all_SB@all": {
+"k": 825,
+"km2": 6.8
+}
+},
+"48330": {
+"R0_current": {
+"k": 1645,
+"km2": 1.6
+},
+"R0_current_SB": {
+"k": 326,
+"km2": 0.4
+},
+"R1_protect": {
+"k": 1647,
+"km2": 1.6
+},
+"R1_protect_SB": {
+"k": 326,
+"km2": 0.4
+},
+"R2_promo": {
+"k": 1679,
+"km2": 1.8
+},
+"R2_promo_SB": {
+"k": 345,
+"km2": 0.4
+},
+"R3_zone_all": {
+"k": 1679,
+"km2": 1.8
+},
+"R3_zone_all_SB": {
+"k": 345,
+"km2": 0.4
+},
+"R0_current@all": {
+"k": 2035,
+"km2": 15.4
+},
+"R0_current_SB@all": {
+"k": 830,
+"km2": 3.3
+},
+"R1_protect@all": {
+"k": 2037,
+"km2": 15.5
+},
+"R1_protect_SB@all": {
+"k": 834,
+"km2": 3.4
+},
+"R2_promo@all": {
+"k": 1990,
+"km2": 18.6
+},
+"R2_promo_SB@all": {
+"k": 826,
+"km2": 4.7
+},
+"R3_zone_all@all": {
+"k": 1991,
+"km2": 18.7
+},
+"R3_zone_all_SB@all": {
+"k": 830,
+"km2": 4.7
+}
+},
+"48720": {
+"R0_current": {
+"k": 1570,
+"km2": 1.8
+},
+"R0_current_SB": {
+"k": 675,
+"km2": 0.9
+},
+"R1_protect": {
+"k": 1703,
+"km2": 1.9
+},
+"R1_protect_SB": {
+"k": 750,
+"km2": 1.0
+},
+"R2_promo": {
+"k": 2133,
+"km2": 4.1
+},
+"R2_promo_SB": {
+"k": 1038,
+"km2": 2.5
+},
+"R3_zone_all": {
+"k": 2244,
+"km2": 4.2
+},
+"R3_zone_all_SB": {
+"k": 1104,
+"km2": 2.6
+},
+"R0_current@all": {
+"k": 2264,
+"km2": 24.0
+},
+"R0_current_SB@all": {
+"k": 1534,
+"km2": 10.3
+},
+"R1_protect@all": {
+"k": 2263,
+"km2": 26.5
+},
+"R1_protect_SB@all": {
+"k": 1589,
+"km2": 11.4
+},
+"R2_promo@all": {
+"k": 1849,
+"km2": 51.8
+},
+"R2_promo_SB@all": {
+"k": 1548,
+"km2": 27.0
+},
+"R3_zone_all@all": {
+"k": 1808,
+"km2": 54.4
+},
+"R3_zone_all_SB@all": {
+"k": 1581,
+"km2": 28.1
+}
+},
+"48730": {
+"R0_current": {
+"k": 1674,
+"km2": 2.0
+},
+"R0_current_SB": {
+"k": 568,
+"km2": 0.7
+},
+"R1_protect": {
+"k": 1803,
+"km2": 2.1
+},
+"R1_protect_SB": {
+"k": 638,
+"km2": 0.8
+},
+"R2_promo": {
+"k": 2540,
+"km2": 5.5
+},
+"R2_promo_SB": {
+"k": 1218,
+"km2": 3.3
+},
+"R3_zone_all": {
+"k": 2646,
+"km2": 5.7
+},
+"R3_zone_all_SB": {
+"k": 1279,
+"km2": 3.4
+},
+"R0_current@all": {
+"k": 2158,
+"km2": 30.2
+},
+"R0_current_SB@all": {
+"k": 1245,
+"km2": 10.4
+},
+"R1_protect@all": {
+"k": 2245,
+"km2": 32.9
+},
+"R1_protect_SB@all": {
+"k": 1343,
+"km2": 11.6
+},
+"R2_promo@all": {
+"k": 1789,
+"km2": 76.1
+},
+"R2_promo_SB@all": {
+"k": 1248,
+"km2": 41.8
+},
+"R3_zone_all@all": {
+"k": 1833,
+"km2": 78.8
+},
+"R3_zone_all_SB@all": {
+"k": 1321,
+"km2": 43.0
+}
+},
+"48740": {
+"R0_current": {
+"k": 2127,
+"km2": 3.8
+},
+"R0_current_SB": {
+"k": 929,
+"km2": 2.0
+},
+"R1_protect": {
+"k": 2386,
+"km2": 4.1
+},
+"R1_protect_SB": {
+"k": 1070,
+"km2": 2.3
+},
+"R2_promo": {
+"k": 3037,
+"km2": 7.9
+},
+"R2_promo_SB": {
+"k": 1621,
+"km2": 4.9
+},
+"R3_zone_all": {
+"k": 3255,
+"km2": 8.3
+},
+"R3_zone_all_SB": {
+"k": 1741,
+"km2": 5.2
+},
+"R0_current@all": {
+"k": 2645,
+"km2": 35.0
+},
+"R0_current_SB@all": {
+"k": 1596,
+"km2": 14.3
+},
+"R1_protect@all": {
+"k": 2721,
+"km2": 40.8
+},
+"R1_protect_SB@all": {
+"k": 1746,
+"km2": 16.6
+},
+"R2_promo@all": {
+"k": 2055,
+"km2": 86.8
+},
+"R2_promo_SB@all": {
+"k": 1525,
+"km2": 48.2
+},
+"R3_zone_all@all": {
+"k": 2053,
+"km2": 92.6
+},
+"R3_zone_all_SB@all": {
+"k": 1620,
+"km2": 50.5
+}
+},
+"48820": {
+"R0_current": {
+"k": 1513,
+"km2": 1.6
+},
+"R0_current_SB": {
+"k": 464,
+"km2": 0.5
+},
+"R1_protect": {
+"k": 1624,
+"km2": 1.8
+},
+"R1_protect_SB": {
+"k": 528,
+"km2": 0.6
+},
+"R2_promo": {
+"k": 2429,
+"km2": 5.2
+},
+"R2_promo_SB": {
+"k": 1057,
+"km2": 2.4
+},
+"R3_zone_all": {
+"k": 2514,
+"km2": 5.4
+},
+"R3_zone_all_SB": {
+"k": 1109,
+"km2": 2.5
+},
+"R0_current@all": {
+"k": 3072,
+"km2": 29.9
+},
+"R0_current_SB@all": {
+"k": 1578,
+"km2": 9.8
+},
+"R1_protect@all": {
+"k": 3114,
+"km2": 33.2
+},
+"R1_protect_SB@all": {
+"k": 1674,
+"km2": 11.3
+},
+"R2_promo@all": {
+"k": 2248,
+"km2": 77.6
+},
+"R2_promo_SB@all": {
+"k": 1591,
+"km2": 30.3
+},
+"R3_zone_all@all": {
+"k": 2216,
+"km2": 81.1
+},
+"R3_zone_all_SB@all": {
+"k": 1645,
+"km2": 31.8
+}
+},
+"48840": {
+"R0_current": {
+"k": 1246,
+"km2": 1.5
+},
+"R0_current_SB": {
+"k": 367,
+"km2": 0.6
+},
+"R1_protect": {
+"k": 1320,
+"km2": 1.6
+},
+"R1_protect_SB": {
+"k": 405,
+"km2": 0.6
+},
+"R2_promo": {
+"k": 1471,
+"km2": 2.1
+},
+"R2_promo_SB": {
+"k": 487,
+"km2": 0.8
+},
+"R3_zone_all": {
+"k": 1535,
+"km2": 2.2
+},
+"R3_zone_all_SB": {
+"k": 522,
+"km2": 0.9
+},
+"R0_current@all": {
+"k": 1850,
+"km2": 29.0
+},
+"R0_current_SB@all": {
+"k": 1092,
+"km2": 8.7
+},
+"R1_protect@all": {
+"k": 1839,
+"km2": 31.0
+},
+"R1_protect_SB@all": {
+"k": 1129,
+"km2": 9.3
+},
+"R2_promo@all": {
+"k": 1531,
+"km2": 42.5
+},
+"R2_promo_SB@all": {
+"k": 1090,
+"km2": 13.0
+},
+"R3_zone_all@all": {
+"k": 1502,
+"km2": 44.6
+},
+"R3_zone_all_SB@all": {
+"k": 1107,
+"km2": 13.6
+}
+},
+"48850": {
+"R0_current": {
+"k": 1874,
+"km2": 2.2
+},
+"R0_current_SB": {
+"k": 669,
+"km2": 0.8
+},
+"R1_protect": {
+"k": 2025,
+"km2": 2.5
+},
+"R1_protect_SB": {
+"k": 748,
+"km2": 0.9
+},
+"R2_promo": {
+"k": 2549,
+"km2": 5.7
+},
+"R2_promo_SB": {
+"k": 1139,
+"km2": 2.6
+},
+"R3_zone_all": {
+"k": 2660,
+"km2": 5.9
+},
+"R3_zone_all_SB": {
+"k": 1197,
+"km2": 2.7
+},
+"R0_current@all": {
+"k": 3119,
+"km2": 28.0
+},
+"R0_current_SB@all": {
+"k": 1786,
+"km2": 9.7
+},
+"R1_protect@all": {
+"k": 3189,
+"km2": 31.2
+},
+"R1_protect_SB@all": {
+"k": 1852,
+"km2": 10.9
+},
+"R2_promo@all": {
+"k": 2414,
+"km2": 66.4
+},
+"R2_promo_SB@all": {
+"k": 1785,
+"km2": 26.5
+},
+"R3_zone_all@all": {
+"k": 2402,
+"km2": 69.6
+},
+"R3_zone_all_SB@all": {
+"k": 1815,
+"km2": 27.7
+}
+},
+"48860": {
+"R0_current": {
+"k": 1680,
+"km2": 2.0
+},
+"R0_current_SB": {
+"k": 689,
+"km2": 1.0
+},
+"R1_protect": {
+"k": 1786,
+"km2": 2.2
+},
+"R1_protect_SB": {
+"k": 752,
+"km2": 1.1
+},
+"R2_promo": {
+"k": 2303,
+"km2": 3.8
+},
+"R2_promo_SB": {
+"k": 1078,
+"km2": 1.9
+},
+"R3_zone_all": {
+"k": 2380,
+"km2": 3.9
+},
+"R3_zone_all_SB": {
+"k": 1132,
+"km2": 2.0
+},
+"R0_current@all": {
+"k": 3570,
+"km2": 36.0
+},
+"R0_current_SB@all": {
+"k": 2304,
+"km2": 16.1
+},
+"R1_protect@all": {
+"k": 3608,
+"km2": 38.6
+},
+"R1_protect_SB@all": {
+"k": 2380,
+"km2": 17.4
+},
+"R2_promo@all": {
+"k": 3001,
+"km2": 64.1
+},
+"R2_promo_SB@all": {
+"k": 2303,
+"km2": 28.7
+},
+"R3_zone_all@all": {
+"k": 2959,
+"km2": 66.7
+},
+"R3_zone_all_SB@all": {
+"k": 2335,
+"km2": 30.0
+}
+},
+"48870": {
+"R0_current": {
+"k": 2074,
+"km2": 3.2
+},
+"R0_current_SB": {
+"k": 1092,
+"km2": 1.8
+},
+"R1_protect": {
+"k": 2164,
+"km2": 3.4
+},
+"R1_protect_SB": {
+"k": 1145,
+"km2": 1.9
+},
+"R2_promo": {
+"k": 2431,
+"km2": 4.6
+},
+"R2_promo_SB": {
+"k": 1379,
+"km2": 2.7
+},
+"R3_zone_all": {
+"k": 2476,
+"km2": 4.9
+},
+"R3_zone_all_SB": {
+"k": 1403,
+"km2": 2.8
+},
+"R0_current@all": {
+"k": 3315,
+"km2": 38.7
+},
+"R0_current_SB@all": {
+"k": 2596,
+"km2": 20.1
+},
+"R1_protect@all": {
+"k": 3267,
+"km2": 42.2
+},
+"R1_protect_SB@all": {
+"k": 2634,
+"km2": 21.7
+},
+"R2_promo@all": {
+"k": 2723,
+"km2": 63.1
+},
+"R2_promo_SB@all": {
+"k": 2420,
+"km2": 32.6
+},
+"R3_zone_all@all": {
+"k": 2605,
+"km2": 69.6
+},
+"R3_zone_all_SB@all": {
+"k": 2410,
+"km2": 34.2
+}
+},
+"48880": {
+"R0_current": {
+"k": 1358,
+"km2": 1.6
+},
+"R0_current_SB": {
+"k": 538,
+"km2": 0.7
+},
+"R1_protect": {
+"k": 1458,
+"km2": 1.8
+},
+"R1_protect_SB": {
+"k": 613,
+"km2": 0.9
+},
+"R2_promo": {
+"k": 1870,
+"km2": 3.0
+},
+"R2_promo_SB": {
+"k": 914,
+"km2": 1.6
+},
+"R3_zone_all": {
+"k": 1942,
+"km2": 3.3
+},
+"R3_zone_all_SB": {
+"k": 971,
+"km2": 1.7
+},
+"R0_current@all": {
+"k": 2526,
+"km2": 32.1
+},
+"R0_current_SB@all": {
+"k": 1553,
+"km2": 15.6
+},
+"R1_protect@all": {
+"k": 2539,
+"km2": 35.5
+},
+"R1_protect_SB@all": {
+"k": 1631,
+"km2": 17.3
+},
+"R2_promo@all": {
+"k": 2050,
+"km2": 62.9
+},
+"R2_promo_SB@all": {
+"k": 1534,
+"km2": 33.4
+},
+"R3_zone_all@all": {
+"k": 1996,
+"km2": 66.6
+},
+"R3_zone_all_SB@all": {
+"k": 1564,
+"km2": 35.1
+}
+},
+"48890": {
+"R0_current": {
+"k": 2285,
+"km2": 2.8
+},
+"R0_current_SB": {
+"k": 1071,
+"km2": 1.5
+},
+"R1_protect": {
+"k": 2398,
+"km2": 2.9
+},
+"R1_protect_SB": {
+"k": 1140,
+"km2": 1.6
+},
+"R2_promo": {
+"k": 3305,
+"km2": 5.8
+},
+"R2_promo_SB": {
+"k": 1783,
+"km2": 3.4
+},
+"R3_zone_all": {
+"k": 3396,
+"km2": 6.0
+},
+"R3_zone_all_SB": {
+"k": 1842,
+"km2": 3.5
+},
+"R0_current@all": {
+"k": 5121,
+"km2": 51.2
+},
+"R0_current_SB@all": {
+"k": 3626,
+"km2": 26.1
+},
+"R1_protect@all": {
+"k": 5081,
+"km2": 53.4
+},
+"R1_protect_SB@all": {
+"k": 3654,
+"km2": 27.2
+},
+"R2_promo@all": {
+"k": 4205,
+"km2": 101.8
+},
+"R2_promo_SB@all": {
+"k": 3519,
+"km2": 56.3
+},
+"R3_zone_all@all": {
+"k": 4085,
+"km2": 103.9
+},
+"R3_zone_all_SB@all": {
+"k": 3498,
+"km2": 57.4
+}
+},
+"50110": {
+"R0_current": {
+"k": 2923,
+"km2": 6.9
+},
+"R0_current_SB": {
+"k": 1263,
+"km2": 4.1
+},
+"R1_protect": {
+"k": 2923,
+"km2": 6.9
+},
+"R1_protect_SB": {
+"k": 1263,
+"km2": 4.1
+},
+"R2_promo": {
+"k": 2923,
+"km2": 6.9
+},
+"R2_promo_SB": {
+"k": 1263,
+"km2": 4.1
+},
+"R3_zone_all": {
+"k": 2923,
+"km2": 6.9
+},
+"R3_zone_all_SB": {
+"k": 1263,
+"km2": 4.1
+},
+"R0_current@all": {
+"k": 4303,
+"km2": 182.5
+},
+"R0_current_SB@all": {
+"k": 2952,
+"km2": 100.0
+},
+"R1_protect@all": {
+"k": 4303,
+"km2": 182.5
+},
+"R1_protect_SB@all": {
+"k": 2952,
+"km2": 100.0
+},
+"R2_promo@all": {
+"k": 4303,
+"km2": 182.5
+},
+"R2_promo_SB@all": {
+"k": 2952,
+"km2": 100.0
+},
+"R3_zone_all@all": {
+"k": 4303,
+"km2": 182.5
+},
+"R3_zone_all_SB@all": {
+"k": 2952,
+"km2": 100.0
+}
+},
+"50130": {
+"R0_current": {
+"k": 2548,
+"km2": 9.7
+},
+"R0_current_SB": {
+"k": 1210,
+"km2": 7.6
+},
+"R1_protect": {
+"k": 2548,
+"km2": 9.7
+},
+"R1_protect_SB": {
+"k": 1210,
+"km2": 7.6
+},
+"R2_promo": {
+"k": 2548,
+"km2": 9.7
+},
+"R2_promo_SB": {
+"k": 1210,
+"km2": 7.6
+},
+"R3_zone_all": {
+"k": 2548,
+"km2": 9.7
+},
+"R3_zone_all_SB": {
+"k": 1210,
+"km2": 7.6
+},
+"R0_current@all": {
+"k": 4639,
+"km2": 160.5
+},
+"R0_current_SB@all": {
+"k": 2929,
+"km2": 90.9
+},
+"R1_protect@all": {
+"k": 4639,
+"km2": 160.5
+},
+"R1_protect_SB@all": {
+"k": 2929,
+"km2": 90.9
+},
+"R2_promo@all": {
+"k": 4639,
+"km2": 160.5
+},
+"R2_promo_SB@all": {
+"k": 2929,
+"km2": 90.9
+},
+"R3_zone_all@all": {
+"k": 4639,
+"km2": 160.5
+},
+"R3_zone_all_SB@all": {
+"k": 2929,
+"km2": 90.9
+}
+},
+"51110": {
+"R0_current": {
+"k": 2769,
+"km2": 5.0
+},
+"R0_current_SB": {
+"k": 763,
+"km2": 1.7
+},
+"R1_protect": {
+"k": 2766,
+"km2": 5.0
+},
+"R1_protect_SB": {
+"k": 764,
+"km2": 1.7
+},
+"R2_promo": {
+"k": 2821,
+"km2": 5.2
+},
+"R2_promo_SB": {
+"k": 785,
+"km2": 1.7
+},
+"R3_zone_all": {
+"k": 2816,
+"km2": 5.3
+},
+"R3_zone_all_SB": {
+"k": 786,
+"km2": 1.8
+},
+"R0_current@all": {
+"k": 3582,
+"km2": 46.0
+},
+"R0_current_SB@all": {
+"k": 1754,
+"km2": 11.9
+},
+"R1_protect@all": {
+"k": 3576,
+"km2": 46.2
+},
+"R1_protect_SB@all": {
+"k": 1755,
+"km2": 11.9
+},
+"R2_promo@all": {
+"k": 3505,
+"km2": 49.2
+},
+"R2_promo_SB@all": {
+"k": 1761,
+"km2": 12.7
+},
+"R3_zone_all@all": {
+"k": 3497,
+"km2": 49.4
+},
+"R3_zone_all_SB@all": {
+"k": 1762,
+"km2": 12.7
+}
+},
+"51130": {
+"R0_current": {
+"k": 3147,
+"km2": 5.7
+},
+"R0_current_SB": {
+"k": 998,
+"km2": 2.6
+},
+"R1_protect": {
+"k": 3260,
+"km2": 5.9
+},
+"R1_protect_SB": {
+"k": 1047,
+"km2": 2.7
+},
+"R2_promo": {
+"k": 3498,
+"km2": 7.9
+},
+"R2_promo_SB": {
+"k": 1203,
+"km2": 3.8
+},
+"R3_zone_all": {
+"k": 3591,
+"km2": 8.1
+},
+"R3_zone_all_SB": {
+"k": 1243,
+"km2": 3.9
+},
+"R0_current@all": {
+"k": 5632,
+"km2": 55.6
+},
+"R0_current_SB@all": {
+"k": 3157,
+"km2": 18.5
+},
+"R1_protect@all": {
+"k": 5568,
+"km2": 59.2
+},
+"R1_protect_SB@all": {
+"k": 3189,
+"km2": 19.6
+},
+"R2_promo@all": {
+"k": 4976,
+"km2": 79.8
+},
+"R2_promo_SB@all": {
+"k": 3109,
+"km2": 28.6
+},
+"R3_zone_all@all": {
+"k": 4883,
+"km2": 83.4
+},
+"R3_zone_all_SB@all": {
+"k": 3117,
+"km2": 29.8
+}
+},
+"51150": {
+"R0_current": {
+"k": 2639,
+"km2": 5.5
+},
+"R0_current_SB": {
+"k": 814,
+"km2": 2.2
+},
+"R1_protect": {
+"k": 2679,
+"km2": 5.6
+},
+"R1_protect_SB": {
+"k": 831,
+"km2": 2.3
+},
+"R2_promo": {
+"k": 2951,
+"km2": 8.2
+},
+"R2_promo_SB": {
+"k": 1000,
+"km2": 4.2
+},
+"R3_zone_all": {
+"k": 2975,
+"km2": 8.3
+},
+"R3_zone_all_SB": {
+"k": 1013,
+"km2": 4.2
+},
+"R0_current@all": {
+"k": 4707,
+"km2": 47.7
+},
+"R0_current_SB@all": {
+"k": 2474,
+"km2": 17.8
+},
+"R1_protect@all": {
+"k": 4723,
+"km2": 48.9
+},
+"R1_protect_SB@all": {
+"k": 2518,
+"km2": 18.2
+},
+"R2_promo@all": {
+"k": 4192,
+"km2": 68.4
+},
+"R2_promo_SB@all": {
+"k": 2465,
+"km2": 26.6
+},
+"R3_zone_all@all": {
+"k": 4186,
+"km2": 69.7
+},
+"R3_zone_all_SB@all": {
+"k": 2501,
+"km2": 27.0
+}
+},
+"51170": {
+"R0_current": {
+"k": 881,
+"km2": 0.8
+},
+"R0_current_SB": {
+"k": 183,
+"km2": 0.2
+},
+"R1_protect": {
+"k": 882,
+"km2": 0.8
+},
+"R1_protect_SB": {
+"k": 183,
+"km2": 0.2
+},
+"R2_promo": {
+"k": 881,
+"km2": 0.8
+},
+"R2_promo_SB": {
+"k": 183,
+"km2": 0.2
+},
+"R3_zone_all": {
+"k": 881,
+"km2": 0.8
+},
+"R3_zone_all_SB": {
+"k": 183,
+"km2": 0.2
+},
+"R0_current@all": {
+"k": 1135,
+"km2": 7.7
+},
+"R0_current_SB@all": {
+"k": 494,
+"km2": 2.1
+},
+"R1_protect@all": {
+"k": 1134,
+"km2": 7.8
+},
+"R1_protect_SB@all": {
+"k": 493,
+"km2": 2.1
+},
+"R2_promo@all": {
+"k": 1134,
+"km2": 7.7
+},
+"R2_promo_SB@all": {
+"k": 494,
+"km2": 2.1
+},
+"R3_zone_all@all": {
+"k": 1134,
+"km2": 7.8
+},
+"R3_zone_all_SB@all": {
+"k": 493,
+"km2": 2.1
+}
+},
+"51190": {
+"R0_current": {
+"k": 404,
+"km2": 0.7
+},
+"R0_current_SB": {
+"k": 171,
+"km2": 0.3
+},
+"R1_protect": {
+"k": 408,
+"km2": 0.8
+},
+"R1_protect_SB": {
+"k": 174,
+"km2": 0.3
+},
+"R2_promo": {
+"k": 410,
+"km2": 0.8
+},
+"R2_promo_SB": {
+"k": 176,
+"km2": 0.4
+},
+"R3_zone_all": {
+"k": 414,
+"km2": 0.8
+},
+"R3_zone_all_SB": {
+"k": 179,
+"km2": 0.4
+},
+"R0_current@all": {
+"k": 699,
+"km2": 3.5
+},
+"R0_current_SB@all": {
+"k": 390,
+"km2": 1.9
+},
+"R1_protect@all": {
+"k": 705,
+"km2": 3.6
+},
+"R1_protect_SB@all": {
+"k": 395,
+"km2": 2.0
+},
+"R2_promo@all": {
+"k": 708,
+"km2": 3.9
+},
+"R2_promo_SB@all": {
+"k": 405,
+"km2": 2.1
+},
+"R3_zone_all@all": {
+"k": 713,
+"km2": 4.0
+},
+"R3_zone_all_SB@all": {
+"k": 410,
+"km2": 2.2
+}
+},
+"51210": {
+"R0_current": {
+"k": 448,
+"km2": 0.4
+},
+"R0_current_SB": {
+"k": 130,
+"km2": 0.1
+},
+"R1_protect": {
+"k": 448,
+"km2": 0.4
+},
+"R1_protect_SB": {
+"k": 130,
+"km2": 0.1
+},
+"R2_promo": {
+"k": 448,
+"km2": 0.4
+},
+"R2_promo_SB": {
+"k": 130,
+"km2": 0.1
+},
+"R3_zone_all": {
+"k": 448,
+"km2": 0.4
+},
+"R3_zone_all_SB": {
+"k": 130,
+"km2": 0.1
+},
+"R0_current@all": {
+"k": 453,
+"km2": 4.9
+},
+"R0_current_SB@all": {
+"k": 147,
+"km2": 1.7
+},
+"R1_protect@all": {
+"k": 453,
+"km2": 4.9
+},
+"R1_protect_SB@all": {
+"k": 147,
+"km2": 1.7
+},
+"R2_promo@all": {
+"k": 453,
+"km2": 4.9
+},
+"R2_promo_SB@all": {
+"k": 147,
+"km2": 1.7
+},
+"R3_zone_all@all": {
+"k": 453,
+"km2": 4.9
+},
+"R3_zone_all_SB@all": {
+"k": 147,
+"km2": 1.7
+}
+},
+"51230": {
+"R0_current": {
+"k": 1620,
+"km2": 2.5
+},
+"R0_current_SB": {
+"k": 685,
+"km2": 1.0
+},
+"R1_protect": {
+"k": 1628,
+"km2": 2.5
+},
+"R1_protect_SB": {
+"k": 687,
+"km2": 1.0
+},
+"R2_promo": {
+"k": 1694,
+"km2": 2.8
+},
+"R2_promo_SB": {
+"k": 729,
+"km2": 1.1
+},
+"R3_zone_all": {
+"k": 1702,
+"km2": 2.8
+},
+"R3_zone_all_SB": {
+"k": 731,
+"km2": 1.1
+},
+"R0_current@all": {
+"k": 4149,
+"km2": 25.5
+},
+"R0_current_SB@all": {
+"k": 2721,
+"km2": 12.0
+},
+"R1_protect@all": {
+"k": 4131,
+"km2": 25.9
+},
+"R1_protect_SB@all": {
+"k": 2726,
+"km2": 12.0
+},
+"R2_promo@all": {
+"k": 4081,
+"km2": 29.1
+},
+"R2_promo_SB@all": {
+"k": 2711,
+"km2": 13.7
+},
+"R3_zone_all@all": {
+"k": 4061,
+"km2": 29.5
+},
+"R3_zone_all_SB@all": {
+"k": 2714,
+"km2": 13.8
+}
+},
+"51720": {
+"R0_current": {
+"k": 3192,
+"km2": 6.2
+},
+"R0_current_SB": {
+"k": 1149,
+"km2": 2.7
+},
+"R1_protect": {
+"k": 3314,
+"km2": 6.5
+},
+"R1_protect_SB": {
+"k": 1181,
+"km2": 2.8
+},
+"R2_promo": {
+"k": 3868,
+"km2": 8.8
+},
+"R2_promo_SB": {
+"k": 1429,
+"km2": 3.5
+},
+"R3_zone_all": {
+"k": 3926,
+"km2": 9.2
+},
+"R3_zone_all_SB": {
+"k": 1455,
+"km2": 3.6
+},
+"R0_current@all": {
+"k": 6914,
+"km2": 64.6
+},
+"R0_current_SB@all": {
+"k": 4107,
+"km2": 19.2
+},
+"R1_protect@all": {
+"k": 7040,
+"km2": 67.6
+},
+"R1_protect_SB@all": {
+"k": 4184,
+"km2": 19.7
+},
+"R2_promo@all": {
+"k": 6371,
+"km2": 93.5
+},
+"R2_promo_SB@all": {
+"k": 4298,
+"km2": 26.3
+},
+"R3_zone_all@all": {
+"k": 6280,
+"km2": 96.6
+},
+"R3_zone_all_SB@all": {
+"k": 4338,
+"km2": 26.8
+}
+},
+"51730": {
+"R0_current": {
+"k": 2279,
+"km2": 4.1
+},
+"R0_current_SB": {
+"k": 868,
+"km2": 1.8
+},
+"R1_protect": {
+"k": 2353,
+"km2": 4.3
+},
+"R1_protect_SB": {
+"k": 902,
+"km2": 1.9
+},
+"R2_promo": {
+"k": 2883,
+"km2": 6.6
+},
+"R2_promo_SB": {
+"k": 1139,
+"km2": 2.8
+},
+"R3_zone_all": {
+"k": 2942,
+"km2": 6.8
+},
+"R3_zone_all_SB": {
+"k": 1168,
+"km2": 2.8
+},
+"R0_current@all": {
+"k": 6276,
+"km2": 64.9
+},
+"R0_current_SB@all": {
+"k": 3730,
+"km2": 18.2
+},
+"R1_protect@all": {
+"k": 6244,
+"km2": 67.9
+},
+"R1_protect_SB@all": {
+"k": 3759,
+"km2": 19.0
+},
+"R2_promo@all": {
+"k": 5682,
+"km2": 87.7
+},
+"R2_promo_SB@all": {
+"k": 3838,
+"km2": 24.9
+},
+"R3_zone_all@all": {
+"k": 5578,
+"km2": 90.7
+},
+"R3_zone_all_SB@all": {
+"k": 3843,
+"km2": 25.6
+}
+},
+"51750": {
+"R0_current": {
+"k": 2631,
+"km2": 4.3
+},
+"R0_current_SB": {
+"k": 1273,
+"km2": 2.2
+},
+"R1_protect": {
+"k": 2650,
+"km2": 4.5
+},
+"R1_protect_SB": {
+"k": 1280,
+"km2": 2.3
+},
+"R2_promo": {
+"k": 2841,
+"km2": 5.5
+},
+"R2_promo_SB": {
+"k": 1361,
+"km2": 2.6
+},
+"R3_zone_all": {
+"k": 2850,
+"km2": 5.6
+},
+"R3_zone_all_SB": {
+"k": 1366,
+"km2": 2.7
+},
+"R0_current@all": {
+"k": 4338,
+"km2": 33.3
+},
+"R0_current_SB@all": {
+"k": 2727,
+"km2": 13.8
+},
+"R1_protect@all": {
+"k": 4304,
+"km2": 34.4
+},
+"R1_protect_SB@all": {
+"k": 2733,
+"km2": 14.0
+},
+"R2_promo@all": {
+"k": 4023,
+"km2": 43.8
+},
+"R2_promo_SB@all": {
+"k": 2743,
+"km2": 16.5
+},
+"R3_zone_all@all": {
+"k": 3989,
+"km2": 44.9
+},
+"R3_zone_all_SB@all": {
+"k": 2745,
+"km2": 16.7
+}
+},
+"51760": {
+"R0_current": {
+"k": 3132,
+"km2": 8.7
+},
+"R0_current_SB": {
+"k": 1291,
+"km2": 3.8
+},
+"R1_protect": {
+"k": 3196,
+"km2": 9.1
+},
+"R1_protect_SB": {
+"k": 1315,
+"km2": 4.0
+},
+"R2_promo": {
+"k": 3348,
+"km2": 10.3
+},
+"R2_promo_SB": {
+"k": 1404,
+"km2": 4.4
+},
+"R3_zone_all": {
+"k": 3400,
+"km2": 10.8
+},
+"R3_zone_all_SB": {
+"k": 1425,
+"km2": 4.6
+},
+"R0_current@all": {
+"k": 4391,
+"km2": 58.8
+},
+"R0_current_SB@all": {
+"k": 2827,
+"km2": 19.9
+},
+"R1_protect@all": {
+"k": 4384,
+"km2": 60.4
+},
+"R1_protect_SB@all": {
+"k": 2839,
+"km2": 20.4
+},
+"R2_promo@all": {
+"k": 4189,
+"km2": 70.0
+},
+"R2_promo_SB@all": {
+"k": 2875,
+"km2": 22.6
+},
+"R3_zone_all@all": {
+"k": 4155,
+"km2": 71.6
+},
+"R3_zone_all_SB@all": {
+"k": 2876,
+"km2": 23.1
+}
+},
+"51770": {
+"R0_current": {
+"k": 1828,
+"km2": 2.9
+},
+"R0_current_SB": {
+"k": 879,
+"km2": 1.5
+},
+"R1_protect": {
+"k": 1841,
+"km2": 2.9
+},
+"R1_protect_SB": {
+"k": 881,
+"km2": 1.5
+},
+"R2_promo": {
+"k": 2000,
+"km2": 3.8
+},
+"R2_promo_SB": {
+"k": 948,
+"km2": 2.0
+},
+"R3_zone_all": {
+"k": 2010,
+"km2": 3.8
+},
+"R3_zone_all_SB": {
+"k": 950,
+"km2": 2.0
+},
+"R0_current@all": {
+"k": 3338,
+"km2": 27.2
+},
+"R0_current_SB@all": {
+"k": 2239,
+"km2": 13.5
+},
+"R1_protect@all": {
+"k": 3346,
+"km2": 27.5
+},
+"R1_protect_SB@all": {
+"k": 2245,
+"km2": 13.6
+},
+"R2_promo@all": {
+"k": 3276,
+"km2": 35.8
+},
+"R2_promo_SB@all": {
+"k": 2315,
+"km2": 16.3
+},
+"R3_zone_all@all": {
+"k": 3270,
+"km2": 36.1
+},
+"R3_zone_all_SB@all": {
+"k": 2315,
+"km2": 16.4
+}
+},
+"51780": {
+"R0_current": {
+"k": 1270,
+"km2": 5.0
+},
+"R0_current_SB": {
+"k": 620,
+"km2": 3.0
+},
+"R1_protect": {
+"k": 1293,
+"km2": 5.1
+},
+"R1_protect_SB": {
+"k": 632,
+"km2": 3.0
+},
+"R2_promo": {
+"k": 1484,
+"km2": 6.7
+},
+"R2_promo_SB": {
+"k": 788,
+"km2": 4.0
+},
+"R3_zone_all": {
+"k": 1505,
+"km2": 6.8
+},
+"R3_zone_all_SB": {
+"k": 800,
+"km2": 4.1
+},
+"R0_current@all": {
+"k": 1222,
+"km2": 17.2
+},
+"R0_current_SB@all": {
+"k": 751,
+"km2": 8.4
+},
+"R1_protect@all": {
+"k": 1220,
+"km2": 17.7
+},
+"R1_protect_SB@all": {
+"k": 766,
+"km2": 8.5
+},
+"R2_promo@all": {
+"k": 1022,
+"km2": 42.4
+},
+"R2_promo_SB@all": {
+"k": 719,
+"km2": 23.8
+},
+"R3_zone_all@all": {
+"k": 1008,
+"km2": 43.0
+},
+"R3_zone_all_SB@all": {
+"k": 729,
+"km2": 23.9
+}
+},
+"51790": {
+"R0_current": {
+"k": 1277,
+"km2": 2.0
+},
+"R0_current_SB": {
+"k": 623,
+"km2": 1.3
+},
+"R1_protect": {
+"k": 1295,
+"km2": 2.1
+},
+"R1_protect_SB": {
+"k": 631,
+"km2": 1.3
+},
+"R2_promo": {
+"k": 1387,
+"km2": 2.5
+},
+"R2_promo_SB": {
+"k": 669,
+"km2": 1.5
+},
+"R3_zone_all": {
+"k": 1400,
+"km2": 2.5
+},
+"R3_zone_all_SB": {
+"k": 677,
+"km2": 1.5
+},
+"R0_current@all": {
+"k": 2539,
+"km2": 22.1
+},
+"R0_current_SB@all": {
+"k": 1728,
+"km2": 10.1
+},
+"R1_protect@all": {
+"k": 2528,
+"km2": 22.8
+},
+"R1_protect_SB@all": {
+"k": 1729,
+"km2": 10.3
+},
+"R2_promo@all": {
+"k": 2413,
+"km2": 27.7
+},
+"R2_promo_SB@all": {
+"k": 1736,
+"km2": 12.3
+},
+"R3_zone_all@all": {
+"k": 2387,
+"km2": 28.4
+},
+"R3_zone_all_SB@all": {
+"k": 1732,
+"km2": 12.4
+}
+},
+"51800": {
+"R0_current": {
+"k": 1083,
+"km2": 2.3
+},
+"R0_current_SB": {
+"k": 467,
+"km2": 1.4
+},
+"R1_protect": {
+"k": 1090,
+"km2": 2.3
+},
+"R1_protect_SB": {
+"k": 470,
+"km2": 1.4
+},
+"R2_promo": {
+"k": 1262,
+"km2": 3.0
+},
+"R2_promo_SB": {
+"k": 581,
+"km2": 1.7
+},
+"R3_zone_all": {
+"k": 1266,
+"km2": 3.0
+},
+"R3_zone_all_SB": {
+"k": 583,
+"km2": 1.7
+},
+"R0_current@all": {
+"k": 1456,
+"km2": 18.0
+},
+"R0_current_SB@all": {
+"k": 978,
+"km2": 8.4
+},
+"R1_protect@all": {
+"k": 1448,
+"km2": 18.3
+},
+"R1_protect_SB@all": {
+"k": 978,
+"km2": 8.5
+},
+"R2_promo@all": {
+"k": 1289,
+"km2": 27.4
+},
+"R2_promo_SB@all": {
+"k": 1027,
+"km2": 12.0
+},
+"R3_zone_all@all": {
+"k": 1271,
+"km2": 27.8
+},
+"R3_zone_all_SB@all": {
+"k": 1020,
+"km2": 12.2
+}
+},
+"51810": {
+"R0_current": {
+"k": 2077,
+"km2": 3.5
+},
+"R0_current_SB": {
+"k": 850,
+"km2": 1.7
+},
+"R1_protect": {
+"k": 2087,
+"km2": 3.5
+},
+"R1_protect_SB": {
+"k": 851,
+"km2": 1.7
+},
+"R2_promo": {
+"k": 2182,
+"km2": 3.8
+},
+"R2_promo_SB": {
+"k": 903,
+"km2": 1.9
+},
+"R3_zone_all": {
+"k": 2192,
+"km2": 3.8
+},
+"R3_zone_all_SB": {
+"k": 904,
+"km2": 1.9
+},
+"R0_current@all": {
+"k": 3357,
+"km2": 23.7
+},
+"R0_current_SB@all": {
+"k": 1982,
+"km2": 9.3
+},
+"R1_protect@all": {
+"k": 3366,
+"km2": 24.0
+},
+"R1_protect_SB@all": {
+"k": 1990,
+"km2": 9.4
+},
+"R2_promo@all": {
+"k": 3254,
+"km2": 28.4
+},
+"R2_promo_SB@all": {
+"k": 2007,
+"km2": 10.8
+},
+"R3_zone_all@all": {
+"k": 3245,
+"km2": 28.7
+},
+"R3_zone_all_SB@all": {
+"k": 2008,
+"km2": 10.9
+}
+},
+"51820": {
+"R0_current": {
+"k": 1285,
+"km2": 2.5
+},
+"R0_current_SB": {
+"k": 545,
+"km2": 1.5
+},
+"R1_protect": {
+"k": 1311,
+"km2": 2.5
+},
+"R1_protect_SB": {
+"k": 561,
+"km2": 1.6
+},
+"R2_promo": {
+"k": 1581,
+"km2": 3.4
+},
+"R2_promo_SB": {
+"k": 738,
+"km2": 2.3
+},
+"R3_zone_all": {
+"k": 1602,
+"km2": 3.5
+},
+"R3_zone_all_SB": {
+"k": 753,
+"km2": 2.3
+},
+"R0_current@all": {
+"k": 1697,
+"km2": 14.2
+},
+"R0_current_SB@all": {
+"k": 912,
+"km2": 7.5
+},
+"R1_protect@all": {
+"k": 1708,
+"km2": 14.9
+},
+"R1_protect_SB@all": {
+"k": 938,
+"km2": 7.9
+},
+"R2_promo@all": {
+"k": 1440,
+"km2": 31.8
+},
+"R2_promo_SB@all": {
+"k": 877,
+"km2": 18.9
+},
+"R3_zone_all@all": {
+"k": 1427,
+"km2": 32.5
+},
+"R3_zone_all_SB@all": {
+"k": 885,
+"km2": 19.2
+}
+},
+"51830": {
+"R0_current": {
+"k": 2218,
+"km2": 2.5
+},
+"R0_current_SB": {
+"k": 1009,
+"km2": 1.3
+},
+"R1_protect": {
+"k": 2255,
+"km2": 2.5
+},
+"R1_protect_SB": {
+"k": 1023,
+"km2": 1.4
+},
+"R2_promo": {
+"k": 2475,
+"km2": 2.9
+},
+"R2_promo_SB": {
+"k": 1139,
+"km2": 1.6
+},
+"R3_zone_all": {
+"k": 2510,
+"km2": 3.0
+},
+"R3_zone_all_SB": {
+"k": 1152,
+"km2": 1.6
+},
+"R0_current@all": {
+"k": 2657,
+"km2": 20.7
+},
+"R0_current_SB@all": {
+"k": 1515,
+"km2": 8.8
+},
+"R1_protect@all": {
+"k": 2634,
+"km2": 21.5
+},
+"R1_protect_SB@all": {
+"k": 1519,
+"km2": 9.0
+},
+"R2_promo@all": {
+"k": 2461,
+"km2": 30.6
+},
+"R2_promo_SB@all": {
+"k": 1511,
+"km2": 13.8
+},
+"R3_zone_all@all": {
+"k": 2427,
+"km2": 31.4
+},
+"R3_zone_all_SB@all": {
+"k": 1510,
+"km2": 14.1
+}
+},
+"52111": {
+"R0_current": {
+"k": 649,
+"km2": 0.9
+},
+"R0_current_SB": {
+"k": 111,
+"km2": 0.2
+},
+"R1_protect": {
+"k": 649,
+"km2": 0.9
+},
+"R1_protect_SB": {
+"k": 111,
+"km2": 0.2
+},
+"R2_promo": {
+"k": 649,
+"km2": 0.9
+},
+"R2_promo_SB": {
+"k": 111,
+"km2": 0.2
+},
+"R3_zone_all": {
+"k": 649,
+"km2": 0.9
+},
+"R3_zone_all_SB": {
+"k": 111,
+"km2": 0.2
+},
+"R0_current@all": {
+"k": 597,
+"km2": 9.9
+},
+"R0_current_SB@all": {
+"k": 145,
+"km2": 2.7
+},
+"R1_protect@all": {
+"k": 597,
+"km2": 9.9
+},
+"R1_protect_SB@all": {
+"k": 145,
+"km2": 2.7
+},
+"R2_promo@all": {
+"k": 597,
+"km2": 9.9
+},
+"R2_promo_SB@all": {
+"k": 145,
+"km2": 2.7
+},
+"R3_zone_all@all": {
+"k": 597,
+"km2": 9.9
+},
+"R3_zone_all_SB@all": {
+"k": 145,
+"km2": 2.7
+}
+},
+"52113": {
+"R0_current": {
+"k": 1210,
+"km2": 1.6
+},
+"R0_current_SB": {
+"k": 239,
+"km2": 0.5
+},
+"R1_protect": {
+"k": 1211,
+"km2": 1.6
+},
+"R1_protect_SB": {
+"k": 239,
+"km2": 0.5
+},
+"R2_promo": {
+"k": 1278,
+"km2": 2.3
+},
+"R2_promo_SB": {
+"k": 293,
+"km2": 1.0
+},
+"R3_zone_all": {
+"k": 1278,
+"km2": 2.3
+},
+"R3_zone_all_SB": {
+"k": 293,
+"km2": 1.0
+},
+"R0_current@all": {
+"k": 853,
+"km2": 25.0
+},
+"R0_current_SB@all": {
+"k": 246,
+"km2": 8.3
+},
+"R1_protect@all": {
+"k": 853,
+"km2": 25.0
+},
+"R1_protect_SB@all": {
+"k": 247,
+"km2": 8.3
+},
+"R2_promo@all": {
+"k": 837,
+"km2": 30.4
+},
+"R2_promo_SB@all": {
+"k": 253,
+"km2": 12.0
+},
+"R3_zone_all@all": {
+"k": 837,
+"km2": 30.4
+},
+"R3_zone_all_SB@all": {
+"k": 253,
+"km2": 12.0
+}
+},
+"52130": {
+"R0_current": {
+"k": 1899,
+"km2": 3.2
+},
+"R0_current_SB": {
+"k": 288,
+"km2": 1.1
+},
+"R1_protect": {
+"k": 1992,
+"km2": 3.6
+},
+"R1_protect_SB": {
+"k": 336,
+"km2": 1.2
+},
+"R2_promo": {
+"k": 2831,
+"km2": 10.5
+},
+"R2_promo_SB": {
+"k": 962,
+"km2": 4.8
+},
+"R3_zone_all": {
+"k": 2911,
+"km2": 10.8
+},
+"R3_zone_all_SB": {
+"k": 1007,
+"km2": 5.0
+},
+"R0_current@all": {
+"k": 2222,
+"km2": 40.0
+},
+"R0_current_SB@all": {
+"k": 473,
+"km2": 12.5
+},
+"R1_protect@all": {
+"k": 2156,
+"km2": 45.1
+},
+"R1_protect_SB@all": {
+"k": 514,
+"km2": 13.8
+},
+"R2_promo@all": {
+"k": 1740,
+"km2": 159.8
+},
+"R2_promo_SB@all": {
+"k": 625,
+"km2": 67.3
+},
+"R3_zone_all@all": {
+"k": 1659,
+"km2": 166.1
+},
+"R3_zone_all_SB@all": {
+"k": 650,
+"km2": 68.7
+}
+},
+"52140": {
+"R0_current": {
+"k": 3632,
+"km2": 8.5
+},
+"R0_current_SB": {
+"k": 1069,
+"km2": 3.9
+},
+"R1_protect": {
+"k": 3778,
+"km2": 9.0
+},
+"R1_protect_SB": {
+"k": 1136,
+"km2": 4.1
+},
+"R2_promo": {
+"k": 5014,
+"km2": 17.7
+},
+"R2_promo_SB": {
+"k": 2128,
+"km2": 10.1
+},
+"R3_zone_all": {
+"k": 5115,
+"km2": 18.2
+},
+"R3_zone_all_SB": {
+"k": 2176,
+"km2": 10.3
+},
+"R0_current@all": {
+"k": 3691,
+"km2": 78.5
+},
+"R0_current_SB@all": {
+"k": 1594,
+"km2": 27.8
+},
+"R1_protect@all": {
+"k": 3612,
+"km2": 85.4
+},
+"R1_protect_SB@all": {
+"k": 1681,
+"km2": 30.1
+},
+"R2_promo@all": {
+"k": 2766,
+"km2": 230.4
+},
+"R2_promo_SB@all": {
+"k": 1469,
+"km2": 116.8
+},
+"R3_zone_all@all": {
+"k": 2661,
+"km2": 238.6
+},
+"R3_zone_all_SB@all": {
+"k": 1506,
+"km2": 119.2
+}
+},
+"52180": {
+"R0_current": {
+"k": 3189,
+"km2": 5.3
+},
+"R0_current_SB": {
+"k": 1204,
+"km2": 2.3
+},
+"R1_protect": {
+"k": 3364,
+"km2": 5.9
+},
+"R1_protect_SB": {
+"k": 1323,
+"km2": 2.5
+},
+"R2_promo": {
+"k": 4558,
+"km2": 13.0
+},
+"R2_promo_SB": {
+"k": 2289,
+"km2": 7.5
+},
+"R3_zone_all": {
+"k": 4684,
+"km2": 13.5
+},
+"R3_zone_all_SB": {
+"k": 2378,
+"km2": 7.8
+},
+"R0_current@all": {
+"k": 3690,
+"km2": 78.8
+},
+"R0_current_SB@all": {
+"k": 2104,
+"km2": 31.7
+},
+"R1_protect@all": {
+"k": 3616,
+"km2": 87.2
+},
+"R1_protect_SB@all": {
+"k": 2157,
+"km2": 35.0
+},
+"R2_promo@all": {
+"k": 2797,
+"km2": 218.9
+},
+"R2_promo_SB@all": {
+"k": 1928,
+"km2": 121.3
+},
+"R3_zone_all@all": {
+"k": 2660,
+"km2": 230.5
+},
+"R3_zone_all_SB@all": {
+"k": 1889,
+"km2": 124.6
+}
+},
+"52190": {
+"R0_current": {
+"k": 1973,
+"km2": 2.6
+},
+"R0_current_SB": {
+"k": 999,
+"km2": 1.7
+},
+"R1_protect": {
+"k": 2237,
+"km2": 2.9
+},
+"R1_protect_SB": {
+"k": 1175,
+"km2": 1.9
+},
+"R2_promo": {
+"k": 3220,
+"km2": 5.8
+},
+"R2_promo_SB": {
+"k": 1891,
+"km2": 3.9
+},
+"R3_zone_all": {
+"k": 3452,
+"km2": 6.2
+},
+"R3_zone_all_SB": {
+"k": 2051,
+"km2": 4.2
+},
+"R0_current@all": {
+"k": 4425,
+"km2": 48.1
+},
+"R0_current_SB@all": {
+"k": 3066,
+"km2": 26.2
+},
+"R1_protect@all": {
+"k": 4441,
+"km2": 56.3
+},
+"R1_protect_SB@all": {
+"k": 3215,
+"km2": 30.9
+},
+"R2_promo@all": {
+"k": 3171,
+"km2": 124.8
+},
+"R2_promo_SB@all": {
+"k": 2678,
+"km2": 76.2
+},
+"R3_zone_all@all": {
+"k": 2992,
+"km2": 133.6
+},
+"R3_zone_all_SB@all": {
+"k": 2673,
+"km2": 80.9
+}
+},
+"52210": {
+"R0_current": {
+"k": 2660,
+"km2": 5.5
+},
+"R0_current_SB": {
+"k": 954,
+"km2": 2.2
+},
+"R1_protect": {
+"k": 2864,
+"km2": 6.3
+},
+"R1_protect_SB": {
+"k": 1054,
+"km2": 2.6
+},
+"R2_promo": {
+"k": 4436,
+"km2": 15.9
+},
+"R2_promo_SB": {
+"k": 2161,
+"km2": 8.8
+},
+"R3_zone_all": {
+"k": 4606,
+"km2": 16.7
+},
+"R3_zone_all_SB": {
+"k": 2247,
+"km2": 9.2
+},
+"R0_current@all": {
+"k": 3150,
+"km2": 63.6
+},
+"R0_current_SB@all": {
+"k": 1659,
+"km2": 20.1
+},
+"R1_protect@all": {
+"k": 2865,
+"km2": 72.6
+},
+"R1_protect_SB@all": {
+"k": 1618,
+"km2": 23.3
+},
+"R2_promo@all": {
+"k": 2036,
+"km2": 241.6
+},
+"R2_promo_SB@all": {
+"k": 1549,
+"km2": 125.2
+},
+"R3_zone_all@all": {
+"k": 1722,
+"km2": 264.5
+},
+"R3_zone_all_SB@all": {
+"k": 1435,
+"km2": 128.6
+}
+},
+"52710": {
+"R0_current": {
+"k": 2274,
+"km2": 4.4
+},
+"R0_current_SB": {
+"k": 797,
+"km2": 1.8
+},
+"R1_protect": {
+"k": 2471,
+"km2": 4.8
+},
+"R1_protect_SB": {
+"k": 884,
+"km2": 2.0
+},
+"R2_promo": {
+"k": 2793,
+"km2": 6.3
+},
+"R2_promo_SB": {
+"k": 1113,
+"km2": 2.8
+},
+"R3_zone_all": {
+"k": 2980,
+"km2": 6.7
+},
+"R3_zone_all_SB": {
+"k": 1196,
+"km2": 3.0
+},
+"R0_current@all": {
+"k": 2964,
+"km2": 61.7
+},
+"R0_current_SB@all": {
+"k": 1615,
+"km2": 20.4
+},
+"R1_protect@all": {
+"k": 3056,
+"km2": 67.5
+},
+"R1_protect_SB@all": {
+"k": 1754,
+"km2": 22.4
+},
+"R2_promo@all": {
+"k": 2767,
+"km2": 112.4
+},
+"R2_promo_SB@all": {
+"k": 1729,
+"km2": 37.7
+},
+"R3_zone_all@all": {
+"k": 2799,
+"km2": 131.1
+},
+"R3_zone_all_SB@all": {
+"k": 1841,
+"km2": 39.6
+}
+},
+"52720": {
+"R0_current": {
+"k": 1614,
+"km2": 2.2
+},
+"R0_current_SB": {
+"k": 722,
+"km2": 1.2
+},
+"R1_protect": {
+"k": 1778,
+"km2": 2.5
+},
+"R1_protect_SB": {
+"k": 815,
+"km2": 1.4
+},
+"R2_promo": {
+"k": 2081,
+"km2": 3.3
+},
+"R2_promo_SB": {
+"k": 983,
+"km2": 1.8
+},
+"R3_zone_all": {
+"k": 2221,
+"km2": 3.6
+},
+"R3_zone_all_SB": {
+"k": 1057,
+"km2": 2.0
+},
+"R0_current@all": {
+"k": 2726,
+"km2": 34.2
+},
+"R0_current_SB@all": {
+"k": 1830,
+"km2": 16.2
+},
+"R1_protect@all": {
+"k": 2763,
+"km2": 38.4
+},
+"R1_protect_SB@all": {
+"k": 1931,
+"km2": 18.0
+},
+"R2_promo@all": {
+"k": 2414,
+"km2": 54.3
+},
+"R2_promo_SB@all": {
+"k": 1845,
+"km2": 26.0
+},
+"R3_zone_all@all": {
+"k": 2336,
+"km2": 60.3
+},
+"R3_zone_all_SB@all": {
+"k": 1875,
+"km2": 27.8
+}
+},
+"52730": {
+"R0_current": {
+"k": 1287,
+"km2": 1.5
+},
+"R0_current_SB": {
+"k": 583,
+"km2": 0.7
+},
+"R1_protect": {
+"k": 1404,
+"km2": 1.7
+},
+"R1_protect_SB": {
+"k": 642,
+"km2": 0.8
+},
+"R2_promo": {
+"k": 1593,
+"km2": 2.3
+},
+"R2_promo_SB": {
+"k": 799,
+"km2": 1.2
+},
+"R3_zone_all": {
+"k": 1700,
+"km2": 2.4
+},
+"R3_zone_all_SB": {
+"k": 854,
+"km2": 1.2
+},
+"R0_current@all": {
+"k": 1618,
+"km2": 25.9
+},
+"R0_current_SB@all": {
+"k": 1159,
+"km2": 12.1
+},
+"R1_protect@all": {
+"k": 1636,
+"km2": 28.2
+},
+"R1_protect_SB@all": {
+"k": 1209,
+"km2": 13.2
+},
+"R2_promo@all": {
+"k": 1489,
+"km2": 36.7
+},
+"R2_promo_SB@all": {
+"k": 1167,
+"km2": 17.9
+},
+"R3_zone_all@all": {
+"k": 1476,
+"km2": 41.0
+},
+"R3_zone_all_SB@all": {
+"k": 1189,
+"km2": 19.0
+}
+},
+"52740": {
+"R0_current": {
+"k": 1541,
+"km2": 2.4
+},
+"R0_current_SB": {
+"k": 856,
+"km2": 1.4
+},
+"R1_protect": {
+"k": 1691,
+"km2": 2.7
+},
+"R1_protect_SB": {
+"k": 936,
+"km2": 1.5
+},
+"R2_promo": {
+"k": 1967,
+"km2": 4.0
+},
+"R2_promo_SB": {
+"k": 1146,
+"km2": 2.3
+},
+"R3_zone_all": {
+"k": 2085,
+"km2": 4.2
+},
+"R3_zone_all_SB": {
+"k": 1214,
+"km2": 2.4
+},
+"R0_current@all": {
+"k": 2168,
+"km2": 31.3
+},
+"R0_current_SB@all": {
+"k": 1720,
+"km2": 17.1
+},
+"R1_protect@all": {
+"k": 2209,
+"km2": 34.3
+},
+"R1_protect_SB@all": {
+"k": 1769,
+"km2": 18.5
+},
+"R2_promo@all": {
+"k": 1751,
+"km2": 57.5
+},
+"R2_promo_SB@all": {
+"k": 1626,
+"km2": 29.7
+},
+"R3_zone_all@all": {
+"k": 1702,
+"km2": 63.1
+},
+"R3_zone_all_SB@all": {
+"k": 1617,
+"km2": 31.1
+}
+},
+"52750": {
+"R0_current": {
+"k": 1508,
+"km2": 1.5
+},
+"R0_current_SB": {
+"k": 636,
+"km2": 0.8
+},
+"R1_protect": {
+"k": 1734,
+"km2": 1.8
+},
+"R1_protect_SB": {
+"k": 773,
+"km2": 0.9
+},
+"R2_promo": {
+"k": 2056,
+"km2": 2.6
+},
+"R2_promo_SB": {
+"k": 1049,
+"km2": 1.5
+},
+"R3_zone_all": {
+"k": 2248,
+"km2": 2.9
+},
+"R3_zone_all_SB": {
+"k": 1163,
+"km2": 1.6
+},
+"R0_current@all": {
+"k": 3581,
+"km2": 26.8
+},
+"R0_current_SB@all": {
+"k": 2137,
+"km2": 12.8
+},
+"R1_protect@all": {
+"k": 3604,
+"km2": 32.3
+},
+"R1_protect_SB@all": {
+"k": 2292,
+"km2": 15.9
+},
+"R2_promo@all": {
+"k": 2883,
+"km2": 65.4
+},
+"R2_promo_SB@all": {
+"k": 2012,
+"km2": 33.7
+},
+"R3_zone_all@all": {
+"k": 2757,
+"km2": 72.5
+},
+"R3_zone_all_SB@all": {
+"k": 2053,
+"km2": 37.4
+}
+},
+"52770": {
+"R0_current": {
+"k": 700,
+"km2": 0.9
+},
+"R0_current_SB": {
+"k": 379,
+"km2": 0.6
+},
+"R1_protect": {
+"k": 871,
+"km2": 1.2
+},
+"R1_protect_SB": {
+"k": 499,
+"km2": 0.8
+},
+"R2_promo": {
+"k": 1322,
+"km2": 2.8
+},
+"R2_promo_SB": {
+"k": 826,
+"km2": 1.9
+},
+"R3_zone_all": {
+"k": 1475,
+"km2": 3.1
+},
+"R3_zone_all_SB": {
+"k": 933,
+"km2": 2.1
+},
+"R0_current@all": {
+"k": 2386,
+"km2": 27.2
+},
+"R0_current_SB@all": {
+"k": 1708,
+"km2": 14.6
+},
+"R1_protect@all": {
+"k": 2416,
+"km2": 34.5
+},
+"R1_protect_SB@all": {
+"k": 1863,
+"km2": 19.1
+},
+"R2_promo@all": {
+"k": 1907,
+"km2": 74.7
+},
+"R2_promo_SB@all": {
+"k": 1646,
+"km2": 46.5
+},
+"R3_zone_all@all": {
+"k": 1767,
+"km2": 82.2
+},
+"R3_zone_all_SB@all": {
+"k": 1679,
+"km2": 51.0
+}
+},
+"52790": {
+"R0_current": {
+"k": 1647,
+"km2": 3.0
+},
+"R0_current_SB": {
+"k": 745,
+"km2": 1.7
+},
+"R1_protect": {
+"k": 1974,
+"km2": 3.9
+},
+"R1_protect_SB": {
+"k": 924,
+"km2": 2.3
+},
+"R2_promo": {
+"k": 2568,
+"km2": 7.4
+},
+"R2_promo_SB": {
+"k": 1400,
+"km2": 4.8
+},
+"R3_zone_all": {
+"k": 2861,
+"km2": 8.4
+},
+"R3_zone_all_SB": {
+"k": 1565,
+"km2": 5.3
+},
+"R0_current@all": {
+"k": 3243,
+"km2": 77.4
+},
+"R0_current_SB@all": {
+"k": 2055,
+"km2": 35.8
+},
+"R1_protect@all": {
+"k": 2858,
+"km2": 100.8
+},
+"R1_protect_SB@all": {
+"k": 2060,
+"km2": 45.4
+},
+"R2_promo@all": {
+"k": 2350,
+"km2": 204.3
+},
+"R2_promo_SB@all": {
+"k": 1884,
+"km2": 96.2
+},
+"R3_zone_all@all": {
+"k": 1899,
+"km2": 230.9
+},
+"R3_zone_all_SB@all": {
+"k": 1779,
+"km2": 106.9
+}
+},
+"52800": {
+"R0_current": {
+"k": 1935,
+"km2": 2.8
+},
+"R0_current_SB": {
+"k": 535,
+"km2": 1.0
+},
+"R1_protect": {
+"k": 2041,
+"km2": 3.2
+},
+"R1_protect_SB": {
+"k": 590,
+"km2": 1.3
+},
+"R2_promo": {
+"k": 3065,
+"km2": 9.5
+},
+"R2_promo_SB": {
+"k": 1375,
+"km2": 6.1
+},
+"R3_zone_all": {
+"k": 3157,
+"km2": 9.9
+},
+"R3_zone_all_SB": {
+"k": 1421,
+"km2": 6.3
+},
+"R0_current@all": {
+"k": 2158,
+"km2": 46.0
+},
+"R0_current_SB@all": {
+"k": 1008,
+"km2": 11.6
+},
+"R1_protect@all": {
+"k": 1992,
+"km2": 53.7
+},
+"R1_protect_SB@all": {
+"k": 978,
+"km2": 14.2
+},
+"R2_promo@all": {
+"k": 1566,
+"km2": 176.0
+},
+"R2_promo_SB@all": {
+"k": 1068,
+"km2": 97.4
+},
+"R3_zone_all@all": {
+"k": 1401,
+"km2": 199.2
+},
+"R3_zone_all_SB@all": {
+"k": 1001,
+"km2": 99.9
+}
+}
+}
+}

@@ -1,0 +1,1101 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PLANiT · 후보지 찾기 — 대규모 후보 구획 탐색</title>
+<meta name="description" content="대규모 영농형 태양광 사업을 검토할 수 있는 후보 구획을 지도에서 탐색 — 소유·계통·산업단지·지역 전력수요.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=Inter:wght@400;500;700&family=Noto+Sans+KR:wght@400;500;700&family=JetBrains+Mono:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="assets/vendor/leaflet/leaflet.css">
+<script src="assets/vendor/leaflet/leaflet.js"></script>
+<script src="assets/v4.js"></script>
+<style>
+#proxmap{height:76vh;min-height:560px;border:1px solid var(--line);border-radius:12px;background:#dfe8df}
+.prox-wide{width:min(1240px,calc(100vw - 48px));position:relative;left:50%;transform:translateX(-50%)}
+.map-wrap{display:grid;grid-template-columns:1fr 330px;gap:16px}
+@media(max-width:900px){.map-wrap{grid-template-columns:1fr}}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 14px 16px;
+ font-size:12.5px;max-height:76vh;overflow-y:auto}
+.panel h3{font-family:var(--serif);color:var(--navy);font-size:15px;margin-bottom:8px}
+.grp{border-top:1px solid var(--line);padding:10px 0 8px;margin-top:6px}
+.grp:first-of-type{border-top:none;margin-top:0}
+.gt{font-weight:800;color:var(--navy);font-size:12.5px;display:flex;align-items:center;gap:8px;margin-bottom:6px}
+.allbtn{margin-left:auto;font:700 11px 'Noto Sans KR',sans-serif;border:1.5px solid var(--navy);
+ border-radius:999px;padding:2px 10px;background:#fff;color:var(--navy);cursor:pointer}
+.allbtn.on{background:var(--navy);color:#fff}
+.scrolllist{max-height:190px;overflow-y:auto;border:1px solid var(--line);border-radius:8px}
+.scrolllist label{display:flex;gap:6px;align-items:baseline;padding:4px 8px;border-bottom:1px solid #f0f0ec;
+ cursor:pointer;font-size:11.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.scrolllist label:hover{background:var(--sky)}
+.scrolllist .mw{font-weight:800;color:var(--navy);font-variant-numeric:tabular-nums;min-width:46px}
+.scrolllist .rk{font-family:var(--mono);font-size:10px;color:var(--muted);min-width:14px}
+.typerow{display:flex;gap:6px;align-items:center;padding:3px 0;font-size:12px;cursor:pointer}
+.typerow .sw{width:11px;height:11px;border-radius:3px;display:inline-block}
+input[type=range]{accent-color:var(--navy)}
+.glbl{font-size:11.5px;color:var(--ink);margin:2px 0 4px;font-variant-numeric:tabular-nums}
+.gleg{display:flex;gap:2px;margin-top:4px}
+.gleg span{width:26px;height:9px;display:inline-block}
+.glegtxt{font-size:10px;color:var(--muted);font-family:var(--mono);margin-top:2px}
+.searchbox{width:100%;font:12.5px 'Noto Sans KR',sans-serif;padding:6px 9px;border:1.5px solid var(--line);
+ border-radius:8px;margin-bottom:4px}
+.searchbox:focus{outline:none;border-color:var(--navy)}
+.sresults{max-height:150px;overflow-y:auto;border:1px solid var(--line);border-radius:8px;display:none}
+.sresults.open{display:block}
+.sresults .sr{display:flex;gap:6px;align-items:center;padding:4px 8px;border-bottom:1px solid #f0f0ec;
+ cursor:pointer;font-size:11.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sresults .sr:hover{background:var(--sky)}
+.sresults .none{padding:5px 8px;color:var(--muted);font-size:11.5px}
+#bufList{max-height:170px;font-size:11.5px}
+#bufList .bh{font-weight:800;color:var(--navy);padding:4px 8px 1px;font-size:11.5px}
+#bufList .bi{padding:1px 8px 1px 16px;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#bufList .none{padding:2px 8px 4px 16px;color:var(--muted)}
+.prox-leg{font-size:11.5px;color:var(--muted);margin-top:8px;line-height:1.7}
+.prox-leg .sw{display:inline-block;width:12px;height:12px;border-radius:3px;vertical-align:-2px;margin-right:4px}
+.prox-leg .dot{display:inline-block;width:11px;height:11px;border-radius:50%;vertical-align:-1px;margin-right:4px}
+.layerbox{background:#fff;border:2px solid rgba(0,0,0,.2);border-radius:8px;padding:8px 10px;
+ box-shadow:0 1px 6px rgba(0,0,0,.3);font:12px/1.7 'Noto Sans KR',sans-serif;color:var(--ink)}
+.layerbox b{font-size:11px;color:var(--muted);letter-spacing:.04em}
+.layerbox label{display:flex;gap:6px;align-items:center;cursor:pointer;white-space:nowrap}
+.layerbox .gleg{display:flex;gap:2px;margin:2px 0 0 20px}
+.layerbox .gleg span{width:22px;height:9px;display:inline-block}
+.layerbox .glegtxt{margin-left:20px;font-size:10px;color:var(--muted);font-family:var(--mono)}
+.linklbl{background:rgba(12,53,106,.88);color:#fff;border:none;border-radius:4px;
+ font:600 10px/1.2 'JetBrains Mono',monospace;padding:2px 5px;box-shadow:0 1px 3px rgba(0,0,0,.4)}
+.linklbl::before{display:none}
+#t-prox tr.rowbtn{cursor:pointer}
+#t-prox tr.rowbtn:hover td{background:var(--sky)}
+#t-prox th,#t-prox td{white-space:nowrap}
+#t-prox tr:nth-child(even) td{background:#FAFBF7}
+#t-prox tr.rowbtn:hover td{background:var(--sky)}
+#t-prox .rk{font-family:var(--serif);font-weight:700;color:var(--navy)}
+#t-prox tr:nth-child(-n+4) .rk{color:var(--gold)}
+.mwc{display:flex;align-items:center;gap:7px;justify-content:flex-end}
+.mwb{display:inline-block;height:7px;border-radius:4px;background:linear-gradient(90deg,var(--gold),#E4A93B)}
+.chip-rec{display:inline-block;background:#FDF0E3;color:#C96A00;border:1px solid #E8C9A8;
+ border-radius:999px;padding:1px 9px;font-size:11.5px;font-weight:700}
+.cond-pill{display:inline-flex;align-items:center;gap:6px;background:var(--card);
+ border:1px solid var(--line);border-radius:999px;padding:4px 12px;font-size:12.5px;margin:2px 6px 2px 0}
+.cond-pill b{color:var(--navy)}
+#recTbl th,#recTbl td{white-space:nowrap}
+#recTbl tr:nth-child(even) td{background:#FAFBF7}
+#recMap{height:420px;border:1px solid var(--line);border-radius:10px;background:#dfe8df}
+.cav{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:12px 0}
+@media(max-width:820px){.cav{grid-template-columns:1fr 1fr}}
+.cav .c{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:11px 13px;font-size:12.5px;line-height:1.65}
+.cav .c b{display:block;color:var(--navy);margin-bottom:3px;font-size:12.5px}
+.own-kpi{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:16px 0 22px}
+@media(max-width:820px){.own-kpi{grid-template-columns:1fr 1fr}}
+.own-kpi>div{background:var(--white);border:1px solid var(--line);border-radius:12px;padding:14px 12px;text-align:center}
+.own-kpi>div.hi{background:var(--sky);border-color:var(--leaf)}
+.own-kpi b{display:block;font-family:var(--serif);font-size:clamp(24px,2.8vw,32px);font-weight:700;color:var(--navy);line-height:1.15;margin-bottom:4px}
+.own-kpi b small{font-family:var(--mono);font-size:13px;color:var(--muted);font-weight:400}
+.own-kpi>div>span{font-size:11.5px;color:var(--muted);line-height:1.5;word-break:keep-all}
+.jsi{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin:14px 0 18px}
+@media(max-width:900px){.jsi{grid-template-columns:1fr 1fr}}
+.jsi>div{background:var(--white);border:1px solid var(--line);border-radius:12px;padding:13px 10px;text-align:center}
+.jsi>div>i{display:block;font-style:normal;font-family:var(--sans);font-size:12px;font-weight:700;color:var(--navy);margin-bottom:6px;word-break:keep-all}
+.jsi b{display:block;font-family:var(--serif);font-size:clamp(22px,2.4vw,28px);font-weight:700;color:var(--navy);line-height:1.15;margin-bottom:4px}
+.jsi b small{font-family:var(--mono);font-size:12.5px;color:var(--muted);font-weight:400}
+.jsi>div>span{font-size:11.5px;color:var(--muted);line-height:1.5;word-break:keep-all}
+.key2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(max-width:760px){.key2{grid-template-columns:1fr}}
+.key2>div{font-size:13px;line-height:1.7;word-break:keep-all}
+.key2 i{display:block;font-style:normal;font-family:var(--sans);font-size:12px;font-weight:700;color:var(--navy);margin-bottom:2px}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="wrap">
+    <span data-i18n="tb-tag">Agrivoltaic · PLANiT Institute의 영농형 태양광 섹터</span>
+    <span><a href="https://planit.institute/" data-i18n="tb-link">← planit.institute 메인으로</a></span>
+  </div>
+</div>
+
+<header class="nav">
+  <div class="wrap">
+    <a class="brand" href="index.html"><img class="mark-img" src="assets/planit_logo.png" alt="PLANiT"><span class="sector" data-i18n="brand-sector">영농형 태양광</span></a>
+    <nav class="menu" id="menu">
+      <a href="index.html" data-i18n="nav-index">한눈에 보기</a>
+      <a class="active" href="finder.html" data-i18n="nav-finder">후보지 찾기</a>
+      <a href="scenarios.html" data-i18n="nav-scn">정책 시나리오</a>
+      <a href="regions.html" data-i18n="nav-regions">지역별 우선 후보</a>
+      <a href="method.html" data-i18n="nav-method">근거와 방법</a>
+    </nav>
+    <div style="display:flex;gap:12px;align-items:center">
+      <div class="lang-toggle" role="group" aria-label="Language">
+        <button type="button" data-lang="ko">KO</button>
+        <button type="button" data-lang="en">EN</button>
+      </div>
+      <a class="nav-cta" href="method.html#contact">Contact</a>
+      <button class="hamburger" aria-label="메뉴 열기" onclick="document.getElementById('menu').classList.toggle('open')">☰</button>
+    </div>
+  </div>
+</header>
+
+<div class="page-hero">
+  <div class="wrap" style="max-width:860px">
+    <p class="eyebrow">Proximity · 수요·계통 연계</p>
+    <h1>후보지 찾기</h1>
+    <p class="lede">대규모 영농형 태양광 사업을 검토할 수 있는 후보 구획을 탐색함.<br>
+    폴리곤 = 약 50MW 이상(특구급 — 분석상 규모 표현) 후보 25곳(분석 기준 필지 =
+    법인·국공유 소유, 농업진흥구역 개방 기준) · 겹칠 수 있는 레이어 = 산업단지 전국
+    1,363곳<sup class="fnref">[23]</sup> · 읍면동 계통 여유<sup class="fnref">[22]</sup>.</p>
+    <p style="font-family:var(--mono);font-size:11.5px;color:var(--muted);margin-top:14px"
+      id="art-meta">PLANiT Institute · 데이터 생성 <span id="gen-stamp">—</span></p>
+  </div>
+</div>
+
+<article>
+<div class="wrap art" style="max-width:860px">
+
+  <h2 class="art-h" id="own">1. 소유 구성 — 특구급 구획의 개인 소유 비중</h2>
+  <p>특구급(≥50MW 등가 = 1.111km², 읽기 눈금) 구획은 개방 전(진흥✕·보호✕) 기준
+  <b id="c-a50">—</b>곳 있지만 면적의 <b id="c-indiv">—</b>%가 개인
+  소유<sup class="fnref">[1]</sup> — 수백 명의 동의 조직이 전제.
+  법인·국공유만 병합하면 <b id="c-cp-a50">—</b>곳(제주 서귀포
+  <span id="c-cp-a-mw">—</span>MW)으로 줄고, 농업진흥구역 개방 시
+  <b id="c-cp-r50">—</b>곳(합 <span id="c-cp-r-mw50">—</span>MW) —
+  그 25곳이 이 페이지의 대상.<br>
+  이격 200m 보수<sup class="fnref">[11]</sup>를 얹어도
+  <span id="c-sb-from">—</span> → <span id="c-sb-to">—</span> km²(−39%)로
+  개방 전 분(−53%)보다 덜 깎임 — 8칸 전체는 근거 탭 표 5.</p>
+  <p style="display:none"><span id="c-cp-a100"></span><span id="c-cp-r-km2"></span><span id="c-cp-r-mw"></span></p>
+
+  <div class="own-kpi">
+    <div><b><span id="k-a50">—</span><small>곳</small> <small>→</small> <span id="k-cp1">—</span><small>곳</small></b>
+      <span>개인 포함 → 법인·국공유만<br>(개방 전 특구급)</span></div>
+    <div><b><span id="k-indiv">—</span><small>%</small></b>
+      <span>특구급 면적 중<br>개인 소유 비중<sup class="fnref">[1]</sup></span></div>
+    <div class="hi"><b><span id="k-r50">—</span><small>곳</small> <small>·</small> <span id="k-mw">—</span><small>MW</small></b>
+      <span>농업진흥구역 개방 시<br>특구급 (이격 후 <span id="k-r50sb">—</span>곳)</span></div>
+    <div><b>−39<small>%</small></b>
+      <span>진흥 개방분의 이격 감소<br>(개방 전 분은 −53%)<sup class="fnref">[11]</sup></span></div>
+  </div>
+
+  <h2 class="art-h">2. 지도 — 구획 · 산업단지 · 계통 여유</h2>
+  <p>오른쪽 패널에서 후보·산업단지 선택 · 계통 여유는 슬라이더로 문턱 조정 ·
+  후보를 고르면 반경 안 산업단지 목록 표시 · 검색창에 산단·입주기업명(예: 현대제철)
+  입력 시 이동 · 폴리곤 클릭 = 상세 수치.</p>
+
+  <figure class="art-fig prox-wide">
+    <div class="map-wrap">
+      <div id="proxmap"></div>
+      <div class="panel">
+        <h3>레이어</h3>
+        <div class="grp"><div class="gt">특구급 후보 구획 <span id="candCnt" style="font-weight:400;color:var(--muted)"></span>
+          <button class="allbtn on" id="candAll">전체</button></div>
+          <div class="scrolllist" id="candList"></div></div>
+        <div class="grp"><div class="gt">산업단지 <span id="indCnt" style="font-weight:400;color:var(--muted)"></span>
+          <button class="allbtn on" id="indAll">전체</button></div>
+          <input class="searchbox" id="indSearch" type="text" placeholder="산업단지·입주기업 검색 — 예: 고덕, 현대제철"
+            autocomplete="off">
+          <div class="sresults" id="indResults"></div>
+          <div id="indTypes"></div></div>
+        <div class="grp"><div class="gt">계통 여유 — 표시 문턱</div>
+          <input type="range" id="gridSlider" min="0" max="50" step="1" value="0" style="width:100%">
+          <div class="glbl" id="gridLbl">—</div>
+          <div class="gleg"><span style="background:#EFDFDD"></span><span style="background:#F0F4F6"></span><span style="background:#CFE3EE"></span><span style="background:#8FC0D8"></span><span style="background:#4A94BA"></span><span style="background:#1C5F86"></span><span style="background:#CFCFCF"></span></div>
+          <div class="glegtxt">포화 · 0–2 · 2–8 · 8–20 · 20–50 · 50+ MW (하한) · 회색 = 알 수 없음</div></div>
+        <div class="grp"><div class="gt">선택 후보의 인근 산업단지 — 반경 <span id="bufKmLbl">10</span> km</div>
+          <input type="range" id="bufSlider" min="5" max="30" step="1" value="10" style="width:100%">
+          <div class="scrolllist" id="bufList"></div></div>
+      </div>
+    </div>
+    <div class="prox-leg">
+      <span class="sw" style="background:rgba(255,155,61,.85);border:1px solid #C96A00"></span>간척 지구의 특구급 구획 ·
+      <span class="sw" style="background:rgba(255,80,70,.85);border:1px solid #B3261E"></span>비간척 특구급 구획 ·
+      <span class="dot" style="background:#0C356A;border:2px solid #fff;box-shadow:0 0 0 1px #0C356A"></span>산업단지 경계·중심점 (색 = 유형: 빨강 국가 · 남색 일반 · 보라 도시첨단 · 청록 농공) ·
+      금색 점선 원 = 선택 후보의 반경 버퍼 · 금색 테두리 = 버퍼 안 산업단지
+    </div>
+    <figcaption style="font-size:12px;color:var(--muted);margin-top:6px">그림 2. 특구급 후보 25곳 ×
+    산업단지 전국 <span id="p-ind3">—</span>곳 × 읍면동 단위 계통 여유 전국 — 위성 배경 © Esri<sup class="fnref">[19]</sup> ·
+    구획 지오메트리 15m 간소화(표시용)<sup class="fnref">[12]</sup> ·
+    계통<sup class="fnref">[22]</sup>·산업단지<sup class="fnref">[23]</sup>는 참고 레이어(성격·한계는 방법·자료 탭).</figcaption>
+  </figure>
+
+  <h2 class="art-h" id="candtbl">3. 특구급 후보 25곳 — 소재·최근접 산업단지·계통</h2>
+  <p style="margin-bottom:8px">이 25곳은 파레토가 아니라 <b>조건 선별</b> — 다음 세 조건을
+  전부 만족하는 구획 전량(규모순 표시):</p>
+  <p style="margin:0 0 10px">
+    <span class="cond-pill">① 소유 — <b>법인·국공유만 병합</b> (정본 우주)</span>
+    <span class="cond-pill">② 구역 — <b>농업진흥구역 개방(R2)</b> 기준</span>
+    <span class="cond-pill">③ 규모 — <b>≥50MW 등가</b> = 1,111,111㎡ (읽기 눈금, 문턱 아님)</span>
+  </p>
+  <p style="font-size:13px;color:var(--muted)">§5의 시군별 공동 1등은 별개 방식 —
+  규모 눈금 없이 세 축 비지배(파레토)로 뽑음. 거리 = 측지 직선(방법·자료 탭 참조).</p>
+
+  <figure class="art-fig">
+    <div class="figbox">
+      <div style="overflow-x:auto"><table class="v4" id="t-prox"></table></div>
+      <div class="figcap">표 1. 특구급 후보 25곳의 최근접 산업단지·직선거리·소재 읍면동 계통 여유 —
+      행 클릭 = 지도 이동. 거리·계통 여유는 표시용 참고값(방법·자료 탭 참조).</div>
+    </div>
+  </figure>
+
+  <div class="callout-v4" id="p-read">—</div>
+
+  <h2 class="art-h" id="jisan">4. 후보 25곳 요약 — 다섯 값</h2>
+  <p>후보 25곳 안의 최대·최소 — 규모·계통·거리(비지배 세 축)와 지역 전력수요 대비의
+  양 끝. 지역 전력수요 대비는 참고지표로, 실제 지역 내 전력 자립이나 직접거래
+  가능성을 의미하지 않음<sup class="fnref">[28]</sup>. 시군별 종합 비교는
+  <a href="regions.html" style="color:var(--leaf-deep);font-weight:700">지역별 우선 후보 탭</a>.</p>
+  <div class="jsi" id="jsi"></div>
+  <div style="font-size:12px;color:var(--muted);margin:-12px 0 10px">계통·수요 값은
+  참고 표기 · 판정·선별 불사용<sup class="fnref">[28]</sup><sup class="fnref">[29]</sup>.</div>
+  <p style="font-size:12px;color:var(--muted);margin-top:26px">성격·한계·미확인
+  사항 상세는 방법·자료 탭의 한계 표와 논문(한계·디스커션)으로 이관(2026-09-01).</p>
+
+  <div class="fn">특구급 = 50MW 이상 = 연접 농지 <span id="p-th">—</span>㎡부터(0.045 kW/㎡ 환산<sup class="fnref">[13]</sup>) ·
+  소유 필터 = 법인('06')·국유지('02')·시/도유지('04')·군유지('05')만 병합<sup class="fnref">[12]</sup> ·
+  간척 구분 = 농어촌공사 원장 등재 필지 비중 50% 이상<sup class="fnref">[3]</sup> ·
+  계통 여유·산업단지 경계는 참고 레이어로 정본 판정에 불사용<sup class="fnref">[22]</sup><sup class="fnref">[23]</sup>.</div>
+</div>
+</article>
+
+
+<!-- ═══════════ §5 정책 시나리오 증분 지도 (구 지도 탭 이식 — V5 1단계 통합) ═══════════ -->
+<style>
+.map-wrap{display:grid;grid-template-columns:1fr 340px;gap:16px;margin:18px 0 30px}
+@media(max-width:900px){.map-wrap{grid-template-columns:1fr}}
+#map{height:76vh;min-height:520px;border:1px solid var(--line);border-radius:12px;background:#dfe8df}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px;
+ font-size:13px;max-height:76vh;overflow-y:auto}
+.panel h3{font-family:var(--serif);color:var(--navy);font-size:15px;margin-bottom:10px}
+.scn-btns{display:flex;flex-direction:column;gap:6px;margin:8px 0 4px}
+.scn-btns button{font:inherit;font-size:13px;font-weight:700;text-align:left;padding:9px 12px;
+ border:1.5px solid var(--line);border-radius:9px;background:#fff;cursor:pointer;transition:.15s}
+.scn-btns button:hover{border-color:var(--navy)}
+.scn-btns button.on{background:var(--navy);color:#fff;border-color:var(--navy)}
+.scn-btns button small{display:block;font-weight:400;font-size:11px;opacity:.75}
+.sb-toggle{display:flex;gap:0;border:1.5px solid var(--navy);border-radius:999px;overflow:hidden;margin:10px 0}
+.sb-toggle button{flex:1;font:inherit;font-size:12px;font-weight:700;padding:7px 4px;border:none;
+ background:#fff;color:var(--navy);cursor:pointer}
+.sb-toggle button.on{background:var(--navy);color:#fff}
+.stat-line{display:flex;justify-content:space-between;padding:4px 0;border-bottom:1px dotted var(--line)}
+.stat-line .v{font-weight:800;color:var(--navy);font-variant-numeric:tabular-nums}
+.leg{font-size:11.5px;color:var(--muted);margin-top:10px;line-height:1.7}
+.leg .sw{display:inline-block;width:12px;height:12px;border-radius:3px;vertical-align:-2px;margin-right:4px}
+.hint{background:var(--sky);border:1px solid var(--line);border-radius:8px;padding:8px 10px;
+ font-size:12px;margin-top:10px;word-break:keep-all}
+</style>
+
+<section class="alt" style="padding:56px 0" id="scnmap">
+  <div class="wrap">
+    <div class="sec-head"><div><p class="eyebrow">Scenario Map · 제도 변경 증분</p>
+    <h2>5. 정책 시나리오 지도 — 제도 변경으로 추가되는 구획</h2></div>
+    <a class="more" href="scenarios.html">시나리오 수치 전체 →</a></div>
+    <p style="font-size:13px;color:var(--muted)">시군을 추가하면 지금 상태(노랑) 위에
+    보호구역(주황)·진흥구역(빨강) 개방으로 추가되는 구획이 겹쳐 보임 · "적격 필지 점"
+    토글 = 분석 기준 필지(법인·국공유) 전량 검증 표시.</p>
+<div class="map-wrap">
+    <div id="map"></div>
+    <div class="panel">
+      <h3>시군 · 시나리오</h3>
+      <div class="field" style="margin-bottom:6px"><label>시군 추가 — 여러 개 선택 가능</label><select id="sggSel"></select></div>
+      <div id="mapChips" style="margin-bottom:8px"></div>
+      <div class="scn-btns">
+        <button disabled style="cursor:default;background:var(--sky);border-color:var(--line)">
+          진흥✕·보호✕ — 항상 표시<small>농업진흥지역 밖 · 노랑</small></button>
+        <button id="chkProt">＋ 농업보호구역 개방분<small>수단 A (부령) · 주황으로 추가</small></button>
+        <button id="chkProm">＋ 농업진흥구역 개방분<small>수단 B (재생에너지지구) · 빨강으로 추가</small></button>
+        <button id="chkAll">대조군 겹쳐 보기 — 개인 포함 전 소유<small>회색 윤곽 · 정본이 비어 있는 자리의 이유를 확인</small></button>
+        <button id="chkParcel">적격 필지 점 — 검증용<small>정본 우주(법인·국공유) 적격 필지 전량을 연한 점으로 · 구획이 그 위에 얹힘</small></button>
+        <div style="font-size:11.5px;color:var(--muted);padding:6px 2px 0">기본 표시는
+        <b>법인·국공유 소유</b>(정본)임. 대조군을 겹치면 <b>회색만 있고 색이 없는 곳</b>이
+        보이는데, 그 땅은 개인 소유라 정본에서 빠진 것임 — 대조군은 비교용이고 정책 값이 아님.</div>
+      </div>
+      <div class="sb-toggle" id="sbTgl">
+        <button data-sb="0" class="on">이격 미적용</button>
+        <button data-sb="1">주거 200m 상한 보수</button>
+      </div>
+      <div id="stats"></div>
+      <div class="leg">
+        <span class="sw" style="background:rgba(154,163,174,.55);border:1px solid #6B7480"></span>대조군 — 개인 포함 전 소유 (회색, 겹쳐 보기 시)<br>
+        <span class="sw" style="background:rgba(127,168,201,.65);border:1px solid #7FA8C9;border-radius:50%"></span>적격 필지 점 — 법인(06) · <span class="sw" style="background:rgba(157,178,126,.7);border:1px solid #9DB27E;border-radius:50%"></span>국·공유(02·04·05) (검증용, 켰을 때)<br>
+        <span class="sw" style="background:rgba(255,216,77,.8);border:1px solid #B8860B"></span>진흥✕·보호✕ 연접 구획 (노랑)<br>
+        <span class="sw" style="background:rgba(255,155,61,.8);border:1px solid #C96A00"></span>보호구역 개방으로 늘어나는 부분 (주황)<br>
+        <span class="sw" style="background:rgba(255,80,70,.8);border:1px solid #B3261E"></span>진흥구역 개방으로 늘어나는 부분 (빨강)<br>
+        노랑 밖으로 번진 색 = 그 개방의 증분 · 구획 클릭 = 면적·필지 수 · 점선 = 시군 경계 걸침
+      </div>
+      <div class="hint" id="hint">시군을 추가하면 위성 지도로 이동 (여러 개 선택 가능).</div>
+    </div>
+  </div>
+
+  <div class="fn" style="margin-bottom:26px">배경 위성: Esri World Imagery © Esri, Maxar, Earthstar Geographics (온라인 타일) ·
+  구획 = 정본 산출<sup class="fnref">[12]</sup>, 원천은 지적 원장<sup class="fnref">[1]</sup>·팜맵<sup class="fnref">[2]</sup>·진흥지역 경계<sup class="fnref">[5]</sup> ·
+  면적 = 장부면적(토지 원장에 기재된 공부상 면적)<sup class="fnref">[1]</sup> ·
+  지오메트리 15m 간소화(표시용 — 수치는 원본 기준) ·
+  이격 보수 적용은 주택 판정을 대지 필지로 대리한 하한<sup class="fnref">[11]</sup> · 참고 MW 환산 가정<sup class="fnref">[13]</sup>.</div>
+
+
+  </div>
+</section>
+<script>
+(async () => {
+  // 증분 레이어 방식: 현행(노랑) 상시 + 보호 개방분(주황) + 진흥 개방분(빨강)을 겹쳐 그림.
+  // 영역이 포함관계(R0 ⊆ R1 ⊆ R3)라, 아래에 큰 조합을 깔고 위에 작은 조합을 얹으면
+  // 노랑 밖으로 번진 색이 곧 그 개방의 증분이 된다.
+  let onProt = false, onProm = false, curSB = 0, onAll = false;
+  const sb = () => (curSB ? '_SB' : '');
+  // ADR-0040: 정본 우주가 법인·국공유다. 대조군(@all)은 **겹쳐 그리는 배경층**이다 —
+  // 정본이 비어 있는 자리가 '땅이 없어서'인지 '개인 소유라서'인지 눈으로 가르기 위해서다.
+  // 대조군 지오메트리는 정본보다 굵게 간소화했다(위치를 보이는 것이 임무이므로).
+  const baseCell = () => 'R0_current' + sb();
+  const protCell = () => 'R1_protect' + sb();
+  const promCell = () => (onProt ? 'R3_zone_all' : 'R2_promo') + sb();
+  const ctrlCell = () => (onProm ? (onProt ? 'R3_zone_all' : 'R2_promo')
+                                 : (onProt ? 'R1_protect' : 'R0_current')) + sb() + '@all';
+
+  const [idx, names, res] = await Promise.all([
+    V4.data('clusters_index').catch(() => null),   // export 진행 중이면 색인이 아직 없다
+    V4.data('sgg_matrix'), V4.data('results_v4')]);
+
+  // ── 지도 ──
+  const map = L.map('map', {center: [36.3, 127.6], zoom: 7});
+  // Leaflet 은 만들어질 때의 컨테이너 크기를 캐시한다. 레이아웃이 나중에 잡히면 그 값이
+  // 어긋난 채 남아 fitBounds 가 엉뚱한 축척을 고른다 — 실측: 폭을 32px 로 알고 있어
+  // 당진 한 곳을 넣는데 전국 축척(z6)을 골랐다. 크기가 바뀔 때마다 다시 알려준다.
+  // 칸이 좁게 접힌 상태에서 맞추면(창이 작거나 패널이 아직 안 펴졌을 때) 축척이 어긋난 채
+  // 굳는다 — 실측: 폭 32px 로 알고 당진 한 곳에 전국 축척(z6)을 골랐다. 칸이 눈에 띄게
+  // 넓어지면 마지막으로 맞춘 범위로 다시 맞춘다.
+  let lastFit = null, lastW = 0;
+  new ResizeObserver(() => {
+    map.invalidateSize();
+    const w = map.getSize().x;
+    if (lastFit && w > lastW * 1.5) map.fitBounds(lastFit);
+    lastW = w;
+  }).observe(map.getContainer());
+  L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
+    {maxZoom: 18, attribution: 'Imagery © Esri, Maxar, Earthstar Geographics'}).addTo(map);
+  L.control.scale({imperial: false, maxWidth: 140}).addTo(map);   // 축척
+  const north = L.control({position: 'topright'});                 // 방위표
+  north.onAdd = () => {
+    const d = L.DomUtil.create('div');
+    d.innerHTML = '<svg width="30" height="38" style="filter:drop-shadow(0 1px 2px rgba(0,0,0,.5))">' +
+      '<text x="15" y="12" text-anchor="middle" font-size="11" font-weight="700" fill="#fff">N</text>' +
+      '<path d="M15 15 l5 16 l-5 -5 l-5 5 Z" fill="#fff" stroke="#333" stroke-width="1"/></svg>';
+    return d;
+  };
+  north.addTo(map);
+  let layers = [];
+  const cache = {};
+  async function fc(sgg, cell) {
+    const k = sgg + '_' + cell;
+    if (!(k in cache)) {
+      try {  // 구획 파일은 gzip 저장(.json.gz) — 브라우저에서 해제
+        const r = await fetch('data_v4/clusters/' + k + '.json.gz');
+        if (!r.ok) throw 0;
+        const ds = r.body.pipeThrough(new DecompressionStream('gzip'));
+        cache[k] = JSON.parse(await new Response(ds).text());
+      } catch (e) { cache[k] = null; }
+    }
+    return cache[k];
+  }
+
+  // ── 패널 ──
+  const sel = document.getElementById('sggSel');
+  // 전 시군을 목록에 둔다 — 구획 없는 시군도 선택하면 '없음'을 명시 (숨은 배제 금지)
+  const entries = Object.keys(names.codes)
+    .map(c => [c, (names.codes[c] && names.codes[c].name) || c])
+    .sort((a, b) => a[1].localeCompare(b[1], 'ko'));
+  sel.innerHTML = '<option value="">— 추가 —</option>' +
+    entries.map(([c, n]) => `<option value="${c}">${n}</option>`).join('');
+  // 다중 선택 (칩) — 전국 일괄 로드는 데이터량 제약으로 미지원(시군 단위 열람)
+  let picked = [];
+  const chipsEl = document.getElementById('mapChips');
+  const nameOf = c => (names.codes[c] && names.codes[c].name) || c;
+  function renderChips() {
+    chipsEl.innerHTML = picked.map(c =>
+      `<span class="pill" style="cursor:pointer" data-c="${c}" title="클릭하여 제거">${nameOf(c)} ✕</span>`).join(' ');
+    chipsEl.querySelectorAll('[data-c]').forEach(el => el.onclick = () => {
+      picked = picked.filter(x => x !== el.dataset.c); renderChips(); render(true);
+    });
+  }
+  sel.onchange = () => {
+    const v = sel.value;
+    if (v && !picked.includes(v)) { picked.push(v); renderChips(); render(true); }
+    sel.value = '';
+  };
+  // URL 파라미터 (탭 연동): finder.html?sgg=44270,46820 · &all=1 = 대조군 겹쳐 보기 · &prom=1 = 진흥 개방 켬
+  const qp = new URLSearchParams(location.search);
+  const q = qp.get('sgg');
+  if (q) {
+    picked = q.split(',').filter(c => names.codes[c]);
+    renderChips();
+  }
+
+  const bProt = document.getElementById('chkProt');
+  const bProm = document.getElementById('chkProm');
+  bProt.onclick = () => { onProt = !onProt; bProt.classList.toggle('on', onProt); render(); };
+  bProm.onclick = () => { onProm = !onProm; bProm.classList.toggle('on', onProm); render(); };
+  const bAll = document.getElementById('chkAll');
+  bAll.onclick = () => { onAll = !onAll; bAll.classList.toggle('on', onAll); render(); };
+  // URL 파라미터는 **상태만** 세운다 — onclick 을 부르면 초기 렌더가 여러 번 겹쳐 돌아
+  // 서로의 레이어를 지우고 화면 맞춤(fitBounds)이 빈 집합 위에서 일어난다
+  if (qp.get('all') === '1') { onAll = true; bAll.classList.add('on'); }
+  if (qp.get('prom') === '1') { onProm = true; bProm.classList.add('on'); }
+  setTimeout(() => render(true), 50);   // 초기 렌더 — 선택 없어도 전국 통계·안내는 표시
+  document.querySelectorAll('#sbTgl button').forEach(b => b.onclick = () => {
+    curSB = +b.dataset.sb;
+    document.querySelectorAll('#sbTgl button').forEach(x =>
+      x.classList.toggle('on', +x.dataset.sb === curSB));
+    render();
+  });
+  function sumIdx(cell) {
+    let k = 0, km2 = 0;
+    picked.forEach(c => { const e = idx && idx.sgg[c] && idx.sgg[c][cell];
+      if (e) { k += e.k; km2 += e.km2; } });
+    return {k, km2};
+  }
+  function stats() {
+    const natB = res.runs[baseCell()], natP = res.runs[protCell()], natM = res.runs[promCell()];
+    const line = (t, v) => `<div class="stat-line"><span>${t}</span><span class="v">${v}</span></div>`;
+    const cpTag = ' · 법인·국공유';
+    let html = '';
+    if (picked.length && idx) {
+      const b = sumIdx(baseCell());
+      html += line(`선택 시군 · 진흥✕·보호✕${cpTag}${picked.length > 1 ? ' (합계)' : ''}`,
+                   `${V4.n(b.k)}개 · ${V4.km2(b.km2)} km²`);
+      if (onProt) {
+        const p = sumIdx(protCell());
+        html += line('　＋보호구역 개방 증분', `+${V4.km2(p.km2 - b.km2)} → ${V4.km2(p.km2)} km²`);
+      }
+      if (onProm) {
+        const m = sumIdx(promCell());
+        const from = onProt ? sumIdx(protCell()).km2 : b.km2;
+        html += line('　＋진흥구역 개방 증분', `+${V4.km2(m.km2 - from)} → ${V4.km2(m.km2)} km²`);
+      }
+      if (onAll) {           // 제2조 — 같은 칸의 대조군을 같은 화면에 병기한다
+        const a = sumIdx(ctrlCell());
+        const cur = onProm ? sumIdx(promCell()) : (onProt ? sumIdx(protCell()) : b);
+        html += line('　대조군 (개인 포함·정책 값 아님)',
+                     `${V4.n(a.k)}개 · ${V4.km2(a.km2)} km²` +
+                     (cur.km2 > 0 ? ` (×${(a.km2 / cur.km2).toFixed(1)})` : ''));
+      }
+    }
+    if (natB) html += line(`전국 · 진흥✕·보호✕${cpTag}`,
+      `${V4.n(natB.n_component)}구획 · ${V4.km2(natB.component_area_km2)} km²`);
+    if (onProt && natP) html += line('전국 ＋보호구역',
+      `+${V4.km2(natP.component_area_km2 - natB.component_area_km2)} → ${V4.km2(natP.component_area_km2)} km²`);
+    if (onProm && natM) {
+      const fromN = onProt && natP ? natP.component_area_km2 : natB.component_area_km2;
+      html += line('전국 ＋진흥구역',
+        `+${V4.km2(natM.component_area_km2 - fromN)} → ${V4.km2(natM.component_area_km2)} km²`);
+    }
+    const top = onProm ? natM : (onProt ? natP : natB);
+    if (top && top.m_total_mw != null)
+      html += line('참고 MW (전국 합계·가정)', V4.n(Math.round(top.m_total_mw)));
+    document.getElementById('stats').innerHTML = html;
+  }
+
+  const LAYER_STYLE = {
+    ctrl: {fill: '#9AA3AE', line: '#6B7480', label: '대조군(개인 포함) — 정책 값 아님'},
+    base: {fill: '#FFD84D', line: '#B8860B', label: '진흥✕·보호✕'},
+    prot: {fill: '#FF9B3D', line: '#C96A00', label: '＋보호구역 개방 시'},
+    prom: {fill: '#FF5046', line: '#B3261E', label: '＋진흥구역 개방 시'},
+  };
+  let renderSeq = 0;
+  // ── 적격 필지 검증 레이어 (PR-0037) — 표시 전용, 판정 불사용 ──
+  let onParcel = false, parcelLayers = [];
+  const parcelCache = {};
+  map.createPane('parcels');
+  map.getPane('parcels').style.zIndex = 390;          // 구획(overlay 400) 아래
+  const parcelCanvas = L.canvas({pane: 'parcels', padding: 0.3});
+  const OWN_COL = ['#9DB27E', '#9DB27E', '#9DB27E', '#7FA8C9'];   // 02·04·05 국공유 / 06 법인
+  const OWN_LBL = ['국유지(02)', '시/도유지(04)', '군유지(05)', '법인(06)'];
+  async function parcelsOf(c) {
+    if (parcelCache[c] !== undefined) return parcelCache[c];
+    try {
+      const r = await fetch(`data_v4/parcels/${c}.json.gz`);
+      if (!r.ok) throw 0;
+      const ds = r.body.pipeThrough(new DecompressionStream('gzip'));
+      parcelCache[c] = JSON.parse(await new Response(ds).text());
+    } catch (e) { parcelCache[c] = null; }
+    return parcelCache[c];
+  }
+  document.getElementById('chkParcel').onclick = e => {
+    onParcel = !onParcel;
+    e.currentTarget.classList.toggle('on', onParcel);
+    render(false);
+  };
+  async function render(fit) {
+    const my = ++renderSeq;
+    stats();
+    if (!picked.length) {
+      layers.forEach(l => map.removeLayer(l));
+      layers = [];
+      document.getElementById('hint').textContent = '시군을 추가하면 위성 지도로 이동 (여러 개 선택 가능).';
+      return;
+    }
+    const live = picked.filter(c => !idx || idx.sgg[c]);
+    const none = picked.filter(c => idx && !idx.sgg[c]);
+    document.getElementById('hint').textContent = '구획 불러오는 중…';
+    // 아래(큰 조합) → 위(현행) 순서로 쌓는다: 진흥 → 보호 → 현행
+    const plan = [];
+    if (onAll) plan.push(['ctrl', ctrlCell()]);      // 맨 아래 — 배경
+    if (onProm) plan.push(['prom', promCell()]);
+    if (onProt) plan.push(['prot', protCell()]);
+    plan.push(['base', baseCell()]);
+    // 먼저 전부 받아 둔다 — 받는 중에 지워 버리면 겹친 렌더끼리 서로를 없앤다
+    const packs = [];
+    for (const [kind, cell] of plan) {
+      const datas = await Promise.all(live.map(c => fc(c, cell)));
+      const feats = [];
+      datas.forEach(d => { if (d) feats.push(...d.features); });
+      if (feats.length) packs.push([kind, feats]);
+    }
+    if (my !== renderSeq) return;   // 그 사이 더 최근 렌더가 시작됨 — 이 결과는 버린다
+    layers.forEach(l => map.removeLayer(l));
+    layers = [];
+    for (const [kind, feats] of packs) {
+      const st = LAYER_STYLE[kind];
+      layers.push(L.geoJSON({type: 'FeatureCollection', features: feats}, {
+        style: f => ({color: st.line, weight: kind === 'ctrl' ? .5 : (f.properties.sp ? 1.8 : .8),
+                      dashArray: f.properties.sp ? '5 4' : null,
+                      fillColor: st.fill,
+                      fillOpacity: kind === 'ctrl' ? .3 : (kind === 'base' ? .8 : .75)}),
+        onEachFeature: (f, ly) => ly.bindPopup(
+          `<b>${st.label} · 연접 구획 ${V4.km2(f.properties.a, 2)} km²</b> (${V4.n(Math.round(f.properties.a * 1e6))} ㎡)` +
+          (kind === 'ctrl'
+            ? '<br><b>소유 무관 대조군</b> — 개인 필지가 섞여 있어 정본에 없는 자리임'
+              + ' (윤곽은 정본보다 굵게 간소화)'
+            : '') +
+          `<br>이 시군 구간 ${V4.n(f.properties.n)}필지 · 참고 ${V4.n(Math.round(f.properties.a * 45))} MW` +
+          (f.properties.sp ? '<br><b>시군 경계 걸침</b> — 면적은 구획 전체 기준' : '') +
+          `<br><span style="color:#888;font-size:11px">구획 번호 #${f.properties.id} · 환산 0.045 kW/㎡ 가정</span>`)
+      }).addTo(map));
+    }
+    parcelLayers.forEach(l => map.removeLayer(l));
+    parcelLayers = [];
+    let pTot = 0, pAll = 0;
+    if (onParcel) {
+      const pd = await Promise.all(live.map(c => parcelsOf(c)));
+      if (my !== renderSeq) return;
+      pd.forEach(dsg => {
+        if (!dsg) return;
+        pTot += dsg.n; pAll += dsg.n_total;
+        const mks = dsg.pts.map(([lon, lat, oi]) =>
+          L.circleMarker([lat, lon], {renderer: parcelCanvas, pane: 'parcels',
+            radius: 2, weight: 0, fillColor: OWN_COL[oi], fillOpacity: .6})
+           .bindTooltip(`적격 필지 · ${OWN_LBL[oi]}`));
+        parcelLayers.push(L.layerGroup(mks).addTo(map));
+      });
+    }
+    if (fit && layers.length) {
+      map.invalidateSize();          // 맞추기 직전에 실제 크기로 갱신
+      let b = layers[0].getBounds();
+      layers.forEach(l => b = b.extend(l.getBounds()));
+      lastFit = b.pad(0.08);
+      lastW = map.getSize().x;
+      map.fitBounds(lastFit);
+    }
+    let hint = layers.length
+      ? (onAll
+          ? '회색만 있고 색이 없는 자리 = 땅은 있으나 개인 소유라 정본에서 빠진 곳.'
+          : '개방분 버튼을 켜고 끄며 비교 — 노랑 밖으로 번진 색이 그 개방의 증분.')
+      : '선택 시군에는 연접 구획 없음.';
+    if (none.length) hint += ` (${none.map(nameOf).join('·')}: 어떤 시나리오에도 연접 구획 없음)`;
+    if (onParcel && pTot) hint += ` · 적격 필지 점 ${pTot.toLocaleString()}개 표시` +
+      (pAll > pTot ? ` (좌표 결손 ${(pAll - pTot).toLocaleString()}건은 점 없음 — 수치에는 포함)` : '') +
+      ' — 점이 구획 색 안에 들어 있으면 판정·소유가 눈으로 검증됨.';
+    if (picked.length > 12) hint += ' — 선택이 많으면 로딩이 느려질 수 있음.';
+    document.getElementById('hint').textContent = hint;
+  }
+
+  
+})();
+</script>
+
+
+<footer class="v4"><div class="wrap"></div></footer>
+
+<script>
+(async () => {
+  const [N, names] = await Promise.all([V4.data('narrative_v4'), V4.data('sgg_matrix')]);
+  const m = await V4.data('meta_v4');
+  document.getElementById('gen-stamp').textContent = m.generated;
+  document.getElementById('art-meta').textContent =
+    `PLANiT Institute · 데이터 ${m.data_generation} · 생성 ${m.generated}`;
+  const R = N.runs;
+  // ── §1 소유 구성 — 타이포 스탯 (막대 그림은 폐지 2026-09-01) ──
+  {
+    const R1 = N.runs, put = (id, v) => document.getElementById(id).textContent = v;
+    put('c-a50', V4.n(R1['R0_current@all'].ge50));
+    put('c-indiv', V4.n(N.big_composition['R0_current@all'].indiv_share_pct));
+    put('c-cp-a50', V4.n(R1.R0_current.ge50));
+    put('c-cp-a-mw', V4.n((N.cp_big_anchor[0] || {mw: 0}).mw));
+    put('c-cp-r50', V4.n(R1.R2_promo.ge50));
+    put('c-cp-r-mw50', V4.n(R1.R2_promo.ge50_mw));
+    put('c-sb-from', V4.km2(R1.R2_promo.component_km2));
+    put('c-sb-to', V4.km2(R1.R2_promo_SB.component_km2));
+    put('k-a50', V4.n(R1['R0_current@all'].ge50));
+    put('k-cp1', V4.n(R1.R0_current.ge50));
+    put('k-indiv', V4.n(N.big_composition['R0_current@all'].indiv_share_pct));
+    put('k-r50', V4.n(R1.R2_promo.ge50));
+    put('k-mw', V4.n(R1.R2_promo.ge50_mw));
+    put('k-r50sb', V4.n(R1.R2_promo_SB.ge50));
+  }
+
+  const nameOf = c => (names.codes[c] && names.codes[c].name) || c;
+  // p-n/p-comp/p-th 스팬은 압축 편집으로 제거된 문단에 있었음 — 남아 있으면 채움
+  for (const [id, v] of [['p-n', V4.n(R.R2_promo.ge50)], ['p-comp', V4.n(R.R2_promo.n_component)],
+                         ['p-th', V4.n(N.threshold.mw50_m2)]]) {
+    const el = document.getElementById(id); if (el) el.textContent = v;
+  }
+  const GS = await V4.data('grid_summary');
+  // 색인 본체(1.3 MB)는 첫 검색에서 지연 로드되므로 수만 담은 겉짐을 따로 읽는다
+  const FM = await V4.data('ind_firms_meta');
+  for (const [id, v] of [['p-fsrc', FM.n_source], ['p-fmat', FM.n_matched],
+                         ['p-fun', FM.n_unmatched],
+                         ['p-ind', GS.ind_total], ['p-ind2', GS.ind_total], ['p-ind3', GS.ind_total],
+                         ['p-emd', GS.emd_total], ['p-emd2', GS.emd_total],
+                         ['p-ok', GS.emd_ok], ['p-unk', GS.emd_unknown]]) {
+    const el = document.getElementById(id); if (el) el.textContent = V4.n(v);
+  }
+  async function gzfc(path) {
+    const r = await fetch(path);
+    if (!r.ok) return null;
+    const ds = r.body.pipeThrough(new DecompressionStream('gzip'));
+    return JSON.parse(await new Response(ds).text());
+  }
+
+  // ── 지도 골격 ──
+  const map = L.map('proxmap', {center: [36.3, 127.0], zoom: 7});
+  L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
+    {maxZoom: 18, attribution: 'Imagery © Esri, Maxar, Earthstar Geographics'}).addTo(map);
+  L.control.scale({imperial: false, maxWidth: 140}).addTo(map);
+  const north = L.control({position: 'topright'});
+  north.onAdd = () => {
+    const d = L.DomUtil.create('div');
+    d.innerHTML = '<svg width="30" height="38" style="filter:drop-shadow(0 1px 2px rgba(0,0,0,.5))">' +
+      '<text x="15" y="12" text-anchor="middle" font-size="11" font-weight="700" fill="#fff">N</text>' +
+      '<path d="M15 15 l5 16 l-5 -5 l-5 5 Z" fill="#fff" stroke="#333" stroke-width="1"/></svg>';
+    return d;
+  };
+  north.addTo(map);
+  map.createPane('gridPane').style.zIndex = 410;
+  map.createPane('bufPane').style.zIndex = 415;
+  map.createPane('clusterPane').style.zIndex = 420;
+  map.createPane('complexPane').style.zIndex = 440;
+
+  const havKm = (a, b) => {
+    const rad = x => x * Math.PI / 180, R6 = 6371;
+    const dLat = rad(b.lat - a.lat), dLon = rad(b.lng - a.lng);
+    const h = Math.sin(dLat / 2) ** 2 +
+      Math.cos(rad(a.lat)) * Math.cos(rad(b.lat)) * Math.sin(dLon / 2) ** 2;
+    return 2 * R6 * Math.asin(Math.sqrt(h));
+  };
+
+  // ── 계통 레이어 — 전국, 슬라이더 문턱 (기본: 여유 큰 곳만 채색) ──
+  const GRID_BINS = [
+    [50, '#1C5F86'], [20, '#4A94BA'], [8, '#8FC0D8'], [2, '#CFE3EE'], [0.0001, '#F0F4F6'],
+  ];
+  const C_SAT = '#EFDFDD', C_UNK = '#CFCFCF';
+  let gridT = 50;                     // 표시 문턱 MW — 슬라이더 값 s에 대해 T = 50 - s
+  const gstyle = p => {
+    if (p.s === 'unknown') return {color: '#8C8C8C', weight: .3, fillColor: C_UNK, fillOpacity: .45};
+    if (p.s === 'nodata') return {color: '#9AA5B1', weight: .2, fillColor: '#F5F5F2', fillOpacity: .15};
+    const lo = p.lo || 0;
+    const selected = gridT > 0 ? lo >= gridT : true;      // T=0(오른쪽 끝) = 포화 포함 전부
+    if (!selected) return {color: '#8FA0B0', weight: .25, fillColor: '#FFFFFF', fillOpacity: .04};
+    const fill = lo <= 0 ? C_SAT : (GRID_BINS.find(([th]) => lo >= th) || [0, C_SAT])[1];
+    return {color: '#5A7A8C', weight: .45, fillColor: fill, fillOpacity: .6};
+  };
+  const grid = await gzfc('data_v4/grid_emd.json.gz');
+  const nOk = f => f.properties.s === 'ok';
+  const gridLayer = L.geoJSON(grid, {
+    pane: 'gridPane',
+    style: f => gstyle(f.properties),
+    onEachFeature: (f, ly) => {
+      const p = f.properties;
+      const val = p.s === 'ok'
+        ? `잔여 연계가능용량 ${V4.n(p.lo)}–${V4.n(p.hi)} MW <span style="color:#888;font-size:11px">(균등배분 하한–공유 미조정 상한)</span>`
+        : (p.s === 'unknown' ? '알 수 없음 — 원천 무응답·조회 불가' : '계통 조회값 없음');
+      ly.bindPopup(`<b>${p.n}</b><br>${val}<br><span style="color:#888;font-size:11px">한전 분산전원 연계정보 · 2026-07 스냅숏 · 표시 참고용</span>`);
+    }
+  }).addTo(map);
+  const gridLbl = document.getElementById('gridLbl');
+  function gridRefresh() {
+    const n = grid.features.filter(f => nOk(f) && (gridT > 0 ? (f.properties.lo || 0) >= gridT : true)).length;
+    gridLbl.textContent = gridT > 0
+      ? `잔여 ≥ ${gridT} MW 읍면동만 채색 — ${V4.n(n)}곳`
+      : `전체 채색(포화 포함) — ${V4.n(n)}곳`;
+    gridLayer.setStyle(f => gstyle(f.properties));
+  }
+  let rafId = null;
+  document.getElementById('gridSlider').addEventListener('input', e => {
+    gridT = 50 - (+e.target.value);
+    if (rafId) cancelAnimationFrame(rafId);
+    rafId = requestAnimationFrame(gridRefresh);
+  });
+  // 짝수-홀수 판정 (표 1의 소재 읍면동 조회용)
+  const pip = (pt, rings) => {
+    let inside = false;
+    rings.forEach(ring => {
+      for (let i = 0, j = ring.length - 1; i < ring.length; j = i++) {
+        const [xi, yi] = ring[i], [xj, yj] = ring[j];
+        if ((yi > pt.lat) !== (yj > pt.lat) &&
+            pt.lng < (xj - xi) * (pt.lat - yi) / (yj - yi) + xi) inside = !inside;
+      }
+    });
+    return inside;
+  };
+  const gridAt = pt => {
+    for (const f of grid.features) {
+      const g = f.geometry;
+      const polys = g.type === 'Polygon' ? [g.coordinates] : g.coordinates;
+      for (const p of polys) if (pip(pt, p)) return f.properties;
+    }
+    return null;
+  };
+
+  // ── 산업단지 — 유형별 레이어 그룹 + 전체 토글 ──
+  const IND_C = {'국가산업단지': '#B3261E', '일반산업단지': '#0C356A',
+                 '도시첨단산업단지': '#7A4BC9', '농공단지': '#0E8A72'};
+  const TYPES = Object.keys(IND_C);
+  const indGroups = Object.fromEntries(TYPES.map(k => [k, L.layerGroup().addTo(map)]));
+  const indOn = Object.fromEntries(TYPES.map(k => [k, true]));
+  const indFC = await gzfc('data_v4/ind_bnd.json.gz');
+  const complexes = [];
+  const bbCtr = geom => {
+    let x0 = 1e9, y0 = 1e9, x1 = -1e9, y1 = -1e9;
+    const scan = cc => { if (typeof cc[0] === 'number') {
+        x0 = Math.min(x0, cc[0]); x1 = Math.max(x1, cc[0]);
+        y0 = Math.min(y0, cc[1]); y1 = Math.max(y1, cc[1]); }
+      else cc.forEach(scan); };
+    scan(geom.coordinates);
+    return {lat: (y0 + y1) / 2, lon: (x0 + x1) / 2};
+  };
+  indFC.features.forEach(f => {
+    const p = f.properties, col = IND_C[p.t] || '#555';
+    const ctr = bbCtr(f.geometry);
+    const entry = {name: p.n, t: p.t, lat: ctr.lat, lon: ctr.lon};
+    complexes.push(entry);
+    const grp = indGroups[p.t] || indGroups['일반산업단지'];
+    L.geoJSON(f, {pane: 'complexPane',
+      style: {color: col, weight: 1.2, fillColor: col, fillOpacity: .35}
+    }).bindPopup(`<b>${p.n}</b><br>${p.t}<span style="color:#888;font-size:11px"> · 경계 표기용</span>`)
+      .addTo(grp);
+    entry.mk = L.circleMarker([ctr.lat, ctr.lon], {pane: 'complexPane', radius: 3.2,
+      color: '#fff', weight: 1, fillColor: col, fillOpacity: .95})
+      .bindPopup(`<b>${p.n}</b><br>${p.t}`).addTo(grp);
+  });
+  const typeCnt = Object.fromEntries(TYPES.map(k => [k, complexes.filter(c => c.t === k).length]));
+  document.getElementById('indCnt').textContent = `(${V4.n(complexes.length)})`;
+  document.getElementById('indTypes').innerHTML = TYPES.map(k => `
+    <label class="typerow"><input type="checkbox" data-t="${k}" checked>
+      <span class="sw" style="background:${IND_C[k]}"></span>${k} (${V4.n(typeCnt[k])})</label>`).join('');
+  const indAllBtn = document.getElementById('indAll');
+  function indSync() {
+    indAllBtn.classList.toggle('on', TYPES.every(k => indOn[k]));
+    bufRefresh();
+  }
+  document.querySelectorAll('#indTypes input').forEach(cb => cb.onchange = () => {
+    const k = cb.dataset.t;
+    indOn[k] = cb.checked;
+    cb.checked ? map.addLayer(indGroups[k]) : map.removeLayer(indGroups[k]);
+    indSync();
+  });
+  indAllBtn.onclick = () => {
+    const to = !TYPES.every(k => indOn[k]);
+    TYPES.forEach(k => {
+      indOn[k] = to;
+      to ? map.addLayer(indGroups[k]) : map.removeLayer(indGroups[k]);
+    });
+    document.querySelectorAll('#indTypes input').forEach(cb => cb.checked = to);
+    indSync();
+  };
+
+  // ── 산업단지 검색 — 이름 일부로 찾아 이동 ──
+  const sIn = document.getElementById('indSearch');
+  const sRes = document.getElementById('indResults');
+  const norm = s => (s || '').replace(/\s+/g, '').toLowerCase();
+  let sMark = null;
+  function goComplex(c) {
+    if (!indOn[c.t]) {                      // 꺼진 유형이면 켜서 보이게
+      indOn[c.t] = true;
+      map.addLayer(indGroups[c.t]);
+      const cb = document.querySelector(`#indTypes input[data-t="${c.t}"]`);
+      if (cb) cb.checked = true;
+      indSync();
+    }
+    map.setView([c.lat, c.lon], 13);
+    if (sMark) map.removeLayer(sMark);
+    sMark = L.circleMarker([c.lat, c.lon], {pane: 'complexPane', radius: 12,
+      color: '#FFC436', weight: 3, fill: false}).addTo(map);
+    c.mk.openPopup();
+    document.getElementById('proxmap').scrollIntoView({behavior: 'smooth', block: 'center'});
+  }
+  let firmsDB = null, firmsLoading = false;      // 입주기업 색인 — 첫 검색에서 지연 로드
+  async function loadFirms() {
+    if (firmsDB || firmsLoading) return;
+    firmsLoading = true;
+    firmsDB = await gzfc('data_v4/ind_firms.json.gz');
+    firmsLoading = false;
+    sIn.dispatchEvent(new Event('input'));       // 로드 후 현재 입력으로 재검색
+  }
+  const findComplex = (nm, cat) =>
+    complexes.find(c => c.name === nm && c.t === cat) || complexes.find(c => c.name === nm);
+  function renderResults() {
+    const toks = sIn.value.trim().split(/\s+/).map(norm).filter(Boolean);
+    if (!toks.length) { sRes.classList.remove('open'); return; }
+    const danHits = complexes.filter(c => { const n = norm(c.name); return toks.every(k => n.includes(k)); })
+      .slice(0, 5);
+    let firmHits = [];
+    if (firmsDB) {
+      const seen = new Set();
+      const starts = [], rest = [];
+      let total = 0;
+      for (const f of firmsDB.firms) {
+        const n = norm(f[0]);
+        if (!toks.every(k => n.includes(k))) continue;
+        const key = n + '|' + f[1];
+        if (seen.has(key)) continue;               // 같은 기업·같은 단지 중복 제거
+        seen.add(key);
+        total++;
+        (n.startsWith(toks[0]) ? starts : rest).push(f);
+      }
+      firmHits = starts.concat(rest).slice(0, 15);  // 검색어로 시작하는 기업 우선
+      firmHits.total = total;
+    }
+    let html = '';
+    if (danHits.length)
+      html += danHits.map(c => `<div class="sr" data-k="d" data-i="${complexes.indexOf(c)}">
+        <span class="sw" style="width:10px;height:10px;border-radius:3px;background:${IND_C[c.t]};flex:none"></span>
+        ${c.name} <span style="color:#888">· ${c.t.replace('산업단지', '')}</span></div>`).join('');
+    if (firmHits.length)
+      html += `<div class="none" style="font-weight:700">입주기업 → 소재 산업단지${
+        firmHits.total > firmHits.length ? ` — 일치 ${V4.n(firmHits.total)}건 중 ${firmHits.length}건, 기업명을 더 구체적으로` : ''}</div>` +
+        firmHits.map(f => { const d = firmsDB.dans[f[1]];
+          return `<div class="sr" data-k="f" data-nm="${d[0]}" data-t="${d[1]}" data-firm="${f[0]}" data-p="${f[2] || ''}">
+            <span style="flex:none">🏭</span>${f[0]} <span style="color:#888">→ ${d[0]} · ${d[1].replace('산업단지', '')}</span></div>`; }).join('');
+    if (!html)
+      html = firmsDB
+        ? '<div class="none">일치 없음 — 단지 명칭 또는 입주기업명(등록공장 기준)으로 검색.</div>'
+        : (firmsLoading ? '<div class="none">입주기업 색인 불러오는 중…</div>'
+                        : '<div class="none">일치하는 산업단지 없음.</div>');
+    sRes.innerHTML = html;
+    sRes.classList.add('open');
+    sRes.querySelectorAll('.sr').forEach(el => el.onclick = () => {
+      if (el.dataset.k === 'd') {
+        goComplex(complexes[+el.dataset.i]);
+      } else {
+        const c = findComplex(el.dataset.nm, el.dataset.t);
+        if (c) {
+          goComplex(c);
+          L.popup({offset: [0, -6]}).setLatLng([c.lat, c.lon]).setContent(
+            `<b>${el.dataset.firm}</b> 입주 — ${c.name} (${c.t})` +
+            (el.dataset.p ? `<br><span style="color:#888;font-size:11px">생산품: ${el.dataset.p}</span>` : '') +
+            `<br><span style="color:#888;font-size:11px">전국등록공장현황 2024-12-31 기준 · 표시 참고용</span>`
+          ).openOn(map);
+        }
+      }
+      sRes.classList.remove('open');
+    });
+  }
+  sIn.addEventListener('input', () => { loadFirms(); renderResults(); });
+  sIn.addEventListener('keydown', e => {
+    if (e.key === 'Enter') { const f = sRes.querySelector('.sr'); if (f) f.click(); }
+    if (e.key === 'Escape') sRes.classList.remove('open');
+  });
+
+  // ── 특구급 후보 — 개별 토글 + 전체 ──
+  const idx = await V4.data('clusters_index');
+  const TH = 50 / 45;
+  const recMap = Object.fromEntries(N.cp_big.map(b => [b.id, b.reclaim_pct >= 50]));
+  const bigList = N.cp_big;
+  document.getElementById('candCnt').textContent = `(${V4.n(bigList.length)})`;
+  const candLayers = {};                 // id → [leaflet layers]
+  const boundsById = {};
+  const selCand = new Set(bigList.map(b => b.id));
+  const cell = 'R2_promo';
+  const sggs = Object.keys(idx.sgg).filter(c => idx.sgg[c][cell] && idx.sgg[c][cell].k > 0);
+  const datas = await Promise.all(sggs.map(c => gzfc('data_v4/clusters/' + c + '_' + cell + '.json.gz')));
+  datas.forEach(d => {
+    if (!d) return;
+    d.features.filter(f => f.properties.a >= TH).forEach(f => {
+      const mw = Math.round(f.properties.a * 45);
+      const id = f.properties.id;
+      const isRec = !!recMap[id];
+      const ly = L.geoJSON(f, {
+        pane: 'clusterPane',
+        style: {color: isRec ? '#C96A00' : '#B3261E', weight: f.properties.sp ? 1.8 : 1,
+                fillColor: isRec ? '#FF9B3D' : '#FF5046', fillOpacity: .85,
+                dashArray: f.properties.sp ? '5 4' : null},
+      }).bindPopup(
+        `<b>특구급 후보 · ${V4.km2(f.properties.a, 2)} km² ≈ ${V4.n(mw)} MW</b>` +
+        `<br>${nameOf(d.sgg)} 구간 ${V4.n(f.properties.n)}필지 · ${isRec ? '간척 지구' : '비간척'}` +
+        `<br><span style="color:#888;font-size:11px">법인·국공유만 병합 · 진흥구역 개방 기준</span>`);
+      ly.addTo(map);
+      (candLayers[id] = candLayers[id] || []).push(ly);
+      boundsById[id] = boundsById[id] ? boundsById[id].extend(ly.getBounds()) : ly.getBounds();
+    });
+  });
+  const candListEl = document.getElementById('candList');
+  candListEl.innerHTML = bigList.map((b, i) => `
+    <label><input type="checkbox" data-id="${b.id}" checked>
+      <span class="rk">${i + 1}</span><span class="mw">${V4.n(b.mw)}MW</span>
+      <span>${b.reclaim_pct >= 50 ? (b.district || '간척').replace('지구', '') + ' · ' : ''}${nameOf(b.sgg)}</span></label>`).join('');
+  const candAllBtn = document.getElementById('candAll');
+  function setCand(id, on) {
+    (candLayers[id] || []).forEach(ly => on ? map.addLayer(ly) : map.removeLayer(ly));
+    on ? selCand.add(id) : selCand.delete(id);
+  }
+  document.querySelectorAll('#candList input').forEach(cb => cb.onchange = () => {
+    setCand(+cb.dataset.id, cb.checked);
+    candAllBtn.classList.toggle('on', selCand.size === bigList.length);
+    bufRefresh();
+  });
+  candAllBtn.onclick = () => {
+    const to = selCand.size !== bigList.length;
+    bigList.forEach(b => setCand(b.id, to));
+    document.querySelectorAll('#candList input').forEach(cb => cb.checked = to);
+    candAllBtn.classList.toggle('on', to);
+    bufRefresh();
+  };
+
+  // ── 버퍼 — 선택 후보 반경 안의 산업단지 ──
+  const layerBuf = L.layerGroup().addTo(map);
+  let bufKm = 10;
+  const bufListEl = document.getElementById('bufList');
+  function bufRefresh() {
+    layerBuf.clearLayers();
+    const rows = [];
+    bigList.filter(b => selCand.has(b.id)).forEach(b => {
+      const bd = boundsById[b.id];
+      if (!bd) return;
+      const ctr = bd.getCenter();
+      L.circle([ctr.lat, ctr.lng], {pane: 'bufPane', radius: bufKm * 1000,
+        color: '#FFC436', weight: 1.6, dashArray: '6 5', fill: false, opacity: .9}).addTo(layerBuf);
+      const near = complexes
+        .filter(c => indOn[c.t])
+        .map(c => ({c, km: havKm(ctr, {lat: c.lat, lng: c.lon})}))
+        .filter(x => x.km <= bufKm)
+        .sort((x, y) => x.km - y.km);
+      near.forEach(x => L.circleMarker([x.c.lat, x.c.lon], {pane: 'complexPane',
+        radius: 6.5, color: '#FFC436', weight: 2.4, fillColor: IND_C[x.c.t] || '#555',
+        fillOpacity: .95}).bindPopup(
+          `<b>${x.c.name}</b><br>${x.c.t} · ${V4.km2(x.km, 1)} km`).addTo(layerBuf));
+      const label = `${b.reclaim_pct >= 50 ? (b.district || '간척').replace('지구', '') + ' · ' : ''}${nameOf(b.sgg)} ${V4.n(b.mw)}MW`;
+      const items = near.slice(0, 8).map(x =>
+        `<div class="bi">${x.c.name} <span style="color:#888">(${x.c.t.replace('산업단지', '')}, ${V4.km2(x.km, 1)}km)</span></div>`).join('')
+        + (near.length > 8 ? `<div class="bi" style="color:#888">외 ${V4.n(near.length - 8)}곳</div>` : '');
+      rows.push(`<div class="bh">${label} — ${V4.n(near.length)}곳</div>` +
+        (near.length ? items : '<div class="none">반경 안 산업단지 없음</div>'));
+    });
+    bufListEl.innerHTML = rows.length ? rows.join('')
+      : '<div class="none">후보를 선택하면 반경 안 산업단지가 나옴.</div>';
+  }
+  document.getElementById('bufSlider').addEventListener('input', e => {
+    bufKm = +e.target.value;
+    document.getElementById('bufKmLbl').textContent = bufKm;
+    bufRefresh();
+  });
+
+  // ── 표 1 — 후보 25곳 × 최근접 산단 · 거리 · 계통 여유 (전체 등재분 기준) ──
+  const nearestOf = {};
+  bigList.forEach(b => {
+    const bd = boundsById[b.id];
+    if (!bd) return;
+    const ctr = bd.getCenter();
+    let best = null;
+    complexes.forEach(c => {
+      const km = havKm(ctr, {lat: c.lat, lng: c.lon});
+      if (!best || km < best.km) best = {c, km};
+    });
+    const in20 = complexes.filter(c => havKm(ctr, {lat: c.lat, lng: c.lon}) <= 20).length;
+    nearestOf[b.id] = {ctr, best, in20};
+  });
+  let minKm = null, maxIn20 = null;
+  document.getElementById('t-prox').innerHTML =
+    `<tr><th>순위</th><th>참고 MW</th><th style="text-align:left">소재</th><th>간척 지구</th>
+     <th>필지</th>
+     <th style="text-align:left">최근접 산단</th><th>거리 km</th>
+     <th>20km 내</th><th>계통 여유 MW</th></tr>` +
+    bigList.map((b, i) => {
+      const nb = nearestOf[b.id] || {};
+      if (nb.best) {
+        if (minKm === null || nb.best.km < minKm.km) minKm = {km: nb.best.km, b, c: nb.best.c};
+        if (maxIn20 === null || nb.in20 > maxIn20.n) maxIn20 = {n: nb.in20, b};
+      }
+      const gp = nb.ctr ? gridAt(nb.ctr) : null;
+      const gtxt = !gp ? '—'
+        : (gp.s === 'ok' ? `${V4.n(gp.lo)}–${V4.n(gp.hi)}`
+        : (gp.s === 'unknown' ? '알 수 없음' : '—'));
+      return `<tr class="rowbtn" data-id="${b.id}">
+        <td class="rk">${i + 1}</td>
+        <td><div class="mwc"><b>${V4.n(b.mw)}</b><span class="mwb" style="width:${Math.round(44 * b.mw / bigList[0].mw)}px"></span></div></td>
+        <td class="l">${nameOf(b.sgg)}</td>
+        <td>${b.reclaim_pct >= 50 ? `<span class="chip-rec">${(b.district || '간척').replace('지구', '')}</span>` : '<span style="color:#B3261E;font-weight:700">비간척</span>'}</td>
+        <td>${V4.n(b.n)}</td>
+        <td class="l">${nb.best ? nb.best.c.name + ' <span style="color:#888;font-size:11px">' + nb.best.c.t + '</span>' : '—'}</td>
+        <td>${nb.best ? V4.km2(nb.best.km, 1) : '—'}</td>
+        <td>${nb.best ? V4.n(nb.in20) : '—'}</td>
+        <td>${gtxt}</td>
+      </tr>`;
+    }).join('');
+  document.querySelectorAll('#t-prox tr.rowbtn').forEach(tr => tr.onclick = () => {
+    const bd = boundsById[+tr.dataset.id];
+    if (bd) {
+      map.fitBounds(bd.pad(0.6));
+      document.getElementById('proxmap').scrollIntoView({behavior: 'smooth', block: 'center'});
+    }
+  });
+
+  document.getElementById('p-read').innerHTML =
+    `<b>읽기.</b> 최근접 사례는 ${minKm ? `<b>${nameOf(minKm.b.sgg)} ${V4.n(minKm.b.mw)}MW 후보 —
+      ${minKm.c.name} ${V4.km2(minKm.km, 1)} km</b>` : '—'}.` +
+    (maxIn20 && maxIn20.n > 0 ? ` 20km 안 산업단지가 가장 많은 후보는 ${nameOf(maxIn20.b.sgg)}
+      (${V4.n(maxIn20.n)}곳).` : '') +
+    `<br>산업단지·계통 레이어는 전국 커버 — "알 수 없음" 읍면동만 계통 판단을 보류함(방법·자료 탭).`;
+
+
+  // ── §5 시군별 공동 1등 (recommend_v4 — 발행은 export_recommend_v4.py 게이트 통과분만) ──
+  const REC = await gzfc('data_v4/recommend_v4.json.gz');
+
+  // ── 지산지소 카드 5장 — 후보 25곳 안의 최대·최소 (모두 표기 전용) ──
+  (() => {
+    const demOf = s => {
+      const fr = REC.sgg[s] && REC.sgg[s].frontier;
+      return fr && fr.length ? fr[0].dem : null;
+    };
+    const rows = bigList.map(b => {
+      const nb = nearestOf[b.id] || {};
+      const gp = nb.ctr ? gridAt(nb.ctr) : null;
+      const dem = demOf(b.sgg);
+      return {b, km: nb.best ? nb.best.km : null, ind: nb.best ? nb.best.c.name : null,
+              lo: gp && gp.s === 'ok' ? gp.lo : null,
+              dem, dsh: dem ? b.mw * 1.314 / dem * 100 : null};
+    });
+    const by = (f, min) => rows.filter(r => f(r) != null)
+      .sort((x, y) => min ? f(x) - f(y) : f(y) - f(x))[0];
+    const c1 = rows[0];                                // 규모순 표시 — 첫 행이 최대
+    const c2 = by(r => r.lo, false), c3 = by(r => r.km, true);
+    const c4 = by(r => r.dsh, true), c5 = by(r => r.dsh, false);
+    const P = v => v.toLocaleString('ko-KR', {maximumFractionDigits: 1});
+    document.getElementById('jsi').innerHTML = [
+      ['규모가 가장 큰 곳', `${V4.n(c1.b.mw)}<small>MW</small>`,
+       `${nameOf(c1.b.sgg)} — 후보 최대 구획<br>(지역 전력수요 대비 ${P(c1.dsh)}%)`],
+      ['계통 여유가 가장 큰 곳', `${V4.n(c2.lo)}<small>MW</small>`,
+       `${nameOf(c2.b.sgg)} ${V4.n(c2.b.mw)}MW 후보<br>소재 읍면동 여유 하한`],
+      ['수요처가 바로 옆인 곳', `${P(c3.km)}<small>km</small>`,
+       `${nameOf(c3.b.sgg)} ${V4.n(c3.b.mw)}MW 후보<br>→ ${c3.ind}`],
+      ['지역 안에서 다 쓰는 곳', `${P(c4.dsh)}<small>%</small>`,
+       `${nameOf(c4.b.sgg)} ${V4.n(c4.b.mw)}MW —<br>수요 대비 최소 = 전량 지역 소비`],
+      ['지역 수요의 큰 몫을 채우는 곳', `${P(c5.dsh)}<small>%</small>`,
+       `${nameOf(c5.b.sgg)} ${V4.n(c5.b.mw)}MW —<br>시군 연간 수요 ${V4.n(c5.dem)}GWh 대비`],
+    ].map(([t, v, s]) => `<div><i>${t}</i><b>${v}</b><span>${s}</span></div>`).join('');
+
+  })();
+  gridRefresh();
+  bufRefresh();
+  V4.footer();
+})();
+</script>
+<script src="site.js"></script>
+</body>
+</html>

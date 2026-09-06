@@ -1,0 +1,45 @@
+/* v4 — 앵커 개정판 세대 공통 스타일 (자족형: 외부 폰트·CDN 없음) */
+:root{--bg:#f9f9f7;--card:#fff;--ink:#0b0b0b;--mut:#52514e;--line:#ddd;
+ --corp:#c96a00;--ind:#0e8a72;--r0:#2f6db3;--acc:#8a5a00}
+*{box-sizing:border-box}
+body{font-family:system-ui,'Malgun Gothic',sans-serif;background:var(--bg);color:var(--ink);
+ margin:0;padding:0 0 40px;line-height:1.55}
+.wrap{max-width:1080px;margin:0 auto;padding:0 22px}
+nav{background:#fff;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:5}
+nav .wrap{display:flex;gap:4px;align-items:center;padding:10px 22px}
+nav .brand{font-weight:800;font-size:14px;margin-right:14px}
+nav a{color:var(--mut);text-decoration:none;font-size:13px;padding:5px 10px;border-radius:7px}
+nav a:hover{background:#f0efe9}
+nav a.on{color:var(--ink);font-weight:700;background:#f0efe9}
+h1{font-size:22px;margin:26px 0 4px}
+.lead{color:var(--mut);font-size:13.5px;margin-bottom:18px}
+h2{font-size:16px;margin:26px 0 8px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin:12px 0}
+.genre{display:inline-block;font-size:10.5px;color:#875;border:1px solid #ccb;border-radius:5px;
+ padding:1px 7px;margin-bottom:8px;background:#fdfbf3}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin:14px 0}
+.stat{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+.stat .v{font-size:24px;font-weight:800;letter-spacing:-.5px}
+.stat .u{font-size:13px;color:var(--mut);font-weight:600}
+.stat .k{font-size:12px;color:var(--mut);margin-bottom:3px}
+.stat .s{font-size:11px;color:#888;margin-top:4px}
+table{border-collapse:collapse;width:100%;font-size:13px}
+th{text-align:right;color:var(--mut);font-weight:600;border-bottom:1.5px solid #bbb;padding:6px 8px}
+th:first-child,td:first-child{text-align:left}
+td{text-align:right;border-bottom:1px solid #f0f0ec;padding:6px 8px;font-variant-numeric:tabular-nums}
+td.l{text-align:left}
+tr.hl td{background:#fdf7ec;font-weight:700}
+.callout{border-left:4px solid var(--acc);background:#fdfbf3;border-radius:0 10px 10px 0;
+ padding:10px 14px;font-size:13px;margin:14px 0}
+.fn{font-size:11.5px;color:#777;margin-top:10px;line-height:1.6}
+footer{margin-top:36px;border-top:1px solid var(--line);padding-top:12px;font-size:11.5px;color:#888}
+.bar-wrap{margin:6px 0}
+.bar-row{display:grid;grid-template-columns:190px 1fr 150px;gap:10px;align-items:center;margin:7px 0;font-size:13px}
+.bar-track{background:#eeede7;border-radius:6px;height:22px;position:relative;overflow:hidden}
+.bar-pre{position:absolute;left:0;top:0;bottom:0;background:#d8d7cf;border-radius:6px}
+.bar-post{position:absolute;left:0;top:0;bottom:0;background:var(--r0);border-radius:6px}
+.bar-num{font-weight:700;font-variant-numeric:tabular-nums}
+.bar-sub{color:#888;font-size:11px;font-weight:400}
+iframe.atlas{width:100%;height:1400px;border:1px solid var(--line);border-radius:12px;background:#fff}
+.pill{display:inline-block;border:1px solid var(--line);border-radius:20px;padding:2px 10px;
+ font-size:11.5px;color:var(--mut);margin:2px 4px 2px 0;background:#fff}

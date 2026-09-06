@@ -1,0 +1,187 @@
+{
+ "generated": "2026-09-06 00:48",
+ "data_generation": "ADR-0040+0041 · adr0041_25 · 정본 우주 = 법인·국공유(02·04·05·06) · θ 없음(연접 구획 전량) · 계통 결합 분리",
+ "grid": {
+  "name": "adr0041_25",
+  "edition": "ADR-0040+0041",
+  "sha12": "b3b25860ef5b",
+  "n_runs": 25
+ },
+ "verification": "export 시 앵커 상수 정확 일치 검증 통과 (T16-①)",
+ "lineage": [
+  {
+   "tbl": "agpromo_bnd",
+   "built": "2026-08-21",
+   "source": "농업진흥지역 경계 재조달 — V-World LT_C_AGRIXUE101 = 진흥지역 전체(zone 레이어, ucode별 km² {'UEA100': 34.8, 'UEA110': 8541.4, 'UEA120': 1509.0}), LT_C_AGRIXUE102 = 영농여건불리농지(unfavorable, {'': 0.0, 'UEG100': 1101.5}) — 레이어명·내용 불일치를 실측 정정. 시군 bbox 타일링 252·wkb 중복 제거·ucode 분포 assert. 원장 subagpromo 무효 대체(당진 보호 신 3,465ha vs 원장 807ha). 원시 raw/ fetched_at 내장. v6_02, 사용자 승인 2026-08-21",
+   "layer": "L0"
+  },
+  {
+   "tbl": "bjd_code",
+   "built": "2026-08-19",
+   "source": "행정표준코드 법정동코드 전체자료 (code.go.kr, 2026-08-19 다운로드, 폐지 포함). 리 명칭 정본. v4_02",
+   "layer": "L0"
+  },
+  {
+   "tbl": "emd_bnd",
+   "built": "2026-08-27",
+   "source": "V-World LT_C_ADEMD_INFO 읍면동 경계 5,067개 — 계통 채색 지도 표기용(수치 산출 아님), 원시 sources/emd_bnd/raw",
+   "layer": "L0"
+  },
+  {
+   "tbl": "fm2025",
+   "built": "2026-08-14",
+   "source": "팜맵 2025 공공데이터포털 시도별 SHP(15104481~91), 촬영 2019~2024 혼재",
+   "layer": "L0"
+  },
+  {
+   "tbl": "ind_complex",
+   "built": "2026-08-20",
+   "source": "산업단지 위치 정리본(보고서 추출, 2026-06~07) 54곳 — 이름·좌표·MW·업종·유형. ⚠️커버리지 구 분석 범위(경기·충남 중심) 한정, 산업입지법 경계 조달 전 잠정 정본. 원본 사본 Ledger_Rebuild/sources/ind_complex/. v5_02",
+   "layer": "L0"
+  },
+  {
+   "tbl": "ind_complex_bnd",
+   "built": "2026-08-20",
+   "source": "전국 산업단지 경계 속성 — V-World 데이터 API LT_C_DAMDAN(ILIS), cat_nam=국가/일반/도시첨단/농공. 폴리곤은 sources/ind_complex/damdan.gpkg, 원시 JSON은 damdan_raw/(fetched_at 내장). v5_03",
+   "layer": "L0"
+  },
+  {
+   "tbl": "ind_firms",
+   "built": "2026-08-31",
+   "source": "한국산업단지공단 전국등록공장현황(2024-12-31, data.go.kr 15105482) — 산단 입주 84,111사 중 79,424사를 경계 단지명과 대조(별칭·유형 힌트), 기업명 검색 표기용(판정 불사용). 원시 sources/ind_complex/firms",
+   "layer": "L0"
+  },
+  {
+   "tbl": "kepco_dong_v3",
+   "built": "2026-08-19",
+   "source": "동별 상태 — v4 스냅샷. OK 4,471 · NOTFOUND(무응답=알 수 없음, 계통 없음 아님) 595 · 오류 0. v3_05",
+   "layer": "L0"
+  },
+  {
+   "tbl": "kepco_record_v3",
+   "built": "2026-08-19",
+   "source": "kepco_raw_v4/*.json 5,066파일 — 2026-08-19 14:30~15:27 단일 시점 스냅샷(PR-0017). fetched_at·요청원문·폴백이력 내장. v4_01 수집 + v3_05 --raw kepco_raw_v4",
+   "layer": "L0"
+  },
+  {
+   "tbl": "policy_setback_cap",
+   "built": "2026-08-21",
+   "source": "기후에너지환경부 보도자료(2026-08-11 국무회의 의결): 재생에너지법 §27조의3 + 시행령 개정안 — 태양광 이격 상한 주거(5호) 200m·도로 이격 금지, 법 시행 2026-09-18, 측정방법은 기후부 고시 위임(미제정). 원문 PDF sources/policy/ 보존, sha256=7166ff02a99d90de",
+   "layer": "L0"
+  },
+  {
+   "tbl": "agpromo_tag",
+   "built": "2026-08-21",
+   "source": "필지 대표점 PIP × agpromo_bnd(zone, v6_02 재조달본) — 진흥구역 5,279,842·보호구역 1,076,333·계 6,379,921필지. 겹침은 엄격(UEA110) 우선. 원장 subagpromo(무효·라벨 뒤집힘 의심) 대체. v6_03",
+   "layer": "L1"
+  },
+  {
+   "tbl": "elig_v2",
+   "built": "2026-08-25",
+   "source": "ratio=true_farm/calculatedarea(2025) + elig_nat 구조플래그 승계(지목 v7 적용분 포함). 공식은 v1 역설계 검증본, model/stages/v2_03_elig.py",
+   "layer": "L1"
+  },
+  {
+   "tbl": "exclusion_reason",
+   "built": "2026-08-19",
+   "source": "필지×배제사유 롱폼 — Cadastre_All × D_Regulation.gpkg 공간조인(intersects). reason_key = layer/uname 원문(빈 uname은 MNUM 지역지구 코드). 해석 없음 — constraint_registry와 별도 매핑. v5_01",
+   "layer": "L1"
+  },
+  {
+   "tbl": "grid_pool",
+   "built": "2026-08-14",
+   "source": "KEPCO bigdata dispersedGeneration.do, equal_split+계층캡. 원시 캐시: 신규 3,633동 = Ledger_Rebuild/kepco_nat_20260814/ (2026-08-19 임시폴더에서 이관). 기수집 651동 원시 JSON은 소실 — 파생본 site_v2/data/grid_choropleth.json만 남음",
+   "layer": "L1"
+  },
+  {
+   "tbl": "jimok_apply_v7",
+   "built": "2026-08-25",
+   "source": "LSMD 복구 지목 적용(ADR-0030 판 개정, ADR-0035) — ledger.jimok_src=lsmd_v7 표시, 되돌리기 가능. v7_01",
+   "layer": "L1"
+  },
+  {
+   "tbl": "jimok_recovered",
+   "built": "2026-08-25",
+   "source": "지목 결측 복구 1단계 — 로컬 LSMD 원본 JIBUN 부호 추출(다운로드 0). 결측 4,423,152 중 복구 3,868,483(87.5%), 농지(전답과) 519,077. ⚠️ 미적용 — elig_v2/앵커 반영은 판 개정 절차(ADR-0030). v6_04",
+   "layer": "L1"
+  },
+  {
+   "tbl": "kepco_dl_v3",
+   "built": "2026-08-19",
+   "source": "배전선로별 vol3 min/med/max/n_variants — 1차 계층. v3_05",
+   "layer": "L1"
+  },
+  {
+   "tbl": "kepco_mtr_v3",
+   "built": "2026-08-19",
+   "source": "변압기별 vol2 min/med/max/n_variants. v3_05",
+   "layer": "L1"
+  },
+  {
+   "tbl": "kepco_subst_v3",
+   "built": "2026-08-19",
+   "source": "변전소별 vol1 min/med/max/n_variants — min 채택(보수). v3_05",
+   "layer": "L1"
+  },
+  {
+   "tbl": "kepco_topo_v3",
+   "built": "2026-08-19",
+   "source": "동-선로-변압기-변전소 소속 관계. v3_05",
+   "layer": "L1"
+  },
+  {
+   "tbl": "reclaim_tag",
+   "built": "2026-08-14",
+   "source": "농어촌공사 지구공구 토지정보(2025) data.go.kr 15116438 + 국가관리 13지구 고시(농식품부 25.6)",
+   "layer": "L1"
+  },
+  {
+   "tbl": "spatial_v2",
+   "built": "2026-08-15",
+   "source": "팜맵 2025(data.go.kr 15104481·83~91) × Cadastre_All 공간교차 252시군, model/stages/v2_02_intersect.py",
+   "layer": "L1"
+  },
+  {
+   "tbl": "ggd_cluster_indprox_v4",
+   "built": "2026-08-19",
+   "source": "경기 안정·조건부 등재 구획 × 공업지역(KLIP_004 UQ111 중 전용·일반·준공업 세분, 용도지역 — 산업단지 법정경계 아님) 최근접 거리. 1차 UQ113(농림지역) 오인판은 무효·교체(2026-08-19). v4_05",
+   "layer": "L2"
+  },
+  {
+   "tbl": "grid_cascade_v3",
+   "built": "2026-08-19",
+   "source": "계층 누적 상한(배분 가정 없음) — 인용 정본: 47,426MW·1,053.9km²·적격의 9.6% (2026-08-19 스냅샷). 원 JSON 역산 일치 검증은 v3판(2026-08-19)에서 수행. v3_06 ⑥ + T11",
+   "layer": "L2"
+  },
+  {
+   "tbl": "grid_city_check_v4",
+   "built": "2026-08-19",
+   "source": "시군 공란 질의(kepco_raw_v4_city) vs 동별 수집 완결성 대조. city_only_vol3_kw = 무응답 동이 가리는 연계가능용량 상한. v4_03",
+   "layer": "L2"
+  },
+  {
+   "tbl": "grid_cluster_range_v4",
+   "built": "2026-08-19",
+   "source": "등재 구획별 계통 여유 구간 [균등배분 합, 공유 미조정 합] — 근사·개별 참고용, 구획 간 합산 금지. 무응답 동 걸침은 has_unknown. v4_04",
+   "layer": "L2"
+  },
+  {
+   "tbl": "grid_dl_v3",
+   "built": "2026-08-19",
+   "source": "선로별 여유·배후 적격면적(equal/whole). elig_v2 × kepco_topo_v3. v3_06",
+   "layer": "L2"
+  },
+  {
+   "tbl": "grid_emd_v3",
+   "built": "2026-08-19",
+   "source": "동별 3상태(ok/unknown) — 무응답은 NULL(알 수 없음), 판정 불가 적격 100.2km² 별도. v3_06",
+   "layer": "L2"
+  },
+  {
+   "tbl": "scenario_runs_edition1",
+   "built": "2026-08-25",
+   "source": "1판(ADR-0034 자산) 런 기록 아카이브 — 판 개정(ADR-0035)으로 현역 테이블 초기화. 차이 보고용",
+   "layer": "L2"
+  }
+ ]
+}

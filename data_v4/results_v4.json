@@ -1,0 +1,1498 @@
+{
+"generated": "2026-09-06 00:32",
+"edition": "ADR-0040+0041",
+"grid": "adr0041_25",
+"grid_sha12": "b3b25860ef5b",
+"cells": {
+"policy": [
+{
+"name": "R0_current",
+"decl": "R0_current",
+"role": "policy",
+"group": "정본 정책",
+"label": "R0 진흥✕·보호✕",
+"label_short": "진흥✕·보호✕",
+"universe": null,
+"tau": null
+},
+{
+"name": "R0_current_SB",
+"decl": "R0_current_SB",
+"role": "policy",
+"group": "정본 정책",
+"label": "R0 + 이격 보수",
+"label_short": "진흥✕·보호✕ + 이격 보수",
+"universe": null,
+"tau": null
+},
+{
+"name": "R1_protect",
+"decl": "R1_protect",
+"role": "policy",
+"group": "정본 정책",
+"label": "R1 +보호구역만",
+"label_short": "＋보호구역 개방",
+"universe": null,
+"tau": null
+},
+{
+"name": "R1_protect_SB",
+"decl": "R1_protect_SB",
+"role": "policy",
+"group": "정본 정책",
+"label": "R1 + 이격 보수",
+"label_short": "＋보호구역 · 이격 보수",
+"universe": null,
+"tau": null
+},
+{
+"name": "R2_promo",
+"decl": "R2_promo",
+"role": "policy",
+"group": "정본 정책",
+"label": "R2 +진흥구역만",
+"label_short": "＋진흥구역 개방",
+"universe": null,
+"tau": null
+},
+{
+"name": "R2_promo_SB",
+"decl": "R2_promo_SB",
+"role": "policy",
+"group": "정본 정책",
+"label": "R2 + 이격 보수",
+"label_short": "＋진흥구역 · 이격 보수",
+"universe": null,
+"tau": null
+},
+{
+"name": "R3_zone_all",
+"decl": "R3_zone_all",
+"role": "policy",
+"group": "정본 정책",
+"label": "R3 둘 다 개방",
+"label_short": "＋두 구역 개방",
+"universe": null,
+"tau": null
+},
+{
+"name": "R3_zone_all_SB",
+"decl": "R3_zone_all_SB",
+"role": "policy",
+"group": "정본 정책",
+"label": "R3 + 이격 보수",
+"label_short": "＋두 구역 · 이격 보수",
+"universe": null,
+"tau": null
+}
+],
+"control": [
+{
+"name": "R0_current@all",
+"decl": "R0_current",
+"role": "control",
+"group": "무필터 대조군",
+"label": "R0 진흥✕·보호✕",
+"label_short": "진흥✕·보호✕",
+"universe": "all",
+"tau": null
+},
+{
+"name": "R1_protect@all",
+"decl": "R1_protect",
+"role": "control",
+"group": "무필터 대조군",
+"label": "R1 +보호구역만",
+"label_short": "＋보호구역 개방",
+"universe": "all",
+"tau": null
+},
+{
+"name": "R2_promo@all",
+"decl": "R2_promo",
+"role": "control",
+"group": "무필터 대조군",
+"label": "R2 +진흥구역만",
+"label_short": "＋진흥구역 개방",
+"universe": "all",
+"tau": null
+},
+{
+"name": "R3_zone_all@all",
+"decl": "R3_zone_all",
+"role": "control",
+"group": "무필터 대조군",
+"label": "R3 둘 다 개방",
+"label_short": "＋두 구역 개방",
+"universe": "all",
+"tau": null
+}
+]
+},
+"note": "ADR-0040+0041 — 등재 문턱 없음: 값은 연접 구획 전량이다. 크기 기준이 필요하면 size_bands 를 쓰고 기준을 함께 적는다. track=policy 만 정본이고 what_if 는 가정 딱지가 필수다(ADR-0028). 구판 런은 아카이브.",
+"runs": {
+"S_current_legacy@all": {
+"name": "S_current_legacy@all",
+"universe": "all",
+"track": "legacy_regression",
+"tau_m": 21.0,
+"n_eligible": 7103200,
+"eligible_area_km2": 10935.13,
+"n_component": 458088,
+"component_area_km2": 10935.13,
+"m_total_mw": 492080.9,
+"grid_name": "adr0041_25",
+"grid_sha": "b3b25860ef5b97a42fcc733e805af4520e43b3b5a848e0228bb63a9bcc732275",
+"extra": "[]",
+"ran_at": "2026-08-28T22:39:22",
+"size_bands": [
+{
+"min_ha": 1.1111,
+"n": 84882,
+"area_km2": 10028.982,
+"mw": 451304.2
+},
+{
+"min_ha": 5.0,
+"n": 29465,
+"area_km2": 8752.146,
+"mw": 393846.6
+},
+{
+"min_ha": 6.6667,
+"n": 23635,
+"area_km2": 8415.754,
+"mw": 378708.9
+},
+{
+"min_ha": 111.1111,
+"n": 1311,
+"area_km2": 3357.002,
+"mw": 151065.1
+},
+{
+"min_ha": 222.2222,
+"n": 477,
+"area_km2": 2077.407,
+"mw": 93483.3
+}
+]
+},
+"R0_current": {
+"name": "R0_current",
+"universe": "pubcorp",
+"track": "policy",
+"tau_m": 21.0,
+"n_eligible": 1011491,
+"eligible_area_km2": 490.71,
+"n_component": 300020,
+"component_area_km2": 490.71,
+"m_total_mw": 22081.8,
+"grid_name": "adr0041_25",
+"grid_sha": "b3b25860ef5b97a42fcc733e805af4520e43b3b5a848e0228bb63a9bcc732275",
+"extra": "[]",
+"ran_at": "2026-08-28T22:39:33",
+"size_bands": [
+{
+"min_ha": 1.1111,
+"n": 7261,
+"area_km2": 204.466,
+"mw": 9201.0
+},
+{
+"min_ha": 5.0,
+"n": 689,
+"area_km2": 72.077,
+"mw": 3243.5
+},
+{
+"min_ha": 6.6667,
+"n": 409,
+"area_km2": 56.102,
+"mw": 2524.6
+},
+{
+"min_ha": 111.1111,
+"n": 1,
+"area_km2": 2.37,
+"mw": 106.7
+},
+{
+"min_ha": 222.2222,
+"n": 1,
+"area_km2": 2.37,
+"mw": 106.7
+}
+]
+},
+"R0_current_SB": {
+"name": "R0_current_SB",
+"universe": "pubcorp",
+"track": "policy",
+"tau_m": 21.0,
+"n_eligible": 337453,
+"eligible_area_km2": 229.71,
+"n_component": 114923,
+"component_area_km2": 229.71,
+"m_total_mw": 10337.1,
+"grid_name": "adr0041_25",
+"grid_sha": "b3b25860ef5b97a42fcc733e805af4520e43b3b5a848e0228bb63a9bcc732275",
+"extra": "[\"setback200\"]",
+"ran_at": "2026-08-28T22:39:42",
+"size_bands": [
+{
+"min_ha": 1.1111,
+"n": 3451,
+"area_km2": 99.535,
+"mw": 4479.1
+},
+{
+"min_ha": 5.0,
+"n": 337,
+"area_km2": 37.194,
+"mw": 1673.7
+},
+{
+"min_ha": 6.6667,
+"n": 205,
+"area_km2": 29.647,
+"mw": 1334.1
+},
+{
+"min_ha": 111.1111,
+"n": 1,
+"area_km2": 2.37,
+"mw": 106.7
+},
+{
+"min_ha": 222.2222,
+"n": 1,
+"area_km2": 2.37,
+"mw": 106.7
+}
+]
+},
+"R1_protect": {
+"name": "R1_protect",
+"universe": "pubcorp",
+"track": "policy",
+"tau_m": 21.0,
+"n_eligible": 1080808,
+"eligible_area_km2": 530.23,
+"n_component": 318403,
+"component_area_km2": 530.23,
+"m_total_mw": 23860.5,
+"grid_name": "adr0041_25",
+"grid_sha": "b3b25860ef5b97a42fcc733e805af4520e43b3b5a848e0228bb63a9bcc732275",
+"extra": "[]",
+"ran_at": "2026-08-28T22:39:52",
+"size_bands": [
+{
+"min_ha": 1.1111,
+"n": 7862,
+"area_km2": 217.726,
+"mw": 9797.7
+},
+{
+"min_ha": 5.0,
+"n": 722,
+"area_km2": 74.859,
+"mw": 3368.6
+},
+{
+"min_ha": 6.6667,
+"n": 428,
+"area_km2": 58.038,
+"mw": 2611.7
+},
+{
+"min_ha": 111.1111,
+"n": 1,
+"area_km2": 2.37,
+"mw": 106.7
+},
+{
+"min_ha": 222.2222,
+"n": 1,
+"area_km2": 2.37,
+"mw": 106.7
+}
+]
+},
+"R1_protect_SB": {
+"name": "R1_protect_SB",
+"universe": "pubcorp",
+"track": "policy",
+"tau_m": 21.0,
+"n_eligible": 369231,
+"eligible_area_km2": 250.2,
+"n_component": 125105,
+"component_area_km2": 250.2,
+"m_total_mw": 11258.8,
+"grid_name": "adr0041_25",
+"grid_sha": "b3b25860ef5b97a42fcc733e805af4520e43b3b5a848e0228bb63a9bcc732275",
+"extra": "[\"setback200\"]",
+"ran_at": "2026-08-28T22:40:01",
+"size_bands": [
+{
+"min_ha": 1.1111,
+"n": 3738,
+"area_km2": 105.867,
+"mw": 4764.0
+},
+{
+"min_ha": 5.0,
+"n": 355,
+"area_km2": 38.597,
+"mw": 1736.9
+},
+{
+"min_ha": 6.6667,
+"n": 213,
+"area_km2": 30.448,
+"mw": 1370.2
+},
+{
+"min_ha": 111.1111,
+"n": 1,
+"area_km2": 2.37,
+"mw": 106.7
+},
+{
+"min_ha": 222.2222,
+"n": 1,
+"area_km2": 2.37,
+"mw": 106.7
+}
+]
+},
+"R2_promo": {
+"name": "R2_promo",
+"universe": "pubcorp",
+"track": "policy",
+"tau_m": 21.0,
+"n_eligible": 1494366,
+"eligible_area_km2": 1038.85,
+"n_component": 391150,
+"component_area_km2": 1038.85,
+"m_total_mw": 46748.5,
+"grid_name": "adr0041_25",
+"grid_sha": "b3b25860ef5b97a42fcc733e805af4520e43b3b5a848e0228bb63a9bcc732275",
+"extra": "[]",
+"ran_at": "2026-08-28T22:40:12",
+"size_bands": [
+{
+"min_ha": 1.1111,
+"n": 14732,
+"area_km2": 552.143,
+"mw": 24846.4
+},
+{
+"min_ha": 5.0,
+"n": 1719,
+"area_km2": 288.727,
+"mw": 12992.7
+},
+{
+"min_ha": 6.6667,
+"n": 1118,
+"area_km2": 254.336,
+"mw": 11445.1
+},
+{
+"min_ha": 111.1111,
+"n": 25,
+"area_km2": 54.444,
+"mw": 2450.0
+},
+{
+"min_ha": 222.2222,
+"n": 8,
+"area_km2": 28.261,
+"mw": 1271.8
+}
+]
+},
+"R2_promo_SB": {
+"name": "R2_promo_SB",
+"universe": "pubcorp",
+"track": "policy",
+"tau_m": 21.0,
+"n_eligible": 625754,
+"eligible_area_km2": 631.72,
+"n_component": 178062,
+"component_area_km2": 631.72,
+"m_total_mw": 28427.5,
+"grid_name": "adr0041_25",
+"grid_sha": "b3b25860ef5b97a42fcc733e805af4520e43b3b5a848e0228bb63a9bcc732275",
+"extra": "[\"setback200\"]",
+"ran_at": "2026-08-28T22:40:21",
+"size_bands": [
+{
+"min_ha": 1.1111,
+"n": 8493,
+"area_km2": 365.44,
+"mw": 16444.8
+},
+{
+"min_ha": 5.0,
+"n": 1039,
+"area_km2": 215.795,
+"mw": 9710.8
+},
+{
+"min_ha": 6.6667,
+"n": 703,
+"area_km2": 196.462,
+"mw": 8840.8
+},
+{
+"min_ha": 111.1111,
+"n": 24,
+"area_km2": 52.219,
+"mw": 2349.9
+},
+{
+"min_ha": 222.2222,
+"n": 8,
+"area_km2": 27.755,
+"mw": 1249.0
+}
+]
+},
+"R3_zone_all": {
+"name": "R3_zone_all",
+"universe": "pubcorp",
+"track": "policy",
+"tau_m": 21.0,
+"n_eligible": 1563683,
+"eligible_area_km2": 1078.38,
+"n_component": 406283,
+"component_area_km2": 1078.38,
+"m_total_mw": 48527.2,
+"grid_name": "adr0041_25",
+"grid_sha": "b3b25860ef5b97a42fcc733e805af4520e43b3b5a848e0228bb63a9bcc732275",
+"extra": "[]",
+"ran_at": "2026-08-28T22:40:32",
+"size_bands": [
+{
+"min_ha": 1.1111,
+"n": 15409,
+"area_km2": 569.595,
+"mw": 25631.8
+},
+{
+"min_ha": 5.0,
+"n": 1774,
+"area_km2": 294.203,
+"mw": 13239.2
+},
+{
+"min_ha": 6.6667,
+"n": 1156,
+"area_km2": 258.849,
+"mw": 11648.2
+},
+{
+"min_ha": 111.1111,
+"n": 25,
+"area_km2": 54.461,
+"mw": 2450.8
+},
+{
+"min_ha": 222.2222,
+"n": 8,
+"area_km2": 28.261,
+"mw": 1271.8
+}
+]
+},
+"R3_zone_all_SB": {
+"name": "R3_zone_all_SB",
+"universe": "pubcorp",
+"track": "policy",
+"tau_m": 21.0,
+"n_eligible": 657532,
+"eligible_area_km2": 652.21,
+"n_component": 186778,
+"component_area_km2": 652.21,
+"m_total_mw": 29349.3,
+"grid_name": "adr0041_25",
+"grid_sha": "b3b25860ef5b97a42fcc733e805af4520e43b3b5a848e0228bb63a9bcc732275",
+"extra": "[\"setback200\"]",
+"ran_at": "2026-08-28T22:40:41",
+"size_bands": [
+{
+"min_ha": 1.1111,
+"n": 8808,
+"area_km2": 373.35,
+"mw": 16800.7
+},
+{
+"min_ha": 5.0,
+"n": 1063,
+"area_km2": 217.985,
+"mw": 9809.3
+},
+{
+"min_ha": 6.6667,
+"n": 714,
+"area_km2": 197.895,
+"mw": 8905.3
+},
+{
+"min_ha": 111.1111,
+"n": 24,
+"area_km2": 52.22,
+"mw": 2349.9
+},
+{
+"min_ha": 222.2222,
+"n": 8,
+"area_km2": 27.755,
+"mw": 1249.0
+}
+]
+},
+"R0_current@all": {
+"name": "R0_current@all",
+"universe": "all",
+"track": "policy",
+"tau_m": 21.0,
+"n_eligible": 5719511,
+"eligible_area_km2": 5582.55,
+"n_component": 572303,
+"component_area_km2": 5582.55,
+"m_total_mw": 251214.9,
+"grid_name": "adr0041_25",
+"grid_sha": "b3b25860ef5b97a42fcc733e805af4520e43b3b5a848e0228bb63a9bcc732275",
+"extra": "[]",
+"ran_at": "2026-08-28T22:40:54",
+"size_bands": [
+{
+"min_ha": 1.1111,
+"n": 81311,
+"area_km2": 4718.668,
+"mw": 212340.1
+},
+{
+"min_ha": 5.0,
+"n": 21908,
+"area_km2": 3338.645,
+"mw": 150239.0
+},
+{
+"min_ha": 6.6667,
+"n": 15850,
+"area_km2": 2989.786,
+"mw": 134540.4
+},
+{
+"min_ha": 111.1111,
+"n": 161,
+"area_km2": 386.334,
+"mw": 17385.1
+},
+{
+"min_ha": 222.2222,
+"n": 38,
+"area_km2": 204.846,
+"mw": 9218.1
+}
+]
+},
+"R1_protect@all": {
+"name": "R1_protect@all",
+"universe": "all",
+"track": "policy",
+"tau_m": 21.0,
+"n_eligible": 6200066,
+"eligible_area_km2": 6158.37,
+"n_component": 573879,
+"component_area_km2": 6158.37,
+"m_total_mw": 277126.5,
+"grid_name": "adr0041_25",
+"grid_sha": "b3b25860ef5b97a42fcc733e805af4520e43b3b5a848e0228bb63a9bcc732275",
+"extra": "[]",
+"ran_at": "2026-08-28T22:41:06",
+"size_bands": [
+{
+"min_ha": 1.1111,
+"n": 86341,
+"area_km2": 5295.856,
+"mw": 238313.5
+},
+{
+"min_ha": 5.0,
+"n": 24306,
+"area_km2": 3838.923,
+"mw": 172751.5
+},
+{
+"min_ha": 6.6667,
+"n": 17821,
+"area_km2": 3465.614,
+"mw": 155952.6
+},
+{
+"min_ha": 111.1111,
+"n": 211,
+"area_km2": 480.135,
+"mw": 21606.1
+},
+{
+"min_ha": 222.2222,
+"n": 49,
+"area_km2": 236.777,
+"mw": 10655.0
+}
+]
+},
+"R2_promo@all": {
+"name": "R2_promo@all",
+"universe": "all",
+"track": "policy",
+"tau_m": 21.0,
+"n_eligible": 8790833,
+"eligible_area_km2": 11395.85,
+"n_component": 512376,
+"component_area_km2": 11395.85,
+"m_total_mw": 512813.5,
+"grid_name": "adr0041_25",
+"grid_sha": "b3b25860ef5b97a42fcc733e805af4520e43b3b5a848e0228bb63a9bcc732275",
+"extra": "[]",
+"ran_at": "2026-08-28T22:41:21",
+"size_bands": [
+{
+"min_ha": 1.1111,
+"n": 70857,
+"area_km2": 10665.102,
+"mw": 479929.6
+},
+{
+"min_ha": 5.0,
+"n": 26933,
+"area_km2": 9643.914,
+"mw": 433976.1
+},
+{
+"min_ha": 6.6667,
+"n": 21989,
+"area_km2": 9358.796,
+"mw": 421145.8
+},
+{
+"min_ha": 111.1111,
+"n": 1649,
+"area_km2": 4494.479,
+"mw": 202251.6
+},
+{
+"min_ha": 222.2222,
+"n": 640,
+"area_km2": 2935.839,
+"mw": 132112.8
+}
+]
+},
+"R3_zone_all@all": {
+"name": "R3_zone_all@all",
+"universe": "all",
+"track": "policy",
+"tau_m": 21.0,
+"n_eligible": 9271388,
+"eligible_area_km2": 11971.67,
+"n_component": 503689,
+"component_area_km2": 11971.67,
+"m_total_mw": 538725.1,
+"grid_name": "adr0041_25",
+"grid_sha": "b3b25860ef5b97a42fcc733e805af4520e43b3b5a848e0228bb63a9bcc732275",
+"extra": "[]",
+"ran_at": "2026-08-28T22:41:35",
+"size_bands": [
+{
+"min_ha": 1.1111,
+"n": 70226,
+"area_km2": 11256.602,
+"mw": 506547.1
+},
+{
+"min_ha": 5.0,
+"n": 26975,
+"area_km2": 10244.387,
+"mw": 460997.4
+},
+{
+"min_ha": 6.6667,
+"n": 22042,
+"area_km2": 9960.217,
+"mw": 448209.8
+},
+{
+"min_ha": 111.1111,
+"n": 1733,
+"area_km2": 5059.323,
+"mw": 227669.5
+},
+{
+"min_ha": 222.2222,
+"n": 708,
+"area_km2": 3460.629,
+"mw": 155728.3
+}
+]
+},
+"HARD_W1_zone_all": {
+"name": "HARD_W1_zone_all",
+"universe": "pubcorp",
+"track": "what_if",
+"tau_m": 21.0,
+"n_eligible": 1474695,
+"eligible_area_km2": 806.24,
+"n_component": 404511,
+"component_area_km2": 806.24,
+"m_total_mw": 36280.9,
+"grid_name": "adr0041_25",
+"grid_sha": "b3b25860ef5b97a42fcc733e805af4520e43b3b5a848e0228bb63a9bcc732275",
+"extra": "[]",
+"ran_at": "2026-08-28T22:41:44",
+"size_bands": [
+{
+"min_ha": 1.1111,
+"n": 11897,
+"area_km2": 393.643,
+"mw": 17713.9
+},
+{
+"min_ha": 5.0,
+"n": 1404,
+"area_km2": 178.312,
+"mw": 8024.0
+},
+{
+"min_ha": 6.6667,
+"n": 889,
+"area_km2": 148.933,
+"mw": 6702.0
+},
+{
+"min_ha": 111.1111,
+"n": 10,
+"area_km2": 23.382,
+"mw": 1052.2
+},
+{
+"min_ha": 222.2222,
+"n": 2,
+"area_km2": 10.88,
+"mw": 489.6
+}
+]
+},
+"HARD_W1_SB": {
+"name": "HARD_W1_SB",
+"universe": "pubcorp",
+"track": "what_if",
+"tau_m": 21.0,
+"n_eligible": 558940,
+"eligible_area_km2": 414.78,
+"n_component": 173856,
+"component_area_km2": 414.78,
+"m_total_mw": 18665.0,
+"grid_name": "adr0041_25",
+"grid_sha": "b3b25860ef5b97a42fcc733e805af4520e43b3b5a848e0228bb63a9bcc732275",
+"extra": "[\"setback200\"]",
+"ran_at": "2026-08-28T22:41:53",
+"size_bands": [
+{
+"min_ha": 1.1111,
+"n": 6120,
+"area_km2": 209.648,
+"mw": 9434.1
+},
+{
+"min_ha": 5.0,
+"n": 733,
+"area_km2": 99.913,
+"mw": 4496.1
+},
+{
+"min_ha": 6.6667,
+"n": 479,
+"area_km2": 85.383,
+"mw": 3842.2
+},
+{
+"min_ha": 111.1111,
+"n": 5,
+"area_km2": 12.789,
+"mw": 575.5
+},
+{
+"min_ha": 222.2222,
+"n": 2,
+"area_km2": 8.029,
+"mw": 361.3
+}
+]
+},
+"HARD_W2_inst_H": {
+"name": "HARD_W2_inst_H",
+"universe": "pubcorp",
+"track": "what_if",
+"tau_m": 21.0,
+"n_eligible": 1475757,
+"eligible_area_km2": 807.52,
+"n_component": 404791,
+"component_area_km2": 807.52,
+"m_total_mw": 36338.4,
+"grid_name": "adr0041_25",
+"grid_sha": "b3b25860ef5b97a42fcc733e805af4520e43b3b5a848e0228bb63a9bcc732275",
+"extra": "[]",
+"ran_at": "2026-08-28T22:42:03",
+"size_bands": [
+{
+"min_ha": 1.1111,
+"n": 11921,
+"area_km2": 394.433,
+"mw": 17749.5
+},
+{
+"min_ha": 5.0,
+"n": 1408,
+"area_km2": 178.719,
+"mw": 8042.4
+},
+{
+"min_ha": 6.6667,
+"n": 889,
+"area_km2": 149.092,
+"mw": 6709.1
+},
+{
+"min_ha": 111.1111,
+"n": 10,
+"area_km2": 23.382,
+"mw": 1052.2
+},
+{
+"min_ha": 222.2222,
+"n": 2,
+"area_km2": 10.88,
+"mw": 489.6
+}
+]
+},
+"HARD_W2_SB": {
+"name": "HARD_W2_SB",
+"universe": "pubcorp",
+"track": "what_if",
+"tau_m": 21.0,
+"n_eligible": 559419,
+"eligible_area_km2": 415.59,
+"n_component": 174011,
+"component_area_km2": 415.59,
+"m_total_mw": 18701.7,
+"grid_name": "adr0041_25",
+"grid_sha": "b3b25860ef5b97a42fcc733e805af4520e43b3b5a848e0228bb63a9bcc732275",
+"extra": "[\"setback200\"]",
+"ran_at": "2026-08-28T22:42:12",
+"size_bands": [
+{
+"min_ha": 1.1111,
+"n": 6132,
+"area_km2": 210.1,
+"mw": 9454.5
+},
+{
+"min_ha": 5.0,
+"n": 734,
+"area_km2": 100.125,
+"mw": 4505.6
+},
+{
+"min_ha": 6.6667,
+"n": 479,
+"area_km2": 85.53,
+"mw": 3848.9
+},
+{
+"min_ha": 111.1111,
+"n": 5,
+"area_km2": 12.789,
+"mw": 575.5
+},
+{
+"min_ha": 222.2222,
+"n": 2,
+"area_km2": 8.029,
+"mw": 361.3
+}
+]
+},
+"HARD_W3_technical": {
+"name": "HARD_W3_technical",
+"universe": "pubcorp",
+"track": "what_if",
+"tau_m": 21.0,
+"n_eligible": 2138037,
+"eligible_area_km2": 1540.79,
+"n_component": 518884,
+"component_area_km2": 1540.79,
+"m_total_mw": 69335.7,
+"grid_name": "adr0041_25",
+"grid_sha": "b3b25860ef5b97a42fcc733e805af4520e43b3b5a848e0228bb63a9bcc732275",
+"extra": "[]",
+"ran_at": "2026-08-28T22:42:22",
+"size_bands": [
+{
+"min_ha": 1.1111,
+"n": 21995,
+"area_km2": 883.269,
+"mw": 39747.1
+},
+{
+"min_ha": 5.0,
+"n": 2965,
+"area_km2": 491.738,
+"mw": 22128.2
+},
+{
+"min_ha": 6.6667,
+"n": 1992,
+"area_km2": 436.027,
+"mw": 19621.2
+},
+{
+"min_ha": 111.1111,
+"n": 43,
+"area_km2": 94.221,
+"mw": 4240.0
+},
+{
+"min_ha": 222.2222,
+"n": 13,
+"area_km2": 48.242,
+"mw": 2170.9
+}
+]
+},
+"HARD_W3_SB": {
+"name": "HARD_W3_SB",
+"universe": "pubcorp",
+"track": "what_if",
+"tau_m": 21.0,
+"n_eligible": 946837,
+"eligible_area_km2": 948.04,
+"n_component": 252067,
+"component_area_km2": 948.04,
+"m_total_mw": 42661.7,
+"grid_name": "adr0041_25",
+"grid_sha": "b3b25860ef5b97a42fcc733e805af4520e43b3b5a848e0228bb63a9bcc732275",
+"extra": "[\"setback200\"]",
+"ran_at": "2026-08-28T22:42:31",
+"size_bands": [
+{
+"min_ha": 1.1111,
+"n": 13051,
+"area_km2": 575.233,
+"mw": 25885.5
+},
+{
+"min_ha": 5.0,
+"n": 1806,
+"area_km2": 345.278,
+"mw": 15537.5
+},
+{
+"min_ha": 6.6667,
+"n": 1246,
+"area_km2": 313.031,
+"mw": 14086.4
+},
+{
+"min_ha": 111.1111,
+"n": 34,
+"area_km2": 73.624,
+"mw": 3313.1
+},
+{
+"min_ha": 222.2222,
+"n": 10,
+"area_km2": 36.785,
+"mw": 1655.3
+}
+]
+},
+"R0_current@tau15.0": {
+"name": "R0_current@tau15.0",
+"universe": "pubcorp",
+"track": "policy",
+"tau_m": 15.0,
+"n_eligible": 1011491,
+"eligible_area_km2": 490.71,
+"n_component": 328539,
+"component_area_km2": 490.71,
+"m_total_mw": 22081.8,
+"grid_name": "adr0041_25",
+"grid_sha": "b3b25860ef5b97a42fcc733e805af4520e43b3b5a848e0228bb63a9bcc732275",
+"extra": "[]",
+"ran_at": "2026-08-28T22:42:41",
+"size_bands": [
+{
+"min_ha": 1.1111,
+"n": 6970,
+"area_km2": 191.411,
+"mw": 8613.5
+},
+{
+"min_ha": 5.0,
+"n": 627,
+"area_km2": 64.495,
+"mw": 2902.3
+},
+{
+"min_ha": 6.6667,
+"n": 378,
+"area_km2": 50.24,
+"mw": 2260.8
+},
+{
+"min_ha": 111.1111,
+"n": 1,
+"area_km2": 2.357,
+"mw": 106.1
+},
+{
+"min_ha": 222.2222,
+"n": 1,
+"area_km2": 2.357,
+"mw": 106.1
+}
+]
+},
+"R0_current@tau25.0": {
+"name": "R0_current@tau25.0",
+"universe": "pubcorp",
+"track": "policy",
+"tau_m": 25.0,
+"n_eligible": 1011491,
+"eligible_area_km2": 490.71,
+"n_component": 284677,
+"component_area_km2": 490.71,
+"m_total_mw": 22081.8,
+"grid_name": "adr0041_25",
+"grid_sha": "b3b25860ef5b97a42fcc733e805af4520e43b3b5a848e0228bb63a9bcc732275",
+"extra": "[]",
+"ran_at": "2026-08-28T22:42:51",
+"size_bands": [
+{
+"min_ha": 1.1111,
+"n": 7360,
+"area_km2": 211.398,
+"mw": 9512.9
+},
+{
+"min_ha": 5.0,
+"n": 732,
+"area_km2": 77.041,
+"mw": 3466.8
+},
+{
+"min_ha": 6.6667,
+"n": 443,
+"area_km2": 60.537,
+"mw": 2724.2
+},
+{
+"min_ha": 111.1111,
+"n": 2,
+"area_km2": 3.703,
+"mw": 166.6
+},
+{
+"min_ha": 222.2222,
+"n": 1,
+"area_km2": 2.37,
+"mw": 106.7
+}
+]
+},
+"R3_zone_all@tau15.0": {
+"name": "R3_zone_all@tau15.0",
+"universe": "pubcorp",
+"track": "policy",
+"tau_m": 15.0,
+"n_eligible": 1563683,
+"eligible_area_km2": 1078.38,
+"n_component": 449755,
+"component_area_km2": 1078.38,
+"m_total_mw": 48527.2,
+"grid_name": "adr0041_25",
+"grid_sha": "b3b25860ef5b97a42fcc733e805af4520e43b3b5a848e0228bb63a9bcc732275",
+"extra": "[]",
+"ran_at": "2026-08-28T22:43:02",
+"size_bands": [
+{
+"min_ha": 1.1111,
+"n": 15089,
+"area_km2": 537.175,
+"mw": 24172.9
+},
+{
+"min_ha": 5.0,
+"n": 1683,
+"area_km2": 268.715,
+"mw": 12092.2
+},
+{
+"min_ha": 6.6667,
+"n": 1116,
+"area_km2": 236.236,
+"mw": 10630.6
+},
+{
+"min_ha": 111.1111,
+"n": 15,
+"area_km2": 27.037,
+"mw": 1216.7
+},
+{
+"min_ha": 222.2222,
+"n": 3,
+"area_km2": 8.737,
+"mw": 393.2
+}
+]
+},
+"R3_zone_all@tau25.0": {
+"name": "R3_zone_all@tau25.0",
+"universe": "pubcorp",
+"track": "policy",
+"tau_m": 25.0,
+"n_eligible": 1563683,
+"eligible_area_km2": 1078.38,
+"n_component": 383576,
+"component_area_km2": 1078.38,
+"m_total_mw": 48527.2,
+"grid_name": "adr0041_25",
+"grid_sha": "b3b25860ef5b97a42fcc733e805af4520e43b3b5a848e0228bb63a9bcc732275",
+"extra": "[]",
+"ran_at": "2026-08-28T22:43:12",
+"size_bands": [
+{
+"min_ha": 1.1111,
+"n": 15523,
+"area_km2": 586.349,
+"mw": 26385.7
+},
+{
+"min_ha": 5.0,
+"n": 1825,
+"area_km2": 308.124,
+"mw": 13865.6
+},
+{
+"min_ha": 6.6667,
+"n": 1200,
+"area_km2": 272.307,
+"mw": 12253.8
+},
+{
+"min_ha": 111.1111,
+"n": 38,
+"area_km2": 84.418,
+"mw": 3798.8
+},
+{
+"min_ha": 222.2222,
+"n": 12,
+"area_km2": 44.842,
+"mw": 2017.9
+}
+]
+},
+"R0_current@pubcorp_clan": {
+"name": "R0_current@pubcorp_clan",
+"universe": "pubcorp_clan",
+"track": "policy",
+"tau_m": 21.0,
+"n_eligible": 1122604,
+"eligible_area_km2": 633.68,
+"n_component": 350170,
+"component_area_km2": 633.68,
+"m_total_mw": 28515.7,
+"grid_name": "adr0041_25",
+"grid_sha": "b3b25860ef5b97a42fcc733e805af4520e43b3b5a848e0228bb63a9bcc732275",
+"extra": "[]",
+"ran_at": "2026-08-28T22:43:22",
+"size_bands": [
+{
+"min_ha": 1.1111,
+"n": 9004,
+"area_km2": 242.52,
+"mw": 10913.4
+},
+{
+"min_ha": 5.0,
+"n": 776,
+"area_km2": 78.591,
+"mw": 3536.6
+},
+{
+"min_ha": 6.6667,
+"n": 447,
+"area_km2": 59.771,
+"mw": 2689.7
+},
+{
+"min_ha": 111.1111,
+"n": 1,
+"area_km2": 2.37,
+"mw": 106.7
+},
+{
+"min_ha": 222.2222,
+"n": 1,
+"area_km2": 2.37,
+"mw": 106.7
+}
+]
+},
+"R3_zone_all@pubcorp_clan": {
+"name": "R3_zone_all@pubcorp_clan",
+"universe": "pubcorp_clan",
+"track": "policy",
+"tau_m": 21.0,
+"n_eligible": 1738035,
+"eligible_area_km2": 1325.84,
+"n_component": 480212,
+"component_area_km2": 1325.84,
+"m_total_mw": 59662.8,
+"grid_name": "adr0041_25",
+"grid_sha": "b3b25860ef5b97a42fcc733e805af4520e43b3b5a848e0228bb63a9bcc732275",
+"extra": "[]",
+"ran_at": "2026-08-28T22:43:33",
+"size_bands": [
+{
+"min_ha": 1.1111,
+"n": 18599,
+"area_km2": 643.293,
+"mw": 28948.2
+},
+{
+"min_ha": 5.0,
+"n": 1978,
+"area_km2": 311.013,
+"mw": 13995.6
+},
+{
+"min_ha": 6.6667,
+"n": 1259,
+"area_km2": 269.813,
+"mw": 12141.6
+},
+{
+"min_ha": 111.1111,
+"n": 25,
+"area_km2": 54.469,
+"mw": 2451.1
+},
+{
+"min_ha": 222.2222,
+"n": 8,
+"area_km2": 28.261,
+"mw": 1271.8
+}
+]
+},
+"R0_current_SB@all": {
+"name": "R0_current_SB@all",
+"universe": "all",
+"track": "policy",
+"tau_m": 21.0,
+"n_eligible": 2019431,
+"eligible_area_km2": 2298.17,
+"n_component": 316030,
+"component_area_km2": 2298.17,
+"m_total_mw": 103417.7,
+"grid_name": "not_in_source",
+"grid_sha": null,
+"extra": "[\"setback200\"]",
+"ran_at": "2026-08-29T11:14:37",
+"size_bands": [
+{
+"min_ha": 1.1111,
+"n": 43514,
+"area_km2": 1743.968,
+"mw": 78478.5
+},
+{
+"min_ha": 5.0,
+"n": 7956,
+"area_km2": 942.248,
+"mw": 42401.2
+},
+{
+"min_ha": 6.6667,
+"n": 5003,
+"area_km2": 772.503,
+"mw": 34762.6
+},
+{
+"min_ha": 111.1111,
+"n": 36,
+"area_km2": 86.272,
+"mw": 3882.2
+},
+{
+"min_ha": 222.2222,
+"n": 13,
+"area_km2": 52.452,
+"mw": 2360.4
+}
+]
+},
+"R1_protect_SB@all": {
+"name": "R1_protect_SB@all",
+"universe": "all",
+"track": "policy",
+"tau_m": 21.0,
+"n_eligible": 2235380,
+"eligible_area_km2": 2561.14,
+"n_component": 327755,
+"component_area_km2": 2561.14,
+"m_total_mw": 115251.3,
+"grid_name": "not_in_source",
+"grid_sha": null,
+"extra": "[\"setback200\"]",
+"ran_at": "2026-08-29T11:14:47",
+"size_bands": [
+{
+"min_ha": 1.1111,
+"n": 48279,
+"area_km2": 1984.885,
+"mw": 89319.8
+},
+{
+"min_ha": 5.0,
+"n": 9255,
+"area_km2": 1099.671,
+"mw": 49485.2
+},
+{
+"min_ha": 6.6667,
+"n": 5925,
+"area_km2": 908.005,
+"mw": 40860.2
+},
+{
+"min_ha": 111.1111,
+"n": 39,
+"area_km2": 91.189,
+"mw": 4103.5
+},
+{
+"min_ha": 222.2222,
+"n": 13,
+"area_km2": 52.452,
+"mw": 2360.4
+}
+]
+},
+"R2_promo_SB@all": {
+"name": "R2_promo_SB@all",
+"universe": "all",
+"track": "policy",
+"tau_m": 21.0,
+"n_eligible": 3754291,
+"eligible_area_km2": 5850.57,
+"n_component": 330328,
+"component_area_km2": 5850.57,
+"m_total_mw": 263275.5,
+"grid_name": "not_in_source",
+"grid_sha": null,
+"extra": "[\"setback200\"]",
+"ran_at": "2026-08-29T11:14:58",
+"size_bands": [
+{
+"min_ha": 1.1111,
+"n": 54708,
+"area_km2": 5307.319,
+"mw": 238829.4
+},
+{
+"min_ha": 5.0,
+"n": 18150,
+"area_km2": 4452.685,
+"mw": 200370.8
+},
+{
+"min_ha": 6.6667,
+"n": 14171,
+"area_km2": 4223.098,
+"mw": 190039.4
+},
+{
+"min_ha": 111.1111,
+"n": 627,
+"area_km2": 1306.622,
+"mw": 58798.0
+},
+{
+"min_ha": 222.2222,
+"n": 170,
+"area_km2": 624.252,
+"mw": 28091.3
+}
+]
+},
+"R3_zone_all_SB@all": {
+"name": "R3_zone_all_SB@all",
+"universe": "all",
+"track": "policy",
+"tau_m": 21.0,
+"n_eligible": 3970240,
+"eligible_area_km2": 6113.54,
+"n_component": 335040,
+"component_area_km2": 6113.54,
+"m_total_mw": 275109.1,
+"grid_name": "not_in_source",
+"grid_sha": null,
+"extra": "[\"setback200\"]",
+"ran_at": "2026-08-29T11:15:09",
+"size_bands": [
+{
+"min_ha": 1.1111,
+"n": 57004,
+"area_km2": 5562.907,
+"mw": 250330.8
+},
+{
+"min_ha": 5.0,
+"n": 19045,
+"area_km2": 4672.69,
+"mw": 210271.0
+},
+{
+"min_ha": 6.6667,
+"n": 14886,
+"area_km2": 4432.549,
+"mw": 199464.7
+},
+{
+"min_ha": 111.1111,
+"n": 665,
+"area_km2": 1394.126,
+"mw": 62735.7
+},
+{
+"min_ha": 222.2222,
+"n": 183,
+"area_km2": 670.549,
+"mw": 30174.7
+}
+]
+}
+}
+}

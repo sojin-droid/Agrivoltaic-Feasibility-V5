@@ -1,0 +1,29 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+
+# 파이프라인 대용량/중간 산출물 (사이트 미사용 — Supabase/로컬 보관)
+data/*_members.json
+data/legacy_S3/
+data/legacy_pre_merge/
+
+# 비공개 페이지 (배포 제외)
+lab.html
+policy.html
+
+# 로컬 도구 설정 (Claude Code 미리보기 서버 등 — 배포 무관)
+.claude/
+
+# 백업·임시
+*.bak
+*_pre_*.json
+tmp_*
+.DS_Store
+Thumbs.db
+
+# 편집기 설정 (로컬 전용)
+.vscode/
+
+# 시군 브리프 출력 (발행 결정 전 — 생성기는 추적, 출력은 로컬)
+briefs/
