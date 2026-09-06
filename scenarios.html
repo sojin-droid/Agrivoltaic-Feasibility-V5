@@ -84,7 +84,7 @@ input[type=number].coef{width:80px;font:inherit;padding:2px 6px;border:1px solid
     <div class="sec-head"><div><p class="eyebrow">Diagnosis · 시군별 조회</p>
     <h2>시군별 조회</h2></div>
     <span style="font-size:12.5px;color:var(--muted)">값은 필지층 면적 —
-    사업규모(구획) 단위는 표 5와 지도 탭</span></div>
+    사업규모(구획) 단위는 표 5와 후보지 찾기 탭</span></div>
     <div class="figbox reveal">
       <div style="display:flex;gap:14px;flex-wrap:wrap;margin-bottom:6px">
         <div class="field" style="margin:0;min-width:240px">
@@ -158,7 +158,7 @@ input[type=number].coef{width:80px;font:inherit;padding:2px 6px;border:1px solid
     </div>
 
     <div class="figbox reveal" id="t32">
-      <h3 style="font-family:var(--serif);color:var(--navy);margin-bottom:12px">표 5. 구역 조합(4) × 이격(2)별 설치 가능 면적 — 정본 우주 8칸</h3>
+      <h3 style="font-family:var(--serif);color:var(--navy);margin-bottom:12px">표 5. 구역 조합(4) × 이격(2)별 설치 가능 면적 — 분석 기준 필지 8칸</h3>
       <div style="overflow-x:auto"><table class="v4" id="t-grid"></table></div>
       <div class="figcap">구획 = 필지를 연접 거리 21m로 병합한 성분 <b>전량</b> — 등재 문턱을 두지 않음<sup class="fnref">[12]</sup> ·
       이격 보수 = 주거 200m 상한을 대지 필지 대리로 일률 적용한 하한<sup class="fnref">[11]</sup>.<br>
@@ -188,7 +188,7 @@ input[type=number].coef{width:80px;font:inherit;padding:2px 6px;border:1px solid
     <div class="est-panel">
       <h3>소유 (지적 소유구분 코드)</h3>
       <div class="presets" id="ePresets">
-        <button data-p="pubcorp">정본 우주 — 국유·시도·군·법인</button>
+        <button data-p="pubcorp">분석 기준 필지 — 국유·시도·군·법인</button>
         <button data-p="pubcorp_clan">+ 종중·종교</button>
         <button data-p="all">전체(개인 포함)</button>
       </div>
@@ -230,8 +230,8 @@ input[type=number].coef{width:80px;font:inherit;padding:2px 6px;border:1px solid
   필지 간 연접(τ = 21 m) 계산이 필요해 즉석 산정 불가. 조합이 등재 런과 일치하면
   결과 카드에 해당 런의 구획 값 병기, 등재 밖 조합의 구획 산출은 등재 요청(Contact)
   경로. τ = 21 m는 적격 필지 710만 개의 4-최근접 거리 곡선(k-distance) 무릎에서
-  유도한 값 — 민감도 대역(15–25 m)에서 적격 면적 불변. 유도 그림·근거는 방법·자료
-  문서의 그림 자산 참조.</p>
+  유도한 값 — 민감도 대역(15–25 m)에서 적격 면적 불변. 유도 그림·근거는 근거와 방법
+  탭(왜 21m인가)과 보고서의 그림 자산 참조.</p>
 
   <div class="callout-v4" id="e-read">—</div>
 
@@ -423,7 +423,7 @@ table.mx .ref{color:var(--muted)}
       필요성의 정량 근거.`],
     [`② 상한 규모`, `농업진흥지역 전부 개방(R3) 기준 전국 무필터 ${K(C['전국R3']['대조군'].km2, 2)} km²
       중 이 조문의 대상은 <b>${K(natR3.km2, 2)} km² (${pct(natR3.m2, C['전국R3']['대조군'].m2)}%)</b> —
-      정본 우주로는 ${K(C['전국R3']['정본'].km2, 2)} → ${K(natR3p.km2, 2)} km².`],
+      분석 기준 필지로는 ${K(C['전국R3']['정본'].km2, 2)} → ${K(natR3p.km2, 2)} km².`],
     [`③ 보호구역 개방은 이 경로에 무의미`, `보호구역만 개방(R1)해도 증분은
       +${K((M.R1['대조군'].m2 - M.R0['대조군'].m2) / 1e6, 2)} km²(정본
       +${K((M.R1['정본'].m2 - M.R0['정본'].m2) / 1e6, 2)} km²)에 그침.`],
@@ -514,7 +514,7 @@ table.mx .ref{color:var(--muted)}
   const pz2 = s.anchor.pending_zone_null;
   if (pz2 && pz2.n) document.getElementById('fn-pending').innerHTML =
     ` 용도지역 미상 판정 보류 ${V4.n(pz2.n)}필지 · ${V4.km2(pz2.km2, 2)} km²는 어느 조합에도
-    불포함(보수 배제 — <a href="method.html#caveats" style="color:var(--leaf-deep)">방법·자료의 한계 표</a>).`;
+    불포함(보수 배제 — <a href="method.html#caveats" style="color:var(--leaf-deep)">근거와 방법의 한계 표</a>).`;
 
   // ── 시군별 조회 — 다중 선택(칩) + 전국 전체 ──
   const sg = await V4.data('sgg_matrix');

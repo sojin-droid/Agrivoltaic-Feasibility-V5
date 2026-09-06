@@ -175,7 +175,7 @@ input[type=range]{accent-color:var(--navy)}
         <circle cx="150" cy="90" r="4"/><circle cx="118" cy="52" r="4"/></g>
       <g fill="#FFD84D" stroke="#B3261E" stroke-width="1.6"><circle cx="44" cy="52" r="5.5"/>
         <circle cx="72" cy="34" r="5.5"/><circle cx="116" cy="24" r="5.5"/><circle cx="170" cy="18" r="5.5"/></g>
-      <text x="110" y="136" text-anchor="middle" font-size="10" fill="#6C757D" font-family="var(--sans)">비지배 전선(금색) · 지배됨(회색)</text>
+      <text x="110" y="136" text-anchor="middle" font-size="10" fill="#6C757D" font-family="var(--sans)">비지배 집합(금색) · 지배됨(회색)</text>
     </svg>
   </div>
   <p>시군을 고르면 그 시군의 연접 구획 전수에서 <b>면적 · 계통 여유 · 산업단지
@@ -189,14 +189,14 @@ input[type=range]{accent-color:var(--navy)}
       <select id="recSgg" style="font:inherit;padding:4px 8px"></select>
       <label style="font-size:12px;color:var(--muted);margin-left:10px">표시 방법
         <select id="recMth" style="font:inherit;padding:4px 8px">
-          <option value="">비지배 전선 (정본)</option>
+          <option value="">우선 후보 비교 (기본)</option>
         </select></label>
       <span id="recStamp" style="font-size:12.5px;color:var(--muted)">—</span>
     </div>
     <div style="display:grid;grid-template-columns:1.6fr 1fr;gap:14px;margin-bottom:12px" class="rec2col">
       <div>
         <div style="font-size:12.5px;margin-bottom:3px"><b>위치</b> — 하늘색 점 = 적격
-          필지 전량(클러스터링 직전 단계, 정본 우주)<sup class="fnref">[12]</sup> ·
+          필지 전량(클러스터링 직전 단계, 분석 기준 필지)<sup class="fnref">[12]</sup> ·
           노랑 = 연접 구획 · 금색 = 공동 1등 (점 클릭 = 산점도·표 연동)</div>
         <div id="recMthCap" style="font-size:11.5px;color:#7B4BB7;margin-bottom:3px"></div>
         <div id="recMap" style="height:420px"></div>
@@ -429,7 +429,7 @@ input[type=range]{accent-color:var(--navy)}
         fill: false, dashArray: '3 3'})
         .bindTooltip(`${mname} ${i + 1}위`));
     });
-    if (cap) cap.textContent = `${mname} top10 중 비지배 전선 안 ${inFront}곳`
+    if (cap) cap.textContent = `${mname} top10 중 비지배 집합 안 ${inFront}곳`
       + ` (보라 점선 링 — 전선 밖 ${10 - inFront}곳은 지배당한 구획이라 이 지도에 점이 없음)`
       + ` · 가중치 동일(1/3) — 임의 아님을 위한 통제 조건, 객관 가중 대안은 근거 문서 참조`;
   }

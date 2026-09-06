@@ -286,7 +286,7 @@
     (환산 0.045 kW/㎡ = 설치밀도 0.225 × 모듈효율 0.20<sup class="fnref">[13]</sup>) ·
     소유 필터 = 법인·국공유 필지만 병합(개인·종중 등 배제, 결재 확정 정의)<sup class="fnref">[12]</sup> ·
     이격 = 주거 200m 상한의 보수 하한<sup class="fnref">[11]</sup> ·
-    법인의 농업법인 여부·간척지 임차 가능성은 미확인(방법·자료 탭).</div>
+    법인의 농업법인 여부·간척지 임차 가능성은 미확인(근거와 방법 탭).</div>
   </div>
 </section>
 
@@ -358,7 +358,7 @@
           <b>전량</b>을 집계함<sup class="fnref">[12]</sup> — 법에 규모 숫자가 없기 때문.<br>
           "이 정도는 돼야 사업"이라는 기준이 필요할 때만 눈금(50MW 등가 = 1,111,111㎡ 등)을
           붙여 읽고, 그 기준을 함께 적음.</p>
-          <p style="font-size:13.5px;margin:10px 0 0;word-break:keep-all"><b>정본 우주</b> —
+          <p style="font-size:13.5px;margin:10px 0 0;word-break:keep-all"><b>분석 기준 필지</b> —
           이 분석이 세는 땅은 <b>법인·국공유 소유 농지</b>임<sup class="fnref">[12]</sup>.<br>
           개인 필지는 수백 명의 동의를 조직해야 해서, 그것 없이 성립하는 물량을 보기 위함.<br>
           개인을 포함한 <b>대조군</b>을 늘 함께 표시함 — 정본이 전체의 몇 %인지 알아야
@@ -440,7 +440,7 @@
     <p class="ls-cap" id="ls-cap"></p>
     <div class="figcap" style="max-width:860px;margin:10px auto 0">그림 2. 판정 단계별 적격 규모 변화 —
     충남 당진시의 다섯 층: 지목 농지<sup class="fnref">[1]</sup> → 물리·경사 통과
-    → 진흥✕·보호✕ 적격 → 법인·국공유(정본 우주) → 진흥지역 전체 개방 시 연접 구획. 표시 지오메트리는 간소화본이며
+    → 진흥✕·보호✕ 적격 → 법인·국공유(분석 기준 필지) → 진흥지역 전체 개방 시 연접 구획. 표시 지오메트리는 간소화본이며
     단계별 수치는 정본 DB 조회값<sup class="fnref">[12]</sup>, 단위 필지 수·km².</div>
   </div>
 </section>
@@ -550,13 +550,13 @@
       <b>${V4.n(N.big_composition['R0_current@all'].indiv_share_pct)}%가 개인 소유</b> —
       수백 명의 동의 조직이 전제. 동의 없이 성립하는 법인·국공유만 세면
       <b>전국 ${V4.n(R.R0_current.ge50)}곳</b>(제주 서귀포 ${V4.n(cpAnchorTop.mw)}MW).`,
-     'finder.html#own', '입지 추천 탭 — 소유 구성 상세'],
+     'finder.html#own', '후보지 찾기 탭 — 소유 구성 상세'],
     ['③', '두 수단의 증분', `보호구역 개방 +${V4.km2((M.R1['정본'].m2 - M.R0['정본'].m2)/1e6)} km² ·
       진흥구역 개방 <b>+${V4.km2((M.R2['정본'].m2 - M.R0['정본'].m2)/1e6)} km²</b> —
       규모가 열 배 이상 다름. 진흥구역 개방 시 50MW 이상은
       <b>${V4.n(R.R2_promo.ge50)}곳(합 ${V4.n(R.R2_promo.ge50_mw)}MW)</b>,
       그중 ${V4.n(cpBigRec)}곳이 간척 지구.`,
-     'finder.html#candtbl', `입지 추천 탭 — ${V4.n(R.R2_promo.ge50)}곳의 소재와 지도`],
+     'finder.html#candtbl', `후보지 찾기 탭 — ${V4.n(R.R2_promo.ge50)}곳의 소재와 지도`],
     ['④', '이격 단서', `주거 이격 200m 보수 적용 시 개방 전 분은 −${drop('R0_current')}%,
       진흥구역 개방분은 −${drop('R2_promo')}% —
       <b>50MW 이상은 ${V4.n(R.R2_promo.ge50)} → ${V4.n(R.R2_promo_SB.ge50)}곳으로 하나만
