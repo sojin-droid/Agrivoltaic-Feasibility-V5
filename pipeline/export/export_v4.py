@@ -158,8 +158,15 @@ con.close()
 # 판 표식은 격자 선언에서 읽는다 — 여기에 적으면 판이 바뀔 때마다 사람이 고쳐야 하고,
 # 실제로 3판 문자열이 4판 산출물 위에 남아 있었다.
 _g = load_grid(DEFAULT_GRID)
+# 선언의 note 에 남은 구용어는 **선언을 고치지 않고** 표기만 교정한다 — 선언 파일은
+# sha12(바이트 해시)로 세대를 식별하므로 한 글자만 바꿔도 다른 판이 된다(시나리오 라벨
+# _FIX 와 같은 처리). '정본 우주'는 ADR-0040 이후 '분석 기준 필지'로 부른다.
+_NOTE_FIX = {'정본 우주': '분석 기준 필지'}
+_note = _g.note
+for _a, _b in _NOTE_FIX.items():
+    _note = _note.replace(_a, _b)
 save('meta_v4.json', {'generated': GEN,
-                      'data_generation': f'{_g.edition} · {_g.name} · {_g.note}',
+                      'data_generation': f'{_g.edition} · {_g.name} · {_note}',
                       'grid': {'name': _g.name, 'edition': _g.edition,
                                'sha12': _g.sha12, 'n_runs': len(_g.plan())},
                       'verification': 'export 시 앵커 상수 정확 일치 검증 통과 (T16-①)', 'lineage': lineage})
