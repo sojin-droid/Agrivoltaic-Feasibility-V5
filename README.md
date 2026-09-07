@@ -1,10 +1,10 @@
-# 영농형 태양광 설치 가능 농지 — 전국 분석 사이트
+# 영농형 태양광 설치 가능 농지 — 전국 분석 사이트 (V5)
 
 전국 필지 전수 분석의 결과를 공개하는 정적 사이트.
 데이터 세대는 **격자 선언이 정한다** — 지금은 `ADR-0040+0041` (`grids/adr0041_25.yaml`).
 페이지 푸터에 그 표식이 그대로 찍히므로 화면과 산출물의 판이 어긋날 수 없다.
 
-> **공개 사이트 (GitHub Pages)**: https://sojin-droid.github.io/Agrivoltaic-Feasibility/
+> **공개 사이트 (GitHub Pages)**: https://sojin-droid.github.io/Agrivoltaic-Feasibility-V5/
 
 ## 페이지 (레포 루트 = Pages 루트)
 
