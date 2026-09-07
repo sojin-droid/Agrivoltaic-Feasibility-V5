@@ -522,8 +522,8 @@ table.mx .ref{color:var(--muted)}
   // 표 1 각주: 판정 보류 병기 (T14 v7)
   const pz2 = s.anchor.pending_zone_null;
   if (pz2 && pz2.n) document.getElementById('fn-pending').innerHTML =
-    ` 용도지역 미상 판정 보류 ${V4.n(pz2.n)}필지 · ${V4.km2(pz2.km2, 2)} km²는 어느 조합에도
-    불포함(보수 배제 — <a href="method.html#caveats" style="color:var(--leaf-deep)">근거와 방법의 한계 표</a>).`;
+    ` 용도지역 미상 ${V4.n(pz2.n)}필지 · ${V4.km2(pz2.km2, 2)} km²는 판정 불가로 어느 조합에도
+    불포함(보수 제외 — <a href="method.html#datarules" style="color:var(--leaf-deep)">근거와 방법의 데이터 처리 규칙</a>).`;
 
   // ── 시군별 조회 — 다중 선택(칩) + 전국 전체 ──
   const sg = await V4.data('sgg_matrix');
