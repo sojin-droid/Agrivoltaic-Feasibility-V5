@@ -104,6 +104,8 @@ input[type=range]{accent-color:var(--navy)}
 @media(max-width:760px){.key2{grid-template-columns:1fr}}
 .key2>div{font-size:13px;line-height:1.7;word-break:keep-all}
 .key2 i{display:block;font-style:normal;font-family:var(--sans);font-size:12px;font-weight:700;color:var(--navy);margin-bottom:2px}
+.rec2col{grid-template-columns:1.6fr 1fr}
+@media(max-width:760px){.rec2col{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -194,7 +196,7 @@ input[type=range]{accent-color:var(--navy)}
         </select></label>
       <span id="recStamp" style="font-size:12.5px;color:var(--muted)">—</span>
     </div>
-    <div style="display:grid;grid-template-columns:1.6fr 1fr;gap:14px;margin-bottom:12px" class="rec2col">
+    <div style="display:grid;gap:14px;margin-bottom:12px" class="rec2col">
       <div>
         <div style="font-size:12.5px;margin-bottom:3px"><b>위치</b> — 하늘색 점 = 적격
           필지 전량(클러스터링 직전 단계, 분석 기준 필지)<sup class="fnref">[12]</sup> ·
@@ -210,8 +212,10 @@ input[type=range]{accent-color:var(--navy)}
     </div>
     <div style="overflow-x:auto"><table class="v4" id="recTbl"></table></div>
     <div style="font-size:12px;color:var(--muted);margin:6px 0 0">가중 순위 = 후보군 내부 비교용
-      보조 지표 · 지역 전력수요 대비 = 연간 규모 비교 참고값<sup class="fnref">[28]</sup>
-      († = 시 전체 배정 등 각주 · — = 수요 미수집).</div>
+      보조 지표 · "지역 전력수요 대비" = <b>선택한 비지배 후보 기준</b>(시군 연간 전력판매량 대비
+      그 후보의 환산발전량 — 연간 규모 비교 참고값)<sup class="fnref">[28]</sup>
+      († = 시 전체 배정 등 각주 · — = 수요 미수집). 후보지 찾기 탭의 값은 25개 대규모 후보
+      기준이라 대상이 다름.</div>
     <details style="margin:6px 0 0;font-size:12px;color:var(--muted)">
       <summary style="cursor:pointer;font-weight:700;color:var(--leaf-deep)">가중 순위 자세히 보기</summary>
       <div style="margin-top:6px">가중 순위(WPM·entropy) = 가중곱(Bridgman 1922) × 시군별 엔트로피
@@ -272,7 +276,7 @@ input[type=range]{accent-color:var(--navy)}
   const m = await V4.data('meta_v4');
   document.getElementById('gen-stamp').textContent = m.generated;
   document.getElementById('art-meta').textContent =
-    `PLANiT Institute · 데이터 ${m.data_generation} · 생성 ${m.generated}`;
+    `PLANiT Institute · 데이터 ${String(m.data_generation).replace(/정본 우주/g, '분석 기준 필지')} · 생성 ${m.generated}`;
   const nameOf = c => (names.codes[c] && names.codes[c].name) || c;
   async function gzfc(path) {
     const r = await fetch(path);

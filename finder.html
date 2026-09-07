@@ -156,7 +156,7 @@ input[type=range]{accent-color:var(--navy)}
   <h2 class="art-h" id="own">1. 소유 구성 — 특구급 구획의 개인 소유 비중</h2>
   <p>개방 전(진흥✕·보호✕) 기준 특구급 구획은 <b id="c-a50">—</b>곳이지만 면적의
   <b id="c-indiv">—</b>%가 개인 소유<sup class="fnref">[1]</sup>. 법인·국공유만 병합하면
-  <b id="c-cp-a50">—</b>곳, 농업진흥구역 개방 시 <b id="c-cp-r50">—</b>곳(합
+  <b id="c-cp-a50">—</b>곳, 농업진흥구역 개방 시 <b id="c-cp-r50">—</b>곳(합 약
   <span id="c-cp-r-mw50">—</span>MW) — 그 25곳이 이 페이지의 대상.</p>
   <p style="display:none"><span id="c-cp-a100"></span><span id="c-cp-r-km2"></span><span id="c-cp-r-mw"></span><span id="c-cp-a-mw"></span><span id="c-sb-from"></span><span id="c-sb-to"></span></p>
 
@@ -165,7 +165,7 @@ input[type=range]{accent-color:var(--navy)}
       <span>개인 포함 → 법인·국공유만<br>(개방 전 특구급)</span></div>
     <div><b><span id="k-indiv">—</span><small>%</small></b>
       <span>특구급 면적 중<br>개인 소유 비중<sup class="fnref">[1]</sup></span></div>
-    <div class="hi"><b><span id="k-r50">—</span><small>곳</small> <small>·</small> <span id="k-mw">—</span><small>MW</small></b>
+    <div class="hi"><b><span id="k-r50">—</span><small>곳</small> <small>· 약</small> <span id="k-mw">—</span><small>MW</small></b>
       <span>농업진흥구역 개방 시<br>특구급 (이격 후 <span id="k-r50sb">—</span>곳)</span></div>
     <div><b>−39<small>%</small></b>
       <span>진흥 개방분의 이격 감소<br>(개방 전 분은 −53%)<sup class="fnref">[11]</sup></span></div>
@@ -191,6 +191,8 @@ input[type=range]{accent-color:var(--navy)}
           <div id="indTypes"></div></div>
         <div class="grp"><div class="gt">계통 여유 — 표시 문턱</div>
           <input type="range" id="gridSlider" min="0" max="50" step="1" value="0" style="width:100%">
+          <div style="display:flex;justify-content:space-between;font-size:10.5px;color:var(--muted);margin-top:-2px">
+            <span>◀ 여유 ≥ 50MW만</span><span>전체 ▶</span></div>
           <div class="glbl" id="gridLbl">—</div>
           <div class="gleg"><span style="background:#EFDFDD"></span><span style="background:#F0F4F6"></span><span style="background:#CFE3EE"></span><span style="background:#8FC0D8"></span><span style="background:#4A94BA"></span><span style="background:#1C5F86"></span><span style="background:#CFCFCF"></span></div>
           <div class="glegtxt">포화 · 0–2 · 2–8 · 8–20 · 20–50 · 50+ MW (하한) · 회색 = 알 수 없음</div></div>
@@ -225,7 +227,9 @@ input[type=range]{accent-color:var(--navy)}
     <div class="figbox">
       <div style="overflow-x:auto"><table class="v4" id="t-prox"></table></div>
       <div class="figcap">표 1. 대규모 후보지 25곳 — 최근접 산업단지·직선거리·소재 읍면동 계통 여유(하한).
-      행 클릭 = 지도 이동.</div>
+      행 클릭 = 지도 이동.<br>참고 MW 열의 후보별 값을 더한 정확 합계는
+      <b><span id="p-mwsum">—</span> MW</b>(위 카드의 "약" 값은 면적 합에 계수를 곱한 엔진 집계라
+      개별 반올림 합과 1MW 차이가 남).</div>
     </div>
   </figure>
 
@@ -235,8 +239,10 @@ input[type=range]{accent-color:var(--navy)}
   <p>25곳 안의 최대·최소 — 규모·계통·산단 거리와 지역 전력수요 대비의 양 끝. 시군별 종합 비교는
   <a href="regions.html" style="color:var(--leaf-deep);font-weight:700">지역별 우선 검토 후보 탭</a>.</p>
   <div class="jsi" id="jsi"></div>
-  <div style="font-size:12px;color:var(--muted);margin:-12px 0 10px">지역 전력수요 대비는 연간 규모
-  비교의 참고값(전력 자립·직접거래 가능성 아님)<sup class="fnref">[28]</sup>.</div>
+  <div style="font-size:12px;color:var(--muted);margin:-12px 0 10px">여기의 "지역 전력수요 대비" =
+  <b>25개 대규모 후보 기준</b> — 시군 연간 전력판매량 대비 후보 환산발전량(연간 규모 비교의
+  참고값 · 전력 자립·직접거래 가능성 아님)<sup class="fnref">[28]</sup>. 시군별 비지배 후보
+  기준 값은 지역별 우선 검토 후보 탭에서 따로 계산됨.</div>
 
   <div class="fn">특구급 = 연접 농지 <span id="p-th">—</span>㎡부터(≈50MW, 0.045 kW/㎡ 환산<sup class="fnref">[13]</sup>) ·
   소유 필터 = 법인('06')·국유지('02')·시/도유지('04')·군유지('05')만 병합<sup class="fnref">[12]</sup> ·
@@ -606,7 +612,7 @@ input[type=range]{accent-color:var(--navy)}
   const m = await V4.data('meta_v4');
   document.getElementById('gen-stamp').textContent = m.generated;
   document.getElementById('art-meta').textContent =
-    `PLANiT Institute · 데이터 ${m.data_generation} · 생성 ${m.generated}`;
+    `PLANiT Institute · 데이터 ${String(m.data_generation).replace(/정본 우주/g, '분석 기준 필지')} · 생성 ${m.generated}`;
   const R = N.runs;
   // ── §1 소유 구성 — 타이포 스탯 (막대 그림은 폐지 2026-09-01) ──
   {
@@ -1025,6 +1031,10 @@ input[type=range]{accent-color:var(--navy)}
         <td>${gtxt}</td>
       </tr>`;
     }).join('');
+  {   // 표 1에 실린 후보별 참고 MW의 정확 합계 — 표시 전용(같은 행의 값을 더한 것)
+    const _s = document.getElementById('p-mwsum');
+    if (_s) _s.textContent = V4.n(bigList.reduce((a, b) => a + b.mw, 0));
+  }
   document.querySelectorAll('#t-prox tr.rowbtn').forEach(tr => tr.onclick = () => {
     const bd = boundsById[+tr.dataset.id];
     if (bd) {

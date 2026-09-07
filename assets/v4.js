@@ -105,7 +105,8 @@ const V4 = {
     const el = document.querySelector('footer.v4 .wrap');
     if (el) el.innerHTML =
       `<div>PLANiT Institute · 영농형 태양광 — 전국 설치 가능 농지 분석</div>` +
-      `<div>데이터 세대 ${m.data_generation} · 생성 ${m.generated} · ${m.verification} · ` +
+      `<div>데이터 세대 ${String(m.data_generation).replace(/정본 우주/g, '분석 기준 필지')} · ` +
+      `생성 ${m.generated} · ${m.verification} · ` +
       `소유 구분은 지적 원장의 유형 구분(개인 식별 아님) · ` +
       `수치는 정본 DB 조회값의 export — 페이지 내 재계산 없음 · ` +
       `<a href="method.html#lineage">자료 계보·한계 →</a></div>`;
