@@ -150,8 +150,8 @@
     </div>
 
     <div class="figbox" style="margin-top:18px">
-      <p style="font-size:13.5px;margin:0"><b>연접 기준</b> — 인접 필지를 하나의 사업
-      후보 구획으로 묶기 위해 필지 간 공간적 인접성을 분석함(간격 21m 이내 병합).</p>
+      <p style="font-size:13.5px;margin:0"><b>연접 기준</b> — 간격 21m 이내의 필지를 하나의 후보
+      구획으로 병합함. 21m는 필지 간격 자료에서 유도한 <b>분석 기준</b>이며 법정 기준이 아님.</p>
       <details style="margin-top:8px;font-size:13px">
         <summary style="cursor:pointer;color:var(--leaf-deep);font-weight:700">자세히 보기 — 왜 21m인가</summary>
         <p style="margin:8px 0 0">전국 적격 필지의 이웃 간격 분포(k-거리 곡선, k=4)에서
@@ -172,30 +172,25 @@
       <div class="card reveal vcard" data-k="single">
         <h3>단일 출처 원칙 (Single Source)</h3>
         <div class="meta"><span class="tag">모든 수치는 한 곳에서</span></div>
-        <p>모든 수치는 정본 DB의 표준 질의 모듈에서만 나옴.<br>이 사이트의 데이터 파일도
-        그 모듈을 직접 불러 생성 — 판정 SQL이 두 곳에 존재하지 않음.</p>
+        <p>모든 주요 수치는 하나의 정본 산출 경로에서 나오며, 사이트와 보고서가 같은 값을 참조함.</p>
         <div class="foot"><span>자세히 보기</span><span>＋</span></div>
       </div>
       <div class="card reveal vcard" data-k="touch">
         <h3>기준값 자동 검증 (Touchstone)</h3>
         <div class="meta"><span class="tag">시금석 — 어긋나면 발행 중단</span></div>
-        <p>진흥✕·보호✕(R0) 기준값(필지 수·㎡)이 상수로 박혀 있고, export 시 재조회값과 정확 일치하지
-        않으면 파일 생성이 중단됨.</p>
+        <p>기준값(R0의 필지 수·면적)과 재조회값이 정확히 일치하지 않으면 데이터 파일이 생성되지 않음.</p>
         <div class="foot"><span>자세히 보기</span><span>＋</span></div>
       </div>
       <div class="card reveal vcard" data-k="add">
         <h3>합계 검증 (Additivity)</h3>
         <div class="meta"><span class="tag">가산성 — 부분의 합 = 전체</span></div>
-        <p>세 부분(농업진흥지역 밖 · 보호구역 · 진흥구역)이 서로 겹치지 않으므로,
-        진흥✕·보호✕ 값에 두 증분을 더한 합이 "둘 다 개방" 값과 정확히 일치해야 함 —
-        어긋나면 게이트가 차단함.</p>
+        <p>진흥✕·보호✕ 값에 보호·진흥 증분을 더한 합이 "둘 다 개방" 값과 필지 단위로 정확히 일치해야 함.</p>
         <div class="foot"><span>자세히 보기 — 실제 수치로 검산</span><span>＋</span></div>
       </div>
       <div class="card reveal vcard" data-k="gate">
         <h3>공개 전 품질검사 (Site Gate)</h3>
         <div class="meta"><span class="tag">공개 직전 자동 검사</span></div>
-        <p>무효·구세대 수치, 금지 표현, 외부 자원 로드, 본문 하드코딩 수치를 공개 전에
-        자동 검사함.<br>새 함정이 발견되면 문서보다 먼저 검사 코드에 추가.</p>
+        <p>공개 전에 무효·구세대 수치, 금지 표현, 하드코딩 수치를 자동 검사함.</p>
         <div class="foot"><span>자세히 보기 — 검사 목록과 실전 적발</span><span>＋</span></div>
       </div>
     </div>
@@ -207,15 +202,14 @@
       </div>
     </div>
 
-    <!-- 이격 성격 설명은 아래 한계 표로 통합(중복 제거 2026-09-01) -->
-    <div class="fn">공간 미분해 배제 항목 17종(하천·문화유산 등)은 현재 판에 반영되지 않았음 —
-    따라서 강한 배제(HARD) 계열 값은 <b>하한</b>.<br>분해 레이어 조달 시 판을 올려 반영함<sup class="fnref">[12]</sup>.</div>
-    <div class="fn">구획 정의의 근거와 민감도 — <b>크기 문턱은 두지 않음</b>(법에 규모 숫자가 없음):
-    연접 병합 결과 전량이 산출물이고, 66,667㎡ 같은 값은 3MW 등가(0.045kW/㎡ 역산)의 읽기 눈금이며,
-    법정 규모 기준은 대통령령 미제정이라 자체 기준임을 명시<sup class="fnref">[10]</sup>.<br>연접 21m는
-    필지 간격의 실측(간격의 구성이 구거·도로)에 근거.<br>민감도 검증: 문턱 50,000/66,667/100,000㎡ ×
-    연접 15/21/25m의 전 조합에서 정책 순위(진흥구역 개방 ≥ 진흥✕·보호✕)가 역전되지
-    않음을 확인<sup class="fnref">[12]</sup>.</div>
+    <details style="margin-top:14px;font-size:13px">
+      <summary style="cursor:pointer;color:var(--leaf-deep);font-weight:700">구획 정의와 민감도 — 자세히</summary>
+      <div class="fn" style="margin-top:8px"><b>크기 문턱은 두지 않음</b>(법에 규모 숫자가 없음): 연접 병합 결과
+      전량이 산출물이고, 66,667㎡ 같은 값은 3MW 등가(0.045kW/㎡ 역산)의 읽기 눈금이며, 법정 규모 기준은
+      대통령령 미제정이라 자체 기준임을 명시<sup class="fnref">[10]</sup>.<br>민감도 검증: 문턱
+      50,000/66,667/100,000㎡ × 연접 15/21/25m의 전 조합에서 정책 순위(진흥구역 개방 ≥ 진흥✕·보호✕)가
+      역전되지 않음을 확인<sup class="fnref">[12]</sup>.</div>
+    </details>
   </div>
 </section>
 
@@ -261,10 +255,14 @@
     <div class="sec-head"><div><p class="eyebrow">Lineage</p><h2>데이터 계보</h2></div>
     <span style="font-size:12.5px;color:var(--muted)">층위: L0 원시 취득 → L1 정제·판정 → L2 시나리오·산출</span></div>
     <div class="figbox reveal">
-      <div style="overflow-x:auto"><table class="v4" id="t-lineage"></table></div>
-      <div class="fn">이 표는 정본 DB의 자산 버전 기록을 <b>내부 기록 원문 그대로</b> 출력한 것
-      (export 시점 기준) — 재현·감사용이라 내부 단계 번호와 파일 경로가 그대로 남아 있음.<br>
-      일반 열람용 출처 요약은 페이지 하단의 출처 절.</div>
+      <p style="font-size:13px;margin:0 0 6px">일반 열람용 출처 요약은 페이지 하단의 출처 절 — 아래 표는
+      재현·감사용 내부 기록 원문.</p>
+      <details>
+        <summary style="cursor:pointer;font-size:13px;font-weight:700;color:var(--leaf-deep)">계보 표 펼치기 (내부 기록 원문)</summary>
+        <div style="overflow-x:auto;margin-top:8px"><table class="v4" id="t-lineage"></table></div>
+        <div class="fn">정본 DB의 자산 버전 기록을 export 시점 기준 원문 그대로 출력 — 내부 단계 번호와
+        파일 경로가 그대로 남아 있음.</div>
+      </details>
     </div>
   </div>
 </section>

@@ -139,10 +139,9 @@ input[type=range]{accent-color:var(--navy)}
   <div class="wrap" style="max-width:900px">
     <p class="eyebrow">Regions · 지역별 우선 검토 후보</p>
     <h1>지역별 우선 검토 후보</h1>
-    <p class="lede">각 시군에서 규모·계통·지역수요 및 주요 입지 조건을 종합해 우선
-    검토할 후보지를 보여줌.<br>후보 풀 = 세 축(면적·계통 여유·산단 거리) 모두에서
-    지지 않는 구획 전원(<b>우선 후보 비교 — 비지배 집합</b>)이고, 그 옆에 가중
-    순위(WPM·entropy)를 병기함 — 어느 쪽도 단독 판정이 아님.</p>
+    <p class="lede">면적·계통 여유·산단 거리 세 축에서 서로 다른 trade-off를 가진 <b>비지배
+    후보</b>를 시군별로 함께 보여줌 — 한 축만 우수한 후보가 아니라 세 축 모두 다른 구획에 지지 않는
+    후보 전원.<br>가중 순위는 후보군 내부 비교를 위한 보조 지표임.</p>
     <p style="font-family:var(--mono);font-size:11.5px;color:var(--muted);margin-top:14px"
       id="art-meta">PLANiT Institute</p>
     <span id="gen-stamp" style="display:none">—</span>
@@ -181,7 +180,9 @@ input[type=range]{accent-color:var(--navy)}
   <p>시군을 고르면 그 시군의 연접 구획 전수에서 <b>면적 · 계통 여유 · 산업단지
   거리</b> 세 축 모두 다른 구획에 지지 않는 <b>공동 1등 전원</b>을 보인다.
   가중치도, 우선순위도, 관문도 없다 — 단독 1등을 정하지 않으며, 집합 안에서
-  무엇을 고를지는 보는 쪽의 우선순위다. 축별 순위 세 열이 그 선택을 돕는다.</p>
+  무엇을 고를지는 보는 쪽의 우선순위다. 축별 순위 세 열이 그 선택을 돕는다.
+  계통·거리를 알 수 없는 구획은 해당 축을 최악값으로 두어 비교한다. 전국 209개 시군에서
+  1,477개 구획이 이 집합에 든다.</p>
   </details>
 
   <figure class="figure-v4">
@@ -208,36 +209,36 @@ input[type=range]{accent-color:var(--navy)}
       </div>
     </div>
     <div style="overflow-x:auto"><table class="v4" id="recTbl"></table></div>
-    <div style="font-size:12px;color:var(--muted);margin:6px 0 0">가중 순위(WPM·entropy) =
-      가중곱(Bridgman 1922) × 시군별 엔트로피 가중(Shannon 1948 — 이 시군:
-      <span id="recEw">—</span>)의 구획 전량 중 순위 — <b>변별력 가중(데이터 분포가
-      정함)이며 중요도 가중이 아님</b>(PR-0038). 비지배 집합(이 표의 행)과 나란히 읽는
-      두 번째 눈, 어느 쪽도 단독 판정 아님 · 판정·선별 불사용.<br>지역 전력수요 대비 =
-      구획 참고 발전량(MW × 1,314h) ÷ 시군 연간 전력사용량(한전 2023–25 평균) —
-      지산지소 참고 표기<sup class="fnref">[28]</sup> · 판정·선별 불사용 ·
-      † = 시 전체 배정 등 각주 · — = 수요 미수집.</div>
+    <div style="font-size:12px;color:var(--muted);margin:6px 0 0">가중 순위 = 후보군 내부 비교용
+      보조 지표 · 지역 전력수요 대비 = 연간 규모 비교 참고값<sup class="fnref">[28]</sup>
+      († = 시 전체 배정 등 각주 · — = 수요 미수집).</div>
+    <details style="margin:6px 0 0;font-size:12px;color:var(--muted)">
+      <summary style="cursor:pointer;font-weight:700;color:var(--leaf-deep)">가중 순위 자세히 보기</summary>
+      <div style="margin-top:6px">가중 순위(WPM·entropy) = 가중곱(Bridgman 1922) × 시군별 엔트로피
+      가중(Shannon 1948 — 이 시군: <span id="recEw">—</span>)의 구획 전량 중 순위. 엔트로피 가중은
+      <b>각 시군 안에서 변수의 변별력(데이터 분포)이 정하는 가중</b>이며 정책적 중요도가 아님 —
+      예컨대 거리 가중이 낮으면 그 시군에서 거리 값의 차이가 작다는 뜻. 비지배 집합(이 표의 행)과
+      나란히 읽는 두 번째 눈으로, 판정·선별에는 쓰지 않음.<br>지역 전력수요 대비 = 구획 참고
+      발전량(MW × 1,314h) ÷ 시군 연간 전력사용량(한전 2023–25 평균).</div>
+    </details>
     <div id="recCtl" style="font-size:12px;color:var(--muted);margin:6px 0 10px">—</div>
     <div id="recDem" style="margin:2px 0 12px"></div>
     <div id="recReader" style="background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px;font-size:13px">
       <b>반경 판독기</b> — 위 표·산점도·지도에서 구획을 고르면, 반경 안 산단 점수 합과
       여유용량 합(균등배분 하한 합)을 보임. 고른 뒤 확인하는 도구 — 전선 선별에 불사용.</div>
-    <figcaption class="figcap-v4">세 축 비지배 집합 — 여기 있는 구획은 세 축 모두에서
-      자기를 이기는 구획이 없다. 후보 전수의 쌍별 지배 비교로 정확히 열거한 것(반복
-      근사 아님). 기본 반경은 시군 적응형 — 그 시군 구획의 4분의 3이 첫 산업단지를
-      만나는 거리(75분위 반올림, 2–12km). 참고 MW(0.045 kW/㎡)는 표기 전용. 여유 대역이 같은 이웃 구획들(예: 당진 2~5번의 21.6–51.3)은 같은 읍면동·설비의 여유를 나눠 쓰는 사이 — 동시 개발 시 표의 여유를 합산하면 안 됨.</figcaption>
+    <figcaption class="figcap-v4">판독기의 기본 반경은 시군 적응형(그 시군 구획의 4분의 3이 첫
+      산업단지를 만나는 거리, 2–12km). 여유 대역이 같은 이웃 구획은 같은 읍면동·설비의 여유를 나눠
+      쓰는 사이라 동시 개발 시 표의 여유를 합산하면 안 됨.</figcaption>
   </figure>
 
   <h2 class="art-h" id="jisan">2. 지역 전력수요와 비교 — 시군 분포</h2>
-  <p>각 시군 최대 구획의 <b>지역 전력수요 대비 참고 발전량</b> 분포. 해당 후보지에서
-  환산되는 연간 발전량을 지역 전력수요와 비교한 참고지표이며, 실제 지역 내 전력
-  자립이나 직접거래 가능성을 의미하지 않음<sup class="fnref">[28]</sup>.</p>
+  <p>각 시군 최대 구획의 참고 발전량이 그 시군 연간 전력수요에서 차지하는 비중의 분포 —
+  연간 규모 비교의 참고지표<sup class="fnref">[28]</sup>.</p>
   <figure class="art-fig">
     <div class="figbox">
       <div id="jsiStrip"></div>
-      <div class="figcap">그림. 전국 209개 시군 — 각 시군 최대 구획(면적 1위)의 참고 발전량이
-      그 시군 연간 전력사용량에서 차지하는 비중(로그 눈금). 중앙값 부근의 다수와 오른쪽
-      꼬리(농어촌 군 지역)가 한 축 위에 있음 — 값은 참고 표기<sup class="fnref">[28]</sup> ·
-      판정·선별 불사용 · 유형 구분선 없음(문턱을 두지 않음).</div>
+      <div class="figcap">그림. 전국 209개 시군 — 각 시군 최대 구획(면적 1위)의 참고 발전량 ÷ 연간
+      전력사용량(로그 눈금). 유형 구분선 없음(문턱을 두지 않음).</div>
     </div>
   </figure>
 
@@ -260,12 +261,6 @@ input[type=range]{accent-color:var(--navy)}
 
   <p style="font-size:12px;color:var(--muted);margin-top:26px">방법·한계 상세는
   근거와 방법 탭 · 후보 구획 탐색은 후보지 찾기 탭.</p>
-
-  <div class="fn">특구급 = 약 50MW 이상(= 연접 농지 1,111,111㎡부터)의 대규모 사업
-  규모를 직관적으로 나타내는 <b>분석상 표현</b>이며, 법령상 특구 지정이나 법적
-  지위를 뜻하지 않음<sup class="fnref">[13]</sup> ·
-  참고 MW = 0.045 kW/㎡ 환산 참고 용량(발전 시뮬레이션 아님)<sup class="fnref">[13]</sup> ·
-  계통 여유·수요 대비는 참고 표기로 판정에 불사용<sup class="fnref">[22]</sup><sup class="fnref">[28]</sup>.</div>
 </div>
 </article>
 
@@ -431,7 +426,7 @@ input[type=range]{accent-color:var(--navy)}
     });
     if (cap) cap.textContent = `${mname} top10 중 비지배 집합 안 ${inFront}곳`
       + ` (보라 점선 링 — 전선 밖 ${10 - inFront}곳은 지배당한 구획이라 이 지도에 점이 없음)`
-      + ` · 가중치 동일(1/3) — 임의 아님을 위한 통제 조건, 객관 가중 대안은 근거 문서 참조`;
+      + ` · 가중치 동일(1/3, 통제 조건)`;
   }
   recMthSel.addEventListener('change', drawMth);
 

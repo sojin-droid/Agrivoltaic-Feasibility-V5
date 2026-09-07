@@ -140,16 +140,11 @@ input[type=range]{accent-color:var(--navy)}
   <div class="wrap" style="max-width:860px">
     <p class="eyebrow">Proximity · 수요·계통 연계</p>
     <h1>후보지 찾기</h1>
-    <p class="lede">이 페이지는 약 50MW 이상 규모가 되는 <b>대규모 후보지</b>를 찾고,
-    다음 단계(<a href="regions.html" style="color:inherit;font-weight:700">지역별 우선 검토
-    후보</a>)에서 계통·거리·수요를 비교함.<br>
-    <b>대규모 후보지</b> = 소유·진흥구역 개방·규모 세 조건을 만족하는 구획 전량,
-    <b>우선 검토 후보</b> = 각 시군 안에서 면적·계통·산단 거리를 비교해 먼저 볼 곳 —
-    서로 다른 목록임. 계통 여유는 25곳의 1차 조건 선별에는 사용하지 않고, 지역별 우선
-    검토 후보 비교에서 사용함.<br>
-    폴리곤 = 약 50MW 이상(특구급 — 분석상 규모 표현) 대규모 후보지 25곳(분석 기준 필지 =
-    법인·국공유 소유, 농업진흥구역 개방 기준) · 겹칠 수 있는 레이어 = 산업단지 전국
-    1,363곳<sup class="fnref">[23]</sup> · 읍면동 계통 여유<sup class="fnref">[22]</sup>.</p>
+    <p class="lede">약 50MW 등가(1.111km²) 이상의 <b>대규모 후보지 25곳</b>을 지도와 표로 탐색함.<br>
+    후보 = 법인·국공유 소유(분석 기준 필지) · 농업진흥구역 개방(R2) 기준 · 규모 눈금 이상인 구획
+    전량. 계통 여유는 이 25곳의 선별에는 쓰지 않고
+    <a href="regions.html" style="color:inherit;font-weight:700">지역별 우선 검토 후보</a>(시군 안
+    비교 — 별개 목록)에서 축으로 사용함.</p>
     <p style="font-family:var(--mono);font-size:11.5px;color:var(--muted);margin-top:14px"
       id="art-meta">PLANiT Institute · 데이터 생성 <span id="gen-stamp">—</span></p>
   </div>
@@ -159,17 +154,11 @@ input[type=range]{accent-color:var(--navy)}
 <div class="wrap art" style="max-width:860px">
 
   <h2 class="art-h" id="own">1. 소유 구성 — 특구급 구획의 개인 소유 비중</h2>
-  <p>특구급(≥50MW 등가 = 1.111km², 읽기 눈금) 구획은 개방 전(진흥✕·보호✕) 기준
-  <b id="c-a50">—</b>곳 있지만 면적의 <b id="c-indiv">—</b>%가 개인
-  소유<sup class="fnref">[1]</sup> — 수백 명의 동의 조직이 전제.
-  법인·국공유만 병합하면 <b id="c-cp-a50">—</b>곳(제주 서귀포
-  <span id="c-cp-a-mw">—</span>MW)으로 줄고, 농업진흥구역 개방 시
-  <b id="c-cp-r50">—</b>곳(합 <span id="c-cp-r-mw50">—</span>MW) —
-  그 25곳이 이 페이지의 대상.<br>
-  이격 200m 보수<sup class="fnref">[11]</sup>를 얹어도
-  <span id="c-sb-from">—</span> → <span id="c-sb-to">—</span> km²(−39%)로
-  개방 전 분(−53%)보다 덜 깎임 — 8칸 전체는 정책 시나리오 탭 표 5.</p>
-  <p style="display:none"><span id="c-cp-a100"></span><span id="c-cp-r-km2"></span><span id="c-cp-r-mw"></span></p>
+  <p>개방 전(진흥✕·보호✕) 기준 특구급 구획은 <b id="c-a50">—</b>곳이지만 면적의
+  <b id="c-indiv">—</b>%가 개인 소유<sup class="fnref">[1]</sup>. 법인·국공유만 병합하면
+  <b id="c-cp-a50">—</b>곳, 농업진흥구역 개방 시 <b id="c-cp-r50">—</b>곳(합
+  <span id="c-cp-r-mw50">—</span>MW) — 그 25곳이 이 페이지의 대상.</p>
+  <p style="display:none"><span id="c-cp-a100"></span><span id="c-cp-r-km2"></span><span id="c-cp-r-mw"></span><span id="c-cp-a-mw"></span><span id="c-sb-from"></span><span id="c-sb-to"></span></p>
 
   <div class="own-kpi">
     <div><b><span id="k-a50">—</span><small>곳</small> <small>→</small> <span id="k-cp1">—</span><small>곳</small></b>
@@ -183,9 +172,8 @@ input[type=range]{accent-color:var(--navy)}
   </div>
 
   <h2 class="art-h">2. 지도 — 구획 · 산업단지 · 계통 여유</h2>
-  <p>오른쪽 패널에서 후보·산업단지 선택 · 계통 여유는 슬라이더로 문턱 조정 ·
-  후보를 고르면 반경 안 산업단지 목록 표시 · 검색창에 산단·입주기업명(예: 현대제철)
-  입력 시 이동 · 폴리곤 클릭 = 상세 수치.</p>
+  <p>후보 폴리곤을 클릭하면 규모·계통 여유·인근 산업단지를 확인할 수 있고, 오른쪽 패널에서
+  후보·산업단지 선택, 계통 여유 문턱 조정, 산단·입주기업 검색(예: 현대제철)이 가능함.</p>
 
   <figure class="art-fig prox-wide">
     <div class="map-wrap">
@@ -211,54 +199,48 @@ input[type=range]{accent-color:var(--navy)}
           <div class="scrolllist" id="bufList"></div></div>
       </div>
     </div>
+    <details style="margin-top:8px">
+      <summary style="cursor:pointer;font-size:12.5px;font-weight:700;color:var(--leaf-deep)">지도 읽는 법 — 색·범례·레이어</summary>
     <div class="prox-leg">
       <span class="sw" style="background:rgba(255,155,61,.85);border:1px solid #C96A00"></span>간척 지구의 특구급 구획 ·
       <span class="sw" style="background:rgba(255,80,70,.85);border:1px solid #B3261E"></span>비간척 특구급 구획 ·
       <span class="dot" style="background:#0C356A;border:2px solid #fff;box-shadow:0 0 0 1px #0C356A"></span>산업단지 경계·중심점 (색 = 유형: 빨강 국가 · 남색 일반 · 보라 도시첨단 · 청록 농공) ·
       금색 점선 원 = 선택 후보의 반경 버퍼 · 금색 테두리 = 버퍼 안 산업단지
     </div>
-    <figcaption style="font-size:12px;color:var(--muted);margin-top:6px">그림 2. 대규모 후보지 25곳 ×
-    산업단지 전국 <span id="p-ind3">—</span>곳 × 읍면동 단위 계통 여유 전국 — 위성 배경 © Esri<sup class="fnref">[19]</sup> ·
-    구획 지오메트리 15m 간소화(표시용)<sup class="fnref">[12]</sup> ·
-    계통<sup class="fnref">[22]</sup>·산업단지<sup class="fnref">[23]</sup>는 참고 레이어(성격·한계는 근거와 방법 탭).</figcaption>
+    <div style="font-size:12px;color:var(--muted);margin-top:6px">그림 2. 대규모 후보지 25곳 ×
+    산업단지 전국 <span id="p-ind3">—</span>곳<sup class="fnref">[23]</sup> × 읍면동 계통 여유<sup class="fnref">[22]</sup> —
+    위성 배경 © Esri<sup class="fnref">[19]</sup> · 구획 지오메트리는 15m 간소화 표시(수치는 원본 기준)<sup class="fnref">[12]</sup>.</div>
+    </details>
   </figure>
 
   <h2 class="art-h" id="candtbl">3. 대규모 후보지 25곳 — 소재·최근접 산업단지·계통</h2>
-  <p style="margin-bottom:8px">이 25곳은 파레토가 아니라 <b>조건 선별</b> — 다음 세 조건을
-  전부 만족하는 구획 전량(규모순 표시):</p>
+  <p style="margin-bottom:8px">세 조건을 전부 만족하는 구획 전량(규모순):</p>
   <p style="margin:0 0 10px">
     <span class="cond-pill">① 소유 — <b>법인·국공유만 병합</b> (분석 기준 필지)</span>
     <span class="cond-pill">② 구역 — <b>농업진흥구역 개방(R2)</b> 기준</span>
-    <span class="cond-pill">③ 규모 — <b>≥50MW 등가</b> = 1,111,111㎡ (읽기 눈금, 문턱 아님)</span>
+    <span class="cond-pill">③ 규모 — <b>≥50MW 등가</b> = 1,111,111㎡ (읽기 눈금)</span>
   </p>
-  <p style="font-size:13px;color:var(--muted)">§5의 시군별 공동 1등은 별개 방식 —
-  규모 눈금 없이 세 축 비지배(파레토)로 뽑음. 거리 = 측지 직선(근거와 방법 탭 참조).</p>
 
   <figure class="art-fig">
     <div class="figbox">
       <div style="overflow-x:auto"><table class="v4" id="t-prox"></table></div>
-      <div class="figcap">표 1. 대규모 후보지 25곳의 최근접 산업단지·직선거리·소재 읍면동 계통 여유 —
-      행 클릭 = 지도 이동. 거리·계통 여유는 표시용 참고값(근거와 방법 탭 참조).</div>
+      <div class="figcap">표 1. 대규모 후보지 25곳 — 최근접 산업단지·직선거리·소재 읍면동 계통 여유(하한).
+      행 클릭 = 지도 이동.</div>
     </div>
   </figure>
 
   <div class="callout-v4" id="p-read">—</div>
 
   <h2 class="art-h" id="jisan">4. 대규모 후보지 25곳 요약 — 다섯 값</h2>
-  <p>대규모 후보지 25곳 안의 최대·최소 — 규모·계통·거리(비지배 세 축)와 지역 전력수요 대비의
-  양 끝. 지역 전력수요 대비는 참고지표로, 실제 지역 내 전력 자립이나 직접거래
-  가능성을 의미하지 않음<sup class="fnref">[28]</sup>. 시군별 종합 비교는
+  <p>25곳 안의 최대·최소 — 규모·계통·산단 거리와 지역 전력수요 대비의 양 끝. 시군별 종합 비교는
   <a href="regions.html" style="color:var(--leaf-deep);font-weight:700">지역별 우선 검토 후보 탭</a>.</p>
   <div class="jsi" id="jsi"></div>
-  <div style="font-size:12px;color:var(--muted);margin:-12px 0 10px">계통·수요 값은
-  참고 표기 · 판정·선별 불사용<sup class="fnref">[28]</sup><sup class="fnref">[29]</sup>.</div>
-  <p style="font-size:12px;color:var(--muted);margin-top:26px">성격·한계·미확인
-  사항 상세는 근거와 방법 탭의 한계 표와 논문(한계·디스커션)으로 이관(2026-09-01).</p>
+  <div style="font-size:12px;color:var(--muted);margin:-12px 0 10px">지역 전력수요 대비는 연간 규모
+  비교의 참고값(전력 자립·직접거래 가능성 아님)<sup class="fnref">[28]</sup>.</div>
 
-  <div class="fn">특구급 = 50MW 이상 = 연접 농지 <span id="p-th">—</span>㎡부터(0.045 kW/㎡ 환산<sup class="fnref">[13]</sup>) ·
+  <div class="fn">특구급 = 연접 농지 <span id="p-th">—</span>㎡부터(≈50MW, 0.045 kW/㎡ 환산<sup class="fnref">[13]</sup>) ·
   소유 필터 = 법인('06')·국유지('02')·시/도유지('04')·군유지('05')만 병합<sup class="fnref">[12]</sup> ·
-  간척 구분 = 농어촌공사 원장 등재 필지 비중 50% 이상<sup class="fnref">[3]</sup> ·
-  계통 여유·산업단지 경계는 참고 레이어로 정본 판정에 불사용<sup class="fnref">[22]</sup><sup class="fnref">[23]</sup>.</div>
+  간척 구분 = 농어촌공사 원장 등재 필지 비중 50% 이상<sup class="fnref">[3]</sup>.</div>
 </div>
 </article>
 
@@ -310,9 +292,9 @@ input[type=range]{accent-color:var(--navy)}
         <button id="chkProm">＋ 농업진흥구역 개방분<small>수단 B (재생에너지지구) · 빨강으로 추가</small></button>
         <button id="chkAll">대조군 겹쳐 보기 — 개인 포함 전 소유<small>회색 윤곽 · 정본이 비어 있는 자리의 이유를 확인</small></button>
         <button id="chkParcel">적격 필지 점 — 검증용<small>분석 기준 필지(법인·국공유) 적격 필지 전량을 연한 점으로 · 구획이 그 위에 얹힘</small></button>
-        <div style="font-size:11.5px;color:var(--muted);padding:6px 2px 0">기본 표시는
-        <b>법인·국공유 소유</b>(정본)임. 대조군을 겹치면 <b>회색만 있고 색이 없는 곳</b>이
-        보이는데, 그 땅은 개인 소유라 정본에서 빠진 것임 — 대조군은 비교용이고 정책 값이 아님.</div>
+        <div style="font-size:11.5px;color:var(--muted);padding:6px 2px 0">기본 표시 =
+        <b>법인·국공유 소유</b>(정본). 대조군을 겹쳤을 때 회색만 있는 곳 = 개인 소유라 정본에서
+        빠진 땅(비교용).</div>
       </div>
       <div class="sb-toggle" id="sbTgl">
         <button data-sb="0" class="on">이격 미적용</button>
@@ -331,11 +313,10 @@ input[type=range]{accent-color:var(--navy)}
     </div>
   </div>
 
-  <div class="fn" style="margin-bottom:26px">배경 위성: Esri World Imagery © Esri, Maxar, Earthstar Geographics (온라인 타일) ·
-  구획 = 정본 산출<sup class="fnref">[12]</sup>, 원천은 지적 원장<sup class="fnref">[1]</sup>·팜맵<sup class="fnref">[2]</sup>·진흥지역 경계<sup class="fnref">[5]</sup> ·
-  면적 = 장부면적(토지 원장에 기재된 공부상 면적)<sup class="fnref">[1]</sup> ·
-  지오메트리 15m 간소화(표시용 — 수치는 원본 기준) ·
-  이격 보수 적용은 주택 판정을 대지 필지로 대리한 하한<sup class="fnref">[11]</sup> · 참고 MW 환산 가정<sup class="fnref">[13]</sup>.</div>
+  <div class="fn" style="margin-bottom:26px">배경 위성 © Esri<sup class="fnref">[19]</sup> ·
+  구획 = 정본 산출<sup class="fnref">[12]</sup>(원천: 지적 원장<sup class="fnref">[1]</sup>·진흥지역 경계<sup class="fnref">[5]</sup>,
+  면적은 장부면적, 지오메트리는 15m 간소화 표시) ·
+  이격 보수 = 주거 200m 상한을 대지 필지 대리로 적용한 하한<sup class="fnref">[11]</sup>.</div>
 
 
   </div>
@@ -1056,8 +1037,7 @@ input[type=range]{accent-color:var(--navy)}
     `<b>읽기.</b> 최근접 사례는 ${minKm ? `<b>${nameOf(minKm.b.sgg)} ${V4.n(minKm.b.mw)}MW 후보 —
       ${minKm.c.name} ${V4.km2(minKm.km, 1)} km</b>` : '—'}.` +
     (maxIn20 && maxIn20.n > 0 ? ` 20km 안 산업단지가 가장 많은 후보는 ${nameOf(maxIn20.b.sgg)}
-      (${V4.n(maxIn20.n)}곳).` : '') +
-    `<br>산업단지·계통 레이어는 전국 커버 — "알 수 없음" 읍면동만 계통 판단을 보류함(근거와 방법 탭).`;
+      (${V4.n(maxIn20.n)}곳).` : '');
 
 
   // ── §5 시군별 공동 1등 (recommend_v4 — 발행은 export_recommend_v4.py 게이트 통과분만) ──

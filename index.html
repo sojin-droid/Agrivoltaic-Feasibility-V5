@@ -135,7 +135,7 @@
       <a href="regions.html"><span>우선 검토 후보</span><b id="fl7">—</b><span>시군별 공동 1등<br>(209개 시군)</span></a>
     </div>
     <p style="font-size:12px;color:var(--muted);margin-top:8px">필지·구획 수 기준 —
-    면적·조건 상세는 근거와 방법 탭. 세부 알고리즘은 이 화면에서 설명하지 않음.</p>
+    면적·판정 조건 상세는 근거와 방법 탭.</p>
   </div>
 </section>
 
@@ -191,8 +191,8 @@
                    font-size="13" font-weight="700" fill="var(--navy)">발전율 0%</text></g>
         </svg>
       </div>
-      <figcaption>개념도 — 해가 뜨고 지면 패널이 발전해 이웃 산업단지로 흐르고(선의 흐름 = 발전율), 이랑의 작물은 그대로 자람. 밤에는 도시의 불이 켜짐
-      (마우스로 해를 끌 수 있음). 수치 아님 · 규모·소재는 아래 결론과 각 탭의 정본 값.</figcaption>
+      <figcaption>개념도 — 해의 위치에 따라 패널의 발전이 이웃 산업단지로 흐르고, 이랑의 작물은 그대로
+      자람(마우스로 해를 끌 수 있음). 수치 아님.</figcaption>
     </figure>
   </div>
 </section>
@@ -281,21 +281,21 @@
 </div>
     <div id="story-steps" style="display:flex;flex-direction:column;gap:12px"></div>
 
-    <div class="fn" style="margin-top:14px">특구급 = 재생에너지지구급 사업 규모 50–100MW
-    = 연접 농지 <span id="th50">—</span>–<span id="th100">—</span>㎡
-    (환산 0.045 kW/㎡ = 설치밀도 0.225 × 모듈효율 0.20<sup class="fnref">[13]</sup>) ·
-    소유 필터 = 법인·국공유 필지만 병합(개인·종중 등 배제, 결재 확정 정의)<sup class="fnref">[12]</sup> ·
-    이격 = 주거 200m 상한의 보수 하한<sup class="fnref">[11]</sup> ·
-    법인의 농업법인 여부·간척지 임차 가능성은 미확인(근거와 방법 탭).</div>
+    <div class="fn" style="margin-top:14px">특구급 = 약 50–100MW 등가 = 연접 농지
+    <span id="th50">—</span>–<span id="th100">—</span>㎡(0.045 kW/㎡ 환산<sup class="fnref">[13]</sup>, 분석상 규모 표현) ·
+    소유 필터 = 법인·국공유 필지만 병합<sup class="fnref">[12]</sup> ·
+    이격 = 주거 200m 상한의 보수 하한<sup class="fnref">[11]</sup>.</div>
   </div>
 </section>
 
 <!-- ═══════════ 입문 안내 (처음 읽는 독자용) ═══════════ -->
 <section style="padding:44px 0 36px">
   <div class="wrap">
+    <p style="font-size:13px;color:var(--muted);margin:0 0 10px;word-break:keep-all">R0–R3는
+    농업진흥구역·보호구역의 개방 여부에 따른 네 시나리오 비교임 — 용어와 법적 구조는 아래 펼쳐 보기.</p>
     <details id="primer-fold" style="border:1px solid var(--line);border-radius:12px;background:var(--white);padding:0 18px 6px">
-      <summary style="cursor:pointer;padding:16px 2px;font-weight:700;color:var(--navy);font-size:15px;word-break:keep-all">기본 개념과 농업진흥지역 구조 — 펼쳐 보기
-        <span style="font-weight:400;font-size:12.5px;color:var(--muted)"> · 영농형 태양광 / 필지 / 연접 구획 / 분석 기준 필지 / 진흥·보호구역</span></summary>
+      <summary style="cursor:pointer;padding:16px 2px;font-weight:700;color:var(--navy);font-size:15px;word-break:keep-all">기본 개념 — 펼쳐 보기
+        <span style="font-weight:400;font-size:12.5px;color:var(--muted)"> · 영농형 태양광 / 필지 / 연접 구획 / 대규모 후보지 / 우선 검토 후보 / 진흥·보호구역</span></summary>
 
     <figure class="art-fig" style="margin:6px 0 22px">
       <div class="figbox" style="padding:10px 14px;background:#fff">
@@ -342,35 +342,33 @@
       <figcaption>개념 단면 — 영농형 태양광: 기둥 위 패널, 그 아래에서 영농 병행. 수치 아님.</figcaption>
     </figure>
     <div class="sec-head"><div><p class="eyebrow">Primer · 기본 개념</p>
-    <h2>처음 읽는 분을 위한 네 가지 개념</h2></div>
-    <span style="font-size:12.5px;color:var(--muted)">이 네 가지만 알면 모든 탭을 읽을 수 있음</span></div>
+    <h2>처음 읽는 분을 위한 기본 개념</h2></div></div>
     <div id="primer-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:18px;align-items:stretch">
       <div>
         <div class="figbox" style="height:100%">
           <p style="font-size:13.5px;margin:0 0 10px;word-break:keep-all"><b>영농형 태양광</b> —
-          농지에서 농사를 계속 지으면서 그 위 공간에 태양광 설비를 함께 운영하는 방식.<br>
-          발전만 하는 일반 태양광과 달리 농지가 농지로 유지됨<sup class="fnref">[10]</sup>.</p>
+          농사를 계속 지으면서 그 위 공간에서 발전하는 방식. 농지가 농지로 유지됨<sup class="fnref">[10]</sup>.</p>
           <p style="font-size:13.5px;margin:0 0 10px;word-break:keep-all"><b>필지</b> —
-          토지의 등록 단위.<br>지번 하나가 필지 하나이며, 이 분석은 전국 <b id="i-nparcel">—</b>개 필지를
+          토지의 등록 단위(지번 하나 = 필지 하나). 이 분석은 전국 <b id="i-nparcel">—</b>개 필지를
           하나씩 판정함<sup class="fnref">[1]</sup>.</p>
-          <p style="font-size:13.5px;margin:0;word-break:keep-all"><b>연접 구획</b> —
-          서로 21m 이내로 이어진 필지들을 하나로 병합한 덩어리.<br>크기 문턱을 두지 않고
-          <b>전량</b>을 집계함<sup class="fnref">[12]</sup> — 법에 규모 숫자가 없기 때문.<br>
-          "이 정도는 돼야 사업"이라는 기준이 필요할 때만 눈금(50MW 등가 = 1,111,111㎡ 등)을
-          붙여 읽고, 그 기준을 함께 적음.</p>
-          <p style="font-size:13.5px;margin:10px 0 0;word-break:keep-all"><b>분석 기준 필지</b> —
-          이 분석이 세는 땅은 <b>법인·국공유 소유 농지</b>임<sup class="fnref">[12]</sup>.<br>
-          개인 필지는 수백 명의 동의를 조직해야 해서, 그것 없이 성립하는 물량을 보기 위함.<br>
-          개인을 포함한 <b>대조군</b>을 늘 함께 표시함 — 정본이 전체의 몇 %인지 알아야
-          정본 값을 읽을 수 있기 때문.</p>
+          <p style="font-size:13.5px;margin:0 0 10px;word-break:keep-all"><b>연접 구획</b> —
+          서로 21m 이내로 이어진 필지들을 하나로 병합한 덩어리. 크기 문턱 없이 전량 집계하고,
+          규모가 필요할 때만 눈금(50MW 등가 = 1,111,111㎡)을 붙여 읽음<sup class="fnref">[12]</sup>.</p>
+          <p style="font-size:13.5px;margin:0 0 10px;word-break:keep-all"><b>대규모 후보지</b> —
+          연접 구획 중 약 50MW 등가 이상인 곳. 진흥구역 개방(R2) 기준 25곳(후보지 찾기 탭).</p>
+          <p style="font-size:13.5px;margin:0 0 10px;word-break:keep-all"><b>지역별 우선 검토 후보</b> —
+          각 시군 안에서 면적·계통 여유·산단 거리 세 축 모두 지지 않는 구획(비지배 집합, 지역별
+          우선 검토 후보 탭).</p>
+          <p style="font-size:13.5px;margin:0;word-break:keep-all"><b>분석 기준 필지</b> —
+          이 분석이 세는 땅은 <b>법인·국공유 소유 농지</b>(수백 명의 개인 동의 없이 성립하는
+          물량)<sup class="fnref">[12]</sup>. 개인 포함 <b>대조군</b>을 늘 함께 표시함.</p>
         </div>
       </div>
       <div>
         <div class="figbox" style="height:100%">
           <p style="font-size:13.5px;margin:0 0 12px;word-break:keep-all"><b>농업진흥지역의 구조</b> —
-          이 사이트의 뼈대.<br>농지는 <b>농업진흥지역</b> 안팎으로 나뉘고, 진흥지역 안은 다시
-          <b>농업진흥구역</b>(우량 농지 핵심부)과 <b>농업보호구역</b>(주로 수자원 인접부)으로
-          나뉨<sup class="fnref">[5]</sup>:</p>
+          농지는 <b>농업진흥지역</b> 안팎으로 나뉘고, 진흥지역 안은 <b>농업진흥구역</b>(우량 농지
+          핵심부)과 <b>농업보호구역</b>(주로 수자원 인접부)으로 나뉨<sup class="fnref">[5]</sup>:</p>
           <div style="border:2px dashed var(--line);border-radius:10px;padding:12px;font-size:12.5px">
             <div style="color:var(--muted);margin-bottom:8px">전국의 농지</div>
             <div style="border:2px solid var(--navy);border-radius:8px;padding:10px;background:#fff">
@@ -386,13 +384,10 @@
               <b style="color:var(--leaf-deep)">농업진흥지역 밖의 농지</b> — 지금은 여기만 설치 가능
               = <b>진흥✕·보호✕ 기준값</b><sup class="fnref">[14]</sup></div>
           </div>
-          <p style="font-size:13.5px;margin:12px 0 0;word-break:keep-all">여는 법적 통로는
-          이미 마련됨 — 영농형태양광법 제6조제1항은 발전 부지를 ①농업진흥지역 밖의 농지,
-          ②<b>재생에너지지구로 지정된 농지</b>의 두 갈래로 정함<sup class="fnref">[5]</sup>.
-          ②의 지정 범위를 보호구역·진흥구역 어디까지 허용하느냐가 하위법령에 남은 설계
-          변수.<br>그래서 이 분석의 질문은 하나 — 두 스위치(보호 개방 ○/✕ × 진흥 개방
-          ○/✕)를 어떻게 두느냐에 따라 설치 가능 농지가 얼마나 달라지는가. 아래 네 조합
-          (R0–R3)이 그 답.</p>
+          <p style="font-size:13.5px;margin:12px 0 0;word-break:keep-all">영농형태양광법 제6조제1항은
+          발전 부지를 ①농업진흥지역 밖의 농지, ②<b>재생에너지지구로 지정된 농지</b>의 두 갈래로
+          정하며<sup class="fnref">[5]</sup>, ②를 보호구역·진흥구역 어디까지 허용하느냐가 하위법령에 남은
+          설계 변수. 그 두 스위치의 조합이 아래 네 시나리오(R0–R3).</p>
         </div>
       </div>
     </div>
@@ -410,10 +405,8 @@
     </div>
     <div class="figbox reveal">
       <div id="bars"></div>
-      <div class="figcap">그림 1. 제도 조합별 설치 가능 면적 — 네 독립 조합의 필지 면적.
-      세 부분(농업진흥지역 밖·보호구역·진흥구역)은 서로 겹치지 않아 정확히 더해짐.<br>
-      정본 DB 조회값<sup class="fnref">[12]</sup>, 단위 km².
-      참고 발전용량 환산은 <span id="mw-note"></span> — 환산은 가정이 얹힌 파생값<sup class="fnref">[13]</sup>.</div>
+      <div class="figcap">그림 1. 제도 조합별 설치 가능 면적(km²)<sup class="fnref">[12]</sup> — 네 조합은 독립이며
+      세 부분(진흥지역 밖·보호구역·진흥구역)은 겹치지 않아 정확히 가산됨. 참고: <span id="mw-note"></span>.</div>
     </div>
     <div class="callout-v4 reveal" id="co-reclaim"></div>
   </div>
@@ -438,10 +431,9 @@
       </div>
     </div>
     <p class="ls-cap" id="ls-cap"></p>
-    <div class="figcap" style="max-width:860px;margin:10px auto 0">그림 2. 판정 단계별 적격 규모 변화 —
-    충남 당진시의 다섯 층: 지목 농지<sup class="fnref">[1]</sup> → 물리·경사 통과
-    → 진흥✕·보호✕ 적격 → 법인·국공유(분석 기준 필지) → 진흥지역 전체 개방 시 연접 구획. 표시 지오메트리는 간소화본이며
-    단계별 수치는 정본 DB 조회값<sup class="fnref">[12]</sup>, 단위 필지 수·km².</div>
+    <div class="figcap" style="max-width:860px;margin:10px auto 0">그림 2. 충남 당진시의 판정 다섯 층 —
+    지목 농지<sup class="fnref">[1]</sup> → 물리·경사 통과 → 진흥✕·보호✕ 적격 → 법인·국공유(분석 기준 필지)
+    → 진흥지역 개방 시 연접 구획. 지오메트리는 간소화 표시, 수치는 정본 조회값<sup class="fnref">[12]</sup>.</div>
   </div>
 </section>
 
@@ -540,34 +532,28 @@
      (합 ${V4.n(R.R2_promo.ge50_mw)}MW)</b>이 되며, 그중 ${V4.n(cpBigRec)}곳이 <b>간척 지구</b>다.`;
 
   const STEPS = [
-    ['①', '현재 수준', `개방 전(진흥✕·보호✕ — 농업진흥지역 밖 한정)에서 <b>법인·국공유</b> 농지는
-      <b>${V4.km2(M.R0['정본'].km2)} km²</b> —
+    ['①', '현재 수준', `개방 전(진흥✕·보호✕) 법인·국공유 농지는 <b>${V4.km2(M.R0['정본'].km2)} km²</b> —
       전체(개인 포함) ${V4.km2(M.R0['대조군'].km2)} km²의
-      <b>${(100*M.R0['정본'].km2/M.R0['대조군'].km2).toFixed(1)}%</b>.
-      50MW 이상 구획은 <b>${V4.n(R.R0_current.ge50)}곳</b>뿐임.`,
-     'scenarios.html#t32', '근거 표 5'],
-    ['②', '왜 늘려야 하는가', `개인 포함 50MW 이상 구획은 ${V4.n(R['R0_current@all'].ge50)}곳이지만 면적의
-      <b>${V4.n(N.big_composition['R0_current@all'].indiv_share_pct)}%가 개인 소유</b> —
-      수백 명의 동의 조직이 전제. 동의 없이 성립하는 법인·국공유만 세면
-      <b>전국 ${V4.n(R.R0_current.ge50)}곳</b>(제주 서귀포 ${V4.n(cpAnchorTop.mw)}MW).`,
-     'finder.html#own', '후보지 찾기 탭 — 소유 구성 상세'],
+      <b>${(100*M.R0['정본'].km2/M.R0['대조군'].km2).toFixed(1)}%</b>이고, 50MW 이상 구획은
+      <b>${V4.n(R.R0_current.ge50)}곳</b>.`,
+     'scenarios.html#t32', '정책 시나리오 표 5'],
+    ['②', '왜 늘려야 하는가', `개인 포함 50MW 이상 ${V4.n(R['R0_current@all'].ge50)}곳 중 면적의
+      <b>${V4.n(N.big_composition['R0_current@all'].indiv_share_pct)}%가 개인 소유</b>(동의 조직 전제) —
+      법인·국공유만 세면 <b>${V4.n(R.R0_current.ge50)}곳</b>(제주 서귀포 ${V4.n(cpAnchorTop.mw)}MW).`,
+     'finder.html#own', '후보지 찾기 탭 — 소유 구성'],
     ['③', '두 수단의 증분', `보호구역 개방 +${V4.km2((M.R1['정본'].m2 - M.R0['정본'].m2)/1e6)} km² ·
       진흥구역 개방 <b>+${V4.km2((M.R2['정본'].m2 - M.R0['정본'].m2)/1e6)} km²</b> —
-      규모가 열 배 이상 다름. 진흥구역 개방 시 50MW 이상은
-      <b>${V4.n(R.R2_promo.ge50)}곳(합 ${V4.n(R.R2_promo.ge50_mw)}MW)</b>,
+      진흥구역 개방 시 50MW 이상 <b>${V4.n(R.R2_promo.ge50)}곳(합 ${V4.n(R.R2_promo.ge50_mw)}MW)</b>,
       그중 ${V4.n(cpBigRec)}곳이 간척 지구.`,
      'finder.html#candtbl', `후보지 찾기 탭 — ${V4.n(R.R2_promo.ge50)}곳의 소재와 지도`],
-    ['④', '이격 단서', `주거 이격 200m 보수 적용 시 개방 전 분은 −${drop('R0_current')}%,
-      진흥구역 개방분은 −${drop('R2_promo')}% —
-      <b>50MW 이상은 ${V4.n(R.R2_promo.ge50)} → ${V4.n(R.R2_promo_SB.ge50)}곳으로 하나만
-      줄어듦</b>(간척 평야는 주거에서 멂). 그 외 이격 17종은 공간 분해 전(하한).`,
-     'scenarios.html#t32', '근거 표 5 · 지도의 이격 토글'],
-    ['⑤', '간척·법인 갭', `시행령 제정안은 <b>농업회사법인</b>의 부지를 매립지등(미매각 간척지 등)으로
-      한정함 — 현행 접근 가능 면적이 <b>${kk(outC.anchor_m2)} → ${kk(inC.anchor_m2)} km²</b>로
-      ${cut(outC.anchor_m2, inC.anchor_m2)}% 축소. 진흥구역 개방이 동반돼야 간척 내 법인
-      ${kk(inC.all_m2)} km² + 임차 풀 ${kk(inO.all_m2)} km²(사용승낙 필요)가 열림.
-      간척지가 1차 후보인 이유 — 법인·국공유 비중이 전국
-      ${(100*M.R2['정본'].km2/M.R2['대조군'].km2).toFixed(1)}% 대
+    ['④', '이격 단서', `주거 이격 200m 보수 적용 시 개방 전 분 −${drop('R0_current')}%, 진흥구역 개방분
+      −${drop('R2_promo')}% — <b>50MW 이상은 ${V4.n(R.R2_promo.ge50)} → ${V4.n(R.R2_promo_SB.ge50)}곳</b>
+      (간척 평야는 주거에서 멂).`,
+     'scenarios.html#t32', '정책 시나리오 표 5 · 지도의 이격 토글'],
+    ['⑤', '간척·법인 갭', `시행령 제정안은 <b>농업회사법인</b>의 부지를 매립지등으로 한정 — 접근 면적
+      <b>${kk(outC.anchor_m2)} → ${kk(inC.anchor_m2)} km²</b>(−${cut(outC.anchor_m2, inC.anchor_m2)}%).
+      진흥구역 개방이 동반돼야 간척 내 법인 ${kk(inC.all_m2)} km² + 임차 풀 ${kk(inO.all_m2)} km²가 열리며,
+      법인·국공유 비중은 전국 ${(100*M.R2['정본'].km2/M.R2['대조군'].km2).toFixed(1)}% 대
       <b>간척지 ${(100*K.R2['정본'].km2/K.R2['대조군'].km2).toFixed(1)}%</b>.`,
      'scenarios.html#decree', '시행령 제정안 영향 — 부지 한정 조문·수치'],
   ];

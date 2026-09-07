@@ -115,19 +115,19 @@ input[type=number].coef{width:80px;font:inherit;padding:2px 6px;border:1px solid
     <div class="figbox reveal" style="margin-bottom:22px">
       <h3 style="font-family:var(--serif);color:var(--navy);margin-bottom:12px">시나리오 요약 — 적격 면적 · 추가 면적 · 대규모 후보지</h3>
       <div style="overflow-x:auto"><table class="v4" id="t-scn"></table></div>
-      <div class="figcap">제도 변경으로 추가되는 면적과 특구급(≈50MW 이상 — 분석상 규모
-      표현) 후보 수의 시나리오별 변화.<br>정본 DB 조회값<sup class="fnref">[12]</sup>,
-      km² 1차 · MW는 0.045 kW/㎡ 환산 참고<sup class="fnref">[13]</sup>.</div>
+      <div class="figcap">제도 변경으로 추가되는 면적과 특구급(≈50MW 등가) 후보 수의 시나리오별
+      변화<sup class="fnref">[12]</sup> — km² 1차, MW 참고<sup class="fnref">[13]</sup>.</div>
     </div>
 
 
-    <div class="callout-v4" style="margin-bottom:18px"><b>왜 이 네 조합인가.</b>
-    영농형태양광법 제6조제1항의 부지 두 갈래(①농업진흥지역 밖 ②재생에너지지구 지정
-    농지<sup class="fnref">[5]</sup>) 중 ②의 지정 범위 — 농업보호구역·농업진흥구역을
-    각각 허용하느냐 — 가 하위법령의 설계 변수임. 스위치 두 개의 조합이 네 칸:
-    진흥✕·보호✕(R0 — 지금 상태) · +보호○(R1) · +진흥○(R2) · 둘 다 ○(R3).
-    네 칸을 같은 방법·같은 원장으로 재야 어느 스위치가 규모를 좌우하는지 비교가
-    성립함 — 표 1이 그 결과, 표 3이 스위치별 증분.</div>
+    <details style="margin-bottom:18px">
+      <summary style="cursor:pointer;font-size:13px;font-weight:700;color:var(--leaf-deep)">왜 이 네 조합인가 — 법적 배경</summary>
+      <div class="callout-v4" style="margin-top:8px">영농형태양광법 제6조제1항의 부지 두 갈래(①농업진흥지역 밖
+      ②재생에너지지구 지정 농지<sup class="fnref">[5]</sup>) 중 ②의 지정 범위 — 농업보호구역·농업진흥구역을
+      각각 허용하느냐 — 가 하위법령의 설계 변수임. 스위치 두 개의 조합이 네 칸(R0–R3)이고, 네 칸을
+      같은 방법·같은 원장으로 재야 어느 스위치가 규모를 좌우하는지 비교할 수 있음 — 표 1이 그 결과,
+      표 3이 스위치별 증분.</div>
+    </details>
 
     <div class="figbox reveal" style="margin-bottom:22px">
       <h3 style="font-family:var(--serif);color:var(--navy);margin-bottom:12px">표 1. 구역 조합(R0–R3)별 설치 가능 필지 수와 면적 — 전국</h3>
@@ -160,11 +160,10 @@ input[type=number].coef{width:80px;font:inherit;padding:2px 6px;border:1px solid
     <div class="figbox reveal" id="t32">
       <h3 style="font-family:var(--serif);color:var(--navy);margin-bottom:12px">표 5. 구역 조합(4) × 이격(2)별 설치 가능 면적 — 분석 기준 필지 8칸</h3>
       <div style="overflow-x:auto"><table class="v4" id="t-grid"></table></div>
-      <div class="figcap">구획 = 필지를 연접 거리 21m로 병합한 성분 <b>전량</b> — 등재 문턱을 두지 않음<sup class="fnref">[12]</sup> ·
-      이격 보수 = 주거 200m 상한을 대지 필지 대리로 일률 적용한 하한<sup class="fnref">[11]</sup>.<br>
-      문턱이 없으므로 <b>필지 면적과 구획 면적이 같음</b> — 병합은 면적을 바꾸지 않고
-      덩어리의 수와 크기 분포를 바꿈. 규모의 차이는 면적 열이 아니라
-      <b>≥50MW 등가 열</b>에서 읽어야 함(1.111km²는 0.045kW/㎡ 역산의 읽기 눈금이며 적격 조건이 아님<sup class="fnref">[10]</sup>).<br>
+      <div class="figcap">구획 = 필지를 21m 연접으로 병합한 성분 전량(문턱 없음)<sup class="fnref">[12]</sup> ·
+      이격 보수 = 주거 200m 상한을 대지 필지 대리로 적용한 하한<sup class="fnref">[11]</sup>.
+      병합은 면적을 바꾸지 않으므로 필지 면적 = 구획 면적이고, 규모 차이는 <b>≥50MW 등가 열</b>(읽기 눈금)에서
+      읽음.<br>
       <a href="finder.html#scnmap" style="color:var(--leaf-deep)"><b>지도에서 구획 직접 보기 →</b></a></div>
     </div>
   </div>
@@ -177,9 +176,8 @@ input[type=number].coef{width:80px;font:inherit;padding:2px 6px;border:1px solid
   <div class="wrap" style="max-width:1080px">
     <div class="sec-head"><div><p class="eyebrow">Estimate · 잠재량 산정</p>
     <h2>산정 — 조건을 직접 조합</h2></div></div>
-    <p style="max-width:70ch">위 표에 없는 조합(소유 재조합·간척 한정 등)을 직접 산정 —
-    계산 방식은 정본과 동일하고, 큐브 합산 = 매트릭스 재현 검사 통과분만
-    게시<sup class="fnref">[12]</sup>. <b>1차 산출은 면적</b>, MW는 참고<sup class="fnref">[13]</sup>.
+    <p style="max-width:70ch">조건(소유·구역 개방·이격·범위)을 조합해 적격 면적을 확인함 — 계산 방식은
+    정본과 동일<sup class="fnref">[12]</sup>, 1차 산출은 면적이고 MW는 참고<sup class="fnref">[13]</sup>.
     <span style="font-family:var(--mono);font-size:11px;color:var(--muted)">· 큐브 생성 <span id="e-built">—</span></span></p>
 
 
@@ -205,7 +203,7 @@ input[type=number].coef{width:80px;font:inherit;padding:2px 6px;border:1px solid
       <label class="tgl"><input type="radio" name="eScope" value="2"> 국가관리간척지만 (시행령 제정안 §7 6호 범위)</label>
       <h3>참고 MW 계수</h3>
       <label>kW/㎡ <input type="number" class="coef" id="eCoef" value="0.045" step="0.005" min="0.005" max="0.2"></label>
-      <div style="font-size:11.5px;color:var(--muted)">환산 계수는 표기 전용 — 판정·선별에 쓰지 않음(ADR-0044)</div>
+      <div style="font-size:11.5px;color:var(--muted)">환산 계수는 표기 전용</div>
     </div>
 
     <div>
@@ -224,14 +222,15 @@ input[type=number].coef{width:80px;font:inherit;padding:2px 6px;border:1px solid
     </div>
   </div>
 
-  <p class="sec-kicker" style="font-family:var(--mono);font-size:11.5px;letter-spacing:.14em;color:var(--leaf-deep);margin-top:34px">LAYERS · 산정 층위</p>
-  <h2 class="art-h">산정 층위와 한계 — 필지(1층) · 연접 구획(2층)</h2>
-  <p><b>1층(필지 면적 합)</b> — 큐브로 즉시 산정. <b>2층(연접 구획 수·규모)</b> —
-  필지 간 연접(τ = 21 m) 계산이 필요해 즉석 산정 불가. 조합이 등재 런과 일치하면
-  결과 카드에 해당 런의 구획 값 병기, 등재 밖 조합의 구획 산출은 등재 요청(Contact)
-  경로. τ = 21 m는 적격 필지 710만 개의 4-최근접 거리 곡선(k-distance) 무릎에서
-  유도한 값 — 민감도 대역(15–25 m)에서 적격 면적 불변. 유도 그림·근거는 근거와 방법
-  탭(왜 21m인가)과 보고서의 그림 자산 참조.</p>
+  <details style="margin-top:26px">
+    <summary style="cursor:pointer;font-size:13px;font-weight:700;color:var(--leaf-deep)">산정 층위와 한계 — 필지(1층) · 연접 구획(2층)</summary>
+    <p style="margin-top:8px"><b>1층(필지 면적 합)</b> — 큐브로 즉시 산정. <b>2층(연접 구획 수·규모)</b> —
+    필지 간 연접(τ = 21 m) 계산이 필요해 즉석 산정 불가. 조합이 등재 런과 일치하면
+    결과 카드에 해당 런의 구획 값을 병기하고, 등재 밖 조합의 구획 산출은 등재 요청(Contact)
+    경로. τ = 21 m는 적격 필지 710만 개의 4-최근접 거리 곡선(k-distance) 무릎에서
+    유도한 분석 기준(법정 기준 아님) — 민감도 대역(15–25 m)에서 적격 면적 불변.
+    유도 근거는 근거와 방법 탭(왜 21m인가).</p>
+  </details>
 
   <div class="callout-v4" id="e-read">—</div>
 
@@ -242,9 +241,8 @@ input[type=number].coef{width:80px;font:inherit;padding:2px 6px;border:1px solid
 <section style="padding:26px 0 10px" id="ord">
   <div class="wrap" style="max-width:1080px">
   <div class="callout-v4">부지 한정 조문(시행령 제정안 §7 6호 — 매립지등 미매각분 =
-  국가관리간척지)의 조문 구조·정량 분석은 <a href="scenarios.html#decree"
-  style="color:var(--leaf-deep)"><b>시행령 제정안 탭</b></a>에 있음 — 표 4를 그 조문
-  관점에서 읽는 요약도 그쪽으로 통합함(중복 제거, 2026-09-01).</div>
+  국가관리간척지)의 조문 구조와 정량 분석은 아래
+  <a href="#decree" style="color:var(--leaf-deep)"><b>시행령 제정안 영향</b></a> 절.</div>
   </div>
 </section>
 
@@ -301,7 +299,12 @@ table.mx .ref{color:var(--muted)}
       </g>
     </svg>
   </div>
-  <p><b>본법</b>(법률 제21804호, 2026-06-16 공포, 2026-12-17 시행)<sup class="fnref">[10]</sup>
+  <p>본법(법률 제21804호, 2026-06-16 공포·2026-12-17 시행)<sup class="fnref">[10]</sup> §5①3호·§6①과
+  시행령 제정안 §7 6호<sup class="fnref">[25]</sup>가 <b>농업회사법인</b>의 발전사업부지를 매립지등(매각분 제외 =
+  국가관리간척지 13지구<sup class="fnref">[4]</sup>)으로 한정함. 영농조합법인에는 이 제약이 없음.</p>
+  <details style="margin:6px 0 14px">
+    <summary style="cursor:pointer;font-size:13px;font-weight:700;color:var(--leaf-deep)">조문 원문과 구조 자세히</summary>
+  <p style="margin-top:8px"><b>본법</b><sup class="fnref">[10]</sup>
   제5조제1항제3호는 농업법인의 발전사업을 <b>재생에너지지구로 지정된 지역</b>에서만 허용하고
   세부를 대통령령에 위임함. 제6조제1항은 발전사업부지를 두 갈래로 정함 —
   ①농업진흥지역 밖의 농지, ②재생에너지지구로 지정된 농지.</p>
@@ -314,17 +317,16 @@ table.mx .ref{color:var(--muted)}
   <span class="src">영농형태양광법 시행령 제정안(의견조회판, 2026.7) 제7조 6호 — 원문 그대로<sup class="fnref">[25]</sup></span></blockquote>
   <p>인용된 「농어촌정비법」 제14조제1항의 <b>매립지등</b> 정의<sup class="fnref">[27]</sup>는
   "농업생산기반 정비사업 시행으로 조성된 재산 중 농업생산기반시설에 제공되지 아니하는
-  매립지ㆍ간척지ㆍ개간지ㆍ취토장 등 토지와 그 밖의 물건 등"임. 같은 항은 처분 방법 4종
-  (임대·매각·직접사용·일시사용)을 두는데, 제정안은 이 중 <b>매각분을 제외</b>하므로 남는 것은
+  매립지ㆍ간척지ㆍ개간지ㆍ취토장 등 토지와 그 밖의 물건 등"임. 같은 항의 처분 방법 4종
+  (임대·매각·직접사용·일시사용) 중 제정안은 <b>매각분을 제외</b>하므로 남는 것은
   미매각 유지분 — 개정안 요지의 표현으로 <b>"국가관리간척지"</b>(농식품부 '25.6 공표
   13지구<sup class="fnref">[4]</sup>)임.</p>
   <p><b>시행규칙 제정안(의견조회판)</b><sup class="fnref">[26]</sup>은 농업회사법인의 허가신청 시
-  이 요건의 증빙으로 「농어촌정비법 시행령」 제14조제5항에 따른 <b>매립지등 임대통지서</b>,
-  농업생산기반 정비사업 <b>시행자의 확인서</b> 또는 이에 준하는 자료를 첨부하도록 함.
-  시행령안 제8조의 발전사업 기간은 최초 5년 + 연장 3년×6회 = <b>최대 23년</b>임.</p>
+  <b>매립지등 임대통지서</b>, 농업생산기반 정비사업 <b>시행자의 확인서</b> 또는 이에 준하는
+  자료를 첨부하도록 함. 시행령안 제8조의 발전사업 기간은 최초 5년 + 연장 3년×6회 = <b>최대 23년</b>.</p>
   <div class="callout-v4"><b>범위 확인 — 영농조합법인은 이 제약이 없음.</b> 제7조 6호는
-  농업회사법인에만 적용되며, 영농조합법인은 재생에너지지구 지정 요건(본법 §5①3호)만 충족하면 됨.
-  따라서 "농업법인 전체가 매립지등으로 한정된다"는 서술은 제정안과 다름.</div>
+  농업회사법인에만 적용되며, 영농조합법인은 재생에너지지구 지정 요건(본법 §5①3호)만 충족하면 됨.</div>
+  </details>
 
   <h2 class="art-h">2. 대상 부지의 정량 — 국가관리간척지 모집단</h2>
   <div class="dk">
@@ -714,9 +716,8 @@ table.mx .ref{color:var(--muted)}
   document.querySelectorAll('input[name=eScope]').forEach(e => e.onchange = calc);
 
   document.getElementById('e-read').innerHTML =
-    `읽는 법 — 모든 값은 <b>본값</b>(실경작 무관 적격)이며 방법은 정본과 동일:
-     ${D.method}. 발행 게이트: ${D.gate}. 사용자 조합에는 "정본 아님" 딱지 부착 ·
-     대조군 상시 병기 — 인용 가능한 수치는 정본 등재 조합뿐.`;
+    `읽는 법 — 인용 가능한 수치는 <b>정본 등재</b> 배지가 붙은 조합뿐. 사용자 조합에는
+     "정본 아님" 배지가 붙고 대조군(소유 무필터)이 항상 병기됨.`;
 
   // 초기값 = 정본 3판 조합 (정본 우주 · 진흥구역 개방 · 이격 미적용)
   document.querySelector('.presets button[data-p=pubcorp]').click();
