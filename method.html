@@ -93,7 +93,7 @@
           <rect x="642" y="54" width="140" height="88" rx="9" fill="#fff" stroke="#B3261E" stroke-width="2"/>
           <text x="712" y="80" font-weight="700" fill="#B3261E">검증 게이트</text>
           <text x="712" y="99" fill="#6C757D">시금석 정확 일치</text>
-          <text x="712" y="116" fill="#6C757D">가산성·전선 항등식</text>
+          <text x="712" y="116" fill="#6C757D">가산성·비지배 집합 항등식</text>
           <text x="712" y="133" fill="#6C757D">어긋나면 발행 중단</text>
           <rect x="832" y="24" width="136" height="60" rx="9" fill="#EAF3FB" stroke="#7FA8C9"/>
           <text x="900" y="48" font-weight="700" fill="#16233A">사이트 5탭</text>
@@ -140,7 +140,7 @@
         <tr><td class="l"><b>용도지역 3종</b></td><td class="l">개발제한구역 · 보전관리지역 · 보전녹지지역 제외
           — 원문 재검증으로 확정한 배제 3종.<br>용도지역 정보가 결측인 필지는 해당 여부를
           확인할 수 없어 보수적으로 제외하고 별도 병기함
-          (<a href="method.html#caveats" style="color:var(--leaf-deep)">아래 한계 표의 판정 보류</a>)</td><td class="l">용도지역 원장<sup class="fnref">[1]</sup> · 배제 근거 법문<sup class="fnref">[6]</sup></td></tr>
+          (<a href="#datarules" style="color:var(--leaf-deep)">아래 데이터 처리 규칙의 용도지역 미상 항목</a>)</td><td class="l">용도지역 원장<sup class="fnref">[1]</sup> · 배제 근거 법문<sup class="fnref">[6]</sup></td></tr>
         <tr><td class="l"><b>농업진흥지역</b></td><td class="l">진흥✕·보호✕ 기준은 농업진흥지역 밖의 농지만 —
           보호구역·진흥구역 개방은 제도 변수로 따로 계산해 조합함
           (<a href="scenarios.html" style="color:var(--leaf-deep)">정책 시나리오 탭의 조합 R0–R3</a>)</td><td class="l">진흥지역 경계<sup class="fnref">[5]</sup>(필지 대표점 교차)</td></tr>
@@ -246,7 +246,7 @@
           개인 식별 아님.<br>법인이 농업법인인지는 원장에 없음(명부 조달 시 정밀화).</td></tr>
         <tr><td class="l"><b>자료 기준시점</b></td><td class="l">원천 자료의 기준시점이 서로 다름 —
           지적 원장 2025년판<sup class="fnref">[1]</sup> · 산업단지 경계 2026-08<sup class="fnref">[23]</sup> ·
-          계통 2026-07<sup class="fnref">[22]</sup> · 지역 전력수요 2026-09. 각 자료의 해당 시점 기준을
+          계통 2026-07<sup class="fnref">[22]</sup> · 지역 전력판매량 2026-09. 각 자료의 해당 시점 기준을
           결합한 결과임.</td></tr>
         <tr><td class="l"><b>R1–R3의 성격</b></td><td class="l">R1–R3는 2026-12-17 시행 예정 법률
           제6조제1항제2호의 재생에너지지구 지정 범위를 전제로 한 <b>가정적 시나리오</b>이며 확정된 제도가
@@ -345,13 +345,17 @@
       보고서의 같은 항목이 서로 다른 값을 보일 수 없는 구조.</p>
       <div class="case">실전 사례 — 질의 모듈 안의 용어 규정 위반이 사이트 데이터까지 흘러온 것을
       자동 게이트가 적발해, 사이트가 아니라 원천(질의 모듈)에서 수정 (2026-08-25).</div>`,
-    touch: `<h3>기준값 자동 검증 — 상수 대조 (시금석)</h3><span class="mtag">TOUCHSTONE</span>
-      <p>진흥✕·보호✕(R0) 기준값이 코드에 상수로 박혀 있음:</p>
-      <div class="mbox"><b>${V4.n(s.anchor.n)}필지 · ${V4.n(Math.round(s.anchor.m2))} ㎡</b>
-      (${V4.km2(s.anchor.km2, 2)} km²)</div>
-      <p>사이트 데이터를 만들 때마다 DB를 재조회해 이 상수와 대조함 — 1필지라도 다르면
-      데이터 파일이 생성되지 않음.<br>기준값을 바꾸는 유일한 길은 판 개정 절차
-      (근거 기록 → 검증 → 상수 갱신 → 전체 재계산)뿐.</p>
+    touch: `<h3>기준값 자동 검증 — 두 갈래 대조 (시금석)</h3><span class="mtag">TOUCHSTONE</span>
+      <p>진흥✕·보호✕(R0)을 두 갈래로 검증함 — 정본은 산출값끼리, 대조군은 코드 상수와 대조:</p>
+      <div class="mbox"><b>정본(법인·국공유) ${V4.n(s.anchor.n)}필지 ·
+      ${V4.n(Math.round(s.anchor.m2))} ㎡ (${V4.km2(s.anchor.km2, 2)} km²)</b><br>
+      → 시나리오 런(R0_current)의 산출값과 일치하는지 대조<br><br>
+      <b>대조군(무필터 · 정책 값 아님) ${s.anchor.control ? V4.n(s.anchor.control.n) : ''}필지 ·
+      ${s.anchor.control ? V4.km2(s.anchor.control.km2, 2) : ''} km²</b><br>
+      → 코드에 상수로 박힌 값과 정확히 일치하는지 대조</div>
+      <p>사이트 데이터를 만들 때마다 DB를 재조회해 두 대조를 함께 수행함 — 한쪽이라도 1필지
+      다르면 데이터 파일이 생성되지 않음.<br>대조군 상수를 바꾸는 유일한 길은 판 개정 절차
+      (근거 기록 → 검증 → 상수 갱신 → 전체 재계산)이며, 정본 기준선은 재산출 뒤 등재됨.</p>
       <ul><li>초판 → 배제 규정 원문 재검증으로 1차 개정</li>
       <li>2차 개정: 지목 복구 적용 — 증분 전액이 복구 필지에서 나옴을 분해 검증</li>
       <li>3차 개정(현행): 실경작 비율을 적격 조건에서 제거.

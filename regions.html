@@ -223,26 +223,26 @@ input[type=range]{accent-color:var(--navy)}
       <b>각 시군 안에서 변수의 변별력(데이터 분포)이 정하는 가중</b>이며 정책적 중요도가 아님 —
       예컨대 거리 가중이 낮으면 그 시군에서 거리 값의 차이가 작다는 뜻. 비지배 집합(이 표의 행)과
       나란히 읽는 두 번째 눈으로, 판정·선별에는 쓰지 않음.<br>지역 전력수요 대비 = 구획 참고
-      발전량(MW × 1,314h) ÷ 시군 연간 전력사용량(한전 2023–25 평균).</div>
+      발전량(MW × 1,314h) ÷ 시군 연간 전력판매량(한전 2023–25 평균).</div>
     </details>
     <div id="recCtl" style="font-size:12px;color:var(--muted);margin:6px 0 10px">—</div>
     <div id="recDem" style="margin:2px 0 12px"></div>
     <div id="recReader" style="background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px;font-size:13px">
       <b>반경 판독기</b> — 위 표·산점도·지도에서 구획을 고르면, 반경 안 산단 점수 합과
-      여유용량 합(균등배분 하한 합)을 보임. 고른 뒤 확인하는 도구 — 전선 선별에 불사용.</div>
+      여유용량 합(균등배분 하한 합)을 보임. 고른 뒤 확인하는 도구 — 비지배 집합 선별에 불사용.</div>
     <figcaption class="figcap-v4">판독기의 기본 반경은 시군 적응형(그 시군 구획의 4분의 3이 첫
       산업단지를 만나는 거리, 2–12km). 여유 대역이 같은 이웃 구획은 같은 읍면동·설비의 여유를 나눠
       쓰는 사이라 동시 개발 시 표의 여유를 합산하면 안 됨.</figcaption>
   </figure>
 
   <h2 class="art-h" id="jisan">2. 지역 전력수요와 비교 — 시군 분포</h2>
-  <p>각 시군 최대 구획의 참고 발전량이 그 시군 연간 전력수요에서 차지하는 비중의 분포 —
+  <p>각 시군 최대 구획의 참고 발전량이 그 시군 연간 전력판매량에서 차지하는 비중의 분포 —
   연간 규모 비교의 참고지표<sup class="fnref">[28]</sup>.</p>
   <figure class="art-fig">
     <div class="figbox">
       <div id="jsiStrip"></div>
       <div class="figcap">그림. 전국 209개 시군 — 각 시군 최대 구획(면적 1위)의 참고 발전량 ÷ 연간
-      전력사용량(로그 눈금). 유형 구분선 없음(문턱을 두지 않음).</div>
+      전력판매량(로그 눈금). 유형 구분선 없음(문턱을 두지 않음).</div>
     </div>
   </figure>
 
@@ -250,7 +250,7 @@ input[type=range]{accent-color:var(--navy)}
   <div class="figbox" style="padding:16px 18px;margin:14px 0 4px">
     <div style="font-family:var(--mono);font-size:11px;letter-spacing:.12em;color:var(--leaf-deep);margin-bottom:8px">TWO KEYS · 지산지소가 성립하는 조건</div>
     <div class="key2">
-      <div><i>열쇠 ① 부지</i>영농형 태양광 발전사업법 제6조제1항제2호의
+      <div><i>열쇠 ① 부지</i>영농형태양광법<sup class="fnref">[10]</sup> 제6조제1항제2호의
         <b>재생에너지지구</b> — 농업진흥구역 안 설치를 여는 제도. 지정 사례 없음 —
         이 지도의 후보 목록이 그 지정 근거 자료.</div>
       <div><i>열쇠 ② 판로</i>분산에너지 활성화 특별법 제43조의 <b>특화지역
@@ -316,7 +316,7 @@ input[type=range]{accent-color:var(--navy)}
     });
     document.getElementById('jsiStrip').innerHTML = g + '</svg>';
 
-    // 열쇠 두 개 교차 — 1차 분산특구 7곳 [29] × 전선 1등 (값은 전량 데이터 렌더)
+    // 열쇠 두 개 교차 — 1차 분산특구 7곳 [29] × 비지배 후보 중 면적 최대 (값은 전량 데이터 렌더)
     const Z7 = [
       ['전남 해남군', ['46820']], ['충남 서산시', ['44210']],
       ['제주 (도 전역)', ['50110', '50130']], ['경북 포항시', ['47111', '47113']],
@@ -326,7 +326,7 @@ input[type=range]{accent-color:var(--navy)}
       .map(c => (REC.sgg[c] && REC.sgg[c].frontier[0]) || null)
       .filter(Boolean).sort((a, b) => b.a - a.a)[0] || null;
     const rows7 = Z7.map(([nm, cs]) => ({nm, t: topOf(cs)}));
-    let kh = `<tr><th style="text-align:left">특구 사업지</th><th>전선 1등 구획</th>
+    let kh = `<tr><th style="text-align:left">특구 사업지</th><th>비지배 후보 중 면적 최대 구획</th>
       <th>지역 전력수요 대비</th><th>부지 판독</th></tr>`;
     for (const {nm, t} of rows7) {
       kh += `<tr><td class="l">${nm}</td>
@@ -343,7 +343,8 @@ input[type=range]{accent-color:var(--navy)}
        지금 제도로 두 열쇠를 모두 갖춘 사례. 역으로 부지 최대(당진)·수요 대비
        최대(고흥)는 특구 밖 — 두 제도는 대체가 아니라 보완.
        "특구급"(규모 눈금)과 "분산 특구"(법정 지정)는 다른 말 · 지정 현황은
-       2025년 말 1차 기준<sup class="fnref">[29]</sup>.`;
+       2025년 말 1차 기준<sup class="fnref">[29]</sup>.
+       표의 구획은 각 지역 비지배 후보 중 면적이 가장 큰 것을 골라 보인 것이며 단독 최적해가 아님.`;
   })();
 
   // ── 시군별 우선 후보 — proximity §5 이식 (본지도 마커만 제외, 로직 원문) ──
@@ -396,7 +397,7 @@ input[type=range]{accent-color:var(--navy)}
        여유용량 합 <b>${V4.n(f.reader.grid[ri])} MW</b></div>
        <div style="color:var(--muted);font-size:11.5px;margin-top:4px">
        기본 ${recCur.r_default} km = 이 시군 구획의 4분의 3이 첫 산단을 만나는 거리.
-       점수·합은 확인용 — 전선 선별에 쓰지 않음.</div>`;
+       점수·합은 확인용 — 비지배 집합 선별에 쓰지 않음.</div>`;
     document.getElementById('recRs').addEventListener('input',
       e => recReader(f, +e.target.value));
   }
@@ -422,14 +423,18 @@ input[type=range]{accent-color:var(--navy)}
       const fr = recCur.frontier.find(f => f.lab === lab);
       if (fr) inFront++;
       const p = pos[lab];
-      if (!p) return;                       // 전선 밖 top10은 좌표 미보유 — 캡션으로 보고
+      if (!p) return;                       // 비지배 집합 밖 후보는 좌표 미보유 — 캡션으로 보고
       drawn++;
       recMthMk.addLayer(L.circleMarker(p, {radius: 11, weight: 2.4, color: '#7B4BB7',
         fill: false, dashArray: '3 3'})
         .bindTooltip(`${mname} ${i + 1}위`));
     });
-    if (cap) cap.textContent = `${mname} top10 중 비지배 집합 안 ${inFront}곳`
-      + ` (보라 점선 링 — 전선 밖 ${10 - inFront}곳은 지배당한 구획이라 이 지도에 점이 없음)`
+    // 목록 길이는 시군 구획 수에 따라 다름(2~10) — 고정 10 가정 금지
+    const outside = labs.length - inFront;
+    if (cap) cap.textContent = `${mname} 상위 ${labs.length}곳 중 비지배 집합 안 ${inFront}곳`
+      + (outside > 0
+          ? ` (보라 점선 링 — 나머지 ${outside}곳은 지배당한 구획이라 이 지도에 점이 없음)`
+          : ` (보라 점선 링 — 상위 후보 전원이 비지배 집합 안)`)
       + ` · 가중치 동일(1/3, 통제 조건)`;
   }
   recMthSel.addEventListener('change', drawMth);
@@ -440,7 +445,7 @@ input[type=range]{accent-color:var(--navy)}
     const gen = f.mw * 1.314;                          // GWh/년 = MW × 1,314h [28]
     const w = Math.min(100, f.dsh);
     el.innerHTML = `<div style="font-size:12.5px;margin-bottom:4px">
-      <b>${recName(recSel.value)}</b> 연간 전력사용량 <b>${V4.n(f.dem)} GWh</b> 눈금 위의
+      <b>${recName(recSel.value)}</b> 연간 전력판매량 <b>${V4.n(f.dem)} GWh</b> 눈금 위의
       이 구획 참고 발전량 <b>${gen.toLocaleString('ko-KR', {maximumFractionDigits: 0})} GWh
       = ${f.dsh}%</b>${f.dsc ? `<sup title="${f.dsc}">†</sup>` : ''}
       <span style="color:var(--muted)">${f.dmf != null ? `· 그 수요의 ${f.dmf}%가 제조업 ` : ''}(지산지소 참고 표기 — 판정 불사용)</span></div>
@@ -518,7 +523,7 @@ input[type=range]{accent-color:var(--navy)}
     if (recMthSel.options.length <= 1 && S.mtop) {
       Object.keys(S.mtop).forEach(mname => {
         const o = document.createElement('option');
-        o.value = mname; o.textContent = mname + ' top10 (동일 가중)';
+        o.value = mname; o.textContent = mname + ' · 상위 후보 (동일 가중)';
         recMthSel.appendChild(o);
       });
     }
@@ -561,7 +566,7 @@ input[type=range]{accent-color:var(--navy)}
     svg.querySelectorAll('circle[data-lab]').forEach(c => c.onclick = () =>
       recPick(S.frontier.find(f => f.lab === +c.dataset.lab)));
     document.getElementById('recReader').innerHTML =
-      '<b>반경 판독기</b> — 위 표·산점도·지도에서 구획을 고르면, 반경 안 산단 점수 합과 여유용량 합(균등배분 하한 합)을 보임. 고른 뒤 확인하는 도구 — 전선 선별에 불사용.';
+      '<b>반경 판독기</b> — 위 표·산점도·지도에서 구획을 고르면, 반경 안 산단 점수 합과 여유용량 합(균등배분 하한 합)을 보임. 고른 뒤 확인하는 도구 — 비지배 집합 선별에 불사용.';
   }
   recSel.addEventListener('change', recRender);
   recRender();

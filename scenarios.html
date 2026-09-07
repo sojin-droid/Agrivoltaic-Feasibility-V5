@@ -115,7 +115,7 @@ input[type=number].coef{width:80px;font:inherit;padding:2px 6px;border:1px solid
     <div class="figbox reveal" style="margin-bottom:22px">
       <h3 style="font-family:var(--serif);color:var(--navy);margin-bottom:12px">시나리오 요약 — 적격 면적 · 추가 면적 · 대규모 후보지</h3>
       <div style="overflow-x:auto"><table class="v4" id="t-scn"></table></div>
-      <div class="figcap">제도 변경으로 추가되는 면적과 특구급(≈50MW 등가) 후보 수의 시나리오별
+      <div class="figcap">제도 변경으로 추가되는 면적과 특구급(≥50MW 등가) 후보 수의 시나리오별
       변화<sup class="fnref">[12]</sup> — km² 1차, MW 참고<sup class="fnref">[13]</sup>. 필지 수·대조군·간척·소유
       유형 세부는 아래 세부 표.</div>
     </div>
@@ -334,9 +334,9 @@ table.mx .ref{color:var(--muted)}
 
   <h2 class="art-h">2. 대상 부지의 정량 — 국가관리간척지 모집단</h2>
   <div class="dk">
-    <div><b><span id="dk-a">—</span><small> km²</small></b><span>진흥구역 개방 시 열리는<br>정본(법인·국공유) 면적</span></div>
-    <div><b><span id="dk-s">—</span><small>%</small></b><span>적격 면적 중<br>진흥구역 개방분 비중</span></div>
-    <div><b><span id="dk-m">—</span><small> MW</small></b><span>참고 환산<br>(0.045 kW/㎡ · 표기 전용)</span></div>
+    <div><b><span id="dk-a">—</span><small> km²</small></b><span>진흥지역 전체 개방(R3) 기준<br>정본(법인·국공유) 면적</span></div>
+    <div><b><span id="dk-s">—</span><small>%</small></b><span>R3 적격 면적 중 진흥구역<br>개방분(R2−R0) 비중 · 대조군 기준</span></div>
+    <div><b><span id="dk-m">—</span><small> MW</small></b><span>왼쪽 면적의 참고 환산<br>(0.045 kW/㎡ · 표기 전용)</span></div>
   </div>
   <p>아래 표는 매립지등 미매각분(국가관리간척지 태그<sup class="fnref">[3]</sup><sup class="fnref">[4]</sup>)
   안에서, 구역 개방 조합 R0–R3별 설치 가능 농지의 실측임<sup class="fnref">[12]</sup>.
@@ -425,11 +425,12 @@ table.mx .ref{color:var(--muted)}
   document.getElementById('dk-s').textContent = promoShare;
   document.getElementById('dk-m').textContent = V4.mw(natR3p.m2);
   document.getElementById('analysis').innerHTML = [
-    [`① 이 조문은 진흥구역 개방과 한 몸`, `적격 면적의 <b>${promoShare}%가 진흥구역
-      개방분</b>(R2−R0) — 재생에너지지구 지정<sup class="fnref">[16]</sup>이 있어야 농업회사법인
-      경로가 열림(개방 없이는 무필터 ${K(natR0.km2, 2)} km²뿐). 개방 시 국가관리간척지에서
-      정본 <b>${K(natR3p.km2, 2)} km²</b>가 실행 후보가 됨 — 제정안 자체가 진흥구역 개방
-      필요성의 정량 근거.`],
+    [`① 이 조문은 진흥구역 개방과 한 몸`, `국가관리간척지 <b>대조군</b> 기준 R3 적격 면적의
+      <b>${promoShare}%가 진흥구역 개방분</b>(R2−R0) — 재생에너지지구
+      지정<sup class="fnref">[16]</sup>이 있어야 농업회사법인 경로가 열림(개방 전 R0는 대조군
+      ${K(natR0.km2, 2)} km²·정본 ${K(natR0p.km2, 2)} km²뿐). 개방 시 국가관리간척지에서
+      <b>R3 기준 정본 ${K(natR3p.km2, 2)} km²</b>(R2 기준 ${K(M.R2['정본'].km2, 2)} km²)가
+      실행 후보가 됨 — 제정안 자체가 진흥구역 개방 필요성의 정량 근거.`],
     [`② 상한 규모`, `농업진흥지역 전부 개방(R3) 기준 전국 무필터 ${K(C['전국R3']['대조군'].km2, 2)} km²
       중 이 조문의 대상은 <b>${K(natR3.km2, 2)} km² (${pct(natR3.m2, C['전국R3']['대조군'].m2)}%)</b> —
       분석 기준 필지로는 ${K(C['전국R3']['정본'].km2, 2)} → ${K(natR3p.km2, 2)} km².`],
@@ -600,18 +601,20 @@ table.mx .ref{color:var(--muted)}
     const MM = (await V4.data('summary_v4')).matrix['전국'];
     const GE = {R0: RR.R0_current.ge50, R1: RR.R1_protect.ge50,
                 R2: RR.R2_promo.ge50, R3: RR.R3_zone_all.ge50};
-    const base = MM.R0['정본'].km2;
+    // 증분·증가율은 ㎡ 원값에서 계산한다 — 표시용 km²(1자리)끼리 빼면 이중 반올림으로
+    // 정본(+548.1)이 +548.2로 어긋난다
+    const base2 = MM.R0['정본'].m2;
     const rows = [['R0', '진흥✕·보호✕ (지금 상태)'], ['R1', '+농업보호구역 개방'],
                   ['R2', '+농업진흥구역 개방'], ['R3', '둘 다 개방']];
     document.getElementById('t-scn').innerHTML =
       `<tr><th style="text-align:left">시나리오</th><th>적격 면적 km²</th>
        <th>추가 면적 km²</th><th>증가율</th><th>특구급 후보 수</th></tr>` +
       rows.map(([c, lb]) => {
-        const v = MM[c]['정본'].km2, inc = v - base;
+        const inc2 = MM[c]['정본'].m2 - base2;
         return `<tr${c === 'R2' ? ' class="hl"' : ''}><td class="l"><b>${c}</b> ${lb}</td>
-          <td>${V4.km2(v)}</td>
-          <td>${c === 'R0' ? '—' : '+' + V4.km2(inc)}</td>
-          <td>${c === 'R0' ? '—' : '+' + Math.round(100 * inc / base) + '%'}</td>
+          <td>${V4.km2(MM[c]['정본'].km2)}</td>
+          <td>${c === 'R0' ? '—' : '+' + V4.km2(inc2 / 1e6)}</td>
+          <td>${c === 'R0' ? '—' : '+' + V4.km2(100 * inc2 / base2) + '%'}</td>
           <td>${V4.n(GE[c])}곳</td></tr>`;
       }).join('');
   }

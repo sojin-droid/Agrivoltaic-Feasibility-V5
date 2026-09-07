@@ -27,6 +27,16 @@
 .ls-plane .sheet{fill:#fff;fill-opacity:.78;stroke:rgba(12,53,106,.35);stroke-width:1.2}
 .ls-plane.show{opacity:1}
 .ls-plane.active .sheet{stroke:var(--gold);stroke-width:2.4}
+/* 판은 560px 고정폭이라 좁은 화면에서 페이지를 넘긴다 — 판 크기 자체를 줄인다
+   (컨테이너에 transform을 걸면 perspective가 깨져 3D 판이 사라진다) */
+@media(max-width:700px){
+  .ls-stage3d{height:330px}
+  .ls-floor,.ls-plane{width:330px;height:236px;margin:-88px 0 0 -165px}
+}
+@media(max-width:430px){
+  .ls-stage3d{height:280px}
+  .ls-floor,.ls-plane{width:280px;height:200px;margin:-75px 0 0 -140px}
+}
 .ls-panel{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 16px 18px}
 .ls-steps{display:flex;flex-direction:column;gap:6px;margin-bottom:14px}
 .ls-step{display:flex;gap:11px;align-items:flex-start;text-align:left;background:none;border:1px solid transparent;
@@ -128,7 +138,7 @@
     <div class="flow7">
       <a href="method.html"><span>전국 필지</span><b id="fl1">—</b><span>지적 원장 전수<sup class="fnref">[1]</sup></span></a>
       <a href="method.html"><span>전·답·과수원</span><b id="fl2">—</b><span>지목 농지</span></a>
-      <a href="method.html"><span>물리·법적 1차 적격</span><b id="fl3">—</b><span>구조·경사·용도 통과<br>(법인·국공유 <span id="fl3b">—</span>)</span></a>
+      <a href="method.html"><span>물리·법적 1차 적격</span><b id="fl3">—</b><span>진흥지역 밖 · 구조·경사·용도 통과<br>(무필터 대조군 · 법인·국공유 <span id="fl3b">—</span>)</span></a>
       <a href="finder.html"><span>연접 구획</span><b id="fl4">—</b><span>21m 이내 병합 · 전량<br>(진흥구역 개방 기준)</span></a>
       <a href="finder.html"><span>대규모 후보지</span><b id="fl5">—</b><span>약 50MW 이상<br>(분석상 규모 표현)</span></a>
       <a href="regions.html"><span>소유·계통·지역수요</span><b>3축+α</b><span>규모·계통 여유·산단 거리<br>+ 지역 전력수요 비교</span></a>
@@ -235,7 +245,7 @@
   const lerp = (a, b, u) => a + (b - a) * u;
   function frame() {
     if (auto) { t += 0.0016; p = (t % 1); }
-    const e = Math.max(0, Math.sin(p * Math.PI));          // 고도 0~1
+    const e = Math.max(0, Math.sin(p * Math.PI));          // 고도 0–1
     $('agvSun').setAttribute('cx', 60 + p * 860);
     $('agvSun').setAttribute('cy', 100 - e * 72);
     $('agvSun').setAttribute('r', 12 + e * 7);
@@ -269,8 +279,8 @@
 
     <div id="story-steps" style="display:flex;flex-direction:column;gap:12px"></div>
 
-    <div class="fn" style="margin-top:14px">특구급 = 약 50–100MW 등가 = 연접 농지
-    <span id="th50">—</span>–<span id="th100">—</span>㎡(0.045 kW/㎡ 환산<sup class="fnref">[13]</sup>, 분석상 규모 표현) ·
+    <div class="fn" style="margin-top:14px">특구급 = <b>약 50MW 이상</b> 규모를 뜻하는 분석상 표현(법정 특구 지정과 무관) =
+    연접 농지 <span id="th50">—</span>㎡ 이상(0.045 kW/㎡ 환산<sup class="fnref">[13]</sup>) ·
     소유 필터 = 법인·국공유 필지만 병합<sup class="fnref">[12]</sup> ·
     이격 = 주거 200m 상한의 보수 하한<sup class="fnref">[11]</sup>.</div>
   </div>
@@ -519,7 +529,6 @@
                               / R[k].component_km2);
   const cut = (a, b) => Math.round(100 * (a - b) / a);        // 접근 면적 축소율
   document.getElementById('th50').textContent = V4.n(N.threshold.mw50_m2);
-  document.getElementById('th100').textContent = V4.n(N.threshold.mw100_m2);
 
   document.getElementById('one-liner').innerHTML =
     `농업진흥구역이 재생에너지지구로 개방되면, <b>법인·국공유 농지만으로</b> 50MW 이상 구획이

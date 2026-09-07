@@ -140,9 +140,11 @@ input[type=range]{accent-color:var(--navy)}
   <div class="wrap" style="max-width:860px">
     <p class="eyebrow">Proximity · 수요·계통 연계</p>
     <h1>후보지 찾기</h1>
-    <p class="lede">약 50MW 등가(1.111km²) 이상의 <b>대규모 후보지 25곳</b>을 지도와 표로 탐색함.<br>
-    후보 = 법인·국공유 소유(분석 기준 필지) · 농업진흥구역 개방(R2) 기준 · 규모 눈금 이상인 구획
-    전량. 계통 여유는 이 25곳의 선별에는 쓰지 않고
+    <p class="lede">약 50MW 등가(1.111km²) 이상의 <b>대규모 후보지 25곳 — τ=21m 기준</b>을 지도와 표로 탐색함.<br>
+    후보 = 법인·국공유 소유(분석 기준 필지) · 농업진흥구역 개방(R2) 기준 · 연접 기준 τ=21m으로 병합한
+    구획 중 규모 눈금 이상인 것 전량. 곳수는 이 연접 기준에 따라 달라지므로
+    <a href="method.html#rules" style="color:inherit;font-weight:700">근거와 방법 탭(왜 21m인가·민감도)</a>과
+    함께 읽음. 계통 여유는 이 25곳의 선별에는 쓰지 않고
     <a href="regions.html" style="color:inherit;font-weight:700">지역별 우선 검토 후보</a>(시군 안
     비교 — 별개 목록)에서 축으로 사용함.</p>
     <p style="font-family:var(--mono);font-size:11.5px;color:var(--muted);margin-top:14px"
@@ -216,11 +218,12 @@ input[type=range]{accent-color:var(--navy)}
   </figure>
 
   <h2 class="art-h" id="candtbl">3. 대규모 후보지 25곳 — 소재·최근접 산업단지·계통</h2>
-  <p style="margin-bottom:8px">세 조건을 전부 만족하는 구획 전량(규모순):</p>
+  <p style="margin-bottom:8px">네 조건을 전부 만족하는 구획 전량(규모순):</p>
   <p style="margin:0 0 10px">
     <span class="cond-pill">① 소유 — <b>법인·국공유만 병합</b> (분석 기준 필지)</span>
     <span class="cond-pill">② 구역 — <b>농업진흥구역 개방(R2)</b> 기준</span>
-    <span class="cond-pill">③ 규모 — <b>≥50MW 등가</b> = 1,111,111㎡ (읽기 눈금)</span>
+    <span class="cond-pill">③ 연접 — <b>τ=21m</b> 이내 병합 (분석 기준)</span>
+    <span class="cond-pill">④ 규모 — <b>≥50MW 등가</b> = 1,111,111㎡ (읽기 눈금)</span>
   </p>
 
   <figure class="art-fig">
@@ -241,10 +244,13 @@ input[type=range]{accent-color:var(--navy)}
   <div class="jsi" id="jsi"></div>
   <div style="font-size:12px;color:var(--muted);margin:-12px 0 10px">여기의 "지역 전력수요 대비" =
   <b>25개 대규모 후보 기준</b> — 시군 연간 전력판매량 대비 후보 환산발전량(연간 규모 비교의
-  참고값 · 전력 자립·직접거래 가능성 아님)<sup class="fnref">[28]</sup>. 시군별 비지배 후보
-  기준 값은 지역별 우선 검토 후보 탭에서 따로 계산됨.</div>
+  참고값 · 전력 자립·직접거래 가능성 아님 · 후보 선정 변수 아님 · 시간대별 수급 일치 아님)<sup class="fnref">[28]</sup>.
+  계산 경로는 <b>표 1의 참고 MW(정수 표기) × 1,314h ÷ 시군 연간 전력판매량</b>이라,
+  구획 원면적으로 계산하는 지역별 우선 검토 후보 탭의 값과 소수점 아래에서 다를 수 있음(같은 구획이어도
+  예: 38.2% 대 38.4%). 시군별 비지배 후보 기준 값은 그 탭에서 따로 계산됨.</div>
 
-  <div class="fn">특구급 = 연접 농지 <span id="p-th">—</span>㎡부터(≈50MW, 0.045 kW/㎡ 환산<sup class="fnref">[13]</sup>) ·
+  <div class="fn">특구급 = 연접 농지 <span id="p-th">—</span>㎡ 이상(약 50MW 이상 규모를 뜻하는 분석상 표현 ·
+  0.045 kW/㎡ 환산<sup class="fnref">[13]</sup> · 상한 없음 — 이 25곳의 최대는 표 1 첫 행) ·
   소유 필터 = 법인('06')·국유지('02')·시/도유지('04')·군유지('05')만 병합<sup class="fnref">[12]</sup> ·
   간척 구분 = 농어촌공사 원장 등재 필지 비중 50% 이상<sup class="fnref">[3]</sup>.</div>
 </div>
@@ -1080,10 +1086,10 @@ input[type=range]{accent-color:var(--navy)}
        `${nameOf(c2.b.sgg)} ${V4.n(c2.b.mw)}MW 후보<br>소재 읍면동 여유 하한`],
       ['수요처가 바로 옆인 곳', `${P(c3.km)}<small>km</small>`,
        `${nameOf(c3.b.sgg)} ${V4.n(c3.b.mw)}MW 후보<br>→ ${c3.ind}`],
-      ['지역 안에서 다 쓰는 곳', `${P(c4.dsh)}<small>%</small>`,
-       `${nameOf(c4.b.sgg)} ${V4.n(c4.b.mw)}MW —<br>수요 대비 최소 = 전량 지역 소비`],
-      ['지역 수요의 큰 몫을 채우는 곳', `${P(c5.dsh)}<small>%</small>`,
-       `${nameOf(c5.b.sgg)} ${V4.n(c5.b.mw)}MW —<br>시군 연간 수요 ${V4.n(c5.dem)}GWh 대비`],
+      ['전력판매량 대비가 가장 작은 곳', `${P(c4.dsh)}<small>%</small>`,
+       `${nameOf(c4.b.sgg)} ${V4.n(c4.b.mw)}MW —<br>시군 연간 전력판매량 ${V4.n(c4.dem)}GWh 대비`],
+      ['전력판매량 대비가 가장 큰 곳', `${P(c5.dsh)}<small>%</small>`,
+       `${nameOf(c5.b.sgg)} ${V4.n(c5.b.mw)}MW —<br>시군 연간 전력판매량 ${V4.n(c5.dem)}GWh 대비`],
     ].map(([t, v, s]) => `<div><i>${t}</i><b>${v}</b><span>${s}</span></div>`).join('');
 
   })();
