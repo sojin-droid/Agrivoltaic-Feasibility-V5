@@ -70,8 +70,8 @@ input[type=number].coef{width:80px;font:inherit;padding:2px 6px;border:1px solid
     R2 +농업진흥구역 개방 · R3 둘 다 개방<sup class="fnref">[5]</sup>.</p>
     <div style="margin-top:14px">
       <a class="pill" href="#diag">시군별 조회</a>
-      <a class="pill" href="#tables">표 1–4 조합·증분·소유</a>
-      <a class="pill" href="#t32">표 5 · 정본 8칸</a>
+      <a class="pill" href="#tables">시나리오 요약표 · 세부 표</a>
+      <a class="pill" href="#t32">표 5 · 구획·이격 8칸</a>
       <a class="pill" href="#ord">간척 한정 조문 검토</a>
       <a class="pill" href="#decree">시행령 제정안 영향</a>
     </div>
@@ -116,7 +116,8 @@ input[type=number].coef{width:80px;font:inherit;padding:2px 6px;border:1px solid
       <h3 style="font-family:var(--serif);color:var(--navy);margin-bottom:12px">시나리오 요약 — 적격 면적 · 추가 면적 · 대규모 후보지</h3>
       <div style="overflow-x:auto"><table class="v4" id="t-scn"></table></div>
       <div class="figcap">제도 변경으로 추가되는 면적과 특구급(≈50MW 등가) 후보 수의 시나리오별
-      변화<sup class="fnref">[12]</sup> — km² 1차, MW 참고<sup class="fnref">[13]</sup>.</div>
+      변화<sup class="fnref">[12]</sup> — km² 1차, MW 참고<sup class="fnref">[13]</sup>. 필지 수·대조군·간척·소유
+      유형 세부는 아래 세부 표.</div>
     </div>
 
 
@@ -129,7 +130,9 @@ input[type=number].coef{width:80px;font:inherit;padding:2px 6px;border:1px solid
       표 3이 스위치별 증분.</div>
     </details>
 
-    <div class="figbox reveal" style="margin-bottom:22px">
+    <details style="margin-bottom:22px">
+      <summary style="cursor:pointer;font-size:13px;font-weight:700;color:var(--leaf-deep)">세부 표 펼치기 — 표 1–4: 필지 수·대조군·간척·증분 분해·소유 유형</summary>
+    <div class="figbox reveal" style="margin:12px 0 22px">
       <h3 style="font-family:var(--serif);color:var(--navy);margin-bottom:12px">표 1. 구역 조합(R0–R3)별 설치 가능 필지 수와 면적 — 전국</h3>
       <div style="overflow-x:auto"><table class="v4" id="t-matrix-nat"></table></div>
       <div class="figcap">각 행은 독립 조합(단계 사다리 아님).<br>R1−R0 = 보호구역 증분, R2−R0 = 진흥구역 증분,
@@ -156,6 +159,7 @@ input[type=number].coef{width:80px;font:inherit;padding:2px 6px;border:1px solid
       <div class="figcap">지목 농지 기준.<br>소유는 지적 원장의 유형 구분(개인 식별 아님)<sup class="fnref">[1]</sup> —
       법인이 농업법인인지는 원장에 없어 구분 못 함(명부 조달 시 정밀화).</div>
     </div>
+    </details>
 
     <div class="figbox reveal" id="t32">
       <h3 style="font-family:var(--serif);color:var(--navy);margin-bottom:12px">표 5. 구역 조합(4) × 이격(2)별 설치 가능 면적 — 분석 기준 필지 8칸</h3>
@@ -345,11 +349,14 @@ table.mx .ref{color:var(--muted)}
     단위 km². 참고 MW는 0.045 kW/㎡ 환산 파생값<sup class="fnref">[13]</sup>.</div>
   </div>
 
-  <div class="figbox reveal" style="margin-top:14px">
+  <details style="margin-top:14px">
+    <summary style="cursor:pointer;font-size:13px;font-weight:700;color:var(--leaf-deep)">대조 맥락 표 펼치기 — 전국·간척 전체의 같은 조합 값</summary>
+  <div class="figbox reveal" style="margin-top:8px">
     <div class="tbl-wrap"><table class="mx" id="t-context"></table></div>
     <div class="figcap">표 2. 대조 맥락 — 같은 조합(R3 진흥지역 전체 개방)의 전국·간척(농어촌공사
-    원장 전체<sup class="fnref">[3]</sup>) 값과 진흥✕·보호✕(R0) 전국 값. 같은 질의의 다른 모집단임<sup class="fnref">[12]</sup>.</div>
+    원장 전체<sup class="fnref">[3]</sup>) 값과 진흥✕·보호✕(R0) 전국 값(위 세부 표 1·2와 같은 값)<sup class="fnref">[12]</sup>.</div>
   </div>
+  </details>
 
   <h2 class="art-h">3. 영향 분석 — 이 한정이 사업에 주는 조건</h2>
   <div id="analysis" style="font-size:13.5px;line-height:1.9;word-break:keep-all">—</div>
