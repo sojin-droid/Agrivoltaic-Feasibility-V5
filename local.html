@@ -291,11 +291,13 @@
       const g = L.geoJSON(gj, {style: f => ({color: '#B8860B', weight: .8, fillColor: A(f) >= 0.0667 ? '#FFB020' : '#FFD84D', fillOpacity: .75})})
         .bindTooltip(l => `구획 ${l.feature.properties.id} · ${A(l.feature).toFixed(2)} km² · ${l.feature.properties.n}필지`).addTo(lyrComp);
       bounds = g.getBounds();
+      if (S) Cand.outline(gj, S.frontier.map(f => f.lab)).addTo(lyrComp);     // 공동 1등 구획의 범위(굵은 남색 테두리)
       if (S) S.frontier.forEach((f, i) => { if (f.lat == null) return;
         L.circleMarker([f.lat, f.lon], {radius: Math.max(8, Math.sqrt(f.a) / 180), color: '#0C356A', weight: 2.5, fillColor: '#FFD84D', fillOpacity: .95})
           .bindTooltip(`공동 1등 구획 ${i + 1}/${S.frontier.length} · ${fmtA2(f.a)} · 산단 ${f.d == null ? '—' : f.d.toFixed(1) + 'km'} · 계통 ${f.lo == null ? '—' : f.lo + 'MW'}`).addTo(lyrComp); });
     }
-    if (ccgj) { Cand.layer(ccgj, {minM2: st.minM2}).addTo(lyrCC); Cand.hullLayer(ccgj, {minM2: st.minM2}).addTo(lyrCC); Cand.markers(L.layerGroup().addTo(lyrCC), CF.frontier, {}); }
+    if (ccgj) { Cand.layer(ccgj, {minM2: st.minM2}).addTo(lyrCC); Cand.hullLayer(ccgj, {minM2: st.minM2}).addTo(lyrCC);
+      Cand.outline(ccgj, CF.frontier.map(f => f.id), {weight: 3}).addTo(lyrCC); Cand.markers(L.layerGroup().addTo(lyrCC), CF.frontier, {}); }
     if (st.emd) {
       const e = L.geoJSON(st.emd.feat, {style: {color: '#B3261E', weight: 2.5, fill: false, dashArray: '6 4'}}).addTo(lyrEmd);
       bounds = e.getBounds();

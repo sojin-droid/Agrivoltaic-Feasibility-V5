@@ -84,6 +84,12 @@ window.Cand = (() => {
       L.polygon(h.map(([x, y]) => [y, x]), {pane, color: '#0C356A', weight: 1.6, dashArray: '5 4', fill: true, fillColor: '#0C356A', fillOpacity: .06, interactive: false}).addTo(g); });
     return g;
   }
+  // ── 공동 1등 후보의 폴리곤 테두리(구획 파일·cc 파일 공용: properties.id ∈ ids) — 번호 원 밑의 실제 범위를 보인다 ──
+  function outline(gj, ids, {pane, color = '#0C356A', weight = 2.6, fill = true} = {}) {
+    const set = new Set(ids);
+    return L.geoJSON({type: 'FeatureCollection', features: gj.features.filter(f => set.has(f.properties.id))},
+      {pane, interactive: false, style: {color, weight, opacity: 1, fill, fillColor: '#FFD84D', fillOpacity: fill ? .55 : 0}});
+  }
   // ── 공동 1등 cc 마커 ──
   function markers(group, fr, {axis = '', onPick} = {}) {
     group.clearLayers(); const refs = {}, coords = [];
@@ -133,5 +139,5 @@ window.Cand = (() => {
       ${axis ? `<b>${AXN[axis]}</b> 기준 ${TOP}위 이내 강조.` : ''} 필터는 생성이 아니라 모집단에만 작용 — 필터마다 전선이 달라질 수 있음(정상). 조건 ${cell || DEFAULT_CELL} · 규칙 ${_rec.rule} · ${status()}`;
   }
   return {rec, has, info, frontier, geo, status, cellsFor, FILTERS, MW_LBL, DEFAULT_MIN, DEFAULT_CELL, TOP, AXC, AXN, BAND_FILL, BAND_LBL, bandOf, fmtA, isTop, stars, legendHTML,
-          minSizeControl, unitControl, layer, hullLayer, markers, table, note};
+          minSizeControl, unitControl, layer, hullLayer, outline, markers, table, note};
 })();

@@ -233,7 +233,8 @@
     if (reload) { recPar.clearLayers(); ccGeoCache[cur] = ccGeoCache[cur] || await Cand.geo(cur); }
     if (c0 !== cur) return;
     recBlk.clearLayers();
-    if (ccGeoCache[cur]) { recBlk.addLayer(Cand.layer(ccGeoCache[cur], {minM2, pane: 'recBlocks'})); recBlk.addLayer(Cand.hullLayer(ccGeoCache[cur], {minM2, pane: 'recBlocks'})); }
+    if (ccGeoCache[cur]) { recBlk.addLayer(Cand.layer(ccGeoCache[cur], {minM2, pane: 'recBlocks'})); recBlk.addLayer(Cand.hullLayer(ccGeoCache[cur], {minM2, pane: 'recBlocks'}));
+      recBlk.addLayer(Cand.outline(ccGeoCache[cur], F.frontier.map(f => f.id), {pane: 'recBlocks', weight: 3})); }
     if (reload && coords.length) recGeo.fitBounds(coords, {padding: [30, 30], maxZoom: 12});
   }
 
@@ -306,6 +307,8 @@
     Region.gz(`data_v4/clusters/${cur}_R2_promo.json.gz`).then(gj => {
       if (!gj || c0 !== cur) return;
       recBlk.addLayer(L.geoJSON(gj, {pane: 'recBlocks', style: {color: '#B8860B', weight: .8, fillColor: '#FFD84D', fillOpacity: .7}, interactive: false}));
+      // 공동 1등 구획의 범위 — 굵은 남색 테두리(번호 원 밑의 실제 땅)
+      recBlk.addLayer(Cand.outline(gj, S.frontier.map(f => f.lab), {pane: 'recBlocks'}));
     });
     const coords = drawMarkers();
     if (coords.length) recGeo.fitBounds(coords, {padding: [30, 30], maxZoom: 12});
