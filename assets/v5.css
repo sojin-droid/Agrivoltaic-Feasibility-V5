@@ -28,7 +28,7 @@
 .cmp-arrow b{color:var(--navy)}
 
 /* ── 전면 지도 (후보지 찾기) ── */
-.fs-map{position:relative;height:calc(100vh - 118px);min-height:520px;background:#dfe8df}
+.fs-map{position:relative;height:calc(100vh - 118px);min-height:520px;background:var(--map-bg)}
 .fs-map #proxmap{position:absolute;inset:0;border:none;border-radius:0;height:auto}
 .fs-panel{position:absolute;left:14px;top:14px;z-index:800;width:330px;max-height:calc(100% - 28px);overflow-y:auto;
   background:rgba(255,255,255,.96);backdrop-filter:blur(6px);border:1px solid var(--line);border-radius:14px;padding:14px 16px;
@@ -129,7 +129,7 @@ table.v4 tr.pick td{outline:2px solid #B3261E;outline-offset:-2px}
 .summary-box{background:var(--card);border-radius:12px;padding:12px 16px;font-size:13.5px;line-height:1.8}
 .summary-box li{list-style:none}
 .summary-box li::before{content:"✓ ";color:var(--leaf-deep);font-weight:700}
-#localMap,#recMap2{height:440px;border:1px solid var(--line);border-radius:12px;background:#dfe8df}
+#localMap,#recMap2{height:440px;border:1px solid var(--line);border-radius:12px;background:var(--map-bg)}
 @media(max-width:820px){#localMap,#recMap2{height:340px}}
 
 /* ── 인쇄(보고서) ── */
@@ -154,7 +154,10 @@ table.v4 tr.pick td{outline:2px solid #B3261E;outline-offset:-2px}
   --space-1:4px;--space-2:8px;--space-3:12px;--space-4:16px;--space-5:24px;--space-6:32px;--space-7:48px;--space-8:64px;--space-9:80px;
   --radius-sm:8px;--radius-md:10px;--radius-lg:16px;--control-height:40px;
   --card-radius:16px;--card-padding:24px;--card-border:1px;
-  --surface-page:#FAFBF9;--surface-band:#F1F5F0;--surface-card:#FFFFFF;--surface-control:#F4F7F4;
+  /* 배경은 브랜드 하늘 틴트(네이비 계열), 강조는 골드 — 초록은 배경에 쓰지 않고 영농 의미의 포인트(링크·활성)에만 */
+  --card:#F2F6FB;--sky:#EAF3FB;--chart-bg:#F6F9FD;--line:#D9E3EE;
+  --surface-page:#F8FAFD;--surface-band:#EEF4FA;--surface-card:#FFFFFF;--surface-control:#F2F6FB;
+  --map-bg:#E3ECF5;
   --shadow-soft:0 6px 20px rgba(8,37,72,.08);--shadow-float:0 10px 30px rgba(8,37,72,.16);
   --ax-area:#0C356A;--ax-ind:#2A9D8F;--ax-grid:#3E7A2E;
 }

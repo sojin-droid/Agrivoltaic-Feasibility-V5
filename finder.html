@@ -14,7 +14,7 @@
 <script src="assets/vendor/leaflet/leaflet.js"></script>
 <script src="assets/v4.js"></script>
 <style>
-#proxmap{height:76vh;min-height:560px;border:1px solid var(--line);border-radius:12px;background:#dfe8df}
+#proxmap{height:76vh;min-height:560px;border:1px solid var(--line);border-radius:12px;background:var(--map-bg)}
 .prox-wide{width:min(1240px,calc(100vw - 48px));position:relative;left:50%;transform:translateX(-50%)}
 .map-wrap{display:grid;grid-template-columns:1fr 330px;gap:16px}
 @media(max-width:900px){.map-wrap{grid-template-columns:1fr}}
@@ -69,7 +69,7 @@ input[type=range]{accent-color:var(--navy)}
 #t-prox tr.rowbtn{cursor:pointer}
 #t-prox tr.rowbtn:hover td{background:var(--sky)}
 #t-prox th,#t-prox td{white-space:nowrap}
-#t-prox tr:nth-child(even) td{background:#FAFBF7}
+#t-prox tr:nth-child(even) td{background:var(--surface-control)}
 #t-prox tr.rowbtn:hover td{background:var(--sky)}
 #t-prox .rk{font-family:var(--serif);font-weight:700;color:var(--navy)}
 #t-prox tr:nth-child(-n+4) .rk{color:var(--gold)}
@@ -81,8 +81,8 @@ input[type=range]{accent-color:var(--navy)}
  border:1px solid var(--line);border-radius:999px;padding:4px 12px;font-size:12.5px;margin:2px 6px 2px 0}
 .cond-pill b{color:var(--navy)}
 #recTbl th,#recTbl td{white-space:nowrap}
-#recTbl tr:nth-child(even) td{background:#FAFBF7}
-#recMap{height:420px;border:1px solid var(--line);border-radius:10px;background:#dfe8df}
+#recTbl tr:nth-child(even) td{background:var(--surface-control)}
+#recMap{height:420px;border:1px solid var(--line);border-radius:10px;background:var(--map-bg)}
 .cav{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:12px 0}
 @media(max-width:820px){.cav{grid-template-columns:1fr 1fr}}
 .cav .c{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:11px 13px;font-size:12.5px;line-height:1.65}
