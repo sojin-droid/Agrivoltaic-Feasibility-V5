@@ -68,7 +68,7 @@
         <div class="cmp-flow">
           <div class="cmp-row"><span class="lab"><i>1</i>필지 기준 — 판정 통과 면적</span><span class="val"><span id="a-r1">—</span><small> km²</small></span></div>
           <div class="cmp-row"><span class="lab"><i>2</i>연접 구획 기준 — 21m 이내 병합, 전량</span><span class="val"><span id="a-r2">—</span><small> km² · </small><span id="a-r2n">—</span><small>개</small></span></div>
-          <div class="cmp-row"><span class="lab"><i>3</i>사업 규모 눈금 이상 — 3MW 등가(66,667㎡) 구획</span><span class="val"><span id="a-r3">—</span><small> km² · </small><span id="a-r3n">—</span><small>곳</small></span></div>
+          <div class="cmp-row"><span class="lab"><i>3</i>사업 규모 눈금 이상 — 3MW 등가(<span class="sc3">—</span>㎡) 구획</span><span class="val"><span id="a-r3">—</span><small> km² · </small><span id="a-r3n">—</span><small>곳</small></span></div>
           <div class="cmp-row"><span class="lab"><i>4</i>대규모 후보 — 50MW 등가(1.111km²) 이상</span><span class="val"><span id="a-r4">—</span><small>곳</small></span></div>
         </div>
       </div>
@@ -87,7 +87,7 @@
         <div class="cmp-flow">
           <div class="cmp-row"><span class="lab"><i>1</i>필지 기준 — 판정 통과 면적</span><span class="val"><span id="b-r1">—</span><small> km²</small><span class="up" id="b-r1d"></span></span></div>
           <div class="cmp-row"><span class="lab"><i>2</i>연접 구획 기준 — 21m 이내 병합, 전량</span><span class="val"><span id="b-r2">—</span><small> km² · </small><span id="b-r2n">—</span><small>개</small></span></div>
-          <div class="cmp-row"><span class="lab"><i>3</i>사업 규모 눈금 이상 — 3MW 등가(66,667㎡) 구획</span><span class="val"><span id="b-r3">—</span><small> km² · </small><span id="b-r3n">—</span><small>곳</small><span class="up" id="b-r3d"></span></span></div>
+          <div class="cmp-row"><span class="lab"><i>3</i>사업 규모 눈금 이상 — 3MW 등가(<span class="sc3">—</span>㎡) 구획</span><span class="val"><span id="b-r3">—</span><small> km² · </small><span id="b-r3n">—</span><small>곳</small><span class="up" id="b-r3d"></span></span></div>
           <div class="cmp-row"><span class="lab"><i>4</i>대규모 후보 — 50MW 등가(1.111km²) 이상</span><span class="val"><span id="b-r4">—</span><small>곳</small><span class="up" id="b-r4d"></span></span></div>
         </div>
       </div>
@@ -161,6 +161,8 @@
     put(p + '-r2', V4.km2(run.component_area_km2)); put(p + '-r2n', V4.n(run.n_component));
     put(p + '-r3', V4.km2(b3.area_km2)); put(p + '-r3n', V4.n(b3.n));
     put(p + '-r4', V4.n(b50.n));
+    // 규모 눈금 표기도 results size_bands(min_ha)에서 — ㎡ = ha × 10,000
+    document.querySelectorAll('.sc3').forEach(e => { e.textContent = V4.n(Math.round(b3.min_ha * 1e4)); });
     put(p + '-n', V4.n(m.n));
     if (base) {
       const m0 = M.R0['정본'], run0 = RUN.R0_current, d = (m.m2 - m0.m2) / 1e6;
@@ -172,7 +174,7 @@
       document.getElementById('cmp-note').innerHTML =
         `읽는 법 — ① 필지 면적은 판정 조건을 통과한 필지의 합. ② 연접 구획은 21m 이내 필지를 하나로 묶은 것으로
          병합은 면적을 바꾸지 않으므로 ①과 같은 면적이고(전량 집계, 크기 문턱 없음), 그 대신 <b>구획 수</b>가 사업 단위의 개수를 보여준다.
-         ③·④는 규모 눈금(3MW 등가 66,667㎡ · 50MW 등가 1,111,111㎡)을 넘는 구획만 세었을 때의 값 — 0.045 kW/㎡ 환산의
+         ③·④는 규모 눈금(3MW 등가 ${V4.n(Math.round(b3.min_ha * 1e4))}㎡ · 50MW 등가 ${V4.n(Math.round(b50.min_ha * 1e4))}㎡)을 넘는 구획만 세었을 때의 값 — 0.045 kW/㎡ 환산의
          읽기 눈금이며 법정 규모 기준이 아니다<sup class="fnref">[13]</sup>. 오른쪽 박스의 조합은 시행 예정 법률(2026-12-17)의
          재생에너지지구 지정 범위를 전제로 한 <b>가정적 시나리오</b>다<sup class="fnref">[10]</sup>.
          이격(주거 200m 보수 하한) 적용 시 값은 <a href="scenarios.html#t32" style="color:var(--leaf-deep)">정책 시나리오 표 5</a>.`;
