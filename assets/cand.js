@@ -92,7 +92,9 @@ window.Cand = (() => {
       refs[f.id] = L.circleMarker([f.lat, f.lon], {radius: Math.max(8, Math.sqrt(f.a) / 170) * (axis && hi ? 1.25 : 1),
         color: axis && hi ? AXC[axis] : '#0C356A', weight: axis && hi ? 3.5 : 2.5, fillColor: '#FFD84D', fillOpacity: axis ? (hi ? .95 : .35) : .9, opacity: axis && !hi ? .45 : 1})
         .bindTooltip(`공동 1등 후보 클러스터 ${i + 1}/${fr.length} · ${fmtA(f.a)} · 구획 ${f.nc} · 면적 ${f.ra}위 · 산단 ${f.ri}위 · 계통 ${f.rl}위`)
-        .on('click', () => onPick && onPick(f)).addTo(group); });
+        .on('click', () => onPick && onPick(f)).addTo(group);
+      // 표 순번 배지(면적순 표시 번호 — 순위 아님)
+      L.marker([f.lat, f.lon], {icon: L.divIcon({className: 'mk-num', html: `${i + 1}`, iconSize: [22, 22], iconAnchor: [11, 11]}), interactive: false, keyboard: false}).addTo(group); });
     return {refs, coords};
   }
 
