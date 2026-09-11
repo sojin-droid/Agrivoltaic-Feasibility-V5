@@ -14,8 +14,8 @@
 <script src="assets/vendor/leaflet/leaflet.js"></script>
 <script src="assets/v4.js"></script>
 <script src="assets/region.js"></script>
-<link rel="stylesheet" href="assets/cand.css?v=52d">
-<script src="assets/cand.js?v=52d"></script>
+<link rel="stylesheet" href="assets/cand.css?v=52e">
+<script src="assets/cand.js?v=52e"></script>
 <style>
 .hero-local{background:linear-gradient(180deg,#EEF4FA,#fff);border-bottom:1px solid var(--line);text-align:center;padding:64px 24px 54px}
 .hero-local h1{font-size:clamp(28px,4vw,42px)}
@@ -269,7 +269,7 @@
     const ccgj = CC ? await Cand.geo(st.sgg, rn) : null;
     const CF = CC ? Cand.frontier(st.sgg, st.minM2, rn) : null;
     put('rCards', `
-      <div class="res-card hi"><div class="k">후보 클러스터</div><div class="v">${CC ? V4.n(CF.n_pop) + '<small>곳</small>' : '—'}</div><div class="d">${CC ? `${Cand.MW_LBL[st.minM2]} 이상 · ★ 공동 1등 ${CF.n_front}곳 · 전체 ${V4.n(CC.n_cc)}개 중` : `이 시군·조건(${rn})의 후보 클러스터 층 미등재(등재: 당진·해남·고흥) — 아래는 연접 구획 기준`}</div></div>
+      <div class="res-card hi"><div class="k">후보 클러스터</div><div class="v">${CC ? V4.n(CF.n_pop) + '<small>곳</small>' : '—'}</div><div class="d">${CC ? `${Cand.MW_LBL[st.minM2]} 이상 · ★ 공동 1등 ${CF.n_front}곳 · 전체 ${V4.n(CC.n_cc)}개 중` : `이 시군·조건(${rn})에는 후보 클러스터 산출이 없음 — 아래는 연접 구획 기준`}</div></div>
       <div class="res-card"><div class="k">후보 필지 면적</div><div class="v">${km2(cur.m2)}<small> km²</small></div><div class="d">${V4.n(cur.n)}필지 · 참고 ${(cur.m2 * 0.045 / 1000).toLocaleString('ko-KR', {maximumFractionDigits: 0})} MW</div></div>
       <div class="res-card"><div class="k">개방 전 대비</div><div class="v">${d === 0 ? '기준' : (d > 0 ? '+' : '') + km2(d * 1e6, 1) + '<small> km²</small>'}</div><div class="d">같은 이격 조건에서 진흥·보호 모두 유지(현행)와 비교</div></div>
       <div class="res-card"><div class="k">3MW 이상</div><div class="v">${CC ? V4.n(CC.bands['66667']) + '<small>곳</small>' : gj ? V4.n(b3.length) + '<small>곳</small>' : '—'}</div><div class="d">${CC ? '후보 클러스터 기준(66,667㎡ 이상 · 읽기 눈금)' : '연접 구획 기준 · 66,667㎡ 이상'}</div></div>

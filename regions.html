@@ -14,8 +14,8 @@
 <script src="assets/vendor/leaflet/leaflet.js"></script>
 <script src="assets/v4.js"></script>
 <script src="assets/region.js"></script>
-<link rel="stylesheet" href="assets/cand.css?v=52d">
-<script src="assets/cand.js?v=52d"></script>
+<link rel="stylesheet" href="assets/cand.css?v=52e">
+<script src="assets/cand.js?v=52e"></script>
 <style>
 #recTbl th,#recTbl td{white-space:nowrap}
 #recTbl tr:nth-child(even) td{background:var(--surface-control)}
@@ -150,7 +150,7 @@
   let unit = Cand.has(cur) ? 'cc' : 'comp', minM2 = Cand.DEFAULT_MIN;
   const minCtl = Cand.minSizeControl(document.getElementById('minCtl'), {value: minM2, onChange: v => { minM2 = v; if (unit === 'cc') render(); }});
   const availNote = () => { const el = document.getElementById('ccAvail'); el.hidden = Cand.has(cur);
-    el.innerHTML = Cand.has(cur) ? '' : '이 시군은 후보 클러스터 층이 아직 등재되지 않아(전국 산출 대기) <b>연접 구획 기준(V5.1)</b>으로 보입니다. 후보 클러스터가 등재된 시군: 당진·해남·고흥.'; };
+    el.innerHTML = Cand.has(cur) ? '' : '이 시군·조건에는 후보 클러스터 산출이 없어 <b>연접 구획 기준(V5.1)</b>으로 보입니다.'; };
   const render = () => { unit = Cand.has(cur) ? 'cc' : 'comp'; availNote(); document.getElementById('minCtl').hidden = unit !== 'cc'; unit === 'cc' ? renderCC() : recRender(); };
   const picker = Region.picker(document.getElementById('rp-rec'), {value: cur, restrict: have,
     onChange: c => { cur = c; axis = ''; ccPick = null; syncAxisBtns(); render(); }});

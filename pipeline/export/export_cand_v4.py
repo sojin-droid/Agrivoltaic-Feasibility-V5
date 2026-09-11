@@ -62,6 +62,11 @@ def main():
                 g = geo.geometry.get(cid)
                 if g is None: continue
                 g = shapely.simplify(g, simplify_tol(r['area_m2']) / 111000.0)
+                try:                                                                   # 좌표 5자리(≈1m) — 파일 크기. 위상 충돌 시 유효화 후 재시도, 그래도 실패면 반올림 생략
+                    g = shapely.set_precision(g, 1e-5)
+                except Exception:
+                    try: g = shapely.set_precision(shapely.make_valid(g), 1e-5)
+                    except Exception: pass
                 feats.append({'type': 'Feature', 'geometry': json.loads(shapely.to_geojson(g)),
                               'properties': {'id': int(cid), 'am2': round(float(r['area_m2'])), 'nc': int(r['n_component']), 'n': int(r['n_parcel']), 'iso': bool(r['is_isolated']),
                                              'tb': nz(r['t_birth_m'], round), 'td': nz(r['t_death_m'], round), 'hf': nz(r['hull_fill'], lambda x: round(x, 2)),

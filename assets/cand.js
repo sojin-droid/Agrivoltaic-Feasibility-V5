@@ -47,9 +47,9 @@ window.Cand = (() => {
     const render = () => {
       if (!ccAvailable && v === 'cc') v = 'comp';
       el.innerHTML = `<span class="q">후보 단위</span>
-        <button type="button" data-v="cc" class="${v === 'cc' ? 'on' : ''}" ${ccAvailable ? '' : 'disabled title="후보 클러스터 층 미등재 시군(프로토타입 3시군만)"'}>후보 클러스터</button>
+        <button type="button" data-v="cc" class="${v === 'cc' ? 'on' : ''}" ${ccAvailable ? '' : 'disabled title="이 시군에는 후보 클러스터 산출이 없음"'}>후보 클러스터</button>
         <button type="button" data-v="comp" class="${v === 'comp' ? 'on' : ''}">구획(연접 21m)</button>
-        <span class="cand-hint">${ccAvailable ? '후보 클러스터 = 서로 가까운 연접 구획의 묶음(거리 임계 고정 없음 · 묶음별 안정 구간 표기) · 두 단위 모두 3축 비지배, 새 점수 없음' : '이 시군은 후보 클러스터 층이 아직 등재되지 않음(프로토타입: 당진·해남·고흥)'}</span>`;
+        <span class="cand-hint">${ccAvailable ? '후보 클러스터 = 서로 가까운 연접 구획의 묶음(거리 임계 고정 없음 · 묶음별 안정 구간 표기) · 두 단위 모두 3축 비지배, 새 점수 없음' : '이 시군에는 후보 클러스터 산출이 없음'}</span>`;
       el.querySelectorAll('button:not([disabled])').forEach(b => b.onclick = () => { v = b.dataset.v; render(); onChange && onChange(v); });
     };
     render();
