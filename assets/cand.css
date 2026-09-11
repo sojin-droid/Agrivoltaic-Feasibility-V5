@@ -5,6 +5,17 @@
 .badge-front{display:inline-block;font-size:11px;font-weight:700;padding:1px 8px;border-radius:999px;background:#0C356A;color:#fff;white-space:nowrap}
 .badge-dom{color:#9AA5B1}
 tr.front td{font-weight:600}
+.cand-detail{background:var(--surface-card,#fff);border:1px solid var(--line);border-radius:var(--radius-md,10px);padding:14px 16px;font-size:13px}
+.cand-detail-h{display:flex;gap:10px;align-items:center;margin-bottom:8px}
+.cand-detail-id{font-family:var(--mono,monospace);font-weight:700;font-size:15px;color:var(--navy,#0C356A)}
+.cand-detail-no{color:var(--muted);font-size:12px}
+.cand-detail-kv{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:6px 0 8px}
+.cand-detail-kv>div{background:var(--surface-control,#F2F6FB);border-radius:8px;padding:8px 10px}
+.cand-detail-kv b{display:block;font-family:var(--serif);font-size:16px;color:var(--navy,#0C356A)} .cand-detail-kv small{color:var(--muted);font-size:11px}
+.cand-detail-sub{color:var(--muted);font-size:12px;margin-bottom:8px}
+.cand-detail-note{background:var(--sky,#EAF3FB);border-radius:8px;padding:8px 10px;margin-bottom:8px;font-size:12.5px}
+.cand-members-list{margin:6px 0;line-height:1.9}
+@media(max-width:720px){.cand-detail-kv{grid-template-columns:1fr 1fr}}
 .cand-ctl{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:10px}
 .cand-ctl .q{font-size:12.5px;color:var(--muted);margin-right:4px}
 .cand-ctl button{height:var(--control-height,40px);padding:0 14px;border:1px solid var(--line);border-radius:var(--radius-sm,8px);background:var(--surface-control,#F2F6FB);font:inherit;font-size:13px;cursor:pointer}

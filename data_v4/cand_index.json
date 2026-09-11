@@ -1,0 +1,302 @@
+{
+ "generated": "2026-09-12 00:02",
+ "cells": {
+  "R0_current": {
+   "n_cc": 2953,
+   "stamp": {
+    "rule": "cond-inv",
+    "tau_max_m": 1000.0,
+    "subset": [
+     "44270",
+     "46770",
+     "46820"
+    ],
+    "built_at": "2026-09-11T23:58:46",
+    "n_cc": 2953,
+    "n_isolated": 996
+   }
+  },
+  "R0_current_SB": {
+   "n_cc": 1248,
+   "stamp": {
+    "rule": "cond-inv",
+    "tau_max_m": 1000.0,
+    "subset": [
+     "44270",
+     "46770",
+     "46820"
+    ],
+    "built_at": "2026-09-11T23:59:06",
+    "n_cc": 1248,
+    "n_isolated": 612
+   }
+  },
+  "R1_protect": {
+   "n_cc": 3327,
+   "stamp": {
+    "rule": "cond-inv",
+    "tau_max_m": 1000.0,
+    "subset": [
+     "44270",
+     "46770",
+     "46820"
+    ],
+    "built_at": "2026-09-11T23:59:31",
+    "n_cc": 3327,
+    "n_isolated": 1094
+   }
+  },
+  "R1_protect_SB": {
+   "n_cc": 1440,
+   "stamp": {
+    "rule": "cond-inv",
+    "tau_max_m": 1000.0,
+    "subset": [
+     "44270",
+     "46770",
+     "46820"
+    ],
+    "built_at": "2026-09-11T23:59:52",
+    "n_cc": 1440,
+    "n_isolated": 610
+   }
+  },
+  "R2_promo": {
+   "n_cc": 4969,
+   "stamp": {
+    "rule": "cond-inv",
+    "tau_max_m": 1000.0,
+    "subset": [
+     "44270",
+     "46770",
+     "46820"
+    ],
+    "built_at": "2026-09-11T23:57:49",
+    "n_cc": 4969,
+    "n_isolated": 1792
+   }
+  },
+  "R2_promo_SB": {
+   "n_cc": 2495,
+   "stamp": {
+    "rule": "cond-inv",
+    "tau_max_m": 1000.0,
+    "subset": [
+     "44270",
+     "46770",
+     "46820"
+    ],
+    "built_at": "2026-09-12T00:00:16",
+    "n_cc": 2495,
+    "n_isolated": 900
+   }
+  },
+  "R3_zone_all": {
+   "n_cc": 5285,
+   "stamp": {
+    "rule": "cond-inv",
+    "tau_max_m": 1000.0,
+    "subset": [
+     "44270",
+     "46770",
+     "46820"
+    ],
+    "built_at": "2026-09-12T00:00:50",
+    "n_cc": 5285,
+    "n_isolated": 1894
+   }
+  },
+  "R3_zone_all_SB": {
+   "n_cc": 2713,
+   "stamp": {
+    "rule": "cond-inv",
+    "tau_max_m": 1000.0,
+    "subset": [
+     "44270",
+     "46770",
+     "46820"
+    ],
+    "built_at": "2026-09-12T00:01:18",
+    "n_cc": 2713,
+    "n_isolated": 939
+   }
+  }
+ },
+ "sgg": {
+  "44270": {
+   "R0_current": {
+    "n_cc": 1149,
+    "n_multi": 773,
+    "n_iso": 376,
+    "km2": 3.855,
+    "n_front_3mw": 3
+   },
+   "R0_current_SB": {
+    "n_cc": 296,
+    "n_multi": 139,
+    "n_iso": 157,
+    "km2": 1.056,
+    "n_front_3mw": 1
+   },
+   "R1_protect": {
+    "n_cc": 1196,
+    "n_multi": 802,
+    "n_iso": 394,
+    "km2": 4.077,
+    "n_front_3mw": 3
+   },
+   "R1_protect_SB": {
+    "n_cc": 311,
+    "n_multi": 150,
+    "n_iso": 161,
+    "km2": 1.112,
+    "n_front_3mw": 1
+   },
+   "R2_promo": {
+    "n_cc": 1785,
+    "n_multi": 1135,
+    "n_iso": 650,
+    "km2": 35.113,
+    "n_front_3mw": 6
+   },
+   "R2_promo_SB": {
+    "n_cc": 676,
+    "n_multi": 418,
+    "n_iso": 258,
+    "km2": 29.271,
+    "n_front_3mw": 5
+   },
+   "R3_zone_all": {
+    "n_cc": 1814,
+    "n_multi": 1152,
+    "n_iso": 662,
+    "km2": 35.336,
+    "n_front_3mw": 6
+   },
+   "R3_zone_all_SB": {
+    "n_cc": 681,
+    "n_multi": 431,
+    "n_iso": 250,
+    "km2": 29.327,
+    "n_front_3mw": 5
+   }
+  },
+  "46770": {
+   "R0_current": {
+    "n_cc": 1011,
+    "n_multi": 663,
+    "n_iso": 348,
+    "km2": 4.919,
+    "n_front_3mw": 2
+   },
+   "R0_current_SB": {
+    "n_cc": 465,
+    "n_multi": 257,
+    "n_iso": 208,
+    "km2": 2.554,
+    "n_front_3mw": 2
+   },
+   "R1_protect": {
+    "n_cc": 1130,
+    "n_multi": 738,
+    "n_iso": 392,
+    "km2": 5.53,
+    "n_front_3mw": 2
+   },
+   "R1_protect_SB": {
+    "n_cc": 527,
+    "n_multi": 321,
+    "n_iso": 206,
+    "km2": 2.937,
+    "n_front_3mw": 2
+   },
+   "R2_promo": {
+    "n_cc": 1441,
+    "n_multi": 927,
+    "n_iso": 514,
+    "km2": 28.477,
+    "n_front_3mw": 1
+   },
+   "R2_promo_SB": {
+    "n_cc": 731,
+    "n_multi": 472,
+    "n_iso": 259,
+    "km2": 24.964,
+    "n_front_3mw": 1
+   },
+   "R3_zone_all": {
+    "n_cc": 1534,
+    "n_multi": 994,
+    "n_iso": 540,
+    "km2": 29.088,
+    "n_front_3mw": 3
+   },
+   "R3_zone_all_SB": {
+    "n_cc": 822,
+    "n_multi": 530,
+    "n_iso": 292,
+    "km2": 25.348,
+    "n_front_3mw": 3
+   }
+  },
+  "46820": {
+   "R0_current": {
+    "n_cc": 793,
+    "n_multi": 521,
+    "n_iso": 272,
+    "km2": 4.012,
+    "n_front_3mw": 3
+   },
+   "R0_current_SB": {
+    "n_cc": 487,
+    "n_multi": 240,
+    "n_iso": 247,
+    "km2": 2.659,
+    "n_front_3mw": 2
+   },
+   "R1_protect": {
+    "n_cc": 1001,
+    "n_multi": 693,
+    "n_iso": 308,
+    "km2": 5.001,
+    "n_front_3mw": 3
+   },
+   "R1_protect_SB": {
+    "n_cc": 602,
+    "n_multi": 359,
+    "n_iso": 243,
+    "km2": 3.287,
+    "n_front_3mw": 2
+   },
+   "R2_promo": {
+    "n_cc": 1743,
+    "n_multi": 1115,
+    "n_iso": 628,
+    "km2": 63.448,
+    "n_front_3mw": 10
+   },
+   "R2_promo_SB": {
+    "n_cc": 1088,
+    "n_multi": 705,
+    "n_iso": 383,
+    "km2": 58.76,
+    "n_front_3mw": 4
+   },
+   "R3_zone_all": {
+    "n_cc": 1937,
+    "n_multi": 1245,
+    "n_iso": 692,
+    "km2": 64.437,
+    "n_front_3mw": 11
+   },
+   "R3_zone_all_SB": {
+    "n_cc": 1210,
+    "n_multi": 813,
+    "n_iso": 397,
+    "km2": 59.389,
+    "n_front_3mw": 4
+   }
+  }
+ },
+ "status": "subset 44270,46770,46820 · ADR-0046 · 엔진 산출 export"
+}

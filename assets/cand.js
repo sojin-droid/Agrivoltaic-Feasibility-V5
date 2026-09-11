@@ -29,13 +29,13 @@ window.Cand = (() => {
   const legendHTML = () => Object.keys(BAND_FILL).map(k => `<span><i style="background:${BAND_FILL[k]}"></i>${BAND_LBL[k]}</span>`).join('') +
     '<span><i style="border:2px dashed #0C356A;background:#fff"></i>다구획 클러스터 외곽(볼록껍질)</span><span><i style="border:1px solid #9AA5B1;background:#fff"></i>최소 표시 규모 미만(윤곽만 — 숨기지 않음)</span>';
 
-  // ── 컨트롤: 최소 표시 규모 ──
-  function minSizeControl(el, {value = DEFAULT_MIN, onChange} = {}) {
+  // ── 컨트롤: 최소 규모 (생성 규칙 아님 — 비교 범위) ──
+  function minSizeControl(el, {value = DEFAULT_MIN, onChange, label = '최소 규모', hint = '선택한 규모 이상의 후보 클러스터를 비교합니다. 클러스터 생성 자체에는 영향을 주지 않습니다.'} = {}) {
     let v = value;
     const render = () => {
-      el.innerHTML = `<span class="q">최소 표시 규모</span>` + FILTERS.map(m =>
-        `<button type="button" data-v="${m}" class="${m === v ? 'on' : ''}">${MW_LBL[m]}</button>`).join('') +
-        `<span class="cand-hint">생성 조건이 아님 — 지도·표·공동 1등 판정의 <b>모집단</b>을 이 규모 이상으로 한정(0.045 kW/㎡ 참고 환산)</span>`;
+      el.innerHTML = `<span class="q">${label}</span>` + FILTERS.map(m =>
+        `<button type="button" data-v="${m}" class="${m === v ? 'on' : ''}">${MW_LBL[m]} 이상</button>`).join('') +
+        (hint ? `<span class="cand-hint">${hint}</span>` : '');
       el.querySelectorAll('button').forEach(b => b.onclick = () => { v = +b.dataset.v; render(); onChange && onChange(v); });
     };
     render();
@@ -85,6 +85,42 @@ window.Cand = (() => {
       L.polygon(h.map(([x, y]) => [y, x]), {pane, color: '#0C356A', weight: 1.6, dashArray: '5 4', fill: true, fillColor: '#0C356A', fillOpacity: .06, interactive: false}).addTo(g); });
     return g;
   }
+  // ── 후보 상세 카드 (§17) + 「구성 구획 보기」 — 연접 구획은 여기에서만 세부 단위로 노출 ──
+  const _compCache = {};
+  async function components(sgg, cell) {          // 구획 층 파일(V5.1 그대로): properties {id=lab, a(km² 2dp), n}
+    const k = `${sgg}_${cell || DEFAULT_CELL}`;
+    if (!(k in _compCache)) _compCache[k] = await Region.gz(`data_v4/clusters/${k}.json.gz`);
+    return _compCache[k];
+  }
+  function detail(el, f, {sgg, cell, index, total, compFrontier = [], onMembers} = {}) {
+    if (!f) { el.innerHTML = ''; return; }
+    const big = f.nc >= 20;
+    el.innerHTML = `<div class="cand-detail">
+      <div class="cand-detail-h"><span class="cand-detail-id">CC-${f.id}</span>${index != null ? `<span class="cand-detail-no">후보 ${index}/${total}</span>` : ''}
+        ${f.front ? '<span class="badge-front">★ 공동 1등</span>' : '<span class="badge-dom" title="면적·산단 거리·계통 여유 모두에서 같거나 나은 후보가 있음">지배됨</span>'}</div>
+      <div class="cand-detail-kv"><div><b>${fmtA(f.a)}</b><small>면적</small></div><div><b>≈ ${f.mw} MW</b><small>참고 환산</small></div>
+        <div><b>${f.d == null ? '알 수 없음' : f.d.toFixed(2) + ' km'}</b><small>산단 거리</small></div><div><b>${f.lo == null ? '알 수 없음' : f.lo + ' MW'}</b><small>계통 여유(하한)</small></div></div>
+      <div class="cand-detail-sub">구성 연접 구획 ${f.nc}개 · 필지 ${f.n.toLocaleString('ko-KR')}${f.nc > 1 ? ` · 안정 구간 ${f.td}–${f.tb} m` : ' · 고립(구획 1개)'} · 면적 ${f.ra}위 · 산단 ${f.ri}위 · 계통 ${f.rl}위${f.recl != null ? ` · 간척 ${f.recl}%` : ''}</div>
+      ${big ? `<div class="cand-detail-note">이 후보는 하나의 큰 공간권역으로 연결되어 있습니다. 내부의 세부 우선 후보는 구성 구획 기준으로 확인할 수 있습니다.</div>` : ''}
+      <button type="button" class="cand-x" id="ccMembersBtn">구성 구획 보기</button> <span class="cand-detail-members" id="ccMembers"></span></div>`;
+    const btn = el.querySelector('#ccMembersBtn'), box = el.querySelector('#ccMembers');
+    btn.onclick = async () => {
+      btn.disabled = true; box.textContent = '불러오는 중…';
+      const gj = await components(sgg, cell);
+      const feats = gj ? gj.features.filter(x => (f.labs || []).includes(x.properties.id)) : [];
+      const fset = new Set(compFrontier.map(c => c.lab));
+      feats.sort((a, b) => (b.properties.a || 0) - (a.properties.a || 0));
+      box.innerHTML = feats.length ? `<div class="cand-members-list">` + feats.map(x => `<span class="cand-lab">구획 ${x.properties.id} · ${x.properties.a >= 0.01 ? x.properties.a.toFixed(2) + ' km²' : '<0.01 km²'} · 필지 ${x.properties.n}${fset.has(x.properties.id) ? ' · <b>구획 기준 공동 1등</b>' : ''}</span>`).join('') +
+        `</div><span class="cand-hint">연접 구획 = 21m 이내로 이어진 땅 조각(내부 분석 단위). 구획 기준 공동 1등은 V5.1 recommend_v4 그대로.</span>` : '구획 파일 없음';
+      onMembers && onMembers(feats, gj);
+      btn.textContent = '구성 구획 표시 중'; };
+  }
+  function memberLayer(feats, {pane} = {}) {
+    return L.geoJSON({type: 'FeatureCollection', features: feats}, {pane, interactive: true,
+      style: {color: '#B3261E', weight: 1.6, dashArray: '3 3', fillColor: '#FFD84D', fillOpacity: .35},
+      onEachFeature: (x, l) => l.bindTooltip(`구성 구획 ${x.properties.id} · ${(x.properties.a || 0).toFixed(2)} km² · 필지 ${x.properties.n}`)});
+  }
+
   // ── 공동 1등 후보의 폴리곤 테두리(구획 파일·cc 파일 공용: properties.id ∈ ids) — 번호 원 밑의 실제 범위를 보인다 ──
   function outline(gj, ids, {pane, color = '#0C356A', weight = 2.6, fill = true} = {}) {
     const set = new Set(ids);
@@ -144,5 +180,5 @@ window.Cand = (() => {
       정렬: <b>${axis ? AXN[axis] + ' 순 · ' + TOP + '위 이내 강조' : '면적순'}</b> — 정렬은 보기 조작이며 새 점수·가중치가 아님. 필터는 생성이 아니라 모집단에만 작용 — 필터마다 배지가 달라질 수 있음(정상). 조건 ${cell || DEFAULT_CELL} · 규칙 ${_rec.rule} · ${status()}`;
   }
   return {rec, has, info, frontier, rowsOf, geo, status, cellsFor, FILTERS, MW_LBL, DEFAULT_MIN, DEFAULT_CELL, TOP, AXC, AXN, BAND_FILL, BAND_LBL, bandOf, fmtA, isTop, stars, legendHTML,
-          minSizeControl, unitControl, layer, hullLayer, outline, markers, table, note};
+          minSizeControl, unitControl, layer, hullLayer, outline, markers, table, note, detail, components, memberLayer};
 })();
