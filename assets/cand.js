@@ -57,7 +57,8 @@ window.Cand = (() => {
   }
 
   // ── 지도 레이어: cc 전량. 필터 미만은 윤곽만(숨기지 않음), 필터 이상은 band 채움 + 다구획 남색 외곽 ──
-  function layer(gj, {minM2 = DEFAULT_MIN, pane, interactive = true} = {}) {
+  function layer(gj, {minM2 = DEFAULT_MIN, pane, interactive = true, frontierIds = []} = {}) {
+    const FR = new Set(frontierIds);
     return L.geoJSON(gj, {pane, interactive,
       style: f => { const p = f.properties, below = p.am2 < minM2, multi = p.nc > 1;
         return below ? {color: '#9AA5B1', weight: .5, opacity: .55, fillColor: '#9AA5B1', fillOpacity: .06}
@@ -65,7 +66,7 @@ window.Cand = (() => {
       onEachFeature: (f, l) => { const p = f.properties;
         l.bindTooltip(`후보 클러스터 ${p.id} · 구획 ${p.nc} · 필지 ${p.n} · ${fmtA(p.am2)} · 참고 ${(p.am2 * KAPPA / 1000).toFixed(1)} MW` +
           (p.nc > 1 ? ` · 안정 ${p.td}–${p.tb} m` : ' · 고립(1구획)') + ` · 산단 ${p.d == null ? '—' : p.d.toFixed(1) + ' km'} · 계통 lo ${p.lo == null ? '—' : p.lo + ' MW'}` +
-          (p.am2 < minM2 ? ' · 최소 표시 규모 미만(모집단 밖)' : '')); }});
+          (p.am2 < minM2 ? ' · 최소 표시 규모 미만(모집단 밖)' : FR.size ? (FR.has(p.id) ? ' · <b>공동 1등</b>' : ' · 모집단 안이지만 <b>지배됨</b>(면적·산단·계통 모두 같거나 나은 후보가 있음)') : '')); }});
   }
   // ── 다구획 cc 의 볼록껍질 외곽(필터 이상만) — "여기가 한 권역" 으로 읽히게 하는 표시. 기하 정점에서 클라이언트 계산(표시 전용, 값 아님) ──
   function hull(pts) {

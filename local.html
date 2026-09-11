@@ -296,7 +296,7 @@
         L.circleMarker([f.lat, f.lon], {radius: Math.max(8, Math.sqrt(f.a) / 180), color: '#0C356A', weight: 2.5, fillColor: '#FFD84D', fillOpacity: .95})
           .bindTooltip(`공동 1등 구획 ${i + 1}/${S.frontier.length} · ${fmtA2(f.a)} · 산단 ${f.d == null ? '—' : f.d.toFixed(1) + 'km'} · 계통 ${f.lo == null ? '—' : f.lo + 'MW'}`).addTo(lyrComp); });
     }
-    if (ccgj) { Cand.layer(ccgj, {minM2: st.minM2}).addTo(lyrCC); Cand.hullLayer(ccgj, {minM2: st.minM2}).addTo(lyrCC);
+    if (ccgj) { Cand.layer(ccgj, {minM2: st.minM2, frontierIds: CF.frontier.map(f => f.id)}).addTo(lyrCC); Cand.hullLayer(ccgj, {minM2: st.minM2}).addTo(lyrCC);
       Cand.outline(ccgj, CF.frontier.map(f => f.id), {weight: 3}).addTo(lyrCC); Cand.markers(L.layerGroup().addTo(lyrCC), CF.frontier, {}); }
     if (st.emd) {
       const e = L.geoJSON(st.emd.feat, {style: {color: '#B3261E', weight: 2.5, fill: false, dashArray: '6 4'}}).addTo(lyrEmd);

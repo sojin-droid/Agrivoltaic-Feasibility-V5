@@ -208,7 +208,7 @@
   // ── V5.2 후보 클러스터 단위 — 우리동네와 같은 파일(recommend_cc_v4 · cand/{sgg}_R2_promo)·같은 함수(Cand.*) ──
   const ccGeoCache = {}; let ccPick = null;
   const CAP_COMP = '번호 원 = 공동 1등 구획(번호 = 아래 표의 "후보" 열, 면적순 — 순위 아님; 원 크기 ∝ 면적) · 노랑 = 그 시군의 연접 구획 전량(확대하면 원 밑의 실제 땅이 보임) · 하늘색 점 = 적격 필지(검증용)';
-  const CAP_CC = '번호 원 = 공동 1등 후보 클러스터(번호 = 아래 표의 "후보" 열) · 채움 = 규모 band(최소 표시 규모 이상) · 남색 점선 껍질 = 다구획 클러스터의 권역 · 회색 윤곽 = 최소 표시 규모 미만(모집단 밖 — 숨기지 않음)';
+  const CAP_CC = '번호 원 = 공동 1등 후보 클러스터(번호 = 아래 표의 "후보" 열) · 번호 없는 껍질 = 모집단 안이지만 지배된 클러스터(세 축 모두 같거나 나은 후보가 있음 — 마우스를 올리면 표시) · 채움 = 규모 band · 회색 윤곽 = 최소 표시 규모 미만';
   function ccPickFn(f) {
     ccPick = f.id;
     document.querySelectorAll('#recTbl tr[data-cc]').forEach(tr => tr.classList.toggle('pick', +tr.dataset.cc === f.id));
@@ -233,7 +233,7 @@
     if (reload) { recPar.clearLayers(); ccGeoCache[cur] = ccGeoCache[cur] || await Cand.geo(cur); }
     if (c0 !== cur) return;
     recBlk.clearLayers();
-    if (ccGeoCache[cur]) { recBlk.addLayer(Cand.layer(ccGeoCache[cur], {minM2, pane: 'recBlocks'})); recBlk.addLayer(Cand.hullLayer(ccGeoCache[cur], {minM2, pane: 'recBlocks'}));
+    if (ccGeoCache[cur]) { recBlk.addLayer(Cand.layer(ccGeoCache[cur], {minM2, pane: 'recBlocks', frontierIds: F.frontier.map(f => f.id)})); recBlk.addLayer(Cand.hullLayer(ccGeoCache[cur], {minM2, pane: 'recBlocks'}));
       recBlk.addLayer(Cand.outline(ccGeoCache[cur], F.frontier.map(f => f.id), {pane: 'recBlocks', weight: 3})); }
     if (reload && coords.length) recGeo.fitBounds(coords, {padding: [30, 30], maxZoom: 12});
   }
