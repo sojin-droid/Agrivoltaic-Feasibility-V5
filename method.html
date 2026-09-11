@@ -83,7 +83,7 @@ table.mx .ref{color:var(--muted)}
 <div class="page-hero">
   <div class="wrap">
     <p class="eyebrow">Method · 근거와 방법</p>
-    <h1>이 숫자와 방법은 어디에서 왔는가</h1>
+    <h1>근거와 방법 — 배경·법령·방법·데이터·출처</h1>
     <p class="lede">분석 화면은 결과에 집중하고, 배경·법령·방법·데이터·출처는 이 한 페이지에 모아 둠.
     모든 수치는 정본 데이터베이스의 표준 질의 모듈에서만 산출되며, 기준값과 어긋나면 발행이 자동으로 중단됨.</p>
     <div style="margin-top:14px">
@@ -119,9 +119,9 @@ table.mx .ref{color:var(--muted)}
 <!-- ═══════════ 2. 법·제도적 근거 ═══════════ -->
 <section class="alt" id="law">
   <div class="wrap">
-    <div class="sec-head"><div><p class="eyebrow">2 · 법·제도적 근거</p><h2>어떤 법령을 어떻게 읽어 시나리오를 만들었는가</h2></div>
+    <div class="sec-head"><div><p class="eyebrow">2 · 법·제도적 근거</p><h2>법령과 시나리오 설계 근거</h2></div>
       <span style="font-size:12.5px;color:var(--muted)">법률·시행령·시행규칙·고시 원문은 아래 Sources [4]–[11]·[15]·[16]·[25]–[27]·[29]</span></div>
-    <h3 class="art-h" style="font-size:17px">2-1. 왜 네 조합(R0–R3)인가</h3>
+    <h3 class="art-h" style="font-size:17px">2-1. 네 조합(R0–R3)의 설계 근거</h3>
     <div class="callout-v4" style="margin-top:8px">영농형태양광법 제6조제1항의 부지 두 갈래(①농업진흥지역 밖
       ②재생에너지지구 지정 농지<sup class="fnref">[5]</sup>) 중 ②의 지정 범위 — 농업보호구역·농업진흥구역을
       각각 허용하느냐 — 가 하위법령의 설계 변수임. 스위치 두 개의 조합이 네 칸(R0–R3)이고, 네 칸을
@@ -212,7 +212,7 @@ table.mx .ref{color:var(--muted)}
 <!-- ═══════════ 3. 공간분석 방법 ═══════════ -->
 <section id="spatial">
   <div class="wrap">
-    <div class="sec-head"><div><p class="eyebrow">3 · 공간분석 방법</p><h2>원천 필지에서 규모 조건 이상 구획까지</h2></div>
+    <div class="sec-head"><div><p class="eyebrow">3 · 공간분석 방법</p><h2>원천 필지 → 판정 → 연접 구획 → 규모 눈금</h2></div>
       <span style="font-size:12.5px;color:var(--muted)">원천 필지 → 입지 적격 필터 → 연접 구획 → 규모 눈금 · 계통 컨텍스트 · 면적 환산</span></div>
   </div>
 </section>
@@ -298,7 +298,7 @@ table.mx .ref{color:var(--muted)}
       <p style="font-size:13.5px;margin:0"><b>연접 기준</b> — 간격 21m 이내의 필지를 하나의 후보
       구획으로 병합함. 21m는 필지 간격 자료에서 유도한 <b>분석 기준</b>이며 법정 기준이 아님.</p>
       <details style="margin-top:8px;font-size:13px">
-        <summary style="cursor:pointer;color:var(--leaf-deep);font-weight:700">자세히 보기 — 왜 21m인가</summary>
+        <summary style="cursor:pointer;color:var(--leaf-deep);font-weight:700">자세히 보기 — 연접 기준 21m의 유도 근거</summary>
         <p style="margin:8px 0 0">전국 적격 필지의 이웃 간격 분포(k-거리 곡선, k=4)에서
         기울기가 꺾이는 지점이 21m 부근임 — 간격의 실체는 구거(59.6%)·도로(30.0%)라
         설계상 물길·농로를 건너 하나의 사업 부지로 취급하는 기준임.<br>
@@ -442,7 +442,7 @@ table.mx .ref{color:var(--muted)}
 <!-- ═══════════ 5. 데이터 출처 ═══════════ -->
 <section id="data">
   <div class="wrap">
-    <div class="sec-head"><div><p class="eyebrow">5 · 데이터 출처</p><h2>어떤 자료를 어디에 썼는가</h2></div>
+    <div class="sec-head"><div><p class="eyebrow">5 · 데이터 출처</p><h2>사용 데이터와 용도</h2></div>
       <span style="font-size:12.5px;color:var(--muted)">5-1 요약 표 · 5-2 내부 계보 · 전문은 6 Sources</span></div>
     <div class="figbox">
       <div style="overflow-x:auto"><table class="v4" id="t-datasrc"></table></div>
@@ -693,7 +693,7 @@ table.mx .ref{color:var(--muted)}
   const STEPS = [
     ['①', '현재 수준', `개방 전(진흥✕·보호✕) 법인·국공유 농지는 <b>${V4.km2(M.R0['정본'].km2)} km²</b> — 전체(개인 포함) ${V4.km2(M.R0['대조군'].km2)} km²의
       <b>${(100*M.R0['정본'].km2/M.R0['대조군'].km2).toFixed(1)}%</b>이고, 50MW 이상 구획은 <b>${V4.n(R.R0_current.ge50)}곳</b>.`, 'scenarios.html#t32', '정책 시나리오 표 5'],
-    ['②', '왜 늘려야 하는가', `개인 포함 50MW 이상 ${V4.n(R['R0_current@all'].ge50)}곳 중 면적의 <b>${V4.n(N.big_composition['R0_current@all'].indiv_share_pct)}%가 개인 소유</b>(동의 조직 전제) —
+    ['②', '개인 소유 비중', `개인 포함 50MW 이상 ${V4.n(R['R0_current@all'].ge50)}곳 중 면적의 <b>${V4.n(N.big_composition['R0_current@all'].indiv_share_pct)}%가 개인 소유</b>(동의 조직 전제) —
       법인·국공유만 세면 <b>${V4.n(R.R0_current.ge50)}곳</b>(제주 서귀포 ${V4.n(cpAnchorTop.mw)}MW).`, 'finder.html', '후보지 찾기'],
     ['③', '두 수단의 증분', `보호구역 개방 +${V4.km2((M.R1['정본'].m2 - M.R0['정본'].m2)/1e6)} km² · 진흥구역 개방 <b>+${V4.km2((M.R2['정본'].m2 - M.R0['정본'].m2)/1e6)} km²</b> —
       진흥구역 개방 시 50MW 이상 <b>${V4.n(R.R2_promo.ge50)}곳(합 약 ${V4.n(R.R2_promo.ge50_mw)}MW)</b>, 그중 ${V4.n(cpBigRec)}곳이 간척 지구.`, 'finder.html', `후보지 찾기 — ${V4.n(R.R2_promo.ge50)}곳의 지도`],

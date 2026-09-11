@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>PLANiT · 지역별 우선 후보 — 우리 지역에서는 어디를 우선 검토할 것인가</title>
+<title>PLANiT · 지역별 우선 후보 — 시군 단위 공동 1등 후보 비교</title>
 <meta name="description" content="각 시군에서 규모·계통·지역 전력수요를 종합해 우선 검토할 영농형 태양광 후보지를 제시.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -53,7 +53,7 @@
 <div class="page-hero">
   <div class="wrap">
     <p class="eyebrow">Regions · 지역별 우선 후보</p>
-    <h1>우리 지역에서는 어디를 우선 검토할 것인가</h1>
+    <h1>지역별 우선 후보 — 시군 단위 공동 1등 후보 비교</h1>
     <p class="lede">시군을 고르면 그 안의 후보 구획 가운데 <b>공동 1등 후보</b>가 지도와 표에 나타남 —
     면적이 크고, 산업단지와 가깝고, 계통 여유가 큰 세 조건을 동시에 볼 때 어느 하나가 다른 후보보다
     모든 면에서 낫지 않으면 여러 후보가 공동 1등으로 남음. 세 조건을 번갈아 켜며 서로 다른 장점을 비교하는 화면임.</p>
@@ -64,7 +64,7 @@
 
 <section>
   <div class="wrap">
-    <div class="sec-head"><div><p class="eyebrow">Step 1 · 지역</p><h2>어느 시군을 볼까요</h2></div>
+    <div class="sec-head"><div><p class="eyebrow">Step 1 · 지역</p><h2>분석 시군</h2></div>
       <span style="font-size:12.5px;color:var(--muted)" id="recStamp">—</span></div>
     <div class="figbox" id="rp-rec"></div>
 
@@ -74,7 +74,7 @@
 
     <div class="figbox" style="margin-top:16px">
       <div class="axis-tgl" id="axisTgl">
-        <span class="q">무엇을 우선해서 볼까요?</span>
+        <span class="q">우선 기준</span>
         <button data-ax="" class="on">전체 보기</button>
         <button data-ax="ra"><i style="background:#0C356A"></i>면적</button>
         <button data-ax="ri"><i style="background:#2A9D8F"></i>산단 거리</button>
@@ -84,7 +84,7 @@
         ★ 3개 = 세 조건 모두 3위 이내 · ★ 2개 = 두 조건 · ★ 1개 = 한 조건 — 순위는 정본의 축별 순위 열이며 임의 점수가 아님.</div>
     </div>
 
-    <div class="sec-head" style="margin-top:26px"><div><p class="eyebrow">Step 3 · 공동 1등 후보</p><h2>서로 다른 장점을 가진 후보들</h2></div>
+    <div class="sec-head" style="margin-top:26px"><div><p class="eyebrow">Step 3 · 공동 1등 후보</p><h2>공동 1등 후보 — 축별 비교</h2></div>
       <span style="font-size:12.5px;color:var(--muted)">행 클릭 = 지도 이동 · 표시 순서는 면적순(순위 아님)</span></div>
     <div class="figbox">
       <div style="overflow-x:auto"><table class="v4" id="recTbl"></table></div>
