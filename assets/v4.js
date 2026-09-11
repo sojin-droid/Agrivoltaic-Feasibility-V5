@@ -73,6 +73,14 @@ const V4 = {
   footnotes() {
     const ftr = document.querySelector('footer.v4');
     if (!ftr || document.getElementById('fnsec')) return;
+    // 출처 목록은 「근거와 방법」(body[data-sources=full]) 한 곳에만 — 다른 화면의 각주 마커는 그곳으로 연결
+    if (document.body.dataset.sources !== 'full') {
+      document.querySelectorAll('sup.fnref').forEach(s => {
+        const n = (s.textContent.match(/\d+/) || [])[0];
+        if (n) s.innerHTML = `<a href="method.html#fn-${n}" title="출처 ${n} — 근거와 방법">[${n}]</a>`;
+      });
+      return;
+    }
     const sec = document.createElement('section');
     sec.id = 'fnsec';
     sec.innerHTML = `<div class="wrap">
@@ -103,14 +111,17 @@ const V4 = {
     this.footnotes();
     const m = await this.data('meta_v4');
     const el = document.querySelector('footer.v4 .wrap');
-    if (el) el.innerHTML =
-      `<div>PLANiT Institute · 영농형 태양광 — 전국 설치 가능 농지 분석</div>` +
-      `<div>데이터 세대 ${String(m.data_generation).replace(/정본 우주/g, '분석 기준 필지')} · ` +
-      `생성 ${m.generated} · ${m.verification} · ` +
-      `소유 구분은 지적 원장의 유형 구분(개인 식별 아님) · ` +
-      `수치는 정본 DB 조회값의 export — 페이지 내 재계산 없음</div>` +
-      `<div style="margin-top:6px"><a href="method.html">근거와 방법(데이터·판정 조건·검증·한계) →</a> · ` +
-      `<a href="method.html#lineage">자료 계보 →</a> · <a href="local.html">우리동네 클러스터 고르기 →</a> · ` +
-      `<a href="method.html#contact">문의</a></div>`;
+    const full = document.body.dataset.sources === 'full';
+    if (el) el.innerHTML = full
+      ? `<div>PLANiT Institute · 영농형 태양광 — 전국 설치 가능 농지 분석</div>` +
+        `<div>데이터 세대 ${String(m.data_generation).replace(/정본 우주/g, '분석 기준 필지')} · ` +
+        `생성 ${m.generated} · ${m.verification} · ` +
+        `소유 구분은 지적 원장의 유형 구분(개인 식별 아님) · ` +
+        `수치는 정본 DB 조회값의 export — 페이지 내 재계산 없음</div>` +
+        `<div style="margin-top:6px"><a href="#lineage">자료 계보 →</a> · <a href="local.html">우리동네 클러스터 고르기 →</a> · ` +
+        `<a href="#contact">문의</a></div>`
+      : `<div>PLANiT Institute · 영농형 태양광 — 데이터 세대 ${String(m.data_generation).split(' · ')[0]} · 생성 ${m.generated} · ` +
+        `MW는 면적 환산 참고값 · 적격농지 ≠ 인허가 — ` +
+        `<a href="method.html"><b>출처·방법론은 근거와 방법 →</b></a> · <a href="local.html">우리동네 고르기 →</a></div>`;
   },
 };

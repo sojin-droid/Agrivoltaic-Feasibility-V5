@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>PLANiT · 근거와 방법 — 데이터·분석 기준·검증</title>
+<title>PLANiT · 근거와 방법 — 배경·법령·방법·데이터·출처</title>
 <meta name="description" content="전국 필지 전수 분석의 데이터 출처, 판정 기준, 기준값 자동 검증과 공개 전 품질검사 — 전 과정이 코드로 재현됨.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -11,6 +11,7 @@
 <link rel="stylesheet" href="style.css">
 <link rel="stylesheet" href="assets/v5.css">
 <script src="assets/v4.js"></script>
+<script src="assets/region.js"></script>
 <style>
 .vcard{cursor:pointer}
 .modal-bg{display:none;position:fixed;inset:0;background:rgba(12,53,106,.45);z-index:100;
@@ -29,8 +30,27 @@
 .modal ul{margin:8px 0 8px 20px;font-size:13.5px;line-height:1.8}
 .modal .case{border-left:3px solid var(--gold);padding-left:12px;font-size:13px;color:var(--muted);margin:12px 0}
 </style>
+<style>
+blockquote.law{margin:14px 0;padding:14px 18px;border-left:3px solid var(--gold);
+  background:var(--card);border-radius:0 10px 10px 0;font-size:13.5px;line-height:1.85;word-break:keep-all}
+blockquote.law .src{display:block;margin-top:8px;font-family:var(--mono);font-size:11px;color:var(--muted)}
+.tbl-wrap{overflow-x:auto}
+table.mx{width:100%;border-collapse:collapse;font-size:13px;font-variant-numeric:tabular-nums}
+table.mx th,table.mx td{padding:8px 10px;border-bottom:1px solid var(--line);text-align:right;white-space:nowrap}
+table.mx th{font-size:12px;color:var(--muted);font-weight:700}
+table.mx td.l,table.mx th.l{text-align:left;white-space:normal}
+table.mx tr.hl td{background:var(--sky)}
+table.mx .ref{color:var(--muted)}
+</style><style>
+.dk{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:12px 0 18px}
+@media(max-width:760px){.dk{grid-template-columns:1fr}}
+.dk>div{background:var(--sky);border:1px solid var(--leaf);border-radius:12px;padding:13px;text-align:center}
+.dk b{display:block;font-family:var(--serif);font-size:clamp(24px,2.8vw,32px);font-weight:700;color:var(--navy);line-height:1.15;margin-bottom:3px}
+.dk b small{font-family:var(--mono);font-size:13px;color:var(--muted);font-weight:400}
+.dk>div>span{font-size:11.5px;color:var(--muted);line-height:1.5}
+</style>
 </head>
-<body>
+<body data-sources="full">
 
 <div class="topbar">
   <div class="wrap">
@@ -47,6 +67,7 @@
       <a href="finder.html" data-i18n="nav-finder">후보지 찾기</a>
       <a href="scenarios.html" data-i18n="nav-scn">정책 시나리오</a>
       <a href="regions.html" data-i18n="nav-regions">지역별 우선 후보</a>
+      <a class="active" href="method.html" data-i18n="nav-method">근거와 방법</a>
     </nav>
     <div style="display:flex;gap:12px;align-items:center">
       <div class="lang-toggle" role="group" aria-label="Language">
@@ -60,18 +81,144 @@
 </header>
 
 <div class="page-hero">
-  <div class="wrap">
-    <p class="eyebrow">Method · 방법론</p>
-    <h1>근거와 방법</h1>
-    <p class="lede">필지 전수 → 판정 조건 → 구역 조합 계산의 순서로 진행하며, 모든 단계가
-    코드로 재현됨 — 원천 자료의 계보와 한계도 이 페이지에 통합함.<br>산출이 고정된 기준값과 어긋나면 인용이 자동으로 중단됨.</p>
+  <div class="wrap" style="max-width:960px">
+    <p class="eyebrow">Method · 근거와 방법</p>
+    <h1>이 숫자와 방법은 어디에서 왔는가</h1>
+    <p class="lede">분석 화면은 결과에 집중하고, 배경·법령·방법·데이터·출처는 이 한 페이지에 모아 둠.
+    모든 수치는 정본 데이터베이스의 표준 질의 모듈에서만 산출되며, 기준값과 어긋나면 발행이 자동으로 중단됨.</p>
+    <div style="margin-top:14px">
+      <a class="pill" href="#background">1 배경</a>
+      <a class="pill" href="#law">2 법·제도 근거</a>
+      <a class="pill" href="#spatial">3 공간분석 방법</a>
+      <a class="pill" href="#ranking">4 우선 후보 선정</a>
+      <a class="pill" href="#data">5 데이터 출처</a>
+      <a class="pill" href="#fnsec">6 Sources</a>
+    </div>
   </div>
 </div>
 
-
-<section style="padding:36px 0 4px">
+<!-- ═══════════ 1. 연구·분석 배경 ═══════════ -->
+<section id="background" style="padding:40px 0 10px">
   <div class="wrap" style="max-width:1080px">
-    <div class="sec-head"><div><p class="eyebrow">Pipeline</p><h2>분석 흐름 한 장</h2></div></div>
+    <div class="sec-head"><div><p class="eyebrow">1 · 연구·분석 배경</p><h2>영농형 태양광과 이 분석의 목적</h2></div></div>
+    <div class="figbox" style="font-size:14px;line-height:1.85;word-break:keep-all">
+      <p style="margin:0 0 8px"><b>영농형 태양광</b> — 농사를 계속 지으면서 그 위 공간에서 발전하는 방식. 농지가 농지로 유지됨<sup class="fnref">[10]</sup>.
+      <b>필지</b>는 토지의 등록 단위(지번 하나 = 필지 하나)이고, 이 분석은 전국 <span id="bg-nparcel">—</span>개 필지를 하나씩 판정함<sup class="fnref">[1]</sup>.</p>
+      <p style="margin:0 0 8px"><b>목적</b> — 현행 제도(농업진흥지역 밖의 농지만 설치 가능)에서의 설치 가능 농지와, 시행 예정 법률의 재생에너지지구 지정 범위를 어떻게 설계하느냐(농업보호구역·농업진흥구역 개방)에 따라
+      추가로 열리는 면적·후보를 같은 방법·같은 원장으로 재어, <b>제도 설계의 선택지를 정량으로 비교</b>할 수 있게 하는 것. 정답 하나를 고르는 도구가 아니라 지역과 정책 논의의 출발 자료임.</p>
+      <p style="margin:0"><b>분석 기준 필지</b> — 이 분석이 세는 땅은 법인·국공유 소유 농지(수백 명의 개인 동의 없이 성립하는 물량)<sup class="fnref">[12]</sup>. 개인 포함 <b>대조군</b>을 늘 함께 표시하며 대조군은 정책 값이 아님.
+      <b>적격농지</b>는 이 분석의 판정 조건을 통과한 토지이며 최종 인허가 가능 토지가 아님.</p>
+    </div>
+    <div class="sec-head" style="margin-top:22px"><div><p class="eyebrow">1-2 · 핵심 결과 요약</p><h2>다섯 가지 핵심 결과</h2></div>
+      <span style="font-size:12.5px;color:var(--muted)">전량 정본 산출값 렌더<sup class="fnref">[12]</sup></span></div>
+    <div class="verdict reveal" style="margin-bottom:12px"><span class="vh">한 줄 결론</span><span id="one-liner" style="font-size:14.5px;line-height:1.8">—</span></div>
+    <div id="story-steps" style="display:flex;flex-direction:column;gap:10px"></div>
+  </div>
+</section>
+
+<!-- ═══════════ 2. 법·제도적 근거 ═══════════ -->
+<section class="alt" id="law" style="padding:40px 0 20px">
+  <div class="wrap" style="max-width:1080px">
+    <div class="sec-head"><div><p class="eyebrow">2 · 법·제도적 근거</p><h2>어떤 법령을 어떻게 읽어 시나리오를 만들었는가</h2></div>
+      <span style="font-size:12.5px;color:var(--muted)">법률·시행령·시행규칙·고시 원문은 아래 Sources [4]–[11]·[15]·[16]·[25]–[27]·[29]</span></div>
+    <h3 class="art-h" style="font-size:17px">2-1. 왜 네 조합(R0–R3)인가</h3>
+    <div class="callout-v4" style="margin-top:8px">영농형태양광법 제6조제1항의 부지 두 갈래(①농업진흥지역 밖
+      ②재생에너지지구 지정 농지<sup class="fnref">[5]</sup>) 중 ②의 지정 범위 — 농업보호구역·농업진흥구역을
+      각각 허용하느냐 — 가 하위법령의 설계 변수임. 스위치 두 개의 조합이 네 칸(R0–R3)이고, 네 칸을
+      같은 방법·같은 원장으로 재야 어느 스위치가 규모를 좌우하는지 비교할 수 있음 — 정책 시나리오 표 1이 그 결과, 표 3이 스위치별 증분.</div>
+    <p style="font-size:13px;color:var(--muted);margin:8px 0 0">본법: 「영농형 태양광 발전사업의 활성화 및 지원에 관한 법률」 법률 제21804호(2026-06-16 공포 · 2026-12-17 시행)<sup class="fnref">[10]</sup>.
+      R1–R3은 이 법률의 재생에너지지구 지정 범위(하위법령 설계변수)를 전제로 한 가정적 시나리오이며 확정 제도가 아님.
+      이격거리는 「재생에너지 개발·이용·보급 촉진법」 상한제(주거 200m)<sup class="fnref">[11]</sup>를 전국 일률 보수 하한으로 적용.</p>
+    <div class="wrap art" style="max-width:860px">
+
+  <div class="callout-v4"><b>표기 단서 — 제정안(의견조회판).</b> 아래 시행령·시행규칙
+  조문은 2026년 7월 관계기관 의견조회판<sup class="fnref">[25]</sup><sup class="fnref">[26]</sup>
+  기준임. 입법예고 전 초안이므로 확정 조문이 아니며, 조문이 바뀌면 이 분석의 전제도 바뀜.</div>
+
+  <h3 class="art-h" style="font-size:17px">2-2. 시행령 제정안 — 조문 구조</h3>
+  <div class="figbox" style="padding:14px;margin:10px 0 16px">
+    <svg viewBox="0 0 900 120" style="width:100%;height:auto;display:block" font-family="var(--sans)" font-size="12.5" text-anchor="middle">
+      <defs><marker id="da" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto">
+        <path d="M0,0 L8,4 L0,8 Z" fill="#9aa3ae"/></marker></defs>
+      <rect x="8" y="26" width="230" height="66" rx="10" fill="#fff" stroke="#7FA8C9"/>
+      <text x="123" y="52" font-weight="700" fill="#16233A">본법 §6① — 부지 두 갈래</text>
+      <text x="123" y="74" fill="#6C757D">진흥지역 밖 ｜ 재생에너지지구</text>
+      <rect x="300" y="26" width="250" height="66" rx="10" fill="#FFF6DE" stroke="#E4C64B"/>
+      <text x="425" y="52" font-weight="700" fill="#16233A">시행령안 §7 6호 (의견조회판)</text>
+      <text x="425" y="74" fill="#6C757D">농업회사법인 → 매립지등 한정</text>
+      <rect x="612" y="26" width="280" height="66" rx="10" fill="#F4F7F4" stroke="#9DB27E"/>
+      <text x="752" y="48" font-weight="700" fill="#16233A">농어촌정비법 §14① 매립지등</text>
+      <text x="752" y="68" fill="#6C757D">− 매각분 = 미매각 유지분</text>
+      <text x="752" y="86" fill="#3E7A2E" font-weight="700">= 국가관리간척지 13지구</text>
+      <g stroke="#9aa3ae" stroke-width="2" fill="none" marker-end="url(#da)">
+        <line x1="240" y1="59" x2="296" y2="59"/><line x1="552" y1="59" x2="608" y2="59"/>
+      </g>
+    </svg>
+  </div>
+  <p>본법(법률 제21804호, 2026-06-16 공포·2026-12-17 시행)<sup class="fnref">[10]</sup> §5①3호·§6①과
+  시행령 제정안 §7 6호<sup class="fnref">[25]</sup>가 <b>농업회사법인</b>의 발전사업부지를 매립지등(매각분 제외 =
+  국가관리간척지 13지구<sup class="fnref">[4]</sup>)으로 한정함. 영농조합법인에는 이 제약이 없음.</p>
+  <details style="margin:6px 0 14px">
+    <summary style="cursor:pointer;font-size:13px;font-weight:700;color:var(--leaf-deep)">조문 원문과 구조 자세히</summary>
+  <p style="margin-top:8px"><b>본법</b><sup class="fnref">[10]</sup>
+  제5조제1항제3호는 농업법인의 발전사업을 <b>재생에너지지구로 지정된 지역</b>에서만 허용하고
+  세부를 대통령령에 위임함. 제6조제1항은 발전사업부지를 두 갈래로 정함 —
+  ①농업진흥지역 밖의 농지, ②재생에너지지구로 지정된 농지.</p>
+  <p><b>시행령 제정안(의견조회판)</b><sup class="fnref">[25]</sup> 제7조는 재생에너지지구 내
+  발전사업이 가능한 농업법인을 영농조합법인과 농업회사법인으로 정하면서, 6호에서
+  농업회사법인에만 부지 요건을 얹음:</p>
+  <blockquote class="law">6. 농업회사법인은 발전사업부지가 「농어촌정비법」 제14조제1항에 따른
+  매립지등에 소재하는 경우로 한정할 것(다만, ｢농어촌정비법｣ 제14조제1항제2호에 따라 매각된
+  매립지등은 제외한다)
+  <span class="src">영농형태양광법 시행령 제정안(의견조회판, 2026.7) 제7조 6호 — 원문 그대로<sup class="fnref">[25]</sup></span></blockquote>
+  <p>인용된 「농어촌정비법」 제14조제1항의 <b>매립지등</b> 정의<sup class="fnref">[27]</sup>는
+  "농업생산기반 정비사업 시행으로 조성된 재산 중 농업생산기반시설에 제공되지 아니하는
+  매립지ㆍ간척지ㆍ개간지ㆍ취토장 등 토지와 그 밖의 물건 등"임. 같은 항의 처분 방법 4종
+  (임대·매각·직접사용·일시사용) 중 제정안은 <b>매각분을 제외</b>하므로 남는 것은
+  미매각 유지분 — 개정안 요지의 표현으로 <b>"국가관리간척지"</b>(농식품부 '25.6 공표
+  13지구<sup class="fnref">[4]</sup>)임.</p>
+  <p><b>시행규칙 제정안(의견조회판)</b><sup class="fnref">[26]</sup>은 농업회사법인의 허가신청 시
+  <b>매립지등 임대통지서</b>, 농업생산기반 정비사업 <b>시행자의 확인서</b> 또는 이에 준하는
+  자료를 첨부하도록 함. 시행령안 제8조의 발전사업 기간은 최초 5년 + 연장 3년×6회 = <b>최대 23년</b>.</p>
+  <div class="callout-v4"><b>범위 확인 — 영농조합법인은 이 제약이 없음.</b> 제7조 6호는
+  농업회사법인에만 적용되며, 영농조합법인은 재생에너지지구 지정 요건(본법 §5①3호)만 충족하면 됨.</div>
+  </details>
+
+  <p style="font-size:13px;color:var(--muted)">이 한정의 정량(국가관리간척지 안 R0–R3 면적)은 <a href="scenarios.html#tables" style="color:var(--leaf-deep)">정책 시나리오의 "시행령 고려" 표</a>와 조건 토글에서 비교함.</p>
+<h3 class="art-h" style="font-size:17px">2-3. 정책적 함의 — 이 한정이 사업에 주는 조건</h3>
+  <div id="analysis" style="font-size:13.5px;line-height:1.9;word-break:keep-all">—</div>
+
+
+
+  <h3 class="art-h" style="font-size:17px">2-4. 시행령 분석의 한계</h3>
+  <div class="figbox" style="font-size:13px;line-height:1.85;word-break:keep-all">
+  ① 매립지등 정의에 포함된 <b>개간지·취토장은 필지 데이터가 없어</b> 이 표에 없음 — 대상
+  범위를 과소 계상하는 방향임<sup class="fnref">[3]</sup>.<br>
+  ② <b>민간 공유수면 매립지</b>는 농업생산기반 정비사업 산물이 아니어서 애초 '매립지등'에
+  해당하지 않고, 본 분석의 원장에도 없음<sup class="fnref">[3]</sup>.<br>
+  ③ 시화·화옹·새만금 등 일부 대형 지구는 지목이 아직 농지가 아니어서 적격이 0 부근임 —
+  표 1은 현재 지목 기준의 실측임<sup class="fnref">[1]</sup>.<br>
+  ④ 계통(접속 가능 용량)은 이 표에 반영되어 있지 않음.<br>
+  ⑤ 조문 자체가 의견조회판(입법예고 전 초안)임<sup class="fnref">[25]</sup> — 확정 시 재산출.</div>
+
+  <div class="fn">국가관리간척지 = 농어촌공사 지구·공구 원장<sup class="fnref">[3]</sup> 중
+  농식품부 '25.6 공표 13지구 태그<sup class="fnref">[4]</sup> ·
+  소유 = 지적 원장 유형 구분(개인 식별 아님)<sup class="fnref">[1]</sup> ·
+  면적은 지목 농지 기준.</div>
+</div>
+  </div>
+</section>
+
+<!-- ═══════════ 3. 공간분석 방법 ═══════════ -->
+<section id="spatial" style="padding:40px 0 0">
+  <div class="wrap" style="max-width:1080px">
+    <div class="sec-head"><div><p class="eyebrow">3 · 공간분석 방법</p><h2>원천 필지에서 규모 조건 이상 구획까지</h2></div>
+      <span style="font-size:12.5px;color:var(--muted)">원천 필지 → 입지 적격 필터 → 연접 구획 → 규모 눈금 · 계통 컨텍스트 · 면적 환산</span></div>
+  </div>
+</section>
+<section style="padding:26px 0 8px">
+  <div class="wrap" style="max-width:1080px">
+    <div class="sec-head"><div><p class="eyebrow">3-1 · 분석 흐름</p><h2>분석 흐름 한 장</h2></div></div>
     <div class="figbox" style="padding:16px">
       <svg viewBox="0 0 980 210" style="width:100%;height:auto;display:block" font-family="var(--sans)" font-size="12.5">
         <defs><marker id="ar" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto">
@@ -115,10 +262,9 @@
     원천 자료부터 발행까지. 세부 조건·검증은 아래 각 절.</p>
   </div>
 </section>
-
-<section style="padding:52px 0 40px">
+<section style="padding:26px 0 8px">
   <div class="wrap">
-    <div class="sec-head"><div><p class="eyebrow">Funnel</p><h2>필지 선별 단계 (전국)</h2></div></div>
+    <div class="sec-head"><div><p class="eyebrow">3-2 · 필지 선별</p><h2>필지 선별 단계 (전국)</h2></div></div>
     <div class="figbox reveal">
       <div id="funnel"></div>
       <div class="figcap">그림 1. 필지 선별 단계(전국) — 지적 원장 전수에서 진흥✕·보호✕ 적격까지 네 단계의
@@ -127,10 +273,9 @@
     </div>
   </div>
 </section>
-
-<section class="alt" style="padding:56px 0">
+<section class="alt" style="padding:26px 0 8px">
   <div class="wrap">
-    <div class="sec-head"><div><p class="eyebrow">Rules</p><h2>판정 조건 — 한 필지가 통과해야 하는 검사</h2></div></div>
+    <div class="sec-head"><div><p class="eyebrow">3-3 · 판정 조건과 연접 기준</p><h2>판정 조건 — 한 필지가 통과해야 하는 검사</h2></div></div>
     <div class="figbox reveal">
       <div style="overflow-x:auto"><table class="v4">
         <tr><th style="text-align:left">조건</th><th style="text-align:left">내용</th><th style="text-align:left">근거 자료</th></tr>
@@ -164,10 +309,9 @@
     </div>
   </div>
 </section>
-
-<section style="padding:56px 0 30px">
+<section style="padding:26px 0 8px">
   <div class="wrap">
-    <div class="sec-head"><div><p class="eyebrow">Verification</p><h2>재현·검증 체계</h2></div></div>
+    <div class="sec-head"><div><p class="eyebrow">3-4 · 검증 체계와 데이터 처리 규칙</p><h2>재현·검증 체계</h2></div></div>
     <div class="grid two">
       <div class="card reveal vcard" data-k="single">
         <h3>단일 출처 원칙 (Single Source)</h3>
@@ -233,10 +377,15 @@
     </details>
   </div>
 </section>
-
-<section style="padding:52px 0 40px" id="caveats">
+<section class="alt" style="padding:26px 0 8px">
   <div class="wrap">
-    <div class="sec-head"><div><p class="eyebrow">Caveats</p><h2>한계</h2></div></div>
+    <div class="sec-head"><div><p class="eyebrow">3-5 · 단위·환산 가정</p><h2>단위·환산 가정</h2></div></div>
+    <div class="figbox reveal"><div style="font-size:14.5px;word-break:keep-all;line-height:1.8" id="unit-note"></div></div>
+  </div>
+</section>
+<section style="padding:26px 0 8px" id="caveats">
+  <div class="wrap">
+    <div class="sec-head"><div><p class="eyebrow">3-6 · 한계</p><h2>한계</h2></div></div>
     <div class="figbox reveal">
       <div style="overflow-x:auto"><table class="v4">
         <tr><th style="text-align:left">항목</th><th style="text-align:left">내용</th></tr>
@@ -263,26 +412,50 @@
           "알 수 없음"으로 병기, 2026-07 스냅숏(실시간 아님)이며 실제 접속 가능량 판정이 아님.</td></tr>
       </table></div>
       <div class="fn">해석 범위 단서(적격농지 ≠ 인허가 가능 토지 · MW는 면적 환산 참고값 · 계통·수요·산단
-      거리는 비교용 참고 지표 · 연접 21m는 분석 기준)는 페이지 하단 <b>읽을 때 주의</b>에 한 번에 정리함.<br>
+      거리는 비교용 참고 지표 · 연접 21m는 분석 기준)는 아래 <a href="#fnsec" style="color:var(--leaf-deep)">Sources · 읽을 때 주의</a>에 한 번에 정리함.<br>
       판정에 반영된 조건과 데이터 처리 규칙은 위 <a href="#datarules" style="color:var(--leaf-deep)">데이터
       처리 규칙</a> 절 — 한계 표에는 결과의 해석 범위를 제한하는 항목만 둠.</div>
     </div>
   </div>
 </section>
 
-<section class="alt" style="padding:56px 0">
-  <div class="wrap">
-    <div class="sec-head"><div><p class="eyebrow">Units</p><h2>단위·환산 가정</h2></div></div>
-    <div class="figbox reveal"><div style="font-size:14.5px;word-break:keep-all;line-height:1.8" id="unit-note"></div></div>
+<!-- ═══════════ 4. 우선 후보 선정 방법 ═══════════ -->
+<section class="alt" id="ranking" style="padding:40px 0 30px">
+  <div class="wrap" style="max-width:1080px">
+    <div class="sec-head"><div><p class="eyebrow">4 · 우선 후보 선정 방법</p><h2>공동 1등 후보 — 비지배 집합</h2></div>
+      <span style="font-size:12.5px;color:var(--muted)">지역별 우선 후보 · 우리동네 고르기 화면의 표가 이 방법으로 만들어짐</span></div>
+    <div class="figbox" style="font-size:13.5px;line-height:1.85;word-break:keep-all">
+      <p style="margin:0 0 8px"><b>세 축</b> — max 면적(㎡) · max 계통 여유(MW, 소재 읍면동 잔여 연계가능용량의 하한<sup class="fnref">[22]</sup>) · min 산업단지 거리(km, 최근접 산업단지 경계까지 측지 직선거리<sup class="fnref">[23]</sup>).
+      계통·거리는 25곳 대규모 후보의 1차 선별이나 적격 면적 판정에는 쓰지 않고, 시군 안 후보 비교의 축으로만 사용함.</p>
+      <p style="margin:0 0 8px"><b>비지배 집합(공동 1등)</b> — 시군 안 연접 구획 전수를 쌍별로 비교해 세 축 모두에서 다른 구획에 지지 않는 구획 전원을 정확히 열거함(반복 근사 아님 — ADR-0044).
+      가중치·순서·관문이 없어 단독 1등을 정하지 않으며, 집합 안에서 무엇을 고를지는 보는 쪽의 우선순위임. 화면의 ★는 각 축에서 시군 구획 전체 중 3위 이내라는 표시로, 정본의 축별 순위 열(동률은 같은 순위)이며 새 점수가 아님.
+      계통·거리를 알 수 없는 구획은 해당 축을 최악값으로 두어 비교함. 전국 209개 시군에서 <span id="rk-tot">—</span>개 구획이 이 집합에 듦.</p>
+      <p style="margin:0 0 8px"><b>다기준 방법과의 대조</b> — 정준 10개 다기준 방법(SAW·TOPSIS·VIKOR·PROMETHEE II·WPM·Borda·Copeland·Maximin·GRA·DEA)을 원저 수식대로 적용해 비지배 집합과 대조한 결과, 비교 범위 안에서 어느 방법도 지배당한 구획을 지배한 구획보다 위에 올리지 않았고
+      각 방법의 1위는 모두 비지배 집합 안에 있었음 — 비지배 집합이 가중치 비지정의 기준 후보 풀로 기능함의 실증. 방법 간 순위 상관은 넓게 갈려 단일 방법 채택 자체가 강한 가정임을 함께 보임(수치는 보고서·논문 §4).
+      가중 병기 순위(WPM × 시군별 entropy 가중)는 변별력 가중이지 중요도 가중이 아니며 판정·선별에 쓰지 않음.</p>
+      <p style="margin:0"><b>보조 지표</b> — 반경 판독기(선택 후보 반경 안 산단 점수 합·여유용량 합, 확인용)와 지역 전력판매량 대비(구획 참고 발전량 MW × 1,314h ÷ 시군 연간 전력판매량<sup class="fnref">[28]</sup>, 연간 규모 비교 참고값)는 선별에 쓰지 않으며
+      전력 자립·직접거래 가능성·시간대별 수급 일치를 뜻하지 않음.</p>
+    </div>
   </div>
 </section>
 
-<section style="padding:56px 0 30px" id="lineage">
+<!-- ═══════════ 5. 데이터 출처 ═══════════ -->
+<section id="data" style="padding:40px 0 0">
+  <div class="wrap" style="max-width:1080px">
+    <div class="sec-head"><div><p class="eyebrow">5 · 데이터 출처</p><h2>어떤 자료를 어디에 썼는가</h2></div>
+      <span style="font-size:12.5px;color:var(--muted)">5-1 요약 표 · 5-2 내부 계보 · 전문은 6 Sources</span></div>
+    <div class="figbox">
+      <div style="overflow-x:auto"><table class="v4" id="t-datasrc"></table></div>
+      <div class="figcap">표. 사용 데이터와 용도 — Sources의 데이터 원천·환산·배경지도 항목을 표로 정리(번호는 Sources 번호).</div>
+    </div>
+  </div>
+</section>
+<section style="padding:26px 0 8px" id="lineage">
   <div class="wrap">
-    <div class="sec-head"><div><p class="eyebrow">Lineage</p><h2>데이터 계보</h2></div>
+    <div class="sec-head"><div><p class="eyebrow">5-2 · 데이터 계보 (내부 기록)</p><h2>데이터 계보</h2></div>
     <span style="font-size:12.5px;color:var(--muted)">층위: L0 원시 취득 → L1 정제·판정 → L2 시나리오·산출</span></div>
     <div class="figbox reveal">
-      <p style="font-size:13px;margin:0 0 6px">일반 열람용 출처 요약은 페이지 하단의 출처 절 — 아래 표는
+      <p style="font-size:13px;margin:0 0 6px">일반 열람용 출처는 위 5-1 표와 아래 Sources 절 — 이 표는
       재현·감사용 내부 기록 원문.</p>
       <details>
         <summary style="cursor:pointer;font-size:13px;font-weight:700;color:var(--leaf-deep)">계보 표 펼치기 (내부 기록 원문)</summary>
@@ -293,16 +466,9 @@
     </div>
   </div>
 </section>
-
-<section class="alt" id="contact" style="padding:56px 0">
-  <div class="wrap">
-    <div class="sec-head"><div><p class="eyebrow">Contact</p><h2>문의</h2></div></div>
-    <div class="figbox reveal" style="font-size:14.5px">
-      PLANiT Institute · 영농형 태양광 섹터 —
-      <a href="https://planit.institute/" style="color:var(--leaf-deep)"><b>planit.institute</b></a>
-    </div>
-  </div>
-</section>
+<section style="padding:10px 0 30px" id="contact"><div class="wrap" style="max-width:1080px">
+  <p style="font-size:13.5px">문의 — PLANiT Institute · 영농형 태양광 섹터 · <a href="https://planit.institute/" style="color:var(--leaf-deep)"><b>planit.institute</b></a></p>
+</div></section>
 
 <footer class="v4"><div class="wrap"></div></footer>
 
@@ -438,6 +604,120 @@
     document.getElementById('cav-jimok').innerHTML +=
       ` 잔여 결측: <b>${V4.n(fu['_지목결측'])}필지</b>.`;
   } catch (e) {}
+})();
+</script>
+<script>
+(async () => {
+  const d = await V4.data('decree_v4');
+  // (구 decree 탭 히어로의 art-meta·basis-note는 하위 섹션 이식으로 제거 — 널 가드)
+  const _bn = document.getElementById('basis-note');
+  if (_bn) _bn.textContent = d.basis.split(' — ')[0];
+
+  const M = d.matrix_natmg, C = d.context;
+  const K = V4.km2, N = V4.n;
+
+  (document.getElementById('t-natmg') || {}).innerHTML = `
+    <tr><th class="l">조합</th><th>정본 필지</th><th>정본 km²</th><th>참고 MW</th>
+        <th class="ref">대조군 필지</th><th class="ref">대조군 km²</th><th class="ref">참고 MW</th></tr>` +
+    ['R0', 'R1', 'R2', 'R3'].map(c => `
+    <tr class="${c === 'R0' ? 'hl' : ''}"><td class="l">${c} ${M[c].name}</td>
+      <td>${N(M[c]['정본'].n)}</td><td><b>${K(M[c]['정본'].km2, 2)}</b></td>
+      <td class="ref">${V4.mw(M[c]['정본'].m2)}</td>
+      <td class="ref">${N(M[c]['대조군'].n)}</td><td class="ref">${K(M[c]['대조군'].km2, 2)}</td>
+      <td class="ref">${V4.mw(M[c]['대조군'].m2)}</td></tr>`).join('');
+
+  (document.getElementById('t-context') || {}).innerHTML = `
+    <tr><th class="l">대조 모집단 (같은 질의)</th><th>정본 필지</th><th>정본 km²</th>
+        <th class="ref">대조군 필지</th><th class="ref">대조군 km²</th></tr>
+    <tr><td class="l">전국 — R3 진흥지역 전체 개방</td>
+      <td>${N(C['전국R3']['정본'].n)}</td><td>${K(C['전국R3']['정본'].km2, 2)}</td>
+      <td class="ref">${N(C['전국R3']['대조군'].n)}</td><td class="ref">${K(C['전국R3']['대조군'].km2, 2)}</td></tr>
+    <tr><td class="l">간척 전체(농어촌공사 원장) — R3</td>
+      <td>${N(C['간척R3']['정본'].n)}</td><td>${K(C['간척R3']['정본'].km2, 2)}</td>
+      <td class="ref">${N(C['간척R3']['대조군'].n)}</td><td class="ref">${K(C['간척R3']['대조군'].km2, 2)}</td></tr>
+    <tr><td class="l">전국 — R0 진흥✕·보호✕ (농업진흥지역 밖)</td>
+      <td>${N(C['전국R0']['정본'].n)}</td><td>${K(C['전국R0']['정본'].km2, 2)}</td>
+      <td class="ref">${N(C['전국R0']['대조군'].n)}</td><td class="ref">${K(C['전국R0']['대조군'].km2, 2)}</td></tr>`;
+
+  // 파생값은 전부 위 표의 원값에서 계산 — 하드코딩 없음
+  const pct = (a, b, d1 = 1) => (100 * a / b).toFixed(d1);
+  const natR3 = M.R3['대조군'], natR3p = M.R3['정본'], natR0 = M.R0['대조군'], natR0p = M.R0['정본'];
+  const promoShare = pct(M.R2['대조군'].m2 - M.R0['대조군'].m2, M.R3['대조군'].m2);
+  const soldGap = (C['간척R3']['대조군'].m2 - natR3.m2) / 1e6;
+
+  (document.getElementById('dk-a') || {}).textContent = K(natR3p.km2, 2);
+  (document.getElementById('dk-s') || {}).textContent = promoShare;
+  (document.getElementById('dk-m') || {}).textContent = V4.mw(natR3p.m2);
+  (document.getElementById('analysis') || {}).innerHTML = [
+    [`① 이 조문은 진흥구역 개방과 한 몸`, `국가관리간척지 <b>대조군</b> 기준 R3 적격 면적의
+      <b>${promoShare}%가 진흥구역 개방분</b>(R2−R0) — 재생에너지지구
+      지정<sup class="fnref">[16]</sup>이 있어야 농업회사법인 경로가 열림(개방 전 R0는 대조군
+      ${K(natR0.km2, 2)} km²·정본 ${K(natR0p.km2, 2)} km²뿐). 개방 시 국가관리간척지에서
+      <b>R3 기준 정본 ${K(natR3p.km2, 2)} km²</b>(R2 기준 ${K(M.R2['정본'].km2, 2)} km²)가
+      실행 후보가 됨 — 제정안 자체가 진흥구역 개방 필요성의 정량 근거.`],
+    [`② 상한 규모`, `농업진흥지역 전부 개방(R3) 기준 전국 무필터 ${K(C['전국R3']['대조군'].km2, 2)} km²
+      중 이 조문의 대상은 <b>${K(natR3.km2, 2)} km² (${pct(natR3.m2, C['전국R3']['대조군'].m2)}%)</b> —
+      분석 기준 필지로는 ${K(C['전국R3']['정본'].km2, 2)} → ${K(natR3p.km2, 2)} km².`],
+    [`③ 보호구역 개방은 이 경로에 무의미`, `보호구역만 개방(R1)해도 증분은
+      +${K((M.R1['대조군'].m2 - M.R0['대조군'].m2) / 1e6, 2)} km²(정본
+      +${K((M.R1['정본'].m2 - M.R0['정본'].m2) / 1e6, 2)} km²)에 그침.`],
+    [`④ 매각분 제외의 효과`, `간척 전체(농어촌공사 원장, R3 무필터 ${K(C['간척R3']['대조군'].km2, 2)} km²)에서
+      매각분 제외로 좁히면 ${K(natR3.km2, 2)} km² — <b>−${K(soldGap, 1)} km²</b>.
+      매각 지구의 예는 대호지구(농식품부 13지구 명단 밖<sup class="fnref">[4]</sup>).
+      국가관리 지구별 값은 미산출이라 지구 단위 수치는 제시하지 않음.`],
+    [`⑤ 절차 부담`, `임대통지서·시행자 확인서<sup class="fnref">[26]</sup> = 농어촌공사
+      임차 구조 전제. 발전 기간 5+3×6년(최대 23년)<sup class="fnref">[25]</sup>이라
+      임대차 존속·연장 심사(§8④)를 반복 통과하는 구조.`],
+  ].map(([t, b]) => `<div class="figbox reveal" style="margin-bottom:10px">
+    <b style="font-family:var(--serif);color:var(--navy)">${t}</b><br>${b}</div>`).join('');
+
+  
+})();
+</script>
+<script>
+// ── 배경(핵심 결과 다섯 가지) · 우선 후보 · 데이터 출처 표 — 전량 data_v4·FOOTNOTES 렌더 ──
+(async () => {
+  const [s, N, F] = await Promise.all([V4.data('summary_v4'), V4.data('narrative_v4'), V4.data('funnel_v4')]);
+  const put = (id, v) => { const el = document.getElementById(id); if (el) el.innerHTML = v; };
+  put('bg-nparcel', V4.n(F.national['전체 필지']));
+  const M = s.matrix['전국'], K = s.matrix['간척'], R = N.runs;
+  const og = k => N.owner_setback.find(g => g.group === k);
+  const outC = og('간척지 외 법인'), inC = og('간척지 내 법인'), inO = og('간척지 내 비법인');
+  const kk = m2 => V4.km2(m2 / 1e6);
+  const cpBigRec = N.cp_big.filter(b => b.reclaim_pct >= 50).length;
+  const cpAnchorTop = N.cp_big_anchor[0] || {mw: 0};
+  const drop = k => Math.round(100 * (R[k].component_km2 - R[k + '_SB'].component_km2) / R[k].component_km2);
+  const cut = (a, b) => Math.round(100 * (a - b) / a);
+  put('one-liner', `농업진흥구역이 재생에너지지구로 개방되면, <b>법인·국공유 농지만으로</b> 50MW 이상 구획이
+     전국 <b>${V4.n(R.R0_current.ge50)}곳에서 ${V4.n(R.R2_promo.ge50)}곳 (합 약 ${V4.n(R.R2_promo.ge50_mw)}MW)</b>이 되며, 그중 ${V4.n(cpBigRec)}곳이 <b>간척 지구</b>다.`);
+  const STEPS = [
+    ['①', '현재 수준', `개방 전(진흥✕·보호✕) 법인·국공유 농지는 <b>${V4.km2(M.R0['정본'].km2)} km²</b> — 전체(개인 포함) ${V4.km2(M.R0['대조군'].km2)} km²의
+      <b>${(100*M.R0['정본'].km2/M.R0['대조군'].km2).toFixed(1)}%</b>이고, 50MW 이상 구획은 <b>${V4.n(R.R0_current.ge50)}곳</b>.`, 'scenarios.html#t32', '정책 시나리오 표 5'],
+    ['②', '왜 늘려야 하는가', `개인 포함 50MW 이상 ${V4.n(R['R0_current@all'].ge50)}곳 중 면적의 <b>${V4.n(N.big_composition['R0_current@all'].indiv_share_pct)}%가 개인 소유</b>(동의 조직 전제) —
+      법인·국공유만 세면 <b>${V4.n(R.R0_current.ge50)}곳</b>(제주 서귀포 ${V4.n(cpAnchorTop.mw)}MW).`, 'finder.html', '후보지 찾기'],
+    ['③', '두 수단의 증분', `보호구역 개방 +${V4.km2((M.R1['정본'].m2 - M.R0['정본'].m2)/1e6)} km² · 진흥구역 개방 <b>+${V4.km2((M.R2['정본'].m2 - M.R0['정본'].m2)/1e6)} km²</b> —
+      진흥구역 개방 시 50MW 이상 <b>${V4.n(R.R2_promo.ge50)}곳(합 약 ${V4.n(R.R2_promo.ge50_mw)}MW)</b>, 그중 ${V4.n(cpBigRec)}곳이 간척 지구.`, 'finder.html', `후보지 찾기 — ${V4.n(R.R2_promo.ge50)}곳의 지도`],
+    ['④', '이격 단서', `주거 이격 200m 보수 적용 시 개방 전 분 −${drop('R0_current')}%, 진흥구역 개방분 −${drop('R2_promo')}% —
+      <b>50MW 이상은 ${V4.n(R.R2_promo.ge50)} → ${V4.n(R.R2_promo_SB.ge50)}곳</b>(간척 평야는 주거에서 멂).`, 'scenarios.html#t32', '정책 시나리오 표 5'],
+    ['⑤', '간척·법인 갭', `시행령 제정안은 <b>농업회사법인</b>의 부지를 매립지등으로 한정 — 접근 면적 <b>${kk(outC.anchor_m2)} → ${kk(inC.anchor_m2)} km²</b>(−${cut(outC.anchor_m2, inC.anchor_m2)}%).
+      진흥구역 개방이 동반돼야 간척 내 법인 ${kk(inC.all_m2)} km² + 임차 풀 ${kk(inO.all_m2)} km²가 열리며, 법인·국공유 비중은 전국 ${(100*M.R2['정본'].km2/M.R2['대조군'].km2).toFixed(1)}% 대
+      <b>간척지 ${(100*K.R2['정본'].km2/K.R2['대조군'].km2).toFixed(1)}%</b>.`, '#law', '아래 2 법·제도 근거 — 시행령 제정안'],
+  ];
+  put('story-steps', STEPS.map(([no, t, body, href, lk]) => `
+    <div class="figbox" style="display:grid;grid-template-columns:40px 1fr;gap:12px;align-items:start">
+      <div style="font-family:var(--serif);font-size:24px;font-weight:700;color:var(--gold);line-height:1.2">${no}</div>
+      <div style="font-size:13.5px;line-height:1.8;word-break:keep-all"><b style="font-family:var(--serif);font-size:15px;color:var(--navy)">${t}</b><br>${body}
+        <div style="margin-top:4px"><a href="${href}" style="color:var(--leaf-deep);font-weight:700;font-size:12.5px">${lk} →</a></div></div></div>`).join(''));
+  // 비지배 집합 총수
+  try { const REC = await Region.gz('data_v4/recommend_v4.json.gz');
+    put('rk-tot', V4.n(Object.values(REC.sgg).reduce((a, x) => a + x.frontier.length, 0))); } catch (e) {}
+  // 데이터 출처 표 — FOOTNOTES(데이터 원천·환산·배경지도) 재사용
+  const DATA_IDS = [1, 2, 3, 5, 17, 21, 22, 23, 24, 28, 13, 19, 20];
+  const strip = h => h.replace(/<span class="fn-note">.*$/s, '').replace(/<[^>]+>/g, '');
+  const use = h => { const m = h.match(/<span class="fn-note">(.*?)<\/span>/s); return m ? m[1].replace(/^용도:\s*/, '') : ''; };
+  put('t-datasrc', '<tr><th style="text-align:left">번호</th><th style="text-align:left">자료 (발행처 · 자료명 · 판)</th><th style="text-align:left">이 분석에서의 용도</th></tr>' +
+    DATA_IDS.filter(n => FOOTNOTES[n]).map(n => `<tr><td class="l"><a href="#fn-${n}" style="color:var(--leaf-deep);font-weight:700">[${n}]</a></td>
+      <td class="l" style="white-space:normal">${strip(FOOTNOTES[n])}</td><td class="l" style="white-space:normal;font-size:12.5px">${use(FOOTNOTES[n])}</td></tr>`).join(''));
 })();
 </script>
 <script src="site.js"></script>

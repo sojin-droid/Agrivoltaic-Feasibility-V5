@@ -12,15 +12,6 @@
 <link rel="stylesheet" href="assets/v5.css">
 <script src="assets/v4.js"></script>
 <style>
-.flow7{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;align-items:stretch}
-@media(max-width:900px){.flow7{grid-template-columns:repeat(2,1fr)}}
-.flow7 a{display:block;text-decoration:none;color:var(--ink);background:var(--white);
-  border:1px solid var(--line);border-radius:10px;padding:10px 8px;text-align:center;position:relative}
-.flow7 a:hover{border-color:var(--leaf-deep)}
-.flow7 b{display:block;font-family:var(--serif);font-size:17px;color:var(--navy);margin:2px 0}
-.flow7 span{font-size:11px;color:var(--muted);line-height:1.4;word-break:keep-all}
-.flow7 a:not(:last-child)::after{content:"\2192";position:absolute;right:-11px;top:42%;color:#9aa3ae;font-size:13px}
-@media(max-width:900px){.flow7 a::after{display:none}}
 .card.local{border-color:var(--gold);background:linear-gradient(180deg,#FFF9E8,#fff)}
 </style>
 </head>
@@ -44,6 +35,7 @@
       <a href="finder.html" data-i18n="nav-finder">후보지 찾기</a>
       <a href="scenarios.html" data-i18n="nav-scn">정책 시나리오</a>
       <a href="regions.html" data-i18n="nav-regions">지역별 우선 후보</a>
+      <a href="method.html" data-i18n="nav-method">근거와 방법</a>
     </nav>
     <div style="display:flex;gap:12px;align-items:center">
       <div class="lang-toggle" role="group" aria-label="Language">
@@ -101,6 +93,8 @@
     </div>
     <div class="cmp-arrow"><b>필지 기준</b> → <b>연접 구획 기준</b> → <b>규모 눈금 이상</b> · 제약을 풀면 필지는 크게 늘지만,
       사업 단위로 묶었을 때 규모 눈금을 넘는 구획은 그보다 적다</div>
+    <div class="verdict reveal" style="margin-top:18px"><span class="vh">한 줄 결론</span>
+      <span id="one-liner" style="font-size:14.5px;line-height:1.8">—</span></div>
     <div class="cmp-note" id="cmp-note">—</div>
     <div style="display:flex;gap:14px;margin-top:22px;flex-wrap:wrap">
       <a class="btn btn-primary" href="finder.html">전국 후보지 지도 보기</a>
@@ -110,67 +104,11 @@
   </div>
 </div>
 
-<!-- ═══════════ 분석 흐름 ═══════════ -->
-<section style="padding:34px 0 6px" id="flow">
-  <div class="wrap" style="max-width:1080px">
-    <div class="sec-head"><div><p class="eyebrow">Pipeline · 분석 흐름</p>
-    <h2>전국 필지에서 우선 후보까지</h2></div>
-    <span style="font-size:12.5px;color:var(--muted)">각 단계 클릭 = 해당 화면</span></div>
-    <div class="flow7">
-      <a href="method.html"><span>전국 필지</span><b id="fl1">—</b><span>지적 원장 전수<sup class="fnref">[1]</sup></span></a>
-      <a href="method.html"><span>전·답·과수원</span><b id="fl2">—</b><span>지목 농지</span></a>
-      <a href="method.html"><span>물리·법적 1차 적격</span><b id="fl3">—</b><span>진흥지역 밖 · 구조·경사·용도 통과<br>(무필터 대조군 · 법인·국공유 <span id="fl3b">—</span>)</span></a>
-      <a href="finder.html"><span>연접 구획</span><b id="fl4">—</b><span>21m 이내 병합 · 전량<br>(진흥구역 개방 기준)</span></a>
-      <a href="finder.html"><span>대규모 후보지</span><b id="fl5">—</b><span>약 50MW 이상<br>(분석상 규모 표현)</span></a>
-      <a href="regions.html"><span>소유·계통·지역수요</span><b>3축+α</b><span>규모·계통 여유·산단 거리<br>+ 지역 전력수요 비교</span></a>
-      <a href="regions.html"><span>우선 검토 후보</span><b id="fl7">—</b><span>시군별 공동 1등<br>(209개 시군)</span></a>
-    </div>
-    <p style="font-size:12px;color:var(--muted);margin-top:8px">필지·구획 수 기준 —
-    면적·판정 조건 상세는 <a href="method.html" style="color:var(--leaf-deep)">근거와 방법</a>.</p>
-  </div>
-</section>
-
-<!-- ═══════════ 다섯 가지 핵심 결과 ═══════════ -->
-<section style="padding:36px 0 30px" id="story">
-  <div class="wrap" style="max-width:1080px">
-    <div class="sec-head"><div><p class="eyebrow">Conclusion · 핵심 결과</p>
-    <h2>다섯 가지 핵심 결과</h2></div>
-    <span style="font-size:12.5px;color:var(--muted)">모든 수치는 정본 산출<sup class="fnref">[12]</sup> —
-    각 단계에서 해당 상세 화면으로 이동 가능</span></div>
-
-    <div class="verdict reveal" style="margin-bottom:20px">
-      <span class="vh">한 줄 결론</span>
-      <span id="one-liner" style="font-size:15px;line-height:1.8">—</span>
-    </div>
-    <div id="story-steps" style="display:flex;flex-direction:column;gap:12px"></div>
-    <div class="fn" style="margin-top:14px">특구급 = <b>약 50MW 이상</b> 규모를 뜻하는 분석상 표현(법정 특구 지정과 무관) =
-    연접 농지 <span id="th50">—</span>㎡ 이상(0.045 kW/㎡ 환산<sup class="fnref">[13]</sup>) ·
-    소유 필터 = 법인·국공유 필지만 병합<sup class="fnref">[12]</sup> ·
-    이격 = 주거 200m 상한의 보수 하한<sup class="fnref">[11]</sup>.</div>
-  </div>
-</section>
-
-<!-- ═══════════ 제도 조합 막대 ═══════════ -->
-<section class="alt" id="matrix">
-  <div class="wrap">
-    <div class="sec-head">
-      <div><p class="eyebrow">Combinations · 제도 조합</p>
-      <h2>제도 조합별 설치 가능 면적 (독립 조합 4)</h2></div>
-      <a class="more" href="scenarios.html">정책 시나리오 전체 →</a>
-    </div>
-    <div class="figbox reveal">
-      <div id="bars"></div>
-      <div class="figcap">그림 1. 제도 조합별 설치 가능 면적(km²)<sup class="fnref">[12]</sup> — 네 조합은 독립이며
-      세 부분(진흥지역 밖·보호구역·진흥구역)은 겹치지 않아 정확히 가산됨. 참고: <span id="mw-note"></span>.</div>
-    </div>
-    <div class="callout-v4 reveal" id="co-reclaim"></div>
-  </div>
-</section>
-
 <!-- ═══════════ 네 화면 + 우리동네 ═══════════ -->
 <section id="explore">
   <div class="wrap">
-    <div class="sec-head"><div><p class="eyebrow">Explore</p><h2>네 가지 질문, 네 화면</h2></div></div>
+    <div class="sec-head"><div><p class="eyebrow">Explore</p><h2>다음 화면으로</h2></div>
+      <span style="font-size:12.5px;color:var(--muted)">전국 후보 → 정책 조건 → 지역 후보 → 우리동네</span></div>
     <div class="grid">
       <a class="card reveal" href="finder.html">
         <div class="meta"><span class="tag">FINDER</span><span>전국 지도 · 후보 25곳</span></div>
@@ -197,8 +135,8 @@
         <div class="foot"><span>우리동네 분석하기</span><span>→</span></div>
       </a>
     </div>
-    <p style="font-size:12.5px;color:var(--muted);margin-top:14px">데이터 출처·판정 조건·검증·한계는
-    <a href="method.html" style="color:var(--leaf-deep);font-weight:700">근거와 방법</a>에서 확인.</p>
+    <p style="font-size:12.5px;color:var(--muted);margin-top:14px">이 숫자와 방법은 어디에서 왔는가 —
+    <a href="method.html" style="color:var(--leaf-deep);font-weight:700">근거와 방법 →</a></p>
   </div>
 </section>
 
@@ -206,9 +144,9 @@
 
 <script>
 (async () => {
-  const [s, res, F, N] = await Promise.all([
-    V4.data('summary_v4'), V4.data('results_v4'), V4.data('funnel_v4'), V4.data('narrative_v4')]);
-  const M = s.matrix['전국'], K = s.matrix['간척'];
+  const [s, res, N] = await Promise.all([
+    V4.data('summary_v4'), V4.data('results_v4'), V4.data('narrative_v4')]);
+  const M = s.matrix['전국'];
   const R = N.runs, RUN = res.runs;
   const CELL_RUN = {R0: 'R0_current', R1: 'R1_protect', R2: 'R2_promo', R3: 'R3_zone_all'};
   const band = (run, ha) => (run.size_bands || []).find(b => Math.abs(b.min_ha - ha) < 0.01) || {n: 0, area_km2: 0};
@@ -246,79 +184,12 @@
   document.querySelectorAll('#b-pills button').forEach(b => b.onclick = () => setB(b.dataset.c));
   setB('R3');
 
-  // ── 흐름 도식 (funnel·results·narrative 재렌더) ──
-  put('fl1', V4.n(F.national['전체 필지']));
-  put('fl2', V4.n(F.national['지목 전·답·과수원']));
-  put('fl3', V4.n(F.national['현행법 적격(무필터 대조군)']));
-  put('fl3b', V4.n(M.R0['정본'].n));
-  put('fl4', V4.n(RUN.R2_promo.n_component));
-  put('fl5', V4.n(N.cp_big.length) + '곳');
-  try {
-    const rr = await fetch('data_v4/recommend_v4.json.gz');
-    const ds = rr.body.pipeThrough(new DecompressionStream('gzip'));
-    const RC = JSON.parse(await new Response(ds).text());
-    put('fl7', V4.n(Object.values(RC.sgg).reduce((a, x) => a + x.frontier.length, 0)) + '곳');
-  } catch (e) { put('fl7', '—'); }
-
-  // ── 제도 조합 막대 ──
-  const cells = [['R0', '진흥✕·보호✕'], ['R1', '농업보호구역 개방 시'], ['R2', '농업진흥구역 개방 시'], ['R3', '둘 다 개방 시']];
-  const max = M.R3['정본'].km2;
-  document.getElementById('bars').innerHTML = cells.map(([c, k]) => `
-    <div class="bar-row"><div><b>${k}</b><div class="bar-sub">${M[c].name}</div></div>
-      <div class="bar-track"><div class="bar-post" style="width:${100 * M[c]['정본'].km2 / max}%"></div></div>
-      <div class="bar-num">${V4.km2(M[c]['정본'].km2)} km²<div class="bar-sub">${V4.n(M[c]['정본'].n)}필지</div></div>
-    </div>`).join('');
-  put('mw-note', `개방 전 ${V4.km2(M.R0['정본'].km2)} km² ≈ ${V4.mw(M.R0['정본'].m2)} MW (0.045 kW/㎡ 가정)`);
-  document.getElementById('co-reclaim').innerHTML =
-    `<b>간척 농지는 진흥구역 개방과 함께 움직임.</b><br>간척 확정 농지의 설치 가능 면적은
-     개방 전 ${V4.km2(K.R0['정본'].km2)} km² → 농업진흥구역 개방 시 ${V4.km2(K.R2['정본'].km2)} km²
-     (${V4.n(K.R2['정본'].n)}필지)<sup class="fnref">[3]</sup>.<br>간척 농지 대부분이 농업진흥구역 안에 있기 때문.
-     <a href="scenarios.html#decree"><b>시행령 제정안의 부지 한정 분석 →</b></a>`;
-
   // ── 다섯 가지 핵심 결과 (narrative_v4 렌더 — 로직 원문 유지) ──
-  const og = k => N.owner_setback.find(g => g.group === k);
-  const outC = og('간척지 외 법인'), inC = og('간척지 내 법인'), inO = og('간척지 내 비법인');
-  const kk = m2 => V4.km2(m2 / 1e6);
   const cpBigRec = N.cp_big.filter(b => b.reclaim_pct >= 50).length;
-  const cpAnchorTop = N.cp_big_anchor[0] || {mw: 0};
-  const drop = k => Math.round(100 * (R[k].component_km2 - R[k + '_SB'].component_km2) / R[k].component_km2);
-  const cut = (a, b) => Math.round(100 * (a - b) / a);
-  put('th50', V4.n(N.threshold.mw50_m2));
   document.getElementById('one-liner').innerHTML =
     `농업진흥구역이 재생에너지지구로 개방되면, <b>법인·국공유 농지만으로</b> 50MW 이상 구획이
      전국 <b>${V4.n(R.R0_current.ge50)}곳에서 ${V4.n(R.R2_promo.ge50)}곳
      (합 약 ${V4.n(R.R2_promo.ge50_mw)}MW)</b>이 되며, 그중 ${V4.n(cpBigRec)}곳이 <b>간척 지구</b>다.`;
-  const STEPS = [
-    ['①', '현재 수준', `개방 전(진흥✕·보호✕) 법인·국공유 농지는 <b>${V4.km2(M.R0['정본'].km2)} km²</b> —
-      전체(개인 포함) ${V4.km2(M.R0['대조군'].km2)} km²의
-      <b>${(100*M.R0['정본'].km2/M.R0['대조군'].km2).toFixed(1)}%</b>이고, 50MW 이상 구획은
-      <b>${V4.n(R.R0_current.ge50)}곳</b>.`, 'scenarios.html#t32', '정책 시나리오 표 5'],
-    ['②', '왜 늘려야 하는가', `개인 포함 50MW 이상 ${V4.n(R['R0_current@all'].ge50)}곳 중 면적의
-      <b>${V4.n(N.big_composition['R0_current@all'].indiv_share_pct)}%가 개인 소유</b>(동의 조직 전제) —
-      법인·국공유만 세면 <b>${V4.n(R.R0_current.ge50)}곳</b>(제주 서귀포 ${V4.n(cpAnchorTop.mw)}MW).`,
-     'finder.html', '후보지 찾기 — 전국 지도'],
-    ['③', '두 수단의 증분', `보호구역 개방 +${V4.km2((M.R1['정본'].m2 - M.R0['정본'].m2)/1e6)} km² ·
-      진흥구역 개방 <b>+${V4.km2((M.R2['정본'].m2 - M.R0['정본'].m2)/1e6)} km²</b> —
-      진흥구역 개방 시 50MW 이상 <b>${V4.n(R.R2_promo.ge50)}곳(합 약 ${V4.n(R.R2_promo.ge50_mw)}MW)</b>,
-      그중 ${V4.n(cpBigRec)}곳이 간척 지구.`, 'finder.html', `후보지 찾기 — ${V4.n(R.R2_promo.ge50)}곳의 소재와 지도`],
-    ['④', '이격 단서', `주거 이격 200m 보수 적용 시 개방 전 분 −${drop('R0_current')}%, 진흥구역 개방분
-      −${drop('R2_promo')}% — <b>50MW 이상은 ${V4.n(R.R2_promo.ge50)} → ${V4.n(R.R2_promo_SB.ge50)}곳</b>
-      (간척 평야는 주거에서 멂).`, 'scenarios.html#t32', '정책 시나리오 표 5 · 이격 조건'],
-    ['⑤', '간척·법인 갭', `시행령 제정안은 <b>농업회사법인</b>의 부지를 매립지등으로 한정 — 접근 면적
-      <b>${kk(outC.anchor_m2)} → ${kk(inC.anchor_m2)} km²</b>(−${cut(outC.anchor_m2, inC.anchor_m2)}%).
-      진흥구역 개방이 동반돼야 간척 내 법인 ${kk(inC.all_m2)} km² + 임차 풀 ${kk(inO.all_m2)} km²가 열리며,
-      법인·국공유 비중은 전국 ${(100*M.R2['정본'].km2/M.R2['대조군'].km2).toFixed(1)}% 대
-      <b>간척지 ${(100*K.R2['정본'].km2/K.R2['대조군'].km2).toFixed(1)}%</b>.`,
-     'scenarios.html#decree', '시행령 제정안 영향 — 부지 한정 조문·수치'],
-  ];
-  document.getElementById('story-steps').innerHTML = STEPS.map(([no, t, body, href, lk], _i) => `
-    <div class="figbox reveal" id="s${_i + 1}" style="display:grid;grid-template-columns:44px 1fr;gap:14px;align-items:start">
-      <div style="font-family:var(--serif);font-size:26px;font-weight:700;color:var(--gold);line-height:1.2">${no}</div>
-      <div style="font-size:13.5px;line-height:1.85;word-break:keep-all">
-        <b style="font-family:var(--serif);font-size:15px;color:var(--navy)">${t}</b><br>${body}
-        <div style="margin-top:6px"><a href="${href}" style="color:var(--leaf-deep);font-weight:700;font-size:12.5px">${lk} →</a></div>
-      </div>
-    </div>`).join('');
   V4.footer();
 })();
 </script>
