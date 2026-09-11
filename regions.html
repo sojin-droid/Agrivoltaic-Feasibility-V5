@@ -220,9 +220,7 @@
     document.getElementById('recStamp').textContent =
       `후보 클러스터 ${V4.n(S.n_cc)}개 · 최소 ${Cand.MW_LBL[minM2]} 이상 모집단 ${V4.n(F.n_pop)}개 · 공동 1등 ${F.frontier.length}곳 · 진흥구역 개방(R2) 기준 · 규칙 cond-inv`;
     document.getElementById('recMapCap').textContent = CAP_CC;
-    const lg = document.getElementById('ccLegend'); lg.hidden = false;
-    lg.innerHTML = Object.keys(Cand.BAND_FILL).map(k => `<span><i style="background:${Cand.BAND_FILL[k]}"></i>${Cand.BAND_LBL[k]}</span>`).join('') +
-      '<span><i style="border:2px solid #0C356A;background:#fff"></i>다구획 클러스터</span>';
+    const lg = document.getElementById('ccLegend'); lg.hidden = false; lg.innerHTML = Cand.legendHTML();
     Cand.table(document.getElementById('recTbl'), cur, minM2, {axis, pickId: ccPick, compFrontier: recCur.frontier, onPick: ccPickFn});
     document.getElementById('axisNote').innerHTML = Cand.note(cur, minM2, axis);
     document.getElementById('recCtl').innerHTML = `구획 단위(현행 정본) 공동 1등 ${recCur.frontier.length}곳 · 모집단 ${V4.n(recCur.n_block)}개(≥11,111㎡) —
@@ -234,7 +232,7 @@
     if (reload) { recPar.clearLayers(); ccGeoCache[cur] = ccGeoCache[cur] || await Cand.geo(cur); }
     if (c0 !== cur) return;
     recBlk.clearLayers();
-    if (ccGeoCache[cur]) recBlk.addLayer(Cand.layer(ccGeoCache[cur], {minM2, pane: 'recBlocks'}));
+    if (ccGeoCache[cur]) { recBlk.addLayer(Cand.layer(ccGeoCache[cur], {minM2, pane: 'recBlocks'})); recBlk.addLayer(Cand.hullLayer(ccGeoCache[cur], {minM2, pane: 'recBlocks'})); }
     if (reload && coords.length) recGeo.fitBounds(coords, {padding: [30, 30], maxZoom: 12});
   }
 
