@@ -49,7 +49,7 @@ input[type=number].coef{width:80px;font:inherit;padding:2px 6px;border:1px solid
     <nav class="menu" id="menu">
       <a href="index.html" data-i18n="nav-index">한눈에 보기</a>
       <a href="finder.html" data-i18n="nav-finder">후보지 찾기</a>
-      <a class="active" href="scenarios.html" data-i18n="nav-scn">정책 시나리오</a>
+      <a class="active" aria-current="page" href="scenarios.html" data-i18n="nav-scn">정책 시나리오</a>
       <a href="regions.html" data-i18n="nav-regions">지역별 우선 후보</a>
       <a href="method.html" data-i18n="nav-method">근거와 방법</a>
     </nav>
@@ -65,7 +65,7 @@ input[type=number].coef{width:80px;font:inherit;padding:2px 6px;border:1px solid
 </header>
 
 <div class="page-hero">
-  <div class="wrap" style="max-width:960px">
+  <div class="wrap">
     <p class="eyebrow">Scenarios · 정책 조건 조합</p>
     <h1>정책 조건을 바꾸면 어떻게 달라지는가</h1>
     <p class="lede">정책 시나리오 = 여러 제약 조건의 조합. 지역을 고르고 농업진흥구역·농업보호구역 개방, 이격거리, 매립지 범위를
@@ -83,14 +83,18 @@ input[type=number].coef{width:80px;font:inherit;padding:2px 6px;border:1px solid
 </div>
 
 <!-- ═══════════ 조건 설정기 — 지역(광역→시군) × 제약 조건 조합 ═══════════ -->
-<section style="padding:44px 0 36px" id="builder">
-  <div class="wrap" style="max-width:1120px">
-    <div class="sec-head"><div><p class="eyebrow">Step 1 · 지역</p><h2>어느 지역을 볼까요</h2></div>
-      <span style="font-size:12.5px;color:var(--muted)">광역지역 → 시군 · 전국 전체도 가능</span></div>
+<section id="builder">
+  <div class="wrap">
+    <div class="sec-head"><div><p class="eyebrow">Builder · 조건 설정과 결과</p><h2>조건을 정하면 결과가 바로 바뀝니다</h2></div>
+      <span style="font-size:12.5px;color:var(--muted)">왼쪽에서 지역·조건을 고르고 오른쪽에서 결과를 읽음</span></div>
+    <div class="scn-layout">
+    <aside class="scn-settings" aria-label="조건 설정">
+    <div>
+    <h3 class="step">Step 1 · 지역</h3><div class="step-title">어느 지역을 볼까요 <span style="font-size:12px;color:var(--muted);font-family:var(--sans)">— 광역 → 시군 · 전국 가능</span></div>
     <div class="figbox" id="rp-scn"></div>
-
-    <div class="sec-head" style="margin-top:30px"><div><p class="eyebrow">Step 2 · 제약 조건</p><h2>어떤 제약을 풀어 볼까요</h2></div>
-      <span style="font-size:12.5px;color:var(--muted)">기본값 = 농업진흥구역 개방(R2) · 분석 기준 필지</span></div>
+    </div>
+    <div>
+    <h3 class="step">Step 2 · 제약 조건</h3><div class="step-title">어떤 제약을 풀어 볼까요 <span style="font-size:12px;color:var(--muted);font-family:var(--sans)">— 기본값 R2 · 분석 기준 필지</span></div>
     <div class="cond-grid">
       <div class="cond"><h4>농업진흥구역</h4>
         <div class="seg" data-k="promo"><button data-v="0">유지(개방 안 함)</button><button data-v="1" class="on">개방</button></div>
@@ -116,8 +120,11 @@ input[type=number].coef{width:80px;font:inherit;padding:2px 6px;border:1px solid
         <div class="hint-s">환산 계수는 표기 전용 — 면적이 1차 산출<sup class="fnref">[13]</sup>. 큐브 생성 <span id="e-built" style="font-family:var(--mono)">—</span></div></div>
     </div>
 
-    <div class="sec-head" style="margin-top:30px"><div><p class="eyebrow">Result · 결과</p><h2 id="r-title">—</h2></div>
-      <span id="r-badge"></span></div>
+    </div>
+    </aside>
+    <div class="scn-results" aria-label="결과">
+    <div><h3 class="step">Result · 결과</h3>
+      <div class="step-title" style="display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:baseline"><span id="r-title">—</span><span id="r-badge"></span></div></div>
     <div class="res-cards">
       <div class="res-card hi"><div class="k">후보 필지 면적</div><div class="v"><span id="r-area">—</span><small> km²</small></div><div class="d"><span id="r-n">—</span>필지 · 참고 <span id="r-mw">—</span></div></div>
       <div class="res-card"><div class="k">개방 전 대비 증감</div><div class="v" id="r-delta">—</div><div class="d">같은 소유·이격·범위에서 진흥·보호 모두 유지(개방 전)와 비교 · ㎡ 원값</div></div>
@@ -138,6 +145,8 @@ input[type=number].coef{width:80px;font:inherit;padding:2px 6px;border:1px solid
       <div style="overflow-x:auto;margin-top:8px"><table class="v4" id="eTbl"></table></div>
       <div style="font-size:12px;color:var(--muted)">표시 정렬: 면적(순위 아님) · 시군 귀속은 필지 단위 · 상위 12곳 · 시군 이름 클릭 = 그 시군으로 이동.</div>
     </details>
+    </div>
+    </div>
   </div>
 </section>
 <!-- ═══════════ §5 정책 시나리오 증분 지도 (구 지도 탭 이식 — V5 1단계 통합) ═══════════ -->
@@ -166,7 +175,7 @@ input[type=number].coef{width:80px;font:inherit;padding:2px 6px;border:1px solid
  font-size:12px;margin-top:10px;word-break:keep-all}
 </style>
 
-<section class="alt" style="padding:56px 0" id="scnmap">
+<section class="alt" id="scnmap">
   <div class="wrap">
     <div class="sec-head"><div><p class="eyebrow">Step 3 · 지도</p>
     <h2>지도 — 개방으로 늘어나는 구획</h2></div>
@@ -492,7 +501,7 @@ input[type=number].coef{width:80px;font:inherit;padding:2px 6px;border:1px solid
 })();
 </script>
 <!-- ═══════════ 표 ═══════════ -->
-<section class="alt" style="padding:56px 0" id="tables">
+<section class="alt" id="tables">
   <div class="wrap">
     <div class="sec-head"><div><p class="eyebrow">Tables</p><h2>전체 표</h2></div></div>
     <div class="figbox reveal" style="margin-bottom:22px">

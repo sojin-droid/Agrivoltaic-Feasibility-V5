@@ -36,7 +36,7 @@
       <a href="index.html" data-i18n="nav-index">한눈에 보기</a>
       <a href="finder.html" data-i18n="nav-finder">후보지 찾기</a>
       <a href="scenarios.html" data-i18n="nav-scn">정책 시나리오</a>
-      <a class="active" href="regions.html" data-i18n="nav-regions">지역별 우선 후보</a>
+      <a class="active" aria-current="page" href="regions.html" data-i18n="nav-regions">지역별 우선 후보</a>
       <a href="method.html" data-i18n="nav-method">근거와 방법</a>
     </nav>
     <div style="display:flex;gap:12px;align-items:center">
@@ -51,7 +51,7 @@
 </header>
 
 <div class="page-hero">
-  <div class="wrap" style="max-width:960px">
+  <div class="wrap">
     <p class="eyebrow">Regions · 지역별 우선 후보</p>
     <h1>우리 지역에서는 어디를 우선 검토할 것인가</h1>
     <p class="lede">시군을 고르면 그 안의 후보 구획 가운데 <b>공동 1등 후보</b>가 지도와 표에 나타남 —
@@ -62,8 +62,8 @@
   </div>
 </div>
 
-<section style="padding:40px 0 30px">
-  <div class="wrap" style="max-width:1120px">
+<section>
+  <div class="wrap">
     <div class="sec-head"><div><p class="eyebrow">Step 1 · 지역</p><h2>어느 시군을 볼까요</h2></div>
       <span style="font-size:12.5px;color:var(--muted)" id="recStamp">—</span></div>
     <div class="figbox" id="rp-rec"></div>
@@ -76,9 +76,9 @@
       <div class="axis-tgl" id="axisTgl">
         <span class="q">무엇을 우선해서 볼까요?</span>
         <button data-ax="" class="on">전체 보기</button>
-        <button data-ax="ra"><i style="background:#C2410C"></i>면적</button>
-        <button data-ax="ri"><i style="background:#7B4BB7"></i>산단 거리</button>
-        <button data-ax="rl"><i style="background:#2A9D8F"></i>계통 여유용량</button>
+        <button data-ax="ra"><i style="background:#0C356A"></i>면적</button>
+        <button data-ax="ri"><i style="background:#2A9D8F"></i>산단 거리</button>
+        <button data-ax="rl"><i style="background:#3E7A2E"></i>계통 여유용량</button>
       </div>
       <div class="legend-star" id="axisNote">조건을 누르면 그 기준에서 이 시군 구획 전체 중 <b>3위 이내</b>인 후보가 지도와 표에서 강조됨.
         ★ 3개 = 세 조건 모두 3위 이내 · ★ 2개 = 두 조건 · ★ 1개 = 한 조건 — 순위는 정본의 축별 순위 열이며 임의 점수가 아님.</div>
@@ -146,7 +146,7 @@
   const recPCanvas = L.canvas({pane: 'recParcels', padding: 0.3});
   const recPar = L.layerGroup().addTo(recGeo), recBlk = L.layerGroup().addTo(recGeo), recMk = L.layerGroup().addTo(recGeo);
   let recMkRef = {}, recCur = null, recSelLab = null, axis = '';
-  const AXC = {ra: '#C2410C', ri: '#7B4BB7', rl: '#2A9D8F'};
+  const AXC = {ra: '#0C356A', ri: '#2A9D8F', rl: '#3E7A2E'};
   const TOP = 3;                       // "상위" = 그 축에서 시군 구획 전체 중 3위 이내 (표시 규약)
   const isTop = (f, ax) => f[ax] != null && f[ax] <= TOP;
   const stars = f => ['ra', 'ri', 'rl'].map(ax => `<span class="${isTop(f, ax) ? 'on' : 'off'}" title="${{ra: '면적', ri: '산단 거리', rl: '계통 여유'}[ax]} ${f[ax] ?? '—'}위">★</span>`).join('');

@@ -125,3 +125,19 @@ const V4 = {
         `<a href="method.html"><b>출처·방법론은 근거와 방법 →</b></a> · <a href="local.html">우리동네 고르기 →</a></div>`;
   },
 };
+
+// ── 접근성: 토글의 켜짐 상태를 색만이 아니라 aria-pressed로도 노출 (표시 전용, 로직 무관) ──
+document.addEventListener('DOMContentLoaded', () => {
+  const SEL = '.seg button, .axis-tgl button, .cmp-pills button, .rp-metro button, .rp-sgg button, .allbtn, .scn-btns button, .sb-toggle button, .opt';
+  const mark = b => b.setAttribute('aria-pressed', b.classList.contains('on') ? 'true' : 'false');
+  const sync = () => document.querySelectorAll(SEL).forEach(mark);
+  sync();
+  new MutationObserver(ms => {
+    let full = false;
+    for (const m of ms) {
+      if (m.type === 'attributes' && m.target.matches && m.target.matches(SEL)) mark(m.target);
+      else if (m.type === 'childList' && m.addedNodes.length) full = true;
+    }
+    if (full) sync();
+  }).observe(document.body, {subtree: true, childList: true, attributes: true, attributeFilter: ['class']});
+});

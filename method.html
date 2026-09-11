@@ -67,7 +67,7 @@ table.mx .ref{color:var(--muted)}
       <a href="finder.html" data-i18n="nav-finder">후보지 찾기</a>
       <a href="scenarios.html" data-i18n="nav-scn">정책 시나리오</a>
       <a href="regions.html" data-i18n="nav-regions">지역별 우선 후보</a>
-      <a class="active" href="method.html" data-i18n="nav-method">근거와 방법</a>
+      <a class="active" aria-current="page" href="method.html" data-i18n="nav-method">근거와 방법</a>
     </nav>
     <div style="display:flex;gap:12px;align-items:center">
       <div class="lang-toggle" role="group" aria-label="Language">
@@ -81,7 +81,7 @@ table.mx .ref{color:var(--muted)}
 </header>
 
 <div class="page-hero">
-  <div class="wrap" style="max-width:960px">
+  <div class="wrap">
     <p class="eyebrow">Method · 근거와 방법</p>
     <h1>이 숫자와 방법은 어디에서 왔는가</h1>
     <p class="lede">분석 화면은 결과에 집중하고, 배경·법령·방법·데이터·출처는 이 한 페이지에 모아 둠.
@@ -98,8 +98,8 @@ table.mx .ref{color:var(--muted)}
 </div>
 
 <!-- ═══════════ 1. 연구·분석 배경 ═══════════ -->
-<section id="background" style="padding:40px 0 10px">
-  <div class="wrap" style="max-width:1080px">
+<section id="background">
+  <div class="wrap">
     <div class="sec-head"><div><p class="eyebrow">1 · 연구·분석 배경</p><h2>영농형 태양광과 이 분석의 목적</h2></div></div>
     <div class="figbox" style="font-size:14px;line-height:1.85;word-break:keep-all">
       <p style="margin:0 0 8px"><b>영농형 태양광</b> — 농사를 계속 지으면서 그 위 공간에서 발전하는 방식. 농지가 농지로 유지됨<sup class="fnref">[10]</sup>.
@@ -117,8 +117,8 @@ table.mx .ref{color:var(--muted)}
 </section>
 
 <!-- ═══════════ 2. 법·제도적 근거 ═══════════ -->
-<section class="alt" id="law" style="padding:40px 0 20px">
-  <div class="wrap" style="max-width:1080px">
+<section class="alt" id="law">
+  <div class="wrap">
     <div class="sec-head"><div><p class="eyebrow">2 · 법·제도적 근거</p><h2>어떤 법령을 어떻게 읽어 시나리오를 만들었는가</h2></div>
       <span style="font-size:12.5px;color:var(--muted)">법률·시행령·시행규칙·고시 원문은 아래 Sources [4]–[11]·[15]·[16]·[25]–[27]·[29]</span></div>
     <h3 class="art-h" style="font-size:17px">2-1. 왜 네 조합(R0–R3)인가</h3>
@@ -129,7 +129,7 @@ table.mx .ref{color:var(--muted)}
     <p style="font-size:13px;color:var(--muted);margin:8px 0 0">본법: 「영농형 태양광 발전사업의 활성화 및 지원에 관한 법률」 법률 제21804호(2026-06-16 공포 · 2026-12-17 시행)<sup class="fnref">[10]</sup>.
       R1–R3은 이 법률의 재생에너지지구 지정 범위(하위법령 설계변수)를 전제로 한 가정적 시나리오이며 확정 제도가 아님.
       이격거리는 「재생에너지 개발·이용·보급 촉진법」 상한제(주거 200m)<sup class="fnref">[11]</sup>를 전국 일률 보수 하한으로 적용.</p>
-    <div class="wrap art" style="max-width:860px">
+    <div class="art" style="padding:0">
 
   <div class="callout-v4"><b>표기 단서 — 제정안(의견조회판).</b> 아래 시행령·시행규칙
   조문은 2026년 7월 관계기관 의견조회판<sup class="fnref">[25]</sup><sup class="fnref">[26]</sup>
@@ -210,14 +210,14 @@ table.mx .ref{color:var(--muted)}
 </section>
 
 <!-- ═══════════ 3. 공간분석 방법 ═══════════ -->
-<section id="spatial" style="padding:40px 0 0">
-  <div class="wrap" style="max-width:1080px">
+<section id="spatial">
+  <div class="wrap">
     <div class="sec-head"><div><p class="eyebrow">3 · 공간분석 방법</p><h2>원천 필지에서 규모 조건 이상 구획까지</h2></div>
       <span style="font-size:12.5px;color:var(--muted)">원천 필지 → 입지 적격 필터 → 연접 구획 → 규모 눈금 · 계통 컨텍스트 · 면적 환산</span></div>
   </div>
 </section>
-<section style="padding:26px 0 8px">
-  <div class="wrap" style="max-width:1080px">
+<section>
+  <div class="wrap">
     <div class="sec-head"><div><p class="eyebrow">3-1 · 분석 흐름</p><h2>분석 흐름 한 장</h2></div></div>
     <div class="figbox" style="padding:16px">
       <svg viewBox="0 0 980 210" style="width:100%;height:auto;display:block" font-family="var(--sans)" font-size="12.5">
@@ -262,7 +262,7 @@ table.mx .ref{color:var(--muted)}
     원천 자료부터 발행까지. 세부 조건·검증은 아래 각 절.</p>
   </div>
 </section>
-<section style="padding:26px 0 8px">
+<section>
   <div class="wrap">
     <div class="sec-head"><div><p class="eyebrow">3-2 · 필지 선별</p><h2>필지 선별 단계 (전국)</h2></div></div>
     <div class="figbox reveal">
@@ -273,7 +273,7 @@ table.mx .ref{color:var(--muted)}
     </div>
   </div>
 </section>
-<section class="alt" style="padding:26px 0 8px">
+<section class="alt">
   <div class="wrap">
     <div class="sec-head"><div><p class="eyebrow">3-3 · 판정 조건과 연접 기준</p><h2>판정 조건 — 한 필지가 통과해야 하는 검사</h2></div></div>
     <div class="figbox reveal">
@@ -309,7 +309,7 @@ table.mx .ref{color:var(--muted)}
     </div>
   </div>
 </section>
-<section style="padding:26px 0 8px">
+<section>
   <div class="wrap">
     <div class="sec-head"><div><p class="eyebrow">3-4 · 검증 체계와 데이터 처리 규칙</p><h2>재현·검증 체계</h2></div></div>
     <div class="grid two">
@@ -377,13 +377,13 @@ table.mx .ref{color:var(--muted)}
     </details>
   </div>
 </section>
-<section class="alt" style="padding:26px 0 8px">
+<section class="alt">
   <div class="wrap">
     <div class="sec-head"><div><p class="eyebrow">3-5 · 단위·환산 가정</p><h2>단위·환산 가정</h2></div></div>
     <div class="figbox reveal"><div style="font-size:14.5px;word-break:keep-all;line-height:1.8" id="unit-note"></div></div>
   </div>
 </section>
-<section style="padding:26px 0 8px" id="caveats">
+<section id="caveats">
   <div class="wrap">
     <div class="sec-head"><div><p class="eyebrow">3-6 · 한계</p><h2>한계</h2></div></div>
     <div class="figbox reveal">
@@ -420,8 +420,8 @@ table.mx .ref{color:var(--muted)}
 </section>
 
 <!-- ═══════════ 4. 우선 후보 선정 방법 ═══════════ -->
-<section class="alt" id="ranking" style="padding:40px 0 30px">
-  <div class="wrap" style="max-width:1080px">
+<section class="alt" id="ranking">
+  <div class="wrap">
     <div class="sec-head"><div><p class="eyebrow">4 · 우선 후보 선정 방법</p><h2>공동 1등 후보 — 비지배 집합</h2></div>
       <span style="font-size:12.5px;color:var(--muted)">지역별 우선 후보 · 우리동네 고르기 화면의 표가 이 방법으로 만들어짐</span></div>
     <div class="figbox" style="font-size:13.5px;line-height:1.85;word-break:keep-all">
@@ -440,8 +440,8 @@ table.mx .ref{color:var(--muted)}
 </section>
 
 <!-- ═══════════ 5. 데이터 출처 ═══════════ -->
-<section id="data" style="padding:40px 0 0">
-  <div class="wrap" style="max-width:1080px">
+<section id="data">
+  <div class="wrap">
     <div class="sec-head"><div><p class="eyebrow">5 · 데이터 출처</p><h2>어떤 자료를 어디에 썼는가</h2></div>
       <span style="font-size:12.5px;color:var(--muted)">5-1 요약 표 · 5-2 내부 계보 · 전문은 6 Sources</span></div>
     <div class="figbox">
@@ -450,7 +450,7 @@ table.mx .ref{color:var(--muted)}
     </div>
   </div>
 </section>
-<section style="padding:26px 0 8px" id="lineage">
+<section id="lineage">
   <div class="wrap">
     <div class="sec-head"><div><p class="eyebrow">5-2 · 데이터 계보 (내부 기록)</p><h2>데이터 계보</h2></div>
     <span style="font-size:12.5px;color:var(--muted)">층위: L0 원시 취득 → L1 정제·판정 → L2 시나리오·산출</span></div>
@@ -466,7 +466,7 @@ table.mx .ref{color:var(--muted)}
     </div>
   </div>
 </section>
-<section style="padding:10px 0 30px" id="contact"><div class="wrap" style="max-width:1080px">
+<section class="sec-tight" id="contact"><div class="wrap">
   <p style="font-size:13.5px">문의 — PLANiT Institute · 영농형 태양광 섹터 · <a href="https://planit.institute/" style="color:var(--leaf-deep)"><b>planit.institute</b></a></p>
 </div></section>
 
