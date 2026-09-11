@@ -14,6 +14,8 @@
 <script src="assets/vendor/leaflet/leaflet.js"></script>
 <script src="assets/v4.js"></script>
 <script src="assets/region.js"></script>
+<link rel="stylesheet" href="assets/cand.css">
+<script src="assets/cand.js"></script>
 <style>
 .hero-local{background:linear-gradient(180deg,#EEF4FA,#fff);border-bottom:1px solid var(--line);text-align:center;padding:64px 24px 54px}
 .hero-local h1{font-size:clamp(28px,4vw,42px)}
@@ -94,11 +96,18 @@
       <div class="res-cards" id="rCards"></div>
       <div class="fn" id="rCtl" style="margin-top:8px">—</div>
 
-      <h3 class="rpt-h">4. 주요 후보 클러스터 — 지도</h3>
+      <h3 class="rpt-h">4. 후보 클러스터·구획 — 지도</h3>
+      <div class="cand-ctl no-print" id="mapMode"></div>
       <div id="localMap"></div>
+      <div class="cand-legend" id="ccLegendL" hidden></div>
       <div class="fn" id="rMapCap" style="margin-top:6px">—</div>
 
       <h3 class="rpt-h" id="rTblH">5. 공동 1등 후보</h3>
+      <div class="cand-ctl no-print" id="minCtlL"></div>
+      <div class="cand-tabs no-print" id="ccTabs" hidden>
+        <button type="button" data-t="cc" class="on">후보 클러스터 기준</button>
+        <button type="button" data-t="comp">구획 기준(연접 21m)</button>
+      </div>
       <div class="axis-tgl no-print" id="axisL" style="margin-bottom:8px">
         <span class="q">우선 기준</span>
         <button data-ax="" class="on">전체</button>
@@ -106,8 +115,12 @@
         <button data-ax="ri"><i style="background:#2A9D8F"></i>산단 거리</button>
         <button data-ax="rl"><i style="background:#3E7A2E"></i>계통 여유용량</button>
       </div>
-      <div style="overflow-x:auto"><table class="v4" id="recTblL"></table></div>
-      <div class="callout-v4" id="rExplain" style="margin-top:8px">—</div>
+      <div class="cand-pane" id="paneCC" hidden><h4>공동 1등 후보 클러스터</h4>
+        <div style="overflow-x:auto"><table class="v4" id="recTblCC"></table></div>
+        <div class="callout-v4" id="rExplainCC" style="margin-top:8px">—</div></div>
+      <div class="cand-pane" id="paneComp"><h4>공동 1등 구획(연접 21m)</h4>
+        <div style="overflow-x:auto"><table class="v4" id="recTblL"></table></div>
+        <div class="callout-v4" id="rExplain" style="margin-top:8px">—</div></div>
 
       <h3 class="rpt-h">6. 방법론</h3>
       <div style="font-size:13.5px;line-height:1.8;word-break:keep-all" id="rMethod">—</div>
@@ -131,7 +144,9 @@
   let REC = null;
 
   // ── 상태 ──
-  const st = {sgg: null, emd: null, promo: false, prot: false, sb: true, prio: 'scale', step: 1, axis: ''};
+  const st = {sgg: null, emd: null, promo: false, prot: false, sb: true, prio: 'scale', step: 1, axis: '',
+              minM2: Cand.DEFAULT_MIN, tab: 'cc', mapMode: 'cc'};   // V5.2: 최소 표시 규모(모집단 필터)·표 단위·지도 레이어
+  await Cand.rec();
 
   // ── 검색 ──
   const addr = $('addr'), sres = $('sres');
@@ -190,7 +205,9 @@
         ${opt('prio', 'ind', '산업단지 연계 우선', '산업단지와 가까운 후보를 먼저 봄', st.prio === 'ind')}
         ${opt('prio', 'grid', '계통 연계 우선', '계통 여유가 큰 후보를 먼저 봄', st.prio === 'grid')}
         ${opt('prio', 'recl', '매립지 우선', '간척 원장 등재 비중이 높은 후보를 강조', st.prio === 'recl')}
-        ${opt('prio', 'farm', '농지 보전 우선', '농업진흥구역·보호구역을 열지 않는 현행 조건으로 되돌려 봄', st.prio === 'farm')}</div>` + nav(true, true, '다음 → 확인');
+        ${opt('prio', 'farm', '농지 보전 우선', '농업진흥구역·보호구역을 열지 않는 현행 조건으로 되돌려 봄', st.prio === 'farm')}</div>
+        <h4 style="margin:14px 0 6px">최소 표시 규모 <small style="font-weight:400;color:var(--muted)">— 후보 클러스터 생성 조건이 아님. 지도·표·공동 1등 판정의 모집단을 이 규모 이상으로 한정(0.045 kW/㎡ 참고 환산)</small></h4>
+        <div class="opts">${Cand.FILTERS.map(m => opt('min', String(m), Cand.MW_LBL[m], m === Cand.DEFAULT_MIN ? '기본값' : `${(m / 1e4).toLocaleString('ko-KR', {maximumFractionDigits: 1})} ha 등가 이상`, st.minM2 === m)).join('')}</div>` + nav(true, true, '다음 → 확인');
     } else {
       html = `<h2>분석 실행</h2><p class="sub">아래 조건으로 후보지를 찾습니다.</p>
         <ul class="summary-box">${condList().map(c => `<li>${c}</li>`).join('')}</ul>` + nav(true, true, '이 조건으로 후보지 찾기');
@@ -200,6 +217,7 @@
     $('wzCard').querySelectorAll('.opt:not([disabled])').forEach(b => b.onclick = () => {
       const k = b.dataset.k, v = b.dataset.v;
       if (k === 'prio') { st.prio = v; if (v === 'farm') { st.promo = false; st.prot = false; } }
+      else if (k === 'min') st.minM2 = +v;
       else st[k] = v === '1';
       openWizard(step);
     });
@@ -216,6 +234,7 @@
             `농업보호구역: ${st.prot ? '포함(개방 가정)' : '포함하지 않음(현행)'}`,
             `이격거리: ${st.sb ? '현행 적용 — 주거 200m 보수 하한' : '미적용'}`,
             `정책 우선조건: ${PRIO[st.prio][0]}`,
+            `최소 표시 규모: ${Cand.MW_LBL[st.minM2]} — 후보 클러스터 모집단 필터(생성 조건 아님)`,
             `분석 기준 필지: 법인·국공유 소유 농지(개인 소유 제외) · 연접 τ=21m`];
   }
 
@@ -242,12 +261,18 @@
     const fs = gj ? gj.features : [], A = x => x.properties.a || 0;
     const b3 = fs.filter(x => A(x) >= 0.0667), b50 = fs.filter(x => A(x) >= 1.111);
     const d = (cur.m2 - base.m2) / 1e6;
+    // V5.2 후보 클러스터 층 — 지역별 우선 후보와 같은 파일(recommend_cc_v4 · cand/{sgg}_R2_promo)·같은 함수(Cand.*)
+    const isR2 = rn === 'R2_promo';
+    const CC = isR2 && Cand.has(st.sgg) ? Cand.info(st.sgg) : null;
+    const ccgj = CC ? await Cand.geo(st.sgg) : null;
+    const CF = CC ? Cand.frontier(st.sgg, st.minM2) : null;
     put('rCards', `
       <div class="res-card hi"><div class="k">후보 필지 면적</div><div class="v">${km2(cur.m2)}<small> km²</small></div><div class="d">${V4.n(cur.n)}필지 · 참고 ${(cur.m2 * 0.045 / 1000).toLocaleString('ko-KR', {maximumFractionDigits: 0})} MW</div></div>
       <div class="res-card"><div class="k">개방 전 대비</div><div class="v">${d === 0 ? '기준' : (d > 0 ? '+' : '') + km2(d * 1e6, 1) + '<small> km²</small>'}</div><div class="d">같은 이격 조건에서 진흥·보호 모두 유지(현행)와 비교</div></div>
-      <div class="res-card"><div class="k">후보 클러스터 수</div><div class="v">${gj ? V4.n(fs.length) + '<small>개</small>' : '—'}</div><div class="d">${gj ? `구획 면적 합 약 ${fs.reduce((s, x) => s + A(x), 0).toLocaleString('ko-KR', {maximumFractionDigits: 2})} km² (구획 파일 합산·표시용)` : '구획 파일 없음'}</div></div>
-      <div class="res-card"><div class="k">3MW 눈금 이상</div><div class="v">${gj ? V4.n(b3.length) + '<small>곳</small>' : '—'}</div><div class="d">66,667㎡ 이상 구획 · 읽기 눈금</div></div>
-      <div class="res-card"><div class="k">대규모(≥50MW 등가)</div><div class="v">${gj ? V4.n(b50.length) + '<small>곳</small>' : '—'}</div><div class="d">1.111km² 이상 구획 · 법정 기준 아님</div></div>`);
+      <div class="res-card"><div class="k">연접 구획 수(21m)</div><div class="v">${gj ? V4.n(fs.length) + '<small>개</small>' : '—'}</div><div class="d">${gj ? `구획 면적 합 약 ${fs.reduce((s, x) => s + A(x), 0).toLocaleString('ko-KR', {maximumFractionDigits: 2})} km² (구획 파일 합산·표시용)` : '구획 파일 없음'}</div></div>
+      <div class="res-card ${CC ? 'hi' : ''}"><div class="k">후보 클러스터 수</div><div class="v">${CC ? V4.n(CC.n_cc) + '<small>개</small>' : '—'}</div><div class="d">${CC ? `다구획 ${V4.n(CC.n_multi)} · 고립 ${V4.n(CC.n_iso)} · 최소 ${Cand.MW_LBL[st.minM2]} 이상 ${V4.n(CF.n_pop)}개` : (isR2 ? '이 시군은 후보 클러스터 층 미등재(프로토타입: 당진·해남·고흥)' : '후보 클러스터 층은 진흥구역 개방(R2)·이격 미적용 조건에서 산출')}</div></div>
+      <div class="res-card"><div class="k">3MW 눈금 이상</div><div class="v">${gj ? V4.n(b3.length) + '<small>곳</small>' : '—'}</div><div class="d">66,667㎡ 이상 구획 · 읽기 눈금${CC ? ` · 후보 클러스터 기준 ${V4.n(CC.bands['66667'])}개` : ''}</div></div>
+      <div class="res-card"><div class="k">대규모(≥50MW 등가)</div><div class="v">${gj ? V4.n(b50.length) + '<small>곳</small>' : '—'}</div><div class="d">1.111km² 이상 구획 · 법정 기준 아님${CC ? ` · 후보 클러스터 기준 ${V4.n(CC.bands['1111111'])}개` : ''}</div></div>`);
     put('rCtl', `대조군(개인 포함 · 같은 조건) ${km2(cur.cM2)} km² — 분석 기준 필지는 그 ${cur.cM2 ? (100 * cur.m2 / cur.cM2).toFixed(1) : '—'}% (대조군은 정책 값 아님 · 병기). 등재 런 <b>${rn}</b>.`);
 
     // 4. 지도
@@ -257,39 +282,64 @@
       lyr = L.layerGroup().addTo(map);
     }
     lyr.clearLayers();
+    // 공동 1등 구획(R2 기준 산출)
+    if (isR2 && !REC) REC = await Region.gz('data_v4/recommend_v4.json.gz');
+    const S = isR2 && REC ? REC.sgg[st.sgg] : null;
+    const lyrComp = L.layerGroup(), lyrCC = L.layerGroup(), lyrEmd = L.layerGroup().addTo(lyr);
     let bounds = null;
     if (gj) {
       const g = L.geoJSON(gj, {style: f => ({color: '#B8860B', weight: .8, fillColor: A(f) >= 0.0667 ? '#FFB020' : '#FFD84D', fillOpacity: .75})})
-        .bindTooltip(l => `구획 ${l.feature.properties.id} · ${A(l.feature).toFixed(2)} km² · ${l.feature.properties.n}필지`).addTo(lyr);
+        .bindTooltip(l => `구획 ${l.feature.properties.id} · ${A(l.feature).toFixed(2)} km² · ${l.feature.properties.n}필지`).addTo(lyrComp);
       bounds = g.getBounds();
+      if (S) S.frontier.forEach((f, i) => { if (f.lat == null) return;
+        L.circleMarker([f.lat, f.lon], {radius: Math.max(8, Math.sqrt(f.a) / 180), color: '#0C356A', weight: 2.5, fillColor: '#FFD84D', fillOpacity: .95})
+          .bindTooltip(`공동 1등 구획 ${i + 1}/${S.frontier.length} · ${fmtA2(f.a)} · 산단 ${f.d == null ? '—' : f.d.toFixed(1) + 'km'} · 계통 ${f.lo == null ? '—' : f.lo + 'MW'}`).addTo(lyrComp); });
     }
+    if (ccgj) { Cand.layer(ccgj, {minM2: st.minM2}).addTo(lyrCC); Cand.markers(L.layerGroup().addTo(lyrCC), CF.frontier, {}); }
     if (st.emd) {
-      const e = L.geoJSON(st.emd.feat, {style: {color: '#B3261E', weight: 2.5, fill: false, dashArray: '6 4'}}).addTo(lyr);
+      const e = L.geoJSON(st.emd.feat, {style: {color: '#B3261E', weight: 2.5, fill: false, dashArray: '6 4'}}).addTo(lyrEmd);
       bounds = e.getBounds();
     }
-    // 공동 1등 후보(R2 기준 산출)
-    const isR2 = rn === 'R2_promo';
-    if (isR2 && !REC) REC = await Region.gz('data_v4/recommend_v4.json.gz');
-    const S = isR2 && REC ? REC.sgg[st.sgg] : null;
-    if (S) S.frontier.forEach((f, i) => { if (f.lat == null) return;
-      L.circleMarker([f.lat, f.lon], {radius: Math.max(8, Math.sqrt(f.a) / 180), color: '#0C356A', weight: 2.5, fillColor: '#FFD84D', fillOpacity: .95})
-        .bindTooltip(`공동 1등 ${i + 1}/${S.frontier.length} · ${fmtA2(f.a)} · 산단 ${f.d == null ? '—' : f.d.toFixed(1) + 'km'} · 계통 ${f.lo == null ? '—' : f.lo + 'MW'}`).addTo(lyr); });
+    const lg = $('ccLegendL');
+    lg.innerHTML = Object.keys(Cand.BAND_FILL).map(k => `<span><i style="background:${Cand.BAND_FILL[k]}"></i>${Cand.BAND_LBL[k]}</span>`).join('') + '<span><i style="border:2px solid #0C356A;background:#fff"></i>다구획 클러스터</span>';
+    const applyMap = () => {
+      lyr.removeLayer(lyrComp); lyr.removeLayer(lyrCC);
+      const m = ccgj ? st.mapMode : 'comp';
+      if (m === 'comp' || m === 'both') lyr.addLayer(lyrComp);
+      if (m === 'cc' || m === 'both') lyr.addLayer(lyrCC);
+      lg.hidden = m === 'comp';
+      put('rMapCap', (m === 'comp' ? `노랑 = 이 조건(${rn})의 연접 구획 전량 · 진한 노랑 = 3MW 눈금 이상 · 남색 테두리 원 = 공동 1등 구획(진흥구역 개방 기준 산출)` :
+        m === 'cc' ? `채움 = 후보 클러스터 규모 band · 남색 외곽 = 다구획 클러스터 · 옅은 것 = 최소 ${Cand.MW_LBL[st.minM2]} 미만(모집단 밖, 숨기지 않음) · 남색 원 = 공동 1등 후보 클러스터` :
+        `후보 클러스터 외곽·채움 위에 연접 구획(노랑)을 겹쳐 상위 권역 ↔ 내부 구획 관계를 표시`) +
+        `${st.emd ? ' · 붉은 점선 = 선택 읍면동 경계' : ''} · 위성 배경 © Esri<sup class="fnref">[19]</sup> · 지오메트리 간소화(수치는 원본 기준)<sup class="fnref">[12]</sup>.`);
+    };
+    const mm = $('mapMode');
+    if (ccgj) {
+      mm.innerHTML = `<span class="q">지도 레이어</span>` + [['cc', '후보 클러스터'], ['comp', '구획(연접 21m)'], ['both', '함께 보기']]
+        .map(([v, t]) => `<button type="button" data-v="${v}" class="${st.mapMode === v ? 'on' : ''}">${t}</button>`).join('');
+      mm.querySelectorAll('button').forEach(b => b.onclick = () => { st.mapMode = b.dataset.v; mm.querySelectorAll('button').forEach(x => x.classList.toggle('on', x === b)); applyMap(); });
+    } else mm.innerHTML = '';
+    applyMap();
     if (bounds && bounds.isValid()) map.fitBounds(bounds, {padding: [20, 20], maxZoom: 13}); else map.setView([36.3, 127.0], 8);
     setTimeout(() => map.invalidateSize(), 200);
-    put('rMapCap', `노랑 = 이 조건(${rn})의 연접 구획 전량 · 진한 노랑 = 3MW 눈금 이상 · 남색 테두리 원 = 공동 1등 후보(진흥구역 개방 기준 산출)${st.emd ? ' · 붉은 점선 = 선택 읍면동 경계' : ''} ·
-      위성 배경 © Esri<sup class="fnref">[19]</sup> · 구획 지오메트리 15m 간소화(수치는 원본 기준)<sup class="fnref">[12]</sup>.`);
 
-    // 5. 공동 1등 표
+    // 5. 공동 1등 표 — 두 층(후보 클러스터 / 구획), 인쇄 시 둘 다
     const AX = PRIO[st.prio][1]; st.axis = AX;
+    $('ccTabs').hidden = !CC; if (!CC) st.tab = 'comp';
+    $('ccTabs').querySelectorAll('button').forEach(b => { b.classList.toggle('on', b.dataset.t === st.tab);
+      b.onclick = () => { st.tab = b.dataset.t; $('ccTabs').querySelectorAll('button').forEach(x => x.classList.toggle('on', x === b)); drawTbl(S, fs, CC); }; });
+    $('minCtlL').innerHTML = '';
+    if (CC) Cand.minSizeControl($('minCtlL'), {value: st.minM2, onChange: v => { st.minM2 = v; run(); }});
     document.querySelectorAll('#axisL button').forEach(b => { b.classList.toggle('on', b.dataset.ax === st.axis);
-      b.onclick = () => { st.axis = b.dataset.ax; document.querySelectorAll('#axisL button').forEach(x => x.classList.toggle('on', x === b)); drawTbl(S, fs); }; });
-    drawTbl(S, fs);
+      b.onclick = () => { st.axis = b.dataset.ax; document.querySelectorAll('#axisL button').forEach(x => x.classList.toggle('on', x === b)); drawTbl(S, fs, CC); }; });
+    drawTbl(S, fs, CC);
 
     // 6·7. 방법론·기준
     put('rMethod', `<b>판정</b> — 전국 지적 원장 전수(39,726,310필지 규모의 원장)에서 지목(전·답·과수원) → 구조·입지 제외 → 경사 15% 초과 제외 → 용도지역 3종(개발제한·보전관리·보전녹지) 제외 → 농업진흥지역 구분의
       다섯 검사를 필지 단위로 적용했습니다. 상위법상 배제 17종은 원장의 통합 배제 플래그로 1차 판정에 반영되어 있습니다. 소유는 법인·국공유(02·04·05·06)만 세며 개인 소유 농지는 대조군으로 병기합니다.<br>
       <b>제약 조건</b> — 농업진흥구역·농업보호구역의 "포함"은 시행 예정 법률의 재생에너지지구 지정 범위를 전제로 한 가정이며, 이격거리는 주거 200m 상한제를 전국 일률 보수 하한으로 적용한 값입니다.<br>
-      <b>클러스터</b> — 서로 21m 이내인 적격 필지를 하나의 연접 구획으로 묶었습니다(τ=21m는 필지 간격 자료에서 유도한 분석 기준, 법정 기준 아님). 병합은 면적을 바꾸지 않으며, 3MW·50MW 눈금은 0.045 kW/㎡ 환산의 읽기 눈금입니다.<br>
+      <b>연접 구획</b> — 서로 21m 이내인 적격 필지를 하나의 연접 구획으로 묶었습니다(τ=21m는 필지 간격 자료에서 유도한 분석 기준, 법정 기준 아님). 병합은 면적을 바꾸지 않으며, 3MW·50MW 눈금은 0.045 kW/㎡ 환산의 읽기 눈금입니다.<br>
+      <b>후보 클러스터</b> — 서로 가까운 연접 구획들을 하나의 후보 영역으로 묶은 2차 분석 단위입니다. 구획 경계 간 거리의 단일연결 계층에서 면적 가중 안정성이 가장 큰 가지를 고르며(고정 거리 임계 없음 — 묶음마다 안정 구간을 m로 표기), 어느 묶음에도 들지 않은 구획은 "고립"으로 남겨 삭제하지 않습니다. 최소 표시 규모(3/10/20/50MW)는 생성 조건이 아니라 표·지도·공동 1등 판정의 모집단 필터입니다. 후보 클러스터 면적의 합은 연접 구획 면적의 합과 같습니다.<br>
       <b>공동 1등 후보</b> — 시군 안 구획 전수를 면적(클수록 좋음)·산업단지 직선거리(가까울수록 좋음)·소재 읍면동 계통 여유 하한(클수록 좋음)의 세 조건으로 쌍별 비교해, 어느 한 후보가 세 조건 모두에서 다른 후보보다 낫지 않으면
       모두 공동 1등으로 남겼습니다(방법론 이름: 비지배 집합). 가중치·순서·관문이 없어 정답 하나를 고르지 않으며, 집합 안에서 무엇을 고를지는 지역의 논의 몫입니다. 이 표는 농업진흥구역 개방 기준(R2)에서 산출되어 있습니다.<br>
       <b>해석 범위</b> — 적격농지는 판정 조건을 통과한 토지이며 인허가 가능 토지가 아닙니다. MW는 면적 환산 참고값이고 실제 발전량이 아닙니다. 계통 여유는 2026-07 스냅숏의 하한이며 실제 접속 가능량이 아닙니다.
@@ -300,10 +350,17 @@
       모든 수치는 같은 정본 데이터베이스의 export를 렌더한 것으로 화면과 보고서가 같은 값을 씁니다. 전체 출처는 이 페이지 하단의 출처 절.`);
     $('result').scrollIntoView({behavior: 'smooth', block: 'start'});
   }
-  function drawTbl(S, fs) {
+  function drawTbl(S, fs, CC) {
     const TOP = 3, isTop = (f, ax) => ax && f[ax] != null && f[ax] <= TOP;
+    // 후보 클러스터 층 — 지역별 우선 후보와 같은 Cand.table (필터별 사전 산출 전선)
+    if (CC) {
+      const F = Cand.table($('recTblCC'), st.sgg, st.minM2, {axis: st.axis, compFrontier: S ? S.frontier : []});
+      put('rExplainCC', `<b>공동 1등 후보 클러스터</b> — ${Cand.note(st.sgg, st.minM2, st.axis)}`);
+      $('paneCC').hidden = st.tab !== 'cc'; $('paneComp').hidden = st.tab === 'cc';
+      if (st.tab === 'cc') $('rTblH').textContent = `5. 공동 1등 후보 클러스터 ${F.frontier.length}곳 — 최소 ${Cand.MW_LBL[st.minM2]} · 축별 비교`;
+    } else { $('paneCC').hidden = true; $('paneComp').hidden = false; }
     if (S) {
-      $('rTblH').textContent = `5. 공동 1등 후보 ${S.frontier.length}곳 — 축별 비교`;
+      if (!CC || st.tab === 'comp') $('rTblH').textContent = `5. 공동 1등 구획 ${S.frontier.length}곳 — 축별 비교`;
       const rows = S.frontier.map((f, i) => ({f, i}));
       if (st.axis) rows.sort((x, y) => (x.f[st.axis] ?? 1e9) - (y.f[st.axis] ?? 1e9));
       if (st.prio === 'recl') rows.sort((x, y) => (y.f.recl ?? -1) - (x.f.recl ?? -1));
@@ -319,7 +376,7 @@
         ${st.axis ? `현재 <b>${PRIO[st.prio][0]}</b> 기준으로 정렬·강조되어 있습니다.` : st.prio === 'recl' ? '현재 간척 등재 비중이 높은 후보를 먼저 보이고 있습니다.' : ''}
         지역에서는 "이 후보는 규모는 크지만 계통이 약하다", "이 후보는 산업단지와 매우 가깝다"처럼 장단점을 비교해 논의를 시작할 수 있습니다.`);
     } else {
-      $('rTblH').textContent = '5. 후보 클러스터 — 면적순 상위';
+      $('rTblH').textContent = '5. 연접 구획 — 면적순 상위';
       const top = fs.slice().sort((a, b) => (b.properties.a || 0) - (a.properties.a || 0)).slice(0, 10);
       put('recTblL', `<tr><th>구획</th><th>면적 km²</th><th>필지 수</th><th>참고 MW</th></tr>` +
         top.map(x => `<tr><td class="l">${x.properties.id}</td><td>${(x.properties.a || 0).toFixed(2)}</td><td>${V4.n(x.properties.n)}</td><td>${Math.round((x.properties.a || 0) * 45)}</td></tr>`).join(''));
