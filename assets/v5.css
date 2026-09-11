@@ -245,10 +245,12 @@ body[data-sources=full] #law p,body[data-sources=full] .callout-v4{max-width:72c
 #fnsec ol.fnlist li:last-child{border-bottom:none}
 
 /* ── 정책 시나리오: 설정 | 결과 2열 ── */
-.scn-layout{display:grid;grid-template-columns:minmax(300px,380px) 1fr;gap:var(--space-5);align-items:start}
+.scn-layout{display:grid;grid-template-columns:minmax(360px,520px) 1fr;gap:var(--space-5);align-items:start}
 @media(max-width:1023px){.scn-layout{grid-template-columns:1fr}}
 .scn-settings{display:grid;gap:var(--space-4)}
-.scn-settings .cond-grid{grid-template-columns:1fr;gap:var(--space-3)}
+.scn-settings .cond-grid{grid-template-columns:1fr 1fr;gap:var(--space-3)}
+@media(max-width:1023px){.scn-settings .cond-grid{grid-template-columns:1fr}}
+@media(max-width:560px){.scn-settings .cond-grid{grid-template-columns:1fr}}
 .scn-settings .figbox{padding:var(--space-4)}
 .step{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--leaf-deep);margin:0 0 var(--space-2)}
 .step::before{content:"◆ ";color:var(--gold)}
@@ -276,3 +278,9 @@ body[data-sources=full] #law p,body[data-sources=full] .callout-v4{max-width:72c
 .seg{flex-wrap:wrap}
 .seg button{min-width:0;flex:1 1 auto;white-space:normal;line-height:1.3}
 .cond,.res-card,.figbox{min-width:0}
+/* 결과 열은 설정을 스크롤할 때 따라오고, 조건 카드는 촘촘하게 */
+@media(min-width:1024px){.scn-results{position:sticky;top:88px;max-height:calc(100vh - 100px);overflow:auto;padding-right:2px}}
+.scn-settings .cond{padding:10px 12px}
+.scn-settings .cond h4{margin-bottom:6px}
+.scn-settings .cond .hint-s{font-size:11px;line-height:1.45}
+.scn-settings .seg button{min-height:32px;font-size:12px;padding:5px 4px}
