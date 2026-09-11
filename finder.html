@@ -3,12 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>PLANiT · 후보지 찾기 — 대규모 후보 구획 탐색</title>
+<title>PLANiT · 후보지 찾기 — 전국 후보지 지도</title>
 <meta name="description" content="대규모 영농형 태양광 사업을 검토할 수 있는 후보 구획을 지도에서 탐색 — 소유·계통·산업단지·지역 전력수요.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=Inter:wght@400;500;700&family=Noto+Sans+KR:wght@400;500;700&family=JetBrains+Mono:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="assets/v5.css">
 <link rel="stylesheet" href="assets/vendor/leaflet/leaflet.css">
 <script src="assets/vendor/leaflet/leaflet.js"></script>
 <script src="assets/v4.js"></script>
@@ -122,493 +123,83 @@ input[type=range]{accent-color:var(--navy)}
       <a href="index.html" data-i18n="nav-index">한눈에 보기</a>
       <a class="active" href="finder.html" data-i18n="nav-finder">후보지 찾기</a>
       <a href="scenarios.html" data-i18n="nav-scn">정책 시나리오</a>
-      <a href="regions.html" data-i18n="nav-regions">지역별 우선 검토 후보</a>
-      <a href="method.html" data-i18n="nav-method">근거와 방법</a>
+      <a href="regions.html" data-i18n="nav-regions">지역별 우선 후보</a>
     </nav>
     <div style="display:flex;gap:12px;align-items:center">
       <div class="lang-toggle" role="group" aria-label="Language">
         <button type="button" data-lang="ko">KO</button>
         <button type="button" data-lang="en">EN</button>
       </div>
-      <a class="nav-cta" href="method.html#contact">Contact</a>
+      <a class="nav-cta" href="local.html">우리동네 고르기</a>
       <button class="hamburger" aria-label="메뉴 열기" onclick="document.getElementById('menu').classList.toggle('open')">☰</button>
     </div>
   </div>
 </header>
 
-<div class="page-hero">
-  <div class="wrap" style="max-width:860px">
-    <p class="eyebrow">Proximity · 수요·계통 연계</p>
-    <h1>후보지 찾기</h1>
-    <p class="lede">약 50MW 등가(1.111km²) 이상의 <b>대규모 후보지 25곳 — τ=21m 기준</b>을 지도와 표로 탐색함.<br>
-    후보 = 법인·국공유 소유(분석 기준 필지) · 농업진흥구역 개방(R2) 기준 · 연접 기준 τ=21m으로 병합한
-    구획 중 규모 눈금 이상인 것 전량. 곳수는 이 연접 기준에 따라 달라지므로
-    <a href="method.html#rules" style="color:inherit;font-weight:700">근거와 방법 탭(왜 21m인가·민감도)</a>과
-    함께 읽음. 계통 여유는 이 25곳의 선별에는 쓰지 않고
-    <a href="regions.html" style="color:inherit;font-weight:700">지역별 우선 검토 후보</a>(시군 안
-    비교 — 별개 목록)에서 축으로 사용함.</p>
-    <p style="font-family:var(--mono);font-size:11.5px;color:var(--muted);margin-top:14px"
-      id="art-meta">PLANiT Institute · 데이터 생성 <span id="gen-stamp">—</span></p>
-  </div>
-</div>
+<!-- ═══════════ 전면 지도 — 헤더 아래 전체를 지도가 차지, 레이어 패널은 왼쪽 고정 ═══════════ -->
+<div class="fs-map" id="fsmap">
+  <div id="proxmap"></div>
 
-<article>
-<div class="wrap art" style="max-width:860px">
-
-  <h2 class="art-h" id="own">1. 소유 구성 — 특구급 구획의 개인 소유 비중</h2>
-  <p>개방 전(진흥✕·보호✕) 기준 특구급 구획은 <b id="c-a50">—</b>곳이지만 면적의
-  <b id="c-indiv">—</b>%가 개인 소유<sup class="fnref">[1]</sup>. 법인·국공유만 병합하면
-  <b id="c-cp-a50">—</b>곳, 농업진흥구역 개방 시 <b id="c-cp-r50">—</b>곳(합 약
-  <span id="c-cp-r-mw50">—</span>MW) — 그 25곳이 이 페이지의 대상.</p>
-  <p style="display:none"><span id="c-cp-a100"></span><span id="c-cp-r-km2"></span><span id="c-cp-r-mw"></span><span id="c-cp-a-mw"></span><span id="c-sb-from"></span><span id="c-sb-to"></span></p>
-
-  <div class="own-kpi">
-    <div><b><span id="k-a50">—</span><small>곳</small> <small>→</small> <span id="k-cp1">—</span><small>곳</small></b>
-      <span>개인 포함 → 법인·국공유만<br>(개방 전 특구급)</span></div>
-    <div><b><span id="k-indiv">—</span><small>%</small></b>
-      <span>특구급 면적 중<br>개인 소유 비중<sup class="fnref">[1]</sup></span></div>
-    <div class="hi"><b><span id="k-r50">—</span><small>곳</small> <small>· 약</small> <span id="k-mw">—</span><small>MW</small></b>
-      <span>농업진흥구역 개방 시<br>특구급 (이격 후 <span id="k-r50sb">—</span>곳)</span></div>
-    <div><b>−39<small>%</small></b>
-      <span>진흥 개방분의 이격 감소<br>(개방 전 분은 −53%)<sup class="fnref">[11]</sup></span></div>
-  </div>
-
-  <h2 class="art-h">2. 지도 — 구획 · 산업단지 · 계통 여유</h2>
-  <p>후보 폴리곤을 클릭하면 규모·계통 여유·인근 산업단지를 확인할 수 있고, 오른쪽 패널에서
-  후보·산업단지 선택, 계통 여유 문턱 조정, 산단·입주기업 검색(예: 현대제철)이 가능함.</p>
-
-  <figure class="art-fig prox-wide">
-    <div class="map-wrap">
-      <div id="proxmap"></div>
-      <div class="panel">
-        <h3>레이어</h3>
-        <div class="grp"><div class="gt">특구급 후보 구획 <span id="candCnt" style="font-weight:400;color:var(--muted)"></span>
-          <button class="allbtn on" id="candAll">전체</button></div>
-          <div class="scrolllist" id="candList"></div></div>
-        <div class="grp"><div class="gt">산업단지 <span id="indCnt" style="font-weight:400;color:var(--muted)"></span>
-          <button class="allbtn on" id="indAll">전체</button></div>
-          <input class="searchbox" id="indSearch" type="text" placeholder="산업단지·입주기업 검색 — 예: 고덕, 현대제철"
-            autocomplete="off">
-          <div class="sresults" id="indResults"></div>
-          <div id="indTypes"></div></div>
-        <div class="grp"><div class="gt">계통 여유 — 표시 문턱</div>
-          <input type="range" id="gridSlider" min="0" max="50" step="1" value="0" style="width:100%">
-          <div style="display:flex;justify-content:space-between;font-size:10.5px;color:var(--muted);margin-top:-2px">
-            <span>◀ 여유 ≥ 50MW만</span><span>전체 ▶</span></div>
-          <div class="glbl" id="gridLbl">—</div>
-          <div class="gleg"><span style="background:#EFDFDD"></span><span style="background:#F0F4F6"></span><span style="background:#CFE3EE"></span><span style="background:#8FC0D8"></span><span style="background:#4A94BA"></span><span style="background:#1C5F86"></span><span style="background:#CFCFCF"></span></div>
-          <div class="glegtxt">포화 · 0–2 · 2–8 · 8–20 · 20–50 · 50+ MW (하한) · 회색 = 알 수 없음</div></div>
-        <div class="grp"><div class="gt">선택 후보의 인근 산업단지 — 반경 <span id="bufKmLbl">10</span> km</div>
-          <input type="range" id="bufSlider" min="5" max="30" step="1" value="10" style="width:100%">
-          <div class="scrolllist" id="bufList"></div></div>
+  <aside class="fs-panel">
+    <h3>전국 어디가 후보인가</h3>
+    <p class="lede-s">약 50MW 등가(1.111km²) 이상의 <b>대규모 후보지 <span id="p-n">—</span>곳</b> —
+    법인·국공유 소유(분석 기준 필지) · 농업진흥구역 개방(R2) · 연접 τ=21m 기준.
+    계통 여유·산업단지는 비교용 레이어이며 이 25곳의 선별에는 쓰지 않음.</p>
+    <div class="grp"><div class="gt">대규모 후보 구획 <span id="candCnt" style="font-weight:400;color:var(--muted)"></span>
+      <button class="allbtn on" id="candAll">전체</button></div>
+      <div class="scrolllist" id="candList"></div></div>
+    <div class="grp"><div class="gt">산업단지 <span id="indCnt" style="font-weight:400;color:var(--muted)"></span>
+      <button class="allbtn on" id="indAll">전체</button></div>
+      <input class="searchbox" id="indSearch" type="text" placeholder="산업단지·입주기업 검색 — 예: 고덕, 현대제철" autocomplete="off">
+      <div class="sresults" id="indResults"></div>
+      <div id="indTypes"></div></div>
+    <div class="grp"><div class="gt">계통 여유 — 표시 문턱</div>
+      <input type="range" id="gridSlider" min="0" max="50" step="1" value="0" style="width:100%">
+      <div style="display:flex;justify-content:space-between;font-size:10.5px;color:var(--muted);margin-top:-2px">
+        <span>◀ 여유 ≥ 50MW만</span><span>전체 ▶</span></div>
+      <div class="glbl" id="gridLbl">—</div>
+      <div class="gleg"><span style="background:#EFDFDD"></span><span style="background:#F0F4F6"></span><span style="background:#CFE3EE"></span><span style="background:#8FC0D8"></span><span style="background:#4A94BA"></span><span style="background:#1C5F86"></span><span style="background:#CFCFCF"></span></div>
+      <div class="glegtxt">포화 · 0–2 · 2–8 · 8–20 · 20–50 · 50+ MW (하한) · 회색 = 알 수 없음</div></div>
+    <div class="grp"><div class="gt">선택 후보의 인근 산업단지 — 반경 <span id="bufKmLbl">10</span> km</div>
+      <input type="range" id="bufSlider" min="5" max="30" step="1" value="10" style="width:100%">
+      <div class="scrolllist" id="bufList"></div></div>
+    <details class="grp" style="border-top:1px solid var(--line)">
+      <summary style="cursor:pointer;font-size:12px;font-weight:700;color:var(--leaf-deep)">지도 읽는 법 — 색·범례</summary>
+      <div class="prox-leg">
+        <span class="sw" style="background:rgba(255,155,61,.85);border:1px solid #C96A00"></span>간척 지구의 대규모 후보 구획 ·
+        <span class="sw" style="background:rgba(255,80,70,.85);border:1px solid #B3261E"></span>비간척 대규모 후보 구획 ·
+        <span class="dot" style="background:#0C356A;border:2px solid #fff;box-shadow:0 0 0 1px #0C356A"></span>산업단지 경계·중심점(빨강 국가 · 남색 일반 · 보라 도시첨단 · 청록 농공) ·
+        금색 점선 원 = 선택 후보의 반경 버퍼 · 금색 테두리 = 버퍼 안 산업단지.
+        위성 배경 © Esri<sup class="fnref">[19]</sup> · 구획 지오메트리는 15m 간소화 표시(수치는 원본 기준)<sup class="fnref">[12]</sup> ·
+        산업단지 전국 <span id="p-ind3">—</span>곳<sup class="fnref">[23]</sup> · 읍면동 계통 여유<sup class="fnref">[22]</sup>.
       </div>
-    </div>
-    <figcaption style="font-size:12px;color:var(--muted);margin-top:8px">그림 2. 대규모 후보지 25곳 ×
-    산업단지 전국 <span id="p-ind3">—</span>곳<sup class="fnref">[23]</sup> × 읍면동 계통 여유<sup class="fnref">[22]</sup> —
-    위성 배경 © Esri<sup class="fnref">[19]</sup> · 구획 지오메트리는 15m 간소화 표시(수치는 원본 기준)<sup class="fnref">[12]</sup>.</figcaption>
-    <details style="margin-top:6px">
-      <summary style="cursor:pointer;font-size:12.5px;font-weight:700;color:var(--leaf-deep)">지도 읽는 법 — 색·범례·레이어</summary>
-    <div class="prox-leg">
-      <span class="sw" style="background:rgba(255,155,61,.85);border:1px solid #C96A00"></span>간척 지구의 특구급 구획 ·
-      <span class="sw" style="background:rgba(255,80,70,.85);border:1px solid #B3261E"></span>비간척 특구급 구획 ·
-      <span class="dot" style="background:#0C356A;border:2px solid #fff;box-shadow:0 0 0 1px #0C356A"></span>산업단지 경계·중심점 (색 = 유형: 빨강 국가 · 남색 일반 · 보라 도시첨단 · 청록 농공) ·
-      금색 점선 원 = 선택 후보의 반경 버퍼 · 금색 테두리 = 버퍼 안 산업단지
-    </div>
     </details>
-  </figure>
+  </aside>
 
-  <h2 class="art-h" id="candtbl">3. 대규모 후보지 25곳 — 소재·최근접 산업단지·계통</h2>
-  <p style="margin-bottom:8px">네 조건을 전부 만족하는 구획 전량(규모순):</p>
-  <p style="margin:0 0 10px">
-    <span class="cond-pill">① 소유 — <b>법인·국공유만 병합</b> (분석 기준 필지)</span>
-    <span class="cond-pill">② 구역 — <b>농업진흥구역 개방(R2)</b> 기준</span>
-    <span class="cond-pill">③ 연접 — <b>τ=21m</b> 이내 병합 (분석 기준)</span>
-    <span class="cond-pill">④ 규모 — <b>≥50MW 등가</b> = 1,111,111㎡ (읽기 눈금)</span>
-  </p>
-
-  <figure class="art-fig">
-    <div class="figbox">
+  <div class="fs-drawer min" id="drawer">
+    <div class="dh" id="drawerHead"><b>표 · 대규모 후보지 <span id="p-comp-n">25</span>곳 — 소재·최근접 산업단지·계통 여유</b>
+      <span style="font-size:12px;color:var(--leaf-deep);font-weight:700" id="drawerTgl">펼치기 ▲</span></div>
+    <div class="db">
       <div style="overflow-x:auto"><table class="v4" id="t-prox"></table></div>
-      <div class="figcap">표 1. 대규모 후보지 25곳 — 최근접 산업단지·직선거리·소재 읍면동 계통 여유(하한).
-      행 클릭 = 지도 이동.<br>참고 MW 열의 후보별 값을 더한 정확 합계는
-      <b><span id="p-mwsum">—</span> MW</b>(위 카드의 "약" 값은 면적 합에 계수를 곱한 엔진 집계라
-      개별 반올림 합과 1MW 차이가 남).</div>
-    </div>
-  </figure>
-
-  <div class="callout-v4" id="p-read">—</div>
-
-  <h2 class="art-h" id="jisan">4. 대규모 후보지 25곳 요약 — 다섯 값</h2>
-  <p>25곳 안의 최대·최소 — 규모·계통·산단 거리와 지역 전력수요 대비의 양 끝. 시군별 종합 비교는
-  <a href="regions.html" style="color:var(--leaf-deep);font-weight:700">지역별 우선 검토 후보 탭</a>.</p>
-  <div class="jsi" id="jsi"></div>
-  <div style="font-size:12px;color:var(--muted);margin:-12px 0 10px">여기의 "지역 전력수요 대비" =
-  <b>25개 대규모 후보 기준</b> — 시군 연간 전력판매량 대비 후보 환산발전량(연간 규모 비교의
-  참고값 · 전력 자립·직접거래 가능성 아님 · 후보 선정 변수 아님 · 시간대별 수급 일치 아님)<sup class="fnref">[28]</sup>.
-  계산 경로는 <b>표 1의 참고 MW(정수 표기) × 1,314h ÷ 시군 연간 전력판매량</b>이라,
-  구획 원면적으로 계산하는 지역별 우선 검토 후보 탭의 값과 소수점 아래에서 다를 수 있음(같은 구획이어도
-  예: 38.2% 대 38.4%). 시군별 비지배 후보 기준 값은 그 탭에서 따로 계산됨.</div>
-
-  <div class="fn">특구급 = 연접 농지 <span id="p-th">—</span>㎡ 이상(약 50MW 이상 규모를 뜻하는 분석상 표현 ·
-  0.045 kW/㎡ 환산<sup class="fnref">[13]</sup> · 상한 없음 — 이 25곳의 최대는 표 1 첫 행) ·
-  소유 필터 = 법인('06')·국유지('02')·시/도유지('04')·군유지('05')만 병합<sup class="fnref">[12]</sup> ·
-  간척 구분 = 농어촌공사 원장 등재 필지 비중 50% 이상<sup class="fnref">[3]</sup>.</div>
-</div>
-</article>
-
-
-<!-- ═══════════ §5 정책 시나리오 증분 지도 (구 지도 탭 이식 — V5 1단계 통합) ═══════════ -->
-<style>
-.map-wrap{display:grid;grid-template-columns:1fr 340px;gap:16px;margin:18px 0 30px}
-@media(max-width:900px){.map-wrap{grid-template-columns:1fr}}
-#map{height:76vh;min-height:520px;border:1px solid var(--line);border-radius:12px;background:#dfe8df}
-.panel{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px;
- font-size:13px;max-height:76vh;overflow-y:auto}
-.panel h3{font-family:var(--serif);color:var(--navy);font-size:15px;margin-bottom:10px}
-.scn-btns{display:flex;flex-direction:column;gap:6px;margin:8px 0 4px}
-.scn-btns button{font:inherit;font-size:13px;font-weight:700;text-align:left;padding:9px 12px;
- border:1.5px solid var(--line);border-radius:9px;background:#fff;cursor:pointer;transition:.15s}
-.scn-btns button:hover{border-color:var(--navy)}
-.scn-btns button.on{background:var(--navy);color:#fff;border-color:var(--navy)}
-.scn-btns button small{display:block;font-weight:400;font-size:11px;opacity:.75}
-.sb-toggle{display:flex;gap:0;border:1.5px solid var(--navy);border-radius:999px;overflow:hidden;margin:10px 0}
-.sb-toggle button{flex:1;font:inherit;font-size:12px;font-weight:700;padding:7px 4px;border:none;
- background:#fff;color:var(--navy);cursor:pointer}
-.sb-toggle button.on{background:var(--navy);color:#fff}
-.stat-line{display:flex;justify-content:space-between;padding:4px 0;border-bottom:1px dotted var(--line)}
-.stat-line .v{font-weight:800;color:var(--navy);font-variant-numeric:tabular-nums}
-.leg{font-size:11.5px;color:var(--muted);margin-top:10px;line-height:1.7}
-.leg .sw{display:inline-block;width:12px;height:12px;border-radius:3px;vertical-align:-2px;margin-right:4px}
-.hint{background:var(--sky);border:1px solid var(--line);border-radius:8px;padding:8px 10px;
- font-size:12px;margin-top:10px;word-break:keep-all}
-</style>
-
-<section class="alt" style="padding:56px 0" id="scnmap">
-  <div class="wrap">
-    <div class="sec-head"><div><p class="eyebrow">Scenario Map · 제도 변경 증분</p>
-    <h2>5. 정책 시나리오 지도 — 제도 변경으로 추가되는 구획</h2></div>
-    <a class="more" href="scenarios.html">시나리오 수치 전체 →</a></div>
-    <p style="font-size:13px;color:var(--muted)">시군을 추가하면 지금 상태(노랑) 위에
-    보호구역(주황)·진흥구역(빨강) 개방으로 추가되는 구획이 겹쳐 보임 · "적격 필지 점"
-    토글 = 분석 기준 필지(법인·국공유) 전량 검증 표시.</p>
-<div class="map-wrap">
-    <div id="map"></div>
-    <div class="panel">
-      <h3>시군 · 시나리오</h3>
-      <div class="field" style="margin-bottom:6px"><label>시군 추가 — 여러 개 선택 가능</label><select id="sggSel"></select></div>
-      <div id="mapChips" style="margin-bottom:8px"></div>
-      <div class="scn-btns">
-        <button disabled style="cursor:default;background:var(--sky);border-color:var(--line)">
-          진흥✕·보호✕ — 항상 표시<small>농업진흥지역 밖 · 노랑</small></button>
-        <button id="chkProt">＋ 농업보호구역 개방분<small>수단 A (부령) · 주황으로 추가</small></button>
-        <button id="chkProm">＋ 농업진흥구역 개방분<small>수단 B (재생에너지지구) · 빨강으로 추가</small></button>
-        <button id="chkAll">대조군 겹쳐 보기 — 개인 포함 전 소유<small>회색 윤곽 · 정본이 비어 있는 자리의 이유를 확인</small></button>
-        <button id="chkParcel">적격 필지 점 — 검증용<small>분석 기준 필지(법인·국공유) 적격 필지 전량을 연한 점으로 · 구획이 그 위에 얹힘</small></button>
-        <div style="font-size:11.5px;color:var(--muted);padding:6px 2px 0">기본 표시 =
-        <b>법인·국공유 소유</b>(정본). 대조군을 겹쳤을 때 회색만 있는 곳 = 개인 소유라 정본에서
-        빠진 땅(비교용).</div>
-      </div>
-      <div class="sb-toggle" id="sbTgl">
-        <button data-sb="0" class="on">이격 미적용</button>
-        <button data-sb="1">주거 200m 상한 보수</button>
-      </div>
-      <div id="stats"></div>
-      <div class="leg">
-        <span class="sw" style="background:rgba(154,163,174,.55);border:1px solid #6B7480"></span>대조군 — 개인 포함 전 소유 (회색, 겹쳐 보기 시)<br>
-        <span class="sw" style="background:rgba(127,168,201,.65);border:1px solid #7FA8C9;border-radius:50%"></span>적격 필지 점 — 법인(06) · <span class="sw" style="background:rgba(157,178,126,.7);border:1px solid #9DB27E;border-radius:50%"></span>국·공유(02·04·05) (검증용, 켰을 때)<br>
-        <span class="sw" style="background:rgba(255,216,77,.8);border:1px solid #B8860B"></span>진흥✕·보호✕ 연접 구획 (노랑)<br>
-        <span class="sw" style="background:rgba(255,155,61,.8);border:1px solid #C96A00"></span>보호구역 개방으로 늘어나는 부분 (주황)<br>
-        <span class="sw" style="background:rgba(255,80,70,.8);border:1px solid #B3261E"></span>진흥구역 개방으로 늘어나는 부분 (빨강)<br>
-        노랑 밖으로 번진 색 = 그 개방의 증분 · 구획 클릭 = 면적·필지 수 · 점선 = 시군 경계 걸침
-      </div>
-      <div class="hint" id="hint">시군을 추가하면 위성 지도로 이동 (여러 개 선택 가능).</div>
+      <div class="figcap" style="margin-top:8px">행 클릭 = 지도 이동. 참고 MW 열의 후보별 값을 더한 정확 합계는
+      <b><span id="p-mwsum">—</span> MW</b>(요약 화면의 "약" 값은 면적 합에 계수를 곱한 엔진 집계라 개별 반올림 합과 1MW 차이).
+      계통 여유는 소재 읍면동 잔여 연계가능용량의 하한 스냅숏(2026-07)이며 실제 접속 가능량이 아님<sup class="fnref">[22]</sup>.</div>
+      <div class="callout-v4" id="p-read" style="margin-top:8px">—</div>
     </div>
   </div>
 
-  <div class="fn" style="margin-bottom:26px">배경 위성 © Esri<sup class="fnref">[19]</sup> ·
-  구획 = 정본 산출<sup class="fnref">[12]</sup>(원천: 지적 원장<sup class="fnref">[1]</sup>·진흥지역 경계<sup class="fnref">[5]</sup>,
-  면적은 장부면적, 지오메트리는 15m 간소화 표시) ·
-  이격 보수 = 주거 200m 상한을 대지 필지 대리로 적용한 하한<sup class="fnref">[11]</sup>.</div>
+  <div class="fs-stamp" id="art-meta">PLANiT Institute · 데이터 생성 <span id="gen-stamp">—</span></div>
+</div>
 
-
+<section style="padding:22px 0 8px">
+  <div class="wrap" style="max-width:1080px">
+    <p style="font-size:12.5px;color:var(--muted);word-break:keep-all">특구급·대규모 후보 = 연접 농지 <span id="p-th">—</span>㎡ 이상(약 50MW 이상 규모를 뜻하는 분석상 표현 · 상한 없음)<sup class="fnref">[13]</sup> ·
+    소유 필터 = 법인('06')·국유지('02')·시/도유지('04')·군유지('05')만 병합<sup class="fnref">[12]</sup> ·
+    간척 구분 = 농어촌공사 원장 등재 필지 비중 50% 이상<sup class="fnref">[3]</sup>.
+    시군 안에서 여러 후보의 장단점을 비교하려면 <a href="regions.html" style="color:var(--leaf-deep);font-weight:700">지역별 우선 후보</a>,
+    정책 조건을 바꿔 보려면 <a href="scenarios.html" style="color:var(--leaf-deep);font-weight:700">정책 시나리오</a>.</p>
   </div>
 </section>
-<script>
-(async () => {
-  // 증분 레이어 방식: 현행(노랑) 상시 + 보호 개방분(주황) + 진흥 개방분(빨강)을 겹쳐 그림.
-  // 영역이 포함관계(R0 ⊆ R1 ⊆ R3)라, 아래에 큰 조합을 깔고 위에 작은 조합을 얹으면
-  // 노랑 밖으로 번진 색이 곧 그 개방의 증분이 된다.
-  let onProt = false, onProm = false, curSB = 0, onAll = false;
-  const sb = () => (curSB ? '_SB' : '');
-  // ADR-0040: 정본 우주가 법인·국공유다. 대조군(@all)은 **겹쳐 그리는 배경층**이다 —
-  // 정본이 비어 있는 자리가 '땅이 없어서'인지 '개인 소유라서'인지 눈으로 가르기 위해서다.
-  // 대조군 지오메트리는 정본보다 굵게 간소화했다(위치를 보이는 것이 임무이므로).
-  const baseCell = () => 'R0_current' + sb();
-  const protCell = () => 'R1_protect' + sb();
-  const promCell = () => (onProt ? 'R3_zone_all' : 'R2_promo') + sb();
-  const ctrlCell = () => (onProm ? (onProt ? 'R3_zone_all' : 'R2_promo')
-                                 : (onProt ? 'R1_protect' : 'R0_current')) + sb() + '@all';
-
-  const [idx, names, res] = await Promise.all([
-    V4.data('clusters_index').catch(() => null),   // export 진행 중이면 색인이 아직 없다
-    V4.data('sgg_matrix'), V4.data('results_v4')]);
-
-  // ── 지도 ──
-  const map = L.map('map', {center: [36.3, 127.6], zoom: 7});
-  // Leaflet 은 만들어질 때의 컨테이너 크기를 캐시한다. 레이아웃이 나중에 잡히면 그 값이
-  // 어긋난 채 남아 fitBounds 가 엉뚱한 축척을 고른다 — 실측: 폭을 32px 로 알고 있어
-  // 당진 한 곳을 넣는데 전국 축척(z6)을 골랐다. 크기가 바뀔 때마다 다시 알려준다.
-  // 칸이 좁게 접힌 상태에서 맞추면(창이 작거나 패널이 아직 안 펴졌을 때) 축척이 어긋난 채
-  // 굳는다 — 실측: 폭 32px 로 알고 당진 한 곳에 전국 축척(z6)을 골랐다. 칸이 눈에 띄게
-  // 넓어지면 마지막으로 맞춘 범위로 다시 맞춘다.
-  let lastFit = null, lastW = 0;
-  new ResizeObserver(() => {
-    map.invalidateSize();
-    const w = map.getSize().x;
-    if (lastFit && w > lastW * 1.5) map.fitBounds(lastFit);
-    lastW = w;
-  }).observe(map.getContainer());
-  L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
-    {maxZoom: 18, attribution: 'Imagery © Esri, Maxar, Earthstar Geographics'}).addTo(map);
-  L.control.scale({imperial: false, maxWidth: 140}).addTo(map);   // 축척
-  const north = L.control({position: 'topright'});                 // 방위표
-  north.onAdd = () => {
-    const d = L.DomUtil.create('div');
-    d.innerHTML = '<svg width="30" height="38" style="filter:drop-shadow(0 1px 2px rgba(0,0,0,.5))">' +
-      '<text x="15" y="12" text-anchor="middle" font-size="11" font-weight="700" fill="#fff">N</text>' +
-      '<path d="M15 15 l5 16 l-5 -5 l-5 5 Z" fill="#fff" stroke="#333" stroke-width="1"/></svg>';
-    return d;
-  };
-  north.addTo(map);
-  let layers = [];
-  const cache = {};
-  async function fc(sgg, cell) {
-    const k = sgg + '_' + cell;
-    if (!(k in cache)) {
-      try {  // 구획 파일은 gzip 저장(.json.gz) — 브라우저에서 해제
-        const r = await fetch('data_v4/clusters/' + k + '.json.gz');
-        if (!r.ok) throw 0;
-        const ds = r.body.pipeThrough(new DecompressionStream('gzip'));
-        cache[k] = JSON.parse(await new Response(ds).text());
-      } catch (e) { cache[k] = null; }
-    }
-    return cache[k];
-  }
-
-  // ── 패널 ──
-  const sel = document.getElementById('sggSel');
-  // 전 시군을 목록에 둔다 — 구획 없는 시군도 선택하면 '없음'을 명시 (숨은 배제 금지)
-  const entries = Object.keys(names.codes)
-    .map(c => [c, (names.codes[c] && names.codes[c].name) || c])
-    .sort((a, b) => a[1].localeCompare(b[1], 'ko'));
-  sel.innerHTML = '<option value="">— 추가 —</option>' +
-    entries.map(([c, n]) => `<option value="${c}">${n}</option>`).join('');
-  // 다중 선택 (칩) — 전국 일괄 로드는 데이터량 제약으로 미지원(시군 단위 열람)
-  let picked = [];
-  const chipsEl = document.getElementById('mapChips');
-  const nameOf = c => (names.codes[c] && names.codes[c].name) || c;
-  function renderChips() {
-    chipsEl.innerHTML = picked.map(c =>
-      `<span class="pill" style="cursor:pointer" data-c="${c}" title="클릭하여 제거">${nameOf(c)} ✕</span>`).join(' ');
-    chipsEl.querySelectorAll('[data-c]').forEach(el => el.onclick = () => {
-      picked = picked.filter(x => x !== el.dataset.c); renderChips(); render(true);
-    });
-  }
-  sel.onchange = () => {
-    const v = sel.value;
-    if (v && !picked.includes(v)) { picked.push(v); renderChips(); render(true); }
-    sel.value = '';
-  };
-  // URL 파라미터 (탭 연동): finder.html?sgg=44270,46820 · &all=1 = 대조군 겹쳐 보기 · &prom=1 = 진흥 개방 켬
-  const qp = new URLSearchParams(location.search);
-  const q = qp.get('sgg');
-  if (q) {
-    picked = q.split(',').filter(c => names.codes[c]);
-    renderChips();
-  }
-
-  const bProt = document.getElementById('chkProt');
-  const bProm = document.getElementById('chkProm');
-  bProt.onclick = () => { onProt = !onProt; bProt.classList.toggle('on', onProt); render(); };
-  bProm.onclick = () => { onProm = !onProm; bProm.classList.toggle('on', onProm); render(); };
-  const bAll = document.getElementById('chkAll');
-  bAll.onclick = () => { onAll = !onAll; bAll.classList.toggle('on', onAll); render(); };
-  // URL 파라미터는 **상태만** 세운다 — onclick 을 부르면 초기 렌더가 여러 번 겹쳐 돌아
-  // 서로의 레이어를 지우고 화면 맞춤(fitBounds)이 빈 집합 위에서 일어난다
-  if (qp.get('all') === '1') { onAll = true; bAll.classList.add('on'); }
-  if (qp.get('prom') === '1') { onProm = true; bProm.classList.add('on'); }
-  setTimeout(() => render(true), 50);   // 초기 렌더 — 선택 없어도 전국 통계·안내는 표시
-  document.querySelectorAll('#sbTgl button').forEach(b => b.onclick = () => {
-    curSB = +b.dataset.sb;
-    document.querySelectorAll('#sbTgl button').forEach(x =>
-      x.classList.toggle('on', +x.dataset.sb === curSB));
-    render();
-  });
-  function sumIdx(cell) {
-    let k = 0, km2 = 0;
-    picked.forEach(c => { const e = idx && idx.sgg[c] && idx.sgg[c][cell];
-      if (e) { k += e.k; km2 += e.km2; } });
-    return {k, km2};
-  }
-  function stats() {
-    const natB = res.runs[baseCell()], natP = res.runs[protCell()], natM = res.runs[promCell()];
-    const line = (t, v) => `<div class="stat-line"><span>${t}</span><span class="v">${v}</span></div>`;
-    const cpTag = ' · 법인·국공유';
-    let html = '';
-    if (picked.length && idx) {
-      const b = sumIdx(baseCell());
-      html += line(`선택 시군 · 진흥✕·보호✕${cpTag}${picked.length > 1 ? ' (합계)' : ''}`,
-                   `${V4.n(b.k)}개 · ${V4.km2(b.km2)} km²`);
-      if (onProt) {
-        const p = sumIdx(protCell());
-        html += line('　＋보호구역 개방 증분', `+${V4.km2(p.km2 - b.km2)} → ${V4.km2(p.km2)} km²`);
-      }
-      if (onProm) {
-        const m = sumIdx(promCell());
-        const from = onProt ? sumIdx(protCell()).km2 : b.km2;
-        html += line('　＋진흥구역 개방 증분', `+${V4.km2(m.km2 - from)} → ${V4.km2(m.km2)} km²`);
-      }
-      if (onAll) {           // 제2조 — 같은 칸의 대조군을 같은 화면에 병기한다
-        const a = sumIdx(ctrlCell());
-        const cur = onProm ? sumIdx(promCell()) : (onProt ? sumIdx(protCell()) : b);
-        html += line('　대조군 (개인 포함·정책 값 아님)',
-                     `${V4.n(a.k)}개 · ${V4.km2(a.km2)} km²` +
-                     (cur.km2 > 0 ? ` (×${(a.km2 / cur.km2).toFixed(1)})` : ''));
-      }
-    }
-    if (natB) html += line(`전국 · 진흥✕·보호✕${cpTag}`,
-      `${V4.n(natB.n_component)}구획 · ${V4.km2(natB.component_area_km2)} km²`);
-    if (onProt && natP) html += line('전국 ＋보호구역',
-      `+${V4.km2(natP.component_area_km2 - natB.component_area_km2)} → ${V4.km2(natP.component_area_km2)} km²`);
-    if (onProm && natM) {
-      const fromN = onProt && natP ? natP.component_area_km2 : natB.component_area_km2;
-      html += line('전국 ＋진흥구역',
-        `+${V4.km2(natM.component_area_km2 - fromN)} → ${V4.km2(natM.component_area_km2)} km²`);
-    }
-    const top = onProm ? natM : (onProt ? natP : natB);
-    if (top && top.m_total_mw != null)
-      html += line('참고 MW (전국 합계·가정)', V4.n(Math.round(top.m_total_mw)));
-    document.getElementById('stats').innerHTML = html;
-  }
-
-  const LAYER_STYLE = {
-    ctrl: {fill: '#9AA3AE', line: '#6B7480', label: '대조군(개인 포함) — 정책 값 아님'},
-    base: {fill: '#FFD84D', line: '#B8860B', label: '진흥✕·보호✕'},
-    prot: {fill: '#FF9B3D', line: '#C96A00', label: '＋보호구역 개방 시'},
-    prom: {fill: '#FF5046', line: '#B3261E', label: '＋진흥구역 개방 시'},
-  };
-  let renderSeq = 0;
-  // ── 적격 필지 검증 레이어 (PR-0037) — 표시 전용, 판정 불사용 ──
-  let onParcel = false, parcelLayers = [];
-  const parcelCache = {};
-  map.createPane('parcels');
-  map.getPane('parcels').style.zIndex = 390;          // 구획(overlay 400) 아래
-  const parcelCanvas = L.canvas({pane: 'parcels', padding: 0.3});
-  const OWN_COL = ['#9DB27E', '#9DB27E', '#9DB27E', '#7FA8C9'];   // 02·04·05 국공유 / 06 법인
-  const OWN_LBL = ['국유지(02)', '시/도유지(04)', '군유지(05)', '법인(06)'];
-  async function parcelsOf(c) {
-    if (parcelCache[c] !== undefined) return parcelCache[c];
-    try {
-      const r = await fetch(`data_v4/parcels/${c}.json.gz`);
-      if (!r.ok) throw 0;
-      const ds = r.body.pipeThrough(new DecompressionStream('gzip'));
-      parcelCache[c] = JSON.parse(await new Response(ds).text());
-    } catch (e) { parcelCache[c] = null; }
-    return parcelCache[c];
-  }
-  document.getElementById('chkParcel').onclick = e => {
-    onParcel = !onParcel;
-    e.currentTarget.classList.toggle('on', onParcel);
-    render(false);
-  };
-  async function render(fit) {
-    const my = ++renderSeq;
-    stats();
-    if (!picked.length) {
-      layers.forEach(l => map.removeLayer(l));
-      layers = [];
-      document.getElementById('hint').textContent = '시군을 추가하면 위성 지도로 이동 (여러 개 선택 가능).';
-      return;
-    }
-    const live = picked.filter(c => !idx || idx.sgg[c]);
-    const none = picked.filter(c => idx && !idx.sgg[c]);
-    document.getElementById('hint').textContent = '구획 불러오는 중…';
-    // 아래(큰 조합) → 위(현행) 순서로 쌓는다: 진흥 → 보호 → 현행
-    const plan = [];
-    if (onAll) plan.push(['ctrl', ctrlCell()]);      // 맨 아래 — 배경
-    if (onProm) plan.push(['prom', promCell()]);
-    if (onProt) plan.push(['prot', protCell()]);
-    plan.push(['base', baseCell()]);
-    // 먼저 전부 받아 둔다 — 받는 중에 지워 버리면 겹친 렌더끼리 서로를 없앤다
-    const packs = [];
-    for (const [kind, cell] of plan) {
-      const datas = await Promise.all(live.map(c => fc(c, cell)));
-      const feats = [];
-      datas.forEach(d => { if (d) feats.push(...d.features); });
-      if (feats.length) packs.push([kind, feats]);
-    }
-    if (my !== renderSeq) return;   // 그 사이 더 최근 렌더가 시작됨 — 이 결과는 버린다
-    layers.forEach(l => map.removeLayer(l));
-    layers = [];
-    for (const [kind, feats] of packs) {
-      const st = LAYER_STYLE[kind];
-      layers.push(L.geoJSON({type: 'FeatureCollection', features: feats}, {
-        style: f => ({color: st.line, weight: kind === 'ctrl' ? .5 : (f.properties.sp ? 1.8 : .8),
-                      dashArray: f.properties.sp ? '5 4' : null,
-                      fillColor: st.fill,
-                      fillOpacity: kind === 'ctrl' ? .3 : (kind === 'base' ? .8 : .75)}),
-        onEachFeature: (f, ly) => ly.bindPopup(
-          `<b>${st.label} · 연접 구획 ${V4.km2(f.properties.a, 2)} km²</b> (${V4.n(Math.round(f.properties.a * 1e6))} ㎡)` +
-          (kind === 'ctrl'
-            ? '<br><b>소유 무관 대조군</b> — 개인 필지가 섞여 있어 정본에 없는 자리임'
-              + ' (윤곽은 정본보다 굵게 간소화)'
-            : '') +
-          `<br>이 시군 구간 ${V4.n(f.properties.n)}필지 · 참고 ${V4.n(Math.round(f.properties.a * 45))} MW` +
-          (f.properties.sp ? '<br><b>시군 경계 걸침</b> — 면적은 구획 전체 기준' : '') +
-          `<br><span style="color:#888;font-size:11px">구획 번호 #${f.properties.id} · 환산 0.045 kW/㎡ 가정</span>`)
-      }).addTo(map));
-    }
-    parcelLayers.forEach(l => map.removeLayer(l));
-    parcelLayers = [];
-    let pTot = 0, pAll = 0;
-    if (onParcel) {
-      const pd = await Promise.all(live.map(c => parcelsOf(c)));
-      if (my !== renderSeq) return;
-      pd.forEach(dsg => {
-        if (!dsg) return;
-        pTot += dsg.n; pAll += dsg.n_total;
-        const mks = dsg.pts.map(([lon, lat, oi]) =>
-          L.circleMarker([lat, lon], {renderer: parcelCanvas, pane: 'parcels',
-            radius: 2, weight: 0, fillColor: OWN_COL[oi], fillOpacity: .6})
-           .bindTooltip(`적격 필지 · ${OWN_LBL[oi]}`));
-        parcelLayers.push(L.layerGroup(mks).addTo(map));
-      });
-    }
-    if (fit && layers.length) {
-      map.invalidateSize();          // 맞추기 직전에 실제 크기로 갱신
-      let b = layers[0].getBounds();
-      layers.forEach(l => b = b.extend(l.getBounds()));
-      lastFit = b.pad(0.08);
-      lastW = map.getSize().x;
-      map.fitBounds(lastFit);
-    }
-    let hint = layers.length
-      ? (onAll
-          ? '회색만 있고 색이 없는 자리 = 땅은 있으나 개인 소유라 정본에서 빠진 곳.'
-          : '개방분 버튼을 켜고 끄며 비교 — 노랑 밖으로 번진 색이 그 개방의 증분.')
-      : '선택 시군에는 연접 구획 없음.';
-    if (none.length) hint += ` (${none.map(nameOf).join('·')}: 어떤 시나리오에도 연접 구획 없음)`;
-    if (onParcel && pTot) hint += ` · 적격 필지 점 ${pTot.toLocaleString()}개 표시` +
-      (pAll > pTot ? ` (좌표 결손 ${(pAll - pTot).toLocaleString()}건은 점 없음 — 수치에는 포함)` : '') +
-      ' — 점이 구획 색 안에 들어 있으면 판정·소유가 눈으로 검증됨.';
-    if (picked.length > 12) hint += ' — 선택이 많으면 로딩이 느려질 수 있음.';
-    document.getElementById('hint').textContent = hint;
-  }
-
-  
-})();
-</script>
-
 
 <footer class="v4"><div class="wrap"></div></footer>
 
@@ -620,25 +211,6 @@ input[type=range]{accent-color:var(--navy)}
   document.getElementById('art-meta').textContent =
     `PLANiT Institute · 데이터 ${String(m.data_generation).replace(/정본 우주/g, '분석 기준 필지')} · 생성 ${m.generated}`;
   const R = N.runs;
-  // ── §1 소유 구성 — 타이포 스탯 (막대 그림은 폐지 2026-09-01) ──
-  {
-    const R1 = N.runs, put = (id, v) => document.getElementById(id).textContent = v;
-    put('c-a50', V4.n(R1['R0_current@all'].ge50));
-    put('c-indiv', V4.n(N.big_composition['R0_current@all'].indiv_share_pct));
-    put('c-cp-a50', V4.n(R1.R0_current.ge50));
-    put('c-cp-a-mw', V4.n((N.cp_big_anchor[0] || {mw: 0}).mw));
-    put('c-cp-r50', V4.n(R1.R2_promo.ge50));
-    put('c-cp-r-mw50', V4.n(R1.R2_promo.ge50_mw));
-    put('c-sb-from', V4.km2(R1.R2_promo.component_km2));
-    put('c-sb-to', V4.km2(R1.R2_promo_SB.component_km2));
-    put('k-a50', V4.n(R1['R0_current@all'].ge50));
-    put('k-cp1', V4.n(R1.R0_current.ge50));
-    put('k-indiv', V4.n(N.big_composition['R0_current@all'].indiv_share_pct));
-    put('k-r50', V4.n(R1.R2_promo.ge50));
-    put('k-mw', V4.n(R1.R2_promo.ge50_mw));
-    put('k-r50sb', V4.n(R1.R2_promo_SB.ge50));
-  }
-
   const nameOf = c => (names.codes[c] && names.codes[c].name) || c;
   // p-n/p-comp/p-th 스팬은 압축 편집으로 제거된 문단에 있었음 — 남아 있으면 채움
   for (const [id, v] of [['p-n', V4.n(R.R2_promo.ge50)], ['p-comp', V4.n(R.R2_promo.n_component)],
@@ -1059,43 +631,18 @@ input[type=range]{accent-color:var(--navy)}
   // ── §5 시군별 공동 1등 (recommend_v4 — 발행은 export_recommend_v4.py 게이트 통과분만) ──
   const REC = await gzfc('data_v4/recommend_v4.json.gz');
 
-  // ── 지산지소 카드 5장 — 후보 25곳 안의 최대·최소 (모두 표기 전용) ──
-  (() => {
-    const demOf = s => {
-      const fr = REC.sgg[s] && REC.sgg[s].frontier;
-      return fr && fr.length ? fr[0].dem : null;
-    };
-    const rows = bigList.map(b => {
-      const nb = nearestOf[b.id] || {};
-      const gp = nb.ctr ? gridAt(nb.ctr) : null;
-      const dem = demOf(b.sgg);
-      return {b, km: nb.best ? nb.best.km : null, ind: nb.best ? nb.best.c.name : null,
-              lo: gp && gp.s === 'ok' ? gp.lo : null,
-              dem, dsh: dem ? b.mw * 1.314 / dem * 100 : null};
-    });
-    const by = (f, min) => rows.filter(r => f(r) != null)
-      .sort((x, y) => min ? f(x) - f(y) : f(y) - f(x))[0];
-    const c1 = rows[0];                                // 규모순 표시 — 첫 행이 최대
-    const c2 = by(r => r.lo, false), c3 = by(r => r.km, true);
-    const c4 = by(r => r.dsh, true), c5 = by(r => r.dsh, false);
-    const P = v => v.toLocaleString('ko-KR', {maximumFractionDigits: 1});
-    document.getElementById('jsi').innerHTML = [
-      ['규모가 가장 큰 곳', `${V4.n(c1.b.mw)}<small>MW</small>`,
-       `${nameOf(c1.b.sgg)} — 후보 최대 구획<br>(지역 전력수요 대비 ${P(c1.dsh)}%)`],
-      ['계통 여유가 가장 큰 곳', `${V4.n(c2.lo)}<small>MW</small>`,
-       `${nameOf(c2.b.sgg)} ${V4.n(c2.b.mw)}MW 후보<br>소재 읍면동 여유 하한`],
-      ['수요처가 바로 옆인 곳', `${P(c3.km)}<small>km</small>`,
-       `${nameOf(c3.b.sgg)} ${V4.n(c3.b.mw)}MW 후보<br>→ ${c3.ind}`],
-      ['전력판매량 대비가 가장 작은 곳', `${P(c4.dsh)}<small>%</small>`,
-       `${nameOf(c4.b.sgg)} ${V4.n(c4.b.mw)}MW —<br>시군 연간 전력판매량 ${V4.n(c4.dem)}GWh 대비`],
-      ['전력판매량 대비가 가장 큰 곳', `${P(c5.dsh)}<small>%</small>`,
-       `${nameOf(c5.b.sgg)} ${V4.n(c5.b.mw)}MW —<br>시군 연간 전력판매량 ${V4.n(c5.dem)}GWh 대비`],
-    ].map(([t, v, s]) => `<div><i>${t}</i><b>${v}</b><span>${s}</span></div>`).join('');
-
-  })();
   gridRefresh();
   bufRefresh();
   V4.footer();
+})();
+</script>
+<script>
+// 표 서랍 접기/펼치기 (표시 전용)
+(() => {
+  const d = document.getElementById('drawer'), t = document.getElementById('drawerTgl');
+  document.getElementById('drawerHead').onclick = () => {
+    d.classList.toggle('min'); t.textContent = d.classList.contains('min') ? '펼치기 ▲' : '접기 ▼';
+  };
 })();
 </script>
 <script src="site.js"></script>

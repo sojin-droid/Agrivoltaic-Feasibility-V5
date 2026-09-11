@@ -3,109 +3,21 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>PLANiT · 지역별 우선 검토 후보 — 시군별 종합 검토</title>
+<title>PLANiT · 지역별 우선 후보 — 우리 지역에서는 어디를 우선 검토할 것인가</title>
 <meta name="description" content="각 시군에서 규모·계통·지역 전력수요를 종합해 우선 검토할 영농형 태양광 후보지를 제시.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=Inter:wght@400;500;700&family=Noto+Sans+KR:wght@400;500;700&family=JetBrains+Mono:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="assets/v5.css">
 <link rel="stylesheet" href="assets/vendor/leaflet/leaflet.css">
 <script src="assets/vendor/leaflet/leaflet.js"></script>
 <script src="assets/v4.js"></script>
+<script src="assets/region.js"></script>
 <style>
-#proxmap{height:76vh;min-height:560px;border:1px solid var(--line);border-radius:12px;background:#dfe8df}
-.prox-wide{width:min(1240px,calc(100vw - 48px));position:relative;left:50%;transform:translateX(-50%)}
-.map-wrap{display:grid;grid-template-columns:1fr 330px;gap:16px}
-@media(max-width:900px){.map-wrap{grid-template-columns:1fr}}
-.panel{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 14px 16px;
- font-size:12.5px;max-height:76vh;overflow-y:auto}
-.panel h3{font-family:var(--serif);color:var(--navy);font-size:15px;margin-bottom:8px}
-.grp{border-top:1px solid var(--line);padding:10px 0 8px;margin-top:6px}
-.grp:first-of-type{border-top:none;margin-top:0}
-.gt{font-weight:800;color:var(--navy);font-size:12.5px;display:flex;align-items:center;gap:8px;margin-bottom:6px}
-.allbtn{margin-left:auto;font:700 11px 'Noto Sans KR',sans-serif;border:1.5px solid var(--navy);
- border-radius:999px;padding:2px 10px;background:#fff;color:var(--navy);cursor:pointer}
-.allbtn.on{background:var(--navy);color:#fff}
-.scrolllist{max-height:190px;overflow-y:auto;border:1px solid var(--line);border-radius:8px}
-.scrolllist label{display:flex;gap:6px;align-items:baseline;padding:4px 8px;border-bottom:1px solid #f0f0ec;
- cursor:pointer;font-size:11.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.scrolllist label:hover{background:var(--sky)}
-.scrolllist .mw{font-weight:800;color:var(--navy);font-variant-numeric:tabular-nums;min-width:46px}
-.scrolllist .rk{font-family:var(--mono);font-size:10px;color:var(--muted);min-width:14px}
-.typerow{display:flex;gap:6px;align-items:center;padding:3px 0;font-size:12px;cursor:pointer}
-.typerow .sw{width:11px;height:11px;border-radius:3px;display:inline-block}
-input[type=range]{accent-color:var(--navy)}
-.glbl{font-size:11.5px;color:var(--ink);margin:2px 0 4px;font-variant-numeric:tabular-nums}
-.gleg{display:flex;gap:2px;margin-top:4px}
-.gleg span{width:26px;height:9px;display:inline-block}
-.glegtxt{font-size:10px;color:var(--muted);font-family:var(--mono);margin-top:2px}
-.searchbox{width:100%;font:12.5px 'Noto Sans KR',sans-serif;padding:6px 9px;border:1.5px solid var(--line);
- border-radius:8px;margin-bottom:4px}
-.searchbox:focus{outline:none;border-color:var(--navy)}
-.sresults{max-height:150px;overflow-y:auto;border:1px solid var(--line);border-radius:8px;display:none}
-.sresults.open{display:block}
-.sresults .sr{display:flex;gap:6px;align-items:center;padding:4px 8px;border-bottom:1px solid #f0f0ec;
- cursor:pointer;font-size:11.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.sresults .sr:hover{background:var(--sky)}
-.sresults .none{padding:5px 8px;color:var(--muted);font-size:11.5px}
-#bufList{max-height:170px;font-size:11.5px}
-#bufList .bh{font-weight:800;color:var(--navy);padding:4px 8px 1px;font-size:11.5px}
-#bufList .bi{padding:1px 8px 1px 16px;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-#bufList .none{padding:2px 8px 4px 16px;color:var(--muted)}
-.prox-leg{font-size:11.5px;color:var(--muted);margin-top:8px;line-height:1.7}
-.prox-leg .sw{display:inline-block;width:12px;height:12px;border-radius:3px;vertical-align:-2px;margin-right:4px}
-.prox-leg .dot{display:inline-block;width:11px;height:11px;border-radius:50%;vertical-align:-1px;margin-right:4px}
-.layerbox{background:#fff;border:2px solid rgba(0,0,0,.2);border-radius:8px;padding:8px 10px;
- box-shadow:0 1px 6px rgba(0,0,0,.3);font:12px/1.7 'Noto Sans KR',sans-serif;color:var(--ink)}
-.layerbox b{font-size:11px;color:var(--muted);letter-spacing:.04em}
-.layerbox label{display:flex;gap:6px;align-items:center;cursor:pointer;white-space:nowrap}
-.layerbox .gleg{display:flex;gap:2px;margin:2px 0 0 20px}
-.layerbox .gleg span{width:22px;height:9px;display:inline-block}
-.layerbox .glegtxt{margin-left:20px;font-size:10px;color:var(--muted);font-family:var(--mono)}
-.linklbl{background:rgba(12,53,106,.88);color:#fff;border:none;border-radius:4px;
- font:600 10px/1.2 'JetBrains Mono',monospace;padding:2px 5px;box-shadow:0 1px 3px rgba(0,0,0,.4)}
-.linklbl::before{display:none}
-#t-prox tr.rowbtn{cursor:pointer}
-#t-prox tr.rowbtn:hover td{background:var(--sky)}
-#t-prox th,#t-prox td{white-space:nowrap}
-#t-prox tr:nth-child(even) td{background:#FAFBF7}
-#t-prox tr.rowbtn:hover td{background:var(--sky)}
-#t-prox .rk{font-family:var(--serif);font-weight:700;color:var(--navy)}
-#t-prox tr:nth-child(-n+4) .rk{color:var(--gold)}
-.mwc{display:flex;align-items:center;gap:7px;justify-content:flex-end}
-.mwb{display:inline-block;height:7px;border-radius:4px;background:linear-gradient(90deg,var(--gold),#E4A93B)}
-.chip-rec{display:inline-block;background:#FDF0E3;color:#C96A00;border:1px solid #E8C9A8;
- border-radius:999px;padding:1px 9px;font-size:11.5px;font-weight:700}
-.cond-pill{display:inline-flex;align-items:center;gap:6px;background:var(--card);
- border:1px solid var(--line);border-radius:999px;padding:4px 12px;font-size:12.5px;margin:2px 6px 2px 0}
-.cond-pill b{color:var(--navy)}
 #recTbl th,#recTbl td{white-space:nowrap}
 #recTbl tr:nth-child(even) td{background:#FAFBF7}
-#recMap{height:420px;border:1px solid var(--line);border-radius:10px;background:#dfe8df}
-.cav{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:12px 0}
-@media(max-width:820px){.cav{grid-template-columns:1fr 1fr}}
-.cav .c{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:11px 13px;font-size:12.5px;line-height:1.65}
-.cav .c b{display:block;color:var(--navy);margin-bottom:3px;font-size:12.5px}
-.own-kpi{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:16px 0 22px}
-@media(max-width:820px){.own-kpi{grid-template-columns:1fr 1fr}}
-.own-kpi>div{background:var(--white);border:1px solid var(--line);border-radius:12px;padding:14px 12px;text-align:center}
-.own-kpi>div.hi{background:var(--sky);border-color:var(--leaf)}
-.own-kpi b{display:block;font-family:var(--serif);font-size:clamp(24px,2.8vw,32px);font-weight:700;color:var(--navy);line-height:1.15;margin-bottom:4px}
-.own-kpi b small{font-family:var(--mono);font-size:13px;color:var(--muted);font-weight:400}
-.own-kpi>div>span{font-size:11.5px;color:var(--muted);line-height:1.5;word-break:keep-all}
-.jsi{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin:14px 0 18px}
-@media(max-width:900px){.jsi{grid-template-columns:1fr 1fr}}
-.jsi>div{background:var(--white);border:1px solid var(--line);border-radius:12px;padding:13px 10px;text-align:center}
-.jsi>div>i{display:block;font-style:normal;font-family:var(--sans);font-size:12px;font-weight:700;color:var(--navy);margin-bottom:6px;word-break:keep-all}
-.jsi b{display:block;font-family:var(--serif);font-size:clamp(22px,2.4vw,28px);font-weight:700;color:var(--navy);line-height:1.15;margin-bottom:4px}
-.jsi b small{font-family:var(--mono);font-size:12.5px;color:var(--muted);font-weight:400}
-.jsi>div>span{font-size:11.5px;color:var(--muted);line-height:1.5;word-break:keep-all}
-.key2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-@media(max-width:760px){.key2{grid-template-columns:1fr}}
-.key2>div{font-size:13px;line-height:1.7;word-break:keep-all}
-.key2 i{display:block;font-style:normal;font-family:var(--sans);font-size:12px;font-weight:700;color:var(--navy);margin-bottom:2px}
-.rec2col{grid-template-columns:1.6fr 1fr}
-@media(max-width:760px){.rec2col{grid-template-columns:1fr}}
+.chip-rec{display:inline-block;background:#FDF0E3;color:#C96A00;border:1px solid #E8C9A8;border-radius:999px;padding:1px 9px;font-size:11.5px;font-weight:700}
 </style>
 </head>
 <body>
@@ -124,452 +36,255 @@ input[type=range]{accent-color:var(--navy)}
       <a href="index.html" data-i18n="nav-index">한눈에 보기</a>
       <a href="finder.html" data-i18n="nav-finder">후보지 찾기</a>
       <a href="scenarios.html" data-i18n="nav-scn">정책 시나리오</a>
-      <a class="active" href="regions.html" data-i18n="nav-regions">지역별 우선 검토 후보</a>
-      <a href="method.html" data-i18n="nav-method">근거와 방법</a>
+      <a class="active" href="regions.html" data-i18n="nav-regions">지역별 우선 후보</a>
     </nav>
     <div style="display:flex;gap:12px;align-items:center">
       <div class="lang-toggle" role="group" aria-label="Language">
         <button type="button" data-lang="ko">KO</button>
         <button type="button" data-lang="en">EN</button>
       </div>
-      <a class="nav-cta" href="method.html#contact">Contact</a>
+      <a class="nav-cta" href="local.html">우리동네 고르기</a>
       <button class="hamburger" aria-label="메뉴 열기" onclick="document.getElementById('menu').classList.toggle('open')">☰</button>
     </div>
   </div>
 </header>
+
 <div class="page-hero">
-  <div class="wrap" style="max-width:900px">
-    <p class="eyebrow">Regions · 지역별 우선 검토 후보</p>
-    <h1>지역별 우선 검토 후보</h1>
-    <p class="lede">면적·계통 여유·산단 거리 세 축에서 서로 다른 trade-off를 가진 <b>비지배
-    후보</b>를 시군별로 함께 보여줌 — 한 축만 우수한 후보가 아니라 세 축 모두 다른 구획에 지지 않는
-    후보 전원.<br>가중 순위는 후보군 내부 비교를 위한 보조 지표임.</p>
-    <p style="font-family:var(--mono);font-size:11.5px;color:var(--muted);margin-top:14px"
-      id="art-meta">PLANiT Institute</p>
+  <div class="wrap" style="max-width:960px">
+    <p class="eyebrow">Regions · 지역별 우선 후보</p>
+    <h1>우리 지역에서는 어디를 우선 검토할 것인가</h1>
+    <p class="lede">시군을 고르면 그 안의 후보 구획 가운데 <b>공동 1등 후보</b>가 지도와 표에 나타남 —
+    면적이 크고, 산업단지와 가깝고, 계통 여유가 큰 세 조건을 동시에 볼 때 어느 하나가 다른 후보보다
+    모든 면에서 낫지 않으면 여러 후보가 공동 1등으로 남음. 세 조건을 번갈아 켜며 서로 다른 장점을 비교하는 화면임.</p>
+    <p style="font-family:var(--mono);font-size:11.5px;color:var(--muted);margin-top:14px" id="art-meta">PLANiT Institute</p>
     <span id="gen-stamp" style="display:none">—</span>
   </div>
 </div>
 
-<article>
-<div class="wrap art" style="max-width:860px">
+<section style="padding:40px 0 30px">
+  <div class="wrap" style="max-width:1120px">
+    <div class="sec-head"><div><p class="eyebrow">Step 1 · 지역</p><h2>어느 시군을 볼까요</h2></div>
+      <span style="font-size:12.5px;color:var(--muted)" id="recStamp">—</span></div>
+    <div class="figbox" id="rp-rec"></div>
 
-  <h2 class="art-h" id="rank">1. 시군별 우선 검토 후보 — 우선 후보 비교 (비지배 집합)</h2>
+    <div class="sec-head" style="margin-top:26px"><div><p class="eyebrow">Step 2 · 지도</p><h2 id="recTitle">—</h2></div>
+      <span style="font-size:12.5px;color:var(--muted)">금색 = 공동 1등 후보 · 노랑 = 그 시군의 연접 구획 전량 · 하늘색 점 = 적격 필지(검증용)</span></div>
+    <div id="recMap2"></div>
 
-  <p><b>어떤 후보가 우선인가</b> — 면적이 크고, 계통 여유가 크며, 산업단지와 가까운
-  후보를 비교함. 시군을 고르면 그 시군에서 세 조건 모두 다른 구획에 지지 않는 후보
-  전원이 표시됨.</p>
-
-  <details style="margin:10px 0 16px">
-    <summary style="cursor:pointer;font-size:13px;font-weight:700;color:var(--leaf-deep)">선정 방법 자세히 보기</summary>
-  <div class="figbox" style="display:grid;grid-template-columns:1fr 200px;gap:14px;align-items:center;margin:12px 0 16px">
-    <div style="font-size:13px;line-height:2">
-      <span style="font-family:var(--mono);font-size:11px;color:var(--leaf-deep);letter-spacing:.1em">FORMULATION</span><br>
-      <b>max</b> 면적(㎡) · <b>max</b> 계통 여유(MW, 하한) · <b>min</b> 산업단지 거리(km)<br>
-      <span style="color:var(--muted)">가중치·순서·관문 없음 — 세 축 모두에서 지지 않는 구획 전원이
-      공동 1등(비지배 집합). 후보 전수의 쌍별 비교로 정확 열거(반복 근사 아님).</span>
-    </div>
-    <svg viewBox="0 0 200 140" style="width:100%;height:auto">
-      <line x1="26" y1="118" x2="192" y2="118" stroke="#9aa3ae" stroke-width="1.5"/>
-      <line x1="26" y1="118" x2="26" y2="8" stroke="#9aa3ae" stroke-width="1.5"/>
-      <g fill="#C9CFD6"><circle cx="70" cy="92" r="4"/><circle cx="96" cy="76" r="4"/>
-        <circle cx="120" cy="96" r="4"/><circle cx="140" cy="66" r="4"/><circle cx="88" cy="102" r="4"/>
-        <circle cx="150" cy="90" r="4"/><circle cx="118" cy="52" r="4"/></g>
-      <g fill="#FFD84D" stroke="#B3261E" stroke-width="1.6"><circle cx="44" cy="52" r="5.5"/>
-        <circle cx="72" cy="34" r="5.5"/><circle cx="116" cy="24" r="5.5"/><circle cx="170" cy="18" r="5.5"/></g>
-      <text x="110" y="136" text-anchor="middle" font-size="10" fill="#6C757D" font-family="var(--sans)">비지배 집합(금색) · 지배됨(회색)</text>
-    </svg>
-  </div>
-  <p>시군을 고르면 그 시군의 연접 구획 전수에서 <b>면적 · 계통 여유 · 산업단지
-  거리</b> 세 축 모두 다른 구획에 지지 않는 <b>공동 1등 전원</b>을 보인다.
-  가중치도, 우선순위도, 관문도 없다 — 단독 1등을 정하지 않으며, 집합 안에서
-  무엇을 고를지는 보는 쪽의 우선순위다. 축별 순위 세 열이 그 선택을 돕는다.
-  계통·거리를 알 수 없는 구획은 해당 축을 최악값으로 두어 비교한다. 전국 209개 시군에서
-  1,477개 구획이 이 집합에 든다.</p>
-  </details>
-
-  <figure class="figure-v4">
-    <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:8px">
-      <select id="recSgg" style="font:inherit;padding:4px 8px"></select>
-      <label style="font-size:12px;color:var(--muted);margin-left:10px">표시 방법
-        <select id="recMth" style="font:inherit;padding:4px 8px">
-          <option value="">우선 후보 비교 (기본)</option>
-        </select></label>
-      <span id="recStamp" style="font-size:12.5px;color:var(--muted)">—</span>
-    </div>
-    <div style="display:grid;gap:14px;margin-bottom:12px" class="rec2col">
-      <div>
-        <div style="font-size:12.5px;margin-bottom:3px"><b>위치</b> — 하늘색 점 = 적격
-          필지 전량(클러스터링 직전 단계, 분석 기준 필지)<sup class="fnref">[12]</sup> ·
-          노랑 = 연접 구획 · 금색 = 공동 1등 (점 클릭 = 산점도·표 연동)</div>
-        <div id="recMthCap" style="font-size:11.5px;color:#7B4BB7;margin-bottom:3px"></div>
-        <div id="recMap" style="height:420px"></div>
+    <div class="figbox" style="margin-top:16px">
+      <div class="axis-tgl" id="axisTgl">
+        <span class="q">무엇을 우선해서 볼까요?</span>
+        <button data-ax="" class="on">전체 보기</button>
+        <button data-ax="ra"><i style="background:#B8860B"></i>면적</button>
+        <button data-ax="ri"><i style="background:#7B4BB7"></i>산단 거리</button>
+        <button data-ax="rl"><i style="background:#2A9D8F"></i>계통 여유용량</button>
       </div>
-      <div>
-        <div style="font-size:12.5px;margin-bottom:3px"><b>산점도</b> — x 면적(로그) · y 계통 여유 ·
-          금색 = 공동 1등 · 회색 = 지배당한 구획</div>
-        <svg id="recScatter" style="width:100%;height:420px;background:#fff;border:1px solid var(--line);border-radius:10px"></svg>
-      </div>
+      <div class="legend-star" id="axisNote">조건을 누르면 그 기준에서 이 시군 구획 전체 중 <b>3위 이내</b>인 후보가 지도와 표에서 강조됨.
+        ★ 3개 = 세 조건 모두 3위 이내 · ★ 2개 = 두 조건 · ★ 1개 = 한 조건 — 순위는 정본의 축별 순위 열이며 임의 점수가 아님.</div>
     </div>
-    <div style="overflow-x:auto"><table class="v4" id="recTbl"></table></div>
-    <div style="font-size:12px;color:var(--muted);margin:6px 0 0">가중 순위 = 후보군 내부 비교용
-      보조 지표 · "지역 전력수요 대비" = <b>선택한 비지배 후보 기준</b>(시군 연간 전력판매량 대비
-      그 후보의 환산발전량 — 연간 규모 비교 참고값)<sup class="fnref">[28]</sup>
-      († = 시 전체 배정 등 각주 · — = 수요 미수집). 후보지 찾기 탭의 값은 25개 대규모 후보
-      기준이라 대상이 다름.</div>
-    <details style="margin:6px 0 0;font-size:12px;color:var(--muted)">
-      <summary style="cursor:pointer;font-weight:700;color:var(--leaf-deep)">가중 순위 자세히 보기</summary>
-      <div style="margin-top:6px">가중 순위(WPM·entropy) = 가중곱(Bridgman 1922) × 시군별 엔트로피
-      가중(Shannon 1948 — 이 시군: <span id="recEw">—</span>)의 구획 전량 중 순위. 엔트로피 가중은
-      <b>각 시군 안에서 변수의 변별력(데이터 분포)이 정하는 가중</b>이며 정책적 중요도가 아님 —
-      예컨대 거리 가중이 낮으면 그 시군에서 거리 값의 차이가 작다는 뜻. 비지배 집합(이 표의 행)과
-      나란히 읽는 두 번째 눈으로, 판정·선별에는 쓰지 않음.<br>지역 전력수요 대비 = 구획 참고
-      발전량(MW × 1,314h) ÷ 시군 연간 전력판매량(한전 2023–25 평균).</div>
-    </details>
-    <div id="recCtl" style="font-size:12px;color:var(--muted);margin:6px 0 10px">—</div>
-    <div id="recDem" style="margin:2px 0 12px"></div>
-    <div id="recReader" style="background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px;font-size:13px">
-      <b>반경 판독기</b> — 위 표·산점도·지도에서 구획을 고르면, 반경 안 산단 점수 합과
-      여유용량 합(균등배분 하한 합)을 보임. 고른 뒤 확인하는 도구 — 비지배 집합 선별에 불사용.</div>
-    <figcaption class="figcap-v4">판독기의 기본 반경은 시군 적응형(그 시군 구획의 4분의 3이 첫
-      산업단지를 만나는 거리, 2–12km). 여유 대역이 같은 이웃 구획은 같은 읍면동·설비의 여유를 나눠
-      쓰는 사이라 동시 개발 시 표의 여유를 합산하면 안 됨.</figcaption>
-  </figure>
 
-  <h2 class="art-h" id="jisan">2. 지역 전력수요와 비교 — 시군 분포</h2>
-  <p>각 시군 최대 구획의 참고 발전량이 그 시군 연간 전력판매량에서 차지하는 비중의 분포 —
-  연간 규모 비교의 참고지표<sup class="fnref">[28]</sup>.</p>
-  <figure class="art-fig">
+    <div class="sec-head" style="margin-top:26px"><div><p class="eyebrow">Step 3 · 공동 1등 후보</p><h2>서로 다른 장점을 가진 후보들</h2></div>
+      <span style="font-size:12.5px;color:var(--muted)">행 클릭 = 지도 이동 · 표시 순서는 면적순(순위 아님)</span></div>
     <div class="figbox">
-      <div id="jsiStrip"></div>
-      <div class="figcap">그림. 전국 209개 시군 — 각 시군 최대 구획(면적 1위)의 참고 발전량 ÷ 연간
-      전력판매량(로그 눈금). 유형 구분선 없음(문턱을 두지 않음).</div>
+      <div style="overflow-x:auto"><table class="v4" id="recTbl"></table></div>
+      <div class="fn" style="margin-top:8px" id="recCtl">—</div>
+      <div class="callout-v4" style="margin-top:8px"><b>공동 1등 후보란</b> — 어느 한 후보가 면적·산단 거리·계통 여유용량의 모든 조건에서
+        다른 후보보다 우수하지 않기 때문에 여러 후보가 공동 1등으로 남음. 가중치도 순서도 관문도 없이 세 조건을 동시에 비교한 결과이며,
+        집합 안에서 무엇을 고를지는 지역의 판단임(방법론 이름은 <b>비지배 집합</b> — 아래 "방법 자세히").
+        계통 여유는 읍면동 하한 스냅숏, 산단 거리는 직선거리로 접속·PPA 가능성을 뜻하지 않음<sup class="fnref">[22]</sup><sup class="fnref">[23]</sup>.</div>
     </div>
-  </figure>
 
-  <h2 class="art-h" id="key2">3. 제도 경로 — 부지와 판로의 두 열쇠</h2>
-  <div class="figbox" style="padding:16px 18px;margin:14px 0 4px">
-    <div style="font-family:var(--mono);font-size:11px;letter-spacing:.12em;color:var(--leaf-deep);margin-bottom:8px">TWO KEYS · 지산지소가 성립하는 조건</div>
-    <div class="key2">
-      <div><i>열쇠 ① 부지</i>영농형태양광법<sup class="fnref">[10]</sup> 제6조제1항제2호의
-        <b>재생에너지지구</b> — 농업진흥구역 안 설치를 여는 제도. 지정 사례 없음 —
-        이 지도의 후보 목록이 그 지정 근거 자료.</div>
-      <div><i>열쇠 ② 판로</i>분산에너지 활성화 특별법 제43조의 <b>특화지역
-        직접거래</b>(1차 7곳<sup class="fnref">[29]</sup>) 또는
-        <b>직접PPA</b>(발전 1MW 초과 · 사용자 300kW 이상) — 만든 전기를 지역이
-        직접 사는 계약 경로.</div>
+    <div class="rec2col" style="margin-top:14px">
+      <div id="recReader" style="background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px;font-size:13px">
+        <b>반경 판독기</b> — 표나 지도에서 후보를 고르면 반경 안 산단 점수 합과 여유용량 합(균등배분 하한 합)을 보임. 고른 뒤 확인하는 도구 — 비지배 집합 선별에 불사용.</div>
+      <div id="recDem" style="background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px;font-size:13px">
+        <b>지역 전력판매량 대비</b> — 후보를 고르면 그 시군 연간 전력판매량 대비 환산발전량(참고)을 보임.</div>
     </div>
-    <div style="overflow-x:auto;margin-top:10px"><table class="v4" id="key2Tbl"></table></div>
-    <div style="font-size:12px;color:var(--muted);margin-top:6px" id="key2Read">—</div>
+
+    <details style="margin-top:18px">
+      <summary style="cursor:pointer;font-size:13px;font-weight:700;color:var(--leaf-deep)">방법 자세히 — 비지배 집합 · 축 정의 · 알 수 없는 값</summary>
+      <div class="callout-v4" style="margin-top:8px">수식: max 면적(㎡) · max 계통 여유(MW, 하한) · min 산업단지 거리(km). 시군 안 연접 구획 전수를
+        쌍별로 비교해 세 축 모두에서 다른 구획에 지지 않는 구획 전원을 정확히 열거함(반복 근사 아님 — ADR-0044).
+        계통·거리를 알 수 없는 구획은 해당 축을 최악값으로 두어 비교함. 전국 209개 시군에서 <span id="recTot">—</span>개 구획이 이 집합에 듦.
+        축별 순위는 시군 구획 전체 안에서의 순위(동률은 같은 순위). 정준 10개 다기준 방법과의 비교(지배 위반 0)는
+        <a href="method.html" style="color:var(--leaf-deep)">근거와 방법</a>과 보고서에 수록. "지역 전력판매량 대비" = 구획 참고 발전량(MW × 1,314h) ÷
+        시군 연간 전력판매량(한전 2023–25 평균) — 연간 규모 비교 참고값, 판정·선별 불사용<sup class="fnref">[28]</sup>.</div>
+    </details>
+
+    <details style="margin-top:10px">
+      <summary style="cursor:pointer;font-size:13px;font-weight:700;color:var(--leaf-deep)">제도 경로 — 부지와 판로의 두 열쇠 (분산특구 1차 7곳 대응)</summary>
+      <div class="figbox" style="margin-top:8px">
+        <p style="font-size:13px;margin:0 0 8px">열쇠 ① 부지 = 영농형태양광법<sup class="fnref">[10]</sup> 제6조제1항제2호의 재생에너지지구(농업진흥구역 안 설치를 여는 제도, 지정 사례 없음) ·
+        열쇠 ② 판로 = 분산에너지 활성화 특별법 제43조의 특화지역 직접거래(1차 7곳<sup class="fnref">[29]</sup>) 또는 직접PPA(발전 1MW 초과 · 사용자 300kW 이상).</p>
+        <div style="overflow-x:auto"><table class="v4" id="key2Tbl"></table></div>
+        <div style="font-size:12px;color:var(--muted);margin-top:6px" id="key2Read">—</div>
+      </div>
+    </details>
   </div>
-
-
-  <p style="font-size:12px;color:var(--muted);margin-top:26px">방법·한계 상세는
-  근거와 방법 탭 · 후보 구획 탐색은 후보지 찾기 탭.</p>
-</div>
-</article>
+</section>
 
 <footer class="v4"><div class="wrap"></div></footer>
 
 <script>
 (async () => {
-  const names = await V4.data('sgg_matrix');
   const m = await V4.data('meta_v4');
+  await Region.load();
   document.getElementById('gen-stamp').textContent = m.generated;
   document.getElementById('art-meta').textContent =
     `PLANiT Institute · 데이터 ${String(m.data_generation).replace(/정본 우주/g, '분석 기준 필지')} · 생성 ${m.generated}`;
-  const nameOf = c => (names.codes[c] && names.codes[c].name) || c;
-  async function gzfc(path) {
-    const r = await fetch(path);
-    if (!r.ok) return null;
-    const ds = r.body.pipeThrough(new DecompressionStream('gzip'));
-    return JSON.parse(await new Response(ds).text());
-  }
-
-  const REC = await gzfc('data_v4/recommend_v4.json.gz');
-
-  // ── 지역 전력수요와 비교(분포)·열쇠 두 개 — proximity §4에서 이식 (수치 로직 원문) ──
-  (() => {
-    // 분포 스트립 — 209개 시군 최대 구획의 수요 대비 (로그 눈금 · 문턱 없음)
-    const sv = Object.entries(REC.sgg)
-      .map(([s, d]) => ({s, v: d.frontier[0] && d.frontier[0].dsh}))
-      .filter(r => r.v != null && r.v > 0);
-    const lo10 = Math.log10(0.01), hi10 = Math.log10(60);
-    const X = v => 30 + (Math.log10(v) - lo10) / (hi10 - lo10) * 800;
-    const LAB = {'44270': '당진', '44210': '서산', '46770': '고흥', '41220': '평택', '46820': '해남'};
-    let g = `<svg viewBox="0 0 860 132" style="width:100%;height:auto;display:block" role="img"
-      aria-label="시군별 최대 구획의 수요 대비 분포">`;
-    [[0.1, '0.1%'], [1, '1%'], [10, '10%']].forEach(([t, lb]) => {
-      g += `<line x1="${X(t)}" y1="18" x2="${X(t)}" y2="98" stroke="var(--line)"/>
-        <text x="${X(t)}" y="114" text-anchor="middle" font-family="var(--mono)"
-          font-size="11" fill="var(--muted)">${lb}</text>`;
-    });
-    sv.forEach((r, i) => {
-      g += `<circle cx="${X(r.v).toFixed(1)}" cy="${46 + (i % 8) * 6}" r="3.2"
-        fill="var(--leaf-deep)" opacity=".5">
-        <title>${nameOf(r.s)} — 최대 구획 수요 대비 ${r.v}%</title></circle>`;
-    });
-    sv.filter(r => LAB[r.s]).forEach((r, li) => {
-      const ty = li % 2 ? 12 : 26;                     // 라벨 두 단 교차 — 로그축 겹침 방지
-      g += `<line x1="${X(r.v)}" y1="${ty + 4}" x2="${X(r.v)}" y2="42" stroke="var(--gold)" stroke-width="2"/>
-        <text x="${X(r.v)}" y="${ty}" text-anchor="middle" font-family="var(--sans)"
-          font-size="11.5" font-weight="700" fill="var(--navy)">${LAB[r.s]} ${r.v}%</text>`;
-    });
-    document.getElementById('jsiStrip').innerHTML = g + '</svg>';
-
-    // 열쇠 두 개 교차 — 1차 분산특구 7곳 [29] × 비지배 후보 중 면적 최대 (값은 전량 데이터 렌더)
-    const Z7 = [
-      ['전남 해남군', ['46820']], ['충남 서산시', ['44210']],
-      ['제주 (도 전역)', ['50110', '50130']], ['경북 포항시', ['47111', '47113']],
-      ['경기 의왕시', ['41430']], ['울산 (미포산단)', ['31140', '31170']],
-      ['부산 서구', ['26140']]];
-    const topOf = cs => cs
-      .map(c => (REC.sgg[c] && REC.sgg[c].frontier[0]) || null)
-      .filter(Boolean).sort((a, b) => b.a - a.a)[0] || null;
-    const rows7 = Z7.map(([nm, cs]) => ({nm, t: topOf(cs)}));
-    let kh = `<tr><th style="text-align:left">특구 사업지</th><th>비지배 후보 중 면적 최대 구획</th>
-      <th>지역 전력수요 대비</th><th>부지 판독</th></tr>`;
-    for (const {nm, t} of rows7) {
-      kh += `<tr><td class="l">${nm}</td>
-        <td>${t ? V4.n(t.mw) + 'MW' + (t.recl >= 50 ? ' <span class="chip-rec">간척</span>' : '') : '등재 구획 없음'}</td>
-        <td>${t && t.dsh != null ? t.dsh + '%' : '—'}</td>
-        <td>${t && t.mw >= 50 ? '<b style="color:var(--leaf-deep)">특구급 부지 준비</b>' : '특구급 부지 없음'}</td></tr>`;
-    }
-    document.getElementById('key2Tbl').innerHTML = kh;
-    const nReady = rows7.filter(r => r.t && r.t.mw >= 50).length;
-    document.getElementById('key2Read').innerHTML =
-      `읽기 — 판로(②)가 열린 7곳 중 특구급(≥50MW 읽기 눈금) 부지가 있는 곳은
-       <b>${nReady}곳</b>. 해남·서산은 열쇠 ①(재생에너지지구 지정)만 남고,
-       <b>제주 서귀포</b>는 개방 전(진흥✕·보호✕) 기준 특구급이 있는 유일 시군(§1)이자 특구 안 —
-       지금 제도로 두 열쇠를 모두 갖춘 사례. 역으로 부지 최대(당진)·수요 대비
-       최대(고흥)는 특구 밖 — 두 제도는 대체가 아니라 보완.
-       "특구급"(규모 눈금)과 "분산 특구"(법정 지정)는 다른 말 · 지정 현황은
-       2025년 말 1차 기준<sup class="fnref">[29]</sup>.
-       표의 구획은 각 지역 비지배 후보 중 면적이 가장 큰 것을 골라 보인 것이며 단독 최적해가 아님.`;
-  })();
-
-  // ── 시군별 우선 후보 — proximity §5 이식 (본지도 마커만 제외, 로직 원문) ──
-  const recSel = document.getElementById('recSgg');
+  const REC = await Region.gz('data_v4/recommend_v4.json.gz');
+  const nameOf = c => Region.nameOf(c);
   const fmtA2 = a => a >= 1e6 ? (a / 1e6).toFixed(3) + ' km²' : V4.n(a) + ' ㎡';
-  const recName = c => (names.codes[c] && names.codes[c].name) || REC.sgg[c].label;
-  Object.entries(REC.sgg).sort((x, y) => recName(x[0]).localeCompare(recName(y[0]), 'ko'))
-    .forEach(([code]) => {
-      const o = document.createElement('option');
-      o.value = code; o.textContent = recName(code);
-      recSel.appendChild(o);
-    });
-  recSel.value = '44270';
-  let recCur = null, recSelLab = null;
-  const recGeo = L.map('recMap', {center: [36.3, 127.0], zoom: 8, scrollWheelZoom: false});
+  document.getElementById('recTot').textContent = V4.n(Object.values(REC.sgg).reduce((a, x) => a + x.frontier.length, 0));
+
+  // ── 지역 선택(비지배 데이터가 있는 209시군만) ──
+  const have = new Set(Object.keys(REC.sgg));
+  const q = new URLSearchParams(location.search).get('sgg');
+  let cur = (q && have.has(q)) ? q : '44270';
+  const picker = Region.picker(document.getElementById('rp-rec'), {value: cur, restrict: have,
+    onChange: c => { cur = c; axis = ''; syncAxisBtns(); recRender(); }});
+
+  // ── 지도 골격 (원문 유지) ──
+  const recGeo = L.map('recMap2', {center: [36.3, 127.0], zoom: 8, scrollWheelZoom: false});
   L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
     {maxZoom: 18, attribution: '© Esri'}).addTo(recGeo);
-  const recMk = L.layerGroup().addTo(recGeo);
-  let recMkRef = {};
-  // 검증 레이어 (PR-0037 §5 확장) — 적격 필지(하늘색 점) 위에 구획(노랑 폴리곤)
   recGeo.createPane('recParcels'); recGeo.getPane('recParcels').style.zIndex = 380;
   recGeo.createPane('recBlocks');  recGeo.getPane('recBlocks').style.zIndex = 390;
   const recPCanvas = L.canvas({pane: 'recParcels', padding: 0.3});
-  const recPar = L.layerGroup().addTo(recGeo);   // 필지 점
-  const recBlk = L.layerGroup().addTo(recGeo);   // 구획 폴리곤
-  const recMthMk = L.layerGroup().addTo(recGeo); // 방법 top10 링
-  const _gzCache = {};
-  async function gzJson(url) {
-    if (_gzCache[url] !== undefined) return _gzCache[url];
-    try {
-      const r = await fetch(url);
-      if (!r.ok) throw 0;
-      const ds = r.body.pipeThrough(new DecompressionStream('gzip'));
-      _gzCache[url] = JSON.parse(await new Response(ds).text());
-    } catch (e) { _gzCache[url] = null; }
-    return _gzCache[url];
-  }
-  const recMthSel = document.getElementById('recMth');
+  const recPar = L.layerGroup().addTo(recGeo), recBlk = L.layerGroup().addTo(recGeo), recMk = L.layerGroup().addTo(recGeo);
+  let recMkRef = {}, recCur = null, recSelLab = null, axis = '';
+  const AXC = {ra: '#B8860B', ri: '#7B4BB7', rl: '#2A9D8F'};
+  const TOP = 3;                       // "상위" = 그 축에서 시군 구획 전체 중 3위 이내 (표시 규약)
+  const isTop = (f, ax) => f[ax] != null && f[ax] <= TOP;
+  const stars = f => ['ra', 'ri', 'rl'].map(ax => `<span class="${isTop(f, ax) ? 'on' : 'off'}" title="${{ra: '면적', ri: '산단 거리', rl: '계통 여유'}[ax]} ${f[ax] ?? '—'}위">★</span>`).join('');
 
   function recReader(f, r) {
     const ri = REC.reader_radii_km.indexOf(r);
     const k = recCur.frontier.indexOf(f) + 1, n = recCur.frontier.length;
     document.getElementById('recReader').innerHTML =
-      `<b>${recName(recSel.value)} 공동 1등 ${n}곳 중 ${k}번</b>(면적순 표시 — 순위 아님)
-       — ${fmtA2(f.a)} · 참고 ${f.mw} MW<br>
+      `<b>${nameOf(cur)} 공동 1등 ${n}곳 중 ${k}번</b>(면적순 표시 — 순위 아님) — ${fmtA2(f.a)} · 참고 ${f.mw} MW<br>
        반경 <b><span id="recRv">${r}</span> km</b>
-       <input type="range" id="recRs" min="${REC.reader_radii_km[0]}"
-              max="${REC.reader_radii_km.at(-1)}" step="1" value="${r}" style="width:100%">
-       <div style="margin-top:4px">산단 점수 합 <b>${f.reader.score[ri]}</b> ·
-       여유용량 합 <b>${V4.n(f.reader.grid[ri])} MW</b></div>
-       <div style="color:var(--muted);font-size:11.5px;margin-top:4px">
-       기본 ${recCur.r_default} km = 이 시군 구획의 4분의 3이 첫 산단을 만나는 거리.
-       점수·합은 확인용 — 비지배 집합 선별에 쓰지 않음.</div>`;
-    document.getElementById('recRs').addEventListener('input',
-      e => recReader(f, +e.target.value));
+       <input type="range" id="recRs" min="${REC.reader_radii_km[0]}" max="${REC.reader_radii_km.at(-1)}" step="1" value="${r}" style="width:100%">
+       <div style="margin-top:4px">산단 점수 합 <b>${f.reader.score[ri]}</b> · 여유용량 합 <b>${V4.n(f.reader.grid[ri])} MW</b></div>
+       <div style="color:var(--muted);font-size:11.5px;margin-top:4px">기본 ${recCur.r_default} km = 이 시군 구획의 4분의 3이 첫 산단을 만나는 거리.
+       점수·합은 확인용 — 비지배 집합 선별에 쓰지 않음. 여유 대역이 같은 이웃 구획은 같은 설비의 여유를 나눠 쓰므로 합산 주의.</div>`;
+    document.getElementById('recRs').addEventListener('input', e => recReader(f, +e.target.value));
   }
-
-  const ZONE_LBL = {'46820': '전남 해남', '44210': '충남 서산', '50110': '제주(도 전역)',
-    '50130': '제주(도 전역)', '47111': '경북 포항', '47113': '경북 포항', '41430': '경기 의왕',
-    '26140': '부산 서구', '31140': '울산 미포산단', '31170': '울산 미포산단'};
-
-  const recCurSgg = () => recSel.value;
-  function drawMth() {
-    recMthMk.clearLayers();
-    const mname = recMthSel.value;
-    const cap = document.getElementById('recMthCap');
-    if (!mname || !recCur || !recCur.mtop || !recCur.mtop[mname]) {
-      if (cap) cap.textContent = '';
-      return;
-    }
-    const labs = recCur.mtop[mname];
-    const pos = {};
-    recCur.frontier.forEach(f => { if (f.lat != null) pos[f.lab] = [f.lat, f.lon]; });
-    let drawn = 0, inFront = 0;
-    labs.forEach((lab, i) => {
-      const fr = recCur.frontier.find(f => f.lab === lab);
-      if (fr) inFront++;
-      const p = pos[lab];
-      if (!p) return;                       // 비지배 집합 밖 후보는 좌표 미보유 — 캡션으로 보고
-      drawn++;
-      recMthMk.addLayer(L.circleMarker(p, {radius: 11, weight: 2.4, color: '#7B4BB7',
-        fill: false, dashArray: '3 3'})
-        .bindTooltip(`${mname} ${i + 1}위`));
-    });
-    // 목록 길이는 시군 구획 수에 따라 다름(2~10) — 고정 10 가정 금지
-    const outside = labs.length - inFront;
-    if (cap) cap.textContent = `${mname} 상위 ${labs.length}곳 중 비지배 집합 안 ${inFront}곳`
-      + (outside > 0
-          ? ` (보라 점선 링 — 나머지 ${outside}곳은 지배당한 구획이라 이 지도에 점이 없음)`
-          : ` (보라 점선 링 — 상위 후보 전원이 비지배 집합 안)`)
-      + ` · 가중치 동일(1/3, 통제 조건)`;
-  }
-  recMthSel.addEventListener('change', drawMth);
-
+  const ZONE_LBL = {'46820': '전남 해남', '44210': '충남 서산', '50110': '제주(도 전역)', '50130': '제주(도 전역)',
+    '47111': '경북 포항', '47113': '경북 포항', '41430': '경기 의왕', '26140': '부산 서구', '31140': '울산 미포산단', '31170': '울산 미포산단'};
   function demBar(f) {
     const el = document.getElementById('recDem');
-    if (!f || f.dsh == null) { el.innerHTML = ''; return; }
+    if (!f || f.dsh == null) { el.innerHTML = '<b>지역 전력판매량 대비</b> — 이 후보는 수요 자료 미수집(—).'; return; }
     const gen = f.mw * 1.314;                          // GWh/년 = MW × 1,314h [28]
-    const w = Math.min(100, f.dsh);
-    el.innerHTML = `<div style="font-size:12.5px;margin-bottom:4px">
-      <b>${recName(recSel.value)}</b> 연간 전력판매량 <b>${V4.n(f.dem)} GWh</b> 눈금 위의
-      이 구획 참고 발전량 <b>${gen.toLocaleString('ko-KR', {maximumFractionDigits: 0})} GWh
-      = ${f.dsh}%</b>${f.dsc ? `<sup title="${f.dsc}">†</sup>` : ''}
-      <span style="color:var(--muted)">${f.dmf != null ? `· 그 수요의 ${f.dmf}%가 제조업 ` : ''}(지산지소 참고 표기 — 판정 불사용)</span></div>
-      <div style="height:14px;background:var(--card);border:1px solid var(--line);border-radius:7px;overflow:hidden">
-        <div style="height:100%;width:${w}%;background:var(--gold);min-width:2px"></div></div>
-      <div style="font-size:12px;color:var(--muted);margin-top:6px">열쇠 판독 —
-        부지(①): 농업진흥구역 개방(재생에너지지구 지정) 시 이 구획 ·
-        판로(②): ${ZONE_LBL[recSel.value]
-          ? `<b>${ZONE_LBL[recSel.value]} — 1차 분산특구</b>의 직접거래 특례`
-          : '직접PPA 경로(발전 1MW 초과 · 사용자 300kW 이상)'}<sup class="fnref">[29]</sup></div>`;
+    el.innerHTML = `<div style="font-size:12.5px;margin-bottom:4px"><b>${nameOf(cur)}</b> 연간 전력판매량 <b>${V4.n(f.dem)} GWh</b> 대비
+      이 구획 참고 발전량 <b>${gen.toLocaleString('ko-KR', {maximumFractionDigits: 0})} GWh = ${f.dsh}%</b>${f.dsc ? `<sup title="${f.dsc}">†</sup>` : ''}
+      <span style="color:var(--muted)">${f.dmf != null ? `· 그 수요의 ${f.dmf}%가 제조업 ` : ''}(연간 규모 비교 참고 — 판정 불사용 · 자립·직접거래 뜻 아님)</span></div>
+      <div style="height:14px;background:#fff;border:1px solid var(--line);border-radius:7px;overflow:hidden">
+        <div style="height:100%;width:${Math.min(100, f.dsh)}%;background:var(--gold);min-width:2px"></div></div>
+      <div style="font-size:12px;color:var(--muted);margin-top:6px">제도 경로 — 부지: 농업진흥구역 개방(재생에너지지구 지정) 시 이 구획 ·
+        판로: ${ZONE_LBL[cur] ? `<b>${ZONE_LBL[cur]} — 1차 분산특구</b>의 직접거래 특례` : '직접PPA 경로(발전 1MW 초과 · 사용자 300kW 이상)'}<sup class="fnref">[29]</sup></div>`;
   }
-
   function recPick(f) {
     recSelLab = f.lab;
-    document.querySelectorAll('#recTbl tr[data-lab]').forEach(tr =>
-      tr.style.outline = +tr.dataset.lab === f.lab ? '2px solid #B3261E' : '');
-    document.querySelectorAll('#recScatter circle[data-lab]').forEach(c =>
-      c.setAttribute('stroke-width', +c.dataset.lab === f.lab ? 3.6 : 1.8));
-    if (f.lat != null) { recGeo.flyTo([f.lat, f.lon], 12); recMkRef[f.lab]?.openTooltip(); }
-    recReader(f, recCur.r_default);
-    demBar(f);
+    document.querySelectorAll('#recTbl tr[data-lab]').forEach(tr => tr.classList.toggle('pick', +tr.dataset.lab === f.lab));
+    if (f.lat != null) { recGeo.flyTo([f.lat, f.lon], 12); recMkRef[f.lab] && recMkRef[f.lab].openTooltip(); }
+    recReader(f, recCur.r_default); demBar(f);
   }
+  function syncAxisBtns() {
+    document.querySelectorAll('#axisTgl button').forEach(b => b.classList.toggle('on', b.dataset.ax === axis));
+  }
+  document.querySelectorAll('#axisTgl button').forEach(b => b.onclick = () => { axis = b.dataset.ax; syncAxisBtns(); drawTable(); drawMarkers(); });
 
-  function recRender() {
-    recCur = REC.sgg[recSel.value];
-    const S = recCur;
-    document.getElementById('recStamp').textContent =
-      `구획 ${V4.n(S.n_block)}개 전수 · 지배 비교 ${V4.n(S.n_pairs)}회(근사 아님) · 공동 1등 ${S.frontier.length}개`;
-    // 표 — 구획 번호는 "n곳 중 k번(면적순 표시)"
-    const nF = S.frontier.length;
-    let h = `<tr><th>번호</th><th>면적</th><th>참고 MW</th><th>여유 MW</th><th>산단 km</th>
-      <th>지역 전력수요 대비</th>
-      <th>가중 순위<br>(WPM·entropy)</th>
-      <th>면적 순위</th><th>계통 순위</th><th>산단 순위</th><th>강한 축</th><th>경작</th><th>간척%</th></tr>`;
-    for (const [fi, f] of S.frontier.entries()) {
-      const dsh = f.dsh == null ? '—'
-        : `${f.dsh}%` + (f.dsc ? `<sup title="${f.dsc}">†</sup>` : '');
-      h += `<tr data-lab="${f.lab}" style="cursor:pointer"><td class="rk">${fi + 1}<span style="color:var(--muted);font-weight:400">/${nF}</span></td>
+  function drawTable() {
+    const S = recCur, nF = S.frontier.length;
+    const order = S.frontier.map((f, i) => ({f, i}));
+    if (axis) order.sort((x, y) => (x.f[axis] ?? 1e9) - (y.f[axis] ?? 1e9));
+    const AXN = {ra: '면적', ri: '산단 거리', rl: '계통 여유'};
+    let h = `<tr><th>후보</th><th>조건 충족<br><small>면적·거리·계통</small></th><th>면적</th><th>참고 MW</th>
+      <th>산단 거리 km</th><th>계통 여유 MW<br><small>(하한)</small></th><th>면적 순위</th><th>산단 순위</th><th>계통 순위</th>
+      <th>지역 전력판매량<br>대비(참고)</th><th>간척%</th></tr>`;
+    for (const {f, i} of order) {
+      const hi = axis && isTop(f, axis);
+      const rk = ax => `<span class="chip-n ${isTop(f, ax) ? 'top' : ''}">${f[ax] ?? '—'}</span>`;
+      h += `<tr data-lab="${f.lab}" class="${hi ? 'hi-a' : ''} ${f.lab === recSelLab ? 'pick' : ''}" style="cursor:pointer">
+        <td class="l"><b>${i + 1}</b><span style="color:var(--muted)">/${nF}</span></td>
+        <td><span class="star">${stars(f)}</span></td>
         <td>${fmtA2(f.a)}</td><td>${f.mw}</td>
-        <td>${f.lo == null ? '알 수 없음' : f.lo + (f.hi != null ? '–' + f.hi : '')}</td>
         <td>${f.d == null ? '알 수 없음' : f.d.toFixed(1)}</td>
-        <td>${dsh}</td>
-        <td>${f.wr ?? '—'}</td>
-        <td>${f.ra}</td><td>${f.rl}</td><td>${f.ri}</td><td>${f.strong}</td>
-        <td>${f.farm ?? '—'}</td><td>${f.recl ?? '—'}</td></tr>`;
+        <td>${f.lo == null ? '알 수 없음' : f.lo + (f.hi != null ? '–' + f.hi : '')}</td>
+        <td>${rk('ra')}</td><td>${rk('ri')}</td><td>${rk('rl')}</td>
+        <td>${f.dsh == null ? '—' : f.dsh + '%' + (f.dsc ? `<sup title="${f.dsc}">†</sup>` : '')}</td>
+        <td>${f.recl ?? '—'}</td></tr>`;
     }
     document.getElementById('recTbl').innerHTML = h;
-    document.querySelectorAll('#recTbl tr[data-lab]').forEach(tr => tr.onclick = () =>
-      recPick(S.frontier.find(f => f.lab === +tr.dataset.lab)));
-    document.getElementById('recCtl').textContent = S.control_max_m2
-      ? `대조군(@all · 개인 포함) 최대 구획 ${fmtA2(S.control_max_m2)} — 정본 최대의 ×${(S.control_max_m2 / S.frontier[0].a).toFixed(1)} (정책 값 아님 · 병기)`
-      : '';
-    demBar(S.frontier[0]);                             // 기본 = 1번(면적순 표시)
-    const ewEl = document.getElementById('recEw');
-    if (ewEl) ewEl.textContent = S.ew
-      ? `면적 ${S.ew[0]} · 계통 ${S.ew[1]} · 산단 ${S.ew[2]}` : '—';
-    // 미니 지도 — 공동 1등 금색 (클릭 = 표·산점도 연동)
-    recMk.clearLayers(); recMkRef = {};
-    recPar.clearLayers(); recBlk.clearLayers(); recMthMk.clearLayers();
-    // 적격 필지(하늘색) — 클러스터링 직전 단계(정본 우주 · R2 기준) 전량
-    gzJson(`data_v4/parcels/${recSel.value}.json.gz`).then(pd => {
-      if (!pd || recSel.value !== recCurSgg()) return;
-      pd.pts.forEach(([lon, lat]) => recPar.addLayer(
-        L.circleMarker([lat, lon], {renderer: recPCanvas, pane: 'recParcels',
-          radius: 2, weight: 0, fillColor: '#7FBBD6', fillOpacity: .55})));
-    });
-    // 실제 구획(노랑 폴리곤) — 같은 런(R2_promo)
-    gzJson(`data_v4/clusters/${recSel.value}_R2_promo.json.gz`).then(gj => {
-      if (!gj || recSel.value !== recCurSgg()) return;
-      recBlk.addLayer(L.geoJSON(gj, {pane: 'recBlocks',
-        style: {color: '#B8860B', weight: .8, fillColor: '#FFD84D', fillOpacity: .7},
-        interactive: false}));
-    });
-    // 방법 선택기 채우기 (시군 바뀔 때 옵션 유지)
-    if (recMthSel.options.length <= 1 && S.mtop) {
-      Object.keys(S.mtop).forEach(mname => {
-        const o = document.createElement('option');
-        o.value = mname; o.textContent = mname + ' · 상위 후보 (동일 가중)';
-        recMthSel.appendChild(o);
-      });
+    document.querySelectorAll('#recTbl tr[data-lab]').forEach(tr => tr.onclick = () => recPick(S.frontier.find(f => f.lab === +tr.dataset.lab)));
+    const note = document.getElementById('axisNote');
+    if (axis) {
+      const tops = S.frontier.filter(f => isTop(f, axis)).length;
+      note.innerHTML = `<b>${AXN[axis]}</b> 기준 — 이 시군 구획 전체(${V4.n(S.n_block)}개) 중 ${TOP}위 이내인 공동 1등 후보 <b>${tops}곳</b>을 강조함.
+        다른 조건을 눌러 비교해 보면 같은 후보가 어떤 조건에서는 강하고 어떤 조건에서는 약한지 드러남. ★ 개수 = 3위 이내인 조건의 수.`;
+    } else {
+      note.innerHTML = `조건을 누르면 그 기준에서 이 시군 구획 전체 중 <b>${TOP}위 이내</b>인 후보가 지도와 표에서 강조됨.
+        ★ 3개 = 세 조건 모두 ${TOP}위 이내 · ★ 2개 = 두 조건 · ★ 1개 = 한 조건 — 순위는 정본의 축별 순위 열이며 임의 점수가 아님.`;
     }
-    drawMth();
-    const coords = [];
+  }
+  function drawMarkers() {
+    recMk.clearLayers(); recMkRef = {};
+    const S = recCur, coords = [];
     S.frontier.forEach((f, fi) => {
       if (f.lat == null) return;
       coords.push([f.lat, f.lon]);
+      const hi = axis ? isTop(f, axis) : true;
       recMkRef[f.lab] = L.circleMarker([f.lat, f.lon], {
-        radius: Math.max(7, Math.sqrt(f.a) / 180), color: '#B8860B', weight: 2.5,
-        fillColor: '#FFD84D', fillOpacity: .9
-      }).bindTooltip(`${fi + 1}/${S.frontier.length} · ${fmtA2(f.a)} · ${f.strong}${f.dsh != null ? ' · 수요 ' + f.dsh + '%' : ''}`)
+        radius: Math.max(7, Math.sqrt(f.a) / 180) * (axis && hi ? 1.25 : 1),
+        color: axis && hi ? AXC[axis] : '#B8860B', weight: axis && hi ? 3.5 : 2.5,
+        fillColor: '#FFD84D', fillOpacity: axis ? (hi ? .95 : .35) : .9, opacity: axis && !hi ? .45 : 1
+      }).bindTooltip(`${fi + 1}/${S.frontier.length} · ${fmtA2(f.a)} · 면적 ${f.ra}위 · 산단 ${f.ri}위 · 계통 ${f.rl}위${f.dsh != null ? ' · 수요 ' + f.dsh + '%' : ''}`)
         .on('click', () => recPick(f)).addTo(recMk);
     });
-    if (coords.length) recGeo.fitBounds(coords, {padding: [30, 30], maxZoom: 12});
-    // 산점도
-    const svg = document.getElementById('recScatter');
-    const W = svg.clientWidth || 360, H = 420, Pd = 40;
-    const AS = S.pts.map(p => p[0]);
-    const amin = Math.log10(Math.min(...AS)), amax = Math.log10(Math.max(...AS));
-    const lmax = Math.max(...S.pts.map(p => p[1] ?? 0), 1);
-    const dmax = Math.max(...S.pts.map(p => p[2] ?? 0), 1);
-    const lx = a => Pd + (Math.log10(a) - amin) / (amax - amin + 1e-9) * (W - Pd - 10);
-    const ly = l => H - Pd - (l ?? 0) / lmax * (H - Pd - 12);
-    let e = `<line x1="${Pd}" y1="${H - Pd}" x2="${W - 6}" y2="${H - Pd}" stroke="#999"/>
-             <line x1="${Pd}" y1="${H - Pd}" x2="${Pd}" y2="8" stroke="#999"/>
-             <text x="${W - 88}" y="${H - Pd + 26}" font-size="10.5">면적(로그) →</text>
-             <text x="6" y="16" font-size="10.5">여유 MW ↑</text>`;
-    S.pts.forEach(p => {
-      if (p[3]) return;                                  // 전선은 아래서 frontier로 직접
-      e += `<circle cx="${lx(p[0])}" cy="${ly(p[1])}" r="2.6"
-            fill="#9AA3AE" fill-opacity=".3"/>`;
-    });
-    S.frontier.forEach((f, fi) => {
-      e += `<circle cx="${lx(f.a)}" cy="${ly(f.lo)}" r="6.5" data-lab="${f.lab}"
-            fill="#FFD84D" stroke="#B8860B" stroke-width="1.8" style="cursor:pointer">
-            <title>${fi + 1}/${S.frontier.length} · ${f.strong}</title></circle>`;
-    });
-    svg.innerHTML = e;
-    svg.querySelectorAll('circle[data-lab]').forEach(c => c.onclick = () =>
-      recPick(S.frontier.find(f => f.lab === +c.dataset.lab)));
-    document.getElementById('recReader').innerHTML =
-      '<b>반경 판독기</b> — 위 표·산점도·지도에서 구획을 고르면, 반경 안 산단 점수 합과 여유용량 합(균등배분 하한 합)을 보임. 고른 뒤 확인하는 도구 — 비지배 집합 선별에 불사용.';
+    return coords;
   }
-  recSel.addEventListener('change', recRender);
+  function recRender() {
+    recCur = REC.sgg[cur]; const S = recCur; recSelLab = null;
+    document.getElementById('recTitle').textContent = `${nameOf(cur)} — 공동 1등 후보 ${S.frontier.length}곳`;
+    document.getElementById('recStamp').textContent =
+      `구획 ${V4.n(S.n_block)}개 전수 · 지배 비교 ${V4.n(S.n_pairs)}회(근사 아님) · 공동 1등 ${S.frontier.length}개 · 진흥구역 개방(R2) 기준`;
+    drawTable();
+    document.getElementById('recCtl').textContent = S.control_max_m2
+      ? `대조군(개인 포함) 최대 구획 ${fmtA2(S.control_max_m2)} — 분석 기준 필지 최대의 ×${(S.control_max_m2 / S.frontier[0].a).toFixed(1)} (정책 값 아님 · 병기)` : '';
+    recPar.clearLayers(); recBlk.clearLayers();
+    const c0 = cur;
+    Region.gz(`data_v4/parcels/${cur}.json.gz`).then(pd => {
+      if (!pd || c0 !== cur) return;
+      pd.pts.forEach(([lon, lat]) => recPar.addLayer(L.circleMarker([lat, lon], {renderer: recPCanvas, pane: 'recParcels', radius: 2, weight: 0, fillColor: '#7FBBD6', fillOpacity: .55})));
+    });
+    Region.gz(`data_v4/clusters/${cur}_R2_promo.json.gz`).then(gj => {
+      if (!gj || c0 !== cur) return;
+      recBlk.addLayer(L.geoJSON(gj, {pane: 'recBlocks', style: {color: '#B8860B', weight: .8, fillColor: '#FFD84D', fillOpacity: .7}, interactive: false}));
+    });
+    const coords = drawMarkers();
+    if (coords.length) recGeo.fitBounds(coords, {padding: [30, 30], maxZoom: 12});
+    demBar(S.frontier[0]);
+    document.getElementById('recReader').innerHTML = '<b>반경 판독기</b> — 표나 지도에서 후보를 고르면 반경 안 산단 점수 합과 여유용량 합(균등배분 하한 합)을 보임. 고른 뒤 확인하는 도구 — 비지배 집합 선별에 불사용.';
+  }
   recRender();
+
+  // ── 열쇠 두 개 (표시 전용 · 원문 로직 유지) ──
+  const Z7 = [['전남 해남군', ['46820']], ['충남 서산시', ['44210']], ['제주 (도 전역)', ['50110', '50130']],
+    ['경북 포항시', ['47111', '47113']], ['경기 의왕시', ['41430']], ['울산 (미포산단)', ['31140', '31170']], ['부산 서구', ['26140']]];
+  const topOf = cs => cs.map(c => (REC.sgg[c] && REC.sgg[c].frontier[0]) || null).filter(Boolean).sort((a, b) => b.a - a.a)[0] || null;
+  const rows7 = Z7.map(([nm, cs]) => ({nm, t: topOf(cs)}));
+  document.getElementById('key2Tbl').innerHTML = `<tr><th style="text-align:left">특구 사업지</th><th>비지배 후보 중 면적 최대 구획</th><th>지역 전력판매량 대비</th><th>부지 판독</th></tr>` +
+    rows7.map(({nm, t}) => `<tr><td class="l">${nm}</td>
+      <td>${t ? V4.n(t.mw) + 'MW' + (t.recl >= 50 ? ' <span class="chip-rec">간척</span>' : '') : '등재 구획 없음'}</td>
+      <td>${t && t.dsh != null ? t.dsh + '%' : '—'}</td>
+      <td>${t && t.mw >= 50 ? '<b style="color:var(--leaf-deep)">특구급 부지 준비</b>' : '특구급 부지 없음'}</td></tr>`).join('');
+  const nReady = rows7.filter(r => r.t && r.t.mw >= 50).length;
+  document.getElementById('key2Read').innerHTML =
+    `읽기 — 판로(②)가 열린 7곳 중 특구급(≥50MW 읽기 눈금) 부지가 있는 곳은 <b>${nReady}곳</b>. 해남·서산은 열쇠 ①(재생에너지지구 지정)만 남고,
+     <b>제주 서귀포</b>는 개방 전(진흥✕·보호✕) 기준 특구급이 있는 유일 시군이자 특구 안. 역으로 부지 최대(당진)·수요 대비 최대(고흥)는 특구 밖 —
+     두 제도는 대체가 아니라 보완. "특구급"(규모 눈금)과 "분산 특구"(법정 지정)는 다른 말 · 지정 현황은 2025년 말 1차 기준<sup class="fnref">[29]</sup>.
+     표의 구획은 각 지역 비지배 후보 중 면적이 가장 큰 것이며 단독 최적해가 아님.`;
   V4.footer();
 })();
 </script>

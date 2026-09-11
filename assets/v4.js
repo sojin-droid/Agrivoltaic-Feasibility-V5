@@ -108,7 +108,9 @@ const V4 = {
       `<div>데이터 세대 ${String(m.data_generation).replace(/정본 우주/g, '분석 기준 필지')} · ` +
       `생성 ${m.generated} · ${m.verification} · ` +
       `소유 구분은 지적 원장의 유형 구분(개인 식별 아님) · ` +
-      `수치는 정본 DB 조회값의 export — 페이지 내 재계산 없음 · ` +
-      `<a href="method.html#lineage">자료 계보·한계 →</a></div>`;
+      `수치는 정본 DB 조회값의 export — 페이지 내 재계산 없음</div>` +
+      `<div style="margin-top:6px"><a href="method.html">근거와 방법(데이터·판정 조건·검증·한계) →</a> · ` +
+      `<a href="method.html#lineage">자료 계보 →</a> · <a href="local.html">우리동네 클러스터 고르기 →</a> · ` +
+      `<a href="method.html#contact">문의</a></div>`;
   },
 };
