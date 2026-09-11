@@ -76,7 +76,7 @@
       <div class="axis-tgl" id="axisTgl">
         <span class="q">무엇을 우선해서 볼까요?</span>
         <button data-ax="" class="on">전체 보기</button>
-        <button data-ax="ra"><i style="background:#B8860B"></i>면적</button>
+        <button data-ax="ra"><i style="background:#C2410C"></i>면적</button>
         <button data-ax="ri"><i style="background:#7B4BB7"></i>산단 거리</button>
         <button data-ax="rl"><i style="background:#2A9D8F"></i>계통 여유용량</button>
       </div>
@@ -146,7 +146,7 @@
   const recPCanvas = L.canvas({pane: 'recParcels', padding: 0.3});
   const recPar = L.layerGroup().addTo(recGeo), recBlk = L.layerGroup().addTo(recGeo), recMk = L.layerGroup().addTo(recGeo);
   let recMkRef = {}, recCur = null, recSelLab = null, axis = '';
-  const AXC = {ra: '#B8860B', ri: '#7B4BB7', rl: '#2A9D8F'};
+  const AXC = {ra: '#C2410C', ri: '#7B4BB7', rl: '#2A9D8F'};
   const TOP = 3;                       // "상위" = 그 축에서 시군 구획 전체 중 3위 이내 (표시 규약)
   const isTop = (f, ax) => f[ax] != null && f[ax] <= TOP;
   const stars = f => ['ra', 'ri', 'rl'].map(ax => `<span class="${isTop(f, ax) ? 'on' : 'off'}" title="${{ra: '면적', ri: '산단 거리', rl: '계통 여유'}[ax]} ${f[ax] ?? '—'}위">★</span>`).join('');

@@ -128,16 +128,16 @@ input[type=number].coef{width:80px;font:inherit;padding:2px 6px;border:1px solid
     <div class="figbox" style="margin-top:14px">
       <h3 style="font-family:var(--serif);color:var(--navy);font-size:15px;margin-bottom:6px">시행령 미고려 vs 고려 — 같은 지역·같은 조건</h3>
       <div style="overflow-x:auto"><table class="v4" id="t-dcmp"></table></div>
-      <div style="font-size:12px;color:var(--muted);margin-top:6px">고려 = 국가관리간척지(매립지등 미매각분) 안의 필지만 — 시행령 때문에 늘어나는 면적은 없고 대상 범위가 좁아짐.
+      <div style="font-size:12px;color:var(--muted);margin-top:6px">고려 = 분석 범위를 국가관리간척지(매립지등 미매각분)로 한정 — 시행령 조건은 후보를 늘리지 않으며 범위를 좁힘. 미고려 대비 열은 절대 증감(km²)만 표기함.
         연접 구획·대규모 후보는 등재 런이 있는 조합(전체 범위)에서만 값이 있고, 국가관리간척지 한정 구획은 <b>계산 자료 없음</b>으로 표기함.</div>
     </div>
     <div class="fn" id="r-ctl" style="margin-top:10px">—</div>
     <div class="callout-v4" id="r-note" style="margin-top:8px">—</div>
-    <div id="r-topwrap" style="margin-top:14px">
-      <h3 style="font-family:var(--serif);color:var(--navy);font-size:15px;margin-bottom:6px">이 조합에서 후보 필지 면적이 큰 시군</h3>
-      <div style="overflow-x:auto"><table class="v4" id="eTbl"></table></div>
+    <details id="r-topwrap" style="margin-top:14px">
+      <summary style="cursor:pointer;font-family:var(--serif);color:var(--leaf-deep);font-size:14px;font-weight:700">이 조합에서 후보 필지 면적이 큰 시군 (상위 12곳 펼치기)</summary>
+      <div style="overflow-x:auto;margin-top:8px"><table class="v4" id="eTbl"></table></div>
       <div style="font-size:12px;color:var(--muted)">표시 정렬: 면적(순위 아님) · 시군 귀속은 필지 단위 · 상위 12곳 · 시군 이름 클릭 = 그 시군으로 이동.</div>
-    </div>
+    </details>
   </div>
 </section>
 <!-- ═══════════ §5 정책 시나리오 증분 지도 (구 지도 탭 이식 — V5 1단계 통합) ═══════════ -->
@@ -733,7 +733,10 @@ input[type=number].coef{width:80px;font:inherit;padding:2px 6px;border:1px solid
     put('r-mw', (cur.m2 * state.coef / 1000).toLocaleString('ko-KR', {maximumFractionDigits: 0}) + ' MW');
     const d = (cur.m2 - base.m2) / 1e6, pct = base.m2 ? 100 * (cur.m2 - base.m2) / base.m2 : null;
     put('r-delta', d === 0 ? '기준(개방 전)' :
-      `${d > 0 ? '+' : ''}${km2(d * 1e6, 1)}<small> km²</small>${pct != null ? ` <small>(${pct > 0 ? '+' : ''}${pct.toLocaleString('ko-KR', {maximumFractionDigits: 1})}%)</small>` : ''}`);
+      `${d > 0 ? '+' : ''}${km2(d * 1e6, 1)}<small> km²</small>${pct != null && !state.decree ? ` <small>(${pct > 0 ? '+' : ''}${pct.toLocaleString('ko-KR', {maximumFractionDigits: 1})}%)</small>` : ''}`);
+    { const dl = document.querySelector('#r-delta + .d'); if (dl) dl.textContent = state.decree
+        ? '국가관리간척지 범위 안에서 개방 전과 비교 · 기준값이 작아 비율은 표기하지 않음'
+        : '같은 소유·이격·범위에서 진흥·보호 모두 유지(개방 전)와 비교 · ㎡ 원값'; }
     put('r-ctl', `대조군(소유 무필터 · 같은 구역/이격/범위): ${km2(cur.cM2)} km² — 선택 조합은 그 ${cur.cM2 ? (100 * cur.m2 / cur.cM2).toFixed(1) : '—'}%
       <span style="color:var(--muted)">(단독 수치 금지 — 항상 병기 · 대조군은 정책 값 아님)</span>`);
     const rn = effScope() === 0 ? runName() : null;
@@ -788,10 +791,11 @@ input[type=number].coef{width:80px;font:inherit;padding:2px 6px;border:1px solid
     const rows = [['시행령 미고려', state.scope, state.scope === 0 ? '현재 범위(전체)' : state.scope === 1 ? '간척지만' : '국가관리간척지'],
                   ['시행령 고려', 2, '국가관리간척지 한정(§7 6호)']];
     const rn0 = runName();
+    const ref = agg(f, state.promo, state.prot, state.scope);          // 미고려(현재 범위) 값 — 고려 행의 비교 기준
     put('t-dcmp', `<tr><th style="text-align:left">시나리오</th><th style="text-align:left">범위</th><th>후보 필지 면적 km²</th><th>필지</th>
-      <th>개방 전 대비</th><th>연접 구획</th><th>대규모 후보(≥50MW)</th></tr>` + rows.map(([lb, sc, scLb]) => {
-      const cur = agg(f, state.promo, state.prot, sc), base = agg(f, false, false, sc);
-      const d = (cur.m2 - base.m2) / 1e6, pct = base.m2 ? 100 * (cur.m2 - base.m2) / base.m2 : null;
+      <th>미고려 대비</th><th>연접 구획</th><th>대규모 후보(≥50MW)</th></tr>` + rows.map(([lb, sc, scLb]) => {
+      const cur = agg(f, state.promo, state.prot, sc);
+      const dd = (cur.m2 - ref.m2) / 1e6;                                // 비율은 기준값이 작아 과장되므로 절대 증감만 표기
       let comp = '계산 자료 없음', big = '계산 자료 없음';
       if (sc === 0 && D.runs[rn0] && !f) {
         const rr = RES.runs[rn0], b50 = band(rr, 111.1111);
@@ -799,7 +803,7 @@ input[type=number].coef{width:80px;font:inherit;padding:2px 6px;border:1px solid
       } else if (sc === 0 && D.runs[rn0] && f) { comp = '위 카드(구획 파일 집계)'; big = '위 카드'; }
       return `<tr class="${sc === effScope() ? 'hl' : ''}"><td class="l"><b>${lb}</b></td><td class="l">${scLb}</td>
         <td>${km2(cur.m2)}</td><td>${V4.n(cur.n)}</td>
-        <td>${d === 0 ? '기준' : (d > 0 ? '+' : '') + km2(d * 1e6, 1) + (pct != null ? ` (${pct > 0 ? '+' : ''}${pct.toLocaleString('ko-KR', {maximumFractionDigits: 1})}%)` : '')}</td>
+        <td class="l">${sc === state.scope ? '기준' : `<b>${dd > 0 ? '+' : ''}${km2(dd * 1e6)} km²</b><br><span style="color:var(--muted);font-size:11.5px">${km2(ref.m2)} → ${km2(cur.m2)} · 국가관리간척지로 범위 한정</span>`}</td>
         <td>${comp}</td><td>${big}</td></tr>`;
     }).join(''));
   }
