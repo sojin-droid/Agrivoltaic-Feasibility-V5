@@ -14,8 +14,8 @@
 <script src="assets/vendor/leaflet/leaflet.js"></script>
 <script src="assets/v4.js"></script>
 <script src="assets/region.js"></script>
-<link rel="stylesheet" href="assets/cand.css">
-<script src="assets/cand.js"></script>
+<link rel="stylesheet" href="assets/cand.css?v=52c">
+<script src="assets/cand.js?v=52c"></script>
 <style>
 .hero-local{background:linear-gradient(180deg,#EEF4FA,#fff);border-bottom:1px solid var(--line);text-align:center;padding:64px 24px 54px}
 .hero-local h1{font-size:clamp(28px,4vw,42px)}
@@ -297,7 +297,7 @@
           .bindTooltip(`공동 1등 구획 ${i + 1}/${S.frontier.length} · ${fmtA2(f.a)} · 산단 ${f.d == null ? '—' : f.d.toFixed(1) + 'km'} · 계통 ${f.lo == null ? '—' : f.lo + 'MW'}`).addTo(lyrComp); });
     }
     if (ccgj) { Cand.layer(ccgj, {minM2: st.minM2, frontierIds: CF.frontier.map(f => f.id)}).addTo(lyrCC); Cand.hullLayer(ccgj, {minM2: st.minM2}).addTo(lyrCC);
-      Cand.outline(ccgj, CF.frontier.map(f => f.id), {weight: 3}).addTo(lyrCC); Cand.markers(L.layerGroup().addTo(lyrCC), CF.frontier, {}); }
+      Cand.outline(ccgj, CF.frontier.map(f => f.id), {weight: 3}).addTo(lyrCC); Cand.markers(L.layerGroup().addTo(lyrCC), Cand.rowsOf(CF), {}); }
     if (st.emd) {
       const e = L.geoJSON(st.emd.feat, {style: {color: '#B3261E', weight: 2.5, fill: false, dashArray: '6 4'}}).addTo(lyrEmd);
       bounds = e.getBounds();
@@ -359,7 +359,7 @@
       const F = Cand.table($('recTblCC'), st.sgg, st.minM2, {cell: runName(), axis: st.axis, compFrontier: S ? S.frontier : []});
       put('rExplainCC', `<b>공동 1등 후보 클러스터</b> — ${Cand.note(st.sgg, st.minM2, st.axis, runName())}`);
       $('paneCC').hidden = st.tab !== 'cc'; $('paneComp').hidden = st.tab === 'cc';
-      if (st.tab === 'cc') $('rTblH').textContent = `5. 공동 1등 후보 클러스터 ${F.frontier.length}곳 — 최소 ${Cand.MW_LBL[st.minM2]} · 축별 비교`;
+      if (st.tab === 'cc') $('rTblH').textContent = `5. 후보 클러스터 ${F.n_pop}개 (최소 ${Cand.MW_LBL[st.minM2]}) — 공동 1등 ${F.frontier.length}곳 배지 · ${st.axis ? PRIO[st.prio][0] + ' 정렬' : '면적순'}`;
     } else { $('paneCC').hidden = true; $('paneComp').hidden = false; }
     if (S) {
       if (!CC || st.tab === 'comp') $('rTblH').textContent = `5. 공동 1등 구획 ${S.frontier.length}곳 — 축별 비교`;

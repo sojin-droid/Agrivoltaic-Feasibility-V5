@@ -14,8 +14,8 @@
 <script src="assets/vendor/leaflet/leaflet.js"></script>
 <script src="assets/v4.js"></script>
 <script src="assets/region.js"></script>
-<link rel="stylesheet" href="assets/cand.css">
-<script src="assets/cand.js"></script>
+<link rel="stylesheet" href="assets/cand.css?v=52c">
+<script src="assets/cand.js?v=52c"></script>
 <style>
 #recTbl th,#recTbl td{white-space:nowrap}
 #recTbl tr:nth-child(even) td{background:var(--surface-control)}
@@ -208,7 +208,7 @@
   // ── V5.2 후보 클러스터 단위 — 우리동네와 같은 파일(recommend_cc_v4 · cand/{sgg}_R2_promo)·같은 함수(Cand.*) ──
   const ccGeoCache = {}; let ccPick = null;
   const CAP_COMP = '번호 원 = 공동 1등 구획(번호 = 아래 표의 "후보" 열, 면적순 — 순위 아님; 원 크기 ∝ 면적) · 노랑 = 그 시군의 연접 구획 전량(확대하면 원 밑의 실제 땅이 보임) · 하늘색 점 = 적격 필지(검증용)';
-  const CAP_CC = '번호 원 = 공동 1등 후보 클러스터(번호 = 아래 표의 "후보" 열) · 번호 없는 껍질 = 모집단 안이지만 지배된 클러스터(세 축 모두 같거나 나은 후보가 있음 — 마우스를 올리면 표시) · 채움 = 규모 band · 회색 윤곽 = 최소 표시 규모 미만';
+  const CAP_CC = '번호 원 = 최소 표시 규모 이상 후보 클러스터 전부(번호 = 아래 표의 "후보" 열, 면적순) · 남색 굵은 링 = 공동 1등, 회색 링 = 세 축 모두 같거나 나은 후보가 있는 것(후보에서 빠지지 않음) · 채움 = 규모 band · 회색 윤곽 = 최소 표시 규모 미만';
   function ccPickFn(f) {
     ccPick = f.id;
     document.querySelectorAll('#recTbl tr[data-cc]').forEach(tr => tr.classList.toggle('pick', +tr.dataset.cc === f.id));
@@ -217,9 +217,9 @@
   async function renderCC(reload = true) {
     recCur = REC.sgg[cur];                                   // 구획 층 전선은 내부 비교용으로 그대로
     const S = Cand.info(cur), F = Cand.frontier(cur, minM2);
-    document.getElementById('recTitle').textContent = `${nameOf(cur)} — 공동 1등 후보 클러스터 ${F.frontier.length}곳 (최소 ${Cand.MW_LBL[minM2]})`;
+    document.getElementById('recTitle').textContent = `${nameOf(cur)} — 후보 클러스터 ${F.n_pop}개 (최소 ${Cand.MW_LBL[minM2]}) · 공동 1등 ${F.frontier.length}곳`;
     document.getElementById('recStamp').textContent =
-      `후보 클러스터 ${V4.n(S.n_cc)}개 · 최소 ${Cand.MW_LBL[minM2]} 이상 모집단 ${V4.n(F.n_pop)}개 · 공동 1등 ${F.frontier.length}곳 · 진흥구역 개방(R2) 기준 · 규칙 cond-inv`;
+      `후보 클러스터 ${V4.n(S.n_cc)}개 · 최소 ${Cand.MW_LBL[minM2]} 이상 ${V4.n(F.n_pop)}개 전부 표시 · 공동 1등 배지 ${F.frontier.length}곳 · 진흥구역 개방(R2) 기준 · 규칙 cond-inv`;
     document.getElementById('recMapCap').textContent = CAP_CC;
     const lg = document.getElementById('ccLegend'); lg.hidden = false; lg.innerHTML = Cand.legendHTML();
     Cand.table(document.getElementById('recTbl'), cur, minM2, {axis, pickId: ccPick, compFrontier: recCur.frontier, onPick: ccPickFn});
@@ -228,7 +228,7 @@
       두 단위의 모집단 기준이 다르므로 각 표에 명시. 최소 표시 규모는 후보 클러스터 단위에만 적용.`;
     document.getElementById('recReader').innerHTML = '<b>반경 판독기</b> — 구획 단위 전용 자료(후보 클러스터 단위 미제공). 후보 단위를 「구획」으로 바꾸면 사용 가능.';
     document.getElementById('recDem').innerHTML = '<b>지역 전력판매량 대비</b> — 구획 단위 전용 자료(후보 클러스터 단위 미제공).';
-    const {coords} = Cand.markers(recMk, F.frontier, {axis, onPick: ccPickFn});
+    const {coords} = Cand.markers(recMk, Cand.rowsOf(F), {axis, onPick: ccPickFn});
     const c0 = cur;
     if (reload) { recPar.clearLayers(); ccGeoCache[cur] = ccGeoCache[cur] || await Cand.geo(cur); }
     if (c0 !== cur) return;

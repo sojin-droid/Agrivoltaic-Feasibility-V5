@@ -91,54 +91,58 @@ window.Cand = (() => {
     return L.geoJSON({type: 'FeatureCollection', features: gj.features.filter(f => set.has(f.properties.id))},
       {pane, interactive: false, style: {color, weight, opacity: 1, fill, fillColor: '#FFD84D', fillOpacity: fill ? .55 : 0}});
   }
-  // ── 공동 1등 cc 마커 ──
-  function markers(group, fr, {axis = '', onPick} = {}) {
+  // ── 모집단 행(표에 싣는 것): 필터별 사전 산출 pop(면적순·순위·비지배 배지). pop 이 없는 필터(전량 0)는 전선만 ──
+  const rowsOf = F => (F && F.pop && F.pop.length) ? F.pop : (F ? F.frontier.map(f => ({...f, front: true})) : []);
+  // ── 마커: 모집단 전량에 표 순번 배지. 공동 1등 = 남색 굵은 링, 나머지 = 회색 링. 우선 기준 선택 시 3위 이내만 진하게 ──
+  function markers(group, rows, {axis = '', onPick} = {}) {
     group.clearLayers(); const refs = {}, coords = [];
-    fr.forEach((f, i) => { if (f.lat == null) return; coords.push([f.lat, f.lon]);
-      const hi = axis ? isTop(f, axis) : true;
-      refs[f.id] = L.circleMarker([f.lat, f.lon], {radius: Math.max(8, Math.sqrt(f.a) / 170) * (axis && hi ? 1.25 : 1),
-        color: axis && hi ? AXC[axis] : '#0C356A', weight: axis && hi ? 3.5 : 2.5, fillColor: '#FFD84D', fillOpacity: axis ? (hi ? .95 : .35) : .9, opacity: axis && !hi ? .45 : 1})
-        .bindTooltip(`공동 1등 후보 클러스터 ${i + 1}/${fr.length} · ${fmtA(f.a)} · 구획 ${f.nc} · 면적 ${f.ra}위 · 산단 ${f.ri}위 · 계통 ${f.rl}위`)
+    rows.forEach((f, i) => { if (f.lat == null) return; coords.push([f.lat, f.lon]);
+      const hi = axis ? isTop(f, axis) : true, fr = !!f.front;
+      refs[f.id] = L.circleMarker([f.lat, f.lon], {radius: Math.max(8, Math.sqrt(f.a) / 170) * (axis && hi ? 1.2 : 1),
+        color: axis && hi ? AXC[axis] : (fr ? '#0C356A' : '#6B7B8C'), weight: axis && hi ? 3.5 : (fr ? 2.8 : 1.5),
+        fillColor: '#FFD84D', fillOpacity: axis ? (hi ? .95 : .3) : (fr ? .9 : .6), opacity: axis && !hi ? .4 : 1})
+        .bindTooltip(`${i + 1}/${rows.length} ${fr ? '· <b>공동 1등</b>' : ''} · ${fmtA(f.a)} · 구획 ${f.nc} · 면적 ${f.ra}위 · 산단 ${f.ri}위 · 계통 ${f.rl}위`)
         .on('click', () => onPick && onPick(f)).addTo(group);
-      // 표 순번 배지(면적순 표시 번호 — 순위 아님)
-      L.marker([f.lat, f.lon], {icon: L.divIcon({className: 'mk-num', html: `${i + 1}`, iconSize: [22, 22], iconAnchor: [11, 11]}), interactive: false, keyboard: false}).addTo(group); });
+      L.marker([f.lat, f.lon], {icon: L.divIcon({className: 'mk-num' + (fr ? '' : ' mk-dom'), html: `${i + 1}`, iconSize: [22, 22], iconAnchor: [11, 11]}), interactive: false, keyboard: false}).addTo(group); });
     return {refs, coords};
   }
 
-  // ── 표: 공동 1등 후보 클러스터(필터별 사전 산출 전선) ──
+  // ── 표: 최소 표시 규모 이상 후보 클러스터 **전량**(모집단) — 공동 1등은 배지, 정렬은 사용자 우선 기준(보기 조작, 방법론 아님 — ADR-0044) ──
   function table(el, sgg, minM2, {cell, axis = '', pickId = null, onPick, compFrontier = []} = {}) {
     const F = frontier(sgg, minM2, cell); if (!F) { el.innerHTML = ''; return null; }
-    const fr = F.frontier, n = fr.length;
-    const order = fr.map((f, i) => ({f, i}));
+    const rows = rowsOf(F), n = rows.length;
+    const order = rows.map((f, i) => ({f, i}));                       // i = 면적순 표시 번호(지도 배지와 같음)
     if (axis) order.sort((x, y) => (x.f[axis] ?? 1e9) - (y.f[axis] ?? 1e9));
     const rk = (f, ax) => `<span class="chip-n ${isTop(f, ax) ? 'top' : ''}">${f[ax] ?? '—'}</span>`;
-    let h = `<tr><th>후보</th><th>조건 충족<br><small>면적·거리·계통</small></th><th>면적</th><th>참고 MW</th><th>산단 거리 km</th><th>계통 여유 MW<br><small>(하한)</small></th>
+    let h = `<tr><th>후보</th><th>비지배</th><th>조건 충족<br><small>면적·거리·계통</small></th><th>면적</th><th>참고 MW</th><th>산단 거리 km</th><th>계통 여유 MW<br><small>(하한)</small></th>
       <th>면적 순위</th><th>산단 순위</th><th>계통 순위</th><th>구성</th><th>안정 구간<br><small>m</small></th><th>내부 공동 1등 구획</th></tr>`;
     for (const {f, i} of order) {
       const inner = f.front_labs || [];
-      h += `<tr data-cc="${f.id}" class="${isTop(f, axis) ? 'hi-a' : ''} ${f.id === pickId ? 'pick' : ''}" style="cursor:pointer">
-        <td class="l"><b>${i + 1}</b><span style="color:var(--muted)">/${n}</span></td><td><span class="star">${stars(f)}</span></td>
+      h += `<tr data-cc="${f.id}" class="${isTop(f, axis) ? 'hi-a' : ''} ${f.id === pickId ? 'pick' : ''} ${f.front ? 'front' : ''}" style="cursor:pointer">
+        <td class="l"><b>${i + 1}</b><span style="color:var(--muted)">/${n}</span></td>
+        <td>${f.front ? '<span class="badge-front">공동 1등</span>' : '<span class="badge-dom" title="면적·산단·계통 모두 같거나 나은 후보가 있음">—</span>'}</td>
+        <td><span class="star">${stars(f)}</span></td>
         <td>${fmtA(f.a)}</td><td>${f.mw}</td><td>${f.d == null ? '알 수 없음' : f.d.toFixed(1)}</td><td>${f.lo == null ? '알 수 없음' : f.lo}</td>
         <td>${rk(f, 'ra')}</td><td>${rk(f, 'ri')}</td><td>${rk(f, 'rl')}</td>
         <td>구획 ${f.nc} · 필지 ${f.n.toLocaleString('ko-KR')}${f.iso ? ' <span class="cand-iso">고립</span>' : ''}</td>
         <td>${f.nc > 1 ? `${f.td}–${f.tb}` : '—'}</td>
         <td>${inner.length ? `<button type="button" class="cand-x" data-cc="${f.id}">${inner.length}곳 펼치기</button>` : (compFrontier.length ? '없음' : '—')}</td></tr>
-        <tr class="cand-sub" data-sub="${f.id}" hidden><td colspan="12" class="l">이 후보 클러스터를 이루는 구획 ${f.nc}개 중 <b>구획 층 공동 1등</b>(recommend_v4) ${inner.length}곳:
+        <tr class="cand-sub" data-sub="${f.id}" hidden><td colspan="13" class="l">이 후보 클러스터를 이루는 구획 ${f.nc}개 중 <b>구획 층 공동 1등</b>(recommend_v4) ${inner.length}곳:
           ${inner.map(l => { const c = compFrontier.find(x => x.lab === l); return c ? `<span class="cand-lab">구획 ${l} · ${fmtA(c.a)} · 면적 ${c.ra}위 · 산단 ${c.ri}위 · 계통 ${c.rl}위</span>` : `<span class="cand-lab">구획 ${l}</span>`; }).join(' ')}
           <span style="color:var(--muted)"> — 내부 비교는 구획 단위 표(구획 층 모집단 ≥11,111㎡)에서.</span></td></tr>`;
     }
     el.innerHTML = h;
-    el.querySelectorAll('tr[data-cc]').forEach(tr => tr.onclick = e => { if (e.target.classList.contains('cand-x')) return; onPick && onPick(fr.find(f => f.id === +tr.dataset.cc)); });
+    el.querySelectorAll('tr[data-cc]').forEach(tr => tr.onclick = e => { if (e.target.classList.contains('cand-x')) return; onPick && onPick(rows.find(f => f.id === +tr.dataset.cc)); });
     el.querySelectorAll('.cand-x').forEach(b => b.onclick = () => { const s = el.querySelector(`tr[data-sub="${b.dataset.cc}"]`); s.hidden = !s.hidden; b.textContent = b.textContent.replace(s.hidden ? '접기' : '펼치기', s.hidden ? '펼치기' : '접기'); });
     return F;
   }
   function note(sgg, minM2, axis, cell) {
     const S = info(sgg, cell), F = frontier(sgg, minM2, cell); if (!S || !F) return '';
     const one = F.frontier.length === 1;
-    return `후보 클러스터 <b>${S.n_cc.toLocaleString('ko-KR')}</b>개(다구획 ${S.n_multi.toLocaleString('ko-KR')} · 고립 ${S.n_iso.toLocaleString('ko-KR')}) 중 최소 표시 규모 <b>${MW_LBL[minM2] || '전량'}</b> 이상 <b>${F.n_pop.toLocaleString('ko-KR')}</b>개가 모집단 · 그중 공동 1등 <b>${F.frontier.length}</b>곳.
+    return `후보 클러스터 <b>${S.n_cc.toLocaleString('ko-KR')}</b>개(다구획 ${S.n_multi.toLocaleString('ko-KR')} · 고립 ${S.n_iso.toLocaleString('ko-KR')}) 중 최소 표시 규모 <b>${MW_LBL[minM2] || '전량'}</b> 이상 <b>${F.n_pop.toLocaleString('ko-KR')}</b>개를 표에 <b>전부</b> 싣고, 그중 세 축 어느 것에서도 다른 후보에 밀리지 않는 <b>공동 1등 ${F.frontier.length}곳</b>에 배지를 붙임(탈락 아님 — 나머지도 후보).
       ${one ? '<b>이 규모에서는 후보 클러스터 한 곳이 세 축 모두 우위 — 내부 비교는 구획 단위로.</b>' : ''}
-      ${axis ? `<b>${AXN[axis]}</b> 기준 ${TOP}위 이내 강조.` : ''} 필터는 생성이 아니라 모집단에만 작용 — 필터마다 전선이 달라질 수 있음(정상). 조건 ${cell || DEFAULT_CELL} · 규칙 ${_rec.rule} · ${status()}`;
+      정렬: <b>${axis ? AXN[axis] + ' 순 · ' + TOP + '위 이내 강조' : '면적순'}</b> — 정렬은 보기 조작이며 새 점수·가중치가 아님. 필터는 생성이 아니라 모집단에만 작용 — 필터마다 배지가 달라질 수 있음(정상). 조건 ${cell || DEFAULT_CELL} · 규칙 ${_rec.rule} · ${status()}`;
   }
-  return {rec, has, info, frontier, geo, status, cellsFor, FILTERS, MW_LBL, DEFAULT_MIN, DEFAULT_CELL, TOP, AXC, AXN, BAND_FILL, BAND_LBL, bandOf, fmtA, isTop, stars, legendHTML,
+  return {rec, has, info, frontier, rowsOf, geo, status, cellsFor, FILTERS, MW_LBL, DEFAULT_MIN, DEFAULT_CELL, TOP, AXC, AXN, BAND_FILL, BAND_LBL, bandOf, fmtA, isTop, stars, legendHTML,
           minSizeControl, unitControl, layer, hullLayer, outline, markers, table, note};
 })();
