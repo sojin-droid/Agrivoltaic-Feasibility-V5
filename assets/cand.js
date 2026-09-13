@@ -18,6 +18,9 @@ window.Cand = (() => {
   const frontier = (sgg, minM2, cell) => { const S = info(sgg, cell); return S ? (S.by_filter[String(minM2)] || {n_pop: 0, frontier: []}) : null; };
   const geo = (sgg, cell) => Region.gz(`data_v4/cand/${sgg}_${cell || DEFAULT_CELL}.json.gz`);   // 없으면 null
   const status = () => (_rec && _rec.status) || '';
+  // 속성 기준 cc 수(n_cc) vs 지도 표시 가능 cc 수(n_geom) — 기하 결손 필지의 고립 cc 는 표·집계에는 있고 지도에는 없다 (FINAL GATE §3·§6). 계산이 아니라 export 필드의 표기.
+  const geomNote = (S, short) => { if (!S || S.n_geom == null || S.n_geom === S.n_cc) return ''; const m = S.n_cc - S.n_geom;
+    return short ? ` · 지도 표시 ${S.n_geom.toLocaleString('ko-KR')} · 기하 미확보 ${m.toLocaleString('ko-KR')}` : `<br><span class="cand-hint">전체 후보 클러스터 ${S.n_cc.toLocaleString('ko-KR')} · 지도 표시 가능 ${S.n_geom.toLocaleString('ko-KR')} · 기하 미확보 ${m.toLocaleString('ko-KR')}(지적 폴리곤이 없는 1필지 고립 후보 — 3MW 미만이라 표에는 오르지 않음).</span>`; };
   const cellsFor = sgg => _rec && _rec.cells ? Object.keys(_rec.cells).filter(c => _rec.cells[c].sgg[sgg]) : [];
 
   const fmtA = a => a >= 1e6 ? (a / 1e6).toFixed(3) + ' km²' : (a || 0).toLocaleString('ko-KR') + ' ㎡';
@@ -175,10 +178,10 @@ window.Cand = (() => {
   function note(sgg, minM2, axis, cell) {
     const S = info(sgg, cell), F = frontier(sgg, minM2, cell); if (!S || !F) return '';
     const one = F.frontier.length === 1;
-    return `후보 클러스터 <b>${S.n_cc.toLocaleString('ko-KR')}</b>개(다구획 ${S.n_multi.toLocaleString('ko-KR')} · 고립 ${S.n_iso.toLocaleString('ko-KR')}) 중 최소 표시 규모 <b>${MW_LBL[minM2] || '전량'}</b> 이상 <b>${F.n_pop.toLocaleString('ko-KR')}</b>개를 표에 <b>전부</b> 싣고, 그중 세 축 어느 것에서도 다른 후보에 밀리지 않는 <b>공동 1등 ${F.frontier.length}곳</b>에 배지를 붙임(탈락 아님 — 나머지도 후보).
+    return `후보 클러스터 <b>${S.n_cc.toLocaleString('ko-KR')}</b>개(속성 기준 · 다구획 ${S.n_multi.toLocaleString('ko-KR')} · 고립 ${S.n_iso.toLocaleString('ko-KR')}${geomNote(S, true)}) 중 최소 표시 규모 <b>${MW_LBL[minM2] || '전량'}</b> 이상 <b>${F.n_pop.toLocaleString('ko-KR')}</b>개를 표에 <b>전부</b> 싣고, 그중 세 축 어느 것에서도 다른 후보에 밀리지 않는 <b>공동 1등 ${F.frontier.length}곳</b>에 배지를 붙임(탈락 아님 — 나머지도 후보).
       ${one ? '<b>이 규모에서는 후보 클러스터 한 곳이 세 축 모두 우위 — 내부 비교는 구획 단위로.</b>' : ''}
-      정렬: <b>${axis ? AXN[axis] + ' 순 · ' + TOP + '위 이내 강조' : '면적순'}</b> — 정렬은 보기 조작이며 새 점수·가중치가 아님. 필터는 생성이 아니라 모집단에만 작용 — 필터마다 배지가 달라질 수 있음(정상). 조건 ${cell || DEFAULT_CELL} · 규칙 ${_rec.rule} · ${status()}`;
+      정렬: <b>${axis ? AXN[axis] + ' 순 · ' + TOP + '위 이내 강조' : '면적순'}</b> — 정렬은 보기 조작이며 새 점수·가중치가 아님. 필터는 생성이 아니라 모집단에만 작용 — 필터마다 배지가 달라질 수 있음(정상). 이 시군의 수치는 <b>시군 관여 기준</b>(municipality-touch count) — 시군 경계에 걸친 후보 클러스터는 관련 시군마다 나타나므로 시군 값을 더하면 전국 고유 후보 수(unique CC count)보다 커진다. 조건 ${cell || DEFAULT_CELL} · 규칙 ${_rec.rule} · ${status()}${geomNote(S, false)}`;
   }
-  return {rec, has, info, frontier, rowsOf, geo, status, cellsFor, FILTERS, MW_LBL, DEFAULT_MIN, DEFAULT_CELL, TOP, AXC, AXN, BAND_FILL, BAND_LBL, bandOf, fmtA, isTop, stars, legendHTML,
+  return {rec, has, info, frontier, rowsOf, geo, status, geomNote, cellsFor, FILTERS, MW_LBL, DEFAULT_MIN, DEFAULT_CELL, TOP, AXC, AXN, BAND_FILL, BAND_LBL, bandOf, fmtA, isTop, stars, legendHTML,
           minSizeControl, unitControl, layer, hullLayer, outline, markers, table, note, detail, components, memberLayer};
 })();

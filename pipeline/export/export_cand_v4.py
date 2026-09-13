@@ -3,7 +3,8 @@
 
 산출:
   data_v4/cand/{sgg}_{cell}.json.gz   시군 touch 구획 기준 cc 기하(4326, 단순화) + 속성 {id, am2, nc, n, iso, tb, td, hf, lo, d, labs}
-  data_v4/recommend_cc_v4.json.gz     cells[cell].sgg[sgg] = {label, n_cc, n_multi, n_iso, bands{fm: n}, by_filter{fm: {n_pop, n_front, pop[…], frontier[…]}}}
+  data_v4/recommend_cc_v4.json.gz     cells[cell].sgg[sgg] = {label, n_cc, n_multi, n_iso, n_geom, bands{fm: n}, by_filter{fm: {n_pop, n_front, pop[…], frontier[…]}}}
+                                      n_cc = 속성 기준 cc 수(시군 관여) · n_geom = 기하 확보 cc 수(지도 feature 수, = n_cc − 기하 결손 고립 cc) — 두 수를 화면에서 구분 표기한다
                                       pop 행 = 모집단 전량(cand_frontier 그대로: 순위·front 플래그·좌표·front_labs)
   data_v4/cand_index.json             칸 × 시군 요약 + 스탬프(subset 여부 포함)
 두 화면(regions·local)은 이 두 파일만 소비한다. 화면은 계산하지 않는다.
@@ -86,9 +87,10 @@ def main():
                                 'labs': L, 'front_labs': [l for l in L if l in front_labs]})
                 by[str(fm)] = {'n_pop': int(len(pop)), 'n_front': int(sum(1 for x in pop if x['front'])), 'pop': pop, 'frontier': [x for x in pop if x['front']]}
             n_cc = int(len(ids)); n_multi = int((cand.loc[ids, 'n_component'] > 1).sum()); n_iso = int(cand.loc[ids, 'is_isolated'].sum())
-            rec['cells'][cell]['sgg'][s] = {'label': name_of(s), 'n_cc': n_cc, 'n_multi': n_multi, 'n_iso': n_iso,
+            n_geom = int(len(feats))                      # 기하 확보 cc(지도 표시 가능) — 기하 결손 필지의 고립 cc 는 속성에는 있고 지도에는 없다 (FINAL GATE §3·§6)
+            rec['cells'][cell]['sgg'][s] = {'label': name_of(s), 'n_cc': n_cc, 'n_multi': n_multi, 'n_iso': n_iso, 'n_geom': n_geom,
                                             'bands': {str(fm): int((cand.loc[ids, 'area_m2'] >= fm).sum()) for fm in [0] + FILTERS}, 'by_filter': by}
-            index['sgg'].setdefault(s, {})[cell] = {'n_cc': n_cc, 'n_multi': n_multi, 'n_iso': n_iso, 'km2': round(float(cand.loc[ids, 'area_m2'].sum()) / 1e6, 3), 'n_front_3mw': by['66667']['n_front']}
+            index['sgg'].setdefault(s, {})[cell] = {'n_cc': n_cc, 'n_multi': n_multi, 'n_iso': n_iso, 'n_geom': n_geom, 'km2': round(float(cand.loc[ids, 'area_m2'].sum()) / 1e6, 3), 'n_front_3mw': by['66667']['n_front']}
             print(f'  {s} {cell}: cc {n_cc:,} · 3MW 모집단 {by["66667"]["n_pop"]} 전선 {by["66667"]["n_front"]}')
     rec['status'] = f"{'subset ' + ','.join(subset_all) if subset_all else '전국'} · ADR-0046 · 엔진 산출 export"
     index['status'] = rec['status']

@@ -14,8 +14,8 @@
 <script src="assets/vendor/leaflet/leaflet.js"></script>
 <script src="assets/v4.js"></script>
 <script src="assets/region.js"></script>
-<link rel="stylesheet" href="assets/cand.css?v=52e">
-<script src="assets/cand.js?v=52e"></script>
+<link rel="stylesheet" href="assets/cand.css?v=52f">
+<script src="assets/cand.js?v=52f"></script>
 <style>
 #recTbl th,#recTbl td{white-space:nowrap}
 #recTbl tr:nth-child(even) td{background:var(--surface-control)}
@@ -227,7 +227,7 @@
     document.getElementById('recTitle').textContent = `${nameOf(cur)} — 후보 클러스터 ${F.n_pop}곳 (${Cand.MW_LBL[minM2]} 이상) · ★ 공동 1등 ${F.frontier.length}곳`;
     document.getElementById('tblTitle').textContent = `후보 클러스터 ${F.n_pop}곳 전체 비교 — ★ 공동 1등 ${F.frontier.length}곳`;
     document.getElementById('recStamp').textContent =
-      `후보 클러스터 ${V4.n(S.n_cc)}개 중 ${Cand.MW_LBL[minM2]} 이상 ${V4.n(F.n_pop)}곳 전부 표시 · 진흥구역 개방(R2) 기준`;
+      `후보 클러스터 ${V4.n(S.n_cc)}개(속성 기준${Cand.geomNote(S, true)}) 중 ${Cand.MW_LBL[minM2]} 이상 ${V4.n(F.n_pop)}곳 전부 표시 · 시군 관여 기준 · 진흥구역 개방(R2) 기준`;
     if (ccPick == null) document.getElementById('ccDetail').innerHTML = '<div class="cand-hint">표의 행이나 지도의 번호 원을 클릭하면 후보 상세와 「구성 구획 보기」가 열립니다.</div>';
     document.getElementById('recMapCap').textContent = CAP_CC;
     const lg = document.getElementById('ccLegend'); lg.hidden = false; lg.innerHTML = Cand.legendHTML();
