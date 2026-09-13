@@ -66,7 +66,7 @@ for sgg, grp in bc.groupby('sgg'):
     assert q_labs == e_labs, f"[FAIL] G1 {sgg}: 질의 전선 ≠ 재현 전선"
 print("G1 통과 — 전선 항등식 209개 시군 재현 일치")
 
-# ── 판독기 사전계산 (전선 구획만 — 1,477개) ──
+# ── 판독기 사전계산 (전선 구획만 — 1,478개(2026-09-11 결측 거리 정정 후; 구 1,477)) ──
 dan = gpd.read_file(os.path.join(LR, 'sources', 'ind_complex', 'damdan.gpkg')) \
          .drop_duplicates('dan_id').to_crs(5186)
 w = dan['cat_nam'].map(SCORE).to_numpy(float)
