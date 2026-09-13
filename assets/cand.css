@@ -1,0 +1,36 @@
+/* V5.2 후보 클러스터 층 — 컨트롤·표 보조 스타일 (토큰은 v5.css) */
+.cand-legend[hidden],.cand-tabs[hidden],.cand-ctl[hidden],.cand-pane[hidden]{display:none!important}   /* display:flex 가 UA hidden 을 덮지 않게 */
+.mk-num{display:flex;align-items:center;justify-content:center;font:700 11px/1 var(--mono,monospace);color:#0C356A;background:#fff;border:1.5px solid #0C356A;border-radius:50%;box-shadow:0 1px 3px #0004;pointer-events:none}
+.mk-num.mk-dom{color:#5A6B7C;border-color:#6B7B8C;background:#F6F8FB}
+.badge-front{display:inline-block;font-size:11px;font-weight:700;padding:1px 8px;border-radius:999px;background:#0C356A;color:#fff;white-space:nowrap}
+.badge-dom{color:#9AA5B1}
+tr.front td{font-weight:600}
+.cand-detail{background:var(--surface-card,#fff);border:1px solid var(--line);border-radius:var(--radius-md,10px);padding:14px 16px;font-size:13px}
+.cand-detail-h{display:flex;gap:10px;align-items:center;margin-bottom:8px}
+.cand-detail-id{font-family:var(--mono,monospace);font-weight:700;font-size:15px;color:var(--navy,#0C356A)}
+.cand-detail-no{color:var(--muted);font-size:12px}
+.cand-detail-kv{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:6px 0 8px}
+.cand-detail-kv>div{background:var(--surface-control,#F2F6FB);border-radius:8px;padding:8px 10px}
+.cand-detail-kv b{display:block;font-family:var(--serif);font-size:16px;color:var(--navy,#0C356A)} .cand-detail-kv small{color:var(--muted);font-size:11px}
+.cand-detail-sub{color:var(--muted);font-size:12px;margin-bottom:8px}
+.cand-detail-note{background:var(--sky,#EAF3FB);border-radius:8px;padding:8px 10px;margin-bottom:8px;font-size:12.5px}
+.cand-members-list{margin:6px 0;line-height:1.9}
+@media(max-width:720px){.cand-detail-kv{grid-template-columns:1fr 1fr}}
+.cand-ctl{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:10px}
+.cand-ctl .q{font-size:12.5px;color:var(--muted);margin-right:4px}
+.cand-ctl button{height:var(--control-height,40px);padding:0 14px;border:1px solid var(--line);border-radius:var(--radius-sm,8px);background:var(--surface-control,#F2F6FB);font:inherit;font-size:13px;cursor:pointer}
+.cand-ctl button.on{background:var(--navy,#0C356A);color:#fff;border-color:var(--navy,#0C356A)}
+.cand-ctl button[disabled]{opacity:.45;cursor:not-allowed}
+.cand-ctl button:focus-visible{outline:2px solid var(--gold,#B8860B);outline-offset:2px}
+.cand-hint{flex-basis:100%;font-size:12px;color:var(--muted);line-height:1.5}
+.cand-iso{display:inline-block;font-size:11px;padding:0 6px;border-radius:999px;background:#EEF1F5;color:#5A6B7C;border:1px solid var(--line)}
+.cand-x{font:inherit;font-size:12px;padding:2px 8px;border:1px solid var(--line);border-radius:6px;background:#fff;cursor:pointer;color:var(--navy)}
+.cand-sub td{background:var(--sky,#EAF3FB)!important;font-size:12.5px;white-space:normal!important;line-height:1.7}
+.cand-lab{display:inline-block;margin:2px 4px 2px 0;padding:1px 8px;border-radius:6px;background:#fff;border:1px solid var(--line);font-size:12px}
+.cand-legend{display:flex;flex-wrap:wrap;gap:10px;font-size:12px;color:var(--muted);margin-top:6px}
+.cand-legend i{display:inline-block;width:12px;height:12px;border-radius:3px;border:1px solid #0003;vertical-align:-2px;margin-right:4px}
+.cand-tabs{display:flex;gap:6px;margin:6px 0 10px}
+.cand-tabs button{font:inherit;font-size:13px;padding:8px 14px;border:1px solid var(--line);border-bottom:none;border-radius:8px 8px 0 0;background:var(--surface-control,#F2F6FB);cursor:pointer}
+.cand-tabs button.on{background:#fff;font-weight:700;color:var(--navy)}
+@media print{.cand-ctl,.cand-tabs,.cand-x{display:none!important}.cand-sub{display:table-row!important}.cand-pane[hidden]{display:block!important}.cand-pane>h4{display:block!important}}
+.cand-pane>h4{display:none;font-size:14px;margin:10px 0 6px;color:var(--navy)}

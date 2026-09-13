@@ -14,6 +14,8 @@
 <script src="assets/vendor/leaflet/leaflet.js"></script>
 <script src="assets/v4.js"></script>
 <script src="assets/region.js"></script>
+<link rel="stylesheet" href="assets/cand.css?v=52f">
+<script src="assets/cand.js?v=52f"></script>
 <style>
 #recTbl th,#recTbl td{white-space:nowrap}
 #recTbl tr:nth-child(even) td{background:var(--surface-control)}
@@ -54,9 +56,9 @@
   <div class="wrap">
     <p class="eyebrow">Regions · 지역별 우선 후보</p>
     <h1>지역별 우선 후보 — 시군 단위 공동 1등 후보 비교</h1>
-    <p class="lede">시군을 고르면 그 안의 후보 구획 가운데 <b>공동 1등 후보</b>가 지도와 표에 나타남 —
-    면적이 크고, 산업단지와 가깝고, 계통 여유가 큰 세 조건을 동시에 볼 때 어느 하나가 다른 후보보다
-    모든 면에서 낫지 않으면 여러 후보가 공동 1등으로 남음. 세 조건을 번갈아 켜며 서로 다른 장점을 비교하는 화면임.</p>
+    <p class="lede">시군을 고르면 그 지역의 <b>후보 클러스터</b>가 지도와 표에 전부 나타남. 최소 규모를 정하고,
+    면적·산단 거리·계통 여유용량 중 무엇을 우선할지 고르면 그 기준으로 정렬됨. 세 조건 모두에서 다른 후보에 밀리지 않는 후보에는
+    <b>★ 공동 1등</b> 표시가 붙음 — 나머지도 후보이며 숨기지 않음.</p>
     <p style="font-family:var(--mono);font-size:11.5px;color:var(--muted);margin-top:14px" id="art-meta">PLANiT Institute</p>
     <span id="gen-stamp" style="display:none">—</span>
   </div>
@@ -68,13 +70,22 @@
       <span style="font-size:12.5px;color:var(--muted)" id="recStamp">—</span></div>
     <div class="figbox" id="rp-rec"></div>
 
+    <div class="figbox" style="margin-top:16px">
+      <div class="cand-ctl" id="minCtl"></div>
+      <div class="cand-ctl" id="unitCtl" hidden></div>
+      <div class="cand-hint" id="ccAvail" hidden></div>
+    </div>
+
     <div class="sec-head" style="margin-top:26px"><div><p class="eyebrow">Step 2 · 지도</p><h2 id="recTitle">—</h2></div>
-      <span style="font-size:12.5px;color:var(--muted)">금색 = 공동 1등 후보 · 노랑 = 그 시군의 연접 구획 전량 · 하늘색 점 = 적격 필지(검증용)</span></div>
+      <span style="font-size:12.5px;color:var(--muted)" id="recMapCap">번호 원 = 후보 클러스터(번호 = 아래 표의 "후보" 열) · 남색 굵은 링 = ★ 공동 1등 · 클릭하면 확대</span></div>
+    <div class="callout-v4" style="margin-bottom:10px;font-size:13px"><b>읽는 순서</b> — ① 광역 → 시군을 고른다 ② <b>최소 규모</b>를 정한다(그 규모 이상의 후보 클러스터를 비교) ③ <b>무엇을 우선해서 볼지</b>(면적·산단 거리·계통 여유용량) 누르면 표가 그 기준으로 정렬되고 상위 후보가 진하게 표시된다 ④ 지도의 번호 원과 표의 "후보" 번호는 같은 후보를 가리킨다 — 원이나 행을 클릭하면 확대되고 아래에 상세가 열린다 ⑤ 세 조건 모두에서 다른 후보에 밀리지 않는 후보에는 <b>★ 공동 1등</b>이 붙는다(나머지도 후보). 필요하면 상세의 「구성 구획 보기」로 후보 안의 세부 땅 조각을 본다.</div>
     <div id="recMap2"></div>
+    <div class="cand-legend" id="ccLegend" hidden></div>
+    <div id="ccDetail" style="margin-top:10px"></div>
 
     <div class="figbox" style="margin-top:16px">
       <div class="axis-tgl" id="axisTgl">
-        <span class="q">우선 기준</span>
+        <span class="q">무엇을 우선해서 볼까요?</span>
         <button data-ax="" class="on">전체 보기</button>
         <button data-ax="ra"><i style="background:#0C356A"></i>면적</button>
         <button data-ax="ri"><i style="background:#2A9D8F"></i>산단 거리</button>
@@ -84,8 +95,8 @@
         ★ 3개 = 세 조건 모두 3위 이내 · ★ 2개 = 두 조건 · ★ 1개 = 한 조건 — 순위는 정본의 축별 순위 열이며 임의 점수가 아님.</div>
     </div>
 
-    <div class="sec-head" style="margin-top:26px"><div><p class="eyebrow">Step 3 · 공동 1등 후보</p><h2>공동 1등 후보 — 축별 비교</h2></div>
-      <span style="font-size:12.5px;color:var(--muted)">행 클릭 = 지도 이동 · 표시 순서는 면적순(순위 아님)</span></div>
+    <div class="sec-head" style="margin-top:26px"><div><p class="eyebrow">Step 3 · 전체 후보 표</p><h2 id="tblTitle">후보 클러스터 전체 비교 — ★ 공동 1등</h2></div>
+      <span style="font-size:12.5px;color:var(--muted)">행 클릭 = 지도 이동·상세 · "후보" 번호는 면적순 표시 번호(순위 아님)</span></div>
     <div class="figbox">
       <div style="overflow-x:auto"><table class="v4" id="recTbl"></table></div>
       <div class="fn" style="margin-top:8px" id="recCtl">—</div>
@@ -127,6 +138,7 @@
   document.getElementById('art-meta').textContent =
     `PLANiT Institute · 데이터 ${String(m.data_generation).replace(/정본 우주/g, '분석 기준 필지')} · 생성 ${m.generated}`;
   const REC = await Region.gz('data_v4/recommend_v4.json.gz');
+  await Cand.rec();                                   // 후보 클러스터 층(V5.2) — 우리동네와 같은 파일
   const nameOf = c => Region.nameOf(c);
   const fmtA2 = a => a >= 1e6 ? (a / 1e6).toFixed(3) + ' km²' : V4.n(a) + ' ㎡';
 
@@ -134,8 +146,14 @@
   const have = new Set(Object.keys(REC.sgg));
   const q = new URLSearchParams(location.search).get('sgg');
   let cur = (q && have.has(q)) ? q : '44270';
+  // ── 기본 후보 단위 = 후보 클러스터(ADR-0046). 구획 화면은 cc 층이 아직 없는 시군의 폴백(세부 분석)일 뿐이다. 상태값은 우리동네와 같은 의미 ──
+  let unit = Cand.has(cur) ? 'cc' : 'comp', minM2 = Cand.DEFAULT_MIN;
+  const minCtl = Cand.minSizeControl(document.getElementById('minCtl'), {value: minM2, onChange: v => { minM2 = v; if (unit === 'cc') render(); }});
+  const availNote = () => { const el = document.getElementById('ccAvail'); el.hidden = Cand.has(cur);
+    el.innerHTML = Cand.has(cur) ? '' : '이 시군·조건에는 후보 클러스터 산출이 없어 <b>연접 구획 기준(V5.1)</b>으로 보입니다.'; };
+  const render = () => { unit = Cand.has(cur) ? 'cc' : 'comp'; availNote(); document.getElementById('minCtl').hidden = unit !== 'cc'; unit === 'cc' ? renderCC() : recRender(); };
   const picker = Region.picker(document.getElementById('rp-rec'), {value: cur, restrict: have,
-    onChange: c => { cur = c; axis = ''; syncAxisBtns(); recRender(); }});
+    onChange: c => { cur = c; axis = ''; ccPick = null; syncAxisBtns(); render(); }});
 
   // ── 지도 골격 (원문 유지) ──
   const recGeo = L.map('recMap2', {center: [36.3, 127.0], zoom: 8, scrollWheelZoom: false});
@@ -186,7 +204,48 @@
   function syncAxisBtns() {
     document.querySelectorAll('#axisTgl button').forEach(b => b.classList.toggle('on', b.dataset.ax === axis));
   }
-  document.querySelectorAll('#axisTgl button').forEach(b => b.onclick = () => { axis = b.dataset.ax; syncAxisBtns(); drawTable(); drawMarkers(); });
+  document.querySelectorAll('#axisTgl button').forEach(b => b.onclick = () => { axis = b.dataset.ax; syncAxisBtns();
+    if (unit === 'cc' && Cand.has(cur)) renderCC(false); else { drawTable(); drawMarkers(); } });
+
+  // ── V5.2 후보 클러스터 단위 — 우리동네와 같은 파일(recommend_cc_v4 · cand/{sgg}_R2_promo)·같은 함수(Cand.*) ──
+  const ccGeoCache = {}; let ccPick = null;
+  const CAP_COMP = '번호 원 = 공동 1등 구획(번호 = 아래 표의 "후보" 열, 면적순 — 순위 아님; 원 크기 ∝ 면적) · 노랑 = 그 시군의 연접 구획 전량(확대하면 원 밑의 실제 땅이 보임) · 하늘색 점 = 적격 필지(검증용)';
+  const CAP_CC = '번호 원 = 최소 표시 규모 이상 후보 클러스터 전부(번호 = 아래 표의 "후보" 열, 면적순) · 남색 굵은 링 = 공동 1등, 회색 링 = 세 축 모두 같거나 나은 후보가 있는 것(후보에서 빠지지 않음) · 채움 = 규모 band · 회색 윤곽 = 최소 표시 규모 미만';
+  const recSub = L.layerGroup().addTo(recGeo);           // 「구성 구획 보기」 레이어(선택 후보의 연접 구획)
+  function ccPickFn(f) {
+    ccPick = f.id; recSub.clearLayers();
+    document.querySelectorAll('#recTbl tr[data-cc]').forEach(tr => tr.classList.toggle('pick', +tr.dataset.cc === f.id));
+    if (f.lat != null) recGeo.flyTo([f.lat, f.lon], 12);
+    const rows = Cand.rowsOf(Cand.frontier(cur, minM2)); const i = rows.findIndex(r => r.id === f.id);
+    Cand.detail(document.getElementById('ccDetail'), f, {sgg: cur, cell: Cand.DEFAULT_CELL, index: i + 1, total: rows.length, compFrontier: recCur.frontier,
+      onMembers: feats => { recSub.clearLayers(); if (feats.length) { const l = Cand.memberLayer(feats, {pane: 'recBlocks'}).addTo(recSub); recGeo.fitBounds(l.getBounds(), {padding: [30, 30], maxZoom: 15}); } }});
+    document.getElementById('ccDetail').scrollIntoView({behavior: 'smooth', block: 'nearest'});
+  }
+  async function renderCC(reload = true) {
+    recCur = REC.sgg[cur];                                   // 구획 층 전선은 내부 비교용으로 그대로
+    const S = Cand.info(cur), F = Cand.frontier(cur, minM2);
+    document.getElementById('recTitle').textContent = `${nameOf(cur)} — 후보 클러스터 ${F.n_pop}곳 (${Cand.MW_LBL[minM2]} 이상) · ★ 공동 1등 ${F.frontier.length}곳`;
+    document.getElementById('tblTitle').textContent = `후보 클러스터 ${F.n_pop}곳 전체 비교 — ★ 공동 1등 ${F.frontier.length}곳`;
+    document.getElementById('recStamp').textContent =
+      `후보 클러스터 ${V4.n(S.n_cc)}개(속성 기준${Cand.geomNote(S, true)}) 중 ${Cand.MW_LBL[minM2]} 이상 ${V4.n(F.n_pop)}곳 전부 표시 · 시군 관여 기준 · 진흥구역 개방(R2) 기준`;
+    if (ccPick == null) document.getElementById('ccDetail').innerHTML = '<div class="cand-hint">표의 행이나 지도의 번호 원을 클릭하면 후보 상세와 「구성 구획 보기」가 열립니다.</div>';
+    document.getElementById('recMapCap').textContent = CAP_CC;
+    const lg = document.getElementById('ccLegend'); lg.hidden = false; lg.innerHTML = Cand.legendHTML();
+    Cand.table(document.getElementById('recTbl'), cur, minM2, {axis, pickId: ccPick, compFrontier: recCur.frontier, onPick: ccPickFn});
+    document.getElementById('axisNote').innerHTML = Cand.note(cur, minM2, axis);
+    document.getElementById('recCtl').innerHTML = `구획 단위(현행 정본) 공동 1등 ${recCur.frontier.length}곳 · 모집단 ${V4.n(recCur.n_block)}개(≥11,111㎡) —
+      두 단위의 모집단 기준이 다르므로 각 표에 명시. 최소 표시 규모는 후보 클러스터 단위에만 적용.`;
+    document.getElementById('recReader').innerHTML = '<b>반경 판독기</b> — 구획 단위 전용 자료(후보 클러스터 단위 미제공). 후보 단위를 「구획」으로 바꾸면 사용 가능.';
+    document.getElementById('recDem').innerHTML = '<b>지역 전력판매량 대비</b> — 구획 단위 전용 자료(후보 클러스터 단위 미제공).';
+    const {coords} = Cand.markers(recMk, Cand.rowsOf(F), {axis, onPick: ccPickFn});
+    const c0 = cur;
+    if (reload) { recPar.clearLayers(); ccGeoCache[cur] = ccGeoCache[cur] || await Cand.geo(cur); }
+    if (c0 !== cur) return;
+    recBlk.clearLayers();
+    if (ccGeoCache[cur]) { recBlk.addLayer(Cand.layer(ccGeoCache[cur], {minM2, pane: 'recBlocks', frontierIds: F.frontier.map(f => f.id)})); recBlk.addLayer(Cand.hullLayer(ccGeoCache[cur], {minM2, pane: 'recBlocks'}));
+      recBlk.addLayer(Cand.outline(ccGeoCache[cur], F.frontier.map(f => f.id), {pane: 'recBlocks', weight: 3})); }
+    if (reload && coords.length) recGeo.fitBounds(coords, {padding: [30, 30], maxZoom: 12});
+  }
 
   function drawTable() {
     const S = recCur, nF = S.frontier.length;
@@ -234,10 +293,15 @@
         fillColor: '#FFD84D', fillOpacity: axis ? (hi ? .95 : .35) : .9, opacity: axis && !hi ? .45 : 1
       }).bindTooltip(`${fi + 1}/${S.frontier.length} · ${fmtA2(f.a)} · 면적 ${f.ra}위 · 산단 ${f.ri}위 · 계통 ${f.rl}위${f.dsh != null ? ' · 수요 ' + f.dsh + '%' : ''}`)
         .on('click', () => recPick(f)).addTo(recMk);
+      // 표 순번 배지 — 마커와 표의 "후보" 열이 같은 번호(면적순 표시, 순위 아님)
+      L.marker([f.lat, f.lon], {icon: L.divIcon({className: 'mk-num', html: `${fi + 1}`, iconSize: [22, 22], iconAnchor: [11, 11]}), interactive: false, keyboard: false}).addTo(recMk);
     });
     return coords;
   }
   function recRender() {
+    document.getElementById('ccLegend').hidden = true; document.getElementById('recMapCap').textContent = CAP_COMP;
+    document.getElementById('ccDetail').innerHTML = ''; recSub.clearLayers();
+    document.getElementById('tblTitle').textContent = '연접 구획 기준 공동 1등 — 축별 비교 (후보 클러스터 층 미등재 시군의 세부 분석 화면)';
     recCur = REC.sgg[cur]; const S = recCur; recSelLab = null;
     document.getElementById('recTitle').textContent = `${nameOf(cur)} — 공동 1등 후보 ${S.frontier.length}곳`;
     document.getElementById('recStamp').textContent =
@@ -254,13 +318,15 @@
     Region.gz(`data_v4/clusters/${cur}_R2_promo.json.gz`).then(gj => {
       if (!gj || c0 !== cur) return;
       recBlk.addLayer(L.geoJSON(gj, {pane: 'recBlocks', style: {color: '#B8860B', weight: .8, fillColor: '#FFD84D', fillOpacity: .7}, interactive: false}));
+      // 공동 1등 구획의 범위 — 굵은 남색 테두리(번호 원 밑의 실제 땅)
+      recBlk.addLayer(Cand.outline(gj, S.frontier.map(f => f.lab), {pane: 'recBlocks'}));
     });
     const coords = drawMarkers();
     if (coords.length) recGeo.fitBounds(coords, {padding: [30, 30], maxZoom: 12});
     demBar(S.frontier[0]);
     document.getElementById('recReader').innerHTML = '<b>반경 판독기</b> — 표나 지도에서 후보를 고르면 반경 안 산단 점수 합과 여유용량 합(균등배분 하한 합)을 보임. 고른 뒤 확인하는 도구 — 비지배 집합 선별에 불사용.';
   }
-  recRender();
+  render();
 
   // ── 열쇠 두 개 (표시 전용 · 원문 로직 유지) ──
   const Z7 = [['전남 해남군', ['46820']], ['충남 서산시', ['44210']], ['제주 (도 전역)', ['50110', '50130']],

@@ -55,9 +55,10 @@ g84 = gpd.GeoSeries(shapely.points(u['x'].to_numpy(float), u['y'].to_numpy(float
 # ── G1: 전선 항등식 재현 (질의 구현과 독립 코드로) ──
 for sgg, grp in bc.groupby('sgg'):
     grp = grp.reset_index(drop=True)
-    v = np.nan_to_num(np.array(grp[['area_m2', 'lo', 'dist_ind_km']].to_numpy(float),
-                               copy=True), nan=-np.inf)
-    v[:, 2] = -v[:, 2]
+    v = np.array(grp[['area_m2', 'lo', 'dist_ind_km']].to_numpy(float), copy=True)
+    # 결측은 축 방향별 최악: area·lo → -inf, dist → +inf 뒤 반전 (2026-09-11 정정 — query._frontier_mask·T19-⑦ 과 동일)
+    v[:, 0] = np.nan_to_num(v[:, 0], nan=-np.inf); v[:, 1] = np.nan_to_num(v[:, 1], nan=-np.inf)
+    v[:, 2] = -np.nan_to_num(v[:, 2], nan=np.inf)
     dom = np.array([bool((np.all(v >= v[i], axis=1) & np.any(v > v[i], axis=1)).any())
                     for i in range(len(v))])
     q_labs = set(rows[rows['sgg'] == sgg]['lab'])
@@ -65,7 +66,7 @@ for sgg, grp in bc.groupby('sgg'):
     assert q_labs == e_labs, f"[FAIL] G1 {sgg}: 질의 전선 ≠ 재현 전선"
 print("G1 통과 — 전선 항등식 209개 시군 재현 일치")
 
-# ── 판독기 사전계산 (전선 구획만 — 1,477개) ──
+# ── 판독기 사전계산 (전선 구획만 — 1,478개(2026-09-11 결측 거리 정정 후; 구 1,477)) ──
 dan = gpd.read_file(os.path.join(LR, 'sources', 'ind_complex', 'damdan.gpkg')) \
          .drop_duplicates('dan_id').to_crs(5186)
 w = dan['cat_nam'].map(SCORE).to_numpy(float)
