@@ -2,7 +2,8 @@
 """구획(등재 클러스터) 폴리곤 export — 지도 탭 데이터 (시나리오별·시군별).
 
 원천: 정본 scenario_runs/{cell}/members.parquet (pnu→성분 lab, 1판·ADR-0034 승인)
-      + engine_cache/nodes.parquet(장부면적) + Cadastre_All 지오메트리.
+      + engine_cache/nodes.parquet(장부면적) + Cadastre_All 지오메트리
+      + engine_cache/parcel_geom_pubcorp_recovery.parquet (ADR-0047 회수 필지 구 pnu→신 pnu 대응 — 지적도는 신 pnu 로 읽는다).
 산출: data_v4/clusters/{sgg}_{cell}.json — 등재 구획을 시군 구간별로 dissolve·간소화한
       GeoJSON(4326). 성분이 여러 시군에 걸치면 각 시군 파일에 그 구간이 들어가고
       속성 a(구획 전체 km²)는 동일, part=1 로 표시.
@@ -43,6 +44,15 @@ PROFILE = {
 prof = lambda cell: PROFILE['ctrl' if cell.endswith('@all') else 'main']
 GEN = datetime.datetime.now().strftime('%Y-%m-%d %H:%M')
 
+# ── 회수 필지 대응 (ADR-0047): 원장 키(구 pnu) → 지적도 키(신 pnu). 기하 캐시에 회수가 적용된 필지는 gpkg 에서 신 pnu 로 읽어야 한다.
+#    provenance 는 engine/geometry_recovery.py 가 manifest(sha1 고정) 로부터 쓴 parquet — 이 파일 밖의 대응은 만들지 않는다.
+_recp = os.path.join(LR, 'engine_cache', 'parcel_geom_pubcorp_recovery.parquet')
+REC_MAP = {}
+if os.path.exists(_recp):
+    _r = pd.read_parquet(_recp, columns=['old_pnu', 'new_pnu'])
+    REC_MAP = dict(zip(_r['old_pnu'], _r['new_pnu']))
+    print(f"회수 대응 {len(REC_MAP):,}필지 (ADR-0047 · {os.path.basename(_recp)})", flush=True)
+
 # ── 멤버·면적 적재 (한 번) ──
 nodes = pd.read_parquet(os.path.join(LR, 'engine_cache', 'nodes.parquet'),
                         columns=['pnu', 'area'])
@@ -77,7 +87,9 @@ for i, sgg in enumerate(sggs, 1):
         ms = mem[c][mem[c]['sgg'] == sgg]
         feats = []
         if len(ms):
-            sub = g.reindex(ms['pnu'].values)
+            # 구 pnu 가 회수 대응표에 있으면 신 pnu 로 지적도를 찾는다(식별자 조정 — 값·lab 은 그대로)
+            _keys = ms['pnu'].map(lambda _p: REC_MAP.get(_p, _p)).values if REC_MAP else ms['pnu'].values
+            sub = g.reindex(_keys)
             ok = sub.geometry.notna().values
             geoms = sub.geometry.values[ok]
             labs = ms['lab'].values[ok]
