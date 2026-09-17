@@ -73,6 +73,7 @@
     <div class="figbox" style="margin-top:16px">
       <div class="cand-ctl" id="minCtl"></div>
       <div class="cand-ctl" id="unitCtl" hidden></div>
+      <div class="cand-ctl" id="viewCtl" hidden></div>
       <div class="cand-hint" id="ccAvail" hidden></div>
     </div>
 
@@ -139,6 +140,7 @@
     `PLANiT Institute · 데이터 ${String(m.data_generation).replace(/정본 우주/g, '분석 기준 필지')} · 생성 ${m.generated}`;
   const REC = await Region.gz('data_v4/recommend_v4.json.gz');
   await Cand.rec();                                   // 후보 클러스터 층(V5.2) — 우리동네와 같은 파일
+  await Cand.emd();                                   // 읍면동 후보군(V5.4 · PR-0046) — 같은 후보를 읍면동 범위로 묶은 표기 파일
   const nameOf = c => Region.nameOf(c);
   const fmtA2 = a => a >= 1e6 ? (a / 1e6).toFixed(3) + ' km²' : V4.n(a) + ' ㎡';
 
@@ -148,10 +150,13 @@
   let cur = (q && have.has(q)) ? q : '44270';
   // ── 기본 후보 단위 = 후보 클러스터(ADR-0046). 구획 화면은 cc 층이 아직 없는 시군의 폴백(세부 분석)일 뿐이다. 상태값은 우리동네와 같은 의미 ──
   let unit = Cand.has(cur) ? 'cc' : 'comp', minM2 = Cand.DEFAULT_MIN;
+  let view = 'sgg', emdBnd = L.layerGroup();          // 보기 단위: 시군 전체(기본) | 읍면동별 — 값·판정 불변의 보기 조작
+  const viewCtl = Cand.viewControl(document.getElementById('viewCtl'), {value: view, onChange: v => { view = v; emdBnd.clearLayers(); if (unit === 'cc') renderCC(false); }});
   const minCtl = Cand.minSizeControl(document.getElementById('minCtl'), {value: minM2, onChange: v => { minM2 = v; if (unit === 'cc') render(); }});
   const availNote = () => { const el = document.getElementById('ccAvail'); el.hidden = Cand.has(cur);
     el.innerHTML = Cand.has(cur) ? '' : '이 시군·조건에는 후보 클러스터 산출이 없어 <b>연접 구획 기준(V5.1)</b>으로 보입니다.'; };
-  const render = () => { unit = Cand.has(cur) ? 'cc' : 'comp'; availNote(); document.getElementById('minCtl').hidden = unit !== 'cc'; unit === 'cc' ? renderCC() : recRender(); };
+  const render = () => { unit = Cand.has(cur) ? 'cc' : 'comp'; availNote(); document.getElementById('minCtl').hidden = unit !== 'cc';
+    const ea = unit === 'cc' && Cand.emdHas(cur); document.getElementById('viewCtl').hidden = !ea; viewCtl.setAvail(ea); view = viewCtl.value; emdBnd.clearLayers(); unit === 'cc' ? renderCC() : recRender(); };
   const picker = Region.picker(document.getElementById('rp-rec'), {value: cur, restrict: have,
     onChange: c => { cur = c; axis = ''; ccPick = null; syncAxisBtns(); render(); }});
 
@@ -231,8 +236,15 @@
     if (ccPick == null) document.getElementById('ccDetail').innerHTML = '<div class="cand-hint">표의 행이나 지도의 번호 원을 클릭하면 후보 상세와 「구성 구획 보기」가 열립니다.</div>';
     document.getElementById('recMapCap').textContent = CAP_CC;
     const lg = document.getElementById('ccLegend'); lg.hidden = false; lg.innerHTML = Cand.legendHTML();
-    Cand.table(document.getElementById('recTbl'), cur, minM2, {axis, pickId: ccPick, compFrontier: recCur.frontier, onPick: ccPickFn});
-    document.getElementById('axisNote').innerHTML = Cand.note(cur, minM2, axis);
+    if (view === 'emd' && Cand.emdHas(cur)) {          // 읍면동별 보기 — 같은 행을 읍면동으로 묶고 ◆ 읍면동 비지배를 ★ 와 함께 보임(PR-0046)
+      const G = Cand.emdTable(document.getElementById('recTbl'), cur, minM2, {pickId: ccPick, onPick: ccPickFn,
+        onGroup: async g => { emdBnd.clearLayers(); const b = await Cand.emdBoundary(g.bnd, {pane: 'recBlocks'}); if (b) { b.addTo(emdBnd); recGeo.fitBounds(b.getBounds(), {padding: [30, 30], maxZoom: 13}); } }});
+      document.getElementById('axisNote').innerHTML = Cand.emdNote(cur, minM2);
+      document.getElementById('tblTitle').textContent = `읍면동별 후보군 — 읍면동 ${G ? G.length : 0}곳 · 후보 ${F.n_pop}곳 (${Cand.MW_LBL[minM2]} 이상) · ★ 시군 공동 1등 ${F.frontier.length}곳 · ◆ 읍면동 안 비지배는 후보 수와 함께 표기`;
+    } else {
+      Cand.table(document.getElementById('recTbl'), cur, minM2, {axis, pickId: ccPick, compFrontier: recCur.frontier, onPick: ccPickFn});
+      document.getElementById('axisNote').innerHTML = Cand.note(cur, minM2, axis);
+    }
     document.getElementById('recCtl').innerHTML = `구획 단위(현행 정본) 공동 1등 ${recCur.frontier.length}곳 · 모집단 ${V4.n(recCur.n_block)}개(≥11,111㎡) —
       두 단위의 모집단 기준이 다르므로 각 표에 명시. 최소 표시 규모는 후보 클러스터 단위에만 적용.`;
     document.getElementById('recReader').innerHTML = '<b>반경 판독기</b> — 구획 단위 전용 자료(후보 클러스터 단위 미제공). 후보 단위를 「구획」으로 바꾸면 사용 가능.';
@@ -244,6 +256,7 @@
     recBlk.clearLayers();
     if (ccGeoCache[cur]) { recBlk.addLayer(Cand.layer(ccGeoCache[cur], {minM2, pane: 'recBlocks', frontierIds: F.frontier.map(f => f.id)})); recBlk.addLayer(Cand.hullLayer(ccGeoCache[cur], {minM2, pane: 'recBlocks'}));
       recBlk.addLayer(Cand.outline(ccGeoCache[cur], F.frontier.map(f => f.id), {pane: 'recBlocks', weight: 3})); }
+    if (!recBlk.hasLayer(emdBnd)) recBlk.addLayer(emdBnd);
     if (reload && coords.length) recGeo.fitBounds(coords, {padding: [30, 30], maxZoom: 12});
   }
 

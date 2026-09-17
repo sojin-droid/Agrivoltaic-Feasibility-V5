@@ -182,6 +182,88 @@ window.Cand = (() => {
       ${one ? '<b>이 규모에서는 후보 클러스터 한 곳이 세 축 모두 우위 — 내부 비교는 구획 단위로.</b>' : ''}
       정렬: <b>${axis ? AXN[axis] + ' 순 · ' + TOP + '위 이내 강조' : '면적순'}</b> — 정렬은 보기 조작이며 새 점수·가중치가 아님. 필터는 생성이 아니라 모집단에만 작용 — 필터마다 배지가 달라질 수 있음(정상). 이 시군의 수치는 <b>시군 관여 기준</b>(municipality-touch count) — 시군 경계에 걸친 후보 클러스터는 관련 시군마다 나타나므로 시군 값을 더하면 전국 고유 후보 수(unique CC count)보다 커진다. 조건 ${cell || DEFAULT_CELL} · 규칙 ${_rec.rule} · ${status()}${geomNote(S, false)}`;
   }
+
+  // ── V5.4 읍면동 후보군 (ADR-0048 · PR-0044 §15 · PR-0046) — data_v4/recommend_emd_v4.json.gz. 읍면동은 평가 단위이며 후보 클러스터를 자르지 않는다.
+  //    화면은 계산하지 않는다: 읍면동별 모집단(n_pop)·비지배(fe)·시군 비지배(fs)·비중(sh)·걸침(ne)은 export 값 그대로, 후보 속성은 recommend_cc_v4 의 같은 id 에서 조인한다.
+  //    읽기 원칙: frontier 수는 항상 n_pop 과 함께 · 후보 1개(single)는 정의상 비지배 → "단독" 표기, 배지 없음 · 읍면동별 수는 합산하지 않는다(걸침 후보는 여러 읍면동에 나타남).
+  let _emd = null;
+  async function emd() { if (!_emd) _emd = await Region.gz('data_v4/recommend_emd_v4.json.gz'); return _emd; }
+  const emdCell = c => (_emd && _emd.cells && _emd.cells[c || DEFAULT_CELL]) || null;
+  const emdHas = (sgg, cell) => { const C = emdCell(cell); return !!(C && C.sgg[sgg]); };
+  const emdInfo = (sgg, cell) => { const C = emdCell(cell); return C ? (C.sgg[sgg] || null) : null; };
+  const emdByBnd = (sgg, cell) => { const E = emdInfo(sgg, cell), m = {}; if (E) for (const [c, e] of Object.entries(E.emd)) if (e.bnd) m[e.bnd] = c; return m; };
+  function emdGroups(sgg, minM2, cell) {
+    const E = emdInfo(sgg, cell), F = frontier(sgg, minM2, cell); if (!E || !F) return [];
+    const byId = new Map(rowsOf(F).map((f, i) => [f.id, {...f, no: i + 1}]));
+    const out = [];
+    for (const [code, e] of Object.entries(E.emd)) { const bf = e.by_filter[String(minM2)]; if (!bf) continue;
+      const rows = bf.rows.map(r => { const f = byId.get(r.id); return f ? {...f, sh: r.sh, pr: r.pr, fe: r.fe, fs: r.fs, ne: r.ne} : null; }).filter(Boolean);
+      out.push({code, name: e.name, name_full: e.name_full, bnd: e.bnd, grid: e.grid, touch: e.touch, n_pop: bf.n_pop, n_front: bf.n_front, single: !!bf.single, nStar: rows.filter(r => r.fs).length, rows}); }
+    out.sort((a, b) => b.n_pop - a.n_pop || a.name.localeCompare(b.name, 'ko'));
+    return out;
+  }
+  const emdBadge = (r, single) => single
+    ? '<span class="badge-single" title="이 읍면동에는 후보가 하나뿐이라 비교 대상이 없습니다 — 정의상 비지배이며 우수성 표시가 아닙니다">단독</span>'
+    : (r.fe ? '<span class="badge-emd" title="이 읍면동 후보 사이에서 면적·계통 여유·산단 거리 모두 지지 않음(시군 공동 1등과 같은 함수, 모집단만 읍면동)">◆ 읍면동 비지배</span>'
+            : '<span class="badge-dom" title="같은 읍면동 안에 세 축 모두 같거나 나은 후보가 있음">—</span>');
+  const gridTxt = g => g ? `계통 여유 lo ${g.lo == null ? '—' : g.lo} / hi ${g.hi == null ? '—' : g.hi} MW${g.s && g.s !== 'ok' ? ' · 미상' : ''}` : '계통 자료 없음';
+  // ── 컨트롤: 보기 단위 — 시군 전체(현행 기본값) | 읍면동별. 값·판정을 바꾸지 않는 보기 조작 ──
+  function viewControl(el, {value = 'sgg', onChange, available = true} = {}) {
+    let v = available ? value : 'sgg';
+    const render = () => {
+      el.innerHTML = `<span class="q">보기</span>
+        <button type="button" data-v="sgg" class="${v === 'sgg' ? 'on' : ''}">시군 전체</button>
+        <button type="button" data-v="emd" class="${v === 'emd' ? 'on' : ''}" ${available ? '' : 'disabled title="이 시군·조건에는 읍면동 후보군 산출이 없음"'}>읍면동별</button>
+        <span class="cand-hint">${v === 'emd' ? '같은 후보를 읍면동 범위에서 다시 묶어 본 것 — 후보 정의·수치는 시군 전체 보기와 같음. 걸침 후보는 여러 읍면동에 나타나므로 읍면동별 수를 더하지 않음' : '읍면동별 보기는 같은 후보를 읍면동 단위로 묶어 그 안에서의 비지배(◆)를 함께 보임'}</span>`;
+      el.querySelectorAll('button:not([disabled])').forEach(b => b.onclick = () => { v = b.dataset.v; render(); onChange && onChange(v); });
+    };
+    render();
+    return {get value() { return v; }, set(x) { v = x; render(); }, setAvail(a) { available = a; if (!a) v = 'sgg'; render(); }};
+  }
+  // ── 표: 읍면동 그룹 — 머리 = 읍면동 · 후보 n_pop · ◆ n_front(단독) · ★ 시군 공동 1등 · 계통. 행 = 시군 표와 같은 열 + 배지 + 걸침 ──
+  function emdTable(el, sgg, minM2, {cell, pickId = null, onPick, onGroup, open = null} = {}) {
+    const G = emdGroups(sgg, minM2, cell); if (!G.length) { el.innerHTML = ''; return null; }
+    const F = frontier(sgg, minM2, cell), N = rowsOf(F).length;
+    const rk = (f, ax) => `<span class="chip-n">${f[ax] ?? '—'}</span>`;
+    let h = `<tr><th>후보</th><th>읍면동 안<br><small>비지배</small></th><th>시군<br><small>비지배</small></th><th>조건 충족<br><small>면적·거리·계통</small></th><th>면적</th><th>참고 MW</th><th>산단 거리 km</th><th>계통 여유 MW<br><small>(하한)</small></th>
+      <th>면적 순위</th><th>산단 순위</th><th>계통 순위</th><th>구성</th><th>읍면동 걸침</th></tr>`;
+    for (const g of G) {
+      const isOpen = open === null ? true : open === g.code;
+      h += `<tr class="emd-h" data-emd="${g.code}" style="cursor:pointer"><td colspan="13" class="l"><span class="emd-tg">${isOpen ? '▾' : '▸'}</span> <b>${g.name}</b>
+        <span class="emd-k">후보 <b>${g.n_pop}</b></span><span class="emd-k">${g.single ? '<span class="badge-single">단독 · 비교 대상 없음</span>' : `◆ 읍면동 비지배 <b>${g.n_front}</b>`}</span>
+        <span class="emd-k">★ 시군 공동 1등 <b>${g.nStar}</b></span><span class="emd-k">${gridTxt(g.grid)}</span>
+        ${g.bnd ? `<button type="button" class="cand-x emd-map" data-emd="${g.code}">지도에서 경계</button>` : '<span class="cand-hint">경계 자료 없음</span>'}</td></tr>`;
+      for (const f of g.rows) {
+        h += `<tr data-cc="${f.id}" data-grp="${g.code}" class="${f.id === pickId ? 'pick' : ''} ${f.fe && !g.single ? 'front' : ''}" style="cursor:pointer" ${isOpen ? '' : 'hidden'}>
+          <td class="l"><b>${f.no}</b><span style="color:var(--muted)">/${N}</span></td>
+          <td>${emdBadge(f, g.single)}</td>
+          <td>${f.fs ? '<span class="badge-front">공동 1등</span>' : '<span class="badge-dom" title="시군 전체에서는 세 축 모두 같거나 나은 후보가 있음">—</span>'}</td>
+          <td><span class="star">${stars(f)}</span></td>
+          <td>${fmtA(f.a)}</td><td>${f.mw}</td><td>${f.d == null ? '알 수 없음' : f.d.toFixed(1)}</td><td>${f.lo == null ? '알 수 없음' : f.lo}</td>
+          <td>${rk(f, 'ra')}</td><td>${rk(f, 'ri')}</td><td>${rk(f, 'rl')}</td>
+          <td>구획 ${f.nc} · 필지 ${f.n.toLocaleString('ko-KR')}${f.iso ? ' <span class="cand-iso">고립</span>' : ''}</td>
+          <td>${f.ne >= 2 ? `<span class="emd-span" title="이 후보는 읍면동 ${f.ne}곳에 걸쳐 있어 각 읍면동 표에 나타납니다 — 면적·MW 는 후보 전체 값이며 나누지 않습니다">${f.ne}곳 · 이 읍면동 ${Math.round(f.sh * 100)} %</span>` : '—'}</td></tr>`;
+      }
+    }
+    el.innerHTML = h;
+    el.querySelectorAll('tr.emd-h').forEach(tr => tr.onclick = e => { if (e.target.classList.contains('emd-map')) return;
+      const rows = el.querySelectorAll(`tr[data-grp="${tr.dataset.emd}"]`); if (!rows.length) return; const hide = !rows[0].hidden; rows.forEach(r => r.hidden = hide); tr.querySelector('.emd-tg').textContent = hide ? '▸' : '▾'; });
+    el.querySelectorAll('.emd-map').forEach(b => b.onclick = () => { const g = G.find(x => x.code === b.dataset.emd); onGroup && onGroup(g); });
+    el.querySelectorAll('tr[data-cc]').forEach(tr => tr.onclick = () => { const g = G.find(x => x.code === tr.dataset.grp); onPick && onPick(g.rows.find(f => f.id === +tr.dataset.cc)); });
+    return G;
+  }
+  function emdNote(sgg, minM2, cell) {
+    const E = emdInfo(sgg, cell), G = emdGroups(sgg, minM2, cell), F = frontier(sgg, minM2, cell); if (!E || !F) return '';
+    const single = G.filter(g => g.single).length, span = new Set(G.flatMap(g => g.rows.filter(r => r.ne >= 2).map(r => r.id))).size;
+    return `읍면동 <b>${G.length}</b>곳에 ${MW_LBL[minM2]} 이상 후보가 있음(시군 안 후보 보유 읍면동 ${E.n_emd}곳) · 후보가 하나뿐인 읍면동 <b>${single}</b>곳은 "단독"으로 표기(비교 대상이 없어 정의상 비지배) · 읍면동 두 곳 이상에 걸친 후보 <b>${span}</b>곳은 각 읍면동에 나타남.
+      <b>읍면동 안 비지배(◆)</b>는 시군 공동 1등(★)과 같은 3축·같은 함수이며 비교 모집단만 그 읍면동 후보로 좁힌 것 — 모집단이 작을수록 남는 비율이 커지므로 후보 수와 함께 읽음. 후보 정의(21m 연접)·면적·MW·계통·산단 거리는 시군 전체 보기와 같은 값. 읍면동별 후보 수·MW 는 합산하지 않음.`;
+  }
+  // ── 읍면동 경계 강조 (grid_emd 경계 = 표시용 · 코드 다리 bnd) ──
+  async function emdBoundary(bnd, {pane, color = '#B3261E'} = {}) {
+    const idx = await Region.emdIndex(); const e = idx.find(x => x.code === bnd); if (!e) return null;
+    return L.geoJSON(e.feat, {pane, interactive: false, style: {color, weight: 2.5, fill: false, dashArray: '6 4'}});
+  }
   return {rec, has, info, frontier, rowsOf, geo, status, geomNote, cellsFor, FILTERS, MW_LBL, DEFAULT_MIN, DEFAULT_CELL, TOP, AXC, AXN, BAND_FILL, BAND_LBL, bandOf, fmtA, isTop, stars, legendHTML,
-          minSizeControl, unitControl, layer, hullLayer, outline, markers, table, note, detail, components, memberLayer};
+          minSizeControl, unitControl, layer, hullLayer, outline, markers, table, note, detail, components, memberLayer,
+          emd, emdHas, emdInfo, emdGroups, emdByBnd, emdBadge, viewControl, emdTable, emdNote, emdBoundary};
 })();

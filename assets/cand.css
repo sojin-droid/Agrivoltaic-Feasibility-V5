@@ -34,3 +34,12 @@ tr.front td{font-weight:600}
 .cand-tabs button.on{background:#fff;font-weight:700;color:var(--navy)}
 @media print{.cand-ctl,.cand-tabs,.cand-x{display:none!important}.cand-sub{display:table-row!important}.cand-pane[hidden]{display:block!important}.cand-pane>h4{display:block!important}}
 .cand-pane>h4{display:none;font-size:14px;margin:10px 0 6px;color:var(--navy)}
+/* V5.4 읍면동 후보군 (PR-0046) — 배지 두 종류를 구분: ★ 시군 공동 1등(남색 채움) · ◆ 읍면동 비지배(남색 외곽선) · 단독(회색 — 비교 대상 없음) */
+.badge-emd{display:inline-block;font-size:11px;font-weight:700;padding:0 7px;border-radius:999px;border:1.5px solid #0C356A;color:#0C356A;background:#fff;white-space:nowrap}
+.badge-single{display:inline-block;font-size:11px;font-weight:600;padding:0 7px;border-radius:999px;border:1px solid #9AA5B1;color:#5A6B7C;background:#F6F8FB;white-space:nowrap}
+tr.emd-h td{background:var(--surface-control,#F2F6FB);font-size:12.5px;border-top:2px solid var(--line)}
+tr.emd-h .emd-tg{display:inline-block;width:14px;color:var(--muted)}
+tr.emd-h .emd-k{margin-left:12px;color:var(--muted)} tr.emd-h .emd-k b{color:var(--ink,#1B1B1B)}
+tr.emd-h .emd-map{margin-left:12px}
+.emd-span{font-size:11.5px;color:#5A6B7C;white-space:nowrap}
+
