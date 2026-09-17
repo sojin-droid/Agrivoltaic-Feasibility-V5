@@ -1,5 +1,5 @@
 {
- "generated": "2026-09-17 17:19",
+ "generated": "2026-09-17 21:07",
  "cells": {
   "R0_current": {
    "n_sgg": 154,
@@ -382,6 +382,8 @@
   "n_old": 3886,
   "n_same_code": 3312,
   "n_alias": 572,
-  "n_unmapped": 2
+  "n_stem_name": 2,
+  "n_unmapped": 0,
+  "unmapped": []
  }
 }
