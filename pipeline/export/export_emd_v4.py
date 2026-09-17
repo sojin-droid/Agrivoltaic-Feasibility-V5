@@ -22,7 +22,12 @@ FILTERS = [66667, 222222, 444444, 1111111]
 nz = lambda v, f=lambda x: x: None if v is None or (isinstance(v, float) and np.isnan(v)) else f(v)
 
 
-def code_bridge(old_codes):
+def _stem(nm):
+    nm = (nm or '').split()[-1]
+    return nm[:-1] if nm and nm[-1] in '읍면동가' else nm
+
+
+def code_bridge(old_codes, names=None):
     """정본 emd8(구 코드) → grid_emd.json 경계 코드(신 코드). 경계에 같은 코드가 있으면 그대로, 없으면 emd_alias(이름 대조 + 공간 매칭)의 역방향."""
     import duckdb, geopandas as gpd
     from emd_alias import build_alias
@@ -34,14 +39,28 @@ def code_bridge(old_codes):
     rev = {}
     for new, old in alias.items(): rev.setdefault(old, new)
     bridge = {o: (o if o in bnd_codes else rev.get(o)) for o in old_codes}
-    return bridge, {'n_old': len(old_codes), 'n_same_code': sum(1 for o in old_codes if o in bnd_codes), 'n_alias': sum(1 for o in old_codes if o not in bnd_codes and bridge[o]), 'n_unmapped': sum(1 for o in old_codes if bridge[o] is None)}
+    n_alias = sum(1 for o in old_codes if o not in bnd_codes and bridge[o])
+    # 3차: 같은 시군 코드 접두(5자리) 안에서 이름 어간이 유일하게 일치하는 경계 (읍 승격 등 명칭 변경 동반 개편) — 표시 전용 다리이며 정본 키는 그대로 구 코드
+    n_stem = 0
+    if names:
+        by_sgg = {}
+        for cd, nm in zip(bnd['emd_cd'].astype(str).str[:8], bnd['emd_nm'].astype(str)): by_sgg.setdefault(cd[:5], []).append((cd, _stem(nm)))
+        for o in old_codes:
+            if bridge[o] is None and names.get(o):
+                st = _stem(names[o]); cand = [cd for cd, s2 in by_sgg.get(o[:5], []) if s2 == st and cd not in set(bridge.values())]
+                if len(cand) == 1: bridge[o] = cand[0]; n_stem += 1
+    return bridge, {'n_old': len(old_codes), 'n_same_code': sum(1 for o in old_codes if o in bnd_codes), 'n_alias': n_alias, 'n_stem_name': n_stem, 'n_unmapped': sum(1 for o in old_codes if bridge[o] is None), 'unmapped': [o for o in old_codes if bridge[o] is None]}
 
 
 def main():
     ap = argparse.ArgumentParser(); ap.add_argument('--cells', nargs='+', default=CELLS); ap.add_argument('--site', default=SITE); a = ap.parse_args()
     out_p = os.path.join(a.site, 'data_v4', 'recommend_emd_v4.json.gz')
     rcc = json.load(gzip.open(os.path.join(a.site, 'data_v4', 'recommend_cc_v4.json.gz'), 'rt', encoding='utf-8'))
-    grid = {f['properties']['c']: f['properties'] for f in json.load(gzip.open(os.path.join(a.site, 'data_v4', 'grid_emd.json.gz'), 'rt', encoding='utf-8'))['features']}
+    # 계통 컨텍스트는 정본 grid_emd_v3(구 코드 emd8 키 — 정본 키와 동일)에서 읽는다. 사이트 grid_emd.json 은 신 코드 키라 코드 개편 읍면동(대소면 등)에서 값이 비어 있을 수 있다.
+    import duckdb
+    _con = duckdb.connect(DB, read_only=True)
+    grid = {r[0]: {'s': r[1], 'lo': (None if r[2] is None else round(float(r[2]), 1)), 'hi': (None if r[3] is None else round(float(r[3]), 1))} for r in _con.execute('SELECT emd8, status, vol3_equal_mw, vol3_shared_mw FROM grid_emd_v3').fetchall()}
+    _con.close()
     rec = {'rule': 'ADR-0048 · PR-0046', 'built': datetime.datetime.now().strftime('%Y-%m-%d %H:%M'), 'filters_m2': FILTERS, 'cells': {},
            'note': '읍면동 후보군 = 그 읍면동에 필지를 가진 후보 클러스터(touch) 전량. 클러스터는 21m 연접 정의(ADR-0049) 그대로이며 읍면동으로 자르지 않는다. 읍면동 비지배(fe)는 그 읍면동 후보 사이에서 면적·계통 여유·산단 거리 3축에 지지 않는 후보(시군 비지배 fs 와 같은 함수). '
                    'frontier 수는 항상 후보 수(n_pop)와 함께 읽고, 후보가 1개인 읍면동(single)은 정의상 frontier 이므로 우수성으로 읽지 않는다. 걸침 클러스터(ne≥2)는 여러 읍면동에 나타나므로 읍면동별 수를 합산하지 않는다. 행의 속성은 recommend_cc_v4 의 같은 id 에서 읽는다.'}
@@ -56,13 +75,14 @@ def main():
         st = json.load(open(os.path.join(d, 'emd_frontier.json'), encoding='utf-8'))
         if not st.get('self_check_sgg_as_one_emd', {}).get('PASS'): raise SystemExit(f'거부: {cell} emd_frontier 자기 대조 미통과')
         mem = pd.read_parquet(os.path.join(d, 'emd_membership.parquet')); ef = pd.read_parquet(os.path.join(d, 'emd_frontier.parquet'))
+        names_all = dict(zip(mem['emd8'], mem['emd_name'].astype(str)))
         if bridge is None:
-            bridge, stats = code_bridge(sorted(set(mem['emd8'])))
-            print(f"코드 다리: 읍면동 {stats['n_old']:,} · 동일 코드 {stats['n_same_code']:,} · alias {stats['n_alias']:,} · 미매핑 {stats['n_unmapped']:,}")
+            bridge, stats = code_bridge(sorted(set(mem['emd8'])), names_all)
+            print(f"코드 다리: 읍면동 {stats['n_old']:,} · 동일 코드 {stats['n_same_code']:,} · alias {stats['n_alias']:,} · 이름 어간 {stats['n_stem_name']:,} · 미매핑 {stats['n_unmapped']:,} {stats['unmapped']}")
         else:
             extra = sorted(set(mem['emd8']) - set(bridge));
             if extra:
-                b2, _ = code_bridge(extra); bridge.update(b2)
+                b2, _ = code_bridge(extra, names_all); bridge.update(b2)
         # cc id 가 recommend_cc_v4 의 pop 에 실재하는지(속성 조인 가능) — 필터별 pop 은 그 필터 이상 cc 전량이므로 3MW 필터 pop 으로 검사
         pop_ids = {s: {int(p['id']) for p in v['by_filter'].get('66667', {}).get('pop', [])} for s, v in rcc['cells'][cell]['sgg'].items()}
         cell_out = {'sgg': {}}; n_missing_id = 0
@@ -78,7 +98,7 @@ def main():
                         if int(r.cc_id) not in pop_ids.get(s, set()): n_missing_id += 1
                         rows.append({'id': int(r.cc_id), 'sh': round(float(r.emd_share), 3), 'pr': bool(r.is_primary_emd), 'fe': bool(r.in_emd_frontier), 'fs': bool(r.in_sgg_frontier), 'ne': int(r.n_emd_of_cluster)})
                     by_f[str(fm)] = {'n_pop': int(gf['n_pop'].iloc[0]), 'n_front': int(gf['n_front'].iloc[0]), 'single': bool(gf['n_pop'].iloc[0] == 1), 'rows': rows}
-                b = bridge.get(e); gp = grid.get(b) if b else None
+                b = bridge.get(e); gp = grid.get(e)          # 계통은 정본 키(구 코드)로 직접 조인 · b 는 경계 표시용
                 nm = str(ge['emd_name'].iloc[0]) if ge['emd_name'].notna().any() else e
                 emd_out[e] = {'name': nm.split()[-1] if ' ' in nm else nm, 'name_full': nm, 'bnd': b, 'touch': int(mem[(mem['emd8'] == e)].shape[0]),
                               'grid': ({'s': gp.get('s'), 'lo': gp.get('lo'), 'hi': gp.get('hi')} if gp else None), 'by_filter': by_f}

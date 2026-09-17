@@ -237,9 +237,9 @@
     document.getElementById('recMapCap').textContent = CAP_CC;
     const lg = document.getElementById('ccLegend'); lg.hidden = false; lg.innerHTML = Cand.legendHTML();
     if (view === 'emd' && Cand.emdHas(cur)) {          // 읍면동별 보기 — 같은 행을 읍면동으로 묶고 ◆ 읍면동 비지배를 ★ 와 함께 보임(PR-0046)
-      const G = Cand.emdTable(document.getElementById('recTbl'), cur, minM2, {pickId: ccPick, onPick: ccPickFn,
+      const G = Cand.emdTable(document.getElementById('recTbl'), cur, minM2, {axis, pickId: ccPick, onPick: ccPickFn,
         onGroup: async g => { emdBnd.clearLayers(); const b = await Cand.emdBoundary(g.bnd, {pane: 'recBlocks'}); if (b) { b.addTo(emdBnd); recGeo.fitBounds(b.getBounds(), {padding: [30, 30], maxZoom: 13}); } }});
-      document.getElementById('axisNote').innerHTML = Cand.emdNote(cur, minM2);
+      document.getElementById('axisNote').innerHTML = Cand.emdNote(cur, minM2, undefined, axis);
       document.getElementById('tblTitle').textContent = `읍면동별 후보군 — 읍면동 ${G ? G.length : 0}곳 · 후보 ${F.n_pop}곳 (${Cand.MW_LBL[minM2]} 이상) · ★ 시군 공동 1등 ${F.frontier.length}곳 · ◆ 읍면동 안 비지배는 후보 수와 함께 표기`;
     } else {
       Cand.table(document.getElementById('recTbl'), cur, minM2, {axis, pickId: ccPick, compFrontier: recCur.frontier, onPick: ccPickFn});
