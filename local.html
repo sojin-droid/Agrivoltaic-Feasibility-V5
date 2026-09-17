@@ -103,6 +103,7 @@
       <div class="fn" id="rMapCap" style="margin-top:6px">—</div>
       <div id="ccDetailL" style="margin-top:10px"></div>
 
+      <div id="rEmd"></div>
       <h3 class="rpt-h" id="rTblH">5. 후보 클러스터 전체 비교</h3>
       <div class="cand-ctl no-print" id="minCtlL"></div>
       <div class="cand-tabs" id="ccTabs" hidden>
@@ -148,6 +149,7 @@
   const st = {sgg: null, emd: null, promo: false, prot: false, sb: true, prio: 'scale', step: 1, axis: '',
               minM2: Cand.DEFAULT_MIN, tab: 'cc', mapMode: 'cc'};   // V5.2: 최소 표시 규모(모집단 필터)·표 단위·지도 레이어
   await Cand.rec();
+  await Cand.emd();                                   // 읍면동 후보군(V5.4 · PR-0046)
 
   // ── 검색 ──
   const addr = $('addr'), sres = $('sres');
@@ -302,6 +304,23 @@
     if (st.emd) {
       const e = L.geoJSON(st.emd.feat, {style: {color: '#B3261E', weight: 2.5, fill: false, dashArray: '6 4'}}).addTo(lyrEmd);
       bounds = e.getBounds();
+    }
+    // V5.4 이 읍면동의 후보군 (PR-0046): 시군 후보를 읍면동 범위에서 다시 본 것 — 후보 정의·수치 불변. 후보 1개면 "단독", 걸침 후보는 여러 읍면동에 나타남(합산 금지)
+    const emdBox = $('rEmd');
+    if (emdBox) {
+      const code = st.emd && CC && Cand.emdHas(st.sgg, rn) ? (Cand.emdByBnd(st.sgg, rn)[st.emd.code] || null) : null;
+      const G = code ? Cand.emdGroups(st.sgg, st.minM2, rn).find(g => g.code === code) : null;
+      if (!st.emd) emdBox.innerHTML = '';
+      else if (!G) emdBox.innerHTML = `<div class="cand-hint">${st.emd.name}: ${Cand.MW_LBL[st.minM2]} 이상 후보 클러스터가 없거나 읍면동 후보군 자료가 없습니다(시군 표는 아래).</div>`;
+      else {
+        emdBox.innerHTML = `<h3 style="margin:14px 0 6px">이 읍면동의 후보군 — ${G.name}</h3>
+          <div class="summary-box">후보 <b>${G.n_pop}</b>곳(${Cand.MW_LBL[st.minM2]} 이상) · ${G.single ? '<span class="badge-single">단독 · 비교 대상 없음</span>' : `◆ 읍면동 안 비지배 <b>${G.n_front}</b>곳`} · ★ 시군 공동 1등 <b>${G.nStar}</b>곳 · ${G.grid ? `계통 여유 lo ${G.grid.lo ?? '—'} / hi ${G.grid.hi ?? '—'} MW` : '계통 자료 없음'}</div>
+          <div class="tbl-wrap"><table class="rec-tbl" id="rEmdTbl"></table></div>
+          <p class="cand-hint">분석 단위는 시군이며 이 표는 같은 후보를 읍면동 범위에서 다시 본 것입니다. ◆ 는 이 읍면동 후보 사이의 비지배(시군 ★ 와 같은 3축·같은 함수), 후보가 하나면 비교 대상이 없어 "단독"으로 적습니다. 읍면동 두 곳 이상에 걸친 후보는 각 읍면동에 나타나며 면적·MW 를 나누지 않습니다.</p>`;
+        Cand.emdTable($('rEmdTbl'), st.sgg, st.minM2, {cell: rn, open: G.code, onPick: f => window.__pickL && window.__pickL(f)});
+        $('rEmdTbl').querySelectorAll('tr.emd-h').forEach(tr => { if (tr.dataset.emd !== G.code) tr.hidden = true; });
+        $('rEmdTbl').querySelectorAll('tr[data-grp]').forEach(tr => { if (tr.dataset.grp !== G.code) tr.hidden = true; });
+      }
     }
     const lg = $('ccLegendL');
     lg.innerHTML = Cand.legendHTML();

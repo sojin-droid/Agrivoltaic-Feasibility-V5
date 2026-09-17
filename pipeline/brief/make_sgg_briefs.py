@@ -31,6 +31,43 @@ for b in N['cp_big']:
     CP.setdefault(b['sgg'], []).append(b)
 
 nm = lambda s: NAMES.get(s, {}).get('name', s)
+# V5.4 읍면동 후보군 표 (PR-0046 §5.4) — recommend_cc_v4(후보 속성) + recommend_emd_v4(읍면동별 모집단·비지배). 없으면 표를 생략한다. 화면과 같은 규약: frontier 는 n_pop 과 함께 · 단독 · 합산 금지.
+try:
+    RCC = load('recommend_cc_v4.json.gz')['cells']['R2_promo']['sgg']
+    REMD = load('recommend_emd_v4.json.gz')['cells']['R2_promo']['sgg']
+except Exception:
+    RCC, REMD = {}, {}
+EMD_F = '66667'
+
+def emd_table(sgg):
+    E = REMD.get(sgg); C = RCC.get(sgg)
+    if not E or not C:
+        return ''
+    pop = {p['id']: p for p in C['by_filter'].get(EMD_F, {}).get('pop', [])}
+    groups = []
+    for code, e in E['emd'].items():
+        bf = e['by_filter'].get(EMD_F)
+        if not bf:
+            continue
+        rows = [dict(pop[r['id']], **r) for r in bf['rows'] if r['id'] in pop]
+        groups.append(dict(name=e['name'], n_pop=bf['n_pop'], n_front=bf['n_front'], single=bf['single'], n_star=sum(1 for r in rows if r['fs']),
+                           max_mw=max((r['mw'] for r in rows), default=None), span=sum(1 for r in rows if r['ne'] >= 2), grid=e.get('grid')))
+    if not groups:
+        return ''
+    groups.sort(key=lambda g: (-g['n_pop'], g['name']))
+    single = sum(1 for g in groups if g['single'])
+    trs = ''.join(
+        f"<tr><td class='l'>{html.escape(g['name'])}</td><td>{g['n_pop']}</td>"
+        f"<td>{'단독 (비교 대상 없음)' if g['single'] else g['n_front']}</td><td>{g['n_star']}</td>"
+        f"<td>{'—' if g['max_mw'] is None else g['max_mw']}</td>"
+        f"<td>{'—' if not g['grid'] else str(g['grid'].get('lo', '—')) + ' / ' + str(g['grid'].get('hi', '—'))}</td>"
+        f"<td>{g['span'] or '—'}</td></tr>" for g in groups)
+    return f"""<h2>읍면동별 후보군 (후보 클러스터 3MW 이상 · 읍면동은 평가 단위, 후보를 자르지 않음)</h2>
+<table><tr><th class='l'>읍면동</th><th>후보 수</th><th>읍면동 안 비지배</th><th>시군 공동 1등</th><th>최대 참고 MW</th><th>계통 여유 lo / hi MW</th><th>걸침 후보</th></tr>{trs}</table>
+<div style="font-size:11.5px;color:#6C757D;margin-top:2px">읍면동 안 비지배 = 그 읍면동 후보 사이에서 면적·계통 여유·산단 거리 세 축 모두 지지 않는 후보(시군 공동 1등과 같은 함수, 비교 모집단만 읍면동). 비지배 수는 후보 수와 함께 읽는다 —
+후보가 하나뿐인 읍면동 {single}곳은 비교 대상이 없어 정의상 비지배이므로 "단독"으로 적고 우수성으로 읽지 않는다. 걸침 후보(읍면동 두 곳 이상에 걸친 후보 클러스터)는 각 읍면동 행에 나타나므로 읍면동별 후보 수·MW 를 더하지 않는다.
+후보 클러스터 정의(21m 연접)·면적·MW·계통·산단 거리는 사이트 지역별 우선 후보 표와 같은 값(ADR-0048 · ADR-0049 · PR-0046).</div>
+"""
 fmt = lambda v, d=1: ('—' if v is None else f'{v:,.{d}f}')
 
 CSS = """
@@ -96,7 +133,7 @@ def brief(sgg, S):
 축 1위들뿐 아니라, 어느 축도 1위가 아니지만 아무에게도 전패하지 않는 <b>타협형</b>이 포함되는 것이 이 방식의 본질 — "강한 축"은 그 구획이 가장 잘하는 축의 순위 표기이지 1위 표기가 아님.
 가중 순위(WPM·entropy) = 가중곱(Bridgman 1922) × 시군별 엔트로피 가중(Shannon 1948{ew_txt})의 구획 전량 중 순위 — <b>변별력 가중(데이터 분포가 정함)이며 중요도 가중이 아님</b>(PR-0038). 병기 관점(ADR-0045)이며 어느 쪽도 단독 판정이 아님.</div>
 <div style="font-size:12px;color:#6C757D">{cpline}</div>
-<div class="fn">참고 환산 = 0.045 kW/㎡ · 발전량 = MW×1,314h(이용률 15% 가정) — 표기 전용, 판정·선별 불사용 ·
+{emd_table(sgg)}<div class="fn">참고 환산 = 0.045 kW/㎡ · 발전량 = MW×1,314h(이용률 15% 가정) — 표기 전용, 판정·선별 불사용 ·
 계통 여유 = 읍면동 균등배분 하한–상한(2026-07 스냅숏, 참고 표기) · 거리 = 측지 직선 ·
 정본 출처·방법·한계: 사이트(입지 추천·방법·자료 탭) · 이 문서는 자동 생성본입니다.</div>
 </body></html>"""
