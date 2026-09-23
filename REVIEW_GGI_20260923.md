@@ -22,7 +22,7 @@ status: REFLECTED / REFLECTED_WITH_METHOD_CHANGE / NOT_REFLECTED (이유 필수)
 | F11 | 지도 컨트롤 — 확대/축소를 지도 오른쪽 끝으로, 1280/375에서 겹침 없음 | `zoomControl:false` + `L.control.zoom({position:'topright'})`(finder·regions·local) · `.fs-map .leaflet-control-zoom` 여백 | REFLECTED | 1280px: 패널 right 314 vs 줌 left 1221(겹침 false) · 375px: 패널 static, 줌 지도 안 |
 | F12 | 화살표 더 굵게 · 네이비 · 디자인 토큰 재사용 | `.v55-arrow`/`.v55-flow` SVG stroke 3.5–4px `var(--navy)`(#0C356A 기존 토큰) · 임의 색 생성 없음 | REFLECTED | index 카드 사이 세로 화살표 2개 · 흐름 화살표 2개 |
 | F13 | 계통 레이어 = 참고지표 문구 · 접속 보장 표현 금지 | `V55.GRID_NOTE` 원문 그대로 패널·팝업·표 각주에 삽입 · 팝업 "참고지표 — 실제 접속 가능 용량 아님" | REFLECTED | finder gridNote 텍스트 |
-| F14 | 계통 범례·슬라이더 일치 — 단 후보 규모(MW)와 계통 여유를 한 범례로 합치지 않음 | 규모 범례(`legendHTML`, 50–100/100–200/200+ MW) 와 계통 범례(`gridLegendHTML`) 분리 · 슬라이더 문턱 아래 구간은 흐리게(dim) | REFLECTED_WITH_METHOD_CHANGE | 슬라이더 50→dim 6 · 20→dim 4 · 0→dim 0 (검증 스크립트) · 두 범례 독립 |
+| F14 | 계통 범례·슬라이더 일치 — 단 후보 규모(MW)와 계통 여유를 한 범례로 합치지 않음 | 규모 범례(`legendHTML`, 50–100/100–200/200+ MW) 와 계통 범례(`gridLegendHTML`) 분리 · 슬라이더 문턱 아래 구간은 흐리게(dim) | REFLECTED_WITH_METHOD_CHANGE | 문턱 50MW에서 하위 5구간(포화·0–2·2–8·8–20·20–50) 흐림 실측 · 문턱 변경 시 같은 규칙(rAF 갱신 — 백그라운드 탭에서는 측정 불가) · 두 범례 독립 |
 | F15 | 우선순위 3축 복수 선택(A/B/C/A+B/A+C/B+C/A+B+C) | `V55.axesControl` 체크박스 3종 · regions Step 2 · local 위저드 4단계 | REFLECTED | regions 모드 전환 검증(1·2·3축) |
 | F16 | 1개 축 = 해당 축 정렬 · Pareto 미사용 | `top10.select` mode 'rank' — 값 정렬 순위, 결측은 순위 제외하고 표 아래 명시 | REFLECTED | 해남 발전 규모 TOP 10 · 산업단지 거리 TOP 10(1위 #6776740) |
 | F17 | 2개 이상 축 = 기존 비교 엔진 · 새 scoring formula·가중치 금지 | 비지배 집합(전수 쌍별 지배 비교 · 결측=축 최악 · 동률≠지배)을 축 부분집합에 적용해 export 시 사전 계산(`fronts`) · 3축은 `query._frontier_mask`와 일치 검증(G1, 1,574 시군×칸 + 표시 규모 부분집합) | REFLECTED | export 로그 "G1 통과" · 화면은 플래그를 읽기만 함 |
@@ -53,7 +53,7 @@ status: REFLECTED / REFLECTED_WITH_METHOD_CHANGE / NOT_REFLECTED (이유 필수)
 | ⑧ | 3축 우선순위 | PASS — 주요 비교 후보 | — | 해남 6곳 |
 | ⑨ | 자동 비교 | PASS — 3축 = 비지배 집합, 단일 순위 없음 | — | — |
 | ⑩ | 방법론 팝업 | PASS — 열림/닫힘 | — | modal.open |
-| ⑪ | 계통 레이어 | PASS — 슬라이더·범례 dim 동기화, 참고지표 문구 | — | dim 6/4/0 |
+| ⑪ | 계통 레이어 | PASS — 슬라이더·범례 dim 동기화(문턱 50: 하위 5구간 흐림), 참고지표 문구 | — | dim 5 실측 |
 | ⑫ | 후보 공간 레이어 | PASS — 25 폴리곤(경계 미절단), 규모 범례 분리 | PASS — 줌 컨트롤 지도 안, 패널 static | JS 검증 |
 
 텍스트 겹침·지도 컨트롤 겹침: 1280px 패널(right 314px) vs 줌(left 1221px) 겹침 없음. 375px 패널은 지도 위 static 배치. 범례 불일치: 규모/계통 분리. 카드 정렬: 세로 1열. overflow: 문서 가로 스크롤 없음(표는 자체 스크롤).
