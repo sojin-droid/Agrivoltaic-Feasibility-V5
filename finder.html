@@ -93,8 +93,8 @@ input[type=range]{accent-color:var(--navy)}
   <div id="proxmap"></div>
 
   <aside class="fs-panel">
-    <h3>대규모 영농형 태양광 후보 공간</h3>
-    <p class="lede-s"><b>약 50MW 이상 규모의 후보 공간 <span id="p-n">—</span>곳</b><br>
+    <h3>대규모 영농형 태양광 후보 공간 (50MW 이상)</h3>
+    <p class="lede-s"><b>약 50MW 이상의 영농형 태양광을 설치할 수 있는 대규모 후보 공간 <span id="p-n">—</span>곳의 위치</b><br>
       법인·국공유 소유 농지 기준 · 농업진흥지역 개방 시나리오 기준(특별법 시행 후 재생에너지지구로 농업진흥구역이 열리는 경우를 가정).<br>
       <span style="color:var(--muted)">후보 공간 = 21m 이내로 이어진 필지를 하나로 묶은 공간 분석 단위. 계통 여유·산업단지는 비교용 배경 레이어이며 이 <span id="p-n2">—</span>곳의 선별에는 쓰지 않음.</span></p>
     <div id="p-method"></div>
@@ -111,9 +111,9 @@ input[type=range]{accent-color:var(--navy)}
       <div id="indTypes"></div></div>
 
     <div class="grp"><div class="gt">계통 여유 참고지표 — 표시 문턱</div>
-      <input type="range" id="gridSlider" min="0" max="50" step="1" value="0" style="width:100%" aria-label="계통 여유 표시 문턱">
+      <input type="range" id="gridSlider" min="0" max="50" step="1" value="50" style="width:100%" aria-label="계통 여유 표시 문턱">
       <div style="display:flex;justify-content:space-between;font-size:10.5px;color:var(--muted);margin-top:-2px">
-        <span>◀ 여유 ≥ 50MW만</span><span>전체 ▶</span></div>
+        <span>◀ 전체(포화 포함)</span><span>여유 ≥ 50MW만 ▶</span></div>
       <div class="glbl" id="gridLbl">—</div>
       <div id="gridLegend"></div>
       <div class="v55-hint" id="gridNote"></div></div>
@@ -220,7 +220,7 @@ input[type=range]{accent-color:var(--navy)}
     gridLayer.setStyle(f => gstyle(f.properties));
   }
   let rafId = null;
-  document.getElementById('gridSlider').addEventListener('input', e => { gridT = 50 - (+e.target.value); if (rafId) cancelAnimationFrame(rafId); rafId = requestAnimationFrame(gridRefresh); });
+  document.getElementById('gridSlider').addEventListener('input', e => { gridT = +e.target.value; if (rafId) cancelAnimationFrame(rafId); rafId = requestAnimationFrame(gridRefresh); });
   const pip = (pt, rings) => { let inside = false; rings.forEach(ring => { for (let i = 0, j = ring.length - 1; i < ring.length; j = i++) { const [xi, yi] = ring[i], [xj, yj] = ring[j];
     if ((yi > pt.lat) !== (yj > pt.lat) && pt.lng < (xj - xi) * (pt.lat - yi) / (yj - yi) + xi) inside = !inside; } }); return inside; };
   const gridAt = pt => { for (const f of grid.features) { const g = f.geometry; const polys = g.type === 'Polygon' ? [g.coordinates] : g.coordinates; for (const p of polys) if (pip(pt, p)) return f.properties; } return null; };

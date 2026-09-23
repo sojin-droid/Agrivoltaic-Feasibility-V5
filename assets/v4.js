@@ -112,7 +112,7 @@ const V4 = {
     const el = document.querySelector('footer.v4 .wrap');
     const full = document.body.dataset.sources === 'full';
     if (el) el.innerHTML = full
-      ? `<div>PLANiT Institute · 영농형 태양광 — 전국 설치 가능 농지 분석</div>` +
+      ? `<div>PLANiT Institute · 영농형 태양광 — 전국 영농형 태양광 모아보기</div>` +
         `<div>데이터 세대 ${String(m.data_generation).replace(/정본 우주/g, '분석 기준 필지')} · ` +
         `생성 ${m.generated} · ${m.verification} · ` +
         `소유 구분은 지적 원장의 유형 구분(개인 식별 아님) · ` +

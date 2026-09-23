@@ -68,9 +68,24 @@ status: REFLECTED / REFLECTED_WITH_METHOD_CHANGE / NOT_REFLECTED (이유 필수)
 | data_v4/pnu/{sgg}.json.gz · pnu_index.json · bjd_v4.json.gz | members·clusters(R0/R2/R3) · ledger.region × bjd_code | 필지 수 = members 행 · 단위 면적 합 = clusters 합 |
 | data_v4/existing_pv_v4.json.gz · provenance_v4.json | existing_pv_v1 × spatial_attribution_v1(VALID 9,379) · provenance_v1 | ADR-0053 규칙 |
 
+## 3-1. 원문 재대조 (2026-09-23 · 검토자 JH 원문 `GGI 내부 검토내용_JH.md` 30행 대조 · push 후)
+
+원문 Before/After 표를 화면과 다시 대조한 결과, 반영 지침에는 없었으나 원문에 있는 6건을 추가 반영했다(같은 브랜치 후속 커밋).
+
+| feedback_id | 원문 요청 | 종전 상태 | 추가 반영 | evidence |
+|---|---|---|---|---|
+| F06-b | "현행 대비 설치 가능 면적 119.8% 증가" | 미표시 | 카드 ①에 증가율 렌더(`c1p` = (R3−R0)/R0, summary_v4 ㎡ 원값) | 브라우저 텍스트 119.8 |
+| F06-c | 50MW 카드에 "(면적) km², 25곳 (증가치 추가)" | 곳 수·MW만 표시 | 카드 ③에 면적·증분 렌더(`c3k`·`c3kd` = results_v4 size_bands 111.1111ha area_km2) | 54.5 km² (+52.1 km²) |
+| F03-b | "기준 - 농업진흥지역 밖의 농지만" → "농업진흥지역이 아닌 농지" | "농업진흥지역 밖의 농지만" | index 리드 · v55 SCN long · scenarios SCNL/CELL_LABEL · local 선택지·근거 문구 교체(설명문 속 문장은 유지) | grep: 라벨 0건 잔존 |
+| F14-b | 계통 슬라이더 "제일 왼쪽 포화 → 제일 오른쪽 50MW 이상", 범례와 일치 | 반대 방향(왼쪽 = ≥50MW만 · 오른콽 = 전체) — 범례 좌→우(포화→50+)와 불일치 | 슬라이더 값 = 문턱으로 직결(`gridT = value`), 초기값 50(오른쪽 끝), 양끝 라벨 "◀ 전체(포화 포함) / 여유 ≥ 50MW만 ▶" | 초기 val=50 · 라벨 "잔여 ≥ 50 MW 읍면동만 채색 — 245곳" · dim 5구간 |
+| F09-b | 제목 "대규모 영농형 태양광 후보지 (50 MW 이상)" · "…설치할 수 있는 대규모 특구 후보지 25곳의 위치" | 제목에 (50MW 이상) 없음 | h3 "대규모 영농형 태양광 후보 공간 (50MW 이상)" · 리드 "약 50MW 이상의 영농형 태양광을 설치할 수 있는 대규모 후보 공간 25곳의 위치"(특구 → 후보 공간, F07 방침 동일) | finder 패널 텍스트 |
+| F02-b | 사이트명 "전국 영농형 태양광 모아보기" | 푸터 브랜드 줄 "전국 설치 가능 농지 분석" 잔존 | `assets/v4.js` 푸터 문구 교체 | 푸터 텍스트 |
+
+원문 나머지 24행은 §1과 동일하게 반영 확인(메뉴 3건 · Local 문구 3건 · 히어로 제목·부제 · 시행 전/후 표기 · R 코드 삭제 · 카드 3장 세로 · 방법론 팝업 · 네이비 화살표 · 한 줄 결론(16곳 간척) · 줌 컨트롤 오른쪽). site_gate PASS(FAIL 0) 재실행.
+
 ## 4. 남은 일 · 주의
 
-- **push 금지** — 로컬 커밋만. Pages 반영은 사용자 지시 후.
+- push는 사용자 지시(2026-09-23 "push해줘")로 `origin/v5.5-ggi-review`에 완료. §3-1 후속 커밋은 별도 지시 후 push.
 - `assets/cand.js`·`cand.css`·`data_v4/cand/`·`recommend_cc_v4.json.gz`는 화면에서 더 쓰지 않으나 LEGACY로 보존(≤1000m 응축 · 자문 결과에 따라 재사용 여부 결정).
 - 지역별 우선 후보 화면의 보조 도구(반경 판독기 · 지역 전력판매량 대비 카드 · 분산특구 열쇠 표)는 TOP 10 재구성에서 제외했다(cc 전선 전용 자료 · "특구" 어휘). 전력판매량 대비는 표의 열로 유지.
 - 시행 전·이격 조건의 지도 도형은 등재 런의 시군 구간 폴리곤(15m 단순화 · 시군 경계 절단)이다. 경계 미절단 단위 폴리곤은 진흥구역 개방 조건만 존재(analysis_unit_v1) — 다른 조건도 필요하면 v9_02를 그 런으로 실행해 export 추가.

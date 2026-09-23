@@ -62,7 +62,7 @@
     <p class="lede" style="max-width:820px;font-size:clamp(17px,2vw,21px);color:var(--navy);font-weight:600">
       영농형태양광 특별법에 따라 농업진흥지역에도<br>영농형 태양광을 설치할 수 있게 된다면?</p>
     <p class="lede" style="max-width:820px">
-      전국의 농지를 필지 단위로 판정해<sup class="fnref">[1]</sup>, <b>특별법 시행 전</b>(농업진흥지역 밖의 농지만)과
+      전국의 농지를 필지 단위로 판정해<sup class="fnref">[1]</sup>, <b>특별법 시행 전</b>(농업진흥지역이 아닌 농지)과
       <b>특별법 시행 후</b>(재생에너지지구로 농업진흥지역이 개방된다고 가정)의 설치 가능 농지를 비교합니다.
       시행 후 값은 법률의 실제 시행 여부와 무관한 <b>제도 설계 시나리오</b>입니다<sup class="fnref">[10]</sup>.
       분석 기준 필지는 법인·국공유 소유 농지<sup class="fnref">[12]</sup>, 1차 단위는 면적(km²)<sup class="fnref">[13]</sup>.</p>
@@ -79,7 +79,7 @@
           <div class="v55-card hi">
             <div class="k">① 설치 가능 면적 — 판정을 통과한 필지 면적</div>
             <div class="v"><span id="c1">—</span><small>km²</small></div>
-            <div class="d"><b>+<span id="c1d">—</span> km²</b> 특별법 시행 전 대비<span class="before">시행 전 <span id="c1b">—</span> km² · <span id="c1n">—</span>필지</span></div>
+            <div class="d"><b>+<span id="c1d">—</span> km²</b> 특별법 시행 전 대비 · 현행 대비 설치 가능 면적 <b><span id="c1p">—</span>% 증가</b><span class="before">시행 전 <span id="c1b">—</span> km² · <span id="c1n">—</span>필지</span></div>
           </div>
           <div class="v55-arrow" aria-hidden="true"><svg width="26" height="44" viewBox="0 0 26 44"><path d="M13 2v34" stroke="currentColor" stroke-width="4" stroke-linecap="round"/><path d="M3 28l10 12 10-12" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></svg><span>21m 이내 필지를 이어 붙이면</span></div>
           <div class="v55-card">
@@ -91,7 +91,7 @@
           <div class="v55-card">
             <div class="k">③ 50MW 이상 설치 가능 후보 공간</div>
             <div class="v"><span id="c3">—</span><small>곳</small></div>
-            <div class="d"><b>시행 전 <span id="c3b">—</span>곳 → <span id="c3a">—</span>곳</b><span class="before">합 약 <span id="c3mw">—</span> MW · 1곳 = <span id="c3th">—</span>㎡(≈50MW 등가) 이상의 후보 공간</span></div>
+            <div class="d"><b>시행 전 <span id="c3b">—</span>곳 → <span id="c3a">—</span>곳</b> · 면적 <b><span id="c3k">—</span> km² (+<span id="c3kd">—</span> km²)</b><span class="before">합 약 <span id="c3mw">—</span> MW · 1곳 = <span id="c3th">—</span>㎡(≈50MW 등가) 이상의 후보 공간</span></div>
           </div>
         </div>
 
@@ -181,13 +181,13 @@
   const b3_0 = band(r0, 6.6667), b3_1 = band(r1, 6.6667), b50_0 = band(r0, 111.1111), b50_1 = band(r1, 111.1111);
   // ① 면적 — ㎡ 원값으로 증분 계산(이중 반올림 방지)
   V4.countup(document.getElementById('c1'), m1.m2 / 1e6, 1);
-  put('c1d', V4.km2((m1.m2 - m0.m2) / 1e6)); put('c1b', V4.km2(m0.m2 / 1e6)); put('c1n', V4.n(m0.n));
+  put('c1d', V4.km2((m1.m2 - m0.m2) / 1e6)); put('c1p', ((m1.m2 - m0.m2) / m0.m2 * 100).toFixed(1)); put('c1b', V4.km2(m0.m2 / 1e6)); put('c1n', V4.n(m0.n));
   // ② 3MW 등가 이상 후보 공간 면적·수
   put('c2', V4.km2(b3_1.area_km2)); put('c2d', V4.km2(b3_1.area_km2 - b3_0.area_km2)); put('c2n', V4.n(b3_1.n));
   put('c2b', V4.km2(b3_0.area_km2)); put('c2bn', V4.n(b3_0.n));
   // ③ 50MW 등가 이상 후보 공간 수
   put('c3', V4.n(b50_1.n)); put('c3b', V4.n(b50_0.n)); put('c3a', V4.n(b50_1.n));
-  put('c3mw', V4.n(R[CELL_RUN[AFTER]].ge50_mw)); put('c3th', V4.n(N.threshold.mw50_m2));
+  put('c3k', V4.km2(b50_1.area_km2)); put('c3kd', V4.km2(b50_1.area_km2 - b50_0.area_km2)); put('c3mw', V4.n(R[CELL_RUN[AFTER]].ge50_mw)); put('c3th', V4.n(N.threshold.mw50_m2));
   // 한 줄 결론 — 간척 부가 설명은 데이터(cp_big · 진흥구역 개방 기준)에서 계산될 때만
   const cpBigRec = (N.cp_big || []).filter(b => b.reclaim_pct >= 50).length;
   document.getElementById('one-liner').innerHTML =

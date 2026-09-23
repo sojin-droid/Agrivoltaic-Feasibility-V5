@@ -581,7 +581,7 @@ input[type=number].coef{width:80px;font:inherit;padding:2px 6px;border:1px solid
   const s = await V4.data('summary_v4');
   V55.methodButton(document.getElementById('scnMethod'), 'scenarios');
 
-  const SCNL = {R0: '특별법 시행 전 (농업진흥지역 밖의 농지만)', R1: '농업보호구역만 개방', R2: '특별법 시행 후 · 농업진흥구역 개방', R3: '특별법 시행 후 · 농업진흥지역 전체 개방'};
+  const SCNL = {R0: '특별법 시행 전 (농업진흥지역이 아닌 농지)', R1: '농업보호구역만 개방', R2: '특별법 시행 후 · 농업진흥구역 개방', R3: '특별법 시행 후 · 농업진흥지역 전체 개방'};
   const matRows = (M) => `
     <tr><th>조합</th><th>정본 필지</th><th>정본 km²</th><th>참고 MW</th>
         <th class="ref">대조군 km²</th><th class="ref">정본/대조</th></tr>` +
@@ -660,7 +660,7 @@ input[type=number].coef{width:80px;font:inherit;padding:2px 6px;border:1px solid
     // 증분·증가율은 ㎡ 원값에서 계산한다 — 표시용 km²(1자리)끼리 빼면 이중 반올림으로
     // 정본(+548.1)이 +548.2로 어긋난다
     const base2 = MM.R0['정본'].m2;
-    const rows = [['R0', '특별법 시행 전 (농업진흥지역 밖의 농지만)'], ['R1', '농업보호구역만 개방'],
+    const rows = [['R0', '특별법 시행 전 (농업진흥지역이 아닌 농지)'], ['R1', '농업보호구역만 개방'],
                   ['R2', '특별법 시행 후 · 농업진흥구역 개방'], ['R3', '특별법 시행 후 · 농업진흥지역 전체 개방']];
     document.getElementById('t-scn').innerHTML =
       `<tr><th style="text-align:left">시나리오</th><th>적격 면적 km²</th>
@@ -717,7 +717,7 @@ input[type=number].coef{width:80px;font:inherit;padding:2px 6px;border:1px solid
   const runName = () => cellOf() + (state.sb ? '_SB' : '') + (state.uni === 'pubcorp' ? '' : state.uni === 'all' ? '@all' : '@pubcorp_clan');
   const ownSet = () => new Set(state.uni === 'all' ? CODES : D.universes[state.uni]);
   const band = (rr, ha) => ((rr && rr.size_bands) || []).find(x => Math.abs(x.min_ha - ha) < 0.01);
-  const CELL_LABEL = {R0_current: '특별법 시행 전 · 농업진흥지역 밖의 농지만', R1_protect: '농업보호구역만 개방',
+  const CELL_LABEL = {R0_current: '특별법 시행 전 · 농업진흥지역이 아닌 농지', R1_protect: '농업보호구역만 개방',
                       R2_promo: '특별법 시행 후 · 농업진흥구역 개방', R3_zone_all: '특별법 시행 후 · 농업진흥지역 전체 개방'};
 
   function agg(sggFilter, promo, prot, scope = effScope()) {
