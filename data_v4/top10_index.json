@@ -1,0 +1,7007 @@
+{
+ "generated": "2026-09-23 13:42",
+ "runs": [
+  "R0_current",
+  "R0_current_SB",
+  "R1_protect",
+  "R1_protect_SB",
+  "R2_promo",
+  "R2_promo_SB",
+  "R3_zone_all",
+  "R3_zone_all_SB"
+ ],
+ "cols": [
+  "lab",
+  "a",
+  "mw",
+  "lo",
+  "hi",
+  "d",
+  "lat",
+  "lon",
+  "recl",
+  "n",
+  "ne",
+  "f3",
+  "fab",
+  "fac",
+  "fbc",
+  "dsh"
+ ],
+ "population": "block_context 모집단(정본 그대로 · 규모 문턱 없음) — 시군 관여 기준(걸침 후보는 관련 시군마다 등장, 합산 금지)",
+ "fronts": "표시 규모(0·66667·222222·444444·1111111㎡)별 비지배 lab 목록 — 비교 모집단 = 그 규모 이상 전량",
+ "flags": {
+  "f3": "면적·계통 여유(lo)·산단 거리 3축 비지배 = query._frontier_mask",
+  "fab": "면적+계통 2축 비지배(같은 규칙)",
+  "fac": "면적+산단 2축 비지배(같은 규칙)",
+  "fbc": "계통+산단 2축 비지배(같은 규칙)"
+ },
+ "dsh": "MW×1,314h ÷ 시군 연간 전력판매량(GWh) % — 표기 전용(PR-0030), 판정 불사용",
+ "stamps": {
+  "R0_current": {
+   "generated_at": null,
+   "grid_asset": null,
+   "n_component_total": null
+  },
+  "R0_current_SB": {
+   "generated_at": null,
+   "grid_asset": null,
+   "n_component_total": null
+  },
+  "R1_protect": {
+   "generated_at": null,
+   "grid_asset": null,
+   "n_component_total": null
+  },
+  "R1_protect_SB": {
+   "generated_at": null,
+   "grid_asset": null,
+   "n_component_total": null
+  },
+  "R2_promo": {
+   "generated_at": null,
+   "grid_asset": null,
+   "n_component_total": null
+  },
+  "R2_promo_SB": {
+   "generated_at": null,
+   "grid_asset": null,
+   "n_component_total": null
+  },
+  "R3_zone_all": {
+   "generated_at": null,
+   "grid_asset": null,
+   "n_component_total": null
+  },
+  "R3_zone_all_SB": {
+   "generated_at": null,
+   "grid_asset": null,
+   "n_component_total": null
+  }
+ },
+ "sgg": {
+  "11200": {
+   "label": "서울 11200",
+   "R0_current": [
+    3,
+    2
+   ],
+   "R1_protect": [
+    3,
+    2
+   ],
+   "R2_promo": [
+    3,
+    2
+   ],
+   "R3_zone_all": [
+    3,
+    2
+   ]
+  },
+  "11350": {
+   "label": "서울 11350",
+   "R0_current": [
+    1,
+    1
+   ],
+   "R1_protect": [
+    1,
+    1
+   ],
+   "R2_promo": [
+    1,
+    1
+   ],
+   "R3_zone_all": [
+    1,
+    1
+   ]
+  },
+  "11440": {
+   "label": "서울 11440",
+   "R0_current": [
+    3,
+    2
+   ],
+   "R0_current_SB": [
+    3,
+    2
+   ],
+   "R1_protect": [
+    3,
+    2
+   ],
+   "R1_protect_SB": [
+    3,
+    2
+   ],
+   "R2_promo": [
+    3,
+    2
+   ],
+   "R2_promo_SB": [
+    3,
+    2
+   ],
+   "R3_zone_all": [
+    3,
+    2
+   ],
+   "R3_zone_all_SB": [
+    3,
+    2
+   ]
+  },
+  "11500": {
+   "label": "서울 11500",
+   "R0_current": [
+    2,
+    2
+   ],
+   "R0_current_SB": [
+    2,
+    1
+   ],
+   "R1_protect": [
+    2,
+    2
+   ],
+   "R1_protect_SB": [
+    2,
+    1
+   ],
+   "R2_promo": [
+    2,
+    2
+   ],
+   "R2_promo_SB": [
+    2,
+    1
+   ],
+   "R3_zone_all": [
+    2,
+    2
+   ],
+   "R3_zone_all_SB": [
+    2,
+    1
+   ]
+  },
+  "11650": {
+   "label": "서울 11650",
+   "R0_current": [
+    1,
+    1
+   ],
+   "R0_current_SB": [
+    1,
+    1
+   ],
+   "R1_protect": [
+    1,
+    1
+   ],
+   "R1_protect_SB": [
+    1,
+    1
+   ],
+   "R2_promo": [
+    1,
+    1
+   ],
+   "R2_promo_SB": [
+    1,
+    1
+   ],
+   "R3_zone_all": [
+    1,
+    1
+   ],
+   "R3_zone_all_SB": [
+    1,
+    1
+   ]
+  },
+  "11680": {
+   "label": "서울 11680",
+   "R0_current": [
+    1,
+    1
+   ],
+   "R1_protect": [
+    1,
+    1
+   ],
+   "R2_promo": [
+    1,
+    1
+   ],
+   "R3_zone_all": [
+    1,
+    1
+   ]
+  },
+  "26350": {
+   "label": "부산 26350",
+   "R0_current": [
+    3,
+    1
+   ],
+   "R0_current_SB": [
+    1,
+    1
+   ],
+   "R1_protect": [
+    3,
+    1
+   ],
+   "R1_protect_SB": [
+    1,
+    1
+   ],
+   "R2_promo": [
+    3,
+    1
+   ],
+   "R2_promo_SB": [
+    1,
+    1
+   ],
+   "R3_zone_all": [
+    3,
+    1
+   ],
+   "R3_zone_all_SB": [
+    1,
+    1
+   ]
+  },
+  "26440": {
+   "label": "부산 26440",
+   "R0_current": [
+    1,
+    1
+   ],
+   "R0_current_SB": [
+    1,
+    1
+   ],
+   "R1_protect": [
+    1,
+    1
+   ],
+   "R1_protect_SB": [
+    1,
+    1
+   ],
+   "R2_promo": [
+    1,
+    1
+   ],
+   "R2_promo_SB": [
+    1,
+    1
+   ],
+   "R3_zone_all": [
+    1,
+    1
+   ],
+   "R3_zone_all_SB": [
+    1,
+    1
+   ]
+  },
+  "26530": {
+   "label": "부산 26530",
+   "R0_current": [
+    1,
+    1
+   ],
+   "R0_current_SB": [
+    1,
+    1
+   ],
+   "R1_protect": [
+    1,
+    1
+   ],
+   "R1_protect_SB": [
+    1,
+    1
+   ],
+   "R2_promo": [
+    1,
+    1
+   ],
+   "R2_promo_SB": [
+    1,
+    1
+   ],
+   "R3_zone_all": [
+    1,
+    1
+   ],
+   "R3_zone_all_SB": [
+    1,
+    1
+   ]
+  },
+  "26710": {
+   "label": "부산 26710",
+   "R0_current": [
+    25,
+    4
+   ],
+   "R0_current_SB": [
+    9,
+    3
+   ],
+   "R1_protect": [
+    25,
+    4
+   ],
+   "R1_protect_SB": [
+    9,
+    3
+   ],
+   "R2_promo": [
+    25,
+    4
+   ],
+   "R2_promo_SB": [
+    9,
+    3
+   ],
+   "R3_zone_all": [
+    25,
+    4
+   ],
+   "R3_zone_all_SB": [
+    9,
+    3
+   ]
+  },
+  "27140": {
+   "label": "대구 27140",
+   "R0_current": [
+    5,
+    1
+   ],
+   "R1_protect": [
+    5,
+    1
+   ],
+   "R2_promo": [
+    5,
+    1
+   ],
+   "R3_zone_all": [
+    5,
+    1
+   ]
+  },
+  "27170": {
+   "label": "대구 27170",
+   "R0_current": [
+    2,
+    2
+   ],
+   "R0_current_SB": [
+    1,
+    1
+   ],
+   "R1_protect": [
+    2,
+    2
+   ],
+   "R1_protect_SB": [
+    1,
+    1
+   ],
+   "R2_promo": [
+    2,
+    2
+   ],
+   "R2_promo_SB": [
+    1,
+    1
+   ],
+   "R3_zone_all": [
+    2,
+    2
+   ],
+   "R3_zone_all_SB": [
+    1,
+    1
+   ]
+  },
+  "27230": {
+   "label": "대구 27230",
+   "R0_current": [
+    7,
+    4
+   ],
+   "R0_current_SB": [
+    1,
+    1
+   ],
+   "R1_protect": [
+    7,
+    4
+   ],
+   "R1_protect_SB": [
+    1,
+    1
+   ],
+   "R2_promo": [
+    7,
+    4
+   ],
+   "R2_promo_SB": [
+    1,
+    1
+   ],
+   "R3_zone_all": [
+    7,
+    4
+   ],
+   "R3_zone_all_SB": [
+    1,
+    1
+   ]
+  },
+  "27260": {
+   "label": "대구 27260",
+   "R0_current": [
+    1,
+    1
+   ],
+   "R1_protect": [
+    1,
+    1
+   ],
+   "R2_promo": [
+    1,
+    1
+   ],
+   "R3_zone_all": [
+    1,
+    1
+   ]
+  },
+  "27290": {
+   "label": "대구 27290",
+   "R0_current": [
+    1,
+    1
+   ],
+   "R1_protect": [
+    1,
+    1
+   ],
+   "R2_promo": [
+    1,
+    1
+   ],
+   "R3_zone_all": [
+    1,
+    1
+   ]
+  },
+  "27710": {
+   "label": "대구 27710",
+   "R0_current": [
+    22,
+    8
+   ],
+   "R0_current_SB": [
+    22,
+    9
+   ],
+   "R1_protect": [
+    23,
+    8
+   ],
+   "R1_protect_SB": [
+    23,
+    9
+   ],
+   "R2_promo": [
+    27,
+    8
+   ],
+   "R2_promo_SB": [
+    27,
+    9
+   ],
+   "R3_zone_all": [
+    28,
+    8
+   ],
+   "R3_zone_all_SB": [
+    28,
+    9
+   ]
+  },
+  "27720": {
+   "label": "대구 27720",
+   "R0_current": [
+    17,
+    3
+   ],
+   "R0_current_SB": [
+    12,
+    3
+   ],
+   "R1_protect": [
+    20,
+    3
+   ],
+   "R1_protect_SB": [
+    15,
+    3
+   ],
+   "R2_promo": [
+    34,
+    5
+   ],
+   "R2_promo_SB": [
+    22,
+    6
+   ],
+   "R3_zone_all": [
+    38,
+    5
+   ],
+   "R3_zone_all_SB": [
+    25,
+    6
+   ]
+  },
+  "28110": {
+   "label": "인천 28110",
+   "R0_current": [
+    10,
+    3
+   ],
+   "R0_current_SB": [
+    9,
+    3
+   ],
+   "R1_protect": [
+    10,
+    3
+   ],
+   "R1_protect_SB": [
+    9,
+    3
+   ],
+   "R2_promo": [
+    10,
+    3
+   ],
+   "R2_promo_SB": [
+    9,
+    3
+   ],
+   "R3_zone_all": [
+    10,
+    3
+   ],
+   "R3_zone_all_SB": [
+    9,
+    3
+   ]
+  },
+  "28200": {
+   "label": "인천 28200",
+   "R0_current": [
+    1,
+    1
+   ],
+   "R1_protect": [
+    1,
+    1
+   ],
+   "R2_promo": [
+    1,
+    1
+   ],
+   "R3_zone_all": [
+    1,
+    1
+   ]
+  },
+  "28237": {
+   "label": "인천 28237",
+   "R0_current": [
+    1,
+    1
+   ],
+   "R0_current_SB": [
+    1,
+    1
+   ],
+   "R1_protect": [
+    1,
+    1
+   ],
+   "R1_protect_SB": [
+    1,
+    1
+   ],
+   "R2_promo": [
+    1,
+    1
+   ],
+   "R2_promo_SB": [
+    1,
+    1
+   ],
+   "R3_zone_all": [
+    1,
+    1
+   ],
+   "R3_zone_all_SB": [
+    1,
+    1
+   ]
+  },
+  "28245": {
+   "label": "인천 28245",
+   "R0_current": [
+    1,
+    1
+   ],
+   "R1_protect": [
+    1,
+    1
+   ],
+   "R2_promo": [
+    1,
+    1
+   ],
+   "R3_zone_all": [
+    1,
+    1
+   ]
+  },
+  "28260": {
+   "label": "인천 28260",
+   "R0_current": [
+    10,
+    3
+   ],
+   "R0_current_SB": [
+    5,
+    3
+   ],
+   "R1_protect": [
+    10,
+    3
+   ],
+   "R1_protect_SB": [
+    5,
+    3
+   ],
+   "R2_promo": [
+    17,
+    7
+   ],
+   "R2_promo_SB": [
+    11,
+    4
+   ],
+   "R3_zone_all": [
+    17,
+    7
+   ],
+   "R3_zone_all_SB": [
+    11,
+    4
+   ]
+  },
+  "28710": {
+   "label": "인천 28710",
+   "R0_current": [
+    6,
+    2
+   ],
+   "R0_current_SB": [
+    1,
+    1
+   ],
+   "R1_protect": [
+    7,
+    2
+   ],
+   "R1_protect_SB": [
+    1,
+    1
+   ],
+   "R2_promo": [
+    33,
+    4
+   ],
+   "R2_promo_SB": [
+    23,
+    5
+   ],
+   "R3_zone_all": [
+    33,
+    4
+   ],
+   "R3_zone_all_SB": [
+    23,
+    5
+   ]
+  },
+  "28720": {
+   "label": "인천 28720",
+   "R0_current": [
+    4,
+    3
+   ],
+   "R0_current_SB": [
+    4,
+    3
+   ],
+   "R1_protect": [
+    4,
+    3
+   ],
+   "R1_protect_SB": [
+    4,
+    3
+   ],
+   "R2_promo": [
+    4,
+    3
+   ],
+   "R2_promo_SB": [
+    4,
+    3
+   ],
+   "R3_zone_all": [
+    4,
+    3
+   ],
+   "R3_zone_all_SB": [
+    4,
+    3
+   ]
+  },
+  "29110": {
+   "label": "광주 29110",
+   "R0_current": [
+    1,
+    1
+   ],
+   "R1_protect": [
+    1,
+    1
+   ],
+   "R2_promo": [
+    1,
+    1
+   ],
+   "R3_zone_all": [
+    1,
+    1
+   ]
+  },
+  "29140": {
+   "label": "광주 29140",
+   "R0_current": [
+    7,
+    2
+   ],
+   "R0_current_SB": [
+    4,
+    2
+   ],
+   "R1_protect": [
+    7,
+    2
+   ],
+   "R1_protect_SB": [
+    4,
+    2
+   ],
+   "R2_promo": [
+    7,
+    2
+   ],
+   "R2_promo_SB": [
+    4,
+    2
+   ],
+   "R3_zone_all": [
+    7,
+    2
+   ],
+   "R3_zone_all_SB": [
+    4,
+    2
+   ]
+  },
+  "29155": {
+   "label": "광주 29155",
+   "R0_current": [
+    5,
+    4
+   ],
+   "R0_current_SB": [
+    1,
+    1
+   ],
+   "R1_protect": [
+    5,
+    4
+   ],
+   "R1_protect_SB": [
+    1,
+    1
+   ],
+   "R2_promo": [
+    5,
+    4
+   ],
+   "R2_promo_SB": [
+    1,
+    1
+   ],
+   "R3_zone_all": [
+    5,
+    4
+   ],
+   "R3_zone_all_SB": [
+    1,
+    1
+   ]
+  },
+  "29170": {
+   "label": "광주 29170",
+   "R0_current": [
+    10,
+    3
+   ],
+   "R0_current_SB": [
+    5,
+    4
+   ],
+   "R1_protect": [
+    10,
+    3
+   ],
+   "R1_protect_SB": [
+    5,
+    4
+   ],
+   "R2_promo": [
+    10,
+    3
+   ],
+   "R2_promo_SB": [
+    5,
+    4
+   ],
+   "R3_zone_all": [
+    10,
+    3
+   ],
+   "R3_zone_all_SB": [
+    5,
+    4
+   ]
+  },
+  "29200": {
+   "label": "광주 29200",
+   "R0_current": [
+    26,
+    3
+   ],
+   "R0_current_SB": [
+    10,
+    2
+   ],
+   "R1_protect": [
+    26,
+    3
+   ],
+   "R1_protect_SB": [
+    10,
+    2
+   ],
+   "R2_promo": [
+    26,
+    3
+   ],
+   "R2_promo_SB": [
+    10,
+    2
+   ],
+   "R3_zone_all": [
+    26,
+    3
+   ],
+   "R3_zone_all_SB": [
+    10,
+    2
+   ]
+  },
+  "30140": {
+   "label": "대전 30140",
+   "R0_current": [
+    3,
+    2
+   ],
+   "R0_current_SB": [
+    1,
+    1
+   ],
+   "R1_protect": [
+    3,
+    2
+   ],
+   "R1_protect_SB": [
+    1,
+    1
+   ],
+   "R2_promo": [
+    3,
+    2
+   ],
+   "R2_promo_SB": [
+    1,
+    1
+   ],
+   "R3_zone_all": [
+    3,
+    2
+   ],
+   "R3_zone_all_SB": [
+    1,
+    1
+   ]
+  },
+  "30170": {
+   "label": "대전 30170",
+   "R0_current": [
+    1,
+    1
+   ],
+   "R1_protect": [
+    1,
+    1
+   ],
+   "R2_promo": [
+    1,
+    1
+   ],
+   "R3_zone_all": [
+    1,
+    1
+   ]
+  },
+  "30200": {
+   "label": "대전 30200",
+   "R0_current": [
+    9,
+    4
+   ],
+   "R0_current_SB": [
+    2,
+    2
+   ],
+   "R1_protect": [
+    9,
+    4
+   ],
+   "R1_protect_SB": [
+    2,
+    2
+   ],
+   "R2_promo": [
+    9,
+    4
+   ],
+   "R2_promo_SB": [
+    2,
+    2
+   ],
+   "R3_zone_all": [
+    9,
+    4
+   ],
+   "R3_zone_all_SB": [
+    2,
+    2
+   ]
+  },
+  "30230": {
+   "label": "대전 30230",
+   "R0_current": [
+    5,
+    1
+   ],
+   "R0_current_SB": [
+    1,
+    1
+   ],
+   "R1_protect": [
+    5,
+    1
+   ],
+   "R1_protect_SB": [
+    1,
+    1
+   ],
+   "R2_promo": [
+    5,
+    1
+   ],
+   "R2_promo_SB": [
+    1,
+    1
+   ],
+   "R3_zone_all": [
+    5,
+    1
+   ],
+   "R3_zone_all_SB": [
+    1,
+    1
+   ]
+  },
+  "31140": {
+   "label": "울산 31140",
+   "R0_current": [
+    4,
+    3
+   ],
+   "R0_current_SB": [
+    1,
+    1
+   ],
+   "R1_protect": [
+    4,
+    3
+   ],
+   "R1_protect_SB": [
+    1,
+    1
+   ],
+   "R2_promo": [
+    4,
+    3
+   ],
+   "R2_promo_SB": [
+    1,
+    1
+   ],
+   "R3_zone_all": [
+    4,
+    3
+   ],
+   "R3_zone_all_SB": [
+    1,
+    1
+   ]
+  },
+  "31200": {
+   "label": "울산 31200",
+   "R0_current": [
+    8,
+    5
+   ],
+   "R0_current_SB": [
+    1,
+    1
+   ],
+   "R1_protect": [
+    8,
+    5
+   ],
+   "R1_protect_SB": [
+    1,
+    1
+   ],
+   "R2_promo": [
+    9,
+    5
+   ],
+   "R2_promo_SB": [
+    2,
+    2
+   ],
+   "R3_zone_all": [
+    9,
+    5
+   ],
+   "R3_zone_all_SB": [
+    2,
+    2
+   ]
+  },
+  "31710": {
+   "label": "울산 31710",
+   "R0_current": [
+    40,
+    13
+   ],
+   "R0_current_SB": [
+    18,
+    8
+   ],
+   "R1_protect": [
+    43,
+    13
+   ],
+   "R1_protect_SB": [
+    19,
+    8
+   ],
+   "R2_promo": [
+    50,
+    15
+   ],
+   "R2_promo_SB": [
+    20,
+    10
+   ],
+   "R3_zone_all": [
+    53,
+    15
+   ],
+   "R3_zone_all_SB": [
+    21,
+    10
+   ]
+  },
+  "36110": {
+   "label": "세종 36110",
+   "R0_current": [
+    32,
+    3
+   ],
+   "R0_current_SB": [
+    19,
+    3
+   ],
+   "R1_protect": [
+    32,
+    3
+   ],
+   "R1_protect_SB": [
+    19,
+    3
+   ],
+   "R2_promo": [
+    53,
+    5
+   ],
+   "R2_promo_SB": [
+    34,
+    7
+   ],
+   "R3_zone_all": [
+    54,
+    5
+   ],
+   "R3_zone_all_SB": [
+    35,
+    7
+   ]
+  },
+  "41111": {
+   "label": "경기 41111",
+   "R0_current": [
+    1,
+    1
+   ],
+   "R1_protect": [
+    1,
+    1
+   ],
+   "R2_promo": [
+    1,
+    1
+   ],
+   "R3_zone_all": [
+    1,
+    1
+   ]
+  },
+  "41113": {
+   "label": "경기 41113",
+   "R0_current": [
+    10,
+    2
+   ],
+   "R0_current_SB": [
+    2,
+    2
+   ],
+   "R1_protect": [
+    11,
+    2
+   ],
+   "R1_protect_SB": [
+    3,
+    2
+   ],
+   "R2_promo": [
+    12,
+    1
+   ],
+   "R2_promo_SB": [
+    4,
+    2
+   ],
+   "R3_zone_all": [
+    12,
+    1
+   ],
+   "R3_zone_all_SB": [
+    4,
+    2
+   ]
+  },
+  "41115": {
+   "label": "경기 41115",
+   "R0_current": [
+    3,
+    3
+   ],
+   "R0_current_SB": [
+    1,
+    1
+   ],
+   "R1_protect": [
+    3,
+    3
+   ],
+   "R1_protect_SB": [
+    1,
+    1
+   ],
+   "R2_promo": [
+    3,
+    3
+   ],
+   "R2_promo_SB": [
+    1,
+    1
+   ],
+   "R3_zone_all": [
+    3,
+    3
+   ],
+   "R3_zone_all_SB": [
+    1,
+    1
+   ]
+  },
+  "41117": {
+   "label": "경기 41117",
+   "R0_current": [
+    1,
+    1
+   ],
+   "R1_protect": [
+    1,
+    1
+   ],
+   "R2_promo": [
+    1,
+    1
+   ],
+   "R3_zone_all": [
+    1,
+    1
+   ]
+  },
+  "41131": {
+   "label": "경기 41131",
+   "R0_current": [
+    4,
+    3
+   ],
+   "R1_protect": [
+    4,
+    3
+   ],
+   "R2_promo": [
+    4,
+    3
+   ],
+   "R3_zone_all": [
+    4,
+    3
+   ]
+  },
+  "41135": {
+   "label": "경기 41135",
+   "R0_current": [
+    3,
+    2
+   ],
+   "R1_protect": [
+    3,
+    2
+   ],
+   "R2_promo": [
+    3,
+    2
+   ],
+   "R3_zone_all": [
+    3,
+    2
+   ]
+  },
+  "41150": {
+   "label": "경기 41150",
+   "R0_current": [
+    6,
+    3
+   ],
+   "R1_protect": [
+    6,
+    3
+   ],
+   "R2_promo": [
+    6,
+    3
+   ],
+   "R3_zone_all": [
+    6,
+    3
+   ]
+  },
+  "41171": {
+   "label": "경기 41171",
+   "R0_current": [
+    1,
+    1
+   ],
+   "R1_protect": [
+    1,
+    1
+   ],
+   "R2_promo": [
+    1,
+    1
+   ],
+   "R3_zone_all": [
+    1,
+    1
+   ]
+  },
+  "41173": {
+   "label": "경기 41173",
+   "R0_current": [
+    1,
+    1
+   ],
+   "R1_protect": [
+    1,
+    1
+   ],
+   "R2_promo": [
+    1,
+    1
+   ],
+   "R3_zone_all": [
+    1,
+    1
+   ]
+  },
+  "41192": {
+   "label": "경기 41192",
+   "R0_current": [
+    2,
+    2
+   ],
+   "R0_current_SB": [
+    1,
+    1
+   ],
+   "R1_protect": [
+    2,
+    2
+   ],
+   "R1_protect_SB": [
+    1,
+    1
+   ],
+   "R2_promo": [
+    2,
+    2
+   ],
+   "R2_promo_SB": [
+    1,
+    1
+   ],
+   "R3_zone_all": [
+    2,
+    2
+   ],
+   "R3_zone_all_SB": [
+    1,
+    1
+   ]
+  },
+  "41196": {
+   "label": "경기 41196",
+   "R0_current": [
+    8,
+    3
+   ],
+   "R0_current_SB": [
+    8,
+    3
+   ],
+   "R1_protect": [
+    8,
+    3
+   ],
+   "R1_protect_SB": [
+    8,
+    3
+   ],
+   "R2_promo": [
+    8,
+    3
+   ],
+   "R2_promo_SB": [
+    8,
+    3
+   ],
+   "R3_zone_all": [
+    8,
+    3
+   ],
+   "R3_zone_all_SB": [
+    8,
+    3
+   ]
+  },
+  "41210": {
+   "label": "경기 41210",
+   "R0_current": [
+    5,
+    4
+   ],
+   "R0_current_SB": [
+    1,
+    1
+   ],
+   "R1_protect": [
+    5,
+    4
+   ],
+   "R1_protect_SB": [
+    1,
+    1
+   ],
+   "R2_promo": [
+    5,
+    4
+   ],
+   "R2_promo_SB": [
+    1,
+    1
+   ],
+   "R3_zone_all": [
+    5,
+    4
+   ],
+   "R3_zone_all_SB": [
+    1,
+    1
+   ]
+  },
+  "41220": {
+   "label": "경기 41220",
+   "R0_current": [
+    86,
+    15
+   ],
+   "R0_current_SB": [
+    15,
+    2
+   ],
+   "R1_protect": [
+    91,
+    15
+   ],
+   "R1_protect_SB": [
+    18,
+    2
+   ],
+   "R2_promo": [
+    290,
+    21
+   ],
+   "R2_promo_SB": [
+    186,
+    16
+   ],
+   "R3_zone_all": [
+    293,
+    21
+   ],
+   "R3_zone_all_SB": [
+    188,
+    16
+   ]
+  },
+  "41250": {
+   "label": "경기 41250",
+   "R0_current": [
+    3,
+    3
+   ],
+   "R1_protect": [
+    3,
+    3
+   ],
+   "R2_promo": [
+    3,
+    3
+   ],
+   "R3_zone_all": [
+    3,
+    3
+   ]
+  },
+  "41271": {
+   "label": "경기 41271",
+   "R0_current": [
+    11,
+    3
+   ],
+   "R0_current_SB": [
+    5,
+    4
+   ],
+   "R1_protect": [
+    11,
+    3
+   ],
+   "R1_protect_SB": [
+    5,
+    4
+   ],
+   "R2_promo": [
+    11,
+    3
+   ],
+   "R2_promo_SB": [
+    5,
+    4
+   ],
+   "R3_zone_all": [
+    11,
+    3
+   ],
+   "R3_zone_all_SB": [
+    5,
+    4
+   ]
+  },
+  "41273": {
+   "label": "경기 41273",
+   "R0_current": [
+    7,
+    4
+   ],
+   "R0_current_SB": [
+    2,
+    2
+   ],
+   "R1_protect": [
+    7,
+    4
+   ],
+   "R1_protect_SB": [
+    2,
+    2
+   ],
+   "R2_promo": [
+    7,
+    4
+   ],
+   "R2_promo_SB": [
+    2,
+    2
+   ],
+   "R3_zone_all": [
+    7,
+    4
+   ],
+   "R3_zone_all_SB": [
+    2,
+    2
+   ]
+  },
+  "41281": {
+   "label": "경기 41281",
+   "R0_current": [
+    13,
+    5
+   ],
+   "R0_current_SB": [
+    9,
+    3
+   ],
+   "R1_protect": [
+    13,
+    5
+   ],
+   "R1_protect_SB": [
+    9,
+    3
+   ],
+   "R2_promo": [
+    13,
+    5
+   ],
+   "R2_promo_SB": [
+    9,
+    3
+   ],
+   "R3_zone_all": [
+    13,
+    5
+   ],
+   "R3_zone_all_SB": [
+    9,
+    3
+   ]
+  },
+  "41285": {
+   "label": "경기 41285",
+   "R0_current": [
+    2,
+    1
+   ],
+   "R1_protect": [
+    2,
+    1
+   ],
+   "R2_promo": [
+    8,
+    4
+   ],
+   "R2_promo_SB": [
+    3,
+    2
+   ],
+   "R3_zone_all": [
+    8,
+    4
+   ],
+   "R3_zone_all_SB": [
+    3,
+    2
+   ]
+  },
+  "41287": {
+   "label": "경기 41287",
+   "R0_current": [
+    9,
+    4
+   ],
+   "R0_current_SB": [
+    4,
+    2
+   ],
+   "R1_protect": [
+    9,
+    4
+   ],
+   "R1_protect_SB": [
+    4,
+    2
+   ],
+   "R2_promo": [
+    19,
+    5
+   ],
+   "R2_promo_SB": [
+    6,
+    1
+   ],
+   "R3_zone_all": [
+    19,
+    5
+   ],
+   "R3_zone_all_SB": [
+    6,
+    1
+   ]
+  },
+  "41290": {
+   "label": "경기 41290",
+   "R0_current": [
+    4,
+    2
+   ],
+   "R0_current_SB": [
+    2,
+    1
+   ],
+   "R1_protect": [
+    4,
+    2
+   ],
+   "R1_protect_SB": [
+    2,
+    1
+   ],
+   "R2_promo": [
+    4,
+    2
+   ],
+   "R2_promo_SB": [
+    2,
+    1
+   ],
+   "R3_zone_all": [
+    4,
+    2
+   ],
+   "R3_zone_all_SB": [
+    2,
+    1
+   ]
+  },
+  "41310": {
+   "label": "경기 41310",
+   "R0_current": [
+    1,
+    1
+   ],
+   "R1_protect": [
+    1,
+    1
+   ],
+   "R2_promo": [
+    1,
+    1
+   ],
+   "R3_zone_all": [
+    1,
+    1
+   ]
+  },
+  "41360": {
+   "label": "경기 41360",
+   "R0_current": [
+    85,
+    7
+   ],
+   "R0_current_SB": [
+    24,
+    11
+   ],
+   "R1_protect": [
+    85,
+    7
+   ],
+   "R1_protect_SB": [
+    24,
+    11
+   ],
+   "R2_promo": [
+    86,
+    7
+   ],
+   "R2_promo_SB": [
+    24,
+    11
+   ],
+   "R3_zone_all": [
+    86,
+    7
+   ],
+   "R3_zone_all_SB": [
+    24,
+    11
+   ]
+  },
+  "41370": {
+   "label": "경기 41370",
+   "R0_current": [
+    19,
+    5
+   ],
+   "R0_current_SB": [
+    6,
+    3
+   ],
+   "R1_protect": [
+    21,
+    6
+   ],
+   "R1_protect_SB": [
+    6,
+    3
+   ],
+   "R2_promo": [
+    20,
+    6
+   ],
+   "R2_promo_SB": [
+    6,
+    3
+   ],
+   "R3_zone_all": [
+    22,
+    7
+   ],
+   "R3_zone_all_SB": [
+    6,
+    3
+   ]
+  },
+  "41390": {
+   "label": "경기 41390",
+   "R0_current": [
+    2,
+    2
+   ],
+   "R0_current_SB": [
+    1,
+    1
+   ],
+   "R1_protect": [
+    2,
+    2
+   ],
+   "R1_protect_SB": [
+    1,
+    1
+   ],
+   "R2_promo": [
+    2,
+    2
+   ],
+   "R2_promo_SB": [
+    1,
+    1
+   ],
+   "R3_zone_all": [
+    2,
+    2
+   ],
+   "R3_zone_all_SB": [
+    1,
+    1
+   ]
+  },
+  "41410": {
+   "label": "경기 41410",
+   "R0_current": [
+    1,
+    1
+   ],
+   "R1_protect": [
+    1,
+    1
+   ],
+   "R2_promo": [
+    1,
+    1
+   ],
+   "R3_zone_all": [
+    1,
+    1
+   ]
+  },
+  "41430": {
+   "label": "경기 41430",
+   "R0_current": [
+    1,
+    1
+   ],
+   "R1_protect": [
+    1,
+    1
+   ],
+   "R2_promo": [
+    1,
+    1
+   ],
+   "R3_zone_all": [
+    1,
+    1
+   ]
+  },
+  "41461": {
+   "label": "경기 41461",
+   "R0_current": [
+    90,
+    5
+   ],
+   "R0_current_SB": [
+    32,
+    8
+   ],
+   "R1_protect": [
+    97,
+    6
+   ],
+   "R1_protect_SB": [
+    33,
+    6
+   ],
+   "R2_promo": [
+    129,
+    10
+   ],
+   "R2_promo_SB": [
+    58,
+    10
+   ],
+   "R3_zone_all": [
+    136,
+    11
+   ],
+   "R3_zone_all_SB": [
+    59,
+    8
+   ]
+  },
+  "41463": {
+   "label": "경기 41463",
+   "R0_current": [
+    15,
+    11
+   ],
+   "R0_current_SB": [
+    15,
+    10
+   ],
+   "R1_protect": [
+    15,
+    11
+   ],
+   "R1_protect_SB": [
+    15,
+    10
+   ],
+   "R2_promo": [
+    16,
+    8
+   ],
+   "R2_promo_SB": [
+    16,
+    8
+   ],
+   "R3_zone_all": [
+    16,
+    8
+   ],
+   "R3_zone_all_SB": [
+    16,
+    8
+   ]
+  },
+  "41465": {
+   "label": "경기 41465",
+   "R0_current": [
+    4,
+    3
+   ],
+   "R1_protect": [
+    4,
+    3
+   ],
+   "R2_promo": [
+    4,
+    3
+   ],
+   "R3_zone_all": [
+    4,
+    3
+   ]
+  },
+  "41480": {
+   "label": "경기 41480",
+   "R0_current": [
+    72,
+    8
+   ],
+   "R0_current_SB": [
+    22,
+    4
+   ],
+   "R1_protect": [
+    72,
+    8
+   ],
+   "R1_protect_SB": [
+    22,
+    4
+   ],
+   "R2_promo": [
+    104,
+    8
+   ],
+   "R2_promo_SB": [
+    50,
+    5
+   ],
+   "R3_zone_all": [
+    104,
+    8
+   ],
+   "R3_zone_all_SB": [
+    50,
+    5
+   ]
+  },
+  "41500": {
+   "label": "경기 41500",
+   "R0_current": [
+    107,
+    17
+   ],
+   "R0_current_SB": [
+    54,
+    12
+   ],
+   "R1_protect": [
+    116,
+    17
+   ],
+   "R1_protect_SB": [
+    58,
+    12
+   ],
+   "R2_promo": [
+    244,
+    13
+   ],
+   "R2_promo_SB": [
+    147,
+    13
+   ],
+   "R3_zone_all": [
+    253,
+    14
+   ],
+   "R3_zone_all_SB": [
+    150,
+    13
+   ]
+  },
+  "41550": {
+   "label": "경기 41550",
+   "R0_current": [
+    95,
+    7
+   ],
+   "R0_current_SB": [
+    29,
+    5
+   ],
+   "R1_protect": [
+    108,
+    8
+   ],
+   "R1_protect_SB": [
+    35,
+    6
+   ],
+   "R2_promo": [
+    193,
+    11
+   ],
+   "R2_promo_SB": [
+    98,
+    10
+   ],
+   "R3_zone_all": [
+    205,
+    12
+   ],
+   "R3_zone_all_SB": [
+    103,
+    11
+   ]
+  },
+  "41570": {
+   "label": "경기 41570",
+   "R0_current": [
+    15,
+    4
+   ],
+   "R0_current_SB": [
+    1,
+    1
+   ],
+   "R1_protect": [
+    15,
+    4
+   ],
+   "R1_protect_SB": [
+    1,
+    1
+   ],
+   "R2_promo": [
+    33,
+    5
+   ],
+   "R2_promo_SB": [
+    10,
+    4
+   ],
+   "R3_zone_all": [
+    34,
+    5
+   ],
+   "R3_zone_all_SB": [
+    10,
+    4
+   ]
+  },
+  "41590": {
+   "label": "경기 41590",
+   "R0_current": [
+    135,
+    15
+   ],
+   "R0_current_SB": [
+    133,
+    15
+   ],
+   "R1_protect": [
+    141,
+    15
+   ],
+   "R1_protect_SB": [
+    139,
+    15
+   ],
+   "R2_promo": [
+    280,
+    17
+   ],
+   "R2_promo_SB": [
+    278,
+    17
+   ],
+   "R3_zone_all": [
+    286,
+    17
+   ],
+   "R3_zone_all_SB": [
+    284,
+    17
+   ]
+  },
+  "41610": {
+   "label": "경기 41610",
+   "R0_current": [
+    31,
+    8
+   ],
+   "R0_current_SB": [
+    5,
+    2
+   ],
+   "R1_protect": [
+    32,
+    8
+   ],
+   "R1_protect_SB": [
+    5,
+    2
+   ],
+   "R2_promo": [
+    39,
+    6
+   ],
+   "R2_promo_SB": [
+    9,
+    3
+   ],
+   "R3_zone_all": [
+    41,
+    7
+   ],
+   "R3_zone_all_SB": [
+    9,
+    3
+   ]
+  },
+  "41630": {
+   "label": "경기 41630",
+   "R0_current": [
+    44,
+    6
+   ],
+   "R0_current_SB": [
+    10,
+    3
+   ],
+   "R1_protect": [
+    44,
+    6
+   ],
+   "R1_protect_SB": [
+    10,
+    3
+   ],
+   "R2_promo": [
+    58,
+    9
+   ],
+   "R2_promo_SB": [
+    14,
+    3
+   ],
+   "R3_zone_all": [
+    58,
+    9
+   ],
+   "R3_zone_all_SB": [
+    14,
+    3
+   ]
+  },
+  "41650": {
+   "label": "경기 41650",
+   "R0_current": [
+    88,
+    10
+   ],
+   "R0_current_SB": [
+    33,
+    8
+   ],
+   "R1_protect": [
+    94,
+    11
+   ],
+   "R1_protect_SB": [
+    35,
+    8
+   ],
+   "R2_promo": [
+    151,
+    12
+   ],
+   "R2_promo_SB": [
+    69,
+    6
+   ],
+   "R3_zone_all": [
+    155,
+    12
+   ],
+   "R3_zone_all_SB": [
+    71,
+    6
+   ]
+  },
+  "41670": {
+   "label": "경기 41670",
+   "R0_current": [
+    80,
+    11
+   ],
+   "R0_current_SB": [
+    45,
+    6
+   ],
+   "R1_protect": [
+    91,
+    12
+   ],
+   "R1_protect_SB": [
+    49,
+    6
+   ],
+   "R2_promo": [
+    184,
+    15
+   ],
+   "R2_promo_SB": [
+    118,
+    9
+   ],
+   "R3_zone_all": [
+    198,
+    13
+   ],
+   "R3_zone_all_SB": [
+    122,
+    10
+   ]
+  },
+  "41800": {
+   "label": "경기 41800",
+   "R0_current": [
+    51,
+    9
+   ],
+   "R0_current_SB": [
+    23,
+    7
+   ],
+   "R1_protect": [
+    51,
+    9
+   ],
+   "R1_protect_SB": [
+    23,
+    7
+   ],
+   "R2_promo": [
+    89,
+    10
+   ],
+   "R2_promo_SB": [
+    43,
+    12
+   ],
+   "R3_zone_all": [
+    90,
+    10
+   ],
+   "R3_zone_all_SB": [
+    44,
+    12
+   ]
+  },
+  "41820": {
+   "label": "경기 41820",
+   "R0_current": [
+    58,
+    5
+   ],
+   "R0_current_SB": [
+    16,
+    1
+   ],
+   "R1_protect": [
+    58,
+    5
+   ],
+   "R1_protect_SB": [
+    16,
+    1
+   ],
+   "R2_promo": [
+    62,
+    5
+   ],
+   "R2_promo_SB": [
+    16,
+    1
+   ],
+   "R3_zone_all": [
+    62,
+    5
+   ],
+   "R3_zone_all_SB": [
+    16,
+    1
+   ]
+  },
+  "41830": {
+   "label": "경기 41830",
+   "R0_current": [
+    32,
+    10
+   ],
+   "R0_current_SB": [
+    5,
+    3
+   ],
+   "R1_protect": [
+    36,
+    4
+   ],
+   "R1_protect_SB": [
+    5,
+    3
+   ],
+   "R2_promo": [
+    74,
+    19
+   ],
+   "R2_promo_SB": [
+    20,
+    8
+   ],
+   "R3_zone_all": [
+    80,
+    12
+   ],
+   "R3_zone_all_SB": [
+    21,
+    8
+   ]
+  },
+  "43111": {
+   "label": "충북 43111",
+   "R0_current": [
+    20,
+    8
+   ],
+   "R0_current_SB": [
+    12,
+    5
+   ],
+   "R1_protect": [
+    22,
+    8
+   ],
+   "R1_protect_SB": [
+    13,
+    5
+   ],
+   "R2_promo": [
+    42,
+    9
+   ],
+   "R2_promo_SB": [
+    26,
+    9
+   ],
+   "R3_zone_all": [
+    44,
+    9
+   ],
+   "R3_zone_all_SB": [
+    27,
+    9
+   ]
+  },
+  "43112": {
+   "label": "충북 43112",
+   "R0_current": [
+    17,
+    5
+   ],
+   "R0_current_SB": [
+    9,
+    3
+   ],
+   "R1_protect": [
+    17,
+    5
+   ],
+   "R1_protect_SB": [
+    9,
+    3
+   ],
+   "R2_promo": [
+    17,
+    4
+   ],
+   "R2_promo_SB": [
+    10,
+    5
+   ],
+   "R3_zone_all": [
+    17,
+    4
+   ],
+   "R3_zone_all_SB": [
+    10,
+    5
+   ]
+  },
+  "43113": {
+   "label": "충북 43113",
+   "R0_current": [
+    29,
+    6
+   ],
+   "R0_current_SB": [
+    16,
+    4
+   ],
+   "R1_protect": [
+    30,
+    7
+   ],
+   "R1_protect_SB": [
+    16,
+    4
+   ],
+   "R2_promo": [
+    43,
+    8
+   ],
+   "R2_promo_SB": [
+    26,
+    6
+   ],
+   "R3_zone_all": [
+    45,
+    10
+   ],
+   "R3_zone_all_SB": [
+    26,
+    6
+   ]
+  },
+  "43114": {
+   "label": "충북 43114",
+   "R0_current": [
+    26,
+    8
+   ],
+   "R0_current_SB": [
+    17,
+    8
+   ],
+   "R1_protect": [
+    27,
+    8
+   ],
+   "R1_protect_SB": [
+    18,
+    9
+   ],
+   "R2_promo": [
+    60,
+    7
+   ],
+   "R2_promo_SB": [
+    40,
+    10
+   ],
+   "R3_zone_all": [
+    60,
+    7
+   ],
+   "R3_zone_all_SB": [
+    40,
+    9
+   ]
+  },
+  "43130": {
+   "label": "충북 43130",
+   "R0_current": [
+    110,
+    11
+   ],
+   "R0_current_SB": [
+    41,
+    5
+   ],
+   "R1_protect": [
+    116,
+    11
+   ],
+   "R1_protect_SB": [
+    42,
+    5
+   ],
+   "R2_promo": [
+    200,
+    14
+   ],
+   "R2_promo_SB": [
+    78,
+    6
+   ],
+   "R3_zone_all": [
+    204,
+    14
+   ],
+   "R3_zone_all_SB": [
+    79,
+    6
+   ]
+  },
+  "43150": {
+   "label": "충북 43150",
+   "R0_current": [
+    61,
+    11
+   ],
+   "R0_current_SB": [
+    33,
+    4
+   ],
+   "R1_protect": [
+    66,
+    11
+   ],
+   "R1_protect_SB": [
+    35,
+    4
+   ],
+   "R2_promo": [
+    81,
+    10
+   ],
+   "R2_promo_SB": [
+    45,
+    6
+   ],
+   "R3_zone_all": [
+    87,
+    10
+   ],
+   "R3_zone_all_SB": [
+    47,
+    6
+   ]
+  },
+  "43720": {
+   "label": "충북 43720",
+   "R0_current": [
+    23,
+    6
+   ],
+   "R0_current_SB": [
+    13,
+    4
+   ],
+   "R1_protect": [
+    26,
+    6
+   ],
+   "R1_protect_SB": [
+    15,
+    6
+   ],
+   "R2_promo": [
+    72,
+    11
+   ],
+   "R2_promo_SB": [
+    49,
+    14
+   ],
+   "R3_zone_all": [
+    77,
+    12
+   ],
+   "R3_zone_all_SB": [
+    51,
+    14
+   ]
+  },
+  "43730": {
+   "label": "충북 43730",
+   "R0_current": [
+    16,
+    5
+   ],
+   "R0_current_SB": [
+    4,
+    2
+   ],
+   "R1_protect": [
+    20,
+    5
+   ],
+   "R1_protect_SB": [
+    5,
+    2
+   ],
+   "R2_promo": [
+    50,
+    7
+   ],
+   "R2_promo_SB": [
+    28,
+    4
+   ],
+   "R3_zone_all": [
+    57,
+    8
+   ],
+   "R3_zone_all_SB": [
+    31,
+    4
+   ]
+  },
+  "43740": {
+   "label": "충북 43740",
+   "R0_current": [
+    36,
+    8
+   ],
+   "R0_current_SB": [
+    18,
+    3
+   ],
+   "R1_protect": [
+    39,
+    9
+   ],
+   "R1_protect_SB": [
+    20,
+    3
+   ],
+   "R2_promo": [
+    80,
+    8
+   ],
+   "R2_promo_SB": [
+    46,
+    8
+   ],
+   "R3_zone_all": [
+    82,
+    8
+   ],
+   "R3_zone_all_SB": [
+    48,
+    8
+   ]
+  },
+  "43745": {
+   "label": "충북 43745",
+   "R0_current": [
+    14,
+    6
+   ],
+   "R0_current_SB": [
+    6,
+    4
+   ],
+   "R1_protect": [
+    16,
+    6
+   ],
+   "R1_protect_SB": [
+    7,
+    5
+   ],
+   "R2_promo": [
+    27,
+    2
+   ],
+   "R2_promo_SB": [
+    14,
+    2
+   ],
+   "R3_zone_all": [
+    30,
+    2
+   ],
+   "R3_zone_all_SB": [
+    16,
+    2
+   ]
+  },
+  "43750": {
+   "label": "충북 43750",
+   "R0_current": [
+    36,
+    6
+   ],
+   "R0_current_SB": [
+    16,
+    5
+   ],
+   "R1_protect": [
+    41,
+    6
+   ],
+   "R1_protect_SB": [
+    17,
+    5
+   ],
+   "R2_promo": [
+    87,
+    9
+   ],
+   "R2_promo_SB": [
+    54,
+    9
+   ],
+   "R3_zone_all": [
+    94,
+    9
+   ],
+   "R3_zone_all_SB": [
+    57,
+    9
+   ]
+  },
+  "43760": {
+   "label": "충북 43760",
+   "R0_current": [
+    43,
+    6
+   ],
+   "R0_current_SB": [
+    18,
+    6
+   ],
+   "R1_protect": [
+    56,
+    7
+   ],
+   "R1_protect_SB": [
+    21,
+    7
+   ],
+   "R2_promo": [
+    114,
+    11
+   ],
+   "R2_promo_SB": [
+    57,
+    8
+   ],
+   "R3_zone_all": [
+    127,
+    12
+   ],
+   "R3_zone_all_SB": [
+    61,
+    9
+   ]
+  },
+  "43770": {
+   "label": "충북 43770",
+   "R0_current": [
+    105,
+    12
+   ],
+   "R0_current_SB": [
+    67,
+    8
+   ],
+   "R1_protect": [
+    115,
+    12
+   ],
+   "R1_protect_SB": [
+    70,
+    8
+   ],
+   "R2_promo": [
+    187,
+    19
+   ],
+   "R2_promo_SB": [
+    126,
+    13
+   ],
+   "R3_zone_all": [
+    199,
+    19
+   ],
+   "R3_zone_all_SB": [
+    131,
+    13
+   ]
+  },
+  "43800": {
+   "label": "충북 43800",
+   "R0_current": [
+    39,
+    6
+   ],
+   "R0_current_SB": [
+    20,
+    4
+   ],
+   "R1_protect": [
+    41,
+    7
+   ],
+   "R1_protect_SB": [
+    20,
+    4
+   ],
+   "R2_promo": [
+    45,
+    6
+   ],
+   "R2_promo_SB": [
+    20,
+    4
+   ],
+   "R3_zone_all": [
+    46,
+    7
+   ],
+   "R3_zone_all_SB": [
+    20,
+    4
+   ]
+  },
+  "44131": {
+   "label": "충남 44131",
+   "R0_current": [
+    64,
+    7
+   ],
+   "R0_current_SB": [
+    25,
+    3
+   ],
+   "R1_protect": [
+    68,
+    7
+   ],
+   "R1_protect_SB": [
+    26,
+    3
+   ],
+   "R2_promo": [
+    94,
+    9
+   ],
+   "R2_promo_SB": [
+    42,
+    6
+   ],
+   "R3_zone_all": [
+    99,
+    9
+   ],
+   "R3_zone_all_SB": [
+    43,
+    6
+   ]
+  },
+  "44133": {
+   "label": "충남 44133",
+   "R0_current": [
+    62,
+    10
+   ],
+   "R0_current_SB": [
+    61,
+    10
+   ],
+   "R1_protect": [
+    70,
+    13
+   ],
+   "R1_protect_SB": [
+    69,
+    13
+   ],
+   "R2_promo": [
+    95,
+    13
+   ],
+   "R2_promo_SB": [
+    93,
+    13
+   ],
+   "R3_zone_all": [
+    104,
+    15
+   ],
+   "R3_zone_all_SB": [
+    102,
+    15
+   ]
+  },
+  "44150": {
+   "label": "충남 44150",
+   "R0_current": [
+    109,
+    15
+   ],
+   "R0_current_SB": [
+    56,
+    9
+   ],
+   "R1_protect": [
+    116,
+    15
+   ],
+   "R1_protect_SB": [
+    57,
+    9
+   ],
+   "R2_promo": [
+    200,
+    17
+   ],
+   "R2_promo_SB": [
+    106,
+    11
+   ],
+   "R3_zone_all": [
+    212,
+    17
+   ],
+   "R3_zone_all_SB": [
+    108,
+    11
+   ]
+  },
+  "44180": {
+   "label": "충남 44180",
+   "R0_current": [
+    40,
+    9
+   ],
+   "R0_current_SB": [
+    17,
+    7
+   ],
+   "R1_protect": [
+    44,
+    10
+   ],
+   "R1_protect_SB": [
+    18,
+    8
+   ],
+   "R2_promo": [
+    157,
+    9
+   ],
+   "R2_promo_SB": [
+    103,
+    12
+   ],
+   "R3_zone_all": [
+    161,
+    10
+   ],
+   "R3_zone_all_SB": [
+    104,
+    12
+   ]
+  },
+  "44200": {
+   "label": "충남 44200",
+   "R0_current": [
+    173,
+    8
+   ],
+   "R0_current_SB": [
+    64,
+    9
+   ],
+   "R1_protect": [
+    186,
+    9
+   ],
+   "R1_protect_SB": [
+    66,
+    12
+   ],
+   "R2_promo": [
+    296,
+    18
+   ],
+   "R2_promo_SB": [
+    164,
+    19
+   ],
+   "R3_zone_all": [
+    306,
+    18
+   ],
+   "R3_zone_all_SB": [
+    166,
+    19
+   ]
+  },
+  "44210": {
+   "label": "충남 44210",
+   "R0_current": [
+    70,
+    5
+   ],
+   "R0_current_SB": [
+    23,
+    6
+   ],
+   "R1_protect": [
+    77,
+    5
+   ],
+   "R1_protect_SB": [
+    23,
+    6
+   ],
+   "R2_promo": [
+    293,
+    10
+   ],
+   "R2_promo_SB": [
+    205,
+    18
+   ],
+   "R3_zone_all": [
+    299,
+    9
+   ],
+   "R3_zone_all_SB": [
+    206,
+    18
+   ]
+  },
+  "44230": {
+   "label": "충남 44230",
+   "R0_current": [
+    60,
+    12
+   ],
+   "R0_current_SB": [
+    17,
+    5
+   ],
+   "R1_protect": [
+    68,
+    13
+   ],
+   "R1_protect_SB": [
+    21,
+    5
+   ],
+   "R2_promo": [
+    235,
+    16
+   ],
+   "R2_promo_SB": [
+    111,
+    11
+   ],
+   "R3_zone_all": [
+    248,
+    16
+   ],
+   "R3_zone_all_SB": [
+    118,
+    11
+   ]
+  },
+  "44250": {
+   "label": "충남 44250",
+   "R0_current": [
+    23,
+    6
+   ],
+   "R0_current_SB": [
+    10,
+    4
+   ],
+   "R1_protect": [
+    23,
+    6
+   ],
+   "R1_protect_SB": [
+    10,
+    4
+   ],
+   "R2_promo": [
+    23,
+    6
+   ],
+   "R2_promo_SB": [
+    10,
+    4
+   ],
+   "R3_zone_all": [
+    23,
+    6
+   ],
+   "R3_zone_all_SB": [
+    10,
+    4
+   ]
+  },
+  "44270": {
+   "label": "충남 44270",
+   "R0_current": [
+    53,
+    6
+   ],
+   "R0_current_SB": [
+    20,
+    3
+   ],
+   "R1_protect": [
+    60,
+    6
+   ],
+   "R1_protect_SB": [
+    21,
+    3
+   ],
+   "R2_promo": [
+    298,
+    9
+   ],
+   "R2_promo_SB": [
+    213,
+    10
+   ],
+   "R3_zone_all": [
+    305,
+    9
+   ],
+   "R3_zone_all_SB": [
+    214,
+    10
+   ]
+  },
+  "44710": {
+   "label": "충남 44710",
+   "R0_current": [
+    32,
+    2
+   ],
+   "R0_current_SB": [
+    20,
+    5
+   ],
+   "R1_protect": [
+    35,
+    2
+   ],
+   "R1_protect_SB": [
+    20,
+    5
+   ],
+   "R2_promo": [
+    48,
+    1
+   ],
+   "R2_promo_SB": [
+    33,
+    5
+   ],
+   "R3_zone_all": [
+    51,
+    1
+   ],
+   "R3_zone_all_SB": [
+    33,
+    5
+   ]
+  },
+  "44760": {
+   "label": "충남 44760",
+   "R0_current": [
+    56,
+    6
+   ],
+   "R0_current_SB": [
+    29,
+    8
+   ],
+   "R1_protect": [
+    64,
+    8
+   ],
+   "R1_protect_SB": [
+    32,
+    10
+   ],
+   "R2_promo": [
+    183,
+    19
+   ],
+   "R2_promo_SB": [
+    114,
+    19
+   ],
+   "R3_zone_all": [
+    195,
+    20
+   ],
+   "R3_zone_all_SB": [
+    118,
+    19
+   ]
+  },
+  "44770": {
+   "label": "충남 44770",
+   "R0_current": [
+    23,
+    4
+   ],
+   "R0_current_SB": [
+    3,
+    1
+   ],
+   "R1_protect": [
+    31,
+    4
+   ],
+   "R1_protect_SB": [
+    3,
+    1
+   ],
+   "R2_promo": [
+    83,
+    7
+   ],
+   "R2_promo_SB": [
+    41,
+    6
+   ],
+   "R3_zone_all": [
+    92,
+    7
+   ],
+   "R3_zone_all_SB": [
+    42,
+    6
+   ]
+  },
+  "44790": {
+   "label": "충남 44790",
+   "R0_current": [
+    34,
+    8
+   ],
+   "R0_current_SB": [
+    16,
+    5
+   ],
+   "R1_protect": [
+    41,
+    8
+   ],
+   "R1_protect_SB": [
+    18,
+    6
+   ],
+   "R2_promo": [
+    97,
+    6
+   ],
+   "R2_promo_SB": [
+    45,
+    6
+   ],
+   "R3_zone_all": [
+    102,
+    6
+   ],
+   "R3_zone_all_SB": [
+    46,
+    6
+   ]
+  },
+  "44800": {
+   "label": "충남 44800",
+   "R0_current": [
+    58,
+    9
+   ],
+   "R0_current_SB": [
+    12,
+    5
+   ],
+   "R1_protect": [
+    63,
+    11
+   ],
+   "R1_protect_SB": [
+    15,
+    5
+   ],
+   "R2_promo": [
+    164,
+    18
+   ],
+   "R2_promo_SB": [
+    74,
+    14
+   ],
+   "R3_zone_all": [
+    169,
+    18
+   ],
+   "R3_zone_all_SB": [
+    77,
+    14
+   ]
+  },
+  "44810": {
+   "label": "충남 44810",
+   "R0_current": [
+    48,
+    5
+   ],
+   "R0_current_SB": [
+    16,
+    5
+   ],
+   "R1_protect": [
+    60,
+    5
+   ],
+   "R1_protect_SB": [
+    19,
+    6
+   ],
+   "R2_promo": [
+    190,
+    14
+   ],
+   "R2_promo_SB": [
+    90,
+    16
+   ],
+   "R3_zone_all": [
+    204,
+    14
+   ],
+   "R3_zone_all_SB": [
+    94,
+    17
+   ]
+  },
+  "44825": {
+   "label": "충남 44825",
+   "R0_current": [
+    60,
+    9
+   ],
+   "R0_current_SB": [
+    19,
+    5
+   ],
+   "R1_protect": [
+    64,
+    9
+   ],
+   "R1_protect_SB": [
+    22,
+    5
+   ],
+   "R2_promo": [
+    146,
+    17
+   ],
+   "R2_promo_SB": [
+    83,
+    10
+   ],
+   "R3_zone_all": [
+    150,
+    17
+   ],
+   "R3_zone_all_SB": [
+    86,
+    10
+   ]
+  },
+  "46110": {
+   "label": "전남 46110",
+   "R0_current": [
+    11,
+    5
+   ],
+   "R0_current_SB": [
+    3,
+    2
+   ],
+   "R1_protect": [
+    11,
+    5
+   ],
+   "R1_protect_SB": [
+    3,
+    2
+   ],
+   "R2_promo": [
+    11,
+    5
+   ],
+   "R2_promo_SB": [
+    3,
+    2
+   ],
+   "R3_zone_all": [
+    11,
+    5
+   ],
+   "R3_zone_all_SB": [
+    3,
+    2
+   ]
+  },
+  "46130": {
+   "label": "전남 46130",
+   "R0_current": [
+    58,
+    9
+   ],
+   "R0_current_SB": [
+    28,
+    10
+   ],
+   "R1_protect": [
+    59,
+    9
+   ],
+   "R1_protect_SB": [
+    28,
+    10
+   ],
+   "R2_promo": [
+    73,
+    10
+   ],
+   "R2_promo_SB": [
+    39,
+    12
+   ],
+   "R3_zone_all": [
+    74,
+    10
+   ],
+   "R3_zone_all_SB": [
+    39,
+    12
+   ]
+  },
+  "46150": {
+   "label": "전남 46150",
+   "R0_current": [
+    53,
+    4
+   ],
+   "R0_current_SB": [
+    23,
+    3
+   ],
+   "R1_protect": [
+    54,
+    4
+   ],
+   "R1_protect_SB": [
+    24,
+    3
+   ],
+   "R2_promo": [
+    78,
+    5
+   ],
+   "R2_promo_SB": [
+    34,
+    4
+   ],
+   "R3_zone_all": [
+    78,
+    5
+   ],
+   "R3_zone_all_SB": [
+    34,
+    4
+   ]
+  },
+  "46170": {
+   "label": "전남 46170",
+   "R0_current": [
+    52,
+    9
+   ],
+   "R0_current_SB": [
+    27,
+    7
+   ],
+   "R1_protect": [
+    64,
+    11
+   ],
+   "R1_protect_SB": [
+    37,
+    7
+   ],
+   "R2_promo": [
+    125,
+    11
+   ],
+   "R2_promo_SB": [
+    76,
+    8
+   ],
+   "R3_zone_all": [
+    139,
+    12
+   ],
+   "R3_zone_all_SB": [
+    87,
+    8
+   ]
+  },
+  "46230": {
+   "label": "전남 46230",
+   "R0_current": [
+    25,
+    3
+   ],
+   "R0_current_SB": [
+    9,
+    1
+   ],
+   "R1_protect": [
+    25,
+    3
+   ],
+   "R1_protect_SB": [
+    9,
+    1
+   ],
+   "R2_promo": [
+    43,
+    4
+   ],
+   "R2_promo_SB": [
+    19,
+    1
+   ],
+   "R3_zone_all": [
+    44,
+    4
+   ],
+   "R3_zone_all_SB": [
+    19,
+    1
+   ]
+  },
+  "46710": {
+   "label": "전남 46710",
+   "R0_current": [
+    13,
+    5
+   ],
+   "R0_current_SB": [
+    4,
+    3
+   ],
+   "R1_protect": [
+    18,
+    5
+   ],
+   "R1_protect_SB": [
+    9,
+    3
+   ],
+   "R2_promo": [
+    27,
+    6
+   ],
+   "R2_promo_SB": [
+    8,
+    4
+   ],
+   "R3_zone_all": [
+    34,
+    6
+   ],
+   "R3_zone_all_SB": [
+    13,
+    4
+   ]
+  },
+  "46720": {
+   "label": "전남 46720",
+   "R0_current": [
+    21,
+    7
+   ],
+   "R0_current_SB": [
+    12,
+    5
+   ],
+   "R1_protect": [
+    25,
+    7
+   ],
+   "R1_protect_SB": [
+    15,
+    4
+   ],
+   "R2_promo": [
+    56,
+    10
+   ],
+   "R2_promo_SB": [
+    33,
+    7
+   ],
+   "R3_zone_all": [
+    60,
+    8
+   ],
+   "R3_zone_all_SB": [
+    36,
+    9
+   ]
+  },
+  "46730": {
+   "label": "전남 46730",
+   "R0_current": [
+    17,
+    6
+   ],
+   "R0_current_SB": [
+    5,
+    4
+   ],
+   "R1_protect": [
+    18,
+    7
+   ],
+   "R1_protect_SB": [
+    6,
+    5
+   ],
+   "R2_promo": [
+    43,
+    6
+   ],
+   "R2_promo_SB": [
+    19,
+    5
+   ],
+   "R3_zone_all": [
+    44,
+    7
+   ],
+   "R3_zone_all_SB": [
+    20,
+    6
+   ]
+  },
+  "46770": {
+   "label": "전남 46770",
+   "R0_current": [
+    67,
+    2
+   ],
+   "R0_current_SB": [
+    34,
+    2
+   ],
+   "R1_protect": [
+    77,
+    2
+   ],
+   "R1_protect_SB": [
+    41,
+    2
+   ],
+   "R2_promo": [
+    190,
+    10
+   ],
+   "R2_promo_SB": [
+    148,
+    8
+   ],
+   "R3_zone_all": [
+    200,
+    10
+   ],
+   "R3_zone_all_SB": [
+    155,
+    8
+   ]
+  },
+  "46780": {
+   "label": "전남 46780",
+   "R0_current": [
+    59,
+    10
+   ],
+   "R0_current_SB": [
+    29,
+    11
+   ],
+   "R1_protect": [
+    70,
+    11
+   ],
+   "R1_protect_SB": [
+    36,
+    11
+   ],
+   "R2_promo": [
+    133,
+    7
+   ],
+   "R2_promo_SB": [
+    75,
+    4
+   ],
+   "R3_zone_all": [
+    149,
+    6
+   ],
+   "R3_zone_all_SB": [
+    84,
+    5
+   ]
+  },
+  "46790": {
+   "label": "전남 46790",
+   "R0_current": [
+    62,
+    14
+   ],
+   "R0_current_SB": [
+    41,
+    12
+   ],
+   "R1_protect": [
+    65,
+    14
+   ],
+   "R1_protect_SB": [
+    42,
+    13
+   ],
+   "R2_promo": [
+    97,
+    15
+   ],
+   "R2_promo_SB": [
+    62,
+    12
+   ],
+   "R3_zone_all": [
+    102,
+    15
+   ],
+   "R3_zone_all_SB": [
+    63,
+    12
+   ]
+  },
+  "46800": {
+   "label": "전남 46800",
+   "R0_current": [
+    24,
+    2
+   ],
+   "R0_current_SB": [
+    10,
+    4
+   ],
+   "R1_protect": [
+    26,
+    2
+   ],
+   "R1_protect_SB": [
+    11,
+    4
+   ],
+   "R2_promo": [
+    85,
+    5
+   ],
+   "R2_promo_SB": [
+    53,
+    2
+   ],
+   "R3_zone_all": [
+    90,
+    5
+   ],
+   "R3_zone_all_SB": [
+    54,
+    2
+   ]
+  },
+  "46810": {
+   "label": "전남 46810",
+   "R0_current": [
+    31,
+    8
+   ],
+   "R0_current_SB": [
+    13,
+    8
+   ],
+   "R1_protect": [
+    35,
+    9
+   ],
+   "R1_protect_SB": [
+    16,
+    8
+   ],
+   "R2_promo": [
+    86,
+    14
+   ],
+   "R2_promo_SB": [
+    50,
+    9
+   ],
+   "R3_zone_all": [
+    92,
+    15
+   ],
+   "R3_zone_all_SB": [
+    52,
+    9
+   ]
+  },
+  "46820": {
+   "label": "전남 46820",
+   "R0_current": [
+    69,
+    9
+   ],
+   "R0_current_SB": [
+    46,
+    7
+   ],
+   "R1_protect": [
+    83,
+    11
+   ],
+   "R1_protect_SB": [
+    55,
+    8
+   ],
+   "R2_promo": [
+    318,
+    8
+   ],
+   "R2_promo_SB": [
+    267,
+    14
+   ],
+   "R3_zone_all": [
+    331,
+    9
+   ],
+   "R3_zone_all_SB": [
+    277,
+    15
+   ]
+  },
+  "46830": {
+   "label": "전남 46830",
+   "R0_current": [
+    59,
+    9
+   ],
+   "R0_current_SB": [
+    31,
+    7
+   ],
+   "R1_protect": [
+    68,
+    9
+   ],
+   "R1_protect_SB": [
+    39,
+    7
+   ],
+   "R2_promo": [
+    226,
+    9
+   ],
+   "R2_promo_SB": [
+    166,
+    8
+   ],
+   "R3_zone_all": [
+    235,
+    9
+   ],
+   "R3_zone_all_SB": [
+    175,
+    8
+   ]
+  },
+  "46840": {
+   "label": "전남 46840",
+   "R0_current": [
+    36,
+    9
+   ],
+   "R0_current_SB": [
+    21,
+    7
+   ],
+   "R1_protect": [
+    40,
+    10
+   ],
+   "R1_protect_SB": [
+    22,
+    7
+   ],
+   "R2_promo": [
+    203,
+    17
+   ],
+   "R2_promo_SB": [
+    145,
+    14
+   ],
+   "R3_zone_all": [
+    209,
+    17
+   ],
+   "R3_zone_all_SB": [
+    146,
+    14
+   ]
+  },
+  "46860": {
+   "label": "전남 46860",
+   "R0_current": [
+    78,
+    10
+   ],
+   "R0_current_SB": [
+    35,
+    6
+   ],
+   "R1_protect": [
+    95,
+    10
+   ],
+   "R1_protect_SB": [
+    45,
+    6
+   ],
+   "R2_promo": [
+    130,
+    7
+   ],
+   "R2_promo_SB": [
+    72,
+    11
+   ],
+   "R3_zone_all": [
+    149,
+    7
+   ],
+   "R3_zone_all_SB": [
+    83,
+    11
+   ]
+  },
+  "46870": {
+   "label": "전남 46870",
+   "R0_current": [
+    40,
+    5
+   ],
+   "R0_current_SB": [
+    11,
+    5
+   ],
+   "R1_protect": [
+    48,
+    5
+   ],
+   "R1_protect_SB": [
+    14,
+    5
+   ],
+   "R2_promo": [
+    113,
+    8
+   ],
+   "R2_promo_SB": [
+    60,
+    12
+   ],
+   "R3_zone_all": [
+    121,
+    8
+   ],
+   "R3_zone_all_SB": [
+    63,
+    12
+   ]
+  },
+  "46880": {
+   "label": "전남 46880",
+   "R0_current": [
+    52,
+    10
+   ],
+   "R0_current_SB": [
+    20,
+    3
+   ],
+   "R1_protect": [
+    57,
+    11
+   ],
+   "R1_protect_SB": [
+    23,
+    4
+   ],
+   "R2_promo": [
+    84,
+    5
+   ],
+   "R2_promo_SB": [
+    38,
+    6
+   ],
+   "R3_zone_all": [
+    91,
+    6
+   ],
+   "R3_zone_all_SB": [
+    42,
+    7
+   ]
+  },
+  "46890": {
+   "label": "전남 46890",
+   "R0_current": [
+    22,
+    8
+   ],
+   "R0_current_SB": [
+    10,
+    6
+   ],
+   "R1_protect": [
+    22,
+    8
+   ],
+   "R1_protect_SB": [
+    10,
+    6
+   ],
+   "R2_promo": [
+    40,
+    10
+   ],
+   "R2_promo_SB": [
+    22,
+    6
+   ],
+   "R3_zone_all": [
+    40,
+    10
+   ],
+   "R3_zone_all_SB": [
+    22,
+    6
+   ]
+  },
+  "46900": {
+   "label": "전남 46900",
+   "R0_current": [
+    45,
+    2
+   ],
+   "R0_current_SB": [
+    32,
+    4
+   ],
+   "R1_protect": [
+    58,
+    4
+   ],
+   "R1_protect_SB": [
+    39,
+    4
+   ],
+   "R2_promo": [
+    118,
+    10
+   ],
+   "R2_promo_SB": [
+    98,
+    3
+   ],
+   "R3_zone_all": [
+    132,
+    11
+   ],
+   "R3_zone_all_SB": [
+    105,
+    4
+   ]
+  },
+  "46910": {
+   "label": "전남 46910",
+   "R0_current": [
+    87,
+    6
+   ],
+   "R0_current_SB": [
+    46,
+    5
+   ],
+   "R1_protect": [
+    103,
+    6
+   ],
+   "R1_protect_SB": [
+    56,
+    6
+   ],
+   "R2_promo": [
+    185,
+    7
+   ],
+   "R2_promo_SB": [
+    111,
+    7
+   ],
+   "R3_zone_all": [
+    198,
+    7
+   ],
+   "R3_zone_all_SB": [
+    119,
+    6
+   ]
+  },
+  "47111": {
+   "label": "경북 47111",
+   "R0_current": [
+    75,
+    11
+   ],
+   "R0_current_SB": [
+    29,
+    9
+   ],
+   "R1_protect": [
+    76,
+    10
+   ],
+   "R1_protect_SB": [
+    30,
+    9
+   ],
+   "R2_promo": [
+    79,
+    12
+   ],
+   "R2_promo_SB": [
+    31,
+    10
+   ],
+   "R3_zone_all": [
+    80,
+    10
+   ],
+   "R3_zone_all_SB": [
+    32,
+    10
+   ]
+  },
+  "47113": {
+   "label": "경북 47113",
+   "R0_current": [
+    65,
+    6
+   ],
+   "R0_current_SB": [
+    22,
+    5
+   ],
+   "R1_protect": [
+    71,
+    6
+   ],
+   "R1_protect_SB": [
+    24,
+    6
+   ],
+   "R2_promo": [
+    142,
+    10
+   ],
+   "R2_promo_SB": [
+    75,
+    10
+   ],
+   "R3_zone_all": [
+    150,
+    10
+   ],
+   "R3_zone_all_SB": [
+    77,
+    10
+   ]
+  },
+  "47130": {
+   "label": "경북 47130",
+   "R0_current": [
+    59,
+    4
+   ],
+   "R0_current_SB": [
+    24,
+    4
+   ],
+   "R1_protect": [
+    65,
+    4
+   ],
+   "R1_protect_SB": [
+    26,
+    4
+   ],
+   "R2_promo": [
+    139,
+    5
+   ],
+   "R2_promo_SB": [
+    71,
+    6
+   ],
+   "R3_zone_all": [
+    145,
+    5
+   ],
+   "R3_zone_all_SB": [
+    74,
+    6
+   ]
+  },
+  "47150": {
+   "label": "경북 47150",
+   "R0_current": [
+    41,
+    4
+   ],
+   "R0_current_SB": [
+    22,
+    2
+   ],
+   "R1_protect": [
+    42,
+    4
+   ],
+   "R1_protect_SB": [
+    23,
+    2
+   ],
+   "R2_promo": [
+    73,
+    4
+   ],
+   "R2_promo_SB": [
+    47,
+    3
+   ],
+   "R3_zone_all": [
+    77,
+    4
+   ],
+   "R3_zone_all_SB": [
+    49,
+    3
+   ]
+  },
+  "47170": {
+   "label": "경북 47170",
+   "R0_current": [
+    28,
+    2
+   ],
+   "R0_current_SB": [
+    22,
+    3
+   ],
+   "R1_protect": [
+    28,
+    1
+   ],
+   "R1_protect_SB": [
+    23,
+    3
+   ],
+   "R2_promo": [
+    67,
+    5
+   ],
+   "R2_promo_SB": [
+    44,
+    5
+   ],
+   "R3_zone_all": [
+    67,
+    4
+   ],
+   "R3_zone_all_SB": [
+    45,
+    5
+   ]
+  },
+  "47190": {
+   "label": "경북 47190",
+   "R0_current": [
+    16,
+    4
+   ],
+   "R0_current_SB": [
+    8,
+    4
+   ],
+   "R1_protect": [
+    19,
+    4
+   ],
+   "R1_protect_SB": [
+    11,
+    4
+   ],
+   "R2_promo": [
+    56,
+    5
+   ],
+   "R2_promo_SB": [
+    37,
+    5
+   ],
+   "R3_zone_all": [
+    59,
+    5
+   ],
+   "R3_zone_all_SB": [
+    40,
+    5
+   ]
+  },
+  "47210": {
+   "label": "경북 47210",
+   "R0_current": [
+    59,
+    12
+   ],
+   "R0_current_SB": [
+    34,
+    11
+   ],
+   "R1_protect": [
+    69,
+    12
+   ],
+   "R1_protect_SB": [
+    38,
+    11
+   ],
+   "R2_promo": [
+    128,
+    16
+   ],
+   "R2_promo_SB": [
+    76,
+    16
+   ],
+   "R3_zone_all": [
+    136,
+    17
+   ],
+   "R3_zone_all_SB": [
+    79,
+    16
+   ]
+  },
+  "47230": {
+   "label": "경북 47230",
+   "R0_current": [
+    32,
+    6
+   ],
+   "R0_current_SB": [
+    26,
+    4
+   ],
+   "R1_protect": [
+    38,
+    6
+   ],
+   "R1_protect_SB": [
+    30,
+    4
+   ],
+   "R2_promo": [
+    61,
+    8
+   ],
+   "R2_promo_SB": [
+    42,
+    5
+   ],
+   "R3_zone_all": [
+    68,
+    8
+   ],
+   "R3_zone_all_SB": [
+    46,
+    5
+   ]
+  },
+  "47250": {
+   "label": "경북 47250",
+   "R0_current": [
+    67,
+    11
+   ],
+   "R0_current_SB": [
+    35,
+    9
+   ],
+   "R1_protect": [
+    76,
+    12
+   ],
+   "R1_protect_SB": [
+    42,
+    9
+   ],
+   "R2_promo": [
+    149,
+    14
+   ],
+   "R2_promo_SB": [
+    94,
+    10
+   ],
+   "R3_zone_all": [
+    159,
+    13
+   ],
+   "R3_zone_all_SB": [
+    101,
+    9
+   ]
+  },
+  "47280": {
+   "label": "경북 47280",
+   "R0_current": [
+    20,
+    8
+   ],
+   "R0_current_SB": [
+    15,
+    5
+   ],
+   "R1_protect": [
+    22,
+    8
+   ],
+   "R1_protect_SB": [
+    15,
+    5
+   ],
+   "R2_promo": [
+    32,
+    10
+   ],
+   "R2_promo_SB": [
+    23,
+    7
+   ],
+   "R3_zone_all": [
+    35,
+    11
+   ],
+   "R3_zone_all_SB": [
+    24,
+    7
+   ]
+  },
+  "47290": {
+   "label": "경북 47290",
+   "R0_current": [
+    15,
+    6
+   ],
+   "R0_current_SB": [
+    5,
+    2
+   ],
+   "R1_protect": [
+    17,
+    7
+   ],
+   "R1_protect_SB": [
+    5,
+    2
+   ],
+   "R2_promo": [
+    29,
+    5
+   ],
+   "R2_promo_SB": [
+    10,
+    4
+   ],
+   "R3_zone_all": [
+    32,
+    6
+   ],
+   "R3_zone_all_SB": [
+    11,
+    4
+   ]
+  },
+  "47730": {
+   "label": "경북 47730",
+   "R0_current": [
+    34,
+    6
+   ],
+   "R0_current_SB": [
+    20,
+    12
+   ],
+   "R1_protect": [
+    42,
+    6
+   ],
+   "R1_protect_SB": [
+    24,
+    13
+   ],
+   "R2_promo": [
+    126,
+    6
+   ],
+   "R2_promo_SB": [
+    81,
+    5
+   ],
+   "R3_zone_all": [
+    138,
+    6
+   ],
+   "R3_zone_all_SB": [
+    87,
+    5
+   ]
+  },
+  "47750": {
+   "label": "경북 47750",
+   "R0_current": [
+    53,
+    3
+   ],
+   "R0_current_SB": [
+    28,
+    7
+   ],
+   "R1_protect": [
+    62,
+    3
+   ],
+   "R1_protect_SB": [
+    31,
+    9
+   ],
+   "R2_promo": [
+    100,
+    2
+   ],
+   "R2_promo_SB": [
+    51,
+    8
+   ],
+   "R3_zone_all": [
+    109,
+    2
+   ],
+   "R3_zone_all_SB": [
+    54,
+    9
+   ]
+  },
+  "47760": {
+   "label": "경북 47760",
+   "R0_current": [
+    20,
+    6
+   ],
+   "R0_current_SB": [
+    15,
+    4
+   ],
+   "R1_protect": [
+    21,
+    6
+   ],
+   "R1_protect_SB": [
+    15,
+    4
+   ],
+   "R2_promo": [
+    46,
+    6
+   ],
+   "R2_promo_SB": [
+    32,
+    6
+   ],
+   "R3_zone_all": [
+    48,
+    6
+   ],
+   "R3_zone_all_SB": [
+    32,
+    6
+   ]
+  },
+  "47770": {
+   "label": "경북 47770",
+   "R0_current": [
+    29,
+    3
+   ],
+   "R0_current_SB": [
+    10,
+    2
+   ],
+   "R1_protect": [
+    30,
+    3
+   ],
+   "R1_protect_SB": [
+    11,
+    2
+   ],
+   "R2_promo": [
+    85,
+    5
+   ],
+   "R2_promo_SB": [
+    44,
+    4
+   ],
+   "R3_zone_all": [
+    89,
+    5
+   ],
+   "R3_zone_all_SB": [
+    46,
+    4
+   ]
+  },
+  "47820": {
+   "label": "경북 47820",
+   "R0_current": [
+    24,
+    6
+   ],
+   "R0_current_SB": [
+    9,
+    3
+   ],
+   "R1_protect": [
+    26,
+    6
+   ],
+   "R1_protect_SB": [
+    10,
+    3
+   ],
+   "R2_promo": [
+    44,
+    6
+   ],
+   "R2_promo_SB": [
+    21,
+    8
+   ],
+   "R3_zone_all": [
+    46,
+    6
+   ],
+   "R3_zone_all_SB": [
+    22,
+    8
+   ]
+  },
+  "47830": {
+   "label": "경북 47830",
+   "R0_current": [
+    10,
+    4
+   ],
+   "R0_current_SB": [
+    6,
+    3
+   ],
+   "R1_protect": [
+    10,
+    4
+   ],
+   "R1_protect_SB": [
+    6,
+    3
+   ],
+   "R2_promo": [
+    26,
+    9
+   ],
+   "R2_promo_SB": [
+    18,
+    6
+   ],
+   "R3_zone_all": [
+    26,
+    9
+   ],
+   "R3_zone_all_SB": [
+    18,
+    6
+   ]
+  },
+  "47840": {
+   "label": "경북 47840",
+   "R0_current": [
+    35,
+    7
+   ],
+   "R0_current_SB": [
+    16,
+    9
+   ],
+   "R1_protect": [
+    37,
+    9
+   ],
+   "R1_protect_SB": [
+    19,
+    9
+   ],
+   "R2_promo": [
+    77,
+    4
+   ],
+   "R2_promo_SB": [
+    41,
+    10
+   ],
+   "R3_zone_all": [
+    79,
+    6
+   ],
+   "R3_zone_all_SB": [
+    44,
+    10
+   ]
+  },
+  "47850": {
+   "label": "경북 47850",
+   "R0_current": [
+    27,
+    5
+   ],
+   "R0_current_SB": [
+    5,
+    1
+   ],
+   "R1_protect": [
+    27,
+    5
+   ],
+   "R1_protect_SB": [
+    5,
+    1
+   ],
+   "R2_promo": [
+    33,
+    4
+   ],
+   "R2_promo_SB": [
+    6,
+    1
+   ],
+   "R3_zone_all": [
+    33,
+    4
+   ],
+   "R3_zone_all_SB": [
+    6,
+    1
+   ]
+  },
+  "47900": {
+   "label": "경북 47900",
+   "R0_current": [
+    26,
+    2
+   ],
+   "R0_current_SB": [
+    21,
+    2
+   ],
+   "R1_protect": [
+    28,
+    2
+   ],
+   "R1_protect_SB": [
+    23,
+    2
+   ],
+   "R2_promo": [
+    52,
+    4
+   ],
+   "R2_promo_SB": [
+    42,
+    5
+   ],
+   "R3_zone_all": [
+    54,
+    4
+   ],
+   "R3_zone_all_SB": [
+    44,
+    5
+   ]
+  },
+  "47920": {
+   "label": "경북 47920",
+   "R0_current": [
+    29,
+    5
+   ],
+   "R0_current_SB": [
+    14,
+    6
+   ],
+   "R1_protect": [
+    30,
+    6
+   ],
+   "R1_protect_SB": [
+    14,
+    6
+   ],
+   "R2_promo": [
+    52,
+    7
+   ],
+   "R2_promo_SB": [
+    23,
+    3
+   ],
+   "R3_zone_all": [
+    53,
+    7
+   ],
+   "R3_zone_all_SB": [
+    23,
+    3
+   ]
+  },
+  "47930": {
+   "label": "경북 47930",
+   "R0_current": [
+    63,
+    4
+   ],
+   "R0_current_SB": [
+    44,
+    4
+   ],
+   "R1_protect": [
+    67,
+    4
+   ],
+   "R1_protect_SB": [
+    48,
+    4
+   ],
+   "R2_promo": [
+    74,
+    5
+   ],
+   "R2_promo_SB": [
+    51,
+    5
+   ],
+   "R3_zone_all": [
+    77,
+    5
+   ],
+   "R3_zone_all_SB": [
+    55,
+    5
+   ]
+  },
+  "47940": {
+   "label": "경북 47940",
+   "R0_current": [
+    2,
+    1
+   ],
+   "R1_protect": [
+    2,
+    1
+   ],
+   "R2_promo": [
+    2,
+    1
+   ],
+   "R3_zone_all": [
+    2,
+    1
+   ]
+  },
+  "48121": {
+   "label": "경남 48121",
+   "R0_current": [
+    11,
+    7
+   ],
+   "R0_current_SB": [
+    8,
+    5
+   ],
+   "R1_protect": [
+    13,
+    9
+   ],
+   "R1_protect_SB": [
+    9,
+    6
+   ],
+   "R2_promo": [
+    49,
+    13
+   ],
+   "R2_promo_SB": [
+    36,
+    11
+   ],
+   "R3_zone_all": [
+    50,
+    12
+   ],
+   "R3_zone_all_SB": [
+    37,
+    11
+   ]
+  },
+  "48125": {
+   "label": "경남 48125",
+   "R0_current": [
+    23,
+    3
+   ],
+   "R0_current_SB": [
+    11,
+    5
+   ],
+   "R1_protect": [
+    25,
+    4
+   ],
+   "R1_protect_SB": [
+    13,
+    6
+   ],
+   "R2_promo": [
+    23,
+    4
+   ],
+   "R2_promo_SB": [
+    12,
+    6
+   ],
+   "R3_zone_all": [
+    24,
+    5
+   ],
+   "R3_zone_all_SB": [
+    13,
+    7
+   ]
+  },
+  "48127": {
+   "label": "경남 48127",
+   "R0_current": [
+    8,
+    5
+   ],
+   "R0_current_SB": [
+    1,
+    1
+   ],
+   "R1_protect": [
+    8,
+    5
+   ],
+   "R1_protect_SB": [
+    1,
+    1
+   ],
+   "R2_promo": [
+    8,
+    5
+   ],
+   "R2_promo_SB": [
+    1,
+    1
+   ],
+   "R3_zone_all": [
+    8,
+    5
+   ],
+   "R3_zone_all_SB": [
+    1,
+    1
+   ]
+  },
+  "48129": {
+   "label": "경남 48129",
+   "R0_current": [
+    6,
+    3
+   ],
+   "R0_current_SB": [
+    1,
+    1
+   ],
+   "R1_protect": [
+    6,
+    3
+   ],
+   "R1_protect_SB": [
+    1,
+    1
+   ],
+   "R2_promo": [
+    6,
+    3
+   ],
+   "R2_promo_SB": [
+    1,
+    1
+   ],
+   "R3_zone_all": [
+    6,
+    3
+   ],
+   "R3_zone_all_SB": [
+    1,
+    1
+   ]
+  },
+  "48170": {
+   "label": "경남 48170",
+   "R0_current": [
+    53,
+    6
+   ],
+   "R0_current_SB": [
+    27,
+    4
+   ],
+   "R1_protect": [
+    54,
+    6
+   ],
+   "R1_protect_SB": [
+    28,
+    4
+   ],
+   "R2_promo": [
+    102,
+    14
+   ],
+   "R2_promo_SB": [
+    60,
+    9
+   ],
+   "R3_zone_all": [
+    104,
+    14
+   ],
+   "R3_zone_all_SB": [
+    63,
+    9
+   ]
+  },
+  "48220": {
+   "label": "경남 48220",
+   "R0_current": [
+    13,
+    4
+   ],
+   "R0_current_SB": [
+    4,
+    2
+   ],
+   "R1_protect": [
+    13,
+    4
+   ],
+   "R1_protect_SB": [
+    4,
+    2
+   ],
+   "R2_promo": [
+    18,
+    5
+   ],
+   "R2_promo_SB": [
+    7,
+    4
+   ],
+   "R3_zone_all": [
+    19,
+    5
+   ],
+   "R3_zone_all_SB": [
+    7,
+    4
+   ]
+  },
+  "48240": {
+   "label": "경남 48240",
+   "R0_current": [
+    42,
+    4
+   ],
+   "R0_current_SB": [
+    16,
+    5
+   ],
+   "R1_protect": [
+    44,
+    4
+   ],
+   "R1_protect_SB": [
+    17,
+    5
+   ],
+   "R2_promo": [
+    70,
+    5
+   ],
+   "R2_promo_SB": [
+    27,
+    4
+   ],
+   "R3_zone_all": [
+    73,
+    5
+   ],
+   "R3_zone_all_SB": [
+    28,
+    4
+   ]
+  },
+  "48250": {
+   "label": "경남 48250",
+   "R0_current": [
+    50,
+    10
+   ],
+   "R0_current_SB": [
+    27,
+    7
+   ],
+   "R1_protect": [
+    53,
+    10
+   ],
+   "R1_protect_SB": [
+    29,
+    7
+   ],
+   "R2_promo": [
+    81,
+    11
+   ],
+   "R2_promo_SB": [
+    50,
+    10
+   ],
+   "R3_zone_all": [
+    84,
+    11
+   ],
+   "R3_zone_all_SB": [
+    52,
+    10
+   ]
+  },
+  "48270": {
+   "label": "경남 48270",
+   "R0_current": [
+    43,
+    5
+   ],
+   "R0_current_SB": [
+    17,
+    8
+   ],
+   "R1_protect": [
+    47,
+    5
+   ],
+   "R1_protect_SB": [
+    18,
+    8
+   ],
+   "R2_promo": [
+    129,
+    8
+   ],
+   "R2_promo_SB": [
+    72,
+    9
+   ],
+   "R3_zone_all": [
+    135,
+    8
+   ],
+   "R3_zone_all_SB": [
+    73,
+    9
+   ]
+  },
+  "48310": {
+   "label": "경남 48310",
+   "R0_current": [
+    15,
+    6
+   ],
+   "R0_current_SB": [
+    6,
+    4
+   ],
+   "R1_protect": [
+    16,
+    6
+   ],
+   "R1_protect_SB": [
+    7,
+    4
+   ],
+   "R2_promo": [
+    21,
+    4
+   ],
+   "R2_promo_SB": [
+    7,
+    5
+   ],
+   "R3_zone_all": [
+    24,
+    4
+   ],
+   "R3_zone_all_SB": [
+    8,
+    6
+   ]
+  },
+  "48330": {
+   "label": "경남 48330",
+   "R0_current": [
+    26,
+    5
+   ],
+   "R0_current_SB": [
+    7,
+    2
+   ],
+   "R1_protect": [
+    26,
+    5
+   ],
+   "R1_protect_SB": [
+    7,
+    2
+   ],
+   "R2_promo": [
+    29,
+    5
+   ],
+   "R2_promo_SB": [
+    8,
+    2
+   ],
+   "R3_zone_all": [
+    29,
+    5
+   ],
+   "R3_zone_all_SB": [
+    8,
+    2
+   ]
+  },
+  "48720": {
+   "label": "경남 48720",
+   "R0_current": [
+    23,
+    3
+   ],
+   "R0_current_SB": [
+    9,
+    2
+   ],
+   "R1_protect": [
+    24,
+    3
+   ],
+   "R1_protect_SB": [
+    10,
+    3
+   ],
+   "R2_promo": [
+    65,
+    5
+   ],
+   "R2_promo_SB": [
+    43,
+    4
+   ],
+   "R3_zone_all": [
+    66,
+    5
+   ],
+   "R3_zone_all_SB": [
+    44,
+    5
+   ]
+  },
+  "48730": {
+   "label": "경남 48730",
+   "R0_current": [
+    31,
+    9
+   ],
+   "R0_current_SB": [
+    11,
+    3
+   ],
+   "R1_protect": [
+    33,
+    10
+   ],
+   "R1_protect_SB": [
+    12,
+    4
+   ],
+   "R2_promo": [
+    98,
+    11
+   ],
+   "R2_promo_SB": [
+    54,
+    9
+   ],
+   "R3_zone_all": [
+    100,
+    13
+   ],
+   "R3_zone_all_SB": [
+    55,
+    10
+   ]
+  },
+  "48740": {
+   "label": "경남 48740",
+   "R0_current": [
+    44,
+    5
+   ],
+   "R0_current_SB": [
+    20,
+    5
+   ],
+   "R1_protect": [
+    47,
+    5
+   ],
+   "R1_protect_SB": [
+    22,
+    5
+   ],
+   "R2_promo": [
+    104,
+    6
+   ],
+   "R2_promo_SB": [
+    59,
+    7
+   ],
+   "R3_zone_all": [
+    108,
+    7
+   ],
+   "R3_zone_all_SB": [
+    61,
+    8
+   ]
+  },
+  "48820": {
+   "label": "경남 48820",
+   "R0_current": [
+    21,
+    3
+   ],
+   "R0_current_SB": [
+    8,
+    5
+   ],
+   "R1_protect": [
+    25,
+    3
+   ],
+   "R1_protect_SB": [
+    10,
+    6
+   ],
+   "R2_promo": [
+    68,
+    8
+   ],
+   "R2_promo_SB": [
+    37,
+    5
+   ],
+   "R3_zone_all": [
+    74,
+    9
+   ],
+   "R3_zone_all_SB": [
+    41,
+    5
+   ]
+  },
+  "48840": {
+   "label": "경남 48840",
+   "R0_current": [
+    23,
+    9
+   ],
+   "R0_current_SB": [
+    7,
+    4
+   ],
+   "R1_protect": [
+    24,
+    9
+   ],
+   "R1_protect_SB": [
+    8,
+    4
+   ],
+   "R2_promo": [
+    31,
+    11
+   ],
+   "R2_promo_SB": [
+    12,
+    8
+   ],
+   "R3_zone_all": [
+    31,
+    11
+   ],
+   "R3_zone_all_SB": [
+    12,
+    8
+   ]
+  },
+  "48850": {
+   "label": "경남 48850",
+   "R0_current": [
+    34,
+    14
+   ],
+   "R0_current_SB": [
+    14,
+    7
+   ],
+   "R1_protect": [
+    39,
+    13
+   ],
+   "R1_protect_SB": [
+    14,
+    6
+   ],
+   "R2_promo": [
+    100,
+    11
+   ],
+   "R2_promo_SB": [
+    52,
+    7
+   ],
+   "R3_zone_all": [
+    103,
+    11
+   ],
+   "R3_zone_all_SB": [
+    53,
+    7
+   ]
+  },
+  "48860": {
+   "label": "경남 48860",
+   "R0_current": [
+    30,
+    6
+   ],
+   "R0_current_SB": [
+    11,
+    6
+   ],
+   "R1_protect": [
+    33,
+    7
+   ],
+   "R1_protect_SB": [
+    12,
+    6
+   ],
+   "R2_promo": [
+    66,
+    7
+   ],
+   "R2_promo_SB": [
+    26,
+    9
+   ],
+   "R3_zone_all": [
+    70,
+    8
+   ],
+   "R3_zone_all_SB": [
+    27,
+    9
+   ]
+  },
+  "48870": {
+   "label": "경남 48870",
+   "R0_current": [
+    43,
+    5
+   ],
+   "R0_current_SB": [
+    21,
+    4
+   ],
+   "R1_protect": [
+    46,
+    6
+   ],
+   "R1_protect_SB": [
+    24,
+    4
+   ],
+   "R2_promo": [
+    74,
+    8
+   ],
+   "R2_promo_SB": [
+    38,
+    7
+   ],
+   "R3_zone_all": [
+    77,
+    9
+   ],
+   "R3_zone_all_SB": [
+    42,
+    7
+   ]
+  },
+  "48880": {
+   "label": "경남 48880",
+   "R0_current": [
+    18,
+    5
+   ],
+   "R0_current_SB": [
+    9,
+    3
+   ],
+   "R1_protect": [
+    20,
+    5
+   ],
+   "R1_protect_SB": [
+    9,
+    3
+   ],
+   "R2_promo": [
+    40,
+    3
+   ],
+   "R2_promo_SB": [
+    20,
+    2
+   ],
+   "R3_zone_all": [
+    43,
+    3
+   ],
+   "R3_zone_all_SB": [
+    21,
+    2
+   ]
+  },
+  "48890": {
+   "label": "경남 48890",
+   "R0_current": [
+    45,
+    6
+   ],
+   "R0_current_SB": [
+    25,
+    6
+   ],
+   "R1_protect": [
+    46,
+    7
+   ],
+   "R1_protect_SB": [
+    26,
+    7
+   ],
+   "R2_promo": [
+    97,
+    14
+   ],
+   "R2_promo_SB": [
+    55,
+    10
+   ],
+   "R3_zone_all": [
+    98,
+    12
+   ],
+   "R3_zone_all_SB": [
+    56,
+    8
+   ]
+  },
+  "50110": {
+   "label": "제주 50110",
+   "R0_current": [
+    113,
+    16
+   ],
+   "R0_current_SB": [
+    76,
+    16
+   ],
+   "R1_protect": [
+    113,
+    16
+   ],
+   "R1_protect_SB": [
+    76,
+    16
+   ],
+   "R2_promo": [
+    113,
+    16
+   ],
+   "R2_promo_SB": [
+    76,
+    16
+   ],
+   "R3_zone_all": [
+    113,
+    16
+   ],
+   "R3_zone_all_SB": [
+    76,
+    16
+   ]
+  },
+  "50130": {
+   "label": "제주 50130",
+   "R0_current": [
+    108,
+    15
+   ],
+   "R0_current_SB": [
+    80,
+    14
+   ],
+   "R1_protect": [
+    108,
+    15
+   ],
+   "R1_protect_SB": [
+    80,
+    14
+   ],
+   "R2_promo": [
+    108,
+    15
+   ],
+   "R2_promo_SB": [
+    80,
+    14
+   ],
+   "R3_zone_all": [
+    108,
+    15
+   ],
+   "R3_zone_all_SB": [
+    80,
+    14
+   ]
+  },
+  "51110": {
+   "label": "강원 51110",
+   "R0_current": [
+    82,
+    10
+   ],
+   "R0_current_SB": [
+    25,
+    5
+   ],
+   "R1_protect": [
+    83,
+    10
+   ],
+   "R1_protect_SB": [
+    25,
+    5
+   ],
+   "R2_promo": [
+    87,
+    11
+   ],
+   "R2_promo_SB": [
+    26,
+    6
+   ],
+   "R3_zone_all": [
+    87,
+    11
+   ],
+   "R3_zone_all_SB": [
+    26,
+    6
+   ]
+  },
+  "51130": {
+   "label": "강원 51130",
+   "R0_current": [
+    87,
+    6
+   ],
+   "R0_current_SB": [
+    39,
+    8
+   ],
+   "R1_protect": [
+    87,
+    6
+   ],
+   "R1_protect_SB": [
+    39,
+    8
+   ],
+   "R2_promo": [
+    133,
+    9
+   ],
+   "R2_promo_SB": [
+    64,
+    11
+   ],
+   "R3_zone_all": [
+    134,
+    9
+   ],
+   "R3_zone_all_SB": [
+    64,
+    11
+   ]
+  },
+  "51150": {
+   "label": "강원 51150",
+   "R0_current": [
+    80,
+    12
+   ],
+   "R0_current_SB": [
+    30,
+    8
+   ],
+   "R1_protect": [
+    81,
+    12
+   ],
+   "R1_protect_SB": [
+    31,
+    8
+   ],
+   "R2_promo": [
+    119,
+    18
+   ],
+   "R2_promo_SB": [
+    60,
+    14
+   ],
+   "R3_zone_all": [
+    122,
+    18
+   ],
+   "R3_zone_all_SB": [
+    61,
+    14
+   ]
+  },
+  "51170": {
+   "label": "강원 51170",
+   "R0_current": [
+    10,
+    6
+   ],
+   "R0_current_SB": [
+    2,
+    2
+   ],
+   "R1_protect": [
+    10,
+    6
+   ],
+   "R1_protect_SB": [
+    2,
+    2
+   ],
+   "R2_promo": [
+    10,
+    6
+   ],
+   "R2_promo_SB": [
+    2,
+    2
+   ],
+   "R3_zone_all": [
+    10,
+    6
+   ],
+   "R3_zone_all_SB": [
+    2,
+    2
+   ]
+  },
+  "51190": {
+   "label": "강원 51190",
+   "R0_current": [
+    13,
+    9
+   ],
+   "R0_current_SB": [
+    5,
+    3
+   ],
+   "R1_protect": [
+    13,
+    9
+   ],
+   "R1_protect_SB": [
+    5,
+    3
+   ],
+   "R2_promo": [
+    15,
+    9
+   ],
+   "R2_promo_SB": [
+    7,
+    4
+   ],
+   "R3_zone_all": [
+    15,
+    9
+   ],
+   "R3_zone_all_SB": [
+    7,
+    4
+   ]
+  },
+  "51210": {
+   "label": "강원 51210",
+   "R0_current": [
+    4,
+    2
+   ],
+   "R1_protect": [
+    4,
+    2
+   ],
+   "R2_promo": [
+    4,
+    2
+   ],
+   "R3_zone_all": [
+    4,
+    2
+   ]
+  },
+  "51230": {
+   "label": "강원 51230",
+   "R0_current": [
+    33,
+    4
+   ],
+   "R0_current_SB": [
+    12,
+    2
+   ],
+   "R1_protect": [
+    33,
+    4
+   ],
+   "R1_protect_SB": [
+    12,
+    2
+   ],
+   "R2_promo": [
+    41,
+    4
+   ],
+   "R2_promo_SB": [
+    15,
+    2
+   ],
+   "R3_zone_all": [
+    41,
+    4
+   ],
+   "R3_zone_all_SB": [
+    15,
+    2
+   ]
+  },
+  "51720": {
+   "label": "강원 51720",
+   "R0_current": [
+    88,
+    10
+   ],
+   "R0_current_SB": [
+    45,
+    5
+   ],
+   "R1_protect": [
+    96,
+    10
+   ],
+   "R1_protect_SB": [
+    48,
+    5
+   ],
+   "R2_promo": [
+    131,
+    15
+   ],
+   "R2_promo_SB": [
+    51,
+    6
+   ],
+   "R3_zone_all": [
+    142,
+    15
+   ],
+   "R3_zone_all_SB": [
+    54,
+    6
+   ]
+  },
+  "51730": {
+   "label": "강원 51730",
+   "R0_current": [
+    51,
+    6
+   ],
+   "R0_current_SB": [
+    28,
+    3
+   ],
+   "R1_protect": [
+    55,
+    7
+   ],
+   "R1_protect_SB": [
+    28,
+    3
+   ],
+   "R2_promo": [
+    90,
+    6
+   ],
+   "R2_promo_SB": [
+    42,
+    3
+   ],
+   "R3_zone_all": [
+    95,
+    7
+   ],
+   "R3_zone_all_SB": [
+    42,
+    3
+   ]
+  },
+  "51750": {
+   "label": "강원 51750",
+   "R0_current": [
+    66,
+    8
+   ],
+   "R0_current_SB": [
+    28,
+    9
+   ],
+   "R1_protect": [
+    68,
+    8
+   ],
+   "R1_protect_SB": [
+    29,
+    9
+   ],
+   "R2_promo": [
+    91,
+    9
+   ],
+   "R2_promo_SB": [
+    38,
+    9
+   ],
+   "R3_zone_all": [
+    94,
+    9
+   ],
+   "R3_zone_all_SB": [
+    39,
+    9
+   ]
+  },
+  "51760": {
+   "label": "강원 51760",
+   "R0_current": [
+    160,
+    10
+   ],
+   "R0_current_SB": [
+    74,
+    14
+   ],
+   "R1_protect": [
+    171,
+    10
+   ],
+   "R1_protect_SB": [
+    79,
+    15
+   ],
+   "R2_promo": [
+    195,
+    13
+   ],
+   "R2_promo_SB": [
+    85,
+    11
+   ],
+   "R3_zone_all": [
+    206,
+    11
+   ],
+   "R3_zone_all_SB": [
+    90,
+    12
+   ]
+  },
+  "51770": {
+   "label": "강원 51770",
+   "R0_current": [
+    31,
+    8
+   ],
+   "R0_current_SB": [
+    22,
+    5
+   ],
+   "R1_protect": [
+    31,
+    8
+   ],
+   "R1_protect_SB": [
+    22,
+    5
+   ],
+   "R2_promo": [
+    53,
+    8
+   ],
+   "R2_promo_SB": [
+    34,
+    7
+   ],
+   "R3_zone_all": [
+    53,
+    8
+   ],
+   "R3_zone_all_SB": [
+    34,
+    7
+   ]
+  },
+  "51780": {
+   "label": "강원 51780",
+   "R0_current": [
+    87,
+    8
+   ],
+   "R0_current_SB": [
+    50,
+    8
+   ],
+   "R1_protect": [
+    90,
+    8
+   ],
+   "R1_protect_SB": [
+    51,
+    8
+   ],
+   "R2_promo": [
+    127,
+    5
+   ],
+   "R2_promo_SB": [
+    79,
+    9
+   ],
+   "R3_zone_all": [
+    131,
+    5
+   ],
+   "R3_zone_all_SB": [
+    80,
+    9
+   ]
+  },
+  "51790": {
+   "label": "강원 51790",
+   "R0_current": [
+    27,
+    8
+   ],
+   "R0_current_SB": [
+    20,
+    5
+   ],
+   "R1_protect": [
+    28,
+    9
+   ],
+   "R1_protect_SB": [
+    21,
+    5
+   ],
+   "R2_promo": [
+    33,
+    8
+   ],
+   "R2_promo_SB": [
+    24,
+    8
+   ],
+   "R3_zone_all": [
+    33,
+    8
+   ],
+   "R3_zone_all_SB": [
+    24,
+    8
+   ]
+  },
+  "51800": {
+   "label": "강원 51800",
+   "R0_current": [
+    27,
+    9
+   ],
+   "R0_current_SB": [
+    13,
+    6
+   ],
+   "R1_protect": [
+    29,
+    9
+   ],
+   "R1_protect_SB": [
+    14,
+    6
+   ],
+   "R2_promo": [
+    43,
+    8
+   ],
+   "R2_promo_SB": [
+    20,
+    4
+   ],
+   "R3_zone_all": [
+    44,
+    9
+   ],
+   "R3_zone_all_SB": [
+    21,
+    4
+   ]
+  },
+  "51810": {
+   "label": "강원 51810",
+   "R0_current": [
+    50,
+    6
+   ],
+   "R0_current_SB": [
+    26,
+    6
+   ],
+   "R1_protect": [
+    50,
+    6
+   ],
+   "R1_protect_SB": [
+    26,
+    6
+   ],
+   "R2_promo": [
+    59,
+    6
+   ],
+   "R2_promo_SB": [
+    30,
+    3
+   ],
+   "R3_zone_all": [
+    59,
+    6
+   ],
+   "R3_zone_all_SB": [
+    30,
+    3
+   ]
+  },
+  "51820": {
+   "label": "강원 51820",
+   "R0_current": [
+    43,
+    8
+   ],
+   "R0_current_SB": [
+    30,
+    3
+   ],
+   "R1_protect": [
+    44,
+    8
+   ],
+   "R1_protect_SB": [
+    30,
+    3
+   ],
+   "R2_promo": [
+    58,
+    9
+   ],
+   "R2_promo_SB": [
+    43,
+    4
+   ],
+   "R3_zone_all": [
+    59,
+    9
+   ],
+   "R3_zone_all_SB": [
+    43,
+    4
+   ]
+  },
+  "51830": {
+   "label": "강원 51830",
+   "R0_current": [
+    32,
+    7
+   ],
+   "R0_current_SB": [
+    17,
+    4
+   ],
+   "R1_protect": [
+    32,
+    7
+   ],
+   "R1_protect_SB": [
+    17,
+    4
+   ],
+   "R2_promo": [
+    41,
+    8
+   ],
+   "R2_promo_SB": [
+    19,
+    4
+   ],
+   "R3_zone_all": [
+    41,
+    8
+   ],
+   "R3_zone_all_SB": [
+    19,
+    4
+   ]
+  },
+  "52111": {
+   "label": "전북 52111",
+   "R0_current": [
+    17,
+    4
+   ],
+   "R0_current_SB": [
+    8,
+    3
+   ],
+   "R1_protect": [
+    17,
+    4
+   ],
+   "R1_protect_SB": [
+    8,
+    3
+   ],
+   "R2_promo": [
+    17,
+    4
+   ],
+   "R2_promo_SB": [
+    8,
+    3
+   ],
+   "R3_zone_all": [
+    17,
+    4
+   ],
+   "R3_zone_all_SB": [
+    8,
+    3
+   ]
+  },
+  "52113": {
+   "label": "전북 52113",
+   "R0_current": [
+    23,
+    5
+   ],
+   "R0_current_SB": [
+    7,
+    3
+   ],
+   "R1_protect": [
+    23,
+    5
+   ],
+   "R1_protect_SB": [
+    7,
+    3
+   ],
+   "R2_promo": [
+    40,
+    6
+   ],
+   "R2_promo_SB": [
+    20,
+    4
+   ],
+   "R3_zone_all": [
+    40,
+    6
+   ],
+   "R3_zone_all_SB": [
+    20,
+    4
+   ]
+  },
+  "52130": {
+   "label": "전북 52130",
+   "R0_current": [
+    45,
+    5
+   ],
+   "R0_current_SB": [
+    18,
+    4
+   ],
+   "R1_protect": [
+    52,
+    5
+   ],
+   "R1_protect_SB": [
+    20,
+    4
+   ],
+   "R2_promo": [
+    171,
+    10
+   ],
+   "R2_promo_SB": [
+    98,
+    6
+   ],
+   "R3_zone_all": [
+    178,
+    10
+   ],
+   "R3_zone_all_SB": [
+    100,
+    6
+   ]
+  },
+  "52140": {
+   "label": "전북 52140",
+   "R0_current": [
+    149,
+    11
+   ],
+   "R0_current_SB": [
+    72,
+    10
+   ],
+   "R1_protect": [
+    161,
+    11
+   ],
+   "R1_protect_SB": [
+    75,
+    10
+   ],
+   "R2_promo": [
+    310,
+    15
+   ],
+   "R2_promo_SB": [
+    186,
+    11
+   ],
+   "R3_zone_all": [
+    319,
+    15
+   ],
+   "R3_zone_all_SB": [
+    188,
+    11
+   ]
+  },
+  "52180": {
+   "label": "전북 52180",
+   "R0_current": [
+    91,
+    9
+   ],
+   "R0_current_SB": [
+    39,
+    5
+   ],
+   "R1_protect": [
+    98,
+    9
+   ],
+   "R1_protect_SB": [
+    43,
+    5
+   ],
+   "R2_promo": [
+    228,
+    15
+   ],
+   "R2_promo_SB": [
+    137,
+    17
+   ],
+   "R3_zone_all": [
+    237,
+    15
+   ],
+   "R3_zone_all_SB": [
+    141,
+    17
+   ]
+  },
+  "52190": {
+   "label": "전북 52190",
+   "R0_current": [
+    31,
+    7
+   ],
+   "R0_current_SB": [
+    19,
+    6
+   ],
+   "R1_protect": [
+    33,
+    7
+   ],
+   "R1_protect_SB": [
+    21,
+    6
+   ],
+   "R2_promo": [
+    68,
+    11
+   ],
+   "R2_promo_SB": [
+    44,
+    7
+   ],
+   "R3_zone_all": [
+    72,
+    12
+   ],
+   "R3_zone_all_SB": [
+    47,
+    8
+   ]
+  },
+  "52210": {
+   "label": "전북 52210",
+   "R0_current": [
+    71,
+    10
+   ],
+   "R0_current_SB": [
+    38,
+    9
+   ],
+   "R1_protect": [
+    79,
+    10
+   ],
+   "R1_protect_SB": [
+    42,
+    8
+   ],
+   "R2_promo": [
+    272,
+    10
+   ],
+   "R2_promo_SB": [
+    165,
+    8
+   ],
+   "R3_zone_all": [
+    277,
+    9
+   ],
+   "R3_zone_all_SB": [
+    167,
+    8
+   ]
+  },
+  "52710": {
+   "label": "전북 52710",
+   "R0_current": [
+    71,
+    12
+   ],
+   "R0_current_SB": [
+    30,
+    8
+   ],
+   "R1_protect": [
+    78,
+    11
+   ],
+   "R1_protect_SB": [
+    34,
+    8
+   ],
+   "R2_promo": [
+    100,
+    12
+   ],
+   "R2_promo_SB": [
+    46,
+    8
+   ],
+   "R3_zone_all": [
+    108,
+    11
+   ],
+   "R3_zone_all_SB": [
+    51,
+    8
+   ]
+  },
+  "52720": {
+   "label": "전북 52720",
+   "R0_current": [
+    31,
+    5
+   ],
+   "R0_current_SB": [
+    21,
+    3
+   ],
+   "R1_protect": [
+    34,
+    5
+   ],
+   "R1_protect_SB": [
+    23,
+    3
+   ],
+   "R2_promo": [
+    43,
+    5
+   ],
+   "R2_promo_SB": [
+    30,
+    6
+   ],
+   "R3_zone_all": [
+    48,
+    4
+   ],
+   "R3_zone_all_SB": [
+    33,
+    5
+   ]
+  },
+  "52730": {
+   "label": "전북 52730",
+   "R0_current": [
+    17,
+    7
+   ],
+   "R0_current_SB": [
+    11,
+    6
+   ],
+   "R1_protect": [
+    20,
+    8
+   ],
+   "R1_protect_SB": [
+    12,
+    6
+   ],
+   "R2_promo": [
+    29,
+    8
+   ],
+   "R2_promo_SB": [
+    18,
+    9
+   ],
+   "R3_zone_all": [
+    33,
+    8
+   ],
+   "R3_zone_all_SB": [
+    19,
+    9
+   ]
+  },
+  "52740": {
+   "label": "전북 52740",
+   "R0_current": [
+    39,
+    5
+   ],
+   "R0_current_SB": [
+    22,
+    6
+   ],
+   "R1_protect": [
+    41,
+    5
+   ],
+   "R1_protect_SB": [
+    22,
+    6
+   ],
+   "R2_promo": [
+    59,
+    3
+   ],
+   "R2_promo_SB": [
+    29,
+    5
+   ],
+   "R3_zone_all": [
+    62,
+    3
+   ],
+   "R3_zone_all_SB": [
+    29,
+    5
+   ]
+  },
+  "52750": {
+   "label": "전북 52750",
+   "R0_current": [
+    16,
+    6
+   ],
+   "R0_current_SB": [
+    9,
+    4
+   ],
+   "R1_protect": [
+    18,
+    6
+   ],
+   "R1_protect_SB": [
+    10,
+    4
+   ],
+   "R2_promo": [
+    26,
+    6
+   ],
+   "R2_promo_SB": [
+    13,
+    5
+   ],
+   "R3_zone_all": [
+    28,
+    6
+   ],
+   "R3_zone_all_SB": [
+    14,
+    5
+   ]
+  },
+  "52770": {
+   "label": "전북 52770",
+   "R0_current": [
+    10,
+    4
+   ],
+   "R0_current_SB": [
+    6,
+    3
+   ],
+   "R1_protect": [
+    12,
+    4
+   ],
+   "R1_protect_SB": [
+    6,
+    4
+   ],
+   "R2_promo": [
+    31,
+    7
+   ],
+   "R2_promo_SB": [
+    21,
+    8
+   ],
+   "R3_zone_all": [
+    35,
+    7
+   ],
+   "R3_zone_all_SB": [
+    23,
+    9
+   ]
+  },
+  "52790": {
+   "label": "전북 52790",
+   "R0_current": [
+    49,
+    6
+   ],
+   "R0_current_SB": [
+    34,
+    7
+   ],
+   "R1_protect": [
+    61,
+    6
+   ],
+   "R1_protect_SB": [
+    42,
+    8
+   ],
+   "R2_promo": [
+    113,
+    12
+   ],
+   "R2_promo_SB": [
+    83,
+    12
+   ],
+   "R3_zone_all": [
+    129,
+    12
+   ],
+   "R3_zone_all_SB": [
+    92,
+    12
+   ]
+  },
+  "52800": {
+   "label": "전북 52800",
+   "R0_current": [
+    33,
+    3
+   ],
+   "R0_current_SB": [
+    16,
+    2
+   ],
+   "R1_protect": [
+    44,
+    4
+   ],
+   "R1_protect_SB": [
+    24,
+    3
+   ],
+   "R2_promo": [
+    176,
+    9
+   ],
+   "R2_promo_SB": [
+    124,
+    7
+   ],
+   "R3_zone_all": [
+    186,
+    9
+   ],
+   "R3_zone_all_SB": [
+    131,
+    7
+   ]
+  }
+ }
+}

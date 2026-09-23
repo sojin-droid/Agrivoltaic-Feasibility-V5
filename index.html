@@ -3,16 +3,22 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>PLANiT · 영농형 태양광 V5 — 입지·잠재량 분석</title>
-<meta name="description" content="전국 필지 전수 분석 — 현행 제도의 설치 가능 농지와, 농업진흥지역 개방 시 추가로 열리는 면적·후보를 한눈에 비교.">
+<title>PLANiT · 전국 영농형 태양광 모아보기</title>
+<meta name="description" content="영농형태양광 특별법 시행 전과 시행 후(농업진흥지역 개방 가정)의 설치 가능 농지와 대규모 후보 공간을 전국 필지 전수 분석으로 비교.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=Inter:wght@400;500;700&family=Noto+Sans+KR:wght@400;500;700&family=JetBrains+Mono:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 <link rel="stylesheet" href="assets/v5.css">
+<link rel="stylesheet" href="assets/v55.css">
 <script src="assets/v4.js"></script>
+<script src="assets/v55.js"></script>
 <style>
 .card.local{border-color:var(--gold);background:linear-gradient(180deg,#FFF9E8,#fff)}
+.hero-two{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:28px;align-items:start}
+@media(max-width:960px){.hero-two{grid-template-columns:1fr}}
+.hero-side{background:var(--surface-card,#fff);border:1px solid var(--line);border-radius:16px;padding:16px 18px;font-size:13px}
+.hero-side h3{font-family:var(--serif);color:var(--navy);font-size:15px;margin:0 0 6px}
 </style>
 </head>
 <body>
@@ -31,10 +37,10 @@
       <span class="sector" data-i18n="brand-sector">영농형 태양광</span>
     </a>
     <nav class="menu" id="menu">
-      <a class="active" aria-current="page" href="index.html" data-i18n="nav-index">한눈에 보기</a>
+      <a class="active" aria-current="page" href="index.html" data-i18n="nav-index">전국 모아보기</a>
       <a href="finder.html" data-i18n="nav-finder">후보지 찾기</a>
-      <a href="scenarios.html" data-i18n="nav-scn">정책 시나리오</a>
-      <a href="regions.html" data-i18n="nav-regions">지역별 우선 후보</a>
+      <a href="scenarios.html" data-i18n="nav-scn">시나리오별 결과</a>
+      <a href="regions.html" data-i18n="nav-regions">우리 동네 TOP 10</a>
       <a href="method.html" data-i18n="nav-method">근거와 방법</a>
     </nav>
     <div style="display:flex;gap:12px;align-items:center">
@@ -42,98 +48,117 @@
         <button type="button" data-lang="ko">KO</button>
         <button type="button" data-lang="en">EN</button>
       </div>
-      <a class="nav-cta" href="local.html">우리동네 고르기</a>
+      <a class="nav-cta" href="local.html">우리 동네 분석하기</a>
       <button class="hamburger" aria-label="메뉴 열기" onclick="document.getElementById('menu').classList.toggle('open')">☰</button>
     </div>
   </div>
 </header>
 
-<!-- ═══════════ 히어로 + 비교 박스 ═══════════ -->
+<!-- ═══════════ 히어로 — 시행 전 / 시행 후 시나리오 비교 ═══════════ -->
 <div style="border-bottom:1px solid var(--line)">
   <div class="wrap hero-pad">
-    <p class="eyebrow">영농형 태양광 · 현행 제도와 제약 완화 시나리오 비교</p>
-    <h1>전국 설치 가능 농지 분석</h1>
+    <p class="eyebrow">영농형 태양광 · 특별법 시행 전 / 시행 후 시나리오 비교</p>
+    <h1>전국 영농형 태양광 모아보기</h1>
+    <p class="lede" style="max-width:820px;font-size:clamp(17px,2vw,21px);color:var(--navy);font-weight:600">
+      영농형태양광 특별법에 따라 농업진흥지역에도<br>영농형 태양광을 설치할 수 있게 된다면?</p>
     <p class="lede" style="max-width:820px">
-      전국 농지를 필지 단위로 판정해<sup class="fnref">[1]</sup> 현행 제도의 설치 가능 농지와 농업진흥지역 개방 시 추가로 열리는 면적을 비교함 —
-      분석 기준 필지는 법인·국공유 소유 농지<sup class="fnref">[12]</sup>, 1차 단위는 면적(km²)<sup class="fnref">[13]</sup>.
-    </p>
+      전국의 농지를 필지 단위로 판정해<sup class="fnref">[1]</sup>, <b>특별법 시행 전</b>(농업진흥지역 밖의 농지만)과
+      <b>특별법 시행 후</b>(재생에너지지구로 농업진흥지역이 개방된다고 가정)의 설치 가능 농지를 비교합니다.
+      시행 후 값은 법률의 실제 시행 여부와 무관한 <b>제도 설계 시나리오</b>입니다<sup class="fnref">[10]</sup>.
+      분석 기준 필지는 법인·국공유 소유 농지<sup class="fnref">[12]</sup>, 1차 단위는 면적(km²)<sup class="fnref">[13]</sup>.</p>
 
-    <div class="cmp-grid reveal">
-      <!-- BOX A — 현행 제도 -->
-      <div class="cmp a">
-        <div class="cmp-h"><b>현행 제도 · 개방 전</b><span>R0 · 농업진흥지역 밖의 농지만</span></div>
-        <div class="cmp-big"><span id="a-big">—</span><small>km²</small></div>
-        <div class="cmp-k">조건을 충족하는 <b>필지 면적</b> — <span id="a-n">—</span>필지</div>
-        <div class="cmp-delta muted">기준 — 농업진흥지역 밖의 농지만</div>
-        <div class="cmp-flow">
-          <div class="cmp-row"><span class="lab"><i>1</i>필지 기준 — 판정 통과 면적</span><span class="val"><span id="a-r1">—</span><small> km²</small></span></div>
-          <div class="cmp-row"><span class="lab"><i>2</i>연접 구획 기준 — 21m 이내 병합, 전량</span><span class="val"><span id="a-r2">—</span><small> km² · </small><span id="a-r2n">—</span><small>개</small></span></div>
-          <div class="cmp-row"><span class="lab"><i>3</i>사업 규모 눈금 이상 — 3MW 등가(<span class="sc3">—</span>㎡) 구획</span><span class="val"><span id="a-r3">—</span><small> km² · </small><span id="a-r3n">—</span><small>곳</small></span></div>
-          <div class="cmp-row"><span class="lab"><i>4</i>대규모 후보 — 50MW 등가(1.111km²) 이상</span><span class="val"><span id="a-r4">—</span><small>곳</small></span></div>
+    <div class="hero-two">
+      <div>
+        <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:8px">
+          <span class="v55-scn" aria-label="비교 시나리오"><span id="scn-before">특별법 시행 전</span><span class="on" id="scn-after">특별법 시행 후</span></span>
+          <span style="font-size:12.5px;color:var(--muted)">시행 후 = 농업진흥지역(진흥구역·보호구역) 개방 가정 · 아래 값은 시행 후 기준, 시행 전 대비 증가분 병기</span>
+        </div>
+
+        <!-- 세 카드 — 세로 정렬 · 값은 전부 data_v4 -->
+        <div class="v55-cards" id="cards">
+          <div class="v55-card hi">
+            <div class="k">① 설치 가능 면적 — 판정을 통과한 필지 면적</div>
+            <div class="v"><span id="c1">—</span><small>km²</small></div>
+            <div class="d"><b>+<span id="c1d">—</span> km²</b> 특별법 시행 전 대비<span class="before">시행 전 <span id="c1b">—</span> km² · <span id="c1n">—</span>필지</span></div>
+          </div>
+          <div class="v55-arrow" aria-hidden="true"><svg width="26" height="44" viewBox="0 0 26 44"><path d="M13 2v34" stroke="currentColor" stroke-width="4" stroke-linecap="round"/><path d="M3 28l10 12 10-12" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></svg><span>21m 이내 필지를 이어 붙이면</span></div>
+          <div class="v55-card">
+            <div class="k">② 3MW 이상 설치 가능 면적 — 이어 붙인 후보 공간이 3MW 등가 이상인 곳의 면적</div>
+            <div class="v"><span id="c2">—</span><small>km²</small></div>
+            <div class="d"><b>+<span id="c2d">—</span> km²</b> 시행 전 대비 · 후보 공간 <span id="c2n">—</span>곳<span class="before">시행 전 <span id="c2b">—</span> km² · <span id="c2bn">—</span>곳</span></div>
+          </div>
+          <div class="v55-arrow" aria-hidden="true"><svg width="26" height="44" viewBox="0 0 26 44"><path d="M13 2v34" stroke="currentColor" stroke-width="4" stroke-linecap="round"/><path d="M3 28l10 12 10-12" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></svg><span>그중 대규모 사업이 될 만한 곳은</span></div>
+          <div class="v55-card">
+            <div class="k">③ 50MW 이상 설치 가능 후보 공간</div>
+            <div class="v"><span id="c3">—</span><small>곳</small></div>
+            <div class="d"><b>시행 전 <span id="c3b">—</span>곳 → <span id="c3a">—</span>곳</b><span class="before">합 약 <span id="c3mw">—</span> MW · 1곳 = <span id="c3th">—</span>㎡(≈50MW 등가) 이상의 후보 공간</span></div>
+          </div>
+        </div>
+
+        <div class="v55-flow" aria-label="분석 흐름">
+          <b>필지 판정</b>
+          <svg width="34" height="14" viewBox="0 0 34 14" aria-hidden="true"><path d="M2 7h24" stroke="var(--navy)" stroke-width="3.5" stroke-linecap="round"/><path d="M20 2l8 5-8 5" fill="none" stroke="var(--navy)" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <b>21m 연접 → 후보 공간</b>
+          <svg width="34" height="14" viewBox="0 0 34 14" aria-hidden="true"><path d="M2 7h24" stroke="var(--navy)" stroke-width="3.5" stroke-linecap="round"/><path d="M20 2l8 5-8 5" fill="none" stroke="var(--navy)" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <b>규모 눈금(3MW · 50MW)</b>
+          <span style="font-size:12px;color:var(--muted)">— 붙여도 면적은 그대로, 사업 단위의 개수와 규모가 달라짐</span>
+        </div>
+
+        <div class="v55-verdict" id="verdict">
+          <div class="q">농업진흥지역이 개방된다면?</div>
+          <div class="a" id="one-liner">—</div>
+          <div class="s" id="one-sub">—</div>
+        </div>
+
+        <div style="display:flex;gap:12px;margin-top:22px;flex-wrap:wrap" id="cta">
+          <a class="btn btn-primary" href="finder.html">전국 후보 공간 지도 보기</a>
+          <a class="btn btn-ghost" href="scenarios.html">시나리오별 결과 →</a>
+          <a class="btn btn-ghost" href="local.html">우리 동네 분석하기 →</a>
         </div>
       </div>
-      <div class="cmp-vs" aria-hidden="true">VS</div>
-      <!-- BOX B — 제약 완화 -->
-      <div class="cmp b">
-        <div class="cmp-h"><b>정책 제약 완화 시</b>
-          <span class="cmp-pills" id="b-pills">
-            <button data-c="R1">보호구역 개방 (R1)</button>
-            <button data-c="R2">진흥구역 개방 (R2)</button>
-            <button data-c="R3" class="on">둘 다 개방 (R3)</button>
-          </span></div>
-        <div class="cmp-big">+<span id="b-big">—</span><small>km²</small></div>
-        <div class="cmp-k"><b>추가로 활용 가능한 필지 면적</b> — 합계 <span id="b-tot">—</span> km² · <span id="b-n">—</span>필지</div>
-        <div class="cmp-delta">현행 대비 +<span id="b-pct">—</span>%<small>필지 면적 기준 · ㎡ 원값에서 계산</small></div>
-        <div class="cmp-flow">
-          <div class="cmp-row"><span class="lab"><i>1</i>필지 기준 — 판정 통과 면적</span><span class="val"><span id="b-r1">—</span><small> km²</small><span class="up" id="b-r1d"></span></span></div>
-          <div class="cmp-row"><span class="lab"><i>2</i>연접 구획 기준 — 21m 이내 병합, 전량</span><span class="val"><span id="b-r2">—</span><small> km² · </small><span id="b-r2n">—</span><small>개</small></span></div>
-          <div class="cmp-row"><span class="lab"><i>3</i>사업 규모 눈금 이상 — 3MW 등가(<span class="sc3">—</span>㎡) 구획</span><span class="val"><span id="b-r3">—</span><small> km² · </small><span id="b-r3n">—</span><small>곳</small><span class="up" id="b-r3d"></span></span></div>
-          <div class="cmp-row"><span class="lab"><i>4</i>대규모 후보 — 50MW 등가(1.111km²) 이상</span><span class="val"><span id="b-r4">—</span><small>곳</small><span class="up" id="b-r4d"></span></span></div>
-        </div>
-      </div>
-    </div>
-    <div class="cmp-arrow"><b>필지 기준</b> → <b>연접 구획 기준</b> → <b>규모 눈금 이상</b> · 제약 완화 시 필지 면적 증가분보다
-      규모 눈금 이상 구획의 증가분이 작음</div>
-    <div class="verdict reveal" style="margin-top:18px"><span class="vh">한 줄 결론</span>
-      <span id="one-liner" style="font-size:14.5px;line-height:1.8">—</span></div>
-    <div class="cmp-note" id="cmp-note">—</div>
-    <div style="display:flex;gap:14px;margin-top:22px;flex-wrap:wrap">
-      <a class="btn btn-primary" href="finder.html">전국 후보지 지도 보기</a>
-      <a class="btn btn-ghost" href="scenarios.html">정책 조건을 바꿔 보기 →</a>
-      <a class="btn btn-ghost" href="local.html">우리동네 클러스터 고르기 →</a>
+
+      <aside class="hero-side">
+        <h3>읽을 때 주의</h3>
+        <div class="v55-note" style="margin-bottom:10px">
+          시행 전·후 값은 <b>같은 원장·같은 방법</b>으로 잰 시나리오 비교입니다. "적격"은 이 분석의 판정 조건을 통과한 땅이며 인허가 가능 토지가 아닙니다.
+          MW는 면적 환산 참고값입니다.</div>
+        <div class="v55-note" style="margin-bottom:10px;font-size:12px" id="existing-note"></div>
+        <h3 style="margin-top:12px">자료 기준일</h3>
+        <div id="dates"></div>
+      </aside>
     </div>
   </div>
 </div>
 
-<!-- ═══════════ 네 화면 + 우리동네 ═══════════ -->
+<!-- ═══════════ 상세 화면 ═══════════ -->
 <section id="explore">
   <div class="wrap">
     <div class="sec-head"><div><p class="eyebrow">Explore</p><h2>상세 분석 화면</h2></div>
-      <span style="font-size:12.5px;color:var(--muted)">전국 후보지 · 정책 조건 · 지역 후보 · 우리동네</span></div>
+      <span style="font-size:12.5px;color:var(--muted)">전국 지도 · 시나리오 · 우리 동네 TOP 10 · 우리 동네 분석</span></div>
     <div class="grid">
       <a class="card reveal" href="finder.html">
-        <div class="meta"><span class="tag">FINDER</span><span>전국 지도 · 후보 25곳</span></div>
-        <h3>전국 후보지 분포</h3>
-        <p>대규모 후보 25곳을 전국 지도에서 탐색 — 산업단지·계통 여유 레이어.</p>
+        <div class="meta"><span class="tag">FINDER</span><span>전국 지도 · 대규모 후보 공간</span></div>
+        <h3>대규모 후보 공간 지도</h3>
+        <p>약 50MW 이상 규모의 후보 공간을 전국 지도에서 탐색 — 산업단지·계통 여유·기존 시설(위치 검증분) 레이어.</p>
         <div class="foot"><span>후보지 찾기</span><span>→</span></div>
       </a>
       <a class="card reveal" href="scenarios.html">
         <div class="meta"><span class="tag">SCENARIOS</span><span>조건 조합 · 지역별</span></div>
-        <h3>정책 조건별 변화</h3>
+        <h3>시나리오별 결과</h3>
         <p>진흥·보호구역 개방, 이격, 시행령 조건을 조합해 지역별 결과를 비교.</p>
-        <div class="foot"><span>정책 시나리오</span><span>→</span></div>
+        <div class="foot"><span>시나리오별 결과</span><span>→</span></div>
       </a>
       <a class="card reveal" href="regions.html">
-        <div class="meta"><span class="tag">REGIONS</span><span>시군별 · 공동 1등</span></div>
-        <h3>지역별 우선 검토 후보</h3>
-        <p>시군의 공동 1등 후보를 면적·산단 거리·계통 여유로 번갈아 비교.</p>
-        <div class="foot"><span>지역별 우선 후보</span><span>→</span></div>
+        <div class="meta"><span class="tag">TOP 10</span><span>시군별 · 우선순위 선택</span></div>
+        <h3>우리 동네 TOP 10</h3>
+        <p>발전 규모·계통·산업단지 중 원하는 기준으로 시군 안 후보 공간을 정렬하거나 동시에 비교.</p>
+        <div class="foot"><span>우리 동네 TOP 10</span><span>→</span></div>
       </a>
       <a class="card reveal local" href="local.html">
-        <div class="meta"><span class="tag">LOCAL</span><span>지자체 · 주민 · 활동가</span></div>
-        <h3>우리동네 클러스터 고르기</h3>
-        <p>주소를 넣고 정책 조건을 정해 후보 클러스터와 인쇄용 보고서를 만드는 단계별 도구.</p>
-        <div class="foot"><span>우리동네 분석하기</span><span>→</span></div>
+        <div class="meta"><span class="tag">LOCAL</span><span>지자체 · 주민 · 비영리</span></div>
+        <h3>우리 동네 영농형 태양광, 어디가 좋을까?</h3>
+        <p>지역 이름이나 지번을 넣고 조건과 우선순위를 정하면 후보 공간 지도·표와 인쇄용 보고서를 만드는 단계별 도구.</p>
+        <div class="foot"><span>우리 동네 분석하기</span><span>→</span></div>
       </a>
     </div>
     <p style="font-size:12.5px;color:var(--muted);margin-top:14px">수치·방법·출처 —
@@ -145,54 +170,35 @@
 
 <script>
 (async () => {
-  const [s, res, N] = await Promise.all([
-    V4.data('summary_v4'), V4.data('results_v4'), V4.data('narrative_v4')]);
-  const M = s.matrix['전국'];
-  const R = N.runs, RUN = res.runs;
-  const CELL_RUN = {R0: 'R0_current', R1: 'R1_protect', R2: 'R2_promo', R3: 'R3_zone_all'};
+  const [s, res, N] = await Promise.all([V4.data('summary_v4'), V4.data('results_v4'), V4.data('narrative_v4')]);
+  const M = s.matrix['전국'], RUN = res.runs, R = N.runs;
+  const BEFORE = 'R0', AFTER = 'R3';                                  // 시행 전 = 농업진흥지역 밖의 농지만 · 시행 후 = 농업진흥지역(진흥·보호) 개방 가정
+  const CELL_RUN = {R0: 'R0_current', R3: 'R3_zone_all'};
   const band = (run, ha) => (run.size_bands || []).find(b => Math.abs(b.min_ha - ha) < 0.01) || {n: 0, area_km2: 0};
   const put = (id, v) => { const el = document.getElementById(id); if (el) el.textContent = v; };
-
-  // ── 비교 박스 — 값은 전부 summary(필지)·results(구획·규모 눈금)에서 (새 산정 없음) ──
-  const fill = (p, cell, base) => {
-    const m = M[cell]['정본'], run = RUN[CELL_RUN[cell]];
-    const b3 = band(run, 6.6667), b50 = band(run, 111.1111);
-    put(p + '-r1', V4.km2(m.m2 / 1e6));
-    put(p + '-r2', V4.km2(run.component_area_km2)); put(p + '-r2n', V4.n(run.n_component));
-    put(p + '-r3', V4.km2(b3.area_km2)); put(p + '-r3n', V4.n(b3.n));
-    put(p + '-r4', V4.n(b50.n));
-    // 규모 눈금 표기도 results size_bands(min_ha)에서 — ㎡ = ha × 10,000
-    document.querySelectorAll('.sc3').forEach(e => { e.textContent = V4.n(Math.round(b3.min_ha * 1e4)); });
-    put(p + '-n', V4.n(m.n));
-    if (base) {
-      const m0 = M.R0['정본'], run0 = RUN.R0_current, d = (m.m2 - m0.m2) / 1e6;
-      put('b-big', V4.km2(d)); put('b-tot', V4.km2(m.m2 / 1e6));
-      put('b-pct', V4.km2(100 * (m.m2 - m0.m2) / m0.m2));
-      put('b-r1d', '+' + V4.km2(d));
-      put('b-r3d', '+' + V4.km2(b3.area_km2 - band(run0, 6.6667).area_km2) + ' km²');
-      put('b-r4d', `${V4.n(band(run0, 111.1111).n)} → ${V4.n(b50.n)}`);
-      document.getElementById('cmp-note').innerHTML =
-        `읽는 법 — ① 필지 면적은 판정 조건을 통과한 필지의 합. ② 연접 구획은 21m 이내 필지를 하나로 묶은 것으로
-         병합은 면적을 바꾸지 않으므로 ①과 같은 면적이고(전량 집계, 크기 문턱 없음), 그 대신 <b>구획 수</b>가 사업 단위의 개수를 보여준다.
-         ③·④는 규모 눈금(3MW 등가 ${V4.n(Math.round(b3.min_ha * 1e4))}㎡ · 50MW 등가 ${V4.n(Math.round(b50.min_ha * 1e4))}㎡)을 넘는 구획만 세었을 때의 값 — 0.045 kW/㎡ 환산의
-         읽기 눈금이며 법정 규모 기준이 아니다<sup class="fnref">[13]</sup>. 오른쪽 박스의 조합은 시행 예정 법률(2026-12-17)의
-         재생에너지지구 지정 범위를 전제로 한 <b>가정적 시나리오</b>다<sup class="fnref">[10]</sup>.
-         이격(주거 200m 보수 하한) 적용 시 값은 <a href="scenarios.html#t32" style="color:var(--leaf-deep)">정책 시나리오 표 5</a>.`;
-    }
-  };
-  V4.countup(document.getElementById('a-big'), M.R0['정본'].km2, 1);
-  fill('a', 'R0', false);
-  const setB = c => { fill('b', c, true);
-    document.querySelectorAll('#b-pills button').forEach(b => b.classList.toggle('on', b.dataset.c === c)); };
-  document.querySelectorAll('#b-pills button').forEach(b => b.onclick = () => setB(b.dataset.c));
-  setB('R3');
-
-  // ── 다섯 가지 핵심 결과 (narrative_v4 렌더 — 로직 원문 유지) ──
-  const cpBigRec = N.cp_big.filter(b => b.reclaim_pct >= 50).length;
+  const m0 = M[BEFORE]['정본'], m1 = M[AFTER]['정본'];
+  const r0 = RUN[CELL_RUN[BEFORE]], r1 = RUN[CELL_RUN[AFTER]];
+  const b3_0 = band(r0, 6.6667), b3_1 = band(r1, 6.6667), b50_0 = band(r0, 111.1111), b50_1 = band(r1, 111.1111);
+  // ① 면적 — ㎡ 원값으로 증분 계산(이중 반올림 방지)
+  V4.countup(document.getElementById('c1'), m1.m2 / 1e6, 1);
+  put('c1d', V4.km2((m1.m2 - m0.m2) / 1e6)); put('c1b', V4.km2(m0.m2 / 1e6)); put('c1n', V4.n(m0.n));
+  // ② 3MW 등가 이상 후보 공간 면적·수
+  put('c2', V4.km2(b3_1.area_km2)); put('c2d', V4.km2(b3_1.area_km2 - b3_0.area_km2)); put('c2n', V4.n(b3_1.n));
+  put('c2b', V4.km2(b3_0.area_km2)); put('c2bn', V4.n(b3_0.n));
+  // ③ 50MW 등가 이상 후보 공간 수
+  put('c3', V4.n(b50_1.n)); put('c3b', V4.n(b50_0.n)); put('c3a', V4.n(b50_1.n));
+  put('c3mw', V4.n(R[CELL_RUN[AFTER]].ge50_mw)); put('c3th', V4.n(N.threshold.mw50_m2));
+  // 한 줄 결론 — 간척 부가 설명은 데이터(cp_big · 진흥구역 개방 기준)에서 계산될 때만
+  const cpBigRec = (N.cp_big || []).filter(b => b.reclaim_pct >= 50).length;
   document.getElementById('one-liner').innerHTML =
-    `농업진흥구역이 재생에너지지구로 개방되면, <b>법인·국공유 농지만으로</b> 50MW 이상 구획이
-     전국 <b>${V4.n(R.R0_current.ge50)}곳에서 ${V4.n(R.R2_promo.ge50)}곳
-     (합 약 ${V4.n(R.R2_promo.ge50_mw)}MW)</b>이 되며, 그중 ${V4.n(cpBigRec)}곳이 <b>간척 지구</b>다.`;
+    `<b>50MW 이상 규모의 대규모 후보 공간</b>이 전국 <b>${V4.n(b50_0.n)}곳에서 ${V4.n(b50_1.n)}곳</b>으로 증가`;
+  document.getElementById('one-sub').innerHTML =
+    `법인·국공유 소유 농지만 21m 이내로 이어 붙였을 때의 값(합 약 ${V4.n(R[CELL_RUN[AFTER]].ge50_mw)} MW 등가).` +
+    ((N.cp_big || []).length ? ` 농업진흥구역 개방 기준 ${V4.n(N.cp_big.length)}곳 중 ${V4.n(cpBigRec)}곳은 간척 지구에 있음.` : '') +
+    ` 후보 공간은 21m 연접 공간 분석 단위이며 최종 사업 단위·특구 정의가 아님(자문 후 확정).`;
+  V55.methodButton(document.getElementById('cta'), 'index');
+  document.getElementById('existing-note').textContent = V55.EXISTING_NOTE;
+  V55.dataDates(document.getElementById('dates'), {compact: true});
   V4.footer();
 })();
 </script>

@@ -89,8 +89,7 @@ const V4 = {
       <div class="fn" id="read-note" style="margin-bottom:18px"><b>읽을 때 주의</b> — MW는 토지면적을
       기준으로 환산한 참고값(0.045 kW/㎡)이며 실제 발전량 예측값이 아님. 계통 여유·지역 전력수요
       대비·산업단지 거리는 후보 비교를 위한 참고 지표로, 실제 계통연계·지역 전력자립·직접 PPA
-      가능성을 확정하지 않음. '특구급'은 법적 특구 지정이 아니라 약 50MW 이상(≈1.111km² 이상)
-      규모를 나타내는 분석상 표현(상한 없음). 적격농지는 이 분석의 판정 조건을 통과한 토지이며 최종 인허가 가능
+      가능성을 확정하지 않음. '대규모 후보 공간'은 약 50MW 등가 이상(≈1.111km² 이상)의 21m 연접 공간 분석 단위를 나타내는 분석상 표현(상한 없음)이며 법적 특구 지정·최종 사업 단위가 아님. 적격농지는 이 분석의 판정 조건을 통과한 토지이며 최종 인허가 가능
       토지가 아님. 연접 21m는 데이터에서 유도한 분석 기준이며 법정 기준이 아님.</div>` +
       FN_GROUPS.map(([g, nums]) =>
         `<div class="fn-group">${g}</div><ol class="fnlist">` +
@@ -118,11 +117,11 @@ const V4 = {
         `생성 ${m.generated} · ${m.verification} · ` +
         `소유 구분은 지적 원장의 유형 구분(개인 식별 아님) · ` +
         `수치는 정본 DB 조회값의 export — 페이지 내 재계산 없음</div>` +
-        `<div style="margin-top:6px"><a href="#lineage">자료 계보 →</a> · <a href="local.html">우리동네 클러스터 고르기 →</a> · ` +
+        `<div style="margin-top:6px"><a href="#lineage">자료 계보 →</a> · <a href="local.html">우리 동네 분석하기 →</a> · ` +
         `<a href="#contact">문의</a></div>`
       : `<div>PLANiT Institute · 영농형 태양광 — 데이터 세대 ${String(m.data_generation).split(' · ')[0]} · 생성 ${m.generated} · ` +
         `MW는 면적 환산 참고값 · 적격농지 ≠ 인허가 — ` +
-        `<a href="method.html"><b>출처·방법론은 근거와 방법 →</b></a> · <a href="local.html">우리동네 고르기 →</a></div>`;
+        `<a href="method.html"><b>출처·방법론은 근거와 방법 →</b></a> · <a href="local.html">우리 동네 분석하기 →</a></div>`;
   },
 };
 

@@ -31,12 +31,15 @@ PY = sys.executable
 # 수치 — 서로 독립이라 순서는 읽기 좋은 순
 NUM = ['export_v4.py', 'export_results_v4.py', 'export_narrative_v4.py',
        'export_insights_v4.py', 'export_grid_v4.py', 'export_ind_firms.py',
-       'export_stage_v4.py', 'export_decree_v4.py']
+       'export_stage_v4.py', 'export_decree_v4.py',
+       # V5.5 (GGI 검토 반영) — TOP 10 모집단·비지배 플래그 · PNU 소속 · 기존 시설(VALID)·provenance
+       'export_top10_v4.py', 'export_pnu_v4.py', 'export_existing_v4.py']
 
 # 지오메트리 — **순서가 뜻을 갖는다**
 #   export_clusters_v4 가 끝에 rebuild_cluster_index 를 부른다(걸침 표시 + 색인).
 #   압축은 그 다음이어야 한다 — 먼저 압축하면 색인 단계가 .json 을 못 찾는다.
-GEOM = ['export_clusters_v4.py', 'compress_clusters.py']
+GEOM = ['export_clusters_v4.py', 'compress_clusters.py',
+        'export_units_v4.py']     # V5.5 — 21m 공간 분석 단위 폴리곤(analysis_unit_v1.gpkg → data_v4/units/)
 
 
 def run(rel, layer):
