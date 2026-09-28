@@ -267,7 +267,7 @@ window.V55 = (() => {
     kindLabel(d, sgg = null) { const k = this.kinds(d, sgg); return `일반 태양광 ${n(k.p)}곳 · 영농형 태양광 ${n(k.y)}곳`; },
     layer(d, {pane, sgg = null} = {}) { const g = L.layerGroup(); if (!d) return g;
       const pts = sgg ? d.pts.filter(p => p[6] === sgg) : d.pts;
-      const tip = ([, , kw, t, st, src, , emd]) => `<b>기존 ${t === 'y' ? '영농형 태양광' : '일반 태양광'} 시설</b>${(d.meta.emd_names || {})[emd] ? ' · ' + d.meta.emd_names[emd] : ''}<br>상태: ${d.meta.status_codes[st] || st}${kw ? ` · ${n(kw)} kW` : ''}<br><span style="font-size:11px">출처: ${this.SRC[src] || src}</span>`;
+      const tip = ([, , kw, t, st, src, , emd]) => `<b>기존 ${t === 'y' ? '영농형 태양광' : '일반 태양광'} 시설</b>${(d.meta.emd_names || {})[emd] ? ' · ' + d.meta.emd_names[emd] : ''}<br>상태: ${d.meta.status_codes[st] || st}${kw ? ` · ${n(kw)} kW` : ''}<br><span style="font-size:11px">표시 위치: 허가 자료의 주소(지번) 위치 · 출처: ${this.SRC[src] || src}</span>`;
       if (pts.length <= 3000) {        // 시군 단위 — 태양광 표지(☀). 가동 중이 아닌 곳은 회색
         pts.forEach(p => L.marker([p[1], p[0]], {pane, keyboard: false, icon: L.divIcon({className: 'v55-pv' + (p[3] === 'y' ? ' agri' : '') + (p[4] === 'op' ? '' : ' off'), html: '☀', iconSize: [16, 16], iconAnchor: [8, 8]})})
           .bindTooltip(tip(p)).addTo(g));

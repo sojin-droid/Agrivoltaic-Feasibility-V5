@@ -107,7 +107,7 @@ input[type=range]{width:180px;max-width:100%;accent-color:var(--adv-navy)}
       <details style="margin-top:6px"><summary class="adv-note"><b>자료를 읽을 때 주의할 점</b></summary><ul class="adv-note" style="margin:4px 0 0 18px;padding:0">
         <li>MW — 0.045 kW/㎡를 적용해 면적을 환산한 참고 규모입니다. 실제 설치 가능 용량, 실제 발전량, 실제 계통 접속 가능 용량이 아닙니다.</li>
         <li>계통 — 한전 공표 자료를 바탕으로 한 읍면동 단위 참고값입니다. 후보 공간 자체의 접속 가능 용량을 의미하지 않습니다.</li>
-        <li>기존 태양광 — 위치가 확인된 공개 자료만 표시합니다. 표시되지 않는 시설이 존재할 수 있습니다.</li>
+        <li>기존 태양광 — 발전사업 허가 자료 중 위치를 확인할 수 있는 곳만 표시합니다. 점은 허가 자료에 적힌 <b>주소(지번) 위치</b>이며 패널이 실제로 놓인 자리가 아닙니다 — 정수장·공장처럼 넓은 부지에서는 건물 옥상이나 숲에 찍힐 수 있습니다. 표시되지 않는 시설이 존재할 수 있습니다.</li>
         <li>위성 — 배경 위성영상은 분석에 사용한 원자료의 기준 시점과 다를 수 있으며, 현황 확인을 위한 참고자료입니다.</li>
         <li>규제 — 이 화면에 발행되지 않은 용도지역·주요 규제 레이어는 현재 자문 화면에서 직접 검토할 수 없습니다.</li>
       </ul></details></div>
@@ -158,7 +158,7 @@ input[type=range]{width:180px;max-width:100%;accent-color:var(--adv-navy)}
         <tr><td>산업단지</td><td class="l">V-World 산업단지 경계 (LT_C_DAMDAN · 전국 1,363곳)</td><td>V-World 데이터 API</td><td>2026-08-20</td><td>기록 없음</td><td class="l">가장 가까운 산업단지까지 거리 · 산업단지 경계 레이어</td></tr>
         <tr><td>읍면동 경계</td><td class="l">V-World 읍면동 경계 (LT_C_ADEMD_INFO)</td><td>V-World 데이터 API</td><td>2026-08 (표 생성 2026-08-27)</td><td>기록 없음</td><td class="l">읍면동 경계선 · 계통 여유 채색 — 화면 표시용으로 약 8 m 범위에서 단순화</td></tr>
         <tr><td>법정동 이름</td><td class="l">법정동코드표 (폐지된 코드 포함)</td><td>기록 없음</td><td>기록 없음</td><td>기록 없음 (표 구축 2026-08-19)</td><td class="l">시군·읍면동 이름 · 지번 검색</td></tr>
-        <tr><td>기존 태양광 (지도 점)</td><td class="l">「전국태양광발전소전기사업허가정보표준데이터」 (공공데이터포털 15107742 · 지자체 발전사업 허가 대장) 외</td><td>공공데이터포털 (www.data.go.kr) · www.korec.go.kr</td><td>2026-09-21</td><td>기록 없음</td><td class="l">기존 태양광 시설 점 — 위치를 확인할 수 있는 곳만 · 영농형은 시설 이름에 "영농형"이 적힌 경우만 구분</td></tr>
+        <tr><td>기존 태양광 (지도 점)</td><td class="l">「전국태양광발전소전기사업허가정보표준데이터」 (공공데이터포털 15107742 · 지자체 발전사업 허가 대장) 외</td><td>공공데이터포털 (www.data.go.kr) · www.korec.go.kr</td><td>2026-09-21</td><td>기록 없음</td><td class="l">기존 태양광 시설 점 — 점 위치는 허가 자료에 적힌 주소(지번) 위치(패널 위치 아님) · 위치를 확인할 수 있는 곳만 · 영농형은 시설 이름에 "영농형"이 적힌 경우만 구분</td></tr>
         <tr><td>기존 발전설비 목록</td><td class="l">전력통계정보시스템(EPSIS) 발전설비 목록</td><td>한국전력거래소</td><td>2026-09-21</td><td>기록 없음</td><td class="l">좌표가 없어 지도에 표시하지 않음 — 건수 대조에만 사용</td></tr>
         <tr><td>21m 후보 공간</td><td class="l">본 연구 구축 — 설치 가능 필지를 21m 이내로 이어 묶은 공간 (면적 하한 없음)</td><td>본 연구</td><td>—</td><td>위 자료의 시점을 따름 (구축 2026-09-23 · 자문용 전량 2026-09-28)</td><td class="l">후보 공간 목록·지도·통계</td></tr>
       </table></div>
@@ -372,7 +372,7 @@ input[type=range]{width:180px;max-width:100%;accent-color:var(--adv-navy)}
   let _parSgg = null, _ind = null, _ex = null, _eb = null;
   const EX_SRC = {std_15107742: '공공데이터포털 전국태양광발전소 전기사업허가정보', 'sido_전북2026_15138599': '전라북도 태양광 발전사업 허가 현황(2026)'};
   const exTip = p => { const m = (_ex && _ex.meta) || {}, where = String((m.emd_names || {})[p[7]] || '').replace(/^경기도 /, '');
-    return `<b>기존 ${p[3] === 'y' ? '영농형 태양광' : '일반 태양광'} 시설</b>${where ? ' · ' + esc(where) : ''}<br>상태: ${esc((m.status_codes || {})[p[4]] || p[4])}${p[2] ? ` · 설비용량 ${fmt(p[2], 0)} kW` : ''}<br><span style="font-size:11px">출처: ${esc(EX_SRC[p[5]] || p[5])}</span>`; };
+    return `<b>기존 ${p[3] === 'y' ? '영농형 태양광' : '일반 태양광'} 시설</b>${where ? ' · ' + esc(where) : ''}<br>상태: ${esc((m.status_codes || {})[p[4]] || p[4])}${p[2] ? ` · 설비용량 ${fmt(p[2], 0)} kW` : ''}<br><span style="font-size:11px">표시 위치: 허가 자료의 주소(지번) 위치 · 출처: ${esc(EX_SRC[p[5]] || p[5])}</span>`; };
   // 읍면동 경계는 신 코드(개편 후)라 시군 코드 접두로 거르면 빠지는 곳이 있다(화성 구 신설 등) — 지금 보이는 후보 공간 범위와 겹치는 경계를 쓴다
   // 표시용 읍면동 경계: grid_emd 는 전국 채색용(150 m 단순화)이라 확대하면 이웃 경계가 어긋난다 — 같은 원천을 경계 공유 유지(8 m)로 만든 자문 전용 경계를 쓴다(없으면 기존 도형)
   let _pb = null;
