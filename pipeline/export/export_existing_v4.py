@@ -2,7 +2,8 @@
 """기존 태양광 시설(위치 검증 VALID 만) · 시군별 품질 집계 · provenance 기준일 export (V5.5 · GGI 검토 §21·§22·§23).
 
 ADR-0053: 공간 표시는 spatial_attribution_status = VALID 만. CONDITIONAL·UNVERIFIED·UNKNOWN 은 **건수로만** 병기(보조 표기).
-  existing_pv_v4.json.gz  { pts: [[lon, lat, kw|null, type, status_code, src]] (VALID · 좌표 EPSG:5186 → WGS84) ,
+  existing_pv_v4.json.gz  { pts: [[lon, lat, kw|null, type, status_code, src, sgg5, emd8]] (VALID · 좌표 EPSG:5186 → WGS84) ,
+                            meta.emd_names = {emd8: 법정동코드표의 읍면동 이름} — 지도 표지에 소재 읍면동을 적기 위함(시설 이름은 싣지 않는다: 개인 이름이 섞여 있음)
                             by_sgg: { sgg5: {n, valid, cond, unver, unk, yeongnong, kw_known} } , meta }
   provenance_v4.json      provenance_v1 의 dataset 단위 수집일·원천 판·완전성 판정 — 화면의 "자료 기준일" 은 이 값만 쓴다(추정 금지).
 전수 조사가 아니다 — existing_pv_v1 은 확보된 공개 자료(KPX·허가 대장·시도 공개분)의 합이며 전국 기존 설비 전수가 아니다(ADR-0051 L9).
@@ -19,14 +20,14 @@ DB = os.path.join(LR, 'agrivoltaic_ledger_v1.duckdb')
 con = duckdb.connect(DB, read_only=True)
 T = Transformer.from_crs(5186, 4326, always_xy=True)
 
-valid = con.execute("""SELECT e.x, e.y, e.capacity_kw, e.pv_type, e.status, e.src, e.sgg5
+valid = con.execute("""SELECT e.x, e.y, e.capacity_kw, e.pv_type, e.status, e.src, e.sgg5, e.emd8
                        FROM spatial_attribution_v1 s JOIN existing_pv_v1 e ON e.site_id = s.entity_id
                        WHERE s.spatial_attribution_status = 'VALID' AND e.x IS NOT NULL AND e.y IS NOT NULL""").fetchall()
 ST = {'정상가동': 'op', '정상운영': 'op', '사업개시': 'op', '가동중단': 'stop', '폐기': 'closed', '폐업': 'closed', '인허가취소': 'closed'}
 pts = []
-for x, y, kw, t, st, src, sgg in valid:
+for x, y, kw, t, st, src, sgg, emd in valid:
     lon, lat = T.transform(float(x), float(y))
-    pts.append([round(lon, 5), round(lat, 5), (None if kw is None else round(float(kw))), ('y' if t == '영농형' else 'u' if t == 'unknown' else 'p'), ST.get(st, 'other' if st and st != 'not_in_source' else 'unk'), src, sgg])
+    pts.append([round(lon, 5), round(lat, 5), (None if kw is None else round(float(kw))), ('y' if t == '영농형' else 'u' if t == 'unknown' else 'p'), ST.get(st, 'other' if st and st != 'not_in_source' else 'unk'), src, sgg, emd])
 by = {}
 for sgg, n, v, c, u, k, yn, kwk in con.execute("""
     SELECT e.sgg5, COUNT(*), COUNT(*) FILTER (s.spatial_attribution_status='VALID'), COUNT(*) FILTER (s.spatial_attribution_status='CONDITIONAL'),
@@ -42,13 +43,20 @@ meta = {'generated': datetime.datetime.now().strftime('%Y-%m-%d %H:%M'), 'n_reco
         'coverage_note': '전국 기존 설비 전수가 아니다 — KPX·발전사업 허가 대장·시도 공개분의 합(ADR-0051 L9). 영농형 구분은 원천 표기가 있는 행만.',
         'status_codes': {'op': '가동·개시', 'stop': '가동중단', 'closed': '폐기·폐업·취소', 'other': '허가·공사 등', 'unk': '원천에 상태 없음'},
         'type_codes': {'p': '태양광', 'y': '영농형', 'u': '미상'}}
+_emds = sorted({p[7] for p in pts if p[7]})
+meta['emd_names'] = dict(con.execute("SELECT SUBSTR(code10,1,8), name_full FROM bjd_code WHERE SUBSTR(code10,9,2)='00' AND SUBSTR(code10,1,8) IN (" + ','.join("'%s'" % e for e in _emds) + ")").fetchall())
+print(f"읍면동 이름 {len(meta['emd_names'])}/{len(_emds)}")
 with gzip.open(os.path.join(SITE, 'data_v4', 'existing_pv_v4.json.gz'), 'wt', encoding='utf-8') as fo:
     json.dump({'meta': meta, 'pts': pts, 'by_sgg': by}, fo, ensure_ascii=False, separators=(',', ':'))
 print(f"existing_pv_v4: VALID 점 {len(pts):,} · 시군 집계 {len(by)} · 원천 {tot[2]} · 총 {tot[0]:,}행(영농형 표기 {tot[1]})")
 
-prov = con.execute("""SELECT dataset_id, kind, provider, source_name, collection_date, collection_date_basis, original_source_version,
-                             internal_snapshot_version, provenance_status, layer, is_canon FROM provenance_v1 ORDER BY dataset_id""").fetchall()
-cols = ['dataset_id', 'kind', 'provider', 'source_name', 'collection_date', 'collection_date_basis', 'original_source_version', 'internal_snapshot_version', 'provenance_status', 'layer', 'is_canon']
+# 감사 F-10·F-18 — 날짜·판을 의미별로 따로 싣는다: 수집일(collection_date) · 취득 시각(retrieved_at) · 공식 릴리스(source_release_version)
+#   · 내부 스냅숏(internal_snapshot_version) · 구축일(built_at) · 변환(transform_version). 화면은 이 구분을 그대로 보인다.
+cols = ['dataset_id', 'kind', 'asset_class', 'provider', 'source_name', 'collection_date', 'collection_date_basis', 'retrieved_at',
+        'original_source_version', 'source_release_version', 'source_reference_date', 'reference_basis',
+        'internal_snapshot_version', 'built_at', 'transform_version',
+        'checksum_kind', 'provenance_status', 'layer', 'is_canon']
+prov = con.execute("SELECT " + ", ".join(cols) + " FROM provenance_v1 ORDER BY dataset_id").fetchall()
 json.dump({'generated': meta['generated'], 'source': 'provenance_v1 (v9_01_quality_gate.py · ADR-0053) — 값을 지어내지 않는다: 없으면 unknown',
            'cols': cols, 'rows': [list(r) for r in prov]},
           open(os.path.join(SITE, 'data_v4', 'provenance_v4.json'), 'w', encoding='utf-8'), ensure_ascii=False, indent=0)

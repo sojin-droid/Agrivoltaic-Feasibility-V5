@@ -30,12 +30,12 @@
 .v55-flow b{color:var(--navy)}
 .v55-flow svg{flex:none}
 .v55-verdict{background:var(--sky);border:1px solid var(--line);border-left:6px solid var(--navy);border-radius:12px;padding:22px 26px;margin-top:26px;max-width:760px}
-.v55-verdict .q{font-family:var(--serif);color:var(--navy);font-size:clamp(18px,2.2vw,24px);font-weight:700;margin-bottom:8px}
+.v55-verdict .q{font-family:var(--serif);color:var(--navy);font-size:clamp(18px,2.2vw,24px);font-weight:700;margin-bottom:8px;word-break:keep-all}
 .v55-verdict .a{font-size:clamp(16px,2vw,20px);line-height:1.6;color:var(--ink)}
 .v55-verdict .a b{color:var(--navy)}
 .v55-verdict .s{font-size:12.5px;color:var(--muted);margin-top:10px;line-height:1.6}
 .v55-scn{display:inline-flex;gap:0;border:1.5px solid var(--navy);border-radius:999px;overflow:hidden;font-size:12.5px;font-weight:700}
-.v55-scn span{padding:5px 12px;color:var(--navy)}
+.v55-scn span{padding:5px 12px;color:var(--navy);word-break:keep-all}
 .v55-scn span.on{background:var(--navy);color:#fff}
 
 /* ── 범례(규모·계통 분리) ── */
@@ -81,8 +81,8 @@ table.v55-top .rk{font-family:var(--serif);font-weight:700;color:var(--navy);fon
 table.v55-top .cmp{display:inline-block;font-size:11px;font-weight:700;padding:1px 8px;border-radius:999px;background:var(--navy);color:#fff}
 table.v55-top .unk{color:var(--muted)}
 table.v55-top td.hi{background:#FFF6D6}
-.v55-mk{display:flex;align-items:center;justify-content:center;font:700 11px/1 var(--mono,monospace);color:#fff;background:var(--navy);border:1.5px solid #fff;border-radius:50%;box-shadow:0 1px 3px #0005;pointer-events:none}
-.v55-mk.cmp{background:#fff;color:var(--navy);border-color:var(--navy)}
+.v55-mk{display:flex;align-items:center;justify-content:center;font:900 13px/1 var(--sans,sans-serif);color:var(--navy);background:#fff;border:2px solid var(--navy);border-radius:50%;box-shadow:0 0 0 2px #fff,0 1px 5px #0009;pointer-events:none}   /* 후보 공간(남색 강조) 위에서도 읽히게 흰 바탕 · 남색 숫자 (2026-09-28) */
+.v55-mk.cmp{border-style:dashed}   /* 주요 비교 후보 = 표의 줄 번호(순위 아님) — 점선 테두리로 구분 */
 @media(max-width:820px){table.v55-top{font-size:12px}table.v55-top th,table.v55-top td{padding:6px 6px}}
 
 /* ── PNU 결과 카드 ── */
@@ -109,3 +109,15 @@ table.v55-top td.hi{background:#FFF6D6}
 .fs-map .leaflet-control-zoom{margin-right:14px;margin-top:14px}
 .fs-map .leaflet-top.leaflet-right>*:nth-child(2){margin-top:8px}
 #localMap .leaflet-control-zoom,#recMap2 .leaflet-control-zoom{margin-right:12px}
+
+/* 폰 폭 표: 첫 열(시나리오 이름)이 42px 로 눌려 한 글자씩 세로로 쌓이던 문제 — 최소 폭을 주고 표는 감싼 상자 안에서 가로 스크롤 (2026-09-28 모바일 검수) */
+@media (max-width:640px){table.v4 th.l,table.v4 td.l{min-width:9.5em;word-break:keep-all}table.v4 th{word-break:keep-all}}
+/* 시나리오 이름이 들어가는 짧은 라벨(세그먼트 버튼 · 절 제목 옆 부제)도 단어 단위로 줄바꿈 (2026-09-28 "포함" 통일 후 검수) */
+.seg button,.sec-head span,.step-title span{word-break:keep-all}
+.v55-verdict .s{word-break:keep-all}   /* 결론 아래 설명문 — 단어 단위 줄바꿈 */
+.res-card .k,.scn-btns button,.scn-btns button small,.leg,.hint-s{word-break:keep-all}   /* 결과 카드 제목·지도 버튼·범례 — 단어 단위 줄바꿈 */
+/* 기존 태양광 시설 표지 — 후보 공간(금색·주황)과 겹치지 않게 남색 바탕에 노란 해 · 가동 중이 아니면 회색 (2026-09-28) */
+.v55-pv{display:flex;align-items:center;justify-content:center;width:16px;height:16px;border-radius:50%;background:#12305A;color:#FFC21A;font-size:11px;line-height:1;border:1px solid #fff;box-shadow:0 0 2px #0008}
+.v55-pv.off{background:#7A7A7A;color:#E6E6E6}
+.leaflet-marker-icon.v55-mk,.leaflet-marker-icon.v55-pv{display:flex!important}   /* leaflet 의 display:block 이 가운데 정렬을 깨지 않게 — 지도 표지에만 */
+.v55-pv.agri{background:#1F6F43;color:#FFE27A}   /* 영농형 태양광 — 초록 바탕 */

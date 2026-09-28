@@ -7,7 +7,8 @@
 <meta name="description" content="시·군 또는 읍·면·동 이름, PNU·지번을 넣고 제도 조건과 우선순위를 정하면 우리 동네의 영농형 태양광 후보 공간을 지도·표로 확인하고 인쇄용 보고서를 만드는 단계별 도구.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=Inter:wght@400;500;700&family=Noto+Sans+KR:wght@400;500;700&family=JetBrains+Mono:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=Inter:wght@400;500;700&family=JetBrains+Mono:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/vendor/pretendard/pretendardvariable-dynamic-subset.css">
 <link rel="stylesheet" href="style.css">
 <link rel="stylesheet" href="assets/v5.css">
 <link rel="stylesheet" href="assets/v55.css">
@@ -111,7 +112,7 @@
       <h3 class="rpt-h">5. 지도</h3>
       <div class="no-print" style="margin-bottom:6px">
         <label class="tglrow"><input type="checkbox" id="emdTgl" checked> 읍·면·동 경계(배경)</label>
-        <label class="tglrow"><input type="checkbox" id="exTgl"> 기존 태양광 시설(위치 검증 VALID)</label></div>
+        <label class="tglrow"><input type="checkbox" id="exTgl"> <span class="v55-pv" style="display:inline-flex;vertical-align:-3px">☀</span> 기존 태양광 시설 <span id="exCnt" style="color:var(--muted);font-size:12px"></span></label></div>
       <div id="localMap"></div>
       <div id="mapLegend"></div>
       <div class="fn" id="rMapCap" style="margin-top:6px">—</div>
@@ -120,9 +121,8 @@
       <h3 class="rpt-h">6. 방법론</h3>
       <div style="font-size:13.5px;line-height:1.8;word-break:keep-all" id="rMethod">—</div>
 
-      <h3 class="rpt-h">7. 데이터·분석 기준 · 자료 기준일</h3>
+      <h3 class="rpt-h">7. 데이터·분석 기준</h3>
       <div style="font-size:13px;line-height:1.8;word-break:keep-all" id="rBasis">—</div>
-      <div id="dates" style="margin-top:8px"></div>
       <div class="v55-note" style="margin-top:10px" id="exNote"></div>
     </div>
   </div>
@@ -140,9 +140,9 @@
   const IDX = await V55.top10.index();
   const have = new Set(Object.keys(IDX.sgg));
   const EX = await V55.existing.load();
+  const BIG = await V4.data('big_sgg_v4').catch(() => null);   // 시군별 후보 공간 전량(면적 문턱 없음)
   V55.methodButton($('landBtns'), 'local'); V55.methodButton($('rBtns'), 'local');
   $('exNote').textContent = V55.EXISTING_NOTE;
-  V55.dataDates($('dates'));
 
   // ── 상태 ──
   const st = {sgg: null, emd: null, scn: 'R2_promo', sb: false, axes: new Set(['a']), minM2: 66667, step: 1, lab: null};
@@ -181,8 +181,8 @@
       html = `<h2>제도 조건</h2><p class="sub">현행 제도에서는 농업진흥지역 밖의 농지만 설치할 수 있습니다. 영농형태양광 특별법 시행 후 재생에너지지구 지정 범위를 어떻게 설계하느냐에 따라 농업진흥구역·농업보호구역이 열릴 수 있습니다 — 확정 제도가 아닌 가정입니다.</p>
         <div class="opts">
         ${opt('scn', 'R0_current', '특별법 시행 전', '농업진흥지역이 아닌 농지(현행)', st.scn === 'R0_current')}
-        ${opt('scn', 'R2_promo', '특별법 시행 후 · 농업진흥구역 개방', '대규모 후보 공간은 이 조건에서 나타남', st.scn === 'R2_promo')}
-        ${opt('scn', 'R3_zone_all', '특별법 시행 후 · 농업진흥지역 전체 개방', '진흥구역과 보호구역 모두 포함', st.scn === 'R3_zone_all')}</div>` + nav(true);
+        ${opt('scn', 'R2_promo', '특별법 시행 후 · 농업진흥구역에도 설치 가능', '대규모 후보 공간은 이 조건에서 나타남', st.scn === 'R2_promo')}
+        ${opt('scn', 'R3_zone_all', '특별법 시행 후 · 농업진흥구역·농업보호구역에도 설치 가능', '진흥구역과 보호구역 모두 설치 가능', st.scn === 'R3_zone_all')}</div>` + nav(true);
     } else if (step === 3) {
       html = `<h2>주거 이격</h2><p class="sub">이격거리 상한제(주거 200m)를 전국 일률 보수 하한으로 적용한 값만 산출되어 있습니다<sup class="fnref">[11]</sup>.</p>
         <div class="opts">${opt('sb', '0', '미적용', '이격 조건 없이 전량', !st.sb)}${opt('sb', '1', '적용', '주거 200m 보수 하한 — 대상 필지 제외', st.sb)}
@@ -191,7 +191,7 @@
       html = `<h2>우선순위</h2><p class="sub">발전 규모·계통 여유·산업단지 거리 중 원하는 기준을 고르세요(복수 선택). 1개면 그 기준의 순위, 2개 이상이면 모든 기준에서 밀리지 않는 주요 비교 후보를 보입니다. 새 점수나 가중치는 없습니다.</p><div id="axesL"></div>` + nav(true);
     } else if (step === 5) {
       html = `<h2>어느 정도 규모부터 볼까요?</h2><p class="sub">선택한 규모 이상의 후보 공간만 표에 올립니다. 표시 범위이며 후보 공간을 만들거나 지우지 않습니다(0.045 kW/㎡ 환산 읽기 눈금).</p>
-        <div class="opts">${[[66667, '3 MW'], [222222, '10 MW'], [444444, '20 MW'], [1111111, '50 MW']].map(([m, l]) => opt('min', String(m), l + ' 이상', m === 66667 ? '기본값' : `${(m / 1e4).toLocaleString('ko-KR')} ha 등가 이상`, st.minM2 === m)).join('')}</div>` + nav(true, '다음 → 확인');
+        <div class="opts">${[[66667, '3 MW'], [222222, '10 MW'], [444444, '20 MW'], [1111111, '50 MW']].map(([m, l]) => opt('min', String(m), l + ' 이상', m === 66667 ? '기본값' : `${(m / 1e4).toLocaleString('ko-KR')} ha 이상`, st.minM2 === m)).join('')}</div>` + nav(true, '다음 → 확인');
     } else {
       html = `<h2>분석 실행</h2><p class="sub">아래 조건으로 후보 공간을 찾습니다.</p><ul class="summary-box">${condList().map(c => `<li>${c}</li>`).join('')}</ul>` + nav(true, '우리 동네 분석하기');
     }
@@ -209,7 +209,7 @@
   function condList() { const S = V55.scn(runName());
     return [`제도: ${S.short}`, `주거 이격 200m: ${st.sb ? '적용(보수 하한)' : '미적용'}`,
             `우선순위: ${st.axes.size ? [...st.axes].sort().map(k => AXN[k]).join(' + ') + (st.axes.size === 1 ? ' — 정렬 순위' : ' — 주요 비교 후보(비지배)') : '미선택 — 면적순 표시'}`,
-            `최소 표시 규모: ${V55.mw(st.minM2)} MW 등가 이상 — 표시 범위(후보 공간 생성에는 영향 없음)`,
+            `최소 표시 규모: ${V55.mw(st.minM2)} MW 이상 — 표시 범위(후보 공간 생성에는 영향 없음)`,
             `분석 기준 필지: 법인·국공유 소유 농지(개인 소유 제외) · 후보 공간 = 21m 연접 단위`]; }
 
   // ── 실행 ──
@@ -218,7 +218,7 @@
     $('wizard').style.display = 'none'; $('result').style.display = '';
     const rn = runName(), where = nameOf(st.sgg) + (st.emd ? ` › ${st.emd.name}` : ''), S = V55.scn(rn);
     put('rTitle', `${where} — 후보 공간 분석`);
-    put('rStamp', `PLANiT Institute · 데이터 ${String(meta.data_generation).replace(/정본 우주/g, '분석 기준 필지')} · 생성 ${meta.generated} · 보고서 작성 ${new Date().toLocaleDateString('ko-KR')}`);
+    put('rStamp', `PLANiT Institute · 데이터 ${String(meta.data_generation).replace(/정본 우주/g, '분석 기준 필지')} · TOP 10 자산 생성 ${(await V55.top10.index()).generated} · 수치 요약(meta_v4) 생성 ${meta.generated} · 보고서 작성 ${new Date().toLocaleDateString('ko-KR')}`);
     put('rArea', `<b>${nameOf(st.sgg)}</b>${st.emd ? ` › <b>${st.emd.name}</b> (읍·면·동 경계는 지도 배경으로 강조 — 면적·후보 수는 시군 단위 산출)` : ''} · 시군 코드 ${st.sgg}`);
     put('rCond', condList().map(c => `<li>${c}</li>`).join(''));
     // 요약 — 필지 면적은 estimate 큐브(정본 우주 · 같은 조건), 후보 공간 수는 top10 모집단(정본 block_context)
@@ -228,18 +228,21 @@
     const cur = agg(promo, prot), base = agg(false, false), d = (cur.m2 - base.m2) / 1e6;
     const data = await V55.top10.load(st.sgg);
     const rowsAll = V55.top10.rows(data, rn, 0) || [], rows = rowsAll.filter(r => r.a >= st.minM2);
+    const nAll = BIG && BIG.runs[rn] && BIG.runs[rn].all_sgg ? BIG.runs[rn].all_sgg[st.sgg] : null;   // 면적 문턱 없는 전량
     const sel = V55.top10.select(rows, st.axes, 10, {fronts: data.runs[rn] && data.runs[rn].fronts, minM2: st.minM2});
     put('rCards', `
-      <div class="res-card hi"><div class="k">후보 공간</div><div class="v">${V4.n(rows.length)}<small>곳</small></div><div class="d">${V55.mw(st.minM2)} MW 등가 이상 · 시군 관여 후보 공간 ${V4.n(rowsAll.length)}곳 중</div></div>
+      <div class="res-card hi"><div class="k">후보 공간</div><div class="v">${V4.n(rows.length)}<small>곳</small></div><div class="d">${V55.mw(st.minM2)} MW 이상${nAll != null ? ` · 이 시군의 후보 공간 ${V4.n(nAll)}곳 중` : ''}</div></div>
       <div class="res-card"><div class="k">후보 필지 면적</div><div class="v">${km2(cur.m2)}<small> km²</small></div><div class="d">${V4.n(cur.n)}필지 · 참고 ${V55.mw(cur.m2)} MW</div></div>
       <div class="res-card"><div class="k">특별법 시행 전 대비</div><div class="v">${d === 0 ? '기준' : (d > 0 ? '+' : '') + km2(d * 1e6, 1) + '<small> km²</small>'}</div><div class="d">같은 이격 조건에서 시행 전(농업진흥지역 밖의 농지만)과 비교</div></div>
-      <div class="res-card"><div class="k">3MW 이상</div><div class="v">${V4.n(rowsAll.filter(r => r.a >= 66667).length)}<small>곳</small></div><div class="d">66,667㎡ 이상 후보 공간 · 읽기 눈금</div></div>
+      <div class="res-card"><div class="k">3MW 이상</div><div class="v">${V4.n(rowsAll.filter(r => r.a >= 66667).length)}<small>곳</small></div><div class="d">66,667㎡ 이상 · 법정 기준 아님</div></div>
       <div class="res-card"><div class="k">50MW 이상</div><div class="v">${V4.n(rowsAll.filter(r => r.a >= 1111111).length)}<small>곳</small></div><div class="d">1,111,111㎡ 이상 · 법정 기준 아님</div></div>`);
     put('rCtl', `대조군(개인 포함 · 같은 조건) ${km2(cur.cM2)} km² — 분석 기준 필지는 그 ${cur.cM2 ? (100 * cur.m2 / cur.cM2).toFixed(1) : '—'}% (대조군은 정책 값 아님 · 병기). 조건 <b>${S.short}</b>. 시군 경계에 걸친 후보 공간은 관여 시군마다 나타나므로 시군별 수를 더하지 않음.`);
     // 표
-    $('rTblH').textContent = `4. ${sel.mode === 'rank' ? `${AXN[sel.axis]} 기준 TOP ${sel.list.length}` : sel.mode === 'compare' ? `주요 비교 후보 ${sel.list.length}곳 (${sel.axes.map(k => AXN[k]).join(' · ')})` : '후보 공간 — 면적순'} (${V55.mw(st.minM2)} MW 등가 이상)`;
+    $('rTblH').textContent = `4. ${sel.mode === 'rank' ? `${AXN[sel.axis]} 기준 TOP ${sel.list.length > 10 ? `10 (동률 포함 ${sel.list.length}곳)` : sel.list.length}` : sel.mode === 'compare' ? `주요 비교 후보 ${sel.list.length}곳 (${sel.axes.map(k => AXN[k]).join(' · ')})` : '후보 공간 — 면적순'} (${V55.mw(st.minM2)} MW 등가 이상)`;
     put('rMode', `<b>읽는 법</b> — ${sel.note}`);
-    V55.top10.table($('recTblL'), sel, rows, {nameOf, pickId: st.lab, onPick: r => pick(r)});
+    const miss = rn === 'R2_promo' ? new Set(((await V4.data('units_index')).missing || []).map(m => m.lab)) : null;
+    const drawTable = qual => V55.top10.table($('recTblL'), sel, rows, {nameOf, pickId: st.lab, onPick: r => pick(r), qual, missing: miss});
+    drawTable(null);
     const unk = sel.mode === 'rank' ? rows.filter(r => r[V55.top10.AXES[sel.axis].key] == null) : [];
     put('rExplain', `${unk.length ? `<b>값을 알 수 없는 후보</b>(${AXN[sel.axis]} 결측 · 숨기지 않음): ${unk.slice(0, 12).map(r => `#${r.lab} ${V55.km2(r.a, 2)} km²`).join(' · ')}${unk.length > 12 ? ` 외 ${unk.length - 12}곳` : ''}.<br>` : ''}
       계통 여유 = 소재 읍면동 잔여 연계가능용량 하한(한전 연계정보 스냅숏) — 참고지표이며 실제 접속 가능 용량이 아님<sup class="fnref">[22]</sup> · 산단 거리 = 최근접 산업단지 경계까지 직선거리<sup class="fnref">[23]</sup> · 전력판매량 대비 = MW × 1,314h ÷ 시군 연간 전력판매량(표기 전용)<sup class="fnref">[28]</sup>.`);
@@ -254,23 +257,26 @@
     const fc = rn === 'R2_promo' ? await V55.units.load(st.sgg) : await V55.units.loadRun(st.sgg, rn);
     const ids = new Set(sel.list.map(r => r.lab));
     let bounds = null;
-    if (fc) { const L1 = V55.units.layer(fc, {pane: 'unitPane', dimBelow: st.minM2, highlight: ids, onClick: p => { const r = rows.find(x => x.lab === p.id); if (r) pick(r); }}); lyrUnits.addLayer(L1); bounds = L1.getBounds(); }
+    // 기하 품질 검토 도형은 인쇄용 보고서에서도 정상 도형과 섞지 않는다 — 기본 숨김, 표에는 상태를 적는다(F-04)
+    if (fc) { const L1 = V55.units.layer(fc, {pane: 'unitPane', dimBelow: st.minM2, highlight: ids, showReview: false, onClick: p => { const r = rows.find(x => x.lab === p.id); if (r) pick(r); }}); lyrUnits.addLayer(L1); if (L1.getLayers().length) bounds = L1.getBounds();
+      if (rn === 'R2_promo') drawTable(V55.units.quality(fc)); }
     const emd = await Region.emdIndex();
     emd.filter(e => e.sgg === st.sgg).forEach(e => L.geoJSON(e.feat, {pane: 'emdPane', interactive: false, style: {color: '#fff', weight: 1.2, dashArray: '4 4', fill: false, opacity: .8}}).addTo(lyrEmd));
     if (st.emd) { const e = L.geoJSON(st.emd.feat, {pane: 'emdPane', interactive: false, style: {color: '#B3261E', weight: 2.5, fill: false, dashArray: '6 4'}}).addTo(lyrEmd); bounds = e.getBounds(); }
     if (EX) V55.existing.layer(EX, {pane: 'exPane', sgg: st.sgg}).addTo(lyrEx);
     $('exSum').innerHTML = V55.existing.summaryHTML(EX, st.sgg);
+    $('exCnt').textContent = EX ? `(${V55.existing.kindLabel(EX, st.sgg)})` : '';
     const coords = V55.top10.markers(lyrMk, sel, {onPick: r => pick(r)});
     $('mapLegend').innerHTML = V55.legendHTML(V55.MW_BANDS, '후보 공간 규모(참고 MW)');
-    put('rMapCap', `채움 = 후보 공간 규모 · 굵은 남색 테두리 = 표에 오른 후보 · 흐린 회색 = 최소 표시 규모 미만(숨기지 않음) · 흰 점선 = 읍·면·동 경계(배경${st.emd ? ' · 붉은 점선 = 선택 읍면동' : ''}) · ${rn === 'R2_promo' ? '도형 = 21m 연접 단위(지적 합집합 · 2m 단순화 · 경계로 자르지 않음)' : '도형 = 등재 런의 시군 구간 폴리곤(15m 단순화) · 점선 = 시군 경계 걸침'} · 위성 배경 © Esri<sup class="fnref">[19]</sup>.`);
+    put('rMapCap', `채움 = 후보 공간 규모 · 굵은 남색 테두리 = 표에 오른 후보 · 흐린 회색 = 최소 표시 규모 미만(숨기지 않음) · 흰 점선 = 읍·면·동 경계(배경${st.emd ? ' · 붉은 점선 = 선택 읍면동' : ''}) · ${rn === 'R2_promo' ? '도형 = 21m 연접 단위(지적 합집합 · 2m 단순화 · 경계로 자르지 않음)' : '도형 = 등재 런의 시군 구간 폴리곤(15m 단순화) · 점선 = 시군 경계 걸침'}${rn === 'R2_promo' && V55.units.reviewCount(fc) ? ` · 기하 품질 검토 도형 ${V55.n(V55.units.reviewCount(fc))}개(도형 면적 ≠ 장부 면적)는 지도에서 빼고 표에 상태를 적음` : ''} · 위성 배경 © Esri<sup class="fnref">[19]</sup>.`);
     setTimeout(() => { map.invalidateSize(); if (st.lab && rows.find(r => r.lab === st.lab)) pick(rows.find(r => r.lab === st.lab)); else if (bounds && bounds.isValid()) map.fitBounds(bounds, {padding: [20, 20], maxZoom: 13}); else if (coords.length) map.fitBounds(coords, {padding: [30, 30], maxZoom: 12}); else map.setView([36.3, 127.0], 8); }, 200);
     // 방법·기준
-    put('rMethod', `<b>판정</b> — 전국 지적 원장 전수에서 지목(전·답·과수원) → 구조·입지 제외 → 경사 15% 초과 제외 → 용도지역 3종(개발제한·보전관리·보전녹지) 제외 → 농업진흥지역 구분의 다섯 검사를 필지 단위로 적용했습니다. 소유는 법인·국공유(02·04·05·06)만 세며 개인 소유 농지는 대조군으로 병기합니다.<br>
-      <b>제도 조건</b> — 시행 전 = 농업진흥지역이 아닌 농지. 시행 후 = 재생에너지지구에 농업진흥구역(또는 진흥·보호구역 전체)이 포함된다는 가정. 이격은 주거 200m 상한제를 전국 일률 보수 하한으로 적용한 값입니다.<br>
-      <b>후보 공간</b> — 서로 21m 이내인 적격 필지를 하나의 공간 분석 단위로 묶었습니다(τ=21m는 필지 간격 자료에서 유도한 분석 기준, 법정 기준 아님). 묶어도 면적은 변하지 않습니다. 후보 공간은 최종 사업 단위·cluster·특구 정의가 아니며, 그 정의는 전문가 자문 후 확정합니다. 읍·면·동·시군 경계로 후보 공간을 자르지 않습니다.<br>
+    put('rMethod', `<b>판정</b> — 전국 지적 원장 전수에서 지목(전·답·과수원) → 구조·입지 제외 → 경사 문턱 15 초과 제외(단위 기록 정리 전) → 용도지역 3종(개발제한·보전관리·보전녹지) 제외 → 농업진흥지역 구분의 다섯 검사를 필지 단위로 적용했습니다. 소유는 법인·국공유(02·04·05·06)만 세며 개인 소유 농지는 대조군으로 병기합니다.<br>
+      <b>제도 조건</b> — 시행 전 = 농업진흥지역이 아닌 농지. 시행 후 = 재생에너지지구에 농업진흥구역(또는 진흥·보호구역 전체)이 포함되는 경우. 이격은 주거 200m 상한제를 전국 일률 보수 하한으로 적용한 값입니다.<br>
+      <b>후보 공간</b> — 서로 21m 이내인 설치 가능 필지를 하나의 공간 분석 단위로 묶었습니다(τ=21m는 필지 간격 자료에서 유도한 분석 기준, 법정 기준 아님). 묶어도 면적은 변하지 않습니다. 후보 공간은 최종 사업 단위·cluster·특구 정의가 아니며, 그 정의는 전문가 자문 후 확정합니다. 읍·면·동·시군 경계로 후보 공간을 자르지 않습니다.<br>
       <b>우선순위</b> — 1개 기준: 그 기준 값으로 정렬한 순위. 2개 이상: 선택한 기준 모두에서 다른 후보에 지지 않는 후보(비지배 집합)를 주요 비교 후보로 제시하며 순위를 매기지 않습니다. 결측 축은 그 축의 최악값으로 두고 비교합니다. 점수·가중치·관문은 없습니다.<br>
-      <b>해석 범위</b> — 적격농지는 판정 조건을 통과한 토지이며 인허가 가능 토지가 아닙니다. MW는 면적 환산 참고값입니다. ${V55.GRID_NOTE} 산단 거리와 전력판매량 대비는 비교용 참고 지표입니다.`);
-    put('rBasis', `데이터 세대 <b>${String(meta.data_generation).replace(/정본 우주/g, '분석 기준 필지')}</b> · 생성 ${meta.generated} · ${meta.verification || ''}<br>
+      <b>해석 범위</b> — 설치 가능 농지는 이 분석의 판정 조건을 통과한 땅이며 인허가 가능 여부와 다릅니다. MW는 면적 환산 참고값입니다. ${V55.GRID_NOTE} 산단 거리와 전력판매량 대비는 비교용 참고 지표입니다.`);
+    put('rBasis', `데이터 세대 <b>${String(meta.data_generation).replace(/정본 우주/g, '분석 기준 필지')}</b> · 수치 요약(meta_v4) 생성 ${meta.generated} · TOP 10 자산 생성 ${(await V55.top10.index()).generated} · ${meta.verification || ''}<br>
       원천: 연속지적도·토지 원장<sup class="fnref">[1]</sup> · 농업진흥지역도(V-World)<sup class="fnref">[5]</sup> · 한전 분산전원 연계정보<sup class="fnref">[22]</sup> · 산업단지 경계<sup class="fnref">[23]</sup> · 시군 전력판매량<sup class="fnref">[28]</sup> · 기존 시설 공개 자료(전수 아님). 자료별 기준일은 아래 표(provenance 기록값).`);
     $('result').scrollIntoView({behavior: 'smooth', block: 'start'});
   }

@@ -4,10 +4,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>PLANiT · 후보지 찾기 — 대규모 영농형 태양광 후보 공간</title>
-<meta name="description" content="약 50MW 이상 규모의 영농형 태양광 후보 공간을 전국 지도에서 탐색 — 법인·국공유 소유 농지, 농업진흥지역 개방 시나리오 기준. 산업단지·계통 여유·기존 시설 레이어.">
+<meta name="description" content="약 50MW 이상 규모의 영농형 태양광 후보 공간을 전국 지도에서 탐색 — 법인·국공유 소유 농지, 농업진흥구역에도 설치 가능한 조건 기준. 산업단지·계통 여유·기존 시설 레이어.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=Inter:wght@400;500;700&family=Noto+Sans+KR:wght@400;500;700&family=JetBrains+Mono:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=Inter:wght@400;500;700&family=JetBrains+Mono:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/vendor/pretendard/pretendardvariable-dynamic-subset.css">
 <link rel="stylesheet" href="style.css">
 <link rel="stylesheet" href="assets/v5.css">
 <link rel="stylesheet" href="assets/v55.css">
@@ -95,8 +96,9 @@ input[type=range]{accent-color:var(--navy)}
   <aside class="fs-panel">
     <h3>대규모 영농형 태양광 후보 공간 (50MW 이상)</h3>
     <p class="lede-s"><b>약 50MW 이상의 영농형 태양광을 설치할 수 있는 대규모 후보 공간 <span id="p-n">—</span>곳의 위치</b><br>
-      법인·국공유 소유 농지 기준 · 농업진흥지역 개방 시나리오 기준(특별법 시행 후 재생에너지지구로 농업진흥구역이 열리는 경우를 가정).<br>
-      <span style="color:var(--muted)">후보 공간 = 21m 이내로 이어진 필지를 하나로 묶은 공간 분석 단위. 계통 여유·산업단지는 비교용 배경 레이어이며 이 <span id="p-n2">—</span>곳의 선별에는 쓰지 않음.</span></p>
+      법인·국공유 소유 농지 기준 · <b>특별법 시행 후(농업진흥구역에도 설치 가능)</b> — 재생에너지지구에 농업진흥구역이 포함되는 경우. 전국 모아보기 카드는 농업진흥구역·농업보호구역에 모두 설치할 수 있는 조건이라 값이 다를 수 있음.<br>
+      <span style="color:var(--muted)">후보 공간 = 21m 이내로 이어진 필지를 하나로 묶은 공간 분석 단위. 계통 여유·산업단지는 비교용 배경 레이어이며 이 <span id="p-n2">—</span>곳의 선별에는 쓰지 않음.
+      후보 공간은 <b>현재 비어 있는 땅이라는 뜻이 아님</b> — 기존 시설 설치 여부를 판별하지 않았고, 확보한 기존 시설 자료는 전국 전수가 아님. 계통 여유는 참고지표이며 실제 접속 가능 용량이 아님.</span></p>
     <div id="p-method"></div>
 
     <div class="grp"><div class="gt">후보 공간 <span id="candCnt" style="font-weight:400;color:var(--muted)"></span>
@@ -118,7 +120,7 @@ input[type=range]{accent-color:var(--navy)}
       <div id="gridLegend"></div>
       <div class="v55-hint" id="gridNote"></div></div>
 
-    <div class="grp"><div class="gt">기존 태양광 시설(위치 검증분)</div>
+    <div class="grp"><div class="gt">기존 태양광 시설</div>
       <label class="tglrow"><input type="checkbox" id="exToggle"> 지도에 표시 — <span id="exCnt">—</span></label>
       <div class="v55-hint" id="exNote"></div></div>
 
@@ -130,13 +132,13 @@ input[type=range]{accent-color:var(--navy)}
       <div class="prox-leg" style="margin-top:0">
         <span class="dot" style="background:#0C356A;border:2px solid #fff;box-shadow:0 0 0 1px #0C356A"></span>산업단지 ·
         <span class="sw" style="background:#4A94BA"></span>계통 여유(읍면동) ·
-        <span class="dot" style="background:#6B7B8C"></span>기존 시설(VALID) · 점선 테두리 = 시군 경계에 걸친 후보 공간(하나로 유지)
+        <span class="dot" style="background:#FFC21A;border:1px solid #5A3E00"></span>기존 태양광 시설(초록 = 영농형 · 회색 = 가동중단·폐기) · 점선 테두리 = 시군 경계에 걸친 후보 공간(하나로 유지)
       </div>
-      <details style="margin-top:6px"><summary style="cursor:pointer;font-size:11.5px;color:var(--leaf-deep);font-weight:700">자세한 범례 · 자료 기준일 · 출처</summary>
+      <details style="margin-top:6px"><summary style="cursor:pointer;font-size:11.5px;color:var(--leaf-deep);font-weight:700">자세한 범례 · 출처</summary>
       <div class="prox-leg">산업단지 색 = 유형(빨강 국가 · 남색 일반 · 보라 도시첨단 · 청록 농공) · 금색 점선 원 = 선택 후보의 반경 버퍼 · 금색 테두리 = 버퍼 안 산업단지 ·
         위성 배경 © Esri<sup class="fnref">[19]</sup> · 후보 공간 도형 = 지적 폴리곤 합집합의 2m 단순화 표시(수치는 장부면적 원값)<sup class="fnref">[12]</sup> ·
         산업단지 전국 <span id="p-ind3">—</span>곳<sup class="fnref">[23]</sup> · 읍면동 계통 여유<sup class="fnref">[22]</sup>.</div>
-      <div id="dates" style="margin-top:8px"></div></details>
+      </details>
     </div>
   </aside>
 
@@ -145,7 +147,7 @@ input[type=range]{accent-color:var(--navy)}
       <span style="font-size:12px;color:var(--leaf-deep);font-weight:700" id="drawerTgl">펼치기 ▲</span></div>
     <div class="db">
       <div style="overflow-x:auto"><table class="v4" id="t-prox"></table></div>
-      <div class="figcap" style="margin-top:8px">행 클릭 = 지도 이동. 참고 MW 열의 값을 더한 정확 합계는 <b><span id="p-mwsum">—</span> MW</b>.
+      <div class="figcap" style="margin-top:8px">행 클릭 = 지도 이동. 대규모 후보 공간 참고 MW 합계는 <b><span id="p-mwsum">—</span> MW</b>(발행 자산의 원값 합 — 행별 반올림 값의 합과 1–2 MW 다를 수 있음).
       계통 여유는 소재 읍면동 잔여 연계가능용량의 하한–상한(한전 연계정보 단일 시점 스냅숏)이며 실제 접속 가능 용량이 아님<sup class="fnref">[22]</sup>. 시군 경계에 걸친 후보 공간은 관여 시군을 모두 적음.</div>
       <div class="callout-v4" id="p-read" style="margin-top:8px">—</div>
     </div>
@@ -156,7 +158,7 @@ input[type=range]{accent-color:var(--navy)}
 
 <section class="sec-tight">
   <div class="wrap">
-    <p style="font-size:12.5px;color:var(--muted);word-break:keep-all">대규모 후보 공간 = 이어진 적격 농지 <span id="p-th">—</span>㎡ 이상(약 50MW 등가 · 분석상 읽기 눈금, 법정 기준 아님) · 법인·국공유 소유 · 농업진흥구역 개방 시나리오 · 연접 21m —
+    <p style="font-size:12.5px;color:var(--muted);word-break:keep-all">대규모 후보 공간 = 이어진 설치 가능 농지 <span id="p-th">—</span>㎡ 이상(약 50MW · 법정 기준 아님) · 법인·국공유 소유 · 특별법 시행 후(농업진흥구역에 설치 가능) · 연접 21m —
     정의·출처·한계는 <a href="method.html" style="color:var(--leaf-deep);font-weight:700">근거와 방법 →</a> ·
     시군 안 비교는 <a href="regions.html" style="color:var(--leaf-deep);font-weight:700">우리 동네 TOP 10 →</a></p>
   </div>
@@ -167,14 +169,13 @@ input[type=range]{accent-color:var(--navy)}
 <script>
 (async () => {
   const [N, names, m, GS, FM] = await Promise.all([V4.data('narrative_v4'), V4.data('sgg_matrix'), V4.data('meta_v4'), V4.data('grid_summary'), V4.data('ind_firms_meta')]);
-  document.getElementById('gen-stamp').textContent = m.generated;
-  document.getElementById('art-meta').textContent = `PLANiT Institute · 데이터 ${String(m.data_generation).replace(/정본 우주/g, '분석 기준 필지')} · 생성 ${m.generated}`;
+  const _ux = await V4.data('units_index');   // 이 화면의 후보 공간 도형·표 자산
+  document.getElementById('art-meta').textContent = `PLANiT Institute · 데이터 ${String(m.data_generation).replace(/정본 우주/g, '분석 기준 필지')} · 후보 공간 자산 생성 ${_ux.generated} · 수치 요약(meta_v4) 생성 ${m.generated}`;
   const nameOf = c => (names.codes[c] && names.codes[c].name) || c;
   const put = (id, v) => { const el = document.getElementById(id); if (el) el.textContent = v; };
   put('p-th', V4.n(N.threshold.mw50_m2)); put('p-ind3', V4.n(GS.ind_total));
   V55.methodButton(document.getElementById('p-method'), 'finder', {cls: 'btn btn-ghost'});
   document.getElementById('gridNote').textContent = V55.GRID_NOTE;
-  V55.dataDates(document.getElementById('dates'), {compact: true});
   const gzfc = V55.gz;
 
   // ── 지도 골격 — 확대/축소 컨트롤은 오른쪽 끝(패널·설명과 겹치지 않게) ──
@@ -221,9 +222,6 @@ input[type=range]{accent-color:var(--navy)}
   }
   let rafId = null;
   document.getElementById('gridSlider').addEventListener('input', e => { gridT = +e.target.value; if (rafId) cancelAnimationFrame(rafId); rafId = requestAnimationFrame(gridRefresh); });
-  const pip = (pt, rings) => { let inside = false; rings.forEach(ring => { for (let i = 0, j = ring.length - 1; i < ring.length; j = i++) { const [xi, yi] = ring[i], [xj, yj] = ring[j];
-    if ((yi > pt.lat) !== (yj > pt.lat) && pt.lng < (xj - xi) * (pt.lat - yi) / (yj - yi) + xi) inside = !inside; } }); return inside; };
-  const gridAt = pt => { for (const f of grid.features) { const g = f.geometry; const polys = g.type === 'Polygon' ? [g.coordinates] : g.coordinates; for (const p of polys) if (pip(pt, p)) return f.properties; } return null; };
 
   // ── 산업단지 ──
   const IND_C = {'국가산업단지': '#B3261E', '일반산업단지': '#0C356A', '도시첨단산업단지': '#7A4BC9', '농공단지': '#0E8A72'};
@@ -269,7 +267,7 @@ input[type=range]{accent-color:var(--navy)}
     if (danHits.length) html += danHits.map(c => `<div class="sr" data-k="d" data-i="${complexes.indexOf(c)}"><span class="sw" style="width:10px;height:10px;border-radius:3px;background:${IND_C[c.t]};flex:none"></span>${c.name} <span style="color:#888">· ${c.t.replace('산업단지', '')}</span></div>`).join('');
     if (firmHits.length) html += `<div class="none" style="font-weight:700">입주기업 → 소재 산업단지${firmHits.total > firmHits.length ? ` — 일치 ${V4.n(firmHits.total)}건 중 ${firmHits.length}건, 기업명을 더 구체적으로` : ''}</div>` +
       firmHits.map(f => { const d = firmsDB.dans[f[1]]; return `<div class="sr" data-k="f" data-nm="${d[0]}" data-t="${d[1]}" data-firm="${f[0]}" data-p="${f[2] || ''}"><span style="flex:none">🏭</span>${f[0]} <span style="color:#888">→ ${d[0]} · ${d[1].replace('산업단지', '')}</span></div>`; }).join('');
-    if (!html) html = firmsDB ? '<div class="none">일치 없음 — 단지 명칭 또는 입주기업명(등록공장 기준)으로 검색.</div>' : (firmsLoading ? '<div class="none">입주기업 색인 불러오는 중…</div>' : '<div class="none">일치하는 산업단지 없음.</div>');
+    if (!html) html = firmsDB ? `<div class="none">일치 없음 — 단지 명칭 또는 입주기업명(등록공장 기준)으로 검색.${FM && FM.n_ambiguous ? ` 등록 단지명이 산업단지 경계 이름 둘 이상과 맞는 입주기업 ${V4.n(FM.n_ambiguous)}사는 소재 단지를 하나로 정할 근거가 없어 검색에 연결하지 않음.` : ''}</div>` : (firmsLoading ? '<div class="none">입주기업 색인 불러오는 중…</div>' : '<div class="none">일치하는 산업단지 없음.</div>');
     sRes.innerHTML = html; sRes.classList.add('open');
     sRes.querySelectorAll('.sr').forEach(el => el.onclick = () => { if (el.dataset.k === 'd') goComplex(complexes[+el.dataset.i]);
       else { const c = findComplex(el.dataset.nm, el.dataset.t); if (c) { goComplex(c);
@@ -286,15 +284,16 @@ input[type=range]{accent-color:var(--navy)}
   put('p-n', V4.n(bigList.length)); put('p-n2', V4.n(bigList.length)); put('p-comp-n', V4.n(bigList.length));
   document.getElementById('candCnt').textContent = `(${V4.n(bigList.length)})`;
   document.getElementById('candLegend').innerHTML = V55.legendHTML(V55.BIG_BANDS, '후보 공간 규모(참고 MW · 0.045 kW/㎡ 환산)') +
-    '<div class="v55-hint">규모 범례는 계통 범례와 별개의 지표 — 색상 체계를 합치지 않음.</div>';
+    '<div class="v55-hint">규모 범례는 계통 범례와 별개의 지표 — 색상 체계를 합치지 않음.</div>' +
+    (V55.units.reviewCount(BIG) ? `<div class="v55-hint">회색 점선 = <b>기하 품질 검토</b> ${V4.n(V55.units.reviewCount(BIG))}곳 — 지적 도형 면적이 장부 면적과 1% 넘게 달라 정상 도형처럼 칠하지 않음. 후보 공간 수·면적(장부 기준)에는 그대로 포함.</div>` : '');
   const unitLayers = {}, boundsById = {}, selCand = new Set(bigList.map(b => b.id));
-  const unitLayer = V55.units.layer(BIG, {pane: 'unitPane', bands: V55.BIG_BANDS,
+  const unitLayer = V55.units.layer(BIG, {pane: 'unitPane', bands: V55.BIG_BANDS, showReview: true,   // 개별 선택 목록과 1:1 이라 숨기지 않고 품질 검토 모양(회색 점선)으로만 구분
     tooltip: p => `후보 공간 #${p.id} · ${V4.km2(p.a / 1e6, 2)} km² ≈ ${V4.n(Math.round(p.mw))} MW · 필지 ${V4.n(p.n)} · ${p.sggs.map(nameOf).join(' · ')}${p.ns > 1 ? ' (시군 경계 걸침 — 하나로 유지)' : ''}${recMap[p.id] && recMap[p.id].reclaim_pct >= 50 ? ' · 간척 지구' : ''}`});
   unitLayer.eachLayer(ly => { const p = ly.feature.properties; (unitLayers[p.id] = unitLayers[p.id] || []).push(ly); boundsById[p.id] = ly.getBounds();
     ly.bindPopup(`<b>대규모 후보 공간 · ${V4.km2(p.a / 1e6, 2)} km² ≈ ${V4.n(Math.round(p.mw))} MW</b><br>${p.sggs.map(nameOf).join(' · ')} · ${V4.n(p.n)}필지 · 읍면동 ${p.ne}곳에 걸침${recMap[p.id] && recMap[p.id].reclaim_pct >= 50 ? ' · 간척 지구' : ''}<br><span style="color:#888;font-size:11px">법인·국공유 소유 농지 · 21m 연접 단위 · 농업진흥구역 개방 시나리오 · 후보 공간은 최종 사업 단위가 아님</span>`); });
   unitLayer.addTo(map);
   const lblOf = b => `${recMap[b.id] && recMap[b.id].reclaim_pct >= 50 ? (recMap[b.id].district || '간척').replace('지구', '') + ' · ' : ''}${b.sggs.map(nameOf).join('·')}`;
-  document.getElementById('candList').innerHTML = bigList.map((b, i) => `<label><input type="checkbox" data-id="${b.id}" checked><span class="rk">${i + 1}</span><span class="mw">${V4.n(Math.round(b.mw))}MW</span><span>${lblOf(b)}</span></label>`).join('');
+  document.getElementById('candList').innerHTML = bigList.map((b, i) => `<label><input type="checkbox" data-id="${b.id}" checked><span class="rk">${i + 1}</span><span class="mw">${V4.n(Math.round(b.mw))}MW</span><span>${lblOf(b)}${V55.units.isReview(b) ? ` <small class="unk">기하 품질 검토(${b.ql})</small>` : ''}</span></label>`).join('');
   const candAllBtn = document.getElementById('candAll');
   function setCand(id, on) { (unitLayers[id] || []).forEach(ly => on ? unitLayer.addLayer(ly) : unitLayer.removeLayer(ly)); on ? selCand.add(id) : selCand.delete(id); }
   document.querySelectorAll('#candList input').forEach(cb => cb.onchange = () => { setCand(+cb.dataset.id, cb.checked); candAllBtn.classList.toggle('on', selCand.size === bigList.length); bufRefresh(); });
@@ -302,8 +301,8 @@ input[type=range]{accent-color:var(--navy)}
 
   // ── 기존 태양광 시설(VALID 좌표만) — 전수 아님 ──
   const EX = await V55.existing.load();
-  put('exCnt', EX ? `${V4.n(EX.meta.n_valid_points)}점 (기록 ${V4.n(EX.meta.n_records)}건 중 위치 검증 VALID)` : '자료 없음');
-  document.getElementById('exNote').textContent = V55.EXISTING_NOTE + (EX ? ` 표시 규칙: ${EX.meta.rule}` : '');
+  put('exCnt', EX ? `${V55.existing.kindLabel(EX)}` : '자료 없음');
+  document.getElementById('exNote').textContent = V55.EXISTING_NOTE + ' 지도에는 공개된 태양광 발전사업 허가 자료 중 위치를 확인할 수 있는 곳만 표시합니다.';
   let exLayer = null;
   document.getElementById('exToggle').onchange = e => { if (e.target.checked) { if (!exLayer) exLayer = V55.existing.layer(EX, {pane: 'exPane'}); map.addLayer(exLayer); } else if (exLayer) map.removeLayer(exLayer); };
 
@@ -323,30 +322,25 @@ input[type=range]{accent-color:var(--navy)}
   }
   document.getElementById('bufSlider').addEventListener('input', e => { bufKm = +e.target.value; document.getElementById('bufKmLbl').textContent = bufKm; bufRefresh(); });
 
-  // ── 표 — 후보 × 최근접 산단 · 거리 · 계통 여유 ──
-  const nearestOf = {};
-  bigList.forEach(b => { const bd = boundsById[b.id]; if (!bd) return; const ctr = bd.getCenter(); let best = null;
-    complexes.forEach(c => { const km = havKm(ctr, {lat: c.lat, lng: c.lon}); if (!best || km < best.km) best = {c, km}; });
-    nearestOf[b.id] = {ctr, best, in20: complexes.filter(c => havKm(ctr, {lat: c.lat, lng: c.lon}) <= 20).length}; });
-  let minKm = null, maxIn20 = null;
+  // ── 표 — 후보 × 산단 거리 · 계통 여유 (감사 F-12: 정본 export 값만 렌더 — 브라우저 haversine·PIP 재계산 제거) ──
+  //   d = 최근접 산업단지 경계까지 직선거리(block_context.dist_ind_km) · lo–hi = 소재 읍면동 계통 여유 하한·상한(block_context) — TOP 10 과 같은 값.
+  const UIX = await V4.data('units_index');
+  const withD = bigList.filter(b => b.d != null), minD = withD.length ? withD.reduce((m, b) => b.d < m.d ? b : m) : null;
   document.getElementById('t-prox').innerHTML =
-    `<tr><th>순번</th><th>참고 MW</th><th style="text-align:left">소재 시군</th><th>간척 지구</th><th>필지</th><th style="text-align:left">최근접 산단</th><th>거리 km</th><th>20km 내</th><th>계통 여유 MW(참고)</th></tr>` +
-    bigList.map((b, i) => { const nb = nearestOf[b.id] || {};
-      if (nb.best) { if (minKm === null || nb.best.km < minKm.km) minKm = {km: nb.best.km, b, c: nb.best.c}; if (maxIn20 === null || nb.in20 > maxIn20.n) maxIn20 = {n: nb.in20, b}; }
-      const gp = nb.ctr ? gridAt(nb.ctr) : null;
-      const gtxt = !gp ? '—' : (gp.s === 'ok' ? `${V4.n(gp.lo)}–${V4.n(gp.hi)}` : (gp.s === 'unknown' ? '알 수 없음' : '—'));
+    `<tr><th>순번</th><th>참고 MW</th><th style="text-align:left">소재 시군</th><th>간척 지구</th><th>필지</th><th>산단 거리 km<br><small>최근접 산업단지 경계</small></th><th>계통 여유 MW(참고)<br><small>읍면동 하한–상한</small></th></tr>` +
+    bigList.map((b, i) => {
+      const gtxt = b.lo == null ? '<span class="unk">알 수 없음</span>' : `${V4.n(b.lo)}–${b.hi == null ? '—' : V4.n(b.hi)}${b.emd_unk ? ` <small class="unk">(무응답 읍면동 ${b.emd_unk})</small>` : ''}`;
       const rec = recMap[b.id];
       return `<tr class="rowbtn" data-id="${b.id}"><td class="rk">${i + 1}</td>
         <td><div class="mwc"><b>${V4.n(Math.round(b.mw))}</b><span class="mwb" style="width:${Math.round(44 * b.mw / bigList[0].mw)}px"></span></div></td>
-        <td class="l">${b.sggs.map(nameOf).join(' · ')}${b.ns > 1 ? ' <span style="color:#888;font-size:11px">(경계 걸침)</span>' : ''}</td>
+        <td class="l">${b.sggs.map(nameOf).join(' · ')}${b.ns > 1 ? ' <span style="color:#888;font-size:11px">(경계 걸침)</span>' : ''}${V55.units.isReview(b) ? ` <small class="unk">기하 품질 검토</small>` : ''}</td>
         <td>${rec && rec.reclaim_pct >= 50 ? `<span class="chip-rec">${(rec.district || '간척').replace('지구', '')}</span>` : '<span style="color:var(--muted)">비간척</span>'}</td>
         <td>${V4.n(b.n)}</td>
-        <td class="l">${nb.best ? nb.best.c.name + ' <span style="color:#888;font-size:11px">' + nb.best.c.t + '</span>' : '—'}</td>
-        <td>${nb.best ? V4.km2(nb.best.km, 1) : '—'}</td><td>${nb.best ? V4.n(nb.in20) : '—'}</td><td>${gtxt}</td></tr>`; }).join('');
-  document.getElementById('p-mwsum').textContent = V4.n(bigList.reduce((a, b) => a + Math.round(b.mw), 0));
+        <td>${b.d == null ? '<span class="unk">알 수 없음</span>' : b.d.toFixed(1)}</td><td>${gtxt}</td></tr>`; }).join('');
+  document.getElementById('p-mwsum').textContent = V4.n(Math.round(UIX.big_mw_sum));
   document.querySelectorAll('#t-prox tr.rowbtn').forEach(tr => tr.onclick = () => { const bd = boundsById[+tr.dataset.id]; if (bd) { map.fitBounds(bd.pad(0.6)); document.getElementById('proxmap').scrollIntoView({behavior: 'smooth', block: 'center'}); } });
-  document.getElementById('p-read').innerHTML = `<b>읽기.</b> 최근접 사례는 ${minKm ? `<b>${lblOf(minKm.b)} ${V4.n(Math.round(minKm.b.mw))}MW 후보 — ${minKm.c.name} ${V4.km2(minKm.km, 1)} km</b>` : '—'}.` +
-    (maxIn20 && maxIn20.n > 0 ? ` 20km 안 산업단지가 가장 많은 후보는 ${lblOf(maxIn20.b)} (${V4.n(maxIn20.n)}곳).` : '') + ' 거리·계통은 비교용 참고 지표이며 사업 가능성 판정이 아님.';
+  document.getElementById('p-read').innerHTML = `<b>읽기.</b> 산업단지 경계와 가장 가까운 후보는 ${minD ? `<b>${lblOf(minD)} ${V4.n(Math.round(minD.mw))}MW 후보 — ${minD.d.toFixed(1)} km</b>` : '—'}.` +
+    ' 거리·계통은 비교용 참고 지표이며 사업 가능성 판정이 아님. 계통 여유는 읍면동 단위 값이라 같은 읍면동 후보끼리 같고, 더하면 안 됨 — 실제 접속 가능 용량이 아님. 산업단지 반경 도구(지도)는 화면 표시용 근사 직선거리임.';
 
   gridRefresh(); bufRefresh(); V4.footer();
 })();

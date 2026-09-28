@@ -4,10 +4,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>PLANiT · 전국 영농형 태양광 모아보기</title>
-<meta name="description" content="영농형태양광 특별법 시행 전과 시행 후(농업진흥지역 개방 가정)의 설치 가능 농지와 대규모 후보 공간을 전국 필지 전수 분석으로 비교.">
+<meta name="description" content="영농형태양광 특별법 시행 전과 시행 후(농업진흥구역과 농업보호구역에도 설치할 수 있게 되는 경우)의 설치 가능 농지와 대규모 후보 공간을 전국 필지 전수 분석으로 비교.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=Inter:wght@400;500;700&family=Noto+Sans+KR:wght@400;500;700&family=JetBrains+Mono:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=Inter:wght@400;500;700&family=JetBrains+Mono:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/vendor/pretendard/pretendardvariable-dynamic-subset.css">
 <link rel="stylesheet" href="style.css">
 <link rel="stylesheet" href="assets/v5.css">
 <link rel="stylesheet" href="assets/v55.css">
@@ -63,15 +64,15 @@
       영농형태양광 특별법에 따라 농업진흥지역에도<br>영농형 태양광을 설치할 수 있게 된다면?</p>
     <p class="lede" style="max-width:820px">
       전국의 농지를 필지 단위로 판정해<sup class="fnref">[1]</sup>, <b>특별법 시행 전</b>(농업진흥지역이 아닌 농지)과
-      <b>특별법 시행 후</b>(재생에너지지구로 농업진흥지역이 개방된다고 가정)의 설치 가능 농지를 비교합니다.
+      <b>특별법 시행 후</b>(농업진흥구역과 농업보호구역에도 설치할 수 있게 되는 경우)의 설치 가능 농지를 비교합니다.
       시행 후 값은 법률의 실제 시행 여부와 무관한 <b>제도 설계 시나리오</b>입니다<sup class="fnref">[10]</sup>.
       분석 기준 필지는 법인·국공유 소유 농지<sup class="fnref">[12]</sup>, 1차 단위는 면적(km²)<sup class="fnref">[13]</sup>.</p>
 
     <div class="hero-two">
       <div>
         <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:8px">
-          <span class="v55-scn" aria-label="비교 시나리오"><span id="scn-before">특별법 시행 전</span><span class="on" id="scn-after">특별법 시행 후</span></span>
-          <span style="font-size:12.5px;color:var(--muted)">시행 후 = 농업진흥지역(진흥구역·보호구역) 개방 가정 · 아래 값은 시행 후 기준, 시행 전 대비 증가분 병기</span>
+          <span class="v55-scn" aria-label="비교 시나리오"><span id="scn-before">영농형태양광 특별법 시행 전</span><span class="on" id="scn-after">영농형태양광 특별법 시행 후 (농업진흥구역·농업보호구역에도 설치 가능)</span></span>
+          <span style="font-size:12.5px;color:var(--muted);word-break:keep-all">시행 후 = 농업진흥구역·농업보호구역에도 설치 가능 · 아래 값은 시행 후 기준, 시행 전 대비 증가분 병기</span>
         </div>
 
         <!-- 세 카드 — 세로 정렬 · 값은 전부 data_v4 -->
@@ -83,7 +84,7 @@
           </div>
           <div class="v55-arrow" aria-hidden="true"><svg width="26" height="44" viewBox="0 0 26 44"><path d="M13 2v34" stroke="currentColor" stroke-width="4" stroke-linecap="round"/><path d="M3 28l10 12 10-12" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></svg><span>21m 이내 필지를 이어 붙이면</span></div>
           <div class="v55-card">
-            <div class="k">② 3MW 이상 설치 가능 면적 — 이어 붙인 후보 공간이 3MW 등가 이상인 곳의 면적</div>
+            <div class="k">② 3MW 이상 설치 가능 면적 — 이어 붙인 후보 공간이 3MW 이상인 곳의 면적</div>
             <div class="v"><span id="c2">—</span><small>km²</small></div>
             <div class="d"><b>+<span id="c2d">—</span> km²</b> 시행 전 대비 · 후보 공간 <span id="c2n">—</span>곳<span class="before">시행 전 <span id="c2b">—</span> km² · <span id="c2bn">—</span>곳</span></div>
           </div>
@@ -105,7 +106,7 @@
         </div>
 
         <div class="v55-verdict" id="verdict">
-          <div class="q">농업진흥지역이 개방된다면?</div>
+          <div class="q">농업진흥구역과 농업보호구역에도 영농형 태양광을 설치할 수 있게 된다면?</div>
           <div class="a" id="one-liner">—</div>
           <div class="s" id="one-sub">—</div>
         </div>
@@ -120,11 +121,9 @@
       <aside class="hero-side">
         <h3>읽을 때 주의</h3>
         <div class="v55-note" style="margin-bottom:10px">
-          시행 전·후 값은 <b>같은 원장·같은 방법</b>으로 잰 시나리오 비교입니다. "적격"은 이 분석의 판정 조건을 통과한 땅이며 인허가 가능 토지가 아닙니다.
+          시행 전·후 값은 <b>같은 원장·같은 방법</b>으로 잰 시나리오 비교입니다. "설치 가능"은 이 분석의 판정 조건을 통과한 땅이라는 뜻이며 인허가 가능 여부와 다릅니다.
           MW는 면적 환산 참고값입니다.</div>
         <div class="v55-note" style="margin-bottom:10px;font-size:12px" id="existing-note"></div>
-        <h3 style="margin-top:12px">자료 기준일</h3>
-        <div id="dates"></div>
       </aside>
     </div>
   </div>
@@ -139,7 +138,7 @@
       <a class="card reveal" href="finder.html">
         <div class="meta"><span class="tag">FINDER</span><span>전국 지도 · 대규모 후보 공간</span></div>
         <h3>대규모 후보 공간 지도</h3>
-        <p>약 50MW 이상 규모의 후보 공간을 전국 지도에서 탐색 — 산업단지·계통 여유·기존 시설(위치 검증분) 레이어.</p>
+        <p>약 50MW 이상 규모의 후보 공간을 전국 지도에서 탐색 — 산업단지·계통 여유·기존 태양광 시설 레이어.</p>
         <div class="foot"><span>후보지 찾기</span><span>→</span></div>
       </a>
       <a class="card reveal" href="scenarios.html">
@@ -193,12 +192,11 @@
   document.getElementById('one-liner').innerHTML =
     `<b>50MW 이상 규모의 대규모 후보 공간</b>이 전국 <b>${V4.n(b50_0.n)}곳에서 ${V4.n(b50_1.n)}곳</b>으로 증가`;
   document.getElementById('one-sub').innerHTML =
-    `법인·국공유 소유 농지만 21m 이내로 이어 붙였을 때의 값(합 약 ${V4.n(R[CELL_RUN[AFTER]].ge50_mw)} MW 등가).` +
-    ((N.cp_big || []).length ? ` 농업진흥구역 개방 기준 ${V4.n(N.cp_big.length)}곳 중 ${V4.n(cpBigRec)}곳은 간척 지구에 있음.` : '') +
+    `법인·국공유 소유 농지만 21m 이내로 이어 붙였을 때의 값(합 약 ${V4.n(R[CELL_RUN[AFTER]].ge50_mw)} MW).` +
+    ((N.cp_big || []).length ? ` 참고 — 다른 조건(농업진흥구역에도 설치 가능 · 농업보호구역 제외)에서 50MW 이상 후보 공간은 ${V4.n(N.cp_big.length)}곳이며 그중 ${V4.n(cpBigRec)}곳은 간척 지구에 있음(후보지 찾기 지도가 이 조건을 씀).` : '') +
     ` 후보 공간은 21m 연접 공간 분석 단위이며 최종 사업 단위·특구 정의가 아님(자문 후 확정).`;
   V55.methodButton(document.getElementById('cta'), 'index');
   document.getElementById('existing-note').textContent = V55.EXISTING_NOTE;
-  V55.dataDates(document.getElementById('dates'), {compact: true});
   V4.footer();
 })();
 </script>
