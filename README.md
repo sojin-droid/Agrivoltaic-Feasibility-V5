@@ -17,11 +17,13 @@
 | 시나리오별 결과 | `scenarios.html` | 조건을 바꾸면 어떻게 달라지는가 — 광역→시군 2단계 선택 × 제약 조건 조합(진흥·보호 개방, 이격, 매립지 범위, **시행령 고려/미고려**, 소유) → 필지·구획·규모 눈금 결과 + 미고려/고려 비교표 · 증분 지도 · 요약표(시행령 고려 표 포함) |
 | 우리 동네 TOP 10 | `regions.html` | 시군 안 후보 공간 비교 — 제도(시행 전/후)·이격·최소 규모 + 우선순위 복수 선택(발전 규모·계통·산업단지): 1축 = 정렬 순위, 2축 이상 = 비지배 '주요 비교 후보'(`data_v4/top10/` 사전 계산) · PNU·지번 검색 |
 | 우리 동네 영농형 태양광, 어디가 좋을까? | `local.html` | 이름·PNU·지번 입력 → 6단계 위저드(지역·제도·이격·우선순위·규모·실행) → 후보 공간 지도·TOP 10/주요 비교 후보 표 → 인쇄용 보고서 — 지자체·주민·비영리 |
+| 자문용 검토(ADVISORY) | `advisory.html` | 외부 자문 전용 — 경기도 데이터 검증(근거 레이어·출처) · 후보 공간 방법론 실험(7개 비교·가중치 실험) · 지자체 사용성 과제. 최종 방법·추천을 정하지 않음 · 의견은 브라우저에만 저장 |
 | 근거와 방법 | `method.html` | 이 숫자와 방법은 어디에서 왔는가 — 1 배경(핵심 결과 다섯 가지) · 2 법·제도 근거(`#law`, 시행령 조문·함의) · 3 공간분석 방법(판정 조건·`#datarules`·검증·`#caveats`) · 4 우선 후보 선정(`#ranking`) · 5 데이터 출처 · 6 Sources(`#fnsec`, 전 화면의 출처를 여기로 통합) |
 
 출처 목록은 「근거와 방법」에만 렌더된다(`body[data-sources=full]`) — 다른 화면의 각주 마커 [n]은 `method.html#fn-n`으로 연결.
 공통 부품: `assets/region.js`(광역→시군 선택기 · 읍면동 이름 검색 — `sgg_matrix`·`grid_emd` 재사용), `assets/v5.css`(비교 박스·전면 지도·선택기·토글·위저드·인쇄).
-비지배 집합 계산은 `model/query.py`에 그대로 있고, 화면은 "공동 1등 후보"라는 말로 같은 결과를 보인다 — 새 점수 체계는 없다.
+비지배 집합 계산은 `model/query.py`(`_frontier_mask`)에 그대로 있고, 화면은 "주요 비교 후보"라는 말로 같은 결과를 보인다(1개 기준 = 정렬 순위 · 2개 이상 = 비지배 집합) — 새 점수 체계는 없다.
+용어: 후보 공간 = 21m 연접 공간 분석 단위(`analysis_unit_v1`). 최종 cluster 정의는 **BLANK / 자문 대기** — ≤1,000m 응축(cc)은 ADR-0054 로 활성 계보에서 폐기됐다.
 
 구 탭은 리다이렉트 스텁으로만 남아 있다(링크 보호):
 `proximity.html`·`map.html`·`candidates.html` → 후보지 찾기 ·
@@ -34,10 +36,10 @@
 publish.py            발행 오케스트레이션 — 순서를 사람이 아니라 코드가 안다
 pipeline/
   paths.py            경로는 여기서만 정한다 (SITE·OUT·ROOT·MODEL·LR·CAD)
-  export/  7개        정본 질의 → data_v4/*.json (수치)
-  geom/    4개        구획 폴리곤 → data_v4/clusters/ (지오메트리)
+  export/  15개       정본 질의 → data_v4/*.json (수치 · publish.py NUM 11개 + 수동 보조 3개[estimate·parcels·recommend] + 코드 다리 모듈 emd_alias.py)
+  geom/    5개        21m 단위 폴리곤 → data_v4/units/ · 등재 런 시군 구간 폴리곤 → data_v4/clusters/ (이름은 구세대 그대로 — 내용은 21m 연접 단위이며 cc 아님)
   gate/    1개        site_gate — FAIL 이면 발행하지 않는다
-  legacy/  36개       구세대 — 돌리지 않음 (legacy/README.md)
+  legacy/  36개       구세대 — 돌리지 않음 (legacy/README.md) · ≤1,000m 응축 계보 자산·스크립트는 2026-09-27 제거(git 이력에만)
 data_v4/              발행 자산 — 브라우저가 받는 유일한 데이터
 assets/               v4.js · v4.css · 로고
 ```

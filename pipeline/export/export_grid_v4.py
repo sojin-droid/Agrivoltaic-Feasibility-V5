@@ -54,44 +54,21 @@ print(f"grid_emd_v3 {len(grid):,}행 · ok {sum(1 for v in grid.values() if v[1]
 g = gpd.read_file(os.path.join(LR, 'sources', 'emd_bnd', 'emd_bnd.gpkg'))
 bnd_codes = set(str(x)[:8] for x in g['emd_cd'])
 old_missing = sorted(set(grid) - bnd_codes)
-alias = {}                                      # 신 경계 코드 → 구 계통 코드
-if old_missing:
-    rows = con.execute("""SELECT emd8, name_full, alive FROM bjd_code
-                          WHERE NOT is_ri AND LENGTH(emd8)=8 AND SUBSTR(emd8,6,3)<>'000'""").fetchall()
-    rem_alive, rem_dead = {}, {}
-    for e8, nm, alive in rows:
-        rem = ' '.join(nm.split()[1:])          # 시도 접두어 제거
-        (rem_alive if alive else rem_dead).setdefault(rem, []).append(e8)
-    for old in list(old_missing):
-        nm = next((r for r, es in rem_dead.items() if old in es), None)
-        cand = rem_alive.get(nm, [])
-        if nm and len(cand) == 1 and cand[0] in bnd_codes:
-            alias[cand[0]] = old
-    mapped = set(alias.values())
-    print(f"이름 대조 매핑 {len(alias):,} / 잔여 {len(old_missing)-len(mapped):,}")
-    rest = [o for o in old_missing if o not in mapped]
-    if rest:
-        import glob as _g
-        CAD = os.path.join(ROOT, 'Cadastre_All')
-        gb = g.set_index(g['emd_cd'].astype(str).str[:8])
-        g5186 = gb.to_crs(5186)
-        by_sgg = {}
-        for o in rest:
-            by_sgg.setdefault(o[:5], []).append(o)
-        for sgg, olds in sorted(by_sgg.items()):
-            fp = os.path.join(CAD, f'{sgg}.gpkg')
-            if not os.path.exists(fp):
-                continue
-            pc = gpd.read_file(fp, columns=['pnu'], rows=None).to_crs(5186)
-            pc['e8'] = pc['pnu'].str[:8]
-            pts = pc[pc['e8'].isin(olds)].groupby('e8').head(3).copy()
-            pts['geometry'] = pts.geometry.representative_point()
-            j = gpd.sjoin(pts, g5186[['geometry']], how='inner', predicate='within')
-            rc = 'index_right' if 'index_right' in j.columns else g5186.index.name
-            for e8, new in j.groupby('e8')[rc].agg(lambda s: s.mode().iat[0]).items():
-                if str(new)[:8] not in alias:
-                    alias[str(new)[:8]] = e8
-        print(f"공간 매칭 후 총 매핑 {len(alias):,}")
+# 신·구 코드 다리 — emd_alias 한 곳의 규칙을 쓴다(감사 F-26 · 2026-09-24: 전에는 이 파일 안의 인라인 사본이
+#   시도 이름을 뗀 키로 이름 대조해 인천 중구 7개 동을 부산·대전·대구 중구에 붙이고 값이 소실됐다).
+from emd_alias import build_alias
+alias, _brep = build_alias(con, g, set(grid), with_report=True)
+if _brep:
+    _n, _s = _brep['name'], _brep.get('spatial') or {}
+    print(f"코드 다리: 구 코드 {len(old_missing):,} · 이름 대조 {len(_n['linked']):,} · 공간 매칭 {len(_s.get('linked', [])):,} · "
+          f"모호(연결 안 함) {len(_n['ambiguous']) + len(_s.get('many_to_one', [])):,} · 다른 시도 동명 거부 {len(_n['cross_sido_rejected']):,} · "
+          f"선점 충돌 {len(_s.get('taken_conflict', [])):,} · 미연결 {len(_s.get('unmatched', [])):,}")
+    BRIDGE_REPORT = {'n_old_missing': len(old_missing), 'name_linked': len(_n['linked']), 'spatial_linked': len(_s.get('linked', [])),
+                     'ambiguous': [list(x) for x in _n['ambiguous']] + [list(x) for x in _s.get('many_to_one', [])],
+                     'cross_sido_rejected': [list(x) for x in _n['cross_sido_rejected']],
+                     'taken_conflict': _s.get('taken_conflict', []), 'unmatched': _s.get('unmatched', [])}
+else:
+    BRIDGE_REPORT = {'n_old_missing': 0}
 
 # ── 읍면동 choropleth ──
 g = g.to_crs(5186)
@@ -146,6 +123,7 @@ summary = {
     'hi_sum_mw': round(sum(v[3] or 0 for v in ok)),
     'ind_total': int(sum(ind_cnt.values())),
     'ind_by_cat': {k: int(v) for k, v in sorted(ind_cnt.items(), key=lambda x: -x[1])},
+    'code_bridge': BRIDGE_REPORT,   # 감사 F-26 — 모호·다른 시도 거부·미연결을 숨기지 않는다
 }
 json.dump(summary, open(os.path.join(OUT, 'grid_summary.json'), 'w', encoding='utf-8'),
           ensure_ascii=False, indent=1)

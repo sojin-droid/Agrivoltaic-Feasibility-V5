@@ -1,10 +1,335 @@
 {
- "generated": "2026-09-23 13:18",
+ "generated": "2026-09-23 19:30",
  "source": "analysis_unit_v1.gpkg (v9_02 · 2026-09-23) · R2_promo · min_area_m2 11,111 · simplify 2 m",
  "n_units": 14721,
  "n_big": 25,
+ "big_mw_sum": 2450.0,
+ "big_axes_note": "units_big 의 lo·hi(MW, 읍면동 계통 여유 하한·상한 참고)·d(km, 최근접 산업단지 경계 직선거리) = scenario_runs/R2_promo/block_context 원값(TOP 10 과 같은 값)",
  "n_cross_sgg": 131,
  "unit_note": "21m 연접 공간 분석 단위 — cluster 아님(최종 정의 자문 전) · 경계로 자르지 않음",
+ "tiers": {
+  "default": 13897,
+  "quality_review": 824
+ },
+ "tier_rule": "display_tier = v9_02(analysis_unit_v1) 값 — default = 기하 면적/장부 면적 0.99–1.01 · quality_review = 그 밖(기하 불완전 · 면적 불일치). 기본 지도는 default 만, quality_review 는 별도 표시로 확인(숨기지 않음).",
+ "missing": [
+  {
+   "lab": 1363366,
+   "sgg": "41461",
+   "a": 45577,
+   "n": 107,
+   "reason": "no_cadastre_geometry_for_any_member_parcel"
+  },
+  {
+   "lab": 1364291,
+   "sgg": "41461",
+   "a": 16346,
+   "n": 65,
+   "reason": "no_cadastre_geometry_for_any_member_parcel"
+  },
+  {
+   "lab": 1364709,
+   "sgg": "41461",
+   "a": 30391,
+   "n": 26,
+   "reason": "no_cadastre_geometry_for_any_member_parcel"
+  },
+  {
+   "lab": 1366906,
+   "sgg": "41461",
+   "a": 16021,
+   "n": 65,
+   "reason": "no_cadastre_geometry_for_any_member_parcel"
+  },
+  {
+   "lab": 1367096,
+   "sgg": "41461",
+   "a": 12571,
+   "n": 38,
+   "reason": "no_cadastre_geometry_for_any_member_parcel"
+  },
+  {
+   "lab": 1371682,
+   "sgg": "41461",
+   "a": 32303,
+   "n": 52,
+   "reason": "no_cadastre_geometry_for_any_member_parcel"
+  },
+  {
+   "lab": 1372265,
+   "sgg": "41461",
+   "a": 11196,
+   "n": 11,
+   "reason": "no_cadastre_geometry_for_any_member_parcel"
+  },
+  {
+   "lab": 1374336,
+   "sgg": "41461",
+   "a": 17182,
+   "n": 16,
+   "reason": "no_cadastre_geometry_for_any_member_parcel"
+  },
+  {
+   "lab": 1374403,
+   "sgg": "41461",
+   "a": 15862,
+   "n": 8,
+   "reason": "no_cadastre_geometry_for_any_member_parcel"
+  },
+  {
+   "lab": 1376201,
+   "sgg": "41461",
+   "a": 13650,
+   "n": 11,
+   "reason": "no_cadastre_geometry_for_any_member_parcel"
+  },
+  {
+   "lab": 1553877,
+   "sgg": "41500",
+   "a": 14928,
+   "n": 1,
+   "reason": "no_cadastre_geometry_for_any_member_parcel"
+  },
+  {
+   "lab": 2652548,
+   "sgg": "43114",
+   "a": 11692,
+   "n": 1,
+   "reason": "no_cadastre_geometry_for_any_member_parcel"
+  },
+  {
+   "lab": 3335930,
+   "sgg": "43770",
+   "a": 21449,
+   "n": 24,
+   "reason": "no_cadastre_geometry_for_any_member_parcel"
+  },
+  {
+   "lab": 3336215,
+   "sgg": "43770",
+   "a": 23058,
+   "n": 44,
+   "reason": "no_cadastre_geometry_for_any_member_parcel"
+  },
+  {
+   "lab": 3336469,
+   "sgg": "43770",
+   "a": 15315,
+   "n": 21,
+   "reason": "no_cadastre_geometry_for_any_member_parcel"
+  },
+  {
+   "lab": 3337355,
+   "sgg": "43770",
+   "a": 13211,
+   "n": 19,
+   "reason": "no_cadastre_geometry_for_any_member_parcel"
+  },
+  {
+   "lab": 3337381,
+   "sgg": "43770",
+   "a": 11846,
+   "n": 12,
+   "reason": "no_cadastre_geometry_for_any_member_parcel"
+  },
+  {
+   "lab": 3337482,
+   "sgg": "43770",
+   "a": 12674,
+   "n": 18,
+   "reason": "no_cadastre_geometry_for_any_member_parcel"
+  },
+  {
+   "lab": 3337600,
+   "sgg": "43770",
+   "a": 23199,
+   "n": 19,
+   "reason": "no_cadastre_geometry_for_any_member_parcel"
+  },
+  {
+   "lab": 3337838,
+   "sgg": "43770",
+   "a": 23009,
+   "n": 2,
+   "reason": "no_cadastre_geometry_for_any_member_parcel"
+  },
+  {
+   "lab": 3338035,
+   "sgg": "43770",
+   "a": 14340,
+   "n": 2,
+   "reason": "no_cadastre_geometry_for_any_member_parcel"
+  },
+  {
+   "lab": 3338142,
+   "sgg": "43770",
+   "a": 12143,
+   "n": 21,
+   "reason": "no_cadastre_geometry_for_any_member_parcel"
+  },
+  {
+   "lab": 3338384,
+   "sgg": "43770",
+   "a": 27078,
+   "n": 80,
+   "reason": "no_cadastre_geometry_for_any_member_parcel"
+  },
+  {
+   "lab": 3338625,
+   "sgg": "43770",
+   "a": 19333,
+   "n": 47,
+   "reason": "no_cadastre_geometry_for_any_member_parcel"
+  },
+  {
+   "lab": 3338887,
+   "sgg": "43770",
+   "a": 11272,
+   "n": 3,
+   "reason": "no_cadastre_geometry_for_any_member_parcel"
+  },
+  {
+   "lab": 3338985,
+   "sgg": "43770",
+   "a": 20132,
+   "n": 30,
+   "reason": "no_cadastre_geometry_for_any_member_parcel"
+  },
+  {
+   "lab": 3339156,
+   "sgg": "43770",
+   "a": 38067,
+   "n": 15,
+   "reason": "no_cadastre_geometry_for_any_member_parcel"
+  },
+  {
+   "lab": 3339839,
+   "sgg": "43770",
+   "a": 18418,
+   "n": 7,
+   "reason": "no_cadastre_geometry_for_any_member_parcel"
+  },
+  {
+   "lab": 3341010,
+   "sgg": "43770",
+   "a": 27144,
+   "n": 18,
+   "reason": "no_cadastre_geometry_for_any_member_parcel"
+  },
+  {
+   "lab": 3341012,
+   "sgg": "43770",
+   "a": 23818,
+   "n": 56,
+   "reason": "no_cadastre_geometry_for_any_member_parcel"
+  },
+  {
+   "lab": 3341442,
+   "sgg": "43770",
+   "a": 14520,
+   "n": 9,
+   "reason": "no_cadastre_geometry_for_any_member_parcel"
+  },
+  {
+   "lab": 3342254,
+   "sgg": "43770",
+   "a": 19879,
+   "n": 32,
+   "reason": "no_cadastre_geometry_for_any_member_parcel"
+  },
+  {
+   "lab": 3342397,
+   "sgg": "43770",
+   "a": 17760,
+   "n": 9,
+   "reason": "no_cadastre_geometry_for_any_member_parcel"
+  },
+  {
+   "lab": 3343018,
+   "sgg": "43770",
+   "a": 36140,
+   "n": 14,
+   "reason": "no_cadastre_geometry_for_any_member_parcel"
+  },
+  {
+   "lab": 3343516,
+   "sgg": "43770",
+   "a": 16461,
+   "n": 2,
+   "reason": "no_cadastre_geometry_for_any_member_parcel"
+  },
+  {
+   "lab": 3343589,
+   "sgg": "43770",
+   "a": 24132,
+   "n": 29,
+   "reason": "no_cadastre_geometry_for_any_member_parcel"
+  },
+  {
+   "lab": 3343632,
+   "sgg": "43770",
+   "a": 33026,
+   "n": 19,
+   "reason": "no_cadastre_geometry_for_any_member_parcel"
+  },
+  {
+   "lab": 3344177,
+   "sgg": "43770",
+   "a": 20651,
+   "n": 69,
+   "reason": "no_cadastre_geometry_for_any_member_parcel"
+  },
+  {
+   "lab": 3344862,
+   "sgg": "43770",
+   "a": 20933,
+   "n": 9,
+   "reason": "no_cadastre_geometry_for_any_member_parcel"
+  },
+  {
+   "lab": 3345092,
+   "sgg": "43770",
+   "a": 35692,
+   "n": 25,
+   "reason": "no_cadastre_geometry_for_any_member_parcel"
+  },
+  {
+   "lab": 3345183,
+   "sgg": "43770",
+   "a": 19701,
+   "n": 5,
+   "reason": "no_cadastre_geometry_for_any_member_parcel"
+  },
+  {
+   "lab": 3345680,
+   "sgg": "43770",
+   "a": 24370,
+   "n": 9,
+   "reason": "no_cadastre_geometry_for_any_member_parcel"
+  },
+  {
+   "lab": 10629557,
+   "sgg": "48250",
+   "a": 16225,
+   "n": 1,
+   "reason": "no_cadastre_geometry_for_any_member_parcel"
+  },
+  {
+   "lab": 11298217,
+   "sgg": "48820",
+   "a": 15823,
+   "n": 1,
+   "reason": "no_cadastre_geometry_for_any_member_parcel"
+  },
+  {
+   "lab": 12950949,
+   "sgg": "51760",
+   "a": 14449,
+   "n": 1,
+   "reason": "no_cadastre_geometry_for_any_member_parcel"
+  }
+ ],
+ "missing_note": "analysis_unit_missing_v1 — 소속 필지의 지적 폴리곤이 없어 도형을 만들지 못한 단위. 적격·소속은 그대로이며 지도에만 없다(부적격 아님).",
  "sgg": {
   "11200": {
    "k": 3,

@@ -1,5 +1,5 @@
 {
- "generated": "2026-09-23 13:42",
+ "generated": "2026-09-23 19:37",
  "runs": [
   "R0_current",
   "R0_current_SB",
@@ -28,7 +28,7 @@
   "fbc",
   "dsh"
  ],
- "population": "block_context 모집단(정본 그대로 · 규모 문턱 없음) — 시군 관여 기준(걸침 후보는 관련 시군마다 등장, 합산 금지)",
+ "population": "block_context 모집단(정본 그대로 · 선언 문턱 min_area_m2 11,111㎡ 이상 — 추가 문턱 없음) — 시군 관여 기준(걸침 후보는 관련 시군마다 등장, 합산 금지)",
  "fronts": "표시 규모(0·66667·222222·444444·1111111㎡)별 비지배 lab 목록 — 비교 모집단 = 그 규모 이상 전량",
  "flags": {
   "f3": "면적·계통 여유(lo)·산단 거리 3축 비지배 = query._frontier_mask",
@@ -39,44 +39,100 @@
  "dsh": "MW×1,314h ÷ 시군 연간 전력판매량(GWh) % — 표기 전용(PR-0030), 판정 불사용",
  "stamps": {
   "R0_current": {
-   "generated_at": null,
-   "grid_asset": null,
-   "n_component_total": null
+   "built_at": "2026-09-14T00:22:22",
+   "min_area_m2": 11111.0,
+   "n_block": 7284,
+   "n_block_sgg_pair": 7323,
+   "grid_link": "linked",
+   "assets": {
+    "damdan_gpkg_sha": "a88825b7a9a6",
+    "clusters_mtime": "2026-09-14T00:19:34",
+    "grid_link_mtime": "2026-09-14T00:19:43"
+   }
   },
   "R0_current_SB": {
-   "generated_at": null,
-   "grid_asset": null,
-   "n_component_total": null
+   "built_at": "2026-09-14T00:25:10",
+   "min_area_m2": 11111.0,
+   "n_block": 3474,
+   "n_block_sgg_pair": 3491,
+   "grid_link": "linked",
+   "assets": {
+    "damdan_gpkg_sha": "a88825b7a9a6",
+    "clusters_mtime": "2026-09-14T00:22:38",
+    "grid_link_mtime": "2026-09-14T00:22:46"
+   }
   },
   "R1_protect": {
-   "generated_at": null,
-   "grid_asset": null,
-   "n_component_total": null
+   "built_at": "2026-09-14T00:28:32",
+   "min_area_m2": 11111.0,
+   "n_block": 7885,
+   "n_block_sgg_pair": 7926,
+   "grid_link": "linked",
+   "assets": {
+    "damdan_gpkg_sha": "a88825b7a9a6",
+    "clusters_mtime": "2026-09-14T00:25:27",
+    "grid_link_mtime": "2026-09-14T00:25:36"
+   }
   },
   "R1_protect_SB": {
-   "generated_at": null,
-   "grid_asset": null,
-   "n_component_total": null
+   "built_at": "2026-09-14T00:31:02",
+   "min_area_m2": 11111.0,
+   "n_block": 3761,
+   "n_block_sgg_pair": 3779,
+   "grid_link": "linked",
+   "assets": {
+    "damdan_gpkg_sha": "a88825b7a9a6",
+    "clusters_mtime": "2026-09-14T00:28:43",
+    "grid_link_mtime": "2026-09-14T00:28:48"
+   }
   },
   "R2_promo": {
-   "generated_at": null,
-   "grid_asset": null,
-   "n_component_total": null
+   "built_at": "2026-09-14T11:32:29",
+   "min_area_m2": 11111.0,
+   "n_block": 14766,
+   "n_block_sgg_pair": 14897,
+   "grid_link": "linked",
+   "assets": {
+    "damdan_gpkg_sha": "a88825b7a9a6",
+    "clusters_mtime": "2026-09-14T11:30:46",
+    "grid_link_mtime": "2026-09-14T11:30:51"
+   }
   },
   "R2_promo_SB": {
-   "generated_at": null,
-   "grid_asset": null,
-   "n_component_total": null
+   "built_at": "2026-09-14T00:37:04",
+   "min_area_m2": 11111.0,
+   "n_block": 8528,
+   "n_block_sgg_pair": 8601,
+   "grid_link": "linked",
+   "assets": {
+    "damdan_gpkg_sha": "a88825b7a9a6",
+    "clusters_mtime": "2026-09-14T00:34:24",
+    "grid_link_mtime": "2026-09-14T00:34:32"
+   }
   },
   "R3_zone_all": {
-   "generated_at": null,
-   "grid_asset": null,
-   "n_component_total": null
+   "built_at": "2026-09-14T00:39:00",
+   "min_area_m2": 11111.0,
+   "n_block": 15443,
+   "n_block_sgg_pair": 15577,
+   "grid_link": "linked",
+   "assets": {
+    "damdan_gpkg_sha": "a88825b7a9a6",
+    "clusters_mtime": "2026-09-14T00:37:14",
+    "grid_link_mtime": "2026-09-14T00:37:19"
+   }
   },
   "R3_zone_all_SB": {
-   "generated_at": null,
-   "grid_asset": null,
-   "n_component_total": null
+   "built_at": "2026-09-14T00:40:46",
+   "min_area_m2": 11111.0,
+   "n_block": 8843,
+   "n_block_sgg_pair": 8918,
+   "grid_link": "linked",
+   "assets": {
+    "damdan_gpkg_sha": "a88825b7a9a6",
+    "clusters_mtime": "2026-09-14T00:39:09",
+    "grid_link_mtime": "2026-09-14T00:39:13"
+   }
   }
  },
  "sgg": {

@@ -65,8 +65,11 @@ for run in RUNS:
     got, err = Q._rec_load(run)
     assert not err, f"[FAIL] {err}"
     df, st = got
-    stamps[run] = {'generated_at': st.get('generated_at'), 'grid_asset': (st.get('grid_asset') or {}).get('meta_built'),
-                   'n_component_total': (st.get('subset') or {}).get('n_component_total')}
+    # 감사 F-19 — 존재하지 않는 키(generated_at·grid_asset·n_component_total)를 읽어 전부 null 이던 스탬프를
+    #   block_context.json 에 실제로 있는 값으로 바꾼다. 없는 날짜를 만들지 않는다.
+    stamps[run] = {'built_at': st.get('built_at'), 'min_area_m2': (st.get('subset') or {}).get('min_area_m2'),
+                   'n_block': (st.get('subset') or {}).get('n_block'), 'n_block_sgg_pair': (st.get('subset') or {}).get('n_block_sgg_pair'),
+                   'grid_link': st.get('grid_link'), 'assets': st.get('assets')}
     lon, lat = T.transform(df['x'].to_numpy(float), df['y'].to_numpy(float))
     df = df.assign(lon=lon, lat=lat)
     for sgg, d in df.groupby('sgg'):
@@ -77,6 +80,11 @@ for run in RUNS:
         assert np.array_equal(f3, ref), f"[FAIL] G1 {run} {sgg}: 3축 플래그 ≠ query._frontier_mask"
         n_g1 += 1
         fab, fac, fbc = nondominated(d, 'ab'), nondominated(d, 'ac'), nondominated(d, 'bc')
+        # G1b (감사 F-27) — 2축 플래그도 정본 함수로 독립 대조: 고르지 않은 축을 상수로 두면 그 축에서 누구도 엄격히 낫지 않으므로
+        #   query._frontier_mask 가 곧 나머지 두 축의 비지배 판정이 된다. 3축만 검증된 상태를 전체 검증이라 부르지 않기 위함.
+        for fl_, arr_, col_ in (('fab', fab, 'dist_ind_km'), ('fac', fac, 'lo'), ('fbc', fbc, 'area_m2')):
+            dd_ = d.copy(); dd_[col_] = 0.0
+            assert np.array_equal(arr_, Q._frontier_mask(dd_)), f"[FAIL] G1b {run} {sgg}: {fl_} ≠ query._frontier_mask(축 고정)"
         t = dem.get(sgg) if dem else None
         t_gwh = (None if t is None or pd.isna(t.total_gwh_year) else float(t.total_gwh_year))
         rows = []
@@ -92,20 +100,23 @@ for run in RUNS:
         # G2 — 발행 = 모집단
         assert len(rows) == len(d) and abs(sum(x[1] for x in rows) - round(float(d['area_m2'].sum()))) <= len(d), \
             f"[FAIL] G2 {run} {sgg}: 행 수/면적 합 불일치"
-        # 표시 규모별 비지배 집합 — 비교 모집단 = 그 규모 이상 후보 전량(recommend_cc 의 by_filter 규약과 동일). 정본 함수와 대조(G1)
+        # 표시 규모별 비지배 집합 — 비교 모집단 = 그 규모 이상 후보 전량. 정본 함수와 대조(G1)
         fronts = {}
         for th in FILTERS:
             sub = d[d['area_m2'] >= th].reset_index(drop=True)
             if not len(sub): fronts[str(th)] = {'f3': [], 'fab': [], 'fac': [], 'fbc': []}; continue
             fr = {k: [int(x) for x in sub['lab'][nondominated(sub, a)]] for k, a in [('f3', 'abc'), ('fab', 'ab'), ('fac', 'ac'), ('fbc', 'bc')]}
             assert set(fr['f3']) == set(int(x) for x in sub['lab'][Q._frontier_mask(sub)]), f'[FAIL] G1 {run} {sgg} @{th}: 부분집합 3축 ≠ query._frontier_mask'
+            for fl_, col_ in (('fab', 'dist_ind_km'), ('fac', 'lo'), ('fbc', 'area_m2')):
+                s2_ = sub.copy(); s2_[col_] = 0.0
+                assert set(fr[fl_]) == set(int(x) for x in s2_['lab'][Q._frontier_mask(s2_)]), f'[FAIL] G1b {run} {sgg} @{th}: {fl_}'
             fronts[str(th)] = fr
         per_sgg.setdefault(sgg, {})[run] = {'n': len(rows), 'n_f3': int(f3.sum()), 'rows': rows, 'fronts': fronts}
         labels[sgg] = Q._sgg_label(sgg)
-print(f"G1 통과 — 3축 플래그 = 정본 함수 ({n_g1:,} 시군×칸) · G2 통과")
+print(f"G1 통과 — 3축 플래그 = 정본 함수 ({n_g1:,} 시군×칸) · G1b 통과 — 2축 3종 = 정본 함수(축 고정) · G2 통과")
 
 idx = {'generated': datetime.datetime.now().strftime('%Y-%m-%d %H:%M'), 'runs': RUNS, 'cols': COLS,
-       'population': 'block_context 모집단(정본 그대로 · 규모 문턱 없음) — 시군 관여 기준(걸침 후보는 관련 시군마다 등장, 합산 금지)',
+       'population': 'block_context 모집단(정본 그대로 · 선언 문턱 min_area_m2 11,111㎡ 이상 — 추가 문턱 없음) — 시군 관여 기준(걸침 후보는 관련 시군마다 등장, 합산 금지)',
        'fronts': '표시 규모(0·66667·222222·444444·1111111㎡)별 비지배 lab 목록 — 비교 모집단 = 그 규모 이상 전량',
        'flags': {'f3': '면적·계통 여유(lo)·산단 거리 3축 비지배 = query._frontier_mask', 'fab': '면적+계통 2축 비지배(같은 규칙)',
                  'fac': '면적+산단 2축 비지배(같은 규칙)', 'fbc': '계통+산단 2축 비지배(같은 규칙)'},

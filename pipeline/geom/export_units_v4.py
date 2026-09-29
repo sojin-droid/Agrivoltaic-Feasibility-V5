@@ -9,6 +9,8 @@
 여기서는 좌표계 변환(EPSG:5186 → WGS84)과 좌표 반올림(1e-5도 ≈ 1 m)만 한다 — 새 기하 연산·재클러스터링 없음.
 
 속성: id(lab) · a(장부 면적 ㎡) · mw(참고) · n(필지) · ns(관여 시군 수) · sggs · ne(읍면동 수) · emds · q(기하 품질) · ag(기하 면적 ㎡)
+      · t(display_tier: default | quality_review) · ql(quality_label) — v9_02 값 그대로(감사 F-04: 전에는 export 에서 탈락).
+색인: units_index.json 에 tier 별 수 · 기하 없는 단위 목록(analysis_unit_missing_v1 그대로 — 감사 F-24) 을 싣는다.
 게이트: 폴리곤 수 = DuckDB analysis_unit_v1 행 수 · lab 집합 일치 · 면적 합 일치.
 사용: python pipeline/geom/export_units_v4.py
 """
@@ -28,7 +30,8 @@ print('layers:', layers.tolist() if hasattr(layers, 'tolist') else layers)
 g = gpd.read_file(GPKG, layer=layers[0][0])
 print(f"gpkg {len(g):,} polygons · crs {g.crs} · cols {list(g.columns)}")
 con = duckdb.connect(DB, read_only=True)
-attr = con.execute("SELECT lab, area_ledger_m2, mw_ref, n_parcel_geom, n_sgg, sgg_members, n_emd_geom, emd_members, geom_quality, area_geom_m2 FROM analysis_unit_v1").fetch_df()
+attr = con.execute("SELECT lab, area_ledger_m2, mw_ref, n_parcel_geom, n_sgg, sgg_members, n_emd_geom, emd_members, geom_quality, area_geom_m2, display_tier, quality_label FROM analysis_unit_v1").fetch_df()
+missing = con.execute("SELECT lab, sgg, area_m2, n_parcel, reason FROM analysis_unit_missing_v1 ORDER BY lab").fetchall()
 con.close()
 assert len(g) == len(attr) and set(g['lab'].astype(int)) == set(attr['lab'].astype(int)), '[FAIL] gpkg ≠ analysis_unit_v1 (행 수/lab 집합)'
 g = g[['lab', 'geometry']].merge(attr, on='lab')
@@ -42,7 +45,7 @@ def feat(r):
     gm = {'type': gm['type'], 'coordinates': rnd(gm['coordinates'])}
     p = {'id': int(r.lab), 'a': round(float(r.area_ledger_m2)), 'mw': round(float(r.mw_ref), 1), 'n': int(r.n_parcel_geom),
          'ns': int(r.n_sgg), 'sggs': str(r.sgg_members).split(','), 'ne': int(r.n_emd_geom), 'emds': str(r.emd_members).split(','),
-         'q': str(r.geom_quality), 'ag': round(float(r.area_geom_m2))}
+         'q': str(r.geom_quality), 'ag': round(float(r.area_geom_m2)), 't': str(r.display_tier), 'ql': str(r.quality_label)}
     return {'type': 'Feature', 'properties': p, 'geometry': gm}
 
 feats = [feat(r) for r in g84.itertuples()]
@@ -59,11 +62,30 @@ for s, fs in by_sgg.items():
     tot += os.path.getsize(os.path.join(out_dir, f'{s}.json.gz'))
     idx[s] = {'k': len(fs), 'km2': round(sum(f['properties']['a'] for f in fs) / 1e6, 2), 'cross': sum(1 for f in fs if f['properties']['ns'] > 1)}
 big = sorted([f for f in feats if f['properties']['a'] >= BIG_M2], key=lambda f: -f['properties']['a'])
+# 감사 F-12 — 후보지 찾기 표의 산단 거리·계통 여유는 화면이 계산하지 않는다. 정본 block_context(R2_promo) 값을 그대로 싣는다.
+#   (전에는 브라우저가 bbox 중심↔산단 bbox 중심 haversine · 읍면동 PIP 로 다시 계산해 TOP 10 과 값이 달랐다.)
+_bc = duckdb.connect().execute(
+    "SELECT lab, lo, hi, dist_ind_km, n_emd_unknown FROM read_parquet(?) WHERE lab IN (" + ",".join(str(f['properties']['id']) for f in big) + ")",
+    [os.path.join(LR, 'scenario_runs', 'R2_promo', 'block_context.parquet').replace(os.sep, '/')]).fetchall()
+_bcm = {}
+for lab, lo, hi, dk, nu in _bc:
+    assert lab not in _bcm, f'[FAIL] block_context 에 lab {lab} 이 두 행 — 대규모 단위는 시군 걸침이어도 값이 하나여야 표에 싣는다'
+    _bcm[lab] = (lo, hi, dk, nu)
+assert set(_bcm) == {f['properties']['id'] for f in big}, '[FAIL] units_big lab ≠ block_context'
+for f in big:
+    lo, hi, dk, nu = _bcm[f['properties']['id']]
+    nz = lambda v, k: None if v is None or v != v else round(float(v), k)
+    f['properties'].update({'lo': nz(lo, 1), 'hi': nz(hi, 1), 'd': nz(dk, 2), 'emd_unk': int(nu or 0)})
+big_mw_sum = round(sum(float(f['properties']['mw']) for f in big), 1)
 with gzip.open(os.path.join(SITE, 'data_v4', 'units_big.json.gz'), 'wt', encoding='utf-8') as fo:
     json.dump({'type': 'FeatureCollection', 'run': 'R2_promo', 'min_m2': BIG_M2, 'features': big}, fo, ensure_ascii=False, separators=(',', ':'))
 a_sum = sum(f['properties']['a'] for f in feats)
 assert abs(a_sum - round(float(attr['area_ledger_m2'].sum()))) <= len(feats), '[FAIL] 면적 합 불일치'
 json.dump({'generated': datetime.datetime.now().strftime('%Y-%m-%d %H:%M'), 'source': 'analysis_unit_v1.gpkg (v9_02 · 2026-09-23) · R2_promo · min_area_m2 11,111 · simplify 2 m',
-           'n_units': len(feats), 'n_big': len(big), 'n_cross_sgg': sum(1 for f in feats if f['properties']['ns'] > 1), 'unit_note': '21m 연접 공간 분석 단위 — cluster 아님(최종 정의 자문 전) · 경계로 자르지 않음',
+           'n_units': len(feats), 'n_big': len(big), 'big_mw_sum': big_mw_sum, 'big_axes_note': 'units_big 의 lo·hi(MW, 읍면동 계통 여유 하한·상한 참고)·d(km, 최근접 산업단지 경계 직선거리) = scenario_runs/R2_promo/block_context 원값(TOP 10 과 같은 값)', 'n_cross_sgg': sum(1 for f in feats if f['properties']['ns'] > 1), 'unit_note': '21m 연접 공간 분석 단위 — cluster 아님(최종 정의 자문 전) · 경계로 자르지 않음',
+           'tiers': {t: sum(1 for f in feats if f['properties']['t'] == t) for t in ('default', 'quality_review')},
+           'tier_rule': 'display_tier = v9_02(analysis_unit_v1) 값 — default = 기하 면적/장부 면적 0.99–1.01 · quality_review = 그 밖(기하 불완전 · 면적 불일치). 기본 지도는 default 만, quality_review 는 별도 표시로 확인(숨기지 않음).',
+           'missing': [{'lab': int(l), 'sgg': str(sg), 'a': round(float(a)), 'n': int(np_), 'reason': str(rs)} for l, sg, a, np_, rs in missing],
+           'missing_note': 'analysis_unit_missing_v1 — 소속 필지의 지적 폴리곤이 없어 도형을 만들지 못한 단위. 적격·소속은 그대로이며 지도에만 없다(부적격 아님).',
            'sgg': idx}, open(os.path.join(SITE, 'data_v4', 'units_index.json'), 'w', encoding='utf-8'), ensure_ascii=False, indent=1)
 print(f"units {len(feats):,} · big(≥{BIG_M2:,}㎡) {len(big)} · cross-sgg {sum(1 for f in feats if f['properties']['ns'] > 1)} · {tot/1024/1024:.1f} MB in {len(by_sgg)} files · units_big {os.path.getsize(os.path.join(SITE, 'data_v4', 'units_big.json.gz'))/1024:.0f} KB")

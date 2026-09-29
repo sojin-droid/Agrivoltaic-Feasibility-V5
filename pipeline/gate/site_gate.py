@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """site_gate — 시연·push 전 필수 관문 (REWORK_PLAN 원칙 13).
-검사: ①무효 수치 ②금지어·물결표 ③data_v4 내부 정합(T14·가산성) ④외부 자원 로드 ⑤하드코딩 수치.
+검사: ①무효 수치 ②금지어·물결표 ③data_v4 내부 정합(T14·가산성) ④외부 자원 로드 ⑤하드코딩 수치 ⑥폐기된 1km 응축(cc) 참조 ⑦행정코드 다리 회귀.
 새 함정 발견 시 문서에 적기 전에 여기 검사부터 추가한다.
 
 사용: python pipeline/gate/site_gate.py    → PASS면 종료코드 0, 위반 있으면 1
@@ -11,7 +11,7 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from paths import SITE, OUT, CLUSTERS, ROOT, MODEL, LR, CAD   # 경로는 한 곳에서만
 
 # 전 탭 스캔 — 새 탭 추가 시 반드시 여기에도 추가 (2026-08-26: map·insight·candidates 누락 적발)
-PAGES = ['index.html', 'finder.html', 'scenarios.html', 'regions.html', 'local.html', 'method.html',
+PAGES = ['index.html', 'finder.html', 'scenarios.html', 'regions.html', 'local.html', 'method.html', 'advisory.html',
          'evidence.html', 'map.html', 'candidates.html', 'proximity.html', 'decree.html', 'insight.html', 'about.html']
 DATA = os.path.join(SITE, 'data_v4')
 
@@ -105,6 +105,30 @@ for name in os.listdir(DATA) if os.path.isdir(DATA) else []:
     if not os.path.isfile(fp) or name.endswith('.gz'):
         continue                     # clusters/ 등 지오메트리 폴더·gzip 파일은 수치·어휘 스캔 대상 아님
     scan(fp, f"data_v4/{name}")
+
+# ⑥ 폐기된 ≤1,000m 응축(cc) 계보가 활성 화면·공용 JS·발행 순서에 다시 들어오지 않는가 (ADR-0054 · 감사 F-07/F-23)
+#   LEGACY 자산(data_v4/cand/ · recommend_cc_v4 · recommend_emd_v4 · assets/cand.js)은 파일로 남아 있어도 되지만, 부르면 FAIL.
+CC_REF = [r'assets/cand\.js', r'cand\.css', r'recommend_cc_v4', r'recommend_emd_v4', r'data_v4/cand/', r'cand_index', r'\bCand\.']
+ACTIVE_JS = ['assets/v4.js', 'assets/v55.js', 'assets/region.js', 'site.js']
+for rel in ['index.html', 'finder.html', 'scenarios.html', 'regions.html', 'local.html', 'method.html', 'advisory.html'] + ACTIVE_JS:
+    fp = os.path.join(SITE, rel)
+    if not os.path.exists(fp):
+        continue
+    txt = open(fp, encoding='utf-8').read()
+    for pat in CC_REF:
+        if re.search(pat, txt):
+            fails.append(f"{rel}: 폐기된 1km 응축(cc) 자산 참조 '{pat}' — ADR-0054")
+_pub = open(os.path.join(SITE, 'publish.py'), encoding='utf-8').read()
+for bad in ('export_cand_v4', 'export_emd_v4', 'make_sgg_briefs'):
+    if bad in _pub:
+        fails.append(f"publish.py: 폐기된 1km 응축 exporter '{bad}' 가 발행 순서에 있음 — ADR-0054")
+
+# ⑦ 행정코드 다리 회귀(감사 NEW-F-03) — 합성 fixture(인천·부산·대전·대구 중구 동명) 검사가 깨지면 FAIL
+import subprocess as _sp
+_tb = _sp.run([sys.executable, os.path.join(os.path.dirname(os.path.abspath(__file__)), 'test_admin_bridge.py')],
+              capture_output=True, text=True, encoding='utf-8')
+if _tb.returncode != 0:
+    fails.append('test_admin_bridge: ' + (_tb.stdout.strip().splitlines() or ['실행 실패'])[-1] + ' ' + _tb.stderr.strip()[-200:])
 
 print(f"── site_gate ── FAIL {len(fails)} · WARN {len(warns)}")
 for f in fails:
