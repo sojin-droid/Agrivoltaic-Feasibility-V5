@@ -138,12 +138,13 @@ window.V55 = (() => {
   const bandOf = (a, bands = MW_BANDS) => bands.find(([min]) => a >= min) || bands[bands.length - 1];
   const legendHTML = (bands, title) => `<div class="v55-leg"><b>${title}</b>` + bands.map(([, c, l]) => `<span><i style="background:${c}"></i>${l}</span>`).join('') + `</div>`;
   const GRID_BINS = [[50, '#1C5F86', '50+'], [20, '#4A94BA', '20–50'], [8, '#8FC0D8', '8–20'], [2, '#CFE3EE', '2–8'], [0.0001, '#F0F4F6', '0–2']];
-  const GRID_SAT = '#EFDFDD', GRID_UNK = '#CFCFCF';
+  // 알 수 없음(원천 무응답·조회 불가 587개 읍면동)은 회색이면 배경·조회값 없음과 구분이 안 된다(GGI 2026-10-01) — 이 지도에서 안 쓰는 자홍 + 점선 테두리
+  const GRID_SAT = '#EFDFDD', GRID_UNK = '#E8559F', GRID_UNK_LINE = '#B0106A';
   // 계통 범례 — 슬라이더 문턱과 색상 일치: 문턱 아래 구간은 흐리게
   const gridLegendHTML = (threshold) => `<div class="v55-leg v55-leg-grid"><b>계통 여유 참고지표(읍면동 하한, MW)</b>` +
     [[null, GRID_SAT, '포화(0)', 0], ...GRID_BINS.slice().reverse().map(([th, c, l]) => [th, c, l, th])].map(([th, c, l, v]) =>
       `<span class="${threshold > 0 && v < threshold ? 'dim' : ''}"><i style="background:${c}"></i>${l}</span>`).join('') +
-    `<span><i style="background:${GRID_UNK}"></i>알 수 없음</span></div>`;
+    `<span><i style="background:${GRID_UNK};border:1.5px dashed ${GRID_UNK_LINE}"></i>알 수 없음(조회 불가)</span></div>`;
 
   // ── 후보 공간 폴리곤(21m 연접 단위 · analysis_unit_v1 · 진흥구역 개방 기준) ──
   const units = {
@@ -264,7 +265,9 @@ window.V55 = (() => {
     count(d, sgg = null) { return d ? (sgg ? d.pts.filter(p => p[6] === sgg).length : d.pts.length) : 0; },
     // 종류 — 원천 표기 기준: 영농형(시설 이름에 '영농형'이 적힌 경우) · 일반 태양광
     kinds(d, sgg = null) { const k = {p: 0, y: 0}; if (d) (sgg ? d.pts.filter(p => p[6] === sgg) : d.pts).forEach(p => { if (p[3] === 'y') k.y++; else k.p++; }); return k; },
-    kindLabel(d, sgg = null) { const k = this.kinds(d, sgg); return `일반 태양광 ${n(k.p)}곳 · 영농형 태양광 ${n(k.y)}곳`; },
+    kindLabel(d, sgg = null) { const k = this.kinds(d, sgg), ny = d.meta && d.meta.n_yeongnong_records;
+      // 영농형 0곳은 자료가 없다는 뜻이 아니라, 원천 기록 중 위치를 검증할 수 있는 점이 없다는 뜻 — 전국 표기일 때 기록 건수를 함께 적는다
+      return `일반 태양광 ${n(k.p)}곳 · 영농형 태양광 ${n(k.y)}곳${!sgg && k.y === 0 && ny ? ` (원천 기록 ${n(ny)}건 · 위치 확인된 곳 없음)` : ''}`; },
     layer(d, {pane, sgg = null} = {}) { const g = L.layerGroup(); if (!d) return g;
       const pts = sgg ? d.pts.filter(p => p[6] === sgg) : d.pts;
       const tip = ([, , kw, t, st, src, , emd]) => `<b>기존 ${t === 'y' ? '영농형 태양광' : '일반 태양광'} 시설</b>${(d.meta.emd_names || {})[emd] ? ' · ' + d.meta.emd_names[emd] : ''}<br>상태: ${d.meta.status_codes[st] || st}${kw ? ` · ${n(kw)} kW` : ''}<br><span style="font-size:11px">표시 위치: 허가 자료의 주소(지번) 위치 · 출처: ${this.SRC[src] || src}</span>`;
@@ -367,5 +370,5 @@ window.V55 = (() => {
     }
     return false;
   }
-  return {n, km2, mw, gz, SCN, scn, openModal, methodButton, METHOD, dataDates, EXISTING_NOTE, GRID_NOTE, MW_BANDS, BIG_BANDS, bandOf, legendHTML, GRID_BINS, GRID_SAT, GRID_UNK, gridLegendHTML, units, top10, pnu, existing, axesControl, seg, pnuCard, pnuSearchBox};
+  return {n, km2, mw, gz, SCN, scn, openModal, methodButton, METHOD, dataDates, EXISTING_NOTE, GRID_NOTE, MW_BANDS, BIG_BANDS, bandOf, legendHTML, GRID_BINS, GRID_SAT, GRID_UNK, GRID_UNK_LINE, gridLegendHTML, units, top10, pnu, existing, axesControl, seg, pnuCard, pnuSearchBox};
 })();

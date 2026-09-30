@@ -134,7 +134,8 @@ input[type=range]{accent-color:var(--navy)}
       <div class="v55-hint" id="gridNote"></div></div>
 
     <div class="grp"><div class="gt">기존 태양광 시설</div>
-      <label class="tglrow"><input type="checkbox" id="exToggle"> 지도에 표시 — <span id="exCnt">—</span></label>
+      <label class="tglrow"><input type="checkbox" id="exToggle"> 지도에 표시</label>
+      <div class="v55-hint" id="exCnt" style="margin-top:2px">불러오는 중…</div>
       <div class="v55-hint" id="exNote"></div></div>
 
     <div class="grp"><div class="gt">선택 후보의 인근 산업단지 — 반경 <span id="bufKmLbl">10</span> km</div>
@@ -212,7 +213,7 @@ input[type=range]{accent-color:var(--navy)}
   // ── 계통 레이어 — 범례는 슬라이더 문턱과 같은 색·같은 구간(계통 전용 범례, 규모 범례와 분리) ──
   let gridT = 50;
   const gstyle = p => {
-    if (p.s === 'unknown') return {color: '#8C8C8C', weight: .3, fillColor: V55.GRID_UNK, fillOpacity: .45};
+    if (p.s === 'unknown') return {color: V55.GRID_UNK_LINE, weight: .8, dashArray: '3 3', fillColor: V55.GRID_UNK, fillOpacity: .35};
     if (p.s === 'nodata') return {color: '#9AA5B1', weight: .2, fillColor: '#F5F5F2', fillOpacity: .15};
     const lo = p.lo || 0, selected = gridT > 0 ? lo >= gridT : true;
     if (!selected) return {color: '#8FA0B0', weight: .25, fillColor: '#FFFFFF', fillOpacity: .04};
