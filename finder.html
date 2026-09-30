@@ -33,6 +33,18 @@
 .typerow .sw{width:11px;height:11px;border-radius:3px;display:inline-block}
 input[type=range]{accent-color:var(--navy)}
 .glbl{font-size:11.5px;color:var(--ink);margin:2px 0 4px;font-variant-numeric:tabular-nums}
+.gopt{font-size:11px;color:var(--muted);margin:4px 0 6px}
+/* 방식 A — 손잡이(14px) 중심이 6칸 바의 칸 경계(k/6)에 오도록: 슬라이더 폭 = 5/6 바 폭 + 손잡이 폭, 왼쪽으로 반 손잡이만큼 당김 */
+.gstep{position:relative}
+#gridStep{-webkit-appearance:none;appearance:none;display:block;width:calc(83.333% + 14px);margin:0 0 3px -7px;height:16px;background:transparent;cursor:pointer}
+#gridStep::-webkit-slider-runnable-track{height:4px;background:var(--line);border-radius:2px}
+#gridStep::-webkit-slider-thumb{-webkit-appearance:none;width:14px;height:14px;border-radius:50%;background:var(--navy);border:2px solid #fff;box-shadow:0 0 0 1.5px var(--navy);margin-top:-5px}
+#gridStep::-moz-range-track{height:4px;background:var(--line);border-radius:2px}
+#gridStep::-moz-range-thumb{width:10px;height:10px;border-radius:50%;background:var(--navy);border:2px solid #fff;box-shadow:0 0 0 1.5px var(--navy)}
+.gbar{display:flex;height:13px;border-radius:3px;overflow:hidden;border:1px solid rgba(0,0,0,.25)}
+.gbar i{flex:1 1 0;display:block;border-right:1px solid rgba(0,0,0,.18);transition:opacity .15s}.gbar i:last-child{border-right:none}.gbar i.dim{opacity:.18}
+.gbar-l{display:flex;font-size:10px;color:var(--muted);margin-top:2px}.gbar-l span{flex:1 1 0;text-align:center;white-space:nowrap}.gbar-l span.dim{opacity:.45}
+
 .searchbox{width:100%;font:12.5px 'Noto Sans KR',sans-serif;padding:6px 9px;border:1.5px solid var(--line);border-radius:8px;margin-bottom:4px}
 .searchbox:focus{outline:none;border-color:var(--navy)}
 .sresults{max-height:150px;overflow-y:auto;border:1px solid var(--line);border-radius:8px;display:none}
@@ -113,10 +125,11 @@ input[type=range]{accent-color:var(--navy)}
       <div id="indTypes"></div></div>
 
     <div class="grp"><div class="gt">계통 여유 참고지표 — 표시 문턱</div>
-      <input type="range" id="gridSlider" min="0" max="50" step="1" value="50" style="width:100%" aria-label="계통 여유 표시 문턱">
-      <div style="display:flex;justify-content:space-between;font-size:10.5px;color:var(--muted);margin-top:-2px">
-        <span>◀ 전체(포화 포함)</span><span>여유 ≥ 50MW만 ▶</span></div>
-      <div class="glbl" id="gridLbl">—</div>
+      <div class="gopt">손잡이를 구간 경계로 옮기면 그 구간 이상만 채색합니다 — 손잡이 위치 = 아래 색깔 칸의 왼쪽 경계</div>
+      <div class="gstep">
+        <input type="range" id="gridStep" min="0" max="5" step="1" value="5" aria-label="계통 여유 표시 문턱(구간)">
+        <div class="gbar" id="gridBar"></div><div class="gbar-l" id="gridBarL"></div></div>
+      <div class="glbl" id="gridLbl" style="margin-top:6px">—</div>
       <div id="gridLegend"></div>
       <div class="v55-hint" id="gridNote"></div></div>
 
@@ -216,12 +229,25 @@ input[type=range]{accent-color:var(--navy)}
   const gridLbl = document.getElementById('gridLbl');
   function gridRefresh() {
     const cnt = grid.features.filter(f => nOk(f) && (gridT > 0 ? (f.properties.lo || 0) >= gridT : true)).length;
-    gridLbl.textContent = gridT > 0 ? `잔여 ≥ ${gridT} MW 읍면동만 채색 — ${V4.n(cnt)}곳` : `전체 채색(포화 포함) — ${V4.n(cnt)}곳`;
+    gridLbl.textContent = gridT >= 1 ? `잔여 ≥ ${gridT} MW 읍면동만 채색 — ${V4.n(cnt)}곳` : gridT > 0 ? `여유가 있는 읍면동만 채색(포화 제외) — ${V4.n(cnt)}곳` : `전체 채색(포화 포함) — ${V4.n(cnt)}곳`;
     document.getElementById('gridLegend').innerHTML = V55.gridLegendHTML(gridT);
     gridLayer.setStyle(f => gstyle(f.properties));
   }
+  // 문턱 6단계 = 범례 6칸의 왼쪽 경계 — 0(전체) · 0.0001(포화 제외 = 여유 있음) · 2 · 8 · 20 · 50. 슬라이더는 이 경계에서만 멈춘다(GGI 검토 2026-10-01: 범례와 눈금 일치).
+  const GSTEP = [0, 0.0001, 2, 8, 20, 50], GCOL = [V55.GRID_SAT, ...V55.GRID_BINS.slice().reverse().map(b => b[1])];
+  const GLBL = ['포화(0)', '0–2', '2–8', '8–20', '20–50', '50+'];
+  const stepOf = t => Math.max(0, GSTEP.findIndex((v, i) => t <= v || i === GSTEP.length - 1));
+  document.getElementById('gridBar').innerHTML = GCOL.map(c => `<i style="background:${c}"></i>`).join('');
+  document.getElementById('gridBarL').innerHTML = GLBL.map(l => `<span>${l}</span>`).join('');
+  function gridCtlSync() { const k = stepOf(gridT);
+    document.getElementById('gridStep').value = k;
+    document.querySelectorAll('#gridBar i').forEach((el, i) => el.classList.toggle('dim', i < k));
+    document.querySelectorAll('#gridBarL span').forEach((el, i) => el.classList.toggle('dim', i < k));
+  }
   let rafId = null;
-  document.getElementById('gridSlider').addEventListener('input', e => { gridT = +e.target.value; if (rafId) cancelAnimationFrame(rafId); rafId = requestAnimationFrame(gridRefresh); });
+  const gridSet = k => { gridT = GSTEP[k]; gridCtlSync(); if (rafId) cancelAnimationFrame(rafId); rafId = requestAnimationFrame(gridRefresh); };
+  document.getElementById('gridStep').addEventListener('input', e => gridSet(+e.target.value));
+  gridCtlSync();
 
   // ── 산업단지 ──
   const IND_C = {'국가산업단지': '#B3261E', '일반산업단지': '#0C356A', '도시첨단산업단지': '#7A4BC9', '농공단지': '#0E8A72'};
