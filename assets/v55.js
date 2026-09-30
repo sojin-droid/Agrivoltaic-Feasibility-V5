@@ -13,7 +13,7 @@ window.V55 = (() => {
 
   // ── 시나리오 표기 — 사용자 화면에는 R0~R3 코드를 쓰지 않는다 ──
   const SCN = {
-    R0_current: {short: '특별법 시행 전', long: '영농형태양광 특별법 시행 전 — 농업진흥지역이 아닌 농지', tag: '시행 전'},
+    R0_current: {short: '특별법 시행 전(농업진흥지역에 설치 불가)', long: '영농형태양광 특별법 시행 전 — 농업진흥지역이 아닌 농지', tag: '시행 전'},
     R1_protect: {short: '농업보호구역에 설치 가능(농업진흥구역 제외)', long: '재생에너지지구에 농업보호구역만 포함되는 경우', tag: '농업보호구역(진흥구역 제외)'},
     // 시행 후 가정은 두 가지다(R2 = 진흥구역만 · R3 = 진흥지역 전체). 같은 "시행 후"라는 말로 뭉치지 않는다 — 어느 가정인지 항상 병기.
     R2_promo:   {short: '특별법 시행 후(농업진흥구역에 설치 가능 · 농업보호구역 제외)', long: '재생에너지지구에 농업진흥구역이 포함되는 경우 — 대규모 후보 공간은 이 조건에서 나타남', tag: '시행 후 · 농업진흥구역(보호구역 제외)'},
@@ -49,7 +49,7 @@ window.V55 = (() => {
       <li>후보 공간(21m 연접 단위)은 공간 분석 단위이며 최종 cluster·특구 정의가 아니다. 최종 정의는 전문가 자문 후 확정한다.</li></ul>`;
   const METHOD = {
     index: `<h3>방법론 더 보기 — 전국 모아보기</h3>
-      <h4>쉽게 말하면</h4><p>전국의 모든 땅 조각(필지)을 하나씩 검사해 영농형 태양광을 놓을 수 있는 땅을 고르고, 특별법 시행 전(농업진흥지역 밖의 농지만)과 시행 후(농업진흥구역과 농업보호구역에도 설치할 수 있게 되는 경우)에서 그 땅이 얼마나 되는지, 서로 붙어 있는 땅을 묶으면 사업이 될 규모가 몇 곳 생기는지를 비교한 화면입니다.</p>
+      <h4>쉽게 말하면</h4><p>전국의 모든 땅 조각(필지)을 하나씩 검사해 영농형 태양광을 놓을 수 있는 땅을 고르고, 특별법 시행 전(농업진흥지역에 설치 불가)과 시행 후(농업진흥구역과 농업보호구역에도 설치할 수 있게 되는 경우)에서 그 땅이 얼마나 되는지, 서로 붙어 있는 땅을 묶으면 사업이 될 규모가 몇 곳 생기는지를 비교한 화면입니다.</p>
       <h4>실제 분석 방법</h4><ol>
         <li><b>필지 판정</b> — 지목(전·답·과수원) → 건축물·수역·산업단지 등 구조 제외 → 경사 15 초과 제외(단위 기록 확인 중 — 각주 21) → 용도지역 3종 제외 → 농업진흥지역 구분. 이 프로젝트의 대상지는 법인 및 국공유지이다.</li>
         <li><b>시나리오</b> — 시행 전 = 농업진흥지역 밖 농지만. 시행 후 = 재생에너지지구에 농업진흥구역·농업보호구역이 포함되는 경우. 법률 시행 여부와 무관한 <b>제도 설계 시나리오</b>다.</li>
@@ -320,7 +320,7 @@ window.V55 = (() => {
         value.size === 1 ? `<b>1개 기준</b> — 그 기준으로 정렬한 순위(TOP 10). 점수·가중치 없음.` :
         value.size === 2 ? `<b>2개 기준</b> — 두 기준 모두에서 다른 후보에 지지 않는 <b>주요 비교 후보</b>(비지배 집합). 순위를 억지로 매기지 않음.` :
         `<b>3개 기준 · 자동 비교</b> — 세 기준 모두에서 지지 않는 <b>주요 비교 후보</b>. 학술 용어로는 비지배 집합(근거와 방법 참조).`;
-      el.innerHTML = `<div class="v55-axes"><span class="q">무엇을 우선해서 볼까요? — 여러 개 선택 가능</span>` +
+      el.innerHTML = `<div class="v55-axes"><span class="q">우선해서 볼 기준 — 여러 개 선택 가능</span>` +
         [['a', '발전 규모'], ['b', '계통 여유(참고)'], ['c', '산업단지 거리']].map(([kk, nm]) => `<label class="${value.has(kk) ? 'on' : ''}"><input type="checkbox" value="${kk}" ${value.has(kk) ? 'checked' : ''}><i style="background:${AXC[kk]}"></i>${nm}</label>`).join('') +
         `<span class="v55-mode">${mode}</span></div>`;
       el.querySelectorAll('input').forEach(cb => cb.onchange = () => { cb.checked ? value.add(cb.value) : value.delete(cb.value); render(); onChange && onChange(new Set(value)); });
@@ -350,7 +350,7 @@ window.V55 = (() => {
       return `<div class="row"><div class="s">${label}</div><div><span class="v55-cls" style="background:${C[2]}">${C[0]}</span>${C[1]}${c.lab != null ? `<div class="v55-hint">후보 공간 #${c.lab} · ${km2(c.a, 2)} km² ≈ ${mw(c.a)} MW · 필지 ${n(c.n)} · 규모 기준 ${km2(minM2, 3)} km²(${mw(minM2)}MW)${noGeom}</div>` : ''}</div></div>`; };
     const c2 = pnu.classify(data, pnuStr, 'R2_promo', minM2);
     el.innerHTML = `<div class="v55-pnu"><div class="h">PNU ${pnuStr} · 시군 ${nameOf(sgg)}</div><div class="nm">${nm}</div>${brNote}
-      ${rowHTML('특별법 시행 전', 'R0_current')}${rowHTML('특별법 시행 후<br><small>(농업진흥구역에도 설치 가능)</small>', 'R2_promo')}${rowHTML('특별법 시행 후<br><small>(농업진흥구역·농업보호구역에도 설치 가능)</small>', 'R3_zone_all')}
+      ${rowHTML('특별법 시행 전<br><small>(농업진흥지역에 설치 불가)</small>', 'R0_current')}${rowHTML('특별법 시행 후<br><small>(농업진흥구역에도 설치 가능)</small>', 'R2_promo')}${rowHTML('특별법 시행 후<br><small>(농업진흥구역·농업보호구역에도 설치 가능)</small>', 'R3_zone_all')}
       <div class="v55-hint" style="margin-top:8px">③은 설치 불가 판정이 아님 — 지목·소유(개인 소유 농지는 분석 기준 밖)·제외조건 중 어느 것인지 이 화면은 구분하지 않음. 필지 단위 클릭 대신 검색으로만 확인함.</div>
       <div style="margin-top:10px;display:flex;gap:8px;flex-wrap:wrap"><button type="button" class="btn btn-primary" id="pnuGo">이 필지의 시군(${nameOf(sgg)})으로 분석하기 · 농업진흥구역에도 설치 가능</button></div></div>`;
     el.querySelector('#pnuGo').onclick = () => onGo && onGo(sgg, c2.lab != null ? c2.lab : null);

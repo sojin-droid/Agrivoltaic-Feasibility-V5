@@ -68,6 +68,8 @@ def main():
                 run(f, 'geom')
         else:
             print("\n(지오메트리 건너뜀 — 구획을 다시 구우려면 --geom)", flush=True)
+        # GGI 검토(2026-10-01) — 대규모 후보 공간별 가장 가까운 산업단지. units_big·ind_bnd 를 읽으므로 지오메트리 뒤에 돈다.
+        run('export_big_ind_near_v4.py', 'export')
 
     print("\n── gate/site_gate.py", flush=True)
     g = subprocess.run([PY, os.path.join(PIPE, 'gate', 'site_gate.py')], cwd=HERE)

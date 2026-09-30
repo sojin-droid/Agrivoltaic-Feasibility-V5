@@ -102,7 +102,9 @@ table.v55-top td.hi{background:#FFF6D6}
 .v55-steps .no{font-family:var(--mono);font-size:11px;color:var(--leaf-deep);letter-spacing:.08em}
 .v55-steps .t{font-family:var(--serif);color:var(--navy);font-size:15.5px;font-weight:700;margin:4px 0 4px;word-break:keep-all}
 .v55-steps .s{font-size:12.5px;color:var(--muted);line-height:1.55;word-break:keep-all}
-@media(max-width:700px){.v55-steps{grid-template-columns:1fr}}
+.v55-steps.four{grid-template-columns:repeat(4,1fr);max-width:none;margin:18px 0 0}
+@media(max-width:900px){.v55-steps.four{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:700px){.v55-steps,.v55-steps.four{grid-template-columns:1fr}}
 
 /* ── 지도 위 컨트롤 겹침 방지: 확대/축소는 지도 오른쪽 끝 ── */
 .fs-map .leaflet-top.leaflet-right{margin-top:0}

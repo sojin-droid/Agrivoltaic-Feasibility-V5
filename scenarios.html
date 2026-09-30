@@ -70,7 +70,11 @@ input[type=number].coef{width:80px;font:inherit;padding:2px 6px;border:1px solid
 <div class="page-hero">
   <div class="wrap">
     <p class="eyebrow">Scenarios · 시나리오별 결과</p>
-    <h1>시나리오별 결과</h1>
+    <h1>정책이 달라지면 무엇이 바뀌나?</h1>
+    <ol class="scn-guide" style="margin:12px 0 0 20px;padding:0;color:var(--muted);font-size:14.5px;line-height:1.7;word-break:keep-all">
+      <li><b style="color:var(--navy)">정책 시나리오 고르기</b> (농업진흥구역·농업보호구역 설치 허용 여부, 이격거리, 매립지 범위, 농업회사법인 사업 위치 제한 여부, 필지 소유 유형)</li>
+      <li><b style="color:var(--navy)">정책이 바뀌었을 때 달라지는 면적 확인하기</b></li>
+    </ol>
     <div id="scnMethod" style="margin-top:10px"></div>
   </div>
 </div>
@@ -88,22 +92,24 @@ input[type=number].coef{width:80px;font:inherit;padding:2px 6px;border:1px solid
     <div>
     <h3 class="step">Step 2 · 제약 조건</h3><div class="step-title">제약 조건</div>
     <div class="cond-grid">
-      <div class="cond"><h4>농업진흥구역</h4>
-        <div class="seg" data-k="promo"><button data-v="0">현행 유지</button><button data-v="1" class="on">설치 가능</button></div></div>
-      <div class="cond"><h4>농업보호구역</h4>
+      <div class="cond"><h4>농업진흥지역 (농업진흥구역 · 농업보호구역)</h4>
+        <div class="hint-s" style="margin:0 0 4px">농업진흥구역</div>
+        <div class="seg" data-k="promo"><button data-v="0">현행 유지</button><button data-v="1" class="on">설치 가능</button></div>
+        <div class="hint-s" style="margin:10px 0 4px">농업보호구역</div>
         <div class="seg" data-k="prot"><button data-v="0" class="on">현행 유지</button><button data-v="1">설치 가능</button></div></div>
       <div class="cond"><h4>이격거리</h4>
         <div class="seg" data-k="sb"><button data-v="0" class="on">미적용</button><button data-v="1">적용 (주거 200m)</button></div></div>
       <div class="cond"><h4>매립지(간척) 범위</h4>
         <div class="seg" data-k="scope"><button data-v="0" class="on">전체</button><button data-v="1">간척지만</button><button data-v="2">국가관리간척지</button></div></div>
-      <div class="cond" id="cond-decree"><h4>시행령 제정안 적용</h4>
-        <div class="seg" data-k="decree"><button data-v="0" class="on">미고려</button><button data-v="1">고려</button></div></div>
+      <div class="cond" id="cond-decree"><h4>농업회사법인의 사업 위치 제한 여부</h4>
+        <div class="seg" data-k="decree"><button data-v="0" class="on">미제한</button><button data-v="1">제한</button></div>
+        <div class="hint-s">시행령 제정안 §7 6호 — 농업회사법인의 부지를 국가관리간척지(매립지 등 미매각분)로 한정합니다.</div></div>
       <div class="cond"><h4>소유</h4>
         <div class="seg" data-k="uni"><button data-v="pubcorp" class="on">법인·국공유</button><button data-v="pubcorp_clan">+종중·종교</button><button data-v="all">전체(개인 포함)</button></div>
         <div class="hint-s">이 프로젝트의 대상지는 법인 및 국공유지입니다.</div></div>
-      <div class="cond"><h4>참고 MW 계수</h4>
+      <div class="cond"><h4>면적당 환산 계수</h4>
         <label style="font-size:13px">kW/㎡ <input type="number" class="coef" id="eCoef" value="0.045" step="0.005" min="0.005" max="0.2" style="width:80px;font:inherit;padding:2px 6px;border:1px solid var(--line);border-radius:6px"></label>
-        <div class="hint-s">출처: 설치밀도 0.225 × 모듈 효율 0.20 = 0.045 kW/㎡ (솔라시도 400MW 사업계획과 오차 0.6%)<sup class="fnref">[13]</sup></div></div>
+        <div class="hint-s">면적을 참고 MW로 환산하는 값입니다. 출처: 설치밀도 0.225 × 모듈 효율 0.20 = 0.045 kW/㎡ (솔라시도 400MW 사업계획과 오차 0.6%)<sup class="fnref">[13]</sup></div></div>
     </div>
 
     </div>
@@ -112,10 +118,10 @@ input[type=number].coef{width:80px;font:inherit;padding:2px 6px;border:1px solid
     <div><h3 class="step">Result · 결과</h3>
       <div class="step-title"><span id="r-title">—</span></div></div>
     <div class="res-cards">
-      <div class="res-card hi"><div class="k">후보 필지 면적</div><div class="v"><span id="r-area">—</span><small> km²</small></div></div>
-      <div class="res-card"><div class="k">특별법 시행 전 대비 증가</div><div class="v" id="r-delta">—</div></div>
-      <div class="res-card"><div class="k">3MW 이상 후보 공간</div><div class="v" id="r-b3">—</div></div>
+      <div class="res-card hi"><div class="k">설치 가능 면적</div><div class="v"><span id="r-area">—</span><small> km²</small></div></div>
+      <div class="res-card"><div class="k">선택한 조건의 증감<br><small>(특별법 시행 전 대비)</small></div><div class="v" id="r-delta">—</div></div>
       <div class="res-card"><div class="k">50MW 이상 대규모 후보 공간</div><div class="v" id="r-b50">—</div></div>
+      <div class="res-card"><div class="k">농업회사법인 사업 위치 제한 시 증감</div><div class="v" id="r-dec">—</div></div>
     </div>
     <div class="callout-v4" id="r-note" style="margin-top:10px;display:none"></div>
     <details id="r-topwrap" style="margin-top:14px">
@@ -156,9 +162,11 @@ input[type=number].coef{width:80px;font:inherit;padding:2px 6px;border:1px solid
 <section class="alt" id="scnmap">
   <div class="wrap">
     <div class="sec-head"><div><p class="eyebrow">Step 3 · 지도</p>
-    <h2>지도 — 특별법 시행으로 늘어나는 후보 공간</h2></div>
+    <h2>농업진흥구역·농업보호구역에 설치할 수 있게 된다면?</h2></div>
     <a class="more" href="#builder">조건 설정으로 →</a></div>
-    <p style="font-size:13px;color:var(--muted);word-break:keep-all">시군을 추가하면 특별법 시행 전 후보 공간(노랑) 위에, 농업보호구역(주황)·농업진흥구역(빨강)에 설치할 수 있게 될 때 늘어나는 후보 공간이 겹쳐 보입니다.</p>
+    <ol style="margin:0 0 6px 20px;padding:0;font-size:13.5px;color:var(--ink,#1c2833);line-height:1.7;word-break:keep-all">
+      <li>시군 고르기</li><li>농업진흥구역·농업보호구역 설치 허용 여부 고르기</li><li>이격거리 설정하기</li><li>늘어나는 면적 지도에서 확인하기</li></ol>
+    <p style="font-size:13px;color:var(--muted);word-break:keep-all">특별법 시행 전 후보 공간(노랑) 위에, 농업보호구역(주황)·농업진흥구역(빨강)에 설치할 수 있게 될 때 늘어나는 후보 공간이 겹쳐 보입니다.</p>
 <div class="map-wrap">
     <div id="map"></div>
     <div class="panel">
@@ -356,7 +364,7 @@ input[type=number].coef{width:80px;font:inherit;padding:2px 6px;border:1px solid
 
   const LAYER_STYLE = {
     ctrl: {fill: '#9AA3AE', line: '#6B7480', label: '개인 소유 포함(비교용)'},
-    base: {fill: '#FFD84D', line: '#B8860B', label: '특별법 시행 전'},
+    base: {fill: '#FFD84D', line: '#B8860B', label: '특별법 시행 전(농업진흥지역에 설치 불가)'},
     prot: {fill: '#FF9B3D', line: '#C96A00', label: '＋농업보호구역에 설치 가능할 때'},
     prom: {fill: '#FF5046', line: '#B3261E', label: '＋농업진흥구역에 설치 가능할 때'},
   };
@@ -479,7 +487,7 @@ input[type=number].coef{width:80px;font:inherit;padding:2px 6px;border:1px solid
       <h3 style="font-family:var(--serif);color:var(--navy);margin-bottom:12px">시나리오 요약 — 설치 가능 면적 · 늘어난 면적 · 대규모 후보 공간</h3>
       <div style="overflow-x:auto"><table class="v4" id="t-scn"></table></div>
       <div class="figcap">면적은 km², MW는 참고 환산<sup class="fnref">[13]</sup>.</div>
-      <h3 style="font-family:var(--serif);color:var(--navy);margin:18px 0 10px">시행령 고려 시 — 국가관리간척지 한정 (농업회사법인 부지 §7 6호)</h3>
+      <h3 style="font-family:var(--serif);color:var(--navy);margin:18px 0 10px">농업회사법인 사업 위치 제한 시 — 국가관리간척지 한정 (시행령 제정안 §7 6호)</h3>
       <div style="overflow-x:auto"><table class="v4" id="t-scn-decree"></table></div>
       <div class="figcap">시행령 제정안 §7 6호를 적용해 대상을 국가관리간척지로 좁힌 값<sup class="fnref">[3]</sup><sup class="fnref">[4]</sup>. 조문은 <a href="method.html#law" style="color:var(--leaf-deep)">근거와 방법 →</a></div>
     </div>
@@ -583,7 +591,7 @@ input[type=number].coef{width:80px;font:inherit;padding:2px 6px;border:1px solid
   const res = await V4.data('results_v4');
   // 칸 목록은 데이터에서 온다(results_v4.cells.policy) — 격자 선언이 원본이다.
   // 여기에 배열로 적어 두면 시나리오를 더해도 이 표는 늘지 않는다.
-  const GRID5 = res.cells.policy.map(c => [c.name, ({R0_current: '특별법 시행 전', R1_protect: '농업보호구역에 설치 가능', R2_promo: '농업진흥구역에 설치 가능', R3_zone_all: '두 구역 모두 설치 가능'})[c.name.replace('_SB', '')] + (c.name.endsWith('_SB') ? ' · 이격 적용' : '')]);
+  const GRID5 = res.cells.policy.map(c => [c.name, ({R0_current: '특별법 시행 전(농업진흥지역에 설치 불가)', R1_protect: '농업보호구역에 설치 가능', R2_promo: '농업진흥구역에 설치 가능', R3_zone_all: '두 구역 모두 설치 가능'})[c.name.replace('_SB', '')] + (c.name.endsWith('_SB') ? ' · 이격 적용' : '')]);
   document.getElementById('t-grid').innerHTML = `
     <tr><th>시나리오 · 이격</th><th>필지 km²</th><th>후보 공간 km²</th><th>후보 공간 수</th>
         <th class="ref">50MW 이상<br>후보 공간</th><th>참고 MW</th></tr>` +
@@ -637,7 +645,7 @@ input[type=number].coef{width:80px;font:inherit;padding:2px 6px;border:1px solid
     document.getElementById('t-scn-decree').innerHTML =
       `<tr><th style="text-align:left">시나리오</th><th>필지</th><th>km²</th><th>참고 MW</th>
        <th class="ref">개인 소유 포함 km²<br><small>비교용</small></th></tr>` +
-      ['R0', 'R1', 'R2', 'R3'].map(c => `<tr class="${c === 'R2' ? 'hl' : ''}"><td class="l">${SCNL[c]} · 시행령 고려</td>
+      ['R0', 'R1', 'R2', 'R3'].map(c => `<tr class="${c === 'R2' ? 'hl' : ''}"><td class="l">${SCNL[c]} · 농업회사법인 사업 위치 제한</td>
         <td>${V4.n(MN[c]['정본'].n)}</td><td>${V4.km2(MN[c]['정본'].km2, 2)}</td><td>${V4.mw(MN[c]['정본'].m2)}</td>
         <td class="ref">${V4.km2(MN[c]['대조군'].km2, 2)}</td></tr>`).join('');
   }
@@ -697,10 +705,14 @@ input[type=number].coef{width:80px;font:inherit;padding:2px 6px;border:1px solid
     const f = state.sgg === 'ALL' ? null : state.sgg;
     const cur = agg(f, state.promo, state.prot), base = agg(f, false, false);
     const where = f ? Region.nameOf(f) : '전국';
-    put('r-title', `${where} — ${CELL_LABEL[cellOf()]}${state.sb ? ' · 이격 적용' : ''}${state.decree ? ' · 시행령 고려(국가관리간척지 한정)' : state.scope ? (state.scope === 1 ? ' · 간척지만' : ' · 국가관리간척지') : ''}${state.uni === 'all' ? ' · 개인 소유 포함' : state.uni === 'pubcorp_clan' ? ' · 종중·종교 포함' : ''}`);
+    put('r-title', `${where} — ${CELL_LABEL[cellOf()]}${state.sb ? ' · 이격 적용' : ''}${state.decree ? ' · 농업회사법인 사업 위치 제한(국가관리간척지 한정)' : state.scope ? (state.scope === 1 ? ' · 간척지만' : ' · 국가관리간척지') : ''}${state.uni === 'all' ? ' · 개인 소유 포함' : state.uni === 'pubcorp_clan' ? ' · 종중·종교 포함' : ''}`);
     put('r-area', km2(cur.m2));
     const d = (cur.m2 - base.m2) / 1e6;
     put('r-delta', d === 0 ? '기준(시행 전)' : `${d > 0 ? '+' : ''}${km2(d * 1e6, 1)}<small> km²</small>`);
+    // 농업회사법인 사업 위치 제한 시 증감 — 같은 지역·조건에서 범위를 국가관리간척지로 한정했을 때(시행령 제정안 §7 6호)와 한정하지 않았을 때의 차
+    const unl = agg(f, state.promo, state.prot, state.scope), lim = agg(f, state.promo, state.prot, 2), dd = (lim.m2 - unl.m2) / 1e6;
+    put('r-dec', state.scope === 2 ? '<small>범위가 이미 국가관리간척지입니다</small>'
+      : `${dd > 0 ? '+' : ''}${km2(dd * 1e6, 1)}<small> km²</small><div style="font-size:12px;color:var(--muted);font-weight:400;margin-top:4px">${km2(unl.m2)} → ${km2(lim.m2)} km² · 국가관리간척지로 한정</div>`);
     const note = document.getElementById('r-note');
     const setNote = t => { note.style.display = t ? '' : 'none'; note.innerHTML = t || ''; };
     // 3MW·50MW 수 — 법인·국공유 · 간척 범위 전체일 때 등재 8칸(big_sgg_v4 = block_context)에서 읽는다. 새 산정 없음.
@@ -711,7 +723,7 @@ input[type=number].coef{width:80px;font:inherit;padding:2px 6px;border:1px solid
       tw.style.display = '';
       bigRows.sort((a, b) => b[1][0] - a[1][0] || (cur.bySgg[b[0]] || 0) - (cur.bySgg[a[0]] || 0));
       put('r-topn', V4.n(bigRows.length));
-      put('eTbl', '<tr><th>시군</th><th>50MW 이상</th><th>3MW 이상</th><th>후보 필지 면적 km²</th></tr>' + bigRows.map(([g, [n50, , n3]]) =>
+      put('eTbl', '<tr><th>시군</th><th>50MW 이상</th><th>3MW 이상</th><th>설치 가능 면적 km²</th></tr>' + bigRows.map(([g, [n50, , n3]]) =>
         `<tr><td class="l"><a href="#builder" data-go="${g}" style="color:var(--leaf-deep);font-weight:700">${Region.nameOf(g)}</a></td>
          <td><b>${V4.n(n50)}곳</b></td><td>${V4.n(n3)}곳</td><td>${km2(cur.bySgg[g] || 0)}</td></tr>`).join(''));
       document.querySelectorAll('#eTbl a[data-go]').forEach(a => a.onclick = e => { e.preventDefault(); pickerSet(a.dataset.go); });
@@ -724,7 +736,7 @@ input[type=number].coef{width:80px;font:inherit;padding:2px 6px;border:1px solid
     const rn = effScope() === 0 ? runName() : null;
     if (!rn || !D.runs[rn]) {
       put('r-b3', '—'); put('r-b50', '—');
-      setNote('이 조건 조합은 3MW·50MW 이상 후보 공간 수를 계산해 두지 않았습니다. 후보 필지 면적만 표시합니다.'); return;
+      setNote('이 조건 조합은 50MW 이상 대규모 후보 공간 수를 계산해 두지 않았습니다. 설치 가능 면적만 표시합니다.'); return;
     }
     if (!f) {
       const rr = RES.runs[rn], b3 = band(rr, 6.6667), b50 = band(rr, 111.1111);
