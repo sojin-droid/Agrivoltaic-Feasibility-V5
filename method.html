@@ -49,6 +49,12 @@ table.mx .ref{color:var(--muted)}
 .dk b{display:block;font-family:var(--serif);font-size:clamp(24px,2.8vw,32px);font-weight:700;color:var(--navy);line-height:1.15;margin-bottom:3px}
 .dk b small{font-family:var(--mono);font-size:13px;color:var(--muted);font-weight:400}
 .dk>div>span{font-size:11.5px;color:var(--muted);line-height:1.5}
+/* 근거와 방법 — 문서형 열: 상자·문단 폭 통일(GGI 검토 2026-10-01 "글 박스 가로 폭 통일").
+   본문 열을 900px 로 좁히고, v5.css 의 72ch 상한과 카드 720px 상한을 풀어 모든 상자·문단이 열을 꽉 채운다. 헤더·푸터 폭은 다른 화면과 같게 둔다. */
+body[data-sources=full] section .wrap,body[data-sources=full] .page-hero .wrap{max-width:900px}
+body[data-sources=full] .art p,body[data-sources=full] #background .figbox,body[data-sources=full] #ranking .figbox,
+body[data-sources=full] #law p,body[data-sources=full] .callout-v4,body[data-sources=full] .lede,
+body[data-sources=full] #story-steps .figbox,body[data-sources=full] .verdict,body[data-sources=full] .v55-verdict{max-width:none}
 </style>
 </head>
 <body data-sources="full">

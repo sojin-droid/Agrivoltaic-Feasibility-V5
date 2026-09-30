@@ -125,7 +125,7 @@ input[type=range]{width:180px;max-width:100%;accent-color:var(--adv-navy)}
         <label><input type="checkbox" data-l="parcels"> 판정을 통과한 농지 필지(법인·국공유 · 소유 구분 색)</label>
         <label><input type="checkbox" data-l="emd" checked> 행정경계(읍면동)</label>
         <label><input type="checkbox" data-l="ind"> 산업단지 경계</label>
-        <label><input type="checkbox" data-l="grid"> 계통 여유 참고값(읍면동 채색)</label>
+        <label><input type="checkbox" data-l="grid"> 계통 여유 참고값(읍면동 채색 · 자홍 점선 = 조회 불가)</label>
         <label><input type="checkbox" data-l="ex"> 기존 태양광 시설 <span style="color:var(--muted);font-size:12px">(노랑 = 일반 태양광 · 초록 = 영농형 · 회색 = 가동중단·폐기)</span></label>
         <span class="na" title="발행 자산에 없는 레이어">☐ 용도지역 — 발행 자료 없음</span>
         <span class="na" title="발행 자산에 없는 레이어">☐ 주요 제외조건(규제) — 발행 자료 없음</span>
@@ -391,8 +391,9 @@ input[type=range]{width:180px;max-width:100%;accent-color:var(--adv-navy)}
     LY.emd.clearLayers(); if (on('emd')) emdNear(bb).forEach(e => L.geoJSON(gf(e), {pane: 'lyrEmd', interactive: false, style: {color: '#ffffff', weight: 1.2, dashArray: '4 4', fill: false, opacity: .9}}).addTo(LY.emd));
     if (st.emd && EMDFB.get(st.emd)) L.geoJSON(gf(EMDFB.get(st.emd)), {pane: 'lyrEmd', interactive: false, style: {color: '#ff5a36', weight: 2.5, dashArray: '6 4', fill: false}}).addTo(LY.emd);
     LY.grid.clearLayers(); if (on('grid')) { emdNear(bb).forEach(e => { const p = e.feat.properties; const lo = p.lo;
-        const c = p.s !== 'ok' ? '#cfcfcf' : lo <= 0 ? '#EFDFDD' : lo < 2 ? '#F0F4F6' : lo < 8 ? '#CFE3EE' : lo < 20 ? '#8FC0D8' : lo < 50 ? '#4A94BA' : '#1C5F86';
-        L.geoJSON(gf(e), {pane: 'lyrGrid', style: {color: '#555', weight: .4, fillColor: c, fillOpacity: .55}}).bindTooltip(`${esc(p.n)} · 계통 여유 참고값 ${p.s === 'ok' ? fmt(p.lo) + '–' + fmt(p.hi) + ' MW' : '알 수 없음'}`).addTo(LY.grid); });
+        // 알 수 없음(원천 무응답·조회 불가)은 회색이면 배경과 구분이 안 된다 — 사이트(V5 finder)와 같은 자홍 + 점선(2026-10-01)
+        const unk = p.s === 'unknown', c = unk ? '#E8559F' : p.s !== 'ok' ? '#cfcfcf' : lo <= 0 ? '#EFDFDD' : lo < 2 ? '#F0F4F6' : lo < 8 ? '#CFE3EE' : lo < 20 ? '#8FC0D8' : lo < 50 ? '#4A94BA' : '#1C5F86';
+        L.geoJSON(gf(e), {pane: 'lyrGrid', style: unk ? {color: '#B0106A', weight: .8, dashArray: '3 3', fillColor: c, fillOpacity: .35} : {color: '#555', weight: .4, fillColor: c, fillOpacity: .55}}).bindTooltip(`${esc(p.n)} · 계통 여유 참고값 ${p.s === 'ok' ? fmt(p.lo) + '–' + fmt(p.hi) + ' MW' : p.s === 'unknown' ? '알 수 없음(조회 불가 · 자홍 점선)' : '조회값 없음'}`).addTo(LY.grid); });
       LY.grid.addTo(dm); } else dm.removeLayer(LY.grid);
     if (on('ind')) { if (!_ind) { _ind = await V55.gz('data_v4/ind_bnd.json.gz'); }
       LY.ind.clearLayers(); (_ind ? _ind.features : []).forEach(f => { const g = L.geoJSON(f, {pane: 'lyrInd', style: {color: '#0C356A', weight: 1.5, fillColor: '#0C356A', fillOpacity: .15}}); if (bb.intersects(g.getBounds())) g.bindTooltip(`산업단지 · ${esc(f.properties.n)} (${esc(f.properties.t)})`).addTo(LY.ind); });
