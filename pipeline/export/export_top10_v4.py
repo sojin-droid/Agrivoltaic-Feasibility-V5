@@ -33,7 +33,7 @@ import query as Q
 RUNS = ['R0_current', 'R0_current_SB', 'R1_protect', 'R1_protect_SB',
         'R2_promo', 'R2_promo_SB', 'R3_zone_all', 'R3_zone_all_SB']
 COLS = ['lab', 'a', 'mw', 'lo', 'hi', 'd', 'lat', 'lon', 'recl', 'n', 'ne', 'f3', 'fab', 'fac', 'fbc', 'dsh']
-FILTERS = [0, 66667, 222222, 444444, 1111111]     # 표시 규모 선택지(㎡) — UI 와 동일
+FILTERS = [0, 22222, 66667, 222222, 444444, 1111111]     # 표시 규모 선택지(㎡) — UI 와 동일 (1MW 등가 22,222㎡ 추가 2026-10-07)
 AX = {'a': ('area_m2', +1), 'b': ('lo', +1), 'c': ('dist_ind_km', -1)}   # 방향: +1 최대화 · -1 최소화
 
 
@@ -117,7 +117,7 @@ print(f"G1 통과 — 3축 플래그 = 정본 함수 ({n_g1:,} 시군×칸) · G
 
 idx = {'generated': datetime.datetime.now().strftime('%Y-%m-%d %H:%M'), 'runs': RUNS, 'cols': COLS,
        'population': 'block_context 모집단(정본 그대로 · 2026-10-07 부터 전량 --all · 면적 하한 없음 · ADR-0055) — 시군 관여 기준(걸침 후보는 관련 시군마다 등장, 합산 금지)',
-       'fronts': '표시 규모(0·66667·222222·444444·1111111㎡)별 비지배 lab 목록 — 비교 모집단 = 그 규모 이상 전량',
+       'fronts': '표시 규모(0·22222·66667·222222·444444·1111111㎡)별 비지배 lab 목록 — 비교 모집단 = 그 규모 이상 전량',
        'flags': {'f3': '면적·계통 여유(lo)·산단 거리 3축 비지배 = query._frontier_mask', 'fab': '면적+계통 2축 비지배(같은 규칙)',
                  'fac': '면적+산단 2축 비지배(같은 규칙)', 'fbc': '계통+산단 2축 비지배(같은 규칙)'},
        'dsh': 'MW×1,314h ÷ 시군 연간 전력판매량(GWh) % — 표기 전용(PR-0030), 판정 불사용',

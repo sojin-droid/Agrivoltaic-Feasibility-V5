@@ -16,7 +16,7 @@
 <script src="assets/v4.js"></script>
 <script src="assets/region.js"></script>
 <link rel="stylesheet" href="assets/v55.css">
-<script src="assets/v55.js"></script>
+<script src="assets/v55.js?v=20261007"></script>
 <style>
 /* 페이지 전용 배치 — 색·서체는 전부 :root 토큰(style.css)만 사용 */
 .est-grid{display:grid;grid-template-columns:340px 1fr;gap:18px}
@@ -594,17 +594,19 @@ input[type=number].coef{width:80px;font:inherit;padding:2px 6px;border:1px solid
   const GRID5 = res.cells.policy.map(c => [c.name, ({R0_current: '특별법 시행 전(농업진흥지역에 설치 불가)', R1_protect: '농업보호구역에 설치 가능', R2_promo: '농업진흥구역에 설치 가능', R3_zone_all: '두 구역 모두 설치 가능'})[c.name.replace('_SB', '')] + (c.name.endsWith('_SB') ? ' · 이격 적용' : '')]);
   document.getElementById('t-grid').innerHTML = `
     <tr><th>시나리오 · 이격</th><th>필지 km²</th><th>후보 공간 km²</th><th>후보 공간 수</th>
-        <th class="ref">50MW 이상<br>후보 공간</th><th>참고 MW</th></tr>` +
+        <th class="ref">1MW 이상<br>후보 공간</th><th class="ref">50MW 이상<br>후보 공간</th><th>참고 MW</th></tr>` +
     GRID5.map(([c, t]) => {
       const r = res.runs[c];
       // 선언에는 있는데 아직 돌지 않은 칸은 **빈 줄로 드러낸다** — 조용히 빼면
       // 표가 완전해 보이지만 실은 빠진 것이다(숨은 배제 금지).
       if (!r) return `<tr><td class="l">${t}</td>` +
-        `<td colspan="5" style="color:var(--muted)">값 없음</td></tr>`;
+        `<td colspan="6" style="color:var(--muted)">값 없음</td></tr>`;
       return `<tr class="${c === 'R0_current' ? 'hl' : ''}"><td class="l">${t}</td>
         <td>${V4.km2(r.eligible_area_km2)}</td>
         <td><b>${V4.km2(r.component_area_km2)}</b></td>
         <td>${V4.n(r.n_component)}</td>
+        <td class="ref">${(() => { const b = (r.size_bands||[]).find(x => Math.abs(x.min_ha-2.2222)<0.01);
+                                    return b ? V4.n(b.n) : '—'; })()}</td>
         <td class="ref">${(() => { const b = (r.size_bands||[]).find(x => Math.abs(x.min_ha-111.1)<1);
                                     return b ? V4.n(b.n) : '—'; })()}</td>
         <td class="ref">${V4.n(Math.round(r.component_area_km2 * 45))}</td></tr>`;

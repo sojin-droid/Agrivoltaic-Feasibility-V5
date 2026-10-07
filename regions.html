@@ -16,7 +16,7 @@
 <script src="assets/vendor/leaflet/leaflet.js"></script>
 <script src="assets/v4.js"></script>
 <script src="assets/region.js"></script>
-<script src="assets/v55.js"></script>
+<script src="assets/v55.js?v=20261007"></script>
 <style>
 .cond3{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
 .cond3 .cond h4{margin-bottom:8px}
@@ -162,7 +162,7 @@
   // ── Step 2: 조건 세그먼트 + 우선순위 다중 선택 ──
   V55.seg($('segScn'), [['R0_current', '특별법 시행 전 (농업진흥지역 설치 불가)'], ['R2_promo', '시행 후 · 농업진흥구역 (보호구역 제외)'], ['R3_zone_all', '시행 후 · 농업진흥구역 + 농업보호구역']], st.scn, v => { st.scn = v; render(); });
   V55.seg($('segSB'), [['0', '미적용'], ['1', '적용']], st.sb, v => { st.sb = v; render(); });
-  V55.seg($('segMin'), [[66667, '3 MW 이상'], [222222, '10 MW'], [444444, '20 MW'], [1111111, '50 MW']], st.minM2, v => { st.minM2 = +v; render(); });
+  V55.seg($('segMin'), [[22222, '1 MW 이상'], [66667, '3 MW'], [222222, '10 MW'], [444444, '20 MW'], [1111111, '50 MW']], st.minM2, v => { st.minM2 = +v; render(); });
   V55.axesControl($('axes'), {value: st.axes, onChange: v => { st.axes = v; render(); }});
 
   // ── 지도 ──

@@ -16,7 +16,7 @@
 <script src="assets/vendor/leaflet/leaflet.js"></script>
 <script src="assets/v4.js"></script>
 <script src="assets/region.js"></script>
-<script src="assets/v55.js"></script>
+<script src="assets/v55.js?v=20261007"></script>
 <style>
 .hero-local{background:linear-gradient(180deg,#EEF4FA,#fff);border-bottom:1px solid var(--line);text-align:center;padding:64px 24px 54px}
 .hero-local h1{font-size:clamp(28px,4vw,42px)}
@@ -191,7 +191,7 @@
       html = `<h2>우선순위</h2><p class="sub">발전 규모·계통 여유·산업단지 거리 중 원하는 기준을 고르세요(복수 선택). 1개면 그 기준의 순위, 2개 이상이면 모든 기준에서 밀리지 않는 주요 비교 후보를 보입니다. 새 점수나 가중치는 없습니다.</p><div id="axesL"></div>` + nav(true);
     } else if (step === 5) {
       html = `<h2>어느 정도 규모부터 볼까요?</h2><p class="sub">선택한 규모 이상의 후보 공간만 표에 올립니다. 표시 범위이며 후보 공간을 만들거나 지우지 않습니다(0.045 kW/㎡ 환산 읽기 눈금).</p>
-        <div class="opts">${[[66667, '3 MW'], [222222, '10 MW'], [444444, '20 MW'], [1111111, '50 MW']].map(([m, l]) => opt('min', String(m), l + ' 이상', m === 66667 ? '기본값' : `${(m / 1e4).toLocaleString('ko-KR')} ha 이상`, st.minM2 === m)).join('')}</div>` + nav(true, '다음 → 확인');
+        <div class="opts">${[[22222, '1 MW'], [66667, '3 MW'], [222222, '10 MW'], [444444, '20 MW'], [1111111, '50 MW']].map(([m, l]) => opt('min', String(m), l + ' 이상', m === 66667 ? '기본값' : `${(m / 1e4).toLocaleString('ko-KR')} ha 이상`, st.minM2 === m)).join('')}</div>` + nav(true, '다음 → 확인');
     } else {
       html = `<h2>분석 실행</h2><p class="sub">아래 조건으로 후보 공간을 찾습니다.</p><ul class="summary-box">${condList().map(c => `<li>${c}</li>`).join('')}</ul>` + nav(true, '우리 동네 분석하기');
     }

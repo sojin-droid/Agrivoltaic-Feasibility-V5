@@ -35,7 +35,7 @@ DB = os.path.join(LR, 'agrivoltaic_ledger_v1.duckdb')
 OUT = os.path.join(LR, 'cluster_advisory_pkg')
 SA = json.load(open(os.path.join(SITE, 'docs', 'method_advisory', 'study_areas.json'), encoding='utf-8'))
 KW = 0.045
-BANDS = [(1_111_111, '50MW'), (444_444, '20MW'), (222_222, '10MW'), (66_667, '3MW'), (0, '3MW 미만')]
+BANDS = [(1_111_111, '50MW'), (444_444, '20MW'), (222_222, '10MW'), (66_667, '3MW'), (22_222, '1MW'), (0, '1MW 미만')]
 TO4326 = Transformer.from_crs('EPSG:5186', 'EPSG:4326', always_xy=True)
 TO5186 = Transformer.from_crs('EPSG:4326', 'EPSG:5186', always_xy=True)
 T0 = time.time(); say = lambda *a: print(f"[{time.time() - T0:6.0f}s]", *a, flush=True)
