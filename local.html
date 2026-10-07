@@ -16,7 +16,7 @@
 <script src="assets/vendor/leaflet/leaflet.js"></script>
 <script src="assets/v4.js"></script>
 <script src="assets/region.js"></script>
-<script src="assets/v55.js?v=20261007"></script>
+<script src="assets/v55.js?v=20261007b"></script>
 <style>
 .hero-local{background:linear-gradient(180deg,#EEF4FA,#fff);border-bottom:1px solid var(--line);text-align:center;padding:64px 24px 54px}
 .hero-local h1{font-size:clamp(28px,4vw,42px)}
@@ -145,7 +145,7 @@
   $('exNote').textContent = V55.EXISTING_NOTE;
 
   // ── 상태 ──
-  const st = {sgg: null, emd: null, scn: 'R2_promo', sb: false, axes: new Set(['a']), minM2: 66667, step: 1, lab: null};
+  const st = {sgg: null, emd: null, scn: 'R2_promo', sb: false, axes: new Set(['a']), minM2: 66667, minAuto: true, step: 1, lab: null};   // minAuto: 3MW 이상 후보가 10곳 미만인 시군은 기본 표시 규모를 1MW로
   const nameOf = c => Region.nameOf(c);
   const runName = () => st.scn + (st.sb ? '_SB' : '');
 
@@ -191,7 +191,7 @@
       html = `<h2>우선순위</h2><p class="sub">발전 규모·계통 여유·산업단지 거리 중 원하는 기준을 고르세요(복수 선택). 1개면 그 기준의 순위, 2개 이상이면 모든 기준에서 밀리지 않는 주요 비교 후보를 보입니다. 새 점수나 가중치는 없습니다.</p><div id="axesL"></div>` + nav(true);
     } else if (step === 5) {
       html = `<h2>어느 정도 규모부터 볼까요?</h2><p class="sub">선택한 규모 이상의 후보 공간만 표에 올립니다. 표시 범위이며 후보 공간을 만들거나 지우지 않습니다(0.045 kW/㎡ 환산 읽기 눈금).</p>
-        <div class="opts">${[[22222, '1 MW'], [66667, '3 MW'], [222222, '10 MW'], [444444, '20 MW'], [1111111, '50 MW']].map(([m, l]) => opt('min', String(m), l + ' 이상', m === 66667 ? '기본값' : `${(m / 1e4).toLocaleString('ko-KR')} ha 이상`, st.minM2 === m)).join('')}</div>` + nav(true, '다음 → 확인');
+        <div class="opts">${[[22222, '1 MW'], [66667, '3 MW'], [222222, '10 MW'], [444444, '20 MW'], [1111111, '50 MW']].map(([m, l]) => opt('min', String(m), l + ' 이상', m === 66667 ? '기본값(3MW 이상 후보가 10곳 미만인 시군은 1MW)' : `${(m / 1e4).toLocaleString('ko-KR')} ha 이상`, st.minM2 === m)).join('')}</div>` + nav(true, '다음 → 확인');
     } else {
       html = `<h2>분석 실행</h2><p class="sub">아래 조건으로 후보 공간을 찾습니다.</p><ul class="summary-box">${condList().map(c => `<li>${c}</li>`).join('')}</ul>` + nav(true, '우리 동네 분석하기');
     }
@@ -199,7 +199,7 @@
     if (step === 1) Region.picker($('rpL'), {value: st.sgg, restrict: have, onChange: c => { st.sgg = c; openWizard(1); }});
     if (step === 4) V55.axesControl($('axesL'), {value: st.axes, onChange: v => { st.axes = v; }});
     $('wzCard').querySelectorAll('.opt:not([disabled])').forEach(b => b.onclick = () => { const k = b.dataset.k, v = b.dataset.v;
-      if (k === 'scn') st.scn = v; else if (k === 'min') st.minM2 = +v; else if (k === 'sb') st.sb = v === '1'; openWizard(step); });
+      if (k === 'scn') st.scn = v; else if (k === 'min') { st.minM2 = +v; st.minAuto = false; } else if (k === 'sb') st.sb = v === '1'; openWizard(step); });
     const back = $('wzBack'), next = $('wzNext');
     if (back) back.onclick = () => openWizard(step - 1);
     next.onclick = () => { if (step === 1 && (!st.sgg || !have.has(st.sgg))) return alert('후보 공간 자료가 있는 시군을 먼저 골라 주세요.'); step < 6 ? openWizard(step + 1) : run(); };
@@ -227,14 +227,17 @@
       if (!(z === 0 || (z === 1 && prot) || (z === 2 && promo)) || (st.sb && s === 1)) continue; cM2 += rm; if (!uni.has(own)) continue; n += rn2; m2 += rm; } return {n, m2, cM2}; };
     const cur = agg(promo, prot), base = agg(false, false), d = (cur.m2 - base.m2) / 1e6;
     const data = await V55.top10.load(st.sgg);
-    const rowsAll = V55.top10.rows(data, rn, 0) || [], rows = rowsAll.filter(r => r.a >= st.minM2);
-    const nAll = BIG && BIG.runs[rn] && BIG.runs[rn].all_sgg ? BIG.runs[rn].all_sgg[st.sgg] : null;   // 면적 문턱 없는 전량
+    const rowsAll = V55.top10.rows(data, rn, 0) || [];
+    const n3auto = rowsAll.filter(r => r.a >= 66667).length;
+    if (st.minAuto) st.minM2 = n3auto >= 10 ? 66667 : 22222;
+    const rows = rowsAll.filter(r => r.a >= st.minM2);
+    const nAll = BIG && BIG.runs[rn] && BIG.runs[rn].all_sgg ? BIG.runs[rn].all_sgg[st.sgg] : null;   // 면적 기준 없는 전량
     const sel = V55.top10.select(rows, st.axes, 10, {fronts: data.runs[rn] && data.runs[rn].fronts, minM2: st.minM2});
     put('rCards', `
-      <div class="res-card hi"><div class="k">후보 공간</div><div class="v">${V4.n(rows.length)}<small>곳</small></div><div class="d">${V55.mw(st.minM2)} MW 이상${nAll != null ? ` · 이 시군의 후보 공간 ${V4.n(nAll)}곳 중` : ''}</div></div>
+      <div class="res-card hi"><div class="k">후보 공간</div><div class="v">${V4.n(rows.length)}<small>곳</small></div><div class="d">${V55.mw(st.minM2)} MW 이상${nAll != null ? ` · 이 시군의 후보 공간 ${V4.n(nAll)}곳 중` : ''}${st.minAuto && st.minM2 === 22222 ? ` · 3MW 이상 후보가 ${n3auto}곳(10곳 미만)이라 1MW 기준으로 표시` : ''}</div></div>
       <div class="res-card"><div class="k">후보 필지 면적</div><div class="v">${km2(cur.m2)}<small> km²</small></div><div class="d">${V4.n(cur.n)}필지 · 참고 ${V55.mw(cur.m2)} MW</div></div>
       <div class="res-card"><div class="k">특별법 시행 전 대비</div><div class="v">${d === 0 ? '기준' : (d > 0 ? '+' : '') + km2(d * 1e6, 1) + '<small> km²</small>'}</div><div class="d">같은 이격 조건에서 시행 전(농업진흥지역 밖의 농지만)과 비교</div></div>
-      <div class="res-card"><div class="k">3MW 이상</div><div class="v">${V4.n(rowsAll.filter(r => r.a >= 66667).length)}<small>곳</small></div><div class="d">66,667㎡ 이상 · 법정 기준 아님</div></div>
+      <div class="res-card"><div class="k">1MW 이상 / 3MW 이상</div><div class="v">${V4.n(rowsAll.filter(r => r.a >= 22222).length)}<small>곳</small> / ${V4.n(n3auto)}<small>곳</small></div><div class="d">22,222㎡ / 66,667㎡ 이상 · 법정 기준 아님</div></div>
       <div class="res-card"><div class="k">50MW 이상</div><div class="v">${V4.n(rowsAll.filter(r => r.a >= 1111111).length)}<small>곳</small></div><div class="d">1,111,111㎡ 이상 · 법정 기준 아님</div></div>`);
     put('rCtl', `대조군(개인 포함 · 같은 조건) ${km2(cur.cM2)} km² — 분석 기준 필지는 그 ${cur.cM2 ? (100 * cur.m2 / cur.cM2).toFixed(1) : '—'}% (대조군은 정책 값 아님 · 병기). 조건 <b>${S.short}</b>. 시군 경계에 걸친 후보 공간은 관여 시군마다 나타나므로 시군별 수를 더하지 않음.`);
     // 표

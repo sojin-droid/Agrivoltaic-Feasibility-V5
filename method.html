@@ -248,7 +248,7 @@ body[data-sources=full] #story-steps .figbox,body[data-sources=full] .verdict,bo
           <text x="712" y="80" font-weight="700" fill="#16233A">21m 연접</text>
           <text x="712" y="99" fill="#6C757D">가까운 필지를 묶어</text>
           <text x="712" y="116" fill="#6C757D">후보 공간으로</text>
-          <text x="712" y="133" fill="#6C757D">3MW·50MW 이상 구분</text>
+          <text x="712" y="133" fill="#6C757D">1·3·50MW 이상 구분</text>
           <rect x="832" y="24" width="136" height="60" rx="9" fill="#EAF3FB" stroke="#7FA8C9"/>
           <text x="900" y="48" font-weight="700" fill="#16233A">사이트 화면</text>
           <text x="900" y="68" fill="#6C757D">지도·표</text>
@@ -336,8 +336,8 @@ body[data-sources=full] #story-steps .figbox,body[data-sources=full] .verdict,bo
 
     <details style="margin-top:14px;font-size:13px">
       <summary style="cursor:pointer;color:var(--leaf-deep);font-weight:700">후보 공간의 크기 구분과 민감도 — 자세히</summary>
-      <div class="fn" style="margin-top:8px">후보 공간에는 <b>최소 크기 기준을 두지 않음</b>(법에 규모 숫자가 없음). 3MW(66,667㎡)·50MW(1,111,111㎡) 같은 값은
-      0.045 kW/㎡로 환산한 크기 구분이며 법정 기준이 아님<sup class="fnref">[10]</sup>.<br>크기 구분을 50,000·66,667·100,000㎡로,
+      <div class="fn" style="margin-top:8px">후보 공간에는 <b>최소 크기 기준을 두지 않음</b>(법에 규모 숫자가 없음). 1MW(22,222㎡ · 마을 단위 운영 규모)·3MW(66,667㎡)·50MW(1,111,111㎡) 같은 값은
+      0.045 kW/㎡로 환산한 크기 구분이며 법정 기준이 아님<sup class="fnref">[10]</sup>.<br>크기 구분을 22,222·50,000·66,667·100,000㎡로,
       묶는 간격을 15·21·25m로 바꿔도 시나리오 간 크기 순서는 바뀌지 않음<sup class="fnref">[12]</sup>.</div>
     </details>
   </div>
@@ -382,7 +382,7 @@ body[data-sources=full] #story-steps .figbox,body[data-sources=full] .verdict,bo
       <p style="margin:0 0 8px"><b>비교 기준 세 가지</b> — ① 발전 규모: 후보 공간의 면적(참고 MW 함께 표시) ·
       ② 계통 여유: 후보 공간이 있는 읍면동의 남은 연계 가능 용량(참고값)<sup class="fnref">[22]</sup> ·
       ③ 산업단지 거리: 가장 가까운 산업단지 경계까지의 직선거리<sup class="fnref">[23]</sup>.</p>
-      <p style="margin:0 0 8px"><b>비교 대상</b> — 고른 시군 안에서, 고른 최소 규모(3MW 이상 등) 이상인 후보 공간 전부.</p>
+      <p style="margin:0 0 8px"><b>비교 대상</b> — 고른 시군 안에서, 고른 최소 규모(1MW·3MW 이상 등) 이상인 후보 공간 전부. 기본값은 3MW이며, 3MW 이상 후보가 10곳 미만인 시군(TOP 10을 채울 수 없는 곳)은 1MW를 기본값으로 둔다.</p>
       <p style="margin:0 0 8px"><b>기준을 하나 고르면</b> — 그 기준으로 줄을 세운 순위(TOP 10). 값이 같으면 같은 순위이고,
       10위에 같은 값이 여럿이면 자르지 않고 모두 보여 준다. 계통 여유는 읍면동 단위 값이라 같은 읍면동의 후보 공간끼리 값이 같은 경우가 많다.</p>
       <p style="margin:0 0 8px"><b>기준을 둘 이상 고르면</b> — 고른 기준 모두에서 다른 후보에 뒤지지 않는 후보를 모두 <b>주요 비교 후보</b>로 보여 준다.

@@ -13,7 +13,7 @@
 <link rel="stylesheet" href="assets/v5.css">
 <link rel="stylesheet" href="assets/v55.css">
 <script src="assets/v4.js"></script>
-<script src="assets/v55.js?v=20261007"></script>
+<script src="assets/v55.js?v=20261007b"></script>
 <style>
 .card.local{border-color:var(--gold);background:linear-gradient(180deg,#FFF9E8,#fff)}
 .hero-two{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:28px;align-items:start}
@@ -87,6 +87,7 @@
             <div class="k">② 3MW 이상 설치 가능 면적 — 이어 붙인 후보 공간이 3MW 이상인 곳의 면적</div>
             <div class="v"><span id="c2">—</span><small>km²</small></div>
             <div class="d"><b>+<span id="c2d">—</span> km²</b> 시행 전 대비 · 후보 공간 <span id="c2n">—</span>곳<span class="before">시행 전 <span id="c2b">—</span> km² · <span id="c2bn">—</span>곳</span></div>
+            <div class="d">1MW 이상(마을 단위 규모)으로 보면 <span id="c2m1n">—</span>곳 · <span id="c2m1">—</span> km²<span class="before">시행 전 <span id="c2m1bn">—</span>곳 · <span id="c2m1b">—</span> km²</span></div>
           </div>
           <div class="v55-arrow" aria-hidden="true"><svg width="26" height="44" viewBox="0 0 26 44"><path d="M13 2v34" stroke="currentColor" stroke-width="4" stroke-linecap="round"/><path d="M3 28l10 12 10-12" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></svg><span>그중 대규모 사업이 될 만한 곳은</span></div>
           <div class="v55-card">
@@ -101,7 +102,7 @@
           <svg width="34" height="14" viewBox="0 0 34 14" aria-hidden="true"><path d="M2 7h24" stroke="var(--navy)" stroke-width="3.5" stroke-linecap="round"/><path d="M20 2l8 5-8 5" fill="none" stroke="var(--navy)" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
           <b>21m 연접 → 후보 공간</b>
           <svg width="34" height="14" viewBox="0 0 34 14" aria-hidden="true"><path d="M2 7h24" stroke="var(--navy)" stroke-width="3.5" stroke-linecap="round"/><path d="M20 2l8 5-8 5" fill="none" stroke="var(--navy)" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          <b>규모 눈금(3MW · 50MW)</b>
+          <b>규모 눈금(1MW · 3MW · 50MW)</b>
           <span style="font-size:12px;color:var(--muted)">— 붙여도 면적은 그대로, 사업 단위의 개수와 규모가 달라짐</span>
         </div>
 
@@ -177,13 +178,14 @@
   const put = (id, v) => { const el = document.getElementById(id); if (el) el.textContent = v; };
   const m0 = M[BEFORE]['정본'], m1 = M[AFTER]['정본'];
   const r0 = RUN[CELL_RUN[BEFORE]], r1 = RUN[CELL_RUN[AFTER]];
-  const b3_0 = band(r0, 6.6667), b3_1 = band(r1, 6.6667), b50_0 = band(r0, 111.1111), b50_1 = band(r1, 111.1111);
+  const b3_0 = band(r0, 6.6667), b3_1 = band(r1, 6.6667), b50_0 = band(r0, 111.1111), b50_1 = band(r1, 111.1111), b1_0 = band(r0, 2.2222), b1_1 = band(r1, 2.2222);
   // ① 면적 — ㎡ 원값으로 증분 계산(이중 반올림 방지)
   V4.countup(document.getElementById('c1'), m1.m2 / 1e6, 1);
   put('c1d', V4.km2((m1.m2 - m0.m2) / 1e6)); put('c1p', ((m1.m2 - m0.m2) / m0.m2 * 100).toFixed(1)); put('c1b', V4.km2(m0.m2 / 1e6)); put('c1n', V4.n(m0.n));
   // ② 3MW 등가 이상 후보 공간 면적·수
   put('c2', V4.km2(b3_1.area_km2)); put('c2d', V4.km2(b3_1.area_km2 - b3_0.area_km2)); put('c2n', V4.n(b3_1.n));
   put('c2b', V4.km2(b3_0.area_km2)); put('c2bn', V4.n(b3_0.n));
+  put('c2m1n', V4.n(b1_1.n)); put('c2m1', V4.km2(b1_1.area_km2)); put('c2m1bn', V4.n(b1_0.n)); put('c2m1b', V4.km2(b1_0.area_km2));
   // ③ 50MW 등가 이상 후보 공간 수
   put('c3', V4.n(b50_1.n)); put('c3b', V4.n(b50_0.n)); put('c3a', V4.n(b50_1.n));
   put('c3k', V4.km2(b50_1.area_km2)); put('c3kd', V4.km2(b50_1.area_km2 - b50_0.area_km2)); put('c3mw', V4.n(R[CELL_RUN[AFTER]].ge50_mw)); put('c3th', V4.n(N.threshold.mw50_m2));

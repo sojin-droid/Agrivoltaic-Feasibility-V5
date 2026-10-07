@@ -68,7 +68,7 @@ window.V55 = (() => {
     top10: `<h3>방법론 더 보기 — 우리 동네 TOP 10</h3>
       <h4>쉽게 말하면</h4><p>고른 시군 안의 후보 공간(21m 연접 단위)을 발전 규모·계통 여유·산업단지 거리 중 원하는 기준으로 줄 세우거나, 여러 기준을 동시에 만족하는 후보를 골라 보여줍니다.</p>
       <h4>실제 분석 방법 · 기준</h4><ul>
-        <li><b>비교 대상</b> — 그 시군에 땅이 있는 후보 공간 가운데, 고른 최소 규모(3MW 이상 등) 이상인 것 전부.</li>
+        <li><b>비교 대상</b> — 그 시군에 땅이 있는 후보 공간 가운데, 고른 최소 규모(1MW·3MW 이상 등) 이상인 것 전부. 기본값은 3MW이며, 3MW 이상 후보가 10곳 미만인 시군은 1MW를 기본값으로 둔다.</li>
         <li><b>세 축</b> — A 발전 규모 = 장부면적(참고 MW 병기) · B 계통 = 소재 읍면동 잔여 연계가능용량 하한(lo, MW) · C 산업단지 = 최근접 산업단지 경계까지 직선거리(km).</li>
         <li><b>1개 축</b> — 그 축의 값으로 정렬한 순위(1~10). 같은 값은 같은 순위(최소 순위 규칙)이며, 10위 경계에 동률이 있으면 임의로 자르지 않고 모두 보인다. 계통 여유는 읍면동 단위 값이라 같은 읍면동 후보끼리 동률이 흔하다. 점수·가중치 없음.</li>
         <li><b>2개 이상 축</b> — 기존 비교 엔진(비지배 집합)을 쓴다: 선택한 축 모두에서 다른 후보에 지지 않는 후보만 남긴다. 순위가 아니라 <b>주요 비교 후보</b> 집합이며, 새 점수·가중치를 만들지 않는다. 결측 축은 그 축의 최악값으로 두고 비교한다(숨은 배제 금지).</li>
@@ -349,8 +349,9 @@ window.V55 = (() => {
     if (!data) { el.innerHTML = `<div class="v55-pnu"><div class="h">PNU ${pnuStr}</div><div class="nm">${nm}</div>${brNote}<div class="v55-hint">이 시군의 필지 소속 자산이 없음(분석 모집단 밖 시군).</div></div>`; return; }
     if (!_miss) { const U = await V4.data('units_index'); _miss = new Set((U.missing || []).map(m => m.lab)); }
     const rowHTML = (label, run) => { const c = pnu.classify(data, pnuStr, run, minM2); const C = pnu.CLS[c.cls] || ['—', '자료 없음', '#999'];
+      const c1 = pnu.classify(data, pnuStr, run, 22222); const alt = (c.cls === 1 || c.cls === 2) && c1.cls !== c.cls ? ` · 1MW(22,222㎡) 기준으로는 ${pnu.CLS[c1.cls][0]} ${pnu.CLS[c1.cls][1]}` : (c.cls === 1 || c.cls === 2) ? ' · 1MW 기준도 같음' : '';
       const noGeom = run === 'R2_promo' && c.lab != null && _miss.has(c.lab) ? ' · <b>후보 공간 도형 없음</b>(소속 필지의 지적 폴리곤이 없어 지도에 그리지 못함 — 설치 가능 판정과 소속은 그대로이며 설치 불가라는 뜻은 아님)' : '';
-      return `<div class="row"><div class="s">${label}</div><div><span class="v55-cls" style="background:${C[2]}">${C[0]}</span>${C[1]}${c.lab != null ? `<div class="v55-hint">후보 공간 #${c.lab} · ${km2(c.a, 2)} km² ≈ ${mw(c.a)} MW · 필지 ${n(c.n)} · 규모 기준 ${km2(minM2, 3)} km²(${mw(minM2)}MW)${noGeom}</div>` : ''}</div></div>`; };
+      return `<div class="row"><div class="s">${label}</div><div><span class="v55-cls" style="background:${C[2]}">${C[0]}</span>${C[1]}${c.lab != null ? `<div class="v55-hint">후보 공간 #${c.lab} · ${km2(c.a, 2)} km² ≈ ${mw(c.a)} MW · 필지 ${n(c.n)} · 규모 기준 ${km2(minM2, 3)} km²(${mw(minM2)}MW)${alt}${noGeom}</div>` : ''}</div></div>`; };
     const c2 = pnu.classify(data, pnuStr, 'R2_promo', minM2);
     el.innerHTML = `<div class="v55-pnu"><div class="h">PNU ${pnuStr} · 시군 ${nameOf(sgg)}</div><div class="nm">${nm}</div>${brNote}
       ${rowHTML('특별법 시행 전<br><small>(농업진흥지역에 설치 불가)</small>', 'R0_current')}${rowHTML('특별법 시행 후<br><small>(농업진흥구역에도 설치 가능)</small>', 'R2_promo')}${rowHTML('특별법 시행 후<br><small>(농업진흥구역·농업보호구역에도 설치 가능)</small>', 'R3_zone_all')}

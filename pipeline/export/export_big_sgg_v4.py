@@ -18,7 +18,7 @@ sys.stdout.reconfigure(encoding='utf-8', errors='replace')
 import pandas as pd
 
 RUNS = ['R0_current', 'R0_current_SB', 'R1_protect', 'R1_protect_SB', 'R2_promo', 'R2_promo_SB', 'R3_zone_all', 'R3_zone_all_SB']
-M2_50, M2_3 = 1111111.1, 66666.7
+M2_50, M2_3, M2_1 = 1111111.1, 66666.7, 22222.2
 N = json.load(open(os.path.join(SITE, 'data_v4', 'narrative_v4.json'), encoding='utf-8'))['runs']
 R = json.load(open(os.path.join(SITE, 'data_v4', 'results_v4.json'), encoding='utf-8'))['runs']
 band = lambda run, ha: next((b for b in R[run].get('size_bands', []) if abs(b['min_ha'] - ha) < 0.01), None)
@@ -31,24 +31,27 @@ for run in RUNS:
     m['sgg'] = m.pnu.astype(str).str[:5]
     n_all_sgg = m.drop_duplicates(['lab', 'sgg']).groupby('sgg').lab.nunique()
     n_all = int(m.lab.nunique())
-    b50, b3 = b[b.area_m2 >= M2_50], b[b.area_m2 >= M2_3]
-    n50, n3 = int(b50.lab.nunique()), int(b3.lab.nunique())
+    b50, b3, b1 = b[b.area_m2 >= M2_50], b[b.area_m2 >= M2_3], b[b.area_m2 >= M2_1]
+    n50, n3, n1 = int(b50.lab.nunique()), int(b3.lab.nunique()), int(b1.lab.nunique())
     if n50 != N[run]['ge50']: bad.append(f'{run} 50MW {n50} ≠ narrative {N[run]["ge50"]}')
     if n_all != R[run]['n_component']: bad.append(f'{run} 전량 {n_all} ≠ results_v4 n_component {R[run]["n_component"]}')
     rb = band(run, 6.6667)
     if rb and n3 != rb['n']: bad.append(f'{run} 3MW {n3} ≠ results_v4 {rb["n"]}')
+    rb1 = band(run, 2.2222)
+    if rb1 and n1 != rb1['n']: bad.append(f'{run} 1MW {n1} ≠ results_v4 {rb1["n"]}')
     g50 = b50.groupby('sgg').agg(n=('lab', 'nunique'), m2=('area_m2', 'sum'))
-    g3 = b3.groupby('sgg').lab.nunique()
+    g3 = b3.groupby('sgg').lab.nunique(); g1 = b1.groupby('sgg').lab.nunique()
     # 3MW 이상이 하나라도 있는 시군 전부 — 50MW 이상 목록은 화면이 n50 > 0 으로 거른다
-    out[run] = {'n50': n50, 'n3': n3, 'n_all': n_all, 'all_sgg': {k: int(v) for k, v in n_all_sgg.items()},
-                'sgg': {s: [int(g50.n.get(s, 0)), round(float(g50.m2.get(s, 0)) / 1e6, 2), int(n)] for s, n in g3.sort_values(ascending=False).items()}}
-    print(f'{run:16s} 50MW↑ {n50:>3}곳 · 시군 {len(g50):>2} · 3MW↑ {n3:>5}곳 · 시군 {len(g3):>3} · 전량 {n_all:>7,}')
+    out[run] = {'n50': n50, 'n3': n3, 'n1': n1, 'n_all': n_all, 'all_sgg': {k: int(v) for k, v in n_all_sgg.items()},
+                'sgg': {s: [int(g50.n.get(s, 0)), round(float(g50.m2.get(s, 0)) / 1e6, 2), int(n), int(g1.get(s, 0))] for s, n in g3.sort_values(ascending=False).items()},
+                'sgg1': {s: int(n) for s, n in g1.sort_values(ascending=False).items()}}
+    print(f'{run:16s} 50MW↑ {n50:>3}곳 · 시군 {len(g50):>2} · 3MW↑ {n3:>5}곳 · 시군 {len(g3):>3} · 1MW↑ {n1:>5}곳 · 전량 {n_all:>7,}')
 if bad:
     raise SystemExit('[FAIL] 게이트 — 쓰지 않음: ' + ' · '.join(bad))
 doc = {'generated': datetime.datetime.now().strftime('%Y-%m-%d %H:%M'),
        'source': 'scenario_runs/<run>/block_context.parquet (등재 런 8칸 · 법인·국공유)',
-       'rule': '50MW 등가 = 1,111,111㎡ · 3MW 등가 = 66,667㎡ (0.045 kW/㎡ 읽기 눈금) · 시군 귀속 touch',
-       'cols': ['n50', 'km2_50', 'n3'], 'all_sgg': '시군별 후보 공간 전량(문턱 없음 · members touch)', 'runs': out}
+       'rule': '50MW 등가 = 1,111,111㎡ · 3MW 등가 = 66,667㎡ · 1MW 등가 = 22,222㎡ (0.045 kW/㎡ 읽기 눈금) · 시군 귀속 touch',
+       'cols': ['n50', 'km2_50', 'n3', 'n1'], 'sgg1': '시군별 1MW 이상 후보 공간 수(touch · 1MW 이상이 하나라도 있는 시군 전부)', 'all_sgg': '시군별 후보 공간 전량(문턱 없음 · members touch)', 'runs': out}
 p = os.path.join(SITE, 'data_v4', 'big_sgg_v4.json')
 json.dump(doc, open(p, 'w', encoding='utf-8'), ensure_ascii=False, separators=(',', ':'))
 print('written', p, os.path.getsize(p), 'bytes · 게이트 통과(8칸 모두 narrative·results_v4 와 일치)')

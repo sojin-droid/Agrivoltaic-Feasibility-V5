@@ -16,7 +16,7 @@
 <script src="assets/vendor/leaflet/leaflet.js"></script>
 <script src="assets/v4.js"></script>
 <script src="assets/region.js"></script>
-<script src="assets/v55.js?v=20261007"></script>
+<script src="assets/v55.js?v=20261007b"></script>
 <style>
 .cond3{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
 .cond3 .cond h4{margin-bottom:8px}
@@ -162,7 +162,9 @@
   // ── Step 2: 조건 세그먼트 + 우선순위 다중 선택 ──
   V55.seg($('segScn'), [['R0_current', '특별법 시행 전 (농업진흥지역 설치 불가)'], ['R2_promo', '시행 후 · 농업진흥구역 (보호구역 제외)'], ['R3_zone_all', '시행 후 · 농업진흥구역 + 농업보호구역']], st.scn, v => { st.scn = v; render(); });
   V55.seg($('segSB'), [['0', '미적용'], ['1', '적용']], st.sb, v => { st.sb = v; render(); });
-  V55.seg($('segMin'), [[22222, '1 MW 이상'], [66667, '3 MW'], [222222, '10 MW'], [444444, '20 MW'], [1111111, '50 MW']], st.minM2, v => { st.minM2 = +v; render(); });
+  // 최소 표시 규모 기본값 — 3MW. 다만 그 시군·조건에서 3MW 이상 후보 공간이 10곳 미만(TOP 10을 채울 수 없음)이면 1MW를 기본값으로 둔다. 사용자가 고르면 자동 규칙은 멈춘다.
+  st.minAuto = true;
+  const segMinCtl = V55.seg($('segMin'), [[22222, '1 MW 이상'], [66667, '3 MW'], [222222, '10 MW'], [444444, '20 MW'], [1111111, '50 MW']], st.minM2, v => { st.minM2 = +v; st.minAuto = false; render(); });
   V55.axesControl($('axes'), {value: st.axes, onChange: v => { st.axes = v; render(); }});
 
   // ── 지도 ──
@@ -182,12 +184,15 @@
   async function render(reload = true) {
     const my = ++seq, run = runName(), sgg = st.sgg;
     const data = await V55.top10.load(sgg); if (my !== seq) return;
-    const rowsAll = V55.top10.rows(data, run, 0) || [], rows = rowsAll.filter(r => r.a >= st.minM2);
+    const rowsAll = V55.top10.rows(data, run, 0) || [];
+    const n3auto = rowsAll.filter(r => r.a >= 66667).length;
+    if (st.minAuto) { const want = n3auto >= 10 ? 66667 : 22222; if (want !== st.minM2) { st.minM2 = want; segMinCtl.set(String(want)); } }
+    const rows = rowsAll.filter(r => r.a >= st.minM2);
     const sel = V55.top10.select(rows, st.axes, 10, {fronts: data.runs[run] && data.runs[run].fronts, minM2: st.minM2});
     const S = V55.scn(run);
     $('recTitle').textContent = `${nameOf(sgg)} — ${sel.mode === 'rank' ? (sel.list.length > 10 ? `TOP 10 (동률 포함 ${sel.list.length}곳)` : 'TOP ' + sel.list.length) : sel.mode === 'compare' ? '주요 비교 후보 ' + sel.list.length + '곳' : '후보 공간 면적순'} · ${S.tag}`;
     const BIGr = BIG && BIG.runs[run], nAll = BIGr && BIGr.all_sgg ? BIGr.all_sgg[sgg] : null;
-    $('recStamp').textContent = `${nAll != null ? `이 시군의 후보 공간 ${V4.n(nAll)}곳 중 ` : ''}${V55.mw(st.minM2)}MW 이상 ${V4.n(rows.length)}곳 · 조건 ${S.short}`;
+    $('recStamp').textContent = `${nAll != null ? `이 시군의 후보 공간 ${V4.n(nAll)}곳 중 ` : ''}${V55.mw(st.minM2)}MW 이상 ${V4.n(rows.length)}곳 · 조건 ${S.short}${st.minAuto && st.minM2 === 22222 ? ` · 3MW 이상 후보가 ${n3auto}곳(10곳 미만)이라 기본 표시 규모를 1MW로 둠` : ''}`;
     $('modeNote').innerHTML = `<b>읽는 법</b> — ${sel.note}${sel.unknown ? ` 값을 알 수 없는 후보 ${V4.n(sel.unknown)}곳은 표 아래에 적음.` : ''} 시군 경계에 걸친 후보 공간은 관여 시군마다 나타나므로 시군별 수를 더하지 않음.`;
     const miss = run === 'R2_promo' ? await missingSet() : null; if (my !== seq) return;
     const drawTable = qual => V55.top10.table($('recTbl'), sel, rows, {nameOf, pickId: st.pick, onPick: r => pick(r), qual, missing: miss});
