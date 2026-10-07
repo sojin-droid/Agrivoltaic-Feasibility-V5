@@ -1,6 +1,6 @@
 # 방법론 서면 자문 의뢰 메일 초안 (KEI) — 2026-10-07
 
-> 발송 전 채울 것: 수신자 성함·직위 · 회신 희망일 · 사례비·계약 조건 · 자문 의견 인용 방식(실명/익명) · 첨부 PDF 여부. 대괄호 [ ]가 빈칸이다.
+> 발송 전 채울 것: 수신자 성함·직위 · 회신 희망일 · 사례비·계약 조건 · 자문 의견 인용 방식(실명/익명). 대괄호 [ ]가 빈칸이다. 제공 자료 전체 목록은 `docs/method_advisory/DELIVERABLES.md`.
 
 ---
 
@@ -42,7 +42,7 @@ M1 최소 공간 분석 단위의 타당성 · M2 연접 거리 임계(선언 �
 - 자문 화면(브리프의 화면판 · 전국 어느 시군이든 21m 단위 폴리곤 지도 · 질문 M1–M9 입력·내보내기):
   https://sojin-droid.github.io/Agrivoltaic-Feasibility-V5/cluster_advisory.html
 - 검토 대상지 10곳 데이터 패키지(시군별 적격 필지 폴리곤·속성, 21m 단위 전량 폴리곤·속성, 단위 쌍 거리, 산단·읍면동 계통·기존 시설 레이어, 열 사전):
-  [GitHub Release 링크 — 발송 전 기재]
+  https://github.com/sojin-droid/Agrivoltaic-Feasibility-V5/releases/tag/cluster-advisory-20261007
   선정 기준: https://github.com/sojin-droid/Agrivoltaic-Feasibility-V5/blob/main/docs/method_advisory/STUDY_AREAS.md
 - 방법 비교에 쓴 평가 지표 정의서(5축 11지표 · 입력 규격 · 계산식):
   https://github.com/sojin-droid/Agrivoltaic-Feasibility-V5/blob/main/docs/method_advisory/METRICS_DEFINITIONS.md
@@ -63,4 +63,4 @@ M1 최소 공간 분석 단위의 타당성 · M2 연접 거리 임계(선언 �
 소진 드림
 플랜잇(PLANiT) · sojin@planit.institute
 
-첨부: [방법론 자문 브리프 PDF 1부 — 첨부 여부 결정]
+첨부: 제공 자료 목록 1부(`DELIVERABLES.md` 인쇄본 또는 본문 링크로 갈음)
