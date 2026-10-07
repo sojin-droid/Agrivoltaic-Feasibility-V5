@@ -15,7 +15,7 @@ RUN = os.path.join(LR, 'scenario_runs', 'R2_promo')
 DB = os.path.join(LR, 'agrivoltaic_ledger_v1.duckdb')
 GPKG = os.path.join(LR, 'analysis_units', 'analysis_unit_v1.gpkg')
 SA = json.load(open(os.path.join(SITE, 'docs', 'method_advisory', 'study_areas.json'), encoding='utf-8'))['areas']
-B = {'3MW': 66_667, '10MW': 222_222, '20MW': 444_444, '50MW': 1_111_111}
+B = {'1MW': 22_222, '3MW': 66_667, '10MW': 222_222, '20MW': 444_444, '50MW': 1_111_111}
 
 def gini(x):
     x = np.sort(np.asarray(x, float)); n = len(x)

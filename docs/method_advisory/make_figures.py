@@ -33,7 +33,7 @@ plt.rcParams.update({'font.family': 'Malgun Gothic', 'axes.unicode_minus': False
                      'axes.linewidth': 0.8, 'lines.linewidth': 1.4})
 NAVY, RED, GOLD, GRAY, TEAL, LEAF = '#1c2b4a', '#B3261E', '#B8860B', '#9aa3ae', '#1D6F8A', '#2E7D4F'
 KW = 0.045
-MW = {'3MW': 66_667, '10MW': 222_222, '20MW': 444_444, '50MW': 1_111_111}
+MW = {'1MW': 22_222, '3MW': 66_667, '10MW': 222_222, '20MW': 444_444, '50MW': 1_111_111}
 LOG = []
 
 def save(fig, name):
@@ -90,7 +90,7 @@ ax = axs[0]
 bins = np.logspace(1, 7.2, 70)
 ax.hist(a_pos, bins=bins, color=NAVY, alpha=.85); ax.set_xscale('log'); ax.set_yscale('log')
 for k, v in MW.items():
-    ax.axvline(v, color=RED if k in ('3MW', '50MW') else GRAY, lw=.9, ls='--'); ax.text(v * 1.08, ax.get_ylim()[1] * .55, k, fontsize=8, color=RED if k in ('3MW', '50MW') else GRAY, rotation=90, va='top')
+    ax.axvline(v, color=RED if k in ('1MW', '3MW', '50MW') else GRAY, lw=.9, ls='--'); ax.text(v * 1.08, ax.get_ylim()[1] * .55, k, fontsize=8, color=RED if k in ('1MW', '3MW', '50MW') else GRAY, rotation=90, va='top')
 ax.set_xlabel('후보 공간 면적 (㎡, 로그) — 0.045 kW/㎡ 환산 눈금 표시'); ax.set_ylabel('후보 공간 수 (로그)')
 ax = axs[1]
 npc = cl.n_parcel.to_numpy()
