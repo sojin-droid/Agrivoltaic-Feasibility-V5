@@ -8,6 +8,10 @@
 
 > **공개 사이트 (GitHub Pages)**: https://sojin-droid.github.io/Agrivoltaic-Feasibility-V5/
 
+> **외부 자문 화면** (같은 Pages 안 · 모든 화면 푸터에서 연결)
+> - 경기도 데이터 검토 (경기연구원): https://sojin-droid.github.io/Agrivoltaic-Feasibility-V5/advisory.html — 별도 저장소 사본 https://sojin-droid.github.io/agrivoltaic-advisory-gg/advisory.html (`agrivoltaic-advisory-gg`, `pipeline/export/sync_advisory_gg.py` 로 동기화)
+> - 클러스터링 방법론 (KEI): https://sojin-droid.github.io/Agrivoltaic-Feasibility-V5/cluster_advisory.html — 문서판 [docs/METHOD_ADVISORY.md](docs/METHOD_ADVISORY.md) · 데이터 패키지 [Release cluster-advisory-20261007](https://github.com/sojin-droid/Agrivoltaic-Feasibility-V5/releases/tag/cluster-advisory-20261007)
+
 ## 페이지 — V5.1 5탭 + 우리동네 (레포 루트 = Pages 루트)
 
 | 화면 | 파일 | 질문 · 내용 |
@@ -18,7 +22,7 @@
 | 우리 동네 TOP 10 | `regions.html` | 시군 안 후보 공간 비교 — 제도(시행 전/후)·이격·최소 규모 + 우선순위 복수 선택(발전 규모·계통·산업단지): 1축 = 정렬 순위, 2축 이상 = 비지배 '주요 비교 후보'(`data_v4/top10/` 사전 계산) · PNU·지번 검색 |
 | 우리 동네 영농형 태양광, 어디가 좋을까? | `local.html` | 이름·PNU·지번 입력 → 6단계 위저드(지역·제도·이격·우선순위·규모·실행) → 후보 공간 지도·TOP 10/주요 비교 후보 표 → 인쇄용 보고서 — 지자체·주민·비영리 |
 | 자문용 검토(ADVISORY) | `advisory.html` | 외부 자문 전용(경기연구원) — 경기도 데이터 검증(근거 레이어·출처) · 지자체 사용성 과제 · 데이터 신뢰성 문항 A–D. 최종 방법·추천을 정하지 않음 · 의견은 브라우저에만 저장 |
-| 클러스터링 방법론 자문 | `cluster_advisory.html` | 외부 자문 전용(KEI) — 21m 연접 단위의 유도·분포, ≤1,000m 응축 폐기 사유, 대안 방법 비교, 무가중 비지배와 축 원자료 분포, 전국 21m 단위 지도(시군 선택), M1–M9 문항 입력·내보내기. 데이터 정확성은 묻지 않음 |
+| 클러스터링 방법론 자문 | `cluster_advisory.html` | 외부 자문 전용(KEI) — 21m 연접 거리 산정 근거·후보 공간 분포, 묶음 방법 비교, 무가중 비지배와 축 원자료 분포, 전국 21m 단위 지도(시군 선택), M1–M9 문항 입력·내보내기. 데이터 정확성은 묻지 않음 |
 | 근거와 방법 | `method.html` | 이 숫자와 방법은 어디에서 왔는가 — 1 배경(핵심 결과 다섯 가지) · 2 법·제도 근거(`#law`, 시행령 조문·함의) · 3 공간분석 방법(판정 조건·`#datarules`·검증·`#caveats`) · 4 우선 후보 선정(`#ranking`) · 5 데이터 출처 · 6 Sources(`#fnsec`, 전 화면의 출처를 여기로 통합) |
 
 출처 목록은 「근거와 방법」에만 렌더된다(`body[data-sources=full]`) — 다른 화면의 각주 마커 [n]은 `method.html#fn-n`으로 연결.
@@ -31,7 +35,7 @@
 | 자문 | 범위 | 자료 |
 |---|---|---|
 | 데이터 신뢰성·현실성 (경기도 · 경기연구원) | 자료의 정확성·현실성·완전성·최신성 — 방법론은 묻지 않음 | `advisory.html` · 안내 `docs/ADVISORY_README.md` · 기록 `docs/ADVISORY_HANDOFF.md` |
-| 클러스터링 방법론 (KEI 서면 자문) | 21m 연접 단위의 타당성 · 최종 클러스터 정의의 필요성과 원리 · ≤1,000m 응축 폐기 판단 · 무가중 비지배 비교 위에 더할 방법 — 자료 정확성은 묻지 않음 | 화면 `cluster_advisory.html` · 브리프 `docs/METHOD_ADVISORY.md`(그림 `docs/method_advisory/fig/` · 그림 수치 `docs/method_advisory/data/` · 생성 `make_figures.py`) · 메일 초안 `docs/METHOD_ADVISORY_EMAIL_DRAFT.md` · 의뢰 계획 `docs/METHOD_ADVISORY_PLAN_20261007.md` · ③탭 전용 자산 `data_v4/existing_parcels/`(허가 주소 필지 폴리곤 · `export_existing_parcels_v4.py` · 표시 전용) · 방법 비교 재실행 `model/proposals/pr0042/rerun_sites_20261007.py` → `docs/method_advisory/data/method_comparison_sites.csv` |
+| 클러스터링 방법론 (KEI 서면 자문) | 21m 연접 단위의 타당성 · 최종 클러스터 정의의 필요성과 원리 · 무가중 비지배 비교 위에 더할 방법 — 자료 정확성은 묻지 않음 | 화면 `cluster_advisory.html` · 브리프 `docs/METHOD_ADVISORY.md`(그림 `docs/method_advisory/fig/` · 그림 수치 `docs/method_advisory/data/` · 생성 `make_figures.py`) · 메일 초안 `docs/METHOD_ADVISORY_EMAIL_DRAFT.md` · 의뢰 계획 `docs/METHOD_ADVISORY_PLAN_20261007.md` · ③탭 전용 자산 `data_v4/existing_parcels/`(허가 주소 필지 폴리곤 · `export_existing_parcels_v4.py` · 표시 전용) · 방법 비교 재실행 `model/proposals/pr0042/rerun_sites_20261007.py` → `docs/method_advisory/data/method_comparison_sites.csv` |
 
 두 자문 모두 결과를 받기 전에는 방법론·데이터를 바꾸지 않는다(ADR-0054).
 

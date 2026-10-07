@@ -113,9 +113,11 @@ const V4 = {
     if (el) el.innerHTML = full
       ? `<div>PLANiT Institute · 영농형 태양광 — 전국 영농형 태양광 모아보기</div>` +
         `<div>수치 생성일 ${String(m.generated).split(' ')[0]} · MW는 면적 환산 참고값(0.045 kW/㎡) · 소유 구분은 지적 원장의 소유 유형 구분(개인 식별 아님)</div>` +
-        `<div style="margin-top:6px"><a href="local.html">우리 동네 분석하기 →</a> · <a href="#contact">문의</a></div>`
+        `<div style="margin-top:6px"><a href="local.html">우리 동네 분석하기 →</a> · <a href="#contact">문의</a></div>` +
+        `<div style="margin-top:6px">외부 자문 자료 — <a href="advisory.html">경기도 데이터 검토(경기연구원)</a> · <a href="cluster_advisory.html">클러스터링 방법론(KEI)</a></div>`
       : `<div>PLANiT Institute · 영농형 태양광 · 수치 생성일 ${String(m.generated).split(' ')[0]} · MW는 면적 환산 참고값 · 설치 가능 농지는 인허가 가능 여부와 다름 — ` +
-        `<a href="method.html"><b>출처·방법론은 근거와 방법 →</b></a> · <a href="local.html">우리 동네 분석하기 →</a></div>`;
+        `<a href="method.html"><b>출처·방법론은 근거와 방법 →</b></a> · <a href="local.html">우리 동네 분석하기 →</a></div>` +
+        `<div style="margin-top:6px">외부 자문 자료 — <a href="advisory.html">경기도 데이터 검토(경기연구원)</a> · <a href="cluster_advisory.html">클러스터링 방법론(KEI)</a></div>`;
   },
 };
 
