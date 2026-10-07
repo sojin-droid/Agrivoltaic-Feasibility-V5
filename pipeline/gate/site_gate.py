@@ -11,7 +11,7 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from paths import SITE, OUT, CLUSTERS, ROOT, MODEL, LR, CAD   # 경로는 한 곳에서만
 
 # 전 탭 스캔 — 새 탭 추가 시 반드시 여기에도 추가 (2026-08-26: map·insight·candidates 누락 적발)
-PAGES = ['index.html', 'finder.html', 'scenarios.html', 'regions.html', 'local.html', 'method.html', 'advisory.html',
+PAGES = ['index.html', 'finder.html', 'scenarios.html', 'regions.html', 'local.html', 'method.html', 'advisory.html', 'cluster_advisory.html',
          'evidence.html', 'map.html', 'candidates.html', 'proximity.html', 'decree.html', 'insight.html', 'about.html']
 DATA = os.path.join(SITE, 'data_v4')
 

@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>클러스터링 방법론 자문 — 공간 단위 · 클러스터 정의 · 우선순위 비교</title>
+<meta name="robots" content="noindex">
+<link rel="stylesheet" href="assets/vendor/pretendard/pretendardvariable-dynamic-subset.css">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="assets/vendor/leaflet/leaflet.css">
+<link rel="stylesheet" href="assets/v55.css">
+<script src="assets/vendor/leaflet/leaflet.js"></script>
+<script src="assets/v4.js"></script>
+<script src="assets/region.js"></script>
+<script src="assets/v55.js"></script>
+<style>
+:root{--adv-bg:#fff;--adv-ink:#1d2733;--adv-muted:#5d6b7a;--adv-line:#dde3ea;--adv-soft:#f4f7fa;--adv-navy:#0C356A;--adv-warn:#8a5a00;--adv-warnbg:#fff6e0}
+body{background:var(--adv-bg);color:var(--adv-ink)}
+.adv-wrap{max-width:1180px;margin:0 auto;padding:0 16px}
+.adv-banner{background:var(--adv-warnbg);border-bottom:1px solid #f0d9a0;color:var(--adv-warn);font-size:13px;padding:8px 0}
+.adv-head{display:flex;flex-wrap:wrap;gap:12px;align-items:baseline;justify-content:space-between;padding:14px 0 6px}
+.adv-head h1{font-size:20px;margin:0;color:var(--adv-navy)}
+.adv-tabs{display:flex;flex-wrap:wrap;gap:4px;border-bottom:1px solid var(--adv-line);margin-bottom:12px}
+.adv-tabs button{border:0;background:none;padding:10px 14px;font:600 14px inherit;color:var(--adv-muted);cursor:pointer;border-bottom:3px solid transparent}
+.adv-tabs button.on{color:var(--adv-navy);border-bottom-color:var(--adv-navy)}
+.adv-pane{display:none}.adv-pane.on{display:block}
+.adv-ctl{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:10px;font-size:13px}
+.adv-ctl button,.btnx{padding:6px 10px;border:1px solid var(--adv-navy);background:#fff;color:var(--adv-navy);border-radius:6px;font:600 12.5px inherit;cursor:pointer}
+.adv-ctl button.on,.btnx.on{background:var(--adv-navy);color:#fff}
+.adv-split{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:12px}
+@media (max-width:900px){.adv-split{grid-template-columns:1fr}}
+.adv-map{height:62vh;min-height:400px;border:1px solid var(--adv-line);border-radius:8px}
+.adv-side{height:62vh;min-height:400px;overflow:auto;border:1px solid var(--adv-line);border-radius:8px;background:#fff}
+.adv-note{font-size:12px;color:var(--adv-muted);line-height:1.6}
+.adv-box{border:1px solid var(--adv-line);border-radius:8px;padding:10px 12px;background:var(--adv-soft);font-size:13px;margin-bottom:10px;line-height:1.65;word-break:keep-all}
+.adv-box h2{font-size:16px;margin:0 0 6px;color:var(--adv-navy)}
+.adv-box h3{font-size:14px;margin:12px 0 4px;color:var(--adv-navy)}
+.adv-box ul,.adv-box ol{margin:4px 0 4px 18px;padding:0}
+.adv-box li{margin:2px 0}
+.fig{background:#fff;border:1px solid var(--adv-line);border-radius:8px;padding:8px;margin:8px 0}
+.fig img{width:100%;height:auto;display:block}
+.fig .cap{font-size:12px;color:var(--adv-muted);margin-top:6px;line-height:1.55}
+.fig .cap .tag{margin-right:4px}
+.tag{display:inline-block;font-size:11.5px;padding:1px 7px;border-radius:999px;border:1px solid var(--adv-line);background:#fff}
+.tag.w{border-color:#e7c46b;background:var(--adv-warnbg);color:var(--adv-warn)}
+table.adv{border-collapse:collapse;width:100%;font-size:12.5px;background:#fff}
+table.adv th,table.adv td{border-bottom:1px solid var(--adv-line);padding:5px 7px;text-align:right;white-space:nowrap;vertical-align:top}
+table.adv th:first-child,table.adv td:first-child,table.adv td.l,table.adv th.l{text-align:left}
+table.adv td.w{white-space:normal;word-break:keep-all;min-width:14em}
+table.adv th{background:var(--adv-soft)}
+.scroll{overflow:auto;max-width:100%}
+.lineage{font-family:var(--mono,monospace);font-size:12.5px;background:#fff;border:1px solid var(--adv-line);border-radius:8px;padding:10px 12px;white-space:pre;overflow:auto;line-height:1.6}
+.adv-q{font-size:13px;border-top:1px solid var(--adv-line);padding:8px 0;word-break:keep-all}
+.adv-q .opts,.fb .opts{display:flex;flex-wrap:wrap;gap:6px;margin:4px 0}
+.adv-q textarea,.fb textarea{width:100%;min-height:44px;border:1px solid var(--adv-line);border-radius:6px;font:13px inherit;padding:6px;box-sizing:border-box}
+.fb{margin-top:8px}
+.lyr{display:flex;flex-wrap:wrap;gap:4px 12px;font-size:12.5px;margin:6px 0}.lyr label{cursor:pointer}
+.adv-list .it{padding:8px 10px;border-bottom:1px solid var(--adv-line);cursor:pointer;font-size:13px}
+.adv-list .it:hover{background:var(--adv-soft)}.adv-list .it.sel{background:#e7eef8}
+.adv-list .it b{color:var(--adv-navy)}
+.grp{border-top:1px solid var(--adv-line);padding:8px 10px}.grp:first-child{border-top:0}
+.gt{font-weight:700;font-size:13px;color:var(--adv-navy);display:flex;align-items:center;justify-content:space-between;gap:6px;margin-bottom:4px}
+.allbtn{border:1px solid var(--adv-line);background:#fff;border-radius:999px;font:600 11px inherit;padding:2px 9px;cursor:pointer;color:var(--adv-muted)}.allbtn.on{background:var(--adv-navy);color:#fff;border-color:var(--adv-navy)}
+.typerow,.tglrow{display:flex;gap:6px;align-items:center;padding:3px 0;font-size:12.5px;cursor:pointer}.typerow .sw{width:11px;height:11px;border-radius:3px;display:inline-block}
+.gbar{display:flex;height:13px;border-radius:3px;overflow:hidden;border:1px solid rgba(0,0,0,.25)}.gbar i{flex:1 1 0;display:block;border-right:1px solid rgba(0,0,0,.18)}.gbar i:last-child{border-right:none}.gbar i.dim{opacity:.18}
+.gbar-l{display:flex;font-size:10px;color:var(--adv-muted);margin-top:2px}.gbar-l span{flex:1 1 0;text-align:center;white-space:nowrap}.gbar-l span.dim{opacity:.35}
+.adv-split.map3{grid-template-columns:minmax(0,1.6fr) 340px}@media (max-width:900px){.adv-split.map3{grid-template-columns:1fr}}
+.side3{height:70vh;min-height:480px;overflow:auto;border:1px solid var(--adv-line);border-radius:8px;background:#fff}
+.map3h{height:70vh;min-height:480px}
+#uList .it{padding:6px 10px;font-size:12.5px}
+@media (max-width:640px){table th,table td{word-break:keep-all}}
+</style>
+</head>
+<body>
+<div class="adv-banner"><div class="adv-wrap"><b>클러스터링 방법론 자문 자료</b> — 검토 범위는 후보 공간을 구성하는 공간 분석 단위(21m 연접)의 타당성, 그 위에 두는 최종 클러스터(사업 단위) 층의 필요성과 정의 원리, 후보 간 우선순위 비교 방법이다. 자료의 정확성·최신성, 법적 인허가, 계통 접속 가능성, 경제성은 검토 범위에 포함하지 않는다. 분포 그림·표는 정본 산출로부터 계산한 기술 통계이며 인용 수치가 아니다. 응답은 서버로 전송되지 않고 이 브라우저에만 저장된다.</div></div>
+<div class="adv-wrap">
+  <div class="adv-head"><h1>클러스터링 방법론 자문 — 공간 단위 · 클러스터 정의 · 우선순위 비교</h1><span class="adv-note" id="genStamp">—</span></div>
+  <nav class="adv-tabs" id="tabs">
+    <button data-t="now" class="on">① 공간 분석 방법</button>
+    <button data-t="alt">② 방법 비교 · 우선순위 비교</button>
+    <button data-t="map">③ 지도</button>
+    <button data-t="q">④ 자문 질문</button>
+    <button data-t="fb">의견 내보내기</button>
+  </nav>
+
+  <!-- ① 현재 방법 -->
+  <section class="adv-pane on" id="p-now">
+    <div class="adv-box"><h2>검토 범위</h2>
+      <ul>
+        <li>검토 대상 — ① 판정을 통과한 필지를 경계 간 거리 21m 이내 연접으로 묶은 단위를 최소 공간 분석 단위로 쓰는 것의 타당성 ② 그 위에 최종 클러스터(사업 단위) 층을 둘 필요성과, 둔다면 임의 기준값 없이 정의하는 원리 ③ 무가중 비지배 집합으로 우선 후보를 제시하는 방법과 보완 방안.</li>
+        <li>검토 범위 밖 — 자료의 정확성·최신성(별도 데이터 검토), 법적 인허가, 계통 접속 보장, 경제성.</li>
+        <li>자문 결과를 받기 전에는 방법론과 데이터를 변경하지 않는다. 최종 클러스터 정의는 미정이다.</li>
+        <li>문서판: <a href="https://github.com/sojin-droid/Agrivoltaic-Feasibility-V5/blob/main/docs/METHOD_ADVISORY.md" target="_blank" rel="noopener">docs/METHOD_ADVISORY.md</a> · 그림 수치 <a href="https://github.com/sojin-droid/Agrivoltaic-Feasibility-V5/tree/main/docs/method_advisory/data" target="_blank" rel="noopener">docs/method_advisory/data/</a></li>
+      </ul></div>
+
+    <div class="adv-box"><h2>1. 연구 개요</h2>
+      <p>전국 지적 필지 전수를 대상으로, 영농형태양광 특별법(2026-12-17 시행 예정) 시행 전·후에 영농형 태양광을 설치할 수 있는 농지를 필지 단위로 판정하고, 그 결과를 공간 단위로 묶어 지자체·주민이 활용할 수 있는 형태로 공개하는 연구다. 목적은 농업진흥지역에도 설치를 허용했을 때의 효과를 근거로 제시하는 것이다. 분석 대상은 법인·국공유 소유 농지이며 개인 소유 농지는 포함하지 않는다. 결과는 <a href="index.html">공개 사이트</a>와 보고서·논문으로 발행한다.</p>
+      <p>판정 조건(필지마다 동일 규칙): 지목(전·답·과수원) · 구조·입지 제외(건축물·수역·산업단지·다른 법의 설치 금지 지역) · 경사 15 초과 제외 · 용도지역 3종 제외(개발제한구역·보전관리지역·보전녹지지역) · 농업진흥지역 여부(시나리오). 자세한 조건은 <a href="method.html#datarules">근거와 방법 3-3</a>.</p></div>
+
+    <div class="adv-box"><h2>2. 공간 분석 절차</h2>
+<div class="lineage">개별 필지(판정 통과)
+   │  경계 간 최근접 거리 ≤ 21 m 이면 연결 (단일연결 절단 = 연결성분)
+21m 연접 단위 = 후보 공간 (analysis_unit_v1)      ← 최소 공간 분석 단위 · 면적 하한 없음
+   │  시군 안에서 3축(면적 · 계통 여유 참고값 · 산단 거리) 무가중 비지배 집합 → "주요 비교 후보"
+시군 집계 · 규모 눈금(3 / 10 / 20 / 50 MW 환산) · 화면 · 보고서
+   │
+최종 클러스터(사업 단위) 정의 — 미정</div>
+      <ul>
+        <li><b>후보 공간</b>은 분석 단위이지 사업 단위나 특구가 아니다. 사이트·보고서에서 "클러스터"라는 말은 쓰지 않는다.</li>
+        <li>규모 눈금(3MW = 66,667㎡ · 50MW = 1,111,111㎡)은 0.045 kW/㎡로 환산한 <b>표시용 크기 구분</b>이며 판정·선별에 쓰지 않는다. 면적 하한은 두지 않는다.</li>
+      </ul></div>
+
+    <div class="adv-box"><h2>3. 연접 거리 산정</h2>
+      <h3>3-1. 임계의 성격</h3>
+      <p>연접 거리 τ = 21m는 <b>선언 파라미터</b>다. 적격 필지 사이 간격의 분포에는 자연스러운 꺾임이나 골이 없어(3-3), 분포 자체가 특정 값을 가리키지 않는다. 21m는 간격을 만드는 지물의 종류와 폭(3-2)에 근거해 <b>구거·농로·소하천은 건너 묶고 폭 넓은 하천 본류·간선도로·철도는 끊는</b> 수준으로 20m 안팎 범위에서 정한 값이며, k-거리 곡선의 무릎은 이 범위를 확인하는 보조 근거다. 같은 논리는 15–25m 범위를 모두 허용하므로 15/21/25m 민감도(3-4)를 병기한다.</p>
+      <h3>3-2. 간격의 구성과 지물 폭</h3>
+      <p><b>간격을 만드는 지물.</b> 비개인 소유 10MW 이상 구획(코어) 사이 간격이 21–50m인 쌍 197개의 틈에 끼인 필지 1,665개를 실측한 결과, 틈 면적의 59.6 %가 구거, 30.0 %가 도로였다(선형 구조물 합계 93.1 % · 소유는 국유지 90.5 %, 개인 0.6 %). 즉 적격 농지 사이의 간격은 대부분 수로와 농로다.</p>
+      <div class="scroll"><table class="adv"><tr><th class="l">지목</th><th>필지</th><th>틈 면적</th><th>면적 비중</th></tr><tr><td class="l">구거</td><td>655</td><td>159.2 ha</td><td>59.6 %</td></tr><tr><td class="l">도로</td><td>569</td><td>80.2 ha</td><td>30.0 %</td></tr><tr><td class="l">지목 결측</td><td>138</td><td>11.2 ha</td><td>4.2 %</td></tr><tr><td class="l">하천</td><td>9</td><td>5.9 ha</td><td>2.2 %</td></tr><tr><td class="l">답</td><td>108</td><td>5.0 ha</td><td>1.9 %</td></tr><tr><td class="l">제방</td><td>81</td><td>2.6 ha</td><td>1.0 %</td></tr></table></div>
+      <p class="adv-note">원천: 분석보고서 step4_5_buffer_derivation.md §2-9 (코어 간 간격 21–50m 쌍 197개 · 개입 필지 1,665개 · 코어·적격 필지 제외).</p>
+      <p><b>지물 폭.</b> 간격을 만드는 지목의 폭(≈ 2 × 면적 ÷ 둘레)을 8개 시군구(당진·서산·김제·고흥·이천·구미·춘천·진주) 표본에서 실측했다. 구거·도로의 중앙값은 3–4m이고 25m를 넘는 것은 1 % 미만이다. 하천은 중앙값 6m이나 4.5 %가 25m를 넘는다(본류).</p>
+      <div class="scroll"><table class="adv"><tr><th class="l">지목</th><th>표본 필지</th><th>폭 중앙값</th><th>10m 초과</th><th>25m 초과</th></tr><tr><td class="l">하천</td><td>26,087</td><td>6.0 m</td><td>24.9 %</td><td>4.5 %</td></tr><tr><td class="l">철도용지</td><td>4,090</td><td>5.5 m</td><td>26.6 %</td><td>1.1 %</td></tr><tr><td class="l">제방</td><td>9,894</td><td>5.0 m</td><td>12.0 %</td><td>0.7 %</td></tr><tr><td class="l">구거</td><td>69,697</td><td>3.9 m</td><td>5.0 %</td><td>0.2 %</td></tr><tr><td class="l">도로</td><td>269,917</td><td>3.0 m</td><td>7.3 %</td><td>0.9 %</td></tr></table></div>
+      <p class="adv-note">원천: 분석보고서 step4_1_distance.md §7. 하천·철도용지는 지목이 농지가 아니므로 적격 필지가 아니며, 그 폭이 임계보다 넓으면 양쪽 농지가 자동으로 끊긴다.</p>
+      <p><b>해석.</b> 임계를 20m 안팎으로 두면 구거(99.8 %)·도로(99.1 %)·소하천은 건너 묶이고, 폭 25m를 넘는 하천 본류(4.5 %)·간선도로·철도는 끊긴다. 임계를 10m로 낮추면 구거의 5 %·도로의 7 %·하천의 25 %가 끊겨 한 경작지가 수로 하나로 갈라지고, 50m로 높이면 하천 본류까지 대부분 건너 묶여 서로 다른 유역의 농지가 한 단위가 된다. 이 두 끝 사이에서 어느 값이 "사업 부지"의 경계 개념과 맞는지가 자문 문항 M2다.</p>
+      <h3>3-3. 간격 분포와 k-거리 곡선 (보조 근거)</h3>
+      <p>비접촉 적격 필지의 최근접 간격은 2–4m에서 최고점을 이룬 뒤 단조 감소하는 단봉 분포다(평활 후 추가 봉 0 · p50 7.0m · p75 18.5m · p90 38.9m). 4-최근접 거리의 누적 비율은 아래와 같다.</p>
+      <div class="scroll"><table class="adv"><tr><th class="l">임계</th><th>0 m (접촉)</th><th>10 m</th><th>15 m</th><th>21 m</th><th>25 m</th><th>50 m</th></tr><tr><td class="l">누적 비율(≤)</td><td>19.9 %</td><td>59.3 %</td><td>69.4 %</td><td>77.5 %</td><td>81.5 %</td><td>94.0 %</td></tr></table></div>
+      <div class="fig"><img src="docs/method_advisory/fig/f02_gap_hist_d4.png" alt="4-최근접 간격 히스토그램"><div class="cap">그림 2. 4-최근접 경계 거리 히스토그램(0–200m, 로그 y). 점선 15·25m, 빨간 선 21m. 자연스러운 꺾임이나 골이 없다. (원천 step4_1_gaps_S1.parquet)</div></div>
+      <p>k-거리 곡선(각 필지에서 k번째로 가까운 적격 필지까지 경계 거리, 내림차순)에 Kneedle을 적용하면 무릎이 검출되지만, 그 위치는 <b>k에 비례해 이동</b>한다(k = 1 → 6m, 2 → 10m, 4 → 21.6m, 8 → 44m, 12 → 65m). 따라서 무릎 값은 자료가 가리키는 고유값이 아니라 k 선택의 함수다. k = 4(필지가 네 방향 이웃을 가진다는 격자 배열 가정)에서 S = 2–10 전 구간 20.0–21.6m가 나오며, 이 값이 3-2의 물리적 범위 안에 있다는 점에서 보조 근거로 쓴다.</p>
+      <div class="fig"><img src="docs/method_advisory/fig/f01_kdistance_curves.png" alt="k-거리 곡선"><div class="cap">그림 1. k = 1·2·4·8·12 k-거리 곡선(적격 필지 7,106,500개 기준, 내림차순). 빨간 선 = 21m, 음영 = k = 4의 S 2–10 무릎 대역. (원천 step4_1_gaps_S1.parquet · step4_1_kneedle_S1.csv)</div></div>
+      <div class="scroll"><table class="adv"><tr><th class="l">k</th><th>n</th><th>무릎 (S = 2)</th><th>무릎 백분위</th><th>p25</th><th>p50</th><th>p75</th><th>p95</th></tr><tr><td class="l">1</td><td>7,270,897</td><td>6.0 m</td><td>5.0 %</td><td>0</td><td>0</td><td>0</td><td>6.0</td></tr><tr><td class="l">2</td><td>7,232,792</td><td>10.0 m</td><td>12.3 %</td><td>0</td><td>0</td><td>3.6</td><td>26.4</td></tr><tr><td class="l">4</td><td>7,106,500</td><td>21.6 m</td><td>21.8 %</td><td>2.5</td><td>7.5</td><td>18.9</td><td>54.3</td></tr><tr><td class="l">8</td><td>6,669,512</td><td>44.4 m</td><td>27.2 %</td><td>16.1</td><td>28.9</td><td>46.6</td><td>79.9</td></tr><tr><td class="l">12</td><td>6,001,238</td><td>65.2 m</td><td>24.4 %</td><td>31.6</td><td>46.2</td><td>64.6</td><td>89.8</td></tr></table></div>
+      <h3>3-4. 민감도 (τ = 15 / 21 / 25 m)</h3>
+      <div class="scroll"><table class="adv"><tr><th>τ</th><th>21m 연접 단위 수</th><th>3MW 이상</th><th>50MW 이상</th><th>100MW 이상</th><th>설치 가능 면적</th></tr>
+        <tr><td>15 m</td><td>432,271</td><td>1,087</td><td>15</td><td>3</td><td>1,038.85 km²</td></tr>
+        <tr><td><b>21 m</b></td><td><b>388,121</b></td><td><b>1,119</b></td><td><b>25</b></td><td><b>8</b></td><td>1,038.85 km²</td></tr>
+        <tr><td>25 m</td><td>369,570</td><td>1,150</td><td>38</td><td>12</td><td>1,038.85 km²</td></tr></table></div>
+      <p class="adv-note">조건: 특별법 시행 후(농업진흥구역 설치 가능 · 농업보호구역 제외) · 법인·국공유. 15·25m 행은 2026-09-06 실행값(기하 회수 전). 병합은 면적을 보존하므로 <b>면적은 τ에 무관하고 단위의 수와 큰 단위의 개수만 달라진다</b>. 대규모(50MW 이상) 개수는 15 → 25 → 38로 τ에 민감하다. 관련 문항: M2 · M6.</p></div>
+
+    <div class="adv-box"><h2>4. 후보 공간 분포</h2>
+      <div class="fig"><img src="docs/method_advisory/fig/f03_unit_area_parcels.png" alt="면적·필지 수 분포"><div class="cap">그림 3. 왼쪽: 후보 공간 면적 분포(로그–로그, 환산 눈금 표시). 오른쪽: 구성 필지 수 분포. 원천 scenario_runs/R2_promo/clusters.parquet</div></div>
+      <div class="scroll"><table class="adv"><tr><th>구분</th><th>단위 수</th><th>면적 합</th><th>면적 중앙값</th><th>구성 필지 수 중앙값</th></tr>
+        <tr><td>전체</td><td>388,121</td><td>1,038.85 km²</td><td>462 ㎡</td><td>1</td></tr>
+        <tr><td>3MW 이상 (≥ 66,667 ㎡)</td><td>1,119</td><td>254.44 km²</td><td>109,186 ㎡</td><td>73</td></tr>
+        <tr><td>10MW 이상</td><td>244</td><td>161.19 km²</td><td>447,196 ㎡</td><td>76.5</td></tr>
+        <tr><td>20MW 이상</td><td>122</td><td>123.09 km²</td><td>743,747 ㎡</td><td>87</td></tr>
+        <tr><td>50MW 이상</td><td>25</td><td>54.44 km²</td><td>1,611,404 ㎡</td><td>179</td></tr></table></div>
+      <ul>
+        <li>388,121곳 중 <b>1필지짜리 207,005곳(53 %)</b>. 면적 분위: p50 462㎡ · p90 5,093㎡ · p99 28,985㎡ · p99.9 142,689㎡.</li>
+        <li>파편화의 원인은 τ가 아니라 <b>소유 필터</b>다 — 개인 필지를 제외하면 법인·국공유 필지가 섬처럼 남는다(당진 사례: 548단위 중 61 %가 1필지). τ를 키워도 시군 전체가 400m부터 하나로 연쇄될 뿐 자연스러운 무릎이 없다.</li>
+        <li>면적 하한은 두지 않고 규모 눈금(3/10/20/50MW)으로 표시만 구분한다. 관련 문항: M1·M3.</li>
+      </ul></div>
+
+  </section>
+
+  <!-- ② 대안 비교 · 우선순위 -->
+  <section class="adv-pane" id="p-alt">
+    <div class="adv-box"><h2>5. 묶음 방법 비교</h2>
+      <p>21m 연접(A)을 선행 연구에서 쓰는 다른 원리의 묶음 방법 세 가지(밀도 기반 HDBSCAN* · 그래프 커뮤니티 Leiden · 거리+면적 집적)와 같은 창(시군 필지 + 3 km)·같은 지표로 검토 대상지 10곳에서 비교했다. 방법마다 대표 파라미터 조합을 하나 또는 둘 적용했고, 결과는 10곳 중앙값과 시군별 값으로 제시한다. 채택 판정이 아닌 비교 기준선이다.</p>
+      <h3>5-1. 비교 방법</h3>
+      <div class="scroll"><table class="adv"><tr><th class="l">계열</th><th class="l">정의</th><th class="l">자유 파라미터</th><th class="l">결과 형태 · 특성(정의상 귀결)</th></tr>
+        <tr><td class="l"><b>A</b> 21m 연접(현행)</td><td class="w">경계 거리 ≤ 21m 단일연결 → 연결성분이 곧 단위</td><td class="w">1 (τ = 21m · 유도값)</td><td class="w">모든 필지가 정확히 한 단위에 속함 · 규칙을 한 문장으로 쓸 수 있음</td></tr>
+        <tr><td class="l"><b>B</b> HDBSCAN*(밀도)</td><td class="w">필지 경계 거리 · 상호 도달 거리 · condensed tree · 안정성 절단(필지 수 가중)</td><td class="w">min_samples · min_cluster_size(시군별 유도)</td><td class="w">어디에도 속하지 않는 noise 필지가 생김(모든 적격 필지가 어딘가에 속한다는 규약과 충돌) · 큰 단위가 쪼개지기도 함 · 규칙이 시군마다 달라짐</td></tr>
+        <tr><td class="l"><b>C</b> Leiden 커뮤니티(그래프)</td><td class="w">21m 단위를 노드로 거리 가중 그래프 · 해상도 γ</td><td class="w">λ · γ</td><td class="w">결과 단위가 "후보 부지"가 아니라 시군 여러 곳에 걸친 광역 권역 · γ 유도값이 지역마다 달라 단일 규칙이 서지 않음</td></tr>
+        <tr><td class="l"><b>D</b> 거리 + 면적 집적(씨앗)</td><td class="w">거리 g 안 이웃을 면적 목표에 닿을 때까지 붙임</td><td class="w">g · 목표 면적</td><td class="w">목표 면적에서 닫히므로 "50MW 몇 곳"이 정의상 결과가 됨 · 목표 눈금 = 숨은 기준값(ADR-0041 위반)</td></tr></table></div>
+      <p><b>평가 지표 5축 11지표</b>(가중 합 없이 지표별 우열만): 1 큰 공간 · 2 파편화 · 3 규모 · 4 행정 · 5 안정성 — 정의는 ④탭 M4와 <a href="https://github.com/sojin-droid/Agrivoltaic-Feasibility-V5/blob/main/docs/method_advisory/METRICS_DEFINITIONS.md" target="_blank" rel="noopener">정의서</a>.</p>
+      <h3>5-2. 비교 결과</h3>
+      <p>값은 <b>10곳 중앙값</b>(시군 관여 기준 · 창 밖으로 이어지는 클러스터는 창에서 잘림)이며, 시군별 값은 아래 접힌 표에 있다. 원천 <code>docs/method_advisory/data/method_comparison_sites.csv</code> · 실행 <code>pr0042/rerun_sites_20261007.py</code>.</p>
+      <div class="scroll"><table class="adv"><tr><th class="l">방법</th><th class="l">파라미터</th><th>클러스터 수</th><th>1필지 비율</th><th><3MW 면적비</th><th>≥20MW 면적비</th><th>껍질 채움</th><th>3MW↑</th><th>10MW↑</th><th>50MW↑</th><th>체인</th><th>최대 km²</th><th>noise 필지(B)</th><th>50MW 앵커 분할</th></tr><tr><td class="l"><b>A</b> 21m 연접 (현행)</td><td class="l w">τ=21m</td><td>3,881</td><td>0.528</td><td>0.717</td><td>0.035</td><td>0.585</td><td>22</td><td>4</td><td>0</td><td>0.037</td><td>0.63</td><td>0</td><td>0</td></tr><tr><td class="l"><b>B</b> HDBSCAN* (밀도)</td><td class="l w">k=2, m=1.0×MCS (시군별 유도 99–404)</td><td>4,650</td><td>0.995</td><td>0.227</td><td>0.546</td><td>0.038</td><td>26</td><td>16</td><td>3</td><td>0.155</td><td>2.27</td><td>10,752</td><td>0</td></tr><tr><td class="l"><b>C</b> Leiden 커뮤니티 (그래프)</td><td class="l w">λ=1000m, γ=0.5</td><td>48</td><td>0.626</td><td>0.003</td><td>0.974</td><td>0.026</td><td>15</td><td>14</td><td>8</td><td>0.199</td><td>4.60</td><td>0</td><td>0</td></tr><tr><td class="l"><b>C</b> Leiden 커뮤니티 (그래프)</td><td class="l w">λ=21m, γ=1.0</td><td>426</td><td>0.090</td><td>0.275</td><td>0.288</td><td>0.074</td><td>52</td><td>14</td><td>0</td><td>0.066</td><td>1.15</td><td>0</td><td>0</td></tr><tr><td class="l"><b>D</b> 거리+면적 집적 (씨앗)</td><td class="l w">g=200m, D2 목표 222,222㎡</td><td>809</td><td>0.358</td><td>0.251</td><td>0.032</td><td>0.148</td><td>64</td><td>28</td><td>0</td><td>0.038</td><td>0.63</td><td>0</td><td>0</td></tr><tr><td class="l"><b>D</b> 거리+면적 집적 (씨앗)</td><td class="l w">g=400m, D1 전량 병합</td><td>132</td><td>0.503</td><td>0.016</td><td>0.971</td><td>0.084</td><td>6</td><td>3</td><td>2</td><td>0.806</td><td>29.56</td><td>0</td><td>0</td></tr></table></div>
+      <ul style="margin-top:8px">
+        <li><b>A</b>: 1필지 비율 ~0.5, 면적의 대부분이 3MW 미만 조각 — 작은 단위를 그대로 둔 결과. 자유 파라미터는 21m 하나.</li>
+        <li><b>B</b>: 밀도 기준이라 외딴 필지가 noise(어디에도 속하지 않음)가 되고 그 수가 많다. 큰 클러스터는 만들지만 "왜 같은 클러스터인가"를 거리로 설명할 수 없다.</li>
+        <li><b>C</b>: λ = 1,000m에서는 시군 전체가 수십 개 권역으로 묶여 50MW 이상이 여럿 생기지만 결과 단위가 "후보 부지"가 아니라 권역이다. λ = 21m는 A와 비슷한 자리.</li>
+        <li><b>D</b>: D2는 목표 면적(222,222㎡ ≈ 10MW)에서 닫히므로 10MW 이상 개수가 설계값에 따라 정해진다(숨은 기준값). D1은 거리 400m 전량 병합이라 한 덩어리로 연쇄한다(체인 지수·최대 면적 급증).</li>
+      </ul>
+      <div style="margin-top:8px"><b>시군별 상세</b> (10곳)</div><details style="margin-top:6px"><summary style="cursor:pointer;color:var(--adv-navy);font-size:12.5px">충남 당진시 (44270)</summary><div class="scroll"><table class="adv"><tr><th class="l">방법</th><th class="l">파라미터</th><th>클러스터 수</th><th>1필지 비율</th><th><3MW 면적비</th><th>≥20MW 면적비</th><th>껍질 채움</th><th>3MW↑</th><th>10MW↑</th><th>50MW↑</th><th>체인</th><th>최대 km²</th><th>noise 필지(B)</th><th>50MW 앵커 분할</th></tr><tr><td class="l">A</td><td class="l w">τ=21m</td><td>4,129</td><td>0.527</td><td>0.340</td><td>0.525</td><td>0.640</td><td>43</td><td>14</td><td>4</td><td>0.165</td><td>5.79</td><td>0</td><td>0</td></tr><tr><td class="l">B</td><td class="l w">k=2, m=1.0×MCS (시군별 유도 99–404)</td><td>4,862</td><td>0.995</td><td>0.134</td><td>0.806</td><td>0.033</td><td>25</td><td>17</td><td>3</td><td>0.228</td><td>8.30</td><td>11,014</td><td>0</td></tr><tr><td class="l">C</td><td class="l w">λ=1000m, γ=0.5</td><td>34</td><td>0.500</td><td>0.001</td><td>0.992</td><td>0.026</td><td>14</td><td>14</td><td>9</td><td>0.223</td><td>9.07</td><td>0</td><td>0</td></tr><tr><td class="l">C</td><td class="l w">λ=21m, γ=1.0</td><td>508</td><td>0.039</td><td>0.150</td><td>0.625</td><td>0.074</td><td>56</td><td>16</td><td>3</td><td>0.215</td><td>7.67</td><td>0</td><td>0</td></tr><tr><td class="l">D</td><td class="l w">g=200m, D2 목표 222,222㎡</td><td>1,027</td><td>0.317</td><td>0.178</td><td>0.517</td><td>0.216</td><td>70</td><td>31</td><td>4</td><td>0.162</td><td>5.79</td><td>0</td><td>0</td></tr><tr><td class="l">D</td><td class="l w">g=400m, D1 전량 병합</td><td>148</td><td>0.351</td><td>0.017</td><td>0.966</td><td>0.098</td><td>6</td><td>4</td><td>2</td><td>0.822</td><td>40.09</td><td>0</td><td>0</td></tr></table></div></details><details style="margin-top:6px"><summary style="cursor:pointer;color:var(--adv-navy);font-size:12.5px">전남 해남군 (46820)</summary><div class="scroll"><table class="adv"><tr><th class="l">방법</th><th class="l">파라미터</th><th>클러스터 수</th><th>1필지 비율</th><th><3MW 면적비</th><th>≥20MW 면적비</th><th>껍질 채움</th><th>3MW↑</th><th>10MW↑</th><th>50MW↑</th><th>체인</th><th>최대 km²</th><th>noise 필지(B)</th><th>50MW 앵커 분할</th></tr><tr><td class="l">A</td><td class="l w">τ=21m</td><td>4,154</td><td>0.538</td><td>0.186</td><td>0.608</td><td>0.598</td><td>111</td><td>77</td><td>5</td><td>0.040</td><td>2.55</td><td>0</td><td>0</td></tr><tr><td class="l">B</td><td class="l w">k=2, m=1.0×MCS (시군별 유도 99–404)</td><td>4,339</td><td>0.986</td><td>0.125</td><td>0.809</td><td>0.042</td><td>53</td><td>30</td><td>15</td><td>0.166</td><td>10.79</td><td>7,873</td><td>0</td></tr><tr><td class="l">C</td><td class="l w">λ=1000m, γ=0.5</td><td>39</td><td>0.128</td><td>0.003</td><td>0.967</td><td>0.021</td><td>22</td><td>19</td><td>6</td><td>0.363</td><td>24.10</td><td>0</td><td>0</td></tr><tr><td class="l">C</td><td class="l w">λ=21m, γ=1.0</td><td>525</td><td>0.023</td><td>0.092</td><td>0.818</td><td>0.085</td><td>56</td><td>16</td><td>10</td><td>0.167</td><td>10.83</td><td>0</td><td>0</td></tr><tr><td class="l">D</td><td class="l w">g=200m, D2 목표 222,222㎡</td><td>1,073</td><td>0.311</td><td>0.104</td><td>0.607</td><td>0.251</td><td>140</td><td>92</td><td>5</td><td>0.040</td><td>2.55</td><td>0</td><td>0</td></tr><tr><td class="l">D</td><td class="l w">g=400m, D1 전량 병합</td><td>243</td><td>0.342</td><td>0.018</td><td>0.930</td><td>0.125</td><td>32</td><td>8</td><td>2</td><td>0.806</td><td>60.59</td><td>0</td><td>0</td></tr></table></div></details><details style="margin-top:6px"><summary style="cursor:pointer;color:var(--adv-navy);font-size:12.5px">충남 보령시 (44180)</summary><div class="scroll"><table class="adv"><tr><th class="l">방법</th><th class="l">파라미터</th><th>클러스터 수</th><th>1필지 비율</th><th><3MW 면적비</th><th>≥20MW 면적비</th><th>껍질 채움</th><th>3MW↑</th><th>10MW↑</th><th>50MW↑</th><th>체인</th><th>최대 km²</th><th>noise 필지(B)</th><th>50MW 앵커 분할</th></tr><tr><td class="l">A</td><td class="l w">τ=21m</td><td>3,079</td><td>0.530</td><td>0.599</td><td>0.248</td><td>0.579</td><td>16</td><td>6</td><td>1</td><td>0.096</td><td>1.19</td><td>0</td><td>0</td></tr><tr><td class="l">B</td><td class="l w">k=2, m=1.0×MCS (시군별 유도 99–404)</td><td>4,438</td><td>0.996</td><td>0.171</td><td>0.673</td><td>0.041</td><td>19</td><td>11</td><td>2</td><td>0.393</td><td>6.84</td><td>8,301</td><td>1</td></tr><tr><td class="l">C</td><td class="l w">λ=1000m, γ=0.5</td><td>78</td><td>0.641</td><td>0.006</td><td>0.919</td><td>0.028</td><td>18</td><td>13</td><td>7</td><td>0.223</td><td>4.96</td><td>0</td><td>0</td></tr><tr><td class="l">C</td><td class="l w">λ=21m, γ=1.0</td><td>394</td><td>0.140</td><td>0.225</td><td>0.528</td><td>0.068</td><td>36</td><td>7</td><td>3</td><td>0.268</td><td>4.65</td><td>0</td><td>0</td></tr><tr><td class="l">D</td><td class="l w">g=200m, D2 목표 222,222㎡</td><td>662</td><td>0.376</td><td>0.223</td><td>0.237</td><td>0.134</td><td>46</td><td>18</td><td>1</td><td>0.092</td><td>1.19</td><td>0</td><td>0</td></tr><tr><td class="l">D</td><td class="l w">g=400m, D1 전량 병합</td><td>155</td><td>0.497</td><td>0.039</td><td>0.894</td><td>0.071</td><td>9</td><td>4</td><td>2</td><td>0.485</td><td>9.32</td><td>0</td><td>0</td></tr></table></div></details><details style="margin-top:6px"><summary style="cursor:pointer;color:var(--adv-navy);font-size:12.5px">경기 평택시 (41220)</summary><div class="scroll"><table class="adv"><tr><th class="l">방법</th><th class="l">파라미터</th><th>클러스터 수</th><th>1필지 비율</th><th><3MW 면적비</th><th>≥20MW 면적비</th><th>껍질 채움</th><th>3MW↑</th><th>10MW↑</th><th>50MW↑</th><th>체인</th><th>최대 km²</th><th>noise 필지(B)</th><th>50MW 앵커 분할</th></tr><tr><td class="l">A</td><td class="l w">τ=21m</td><td>4,201</td><td>0.474</td><td>0.636</td><td>0.040</td><td>0.587</td><td>49</td><td>5</td><td>0</td><td>0.040</td><td>0.72</td><td>0</td><td>0</td></tr><tr><td class="l">B</td><td class="l w">k=2, m=1.0×MCS (시군별 유도 99–404)</td><td>6,872</td><td>0.995</td><td>0.217</td><td>0.551</td><td>0.046</td><td>34</td><td>26</td><td>3</td><td>0.114</td><td>2.46</td><td>14,094</td><td>0</td></tr><tr><td class="l">C</td><td class="l w">λ=1000m, γ=0.5</td><td>96</td><td>0.833</td><td>0.001</td><td>0.981</td><td>0.033</td><td>16</td><td>15</td><td>10</td><td>0.153</td><td>4.24</td><td>0</td><td>0</td></tr><tr><td class="l">C</td><td class="l w">λ=21m, γ=1.0</td><td>402</td><td>0.202</td><td>0.183</td><td>0.364</td><td>0.067</td><td>61</td><td>24</td><td>0</td><td>0.052</td><td>1.02</td><td>0</td><td>0</td></tr><tr><td class="l">D</td><td class="l w">g=200m, D2 목표 222,222㎡</td><td>773</td><td>0.362</td><td>0.161</td><td>0.036</td><td>0.143</td><td>81</td><td>48</td><td>0</td><td>0.036</td><td>0.72</td><td>0</td><td>0</td></tr><tr><td class="l">D</td><td class="l w">g=400m, D1 전량 병합</td><td>103</td><td>0.854</td><td>0.004</td><td>0.996</td><td>0.120</td><td>1</td><td>1</td><td>1</td><td>0.996</td><td>34.73</td><td>0</td><td>0</td></tr></table></div></details><details style="margin-top:6px"><summary style="cursor:pointer;color:var(--adv-navy);font-size:12.5px">전북 익산시 (52140)</summary><div class="scroll"><table class="adv"><tr><th class="l">방법</th><th class="l">파라미터</th><th>클러스터 수</th><th>1필지 비율</th><th><3MW 면적비</th><th>≥20MW 면적비</th><th>껍질 채움</th><th>3MW↑</th><th>10MW↑</th><th>50MW↑</th><th>체인</th><th>최대 km²</th><th>noise 필지(B)</th><th>50MW 앵커 분할</th></tr><tr><td class="l">A</td><td class="l w">τ=21m</td><td>5,227</td><td>0.552</td><td>0.798</td><td>0.030</td><td>0.608</td><td>25</td><td>4</td><td>0</td><td>0.030</td><td>0.53</td><td>0</td><td>0</td></tr><tr><td class="l">B</td><td class="l w">k=2, m=1.0×MCS (시군별 유도 99–404)</td><td>9,560</td><td>0.997</td><td>0.354</td><td>0.411</td><td>0.049</td><td>31</td><td>24</td><td>2</td><td>0.080</td><td>1.73</td><td>13,004</td><td>0</td></tr><tr><td class="l">C</td><td class="l w">λ=1000m, γ=0.5</td><td>221</td><td>0.923</td><td>0.004</td><td>0.981</td><td>0.028</td><td>16</td><td>15</td><td>10</td><td>0.202</td><td>5.04</td><td>0</td><td>0</td></tr><tr><td class="l">C</td><td class="l w">λ=21m, γ=1.0</td><td>625</td><td>0.326</td><td>0.292</td><td>0.212</td><td>0.076</td><td>72</td><td>18</td><td>1</td><td>0.065</td><td>1.27</td><td>0</td><td>0</td></tr><tr><td class="l">D</td><td class="l w">g=200m, D2 목표 222,222㎡</td><td>1,088</td><td>0.477</td><td>0.229</td><td>0.027</td><td>0.123</td><td>81</td><td>46</td><td>0</td><td>0.027</td><td>0.53</td><td>0</td><td>0</td></tr><tr><td class="l">D</td><td class="l w">g=400m, D1 전량 병합</td><td>240</td><td>0.892</td><td>0.010</td><td>0.975</td><td>0.070</td><td>3</td><td>2</td><td>1</td><td>0.975</td><td>29.41</td><td>0</td><td>0</td></tr></table></div></details><details style="margin-top:6px"><summary style="cursor:pointer;color:var(--adv-navy);font-size:12.5px">전남 영광군 (46830)</summary><div class="scroll"><table class="adv"><tr><th class="l">방법</th><th class="l">파라미터</th><th>클러스터 수</th><th>1필지 비율</th><th><3MW 면적비</th><th>≥20MW 면적비</th><th>껍질 채움</th><th>3MW↑</th><th>10MW↑</th><th>50MW↑</th><th>체인</th><th>최대 km²</th><th>noise 필지(B)</th><th>50MW 앵커 분할</th></tr><tr><td class="l">A</td><td class="l w">τ=21m</td><td>3,404</td><td>0.552</td><td>0.529</td><td>0.266</td><td>0.564</td><td>30</td><td>11</td><td>0</td><td>0.060</td><td>1.05</td><td>0</td><td>0</td></tr><tr><td class="l">B</td><td class="l w">k=2, m=1.0×MCS (시군별 유도 99–404)</td><td>3,798</td><td>0.993</td><td>0.307</td><td>0.518</td><td>0.031</td><td>26</td><td>14</td><td>3</td><td>0.146</td><td>2.85</td><td>10,491</td><td>0</td></tr><tr><td class="l">C</td><td class="l w">λ=1000m, γ=0.5</td><td>54</td><td>0.611</td><td>0.001</td><td>0.956</td><td>0.026</td><td>17</td><td>15</td><td>8</td><td>0.334</td><td>10.50</td><td>0</td><td>0</td></tr><tr><td class="l">C</td><td class="l w">λ=21m, γ=1.0</td><td>398</td><td>0.085</td><td>0.259</td><td>0.467</td><td>0.076</td><td>45</td><td>15</td><td>3</td><td>0.151</td><td>2.86</td><td>0</td><td>0</td></tr><tr><td class="l">D</td><td class="l w">g=200m, D2 목표 222,222㎡</td><td>788</td><td>0.367</td><td>0.274</td><td>0.262</td><td>0.165</td><td>59</td><td>27</td><td>0</td><td>0.059</td><td>1.05</td><td>0</td><td>0</td></tr><tr><td class="l">D</td><td class="l w">g=400m, D1 전량 병합</td><td>108</td><td>0.509</td><td>0.011</td><td>0.979</td><td>0.101</td><td>8</td><td>2</td><td>1</td><td>0.961</td><td>50.38</td><td>0</td><td>0</td></tr></table></div></details><details style="margin-top:6px"><summary style="cursor:pointer;color:var(--adv-navy);font-size:12.5px">전북 김제시 (52210)</summary><div class="scroll"><table class="adv"><tr><th class="l">방법</th><th class="l">파라미터</th><th>클러스터 수</th><th>1필지 비율</th><th><3MW 면적비</th><th>≥20MW 면적비</th><th>껍질 채움</th><th>3MW↑</th><th>10MW↑</th><th>50MW↑</th><th>체인</th><th>최대 km²</th><th>noise 필지(B)</th><th>50MW 앵커 분할</th></tr><tr><td class="l">A</td><td class="l w">τ=21m</td><td>4,444</td><td>0.549</td><td>0.851</td><td>0.000</td><td>0.646</td><td>20</td><td>2</td><td>0</td><td>0.018</td><td>0.28</td><td>0</td><td>0</td></tr><tr><td class="l">B</td><td class="l w">k=2, m=1.0×MCS (시군별 유도 99–404)</td><td>5,732</td><td>0.995</td><td>0.279</td><td>0.540</td><td>0.044</td><td>28</td><td>20</td><td>3</td><td>0.104</td><td>2.08</td><td>12,029</td><td>0</td></tr><tr><td class="l">C</td><td class="l w">λ=1000m, γ=0.5</td><td>19</td><td>0.316</td><td>0.000</td><td>1.000</td><td>0.028</td><td>13</td><td>13</td><td>10</td><td>0.154</td><td>4.08</td><td>0</td><td>0</td></tr><tr><td class="l">C</td><td class="l w">λ=21m, γ=1.0</td><td>451</td><td>0.013</td><td>0.356</td><td>0.126</td><td>0.092</td><td>65</td><td>13</td><td>0</td><td>0.051</td><td>0.89</td><td>0</td><td>0</td></tr><tr><td class="l">D</td><td class="l w">g=200m, D2 목표 222,222㎡</td><td>830</td><td>0.289</td><td>0.309</td><td>0.000</td><td>0.168</td><td>74</td><td>28</td><td>0</td><td>0.016</td><td>0.29</td><td>0</td><td>0</td></tr><tr><td class="l">D</td><td class="l w">g=400m, D1 전량 병합</td><td>36</td><td>0.417</td><td>0.004</td><td>0.996</td><td>0.130</td><td>3</td><td>3</td><td>2</td><td>0.777</td><td>29.16</td><td>0</td><td>0</td></tr></table></div></details><details style="margin-top:6px"><summary style="cursor:pointer;color:var(--adv-navy);font-size:12.5px">경기 파주시 (41480)</summary><div class="scroll"><table class="adv"><tr><th class="l">방법</th><th class="l">파라미터</th><th>클러스터 수</th><th>1필지 비율</th><th><3MW 면적비</th><th>≥20MW 면적비</th><th>껍질 채움</th><th>3MW↑</th><th>10MW↑</th><th>50MW↑</th><th>체인</th><th>최대 km²</th><th>noise 필지(B)</th><th>50MW 앵커 분할</th></tr><tr><td class="l">A</td><td class="l w">τ=21m</td><td>2,258</td><td>0.512</td><td>0.895</td><td>0.000</td><td>0.553</td><td>6</td><td>0</td><td>0</td><td>0.034</td><td>0.19</td><td>0</td><td>0</td></tr><tr><td class="l">B</td><td class="l w">k=2, m=1.0×MCS (시군별 유도 99–404)</td><td>2,404</td><td>0.996</td><td>0.236</td><td>0.495</td><td>0.031</td><td>10</td><td>8</td><td>1</td><td>0.199</td><td>1.24</td><td>5,660</td><td>0</td></tr><tr><td class="l">C</td><td class="l w">λ=1000m, γ=0.5</td><td>24</td><td>0.375</td><td>0.002</td><td>0.678</td><td>0.023</td><td>14</td><td>12</td><td>1</td><td>0.172</td><td>1.15</td><td>0</td><td>0</td></tr><tr><td class="l">C</td><td class="l w">λ=21m, γ=1.0</td><td>253</td><td>0.036</td><td>0.536</td><td>0.000</td><td>0.071</td><td>20</td><td>3</td><td>0</td><td>0.048</td><td>0.28</td><td>0</td><td>0</td></tr><tr><td class="l">D</td><td class="l w">g=200m, D2 목표 222,222㎡</td><td>376</td><td>0.311</td><td>0.373</td><td>0.000</td><td>0.100</td><td>21</td><td>11</td><td>0</td><td>0.041</td><td>0.24</td><td>0</td><td>0</td></tr><tr><td class="l">D</td><td class="l w">g=400m, D1 전량 병합</td><td>46</td><td>0.326</td><td>0.068</td><td>0.836</td><td>0.049</td><td>5</td><td>3</td><td>2</td><td>0.582</td><td>3.96</td><td>0</td><td>0</td></tr></table></div></details><details style="margin-top:6px"><summary style="cursor:pointer;color:var(--adv-navy);font-size:12.5px">충북 음성군 (43770)</summary><div class="scroll"><table class="adv"><tr><th class="l">방법</th><th class="l">파라미터</th><th>클러스터 수</th><th>1필지 비율</th><th><3MW 면적비</th><th>≥20MW 면적비</th><th>껍질 채움</th><th>3MW↑</th><th>10MW↑</th><th>50MW↑</th><th>체인</th><th>최대 km²</th><th>noise 필지(B)</th><th>50MW 앵커 분할</th></tr><tr><td class="l">A</td><td class="l w">τ=21m</td><td>3,633</td><td>0.484</td><td>0.868</td><td>0.000</td><td>0.570</td><td>13</td><td>0</td><td>0</td><td>0.018</td><td>0.19</td><td>0</td><td>0</td></tr><tr><td class="l">B</td><td class="l w">k=2, m=1.0×MCS (시군별 유도 99–404)</td><td>5,820</td><td>0.997</td><td>0.310</td><td>0.510</td><td>0.035</td><td>20</td><td>15</td><td>1</td><td>0.119</td><td>1.65</td><td>24,158</td><td>0</td></tr><tr><td class="l">C</td><td class="l w">λ=1000m, γ=0.5</td><td>41</td><td>0.683</td><td>0.007</td><td>0.993</td><td>0.025</td><td>10</td><td>10</td><td>7</td><td>0.196</td><td>4.11</td><td>0</td><td>0</td></tr><tr><td class="l">C</td><td class="l w">λ=21m, γ=1.0</td><td>328</td><td>0.095</td><td>0.316</td><td>0.112</td><td>0.069</td><td>48</td><td>10</td><td>0</td><td>0.067</td><td>0.80</td><td>0</td><td>0</td></tr><tr><td class="l">D</td><td class="l w">g=200m, D2 목표 222,222㎡</td><td>714</td><td>0.354</td><td>0.326</td><td>0.000</td><td>0.152</td><td>43</td><td>24</td><td>0</td><td>0.026</td><td>0.30</td><td>0</td><td>0</td></tr><tr><td class="l">D</td><td class="l w">g=400m, D1 전량 병합</td><td>115</td><td>0.539</td><td>0.015</td><td>0.975</td><td>0.066</td><td>6</td><td>3</td><td>2</td><td>0.805</td><td>29.72</td><td>0</td><td>0</td></tr></table></div></details><details style="margin-top:6px"><summary style="cursor:pointer;color:var(--adv-navy);font-size:12.5px">경기 용인시처인구 (41461)</summary><div class="scroll"><table class="adv"><tr><th class="l">방법</th><th class="l">파라미터</th><th>클러스터 수</th><th>1필지 비율</th><th><3MW 면적비</th><th>≥20MW 면적비</th><th>껍질 채움</th><th>3MW↑</th><th>10MW↑</th><th>50MW↑</th><th>체인</th><th>최대 km²</th><th>noise 필지(B)</th><th>50MW 앵커 분할</th></tr><tr><td class="l">A</td><td class="l w">τ=21m</td><td>3,589</td><td>0.524</td><td>0.952</td><td>0.000</td><td>0.582</td><td>4</td><td>0</td><td>0</td><td>0.017</td><td>0.12</td><td>0</td><td>0</td></tr><tr><td class="l">B</td><td class="l w">k=2, m=1.0×MCS (시군별 유도 99–404)</td><td>2,766</td><td>0.994</td><td>0.115</td><td>0.636</td><td>0.020</td><td>16</td><td>11</td><td>4</td><td>0.164</td><td>1.89</td><td>6,159</td><td>0</td></tr><tr><td class="l">C</td><td class="l w">λ=1000m, γ=0.5</td><td>289</td><td>0.948</td><td>0.014</td><td>0.876</td><td>0.013</td><td>14</td><td>13</td><td>3</td><td>0.184</td><td>1.89</td><td>0</td><td>0</td></tr><tr><td class="l">C</td><td class="l w">λ=21m, γ=1.0</td><td>602</td><td>0.457</td><td>0.581</td><td>0.000</td><td>0.075</td><td>27</td><td>3</td><td>0</td><td>0.034</td><td>0.27</td><td>0</td><td>0</td></tr><tr><td class="l">D</td><td class="l w">g=200m, D2 목표 222,222㎡</td><td>833</td><td>0.562</td><td>0.333</td><td>0.000</td><td>0.138</td><td>34</td><td>11</td><td>0</td><td>0.030</td><td>0.24</td><td>0</td><td>0</td></tr><tr><td class="l">D</td><td class="l w">g=400m, D1 전량 병합</td><td>341</td><td>0.856</td><td>0.043</td><td>0.916</td><td>0.062</td><td>8</td><td>4</td><td>3</td><td>0.549</td><td>6.71</td><td>0</td><td>0</td></tr></table></div></details>
+      <p class="adv-note">관련 문항: M4 · M3.</p></div>
+
+    <div class="adv-box"><h2>6. 우선순위 비교 방법</h2>
+      <h3>6-1. 정의</h3>
+      <ul>
+        <li>비교 대상: 고른 시군 안에서, 고른 최소 규모 이상인 후보 공간 전부.</li>
+        <li>세 축: <b>A 면적</b>(㎡, 환산 MW 병기) · <b>B 계통 여유 참고값</b>(후보가 있는 읍면동의 분산전원 잔여 연계가능용량 하한, MW, 한전 2026-08-19 조회) · <b>C 산업단지 거리</b>(가장 가까운 산업단지 경계까지 직선거리, km).</li>
+        <li>기준 1개 → 그 축의 정렬 순위(동률 동순위). 기준 2개 이상 → <b>비지배 집합</b>(고른 축 모두에서 같거나 낫고 한 축 이상에서 더 나은 후보가 하나라도 있으면 탈락). 집합 안에서 순위를 매기지 않는다. 동률은 지배가 아니다. 가중치를 곱해 한 점수로 합치지 않는다. 계통 값을 조회하지 못한 읍면동은 데이터 보완 과제로 다룬다.</li>
+        <li>가중치를 쓰지 않는 근거: 정준 다기준 방법 10종(SAW·TOPSIS·VIKOR·PROMETHEE II·WPM·Borda·Copeland·Maximin·GRA·DEA-CCR)을 원저 수식대로 144시군에 적용한 결과 <b>10방법 전부 지배 위반 0</b> — 어떤 방법·가중치의 1위도 비지배 집합 안에서만 나온다. 반면 점수법의 상위 10 중 비지배 비율은 0.40–0.56에 그치고, 방법 간 순위 상관 τ는 0.26–0.999로 방법 선택만으로 순위가 크게 달라진다(PR-0036, 2026-09-06).</li>
+      </ul>
+      <h3>6-2. 이해관계자 의견</h3>
+      <p>지자체·현장 관계자에게 "공동 1등(비지배 집합)" 제시 방식을 보여 준 결과: 집합 안의 순서(1·2·3위)에는 큰 의미를 두지 않았고, <b>자신이 고른 축을 중심으로 보든 모든 축을 다 보든 가중치 없이 비지배로 추리는 것이 전문가 설문으로 가중치를 만들어 순위를 매기던 방식보다 더 객관적</b>이라고 받아들였다. 관련 문항: M5. 실제 화면은 <a href="regions.html" target="_blank" rel="noopener">우리 동네 TOP 10</a>.</p>
+      <h3>6-3. 모집단 크기와 비지배 비율</h3>
+      <p>비지배는 같은 모집단 안의 쌍별 비교이므로 <b>모집단이 작을수록 거의 전부가 남는다.</b> 후보가 1개뿐인 시군에서는 그 후보가 정의상 비지배다.</p>
+      <div class="fig"><img src="docs/method_advisory/fig/f08_frontier_share_by_population.png" alt="모집단 대 비지배 비율"><div class="cap">그림 8. 왼쪽: 시군 모집단(3MW 이상 후보 수) 대 비지배 비율(축 조합별). 오른쪽: 시군별 3축 비지배 후보 수 분포. 원천 data_v4/top10 · 시행 후 조건 · 시군 touch 기준 1,139행</div></div>
+      <div class="scroll"><table class="adv"><tr><th>모집단(3MW 이상)</th><th>시군 수</th><th>후보 합</th><th>3축 비지배 합</th><th>비율(합산)</th><th>비율(시군 중앙값)</th></tr>
+        <tr><td>1</td><td>26</td><td>26</td><td>26</td><td>1.00</td><td>1.00</td></tr>
+        <tr><td>2–4</td><td>58</td><td>159</td><td>117</td><td>0.74</td><td>0.75</td></tr>
+        <tr><td>5–9</td><td>37</td><td>236</td><td>127</td><td>0.54</td><td>0.50</td></tr>
+        <tr><td>10–19</td><td>23</td><td>292</td><td>121</td><td>0.41</td><td>0.40</td></tr>
+        <tr><td>20–49</td><td>8</td><td>259</td><td>63</td><td>0.24</td><td>0.27</td></tr>
+        <tr><td>50 이상</td><td>2</td><td>167</td><td>14</td><td>0.08</td><td>0.10</td></tr></table></div>
+      <p class="adv-note">표기 규약: 비지배 수는 항상 모집단 수와 함께 적고, 모집단 1개는 "단독(비교 대상 없음)"으로 배지를 쓰지 않는다. 관련 문항: M5.</p></div>
+
+    <div class="adv-box"><h2>7. 비교 축 자료 분포</h2>
+      <p>3MW 이상 후보 공간(시군 touch 기준 1,139행, 시행 후 조건)과 그 입력 자료의 분포다. 축 추가·대체 검토의 참고 자료다.</p>
+      <h3>7-1. 세 축 분포</h3>
+      <div class="fig"><img src="docs/method_advisory/fig/f04_axes_hist.png" alt="세 축 히스토그램"><div class="cap">그림 4. A 면적(로그) · B 계통 하한(MW, 읍면동 단위) · C 산단 거리(km). 정본 3축 표 전량(시군 touch 388,496행 · 면적 하한 없음). 원천 block_context.parquet</div></div>
+      <div class="scroll"><table class="adv"><tr><th class="l">축</th><th>p5</th><th>p25</th><th>p50</th><th>p75</th><th>p95</th><th class="l">비고</th></tr>
+        <tr><td class="l">A 면적 ㎡ (전량)</td><td>12</td><td>111</td><td>463</td><td>1,918</td><td>9,086</td><td class="w">3MW(66,667㎡) 이상은 전체의 0.3 %(1,119곳)</td></tr>
+        <tr><td class="l">B 계통 하한 MW</td><td>0.0</td><td>1.4</td><td>6.4</td><td>21.4</td><td>102.4</td><td class="w">읍면동 값이라 같은 읍면동 후보는 동일값 · 0 = 포화</td></tr>
+        <tr><td class="l">C 산단 거리 km</td><td>0.40</td><td>1.83</td><td>3.72</td><td>6.85</td><td>14.99</td><td class="w">산업단지 1,363곳(일반 763 · 농공 483 · 국가 65 · 도시첨단 52) 경계 기준</td></tr></table></div>
+      <h3>7-2. 축 간 상관 (3MW 이상)</h3>
+      <div class="fig"><img src="docs/method_advisory/fig/f05_axes_scatter_3mw.png" alt="축 산점도"><div class="cap">그림 5. 쌍별 산점도와 Spearman 순위상관(n = 1,139).</div></div>
+      <div class="scroll"><table class="adv"><tr><th class="l">쌍</th><th>Spearman ρ</th><th class="l">읽기</th></tr>
+        <tr><td class="l">면적 – 계통 하한</td><td>−0.05</td><td class="w">거의 무관</td></tr>
+        <tr><td class="l">면적 – 산단 거리</td><td>+0.20</td><td class="w">큰 후보일수록 산단에서 약간 멀다(간척지 효과)</td></tr>
+        <tr><td class="l">계통 하한 – 산단 거리</td><td>−0.35</td><td class="w">산단 가까운 곳의 계통 여유가 큰 경향 — 두 축이 부분적으로 겹침</td></tr></table></div>
+      <p class="adv-note">관련 문항: M5(나).</p>
+      <h3>7-3. 반경 내 산업단지 수</h3>
+      <div class="fig"><img src="docs/method_advisory/fig/f06_ind_count_radius.png" alt="반경 안 산단 수"><div class="cap">그림 6. 후보 공간 대표점에서 반경 5 / 10 / 20 km 안 산업단지 수(경계 기준). 좌표계 검증: 정본 최근접 거리와 재계산 차이 중앙값 0.003 km</div></div>
+      <div class="scroll"><table class="adv"><tr><th>반경</th><th>p25</th><th>p50</th><th>p75</th><th>p95</th><th>0곳인 후보</th></tr>
+        <tr><td>5 km</td><td>0</td><td>1</td><td>3</td><td>7</td><td>404 / 1,139</td></tr>
+        <tr><td>10 km</td><td>2</td><td>5</td><td>11</td><td>21</td><td>132 / 1,139</td></tr>
+        <tr><td>20 km</td><td>9</td><td>16</td><td>31</td><td>64</td><td>22 / 1,139</td></tr></table></div>
+      <p class="adv-note">"가장 가까운 산단까지 거리" 대신 "반경 안 산단 수(또는 유형 가중 합)"를 쓰는 안은 화면의 보조 탐색 도구로만 있었고 정본 축으로 승격하지 않았다(반경이 또 하나의 자유 파라미터이기 때문이다). 현재 비교 축이 아니다. 관련 문항: M5(나).</p>
+      <h3>7-4. 계통 참고값 분포</h3>
+      <div class="fig"><img src="docs/method_advisory/fig/f07_grid_emd.png" alt="읍면동 계통"><div class="cap">그림 7. 읍면동 계통 여유 참고값 분포(균등 배분 MW)와 조회 상태. 원천 DuckDB grid_emd_v3</div></div>
+      <ul>
+        <li>읍면동 5,066 중 조회 성공 4,477 · <b>알 수 없음 589</b>. 성공분 분위: p25 1.8 · p50 5.6 · p75 15.3 · p95 53.3 MW. 읍면동당 배전선로 중앙값 4.</li>
+        <li>조회 불가 읍면동(알 수 없음)은 데이터 보완 과제로 다루며, 검토 대상지는 알 수 없음 읍면동이 없는 시군으로 선정했다.</li>
+        <li>계통 값은 <b>읍면동 단위 참고값</b>이지 후보 공간의 접속 가능 용량이 아니다. 판정에는 쓰지 않는다.</li>
+      </ul></div>
+
+    <div class="adv-box"><h2>8. 용어</h2>
+      <div class="scroll"><table class="adv"><tr><th class="l">표기</th><th class="l">뜻</th><th class="l">쓰지 않는 말</th></tr>
+        <tr><td class="l">후보 공간</td><td class="w">판정 통과 필지를 21m 이내 연접으로 묶은 최소 공간 분석 단위</td><td class="w">클러스터 · 블록 · 구획(화면)</td></tr>
+        <tr><td class="l">최종 클러스터</td><td class="w">사업 단위로서의 묶음 — <b>정의 미정</b></td><td class="w">—</td></tr>
+        <tr><td class="l">주요 비교 후보</td><td class="w">고른 축의 비지배 집합(공동 1등)</td><td class="w">추천 · 1위 · 점수</td></tr>
+        <tr><td class="l">규모 눈금</td><td class="w">3 / 10 / 20 / 50 MW = 면적 × 0.045 kW/㎡ 환산 구분(표시용)</td><td class="w">설치 용량 · 법정 기준</td></tr>
+        <tr><td class="l">특구</td><td class="w">법률 용어(재생에너지지구 등)에 한정</td><td class="w">후보 공간의 별칭으로 사용 금지</td></tr>
+        <tr><td class="l">단일연결 절단</td><td class="w">거리 h에서 자른 단일연결 = 거리 h 그래프의 연결성분(학술적으로 정확)</td><td class="w">regionalization(동질성 최적화를 하지 않으므로 부정확)</td></tr></table></div></div>
+  </section>
+
+  <!-- ③ 21m 단위 보기 -->
+  <section class="adv-pane" id="p-map">
+    <div class="adv-box"><h2>검토 대상지 10곳 — 21m 연접 단위 지도</h2>
+      <ul>
+        <li>조건: 특별법 시행 후(농업진흥구역 설치 가능 · 농업보호구역 제외) · 법인·국공유. 폴리곤은 21m 단위 <b>전량</b>(면적 하한 없음 · 전국 388,121곳), 2m 단순화, 시군 경계로 자르지 않음(경계 걸침은 점선). 1필지 단위가 대부분이라 시군 전체 축척에서는 점으로 보이므로 확대하여 확인한다. 지적도에서 구성 필지를 찾지 못한 단위(기하 없음)는 지도에 표시되지 않고 수로만 제시한다.</li>
+        <li>배경 레이어는 공개 사이트 「후보지 찾기」와 같다 — 산업단지 경계(유형별 색), 읍면동 계통 여유 참고지표(잔여 연계가능용량이 클수록 짙은 푸른색), 기존 태양광 시설(허가 자료의 주소 필지를 칠함 · 짙은 회색, 영농형은 초록). 모두 비교용 배경이며 후보 공간 판정에 쓰지 않았다. 배경 위성영상은 분석에 쓰지 않았고 기준 시점이 다를 수 있다.</li>
+        <li>도형 선택 시 면적·환산 MW·구성 필지 수를 표시한다. 색은 규모 눈금(표시용)이다.</li>
+      </ul></div>
+    <div class="adv-split map3">
+      <div><div id="map" class="adv-map map3h"></div></div>
+      <aside class="side3">
+        <div class="grp"><div class="gt">검토 대상지 10곳 <span class="adv-note" style="font-weight:400">순위 아님 · <a href="https://github.com/sojin-droid/Agrivoltaic-Feasibility-V5/blob/main/docs/method_advisory/STUDY_AREAS.md" target="_blank" rel="noopener">선정 기준</a></span></div>
+          <div class="adv-ctl" id="saBtns" style="margin:0"></div></div>
+        <div class="grp"><div class="adv-note" id="mapNote"></div></div>
+        <div class="grp"><div class="gt">후보 공간 (21m 단위)</div>
+          <div id="legend"></div>
+          <label class="tglrow"><input type="checkbox" id="qrTgl"> 기하 품질 검토 도형 표시(회색 점선 · 도형 면적이 장부 면적과 1 % 넘게 다름)</label></div>
+        <div class="grp"><div class="gt">산업단지 <span id="indCnt" style="font-weight:400;color:var(--adv-muted)"></span><button class="allbtn on" id="indAll">전체</button></div>
+          <div id="indTypes"></div></div>
+        <div class="grp"><div class="gt">계통 여유 참고지표 <label class="tglrow" style="padding:0;font-weight:400"><input type="checkbox" id="gridTgl" checked> 표시</label></div>
+          <div class="adv-note">표시 하한을 올리면 그 값 이상인 읍면동만 채색한다.</div>
+          <input type="range" id="gridStep" min="0" max="5" step="1" value="0" style="width:100%" aria-label="계통 여유 표시 하한(구간)">
+          <div class="gbar" id="gridBar"></div><div class="gbar-l" id="gridBarL"></div>
+          <div class="adv-note" id="gridLbl" style="margin-top:4px">—</div>
+          <div id="gridLegend"></div>
+          <div class="adv-note">읍면동 단위 참고값(한전 공표 · 2026-08-19 조회) · 접속 가능 용량이 아님 · 알 수 없음(자홍 점선) = 원천 무응답·조회 불가</div></div>
+        <div class="grp"><div class="gt">기존 태양광 시설</div>
+          <label class="tglrow"><input type="checkbox" id="exTgl" checked> 지도에 표시</label>
+          <div class="adv-note" id="exCnt">불러오는 중…</div>
+          <div class="adv-note">짙은 회색 = 허가 자료의 주소 <b>필지</b>(초록 = 영농형). 패널 위치가 아니라 허가 주소 필지이며, 한 필지에 허가 기록이 여럿 붙을 수 있다. 주소 필지를 찾지 못한 기록은 표시되지 않는다(전수 아님). 이 필지가 노란 후보 공간이 아닌 이유는 대개 지목이 이미 전·답·과수원이 아니거나(전용 뒤 잡종지 등) 개인 소유라 분석 대상 밖이기 때문이다 — 아래 수치 참조.</div></div>
+        <div class="grp"><div class="gt">후보 공간 목록 <span class="adv-note" style="font-weight:400">면적순 · 누르면 이동</span></div>
+          <div class="adv-list" id="uList" style="max-height:38vh;overflow:auto;border:1px solid var(--adv-line);border-radius:6px"></div></div>
+      </aside>
+    </div>
+  </section>
+
+  <!-- ④ 질문 -->
+  <section class="adv-pane" id="p-q">
+    <div class="adv-box"><b>자문 질문 M1–M9</b> — 각 문항은 선택지를 고른 뒤 필요 시 메모를 기재한다. 판단이 어려운 문항은 "판단 어려움"을 선택하거나 비워 둘 수 있다. 응답은 이 브라우저에만 저장되며 「의견 내보내기」에서 JSON/CSV로 내려받는다. 서면 회신 시 같은 번호를 사용한다.<div id="mQs"></div></div>
+  </section>
+
+  <!-- 의견 내보내기 -->
+  <section class="adv-pane" id="p-fb">
+    <div class="adv-box"><b>자문자 코드</b> <input type="text" id="sCode" placeholder="담당자가 안내한 자문자 코드 (성명·소속 기재 불필요)" style="padding:6px 8px;border:1px solid var(--adv-line);border-radius:6px;font:13px inherit;width:min(360px,100%)"> <button class="btnx" id="sNew">새 자문 시작</button><div class="adv-note" id="sInfo"></div></div>
+    <div class="adv-box"><b>자문자 배경 (선택)</b><div id="q0"></div></div>
+    <div class="adv-box"><b>내보내기</b> — 응답은 서버로 전송되지 않는다. 파일로 내려받아 담당자에게 송부한다. 모든 문항이 행으로 포함되며 미응답 문항은 unanswered로 표시된다.
+      <div class="adv-ctl" style="margin-top:8px"><button class="btnx on" id="fbJson">JSON 내려받기</button><button class="btnx" id="fbCsv">CSV 내려받기</button><button class="btnx" id="fbAll">모든 세션 JSON</button><button class="btnx" id="fbClear">이 세션 응답 지우기</button><span class="adv-note" id="fbCount"></span></div>
+      <div class="scroll" style="margin-top:8px"><table class="adv" id="fbTbl"></table></div></div>
+  </section>
+</div>
+
+<script>
+(async () => {
+  const $ = id => document.getElementById(id);
+  const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;'}[c]));
+  const km2 = (a, d = 2) => (a / 1e6).toLocaleString('ko-KR', {minimumFractionDigits: d, maximumFractionDigits: d});
+  const n = v => v == null ? '—' : Number(v).toLocaleString('ko-KR');
+
+  // ── 탭 ──
+  let map = null, drawnMap = false;
+  $('tabs').onclick = e => { const b = e.target.closest('button'); if (!b) return;
+    document.querySelectorAll('#tabs button').forEach(x => x.classList.toggle('on', x === b));
+    document.querySelectorAll('.adv-pane').forEach(p => p.classList.toggle('on', p.id === 'p-' + b.dataset.t));
+    if (b.dataset.t === 'map') setTimeout(async () => { if (!drawnMap) { drawnMap = true; await initMap(); } if (map) map.invalidateSize(); }, 50); };
+
+  // ── 의견 저장(브라우저 전용) — 데이터 자문 화면(adv_feedback_v2)과 섞이지 않게 별도 키 ──
+  const FBK = 'cluster_feedback_v1';
+  const sNewSession = code => ({advisor_code: code || '', started_at: new Date().toISOString(), answers: {}});
+  const sRead = () => { try { const o = JSON.parse(localStorage.getItem(FBK) || 'null'); return o && o.sessions ? o : null; } catch (e) { return null; } };
+  const sWrite = () => { try { localStorage.setItem(FBK, JSON.stringify(SO)); } catch (e) {} };
+  let SO = sRead() || {current: null, sessions: {}};
+  if (!SO.current || !SO.sessions[SO.current]) { SO.current = 's' + Date.now(); SO.sessions[SO.current] = sNewSession(''); }
+  sWrite();
+  const sCur = () => SO.sessions[SO.current];
+  const fbLoad = () => { const a = sCur().answers, o = {}; for (const k in a) o[k] = {verdict: a[k].answer, memo: a[k].note, at: a[k].at}; return o; };
+  const fbSave = (key, patch) => { const a = sCur().answers, r = a[key] || {answer: '', note: ''};
+    if ('verdict' in patch) r.answer = patch.verdict; if ('memo' in patch) r.note = patch.memo; r.at = new Date().toISOString(); a[key] = r; sWrite(); renderFb(); };
+  function fbWidget(key, label, opts = [], o = {}) {
+    const cur = fbLoad()[key] || {}, sel = String(cur.verdict || '').split(' · ');
+    return `<div class="fb" data-fb="${esc(key)}"${o.multi ? ' data-multi="1"' : ''}><div class="adv-note">${esc(label)}</div>` +
+      (o.hint ? `<div class="adv-note" style="color:var(--adv-muted)">${esc(o.hint)}</div>` : '') +
+      (opts.length ? `<div class="opts">${opts.map(v => `<button type="button" class="btnx ${sel.includes(v) ? 'on' : ''}" data-v="${esc(v)}">${esc(v)}</button>`).join('')}</div>` : '') +
+      (o.memo === false ? '' : `<textarea placeholder="${esc(o.ph || '메모(선택)')}">${esc(cur.memo || '')}</textarea>`) + '</div>';
+  }
+  document.addEventListener('click', e => { const b = e.target.closest('.fb .opts button'); if (!b) return; const w = b.closest('.fb');
+    if (w.dataset.multi) { b.classList.toggle('on'); fbSave(w.dataset.fb, {verdict: [...w.querySelectorAll('.opts button.on')].map(x => x.dataset.v).join(' · ')}); return; }
+    fbSave(w.dataset.fb, {verdict: b.dataset.v}); w.querySelectorAll('.opts button').forEach(x => x.classList.toggle('on', x === b)); });
+  document.addEventListener('change', e => { const t = e.target.closest('.fb textarea'); if (t) fbSave(t.closest('.fb').dataset.fb, {memo: t.value}); });
+
+  const qHead = (k, t) => `<div style="margin-top:10px"><b>${k}.</b> ${esc(t)}</div>`;
+  const qHint = t => `<div class="adv-note" style="color:var(--adv-muted)">${esc(t)}</div>`;
+  const qBox = html => `<div class="adv-q">${html}</div>`;
+  const JUDGE = ['타당함', '조건부 타당 (메모)', '재검토 필요 (메모)', '판단 어려움'];
+  $('q0').innerHTML = qBox(qHead('Z1', '전문 분야를 골라 주세요. (여러 개 가능)') +
+      fbWidget('Z1', '', ['공간분석·GIS', '환경영향평가', '국토·도시계획', '농업·농지', '태양광·재생에너지', '전력·계통', '통계·방법론', '기타'], {multi: true, ph: '기타 분야'})) +
+    qBox(qHead('Z2', '공간 군집·구역화(regionalization) 방법을 실제 연구에 적용해 본 경험은 어느 정도입니까?') +
+      fbWidget('Z2', '', ['많음', '일부', '거의 없음', '판단 어려움'], {memo: false}));
+  const TBL = rows => `<div class="scroll" style="margin:6px 0"><table class="adv">${rows.map((r, i) => '<tr>' + r.map(c => i ? `<td${/^[\d\s.,%−+-]*$/.test(String(c)) ? '' : ' class="l w"'}>${c}</td>` : `<th class="l">${c}</th>`).join('') + '</tr>').join('')}</table></div>`;
+  const REF = html => `<div class="adv-box" style="background:#fff;margin:6px 0"><b>참고 자료</b>${html}</div>`;
+  const OX = ['O 적합', 'X 부적합 (대안 메모)', '판단 어려움'];
+  const TERMS = [
+    ['후보 공간', '판정을 통과한 필지를 경계 간 거리 21m 이내로 이어 묶은 최소 공간 분석 단위. 사업 단위가 아니다'],
+    ['21m 연접', '필지 경계 간 거리가 21m 이내이면 연결 — 단일연결 절단(= 거리 21m 그래프의 연결성분)'],
+    ['최종 클러스터', '후보 공간 위에 둘 수 있는 사업 단위 층 — 현재 정의 없음(이번 자문 대상)'],
+    ['판정 통과 필지 (적격 필지)', '지목·구조·경사·용도지역·농업진흥지역 조건을 통과한 법인·국공유 농지 필지. 화면에서는 "설치 가능 농지"'],
+    ['설치 가능 면적', '판정 통과 필지의 장부 면적 합(km²)'],
+    ['규모 눈금 (3 / 10 / 20 / 50MW)', '면적을 0.045 kW/㎡로 환산한 표시용 크기 구분. 법정 기준·설치 용량이 아니다'],
+    ['면적당 환산 계수 · 참고 MW', '0.045 kW/㎡ — 면적을 참고 MW로 환산하는 값. 실제 설치 용량·발전량이 아니다'],
+    ['주요 비교 후보', '고른 축 모두에서 다른 후보에 뒤지지 않는 후보(비지배 집합 · 공동 1등). 순위가 아니다'],
+    ['계통 여유 참고값', '후보가 있는 읍면동의 분산전원 잔여 연계가능용량(한전 공표 · 읍면동 단위). 접속 보장이 아니다'],
+    ['산업단지 거리', '후보 공간 대표점에서 가장 가까운 산업단지 경계까지 직선거리(km)'],
+    ['특별법 시행 전 / 시행 후', '농업진흥지역에 설치 불가 / 농업진흥구역에 설치 가능(농업보호구역 제외)'],
+    ['농업진흥지역이 아닌 농지', '시행 전 조건에서 설치 가능한 농지 범위(법문 표현)'],
+    ['1필지 단위', '구성 필지가 1개뿐인 후보 공간'],
+    ['기하 없음 · 품질 검토', '지적도에서 구성 필지를 못 찾아 폴리곤이 없는 단위 / 도형 면적과 장부 면적이 1 % 넘게 다른 단위(지도에서 점선)'],
+    ['간척 비중', '후보 공간 구성 필지 중 농어촌공사 간척 원장에 등재된 필지 비율'],
+    ['경작 판독 비율', '팜맵에서 경작지로 판독된 면적 비율(참고 · 휴경 판단이 아니다)'],
+    ['시군 관여 (touch)', '필지가 하나라도 그 시군에 있으면 그 시군의 후보로 센다 — 경계 걸침 단위는 양쪽에 나타나므로 시군 수를 더하면 안 된다'],
+    ['k-거리 무릎', '각 필지에서 k번째로 가까운 적격 필지까지 거리를 내림차순으로 그린 곡선이 꺾이는 지점(Kneedle) — 위치가 k에 따라 이동하며 21m의 보조 근거'],
+    ['특구', '법률 용어(재생에너지지구 등)에만 쓰고 후보 공간의 별칭으로 쓰지 않는다'],
+  ];
+  const METRICS = [['축', '지표', '무엇을 재나', '방향'],
+    ['1 큰 공간', '20MW·50MW 이상 면적 비율', '큰 클러스터가 전체 면적의 얼마를 차지하나', '↑'],
+    ['1 큰 공간', '상위 5·25 면적 합', '가장 큰 클러스터들이 얼마나 큰가', '↑'],
+    ['1 큰 공간', '껍질 채움 중앙값', '클러스터가 볼록껍질을 얼마나 채우나(응집)', '↑'],
+    ['2 파편화', '1필지 클러스터 비율', '필지 하나짜리가 얼마나 많나', '↓'],
+    ['2 파편화', '3MW 미만 면적 비율', '작은 조각에 면적이 얼마나 흩어져 있나', '↓'],
+    ['2 파편화', '100 km²당 클러스터 수', '같은 면적에 조각이 몇 개인가', '↓'],
+    ['2 파편화', '면적 Gini', '면적이 몇 개에 몰려 있나', '↓'],
+    ['3 규모', '3/10/20/50MW 이상 개수', '눈금별 개수(참고 — 목표 눈금을 넣은 방법은 정의상 커지므로 판정에 안 씀)', '참고'],
+    ['3 규모', '체인 지수(최대/합)', '한 덩어리로 연쇄되는 정도', '↓'],
+    ['4 행정', '시군 걸침 비율 · 단위당 읍면동 수', '행정 경계를 얼마나 넘나', '↓'],
+    ['4 행정', '기하·거리 계산 가능 비율', '지도에 그릴 수 있고 산단 거리를 잴 수 있나', '↑'],
+    ['5 안정성', '시군 간 변동계수 · 파라미터 민감도 · 결정성', '지역마다 규칙이 다르게 작동하나 · 값을 조금 바꾸면 결과가 뒤집히나 · 같은 입력에 같은 결과인가', '↓']];
+  $('mQs').innerHTML =
+    qBox(qHead('M1', '최소 공간 분석 단위 — 판정을 통과한 필지를 경계 간 거리 21m 이내로 이어 묶은 단위(단일연결 절단 = 연결성분)를 최소 공간 분석 단위(후보 공간)로 쓰는 것이 타당합니까? 도로·구거를 건너 묶는 설계가 사업 부지 개념과 맞습니까? 면적 하한을 두지 않은 것은 적절합니까?') +
+      fbWidget('M1', '', JUDGE, {ph: '이유 / 대안 단위 / 하한을 둔다면 그 근거'})) +
+    qBox(qHead('M2', '연접 거리 임계 — τ = 21m는 간격을 만드는 지물의 폭(구거·도로 중앙값 3–4m, 25m 초과 1 % 미만 · 하천 중앙값 6m, 25m 초과 4.5 %)에 근거해 "구거·농로·소하천은 건너 묶고 하천 본류·간선도로·철도는 끊는" 수준으로 20m 안팎에서 선언한 값이며, k-거리 곡선의 무릎(k = 4에서 20.0–21.6m)은 보조 근거다. 이 범위 설정과 선언 방식이 적절합니까? 지물 폭 분포에서 임계를 직접 정하는 방식 등 더 나은 유도 방법이 있습니까? 15·21·25m 민감도 제시는 충분합니까?') +
+      qHint('참고: ①탭 §3-2 지물 폭 표, §3-3 k-거리 곡선, §3-4 민감도.') +
+      fbWidget('M2', '', JUDGE, {ph: '적절한 임계 범위 / 유도 방법 / 근거'})) +
+    qBox(qHead('M3', '최종 클러스터(사업 단위) 층 — 21m 단위 위에 더 큰 묶음(최종 클러스터) 층이 필요합니까? 필요하다면 어떤 원리가 맞고, 임의 기준값(예: 1,000m · 목표 면적) 없이 정당화하는 방법은 무엇입니까?') +
+      qHint('참고: ②탭 §5 묶음 방법 비교.') +
+      fbWidget('M3', '', ['필요 없음 — 21m 단위와 규모 눈금으로 충분', '필요함 — 거리 임계 기반', '필요함 — 밀도 기반', '필요함 — 그래프 커뮤니티 기반', '필요함 — 목표 규모 집적', '기타 (메모)', '판단 어려움'], {ph: '원리 / 기준값을 정당화하는 방법'})) +
+    qBox(qHead('M4', '"좋은 클러스터"를 재는 지표 — 저희는 21m 연접을 다른 묶음 방법(밀도 기반 HDBSCAN* · 그래프 커뮤니티 Leiden · 거리+면적 집적)으로 바꿀 수 있는지 비교할 때, 아래 지표로 결과의 좋고 나쁨을 쟀습니다(가중치로 합치지 않고 지표별 우열만 봄). 이 지표 묶음이 "좋은 클러스터"를 판단하기에 충분합니까? 빠진 지표나 불필요한 지표가 있습니까?') +
+      REF(TBL(METRICS) + '<div class="adv-note">정의·계산식 전문: <a href="https://github.com/sojin-droid/Agrivoltaic-Feasibility-V5/blob/main/docs/method_advisory/METRICS_DEFINITIONS.md" target="_blank" rel="noopener">METRICS_DEFINITIONS.md</a></div>') +
+      fbWidget('M4', '지표 묶음 전체', ['충분함', '보완 필요 (아래에서 고르거나 메모)', '판단 어려움'], {memo: false}) +
+      fbWidget('M4.missing', '빠진 지표가 있다면 (여러 개 가능)', ['둘레 기반 응집도(compactness)', '도로·구거 관통 여부', '소유 혼합(법인/국공유 비율)', '환경 제약 구역과 겹침', '농지 연속성·경작 현황', '진입 도로 접근성', '없음', '기타'], {multi: true, ph: '기타 / 불필요한 지표 / 이유'})) +
+    qBox(qHead('M5', '후보 사이의 우선순위 비교 — 현재 화면은 같은 시군 안의 후보를 세 축(면적 · 계통 여유 참고값 · 산업단지 거리)으로 비교해, 어느 축에서도 다른 후보에 뒤지지 않는 후보들을 "주요 비교 후보(공동 1등)"로 보여 줍니다. 가중치로 점수를 매겨 한 줄로 세우지 않습니다. 아래 참고 자료를 보시고 세 문항에 답해 주십시오.') +
+      REF('<div style="margin-top:6px"><b>① 이해관계자 반응</b> — 지자체·현장 관계자는 공동 1등 안의 순서(1·2·3위)에 큰 의미를 두지 않았고, 가중치 없이 추리는 방식이 전문가 설문으로 가중치를 만들어 순위를 매기던 방식보다 객관적이라고 받아들였습니다.</div>' +
+        '<div style="margin-top:8px"><b>② 세 축의 관계</b> (3MW 이상 후보 1,139곳 · Spearman 순위상관)</div>' + TBL([['축 쌍', 'ρ', '읽기'], ['면적 – 계통 여유', '−0.05', '거의 무관'], ['면적 – 산단 거리', '+0.20', '큰 후보일수록 산단에서 약간 멀다(간척지)'], ['계통 여유 – 산단 거리', '−0.35', '산단 가까운 곳이 계통 여유도 큰 경향 — 두 축이 일부 겹침']]) +
+        '<div style="margin-top:8px"><b>③ "가장 가까운 산단 거리" 대신 쓸 수 있는 값의 예 — 반경 안 산업단지 수</b> (3MW 이상 후보 1,139곳)</div>' + TBL([['반경', 'p25', 'p50', 'p75', 'p95', '0곳인 후보'], ['5 km', '0', '1', '3', '7', '404'], ['10 km', '2', '5', '11', '21', '132'], ['20 km', '9', '16', '31', '64', '22']]) +
+        '<div style="margin-top:8px"><b>④ 모집단이 작으면 공동 1등이 거의 전부가 된다</b> (3MW 이상 · 시군 모집단 크기별 3축 비지배 비율)</div>' + TBL([['모집단', '시군 수', '비지배 비율'], ['1', '26', '1.00'], ['2–4', '58', '0.74'], ['5–9', '37', '0.54'], ['10–19', '23', '0.41'], ['20–49', '8', '0.24'], ['50 이상', '2', '0.08']]) +
+        '<div class="adv-note" style="margin-top:6px">②탭 §6·§7에 그림과 함께 수록.</div>') +
+      fbWidget('M5', '(가) 공동 1등(비지배 집합) 제시 방식이 후보 비교 방법으로 적절합니까?', ['적절함', '보완 필요 (메모)', '부적절 — 다른 방식 (메모)', '판단 어려움'], {ph: '보완·대체 방법'}) +
+      fbWidget('M5.axes', '(나) 추가·대체 축 의견 (여러 개 가능)', ['반경 안 산업단지 수', '시군 전력판매량 대비', '도로 접근성', '환경 제약 거리', '경작 현황', '기존 시설 밀도', '추가 없음', '기타'], {multi: true, ph: '기타 / 축의 정의와 자료'}) +
+      fbWidget('M5.ties', '(다) 동률과 비교 범위 — 두 후보의 세 축 값이 모두 같으면(동률) 어느 쪽도 상대를 이기지 못하므로 저희는 둘 다 공동 1등으로 남깁니다. 계통 여유는 읍면동 단위 값이라 같은 읍면동 후보끼리 동률이 자주 생깁니다. 또 비교는 같은 시군 안에서만 합니다(후보를 검토하는 주체가 시군이므로). 이 두 처리가 타당합니까? 다르게 한다면(예: 동률이면 면적 큰 쪽만 남김 · 시도 단위로 비교) 어떻게 하시겠습니까?', ['타당함', '동률 처리 수정 (메모)', '비교 범위 수정 (메모)', '둘 다 수정 (메모)', '판단 어려움'], {ph: '수정안'})) +
+    qBox(qHead('M6', '민감도 분석 — 저희가 정한 값 가운데 결과를 바꿀 수 있는 것은 ① 연접 거리 21m ② k-거리의 k = 4 ③ 규모 눈금(3/10/20/50MW) ④ 소유 필터(법인·국공유만) 입니다. 지금은 ①을 15/21/25m로 바꿔 본 표만 있습니다(면적은 그대로, 단위 수와 50MW 이상 개수만 달라짐 — ①탭 §3-3). 보고서·논문에서 어느 값을 어느 범위로 움직여 보여 주면 독자가 결과를 신뢰할 수 있을지 골라 주십시오.') +
+      fbWidget('M6.vars', '(가) 움직여 볼 값 (여러 개 가능)', ['연접 거리 21m ±5m', '연접 거리 21m ±10m 이상', 'k 값(2 · 4 · 8)', '규모 눈금 경계(3/10/20/50MW)', '소유 필터 범위', '산단 거리·계통 축 정의', '지금(15/21/25m)으로 충분', '기타'], {multi: true, ph: '기타 / 범위'}) +
+      fbWidget('M6.show', '(나) 보여 주는 방식', ['표(값 비교)', '그림(곡선·분포)', '지도(사례 시군 전후 비교)', '표 + 지도', '판단 어려움'], {ph: '예시 · 비슷한 선행 연구'})) +
+    qBox(qHead('M7', '용어 — 아래는 이 자문 자료와 공개 사이트에서 쓰는 용어와 그 뜻입니다. 각 용어가 적합한지 O/X로 표시하고, 부적합하면 대안 표현을 적어 주십시오.') +
+      TERMS.map(([t, d], i) => fbWidget(`M7.${i + 1}`, `${i + 1}. ${t} — ${d}`, OX, {ph: '대안 표현 / 이유'})).join('')) +
+    qBox(qHead('M8', '환경 제약을 다루는 단계 — 생태·경관·재해 등 다른 법령으로 설치가 막히는 지역은 지금 필지 판정 단계에서 "제외 조건"으로만 들어가 있습니다(하천·군사기지 등 설치 금지 지역 17종 통합 표시 · 경사 15 초과 제외). 즉 환경 제약은 후보가 되기 전에 걸러지고, 그 뒤 후보 공간을 묶거나 우선순위를 매길 때는 다시 쓰지 않습니다. 이것으로 충분합니까, 아니면 ② 공간 단위를 정의할 때(예: 제약 구역을 건너서는 묶지 않음)나 ③ 우선순위 축(예: 보호구역까지 거리)에도 반영해야 합니까?') +
+      fbWidget('M8', '', ['현행(판정 단계 제외)으로 충분', '공간 단위 정의 단계에도 반영', '우선순위 축에도 반영', '둘 다 반영', '판단 어려움'], {ph: '반영할 레이어 · 적용 방식'})) +
+    qBox(qHead('M9', '종합 의견 — 현재 방법에서 가장 먼저 바꾸거나 보강해야 할 것 하나와, 그대로 두어도 되는 것을 적어 주십시오.') +
+      fbWidget('M9', '', [], {ph: '자유롭게 적어 주세요'}));
+
+  // ── 내보내기 ──
+  const dl = (name, text, type) => { const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob(['﻿' + text], {type})); a.download = name; a.click(); setTimeout(() => URL.revokeObjectURL(a.href), 1000); };
+  const csvQ = v => { const s = String(v ?? ''); return /[",\n]/.test(s) ? '"' + s.replace(/"/g, '""') + '"' : s; };
+  const qText = key => { const w = document.querySelector(`.fb[data-fb="${CSS.escape(key)}"]`); if (!w) return {question: '', item: ''};
+    const box = w.closest('.adv-q'), head = box ? box.firstElementChild : null, lab = w.querySelector(':scope > .adv-note');
+    return {question: head && head !== w ? head.textContent.trim() : (lab ? lab.textContent.trim() : ''), item: head && head !== w && lab ? lab.textContent.trim() : ''}; };
+  const allKeys = () => [...new Set([...[...document.querySelectorAll('.fb[data-fb]')].map(w => w.dataset.fb), ...Object.keys(sCur().answers)])];
+  const rowsOf = () => allKeys().map(k => { const r = sCur().answers[k], t = qText(k); const has = r && (r.answer || r.note);
+    return {question_id: k, question: t.question, item: t.item, answer: r ? r.answer || '' : '', note: r ? r.note || '' : '', status: has ? 'answered' : 'unanswered', answered_at: r ? r.at || '' : ''}; });
+  const safeCode = () => (sCur().advisor_code || 'NOCODE').replace(/[^A-Za-z0-9_-]/g, '') || 'NOCODE';
+  const stamp = () => { const d = new Date(); return `${d.getFullYear()}${String(d.getMonth() + 1).padStart(2, '0')}${String(d.getDate()).padStart(2, '0')}`; };
+  const GEN = (await V4.data('units_index')).generated;
+  $('genStamp').textContent = `21m 단위 폴리곤 자산 생성 ${GEN} · 그림 2026-10-07`;
+  const sessionJson = (id, rows) => ({schema: 'cluster_advisory_feedback_v1', session_id: id, advisor_code: SO.sessions[id].advisor_code || '', started_at: SO.sessions[id].started_at, exported_at: new Date().toISOString(), asset_generated: GEN, answers: rows});
+  function renderFb() {
+    const a = sCur().answers, ks = Object.keys(a).filter(k => a[k].answer || a[k].note).sort(), cnt = Object.keys(SO.sessions).length;
+    $('fbCount').textContent = `이 세션 응답 ${ks.length}건`;
+    $('sInfo').textContent = `세션 시작 ${new Date(sCur().started_at).toLocaleString('ko-KR', {dateStyle: 'short', timeStyle: 'short'})} · 이 브라우저에 보관된 세션 ${cnt}개`;
+    $('fbTbl').innerHTML = '<tr><th>문항</th><th>응답</th><th class="l">메모</th><th>시각</th></tr>' + ks.map(k => `<tr><td>${esc(k)}</td><td>${esc(a[k].answer || '')}</td><td class="w">${esc(a[k].note || '')}</td><td>${esc((a[k].at || '').slice(0, 16))}</td></tr>`).join(''); }
+  $('sCode').value = sCur().advisor_code || '';
+  $('sCode').onchange = () => { sCur().advisor_code = $('sCode').value.trim(); sWrite(); renderFb(); };
+  $('sNew').onclick = () => { const had = Object.keys(sCur().answers).length;
+    if (had && !confirm('새 자문을 시작할까요? 지금까지의 응답은 지우지 않고 따로 보관됩니다. 내려받지 않으셨다면 먼저 JSON 또는 CSV로 내려받아 주세요.')) return;
+    const code = $('sCode').value.trim(), keep = code && code !== (sCur().advisor_code || '') ? code : ''; SO.current = 's' + Date.now(); SO.sessions[SO.current] = sNewSession(had ? keep : code); sWrite(); location.reload(); };
+  $('fbJson').onclick = () => dl(`cluster_advisory_feedback_${safeCode()}_${stamp()}.json`, JSON.stringify(sessionJson(SO.current, rowsOf()), null, 1), 'application/json');
+  $('fbCsv').onclick = () => { const s0 = sCur(); dl(`cluster_advisory_feedback_${safeCode()}_${stamp()}.csv`, ['advisor_code,session_started_at,question_id,question,item,answer,note,status,answered_at',
+    ...rowsOf().map(r => [s0.advisor_code || '', s0.started_at, r.question_id, r.question, r.item, r.answer, r.note, r.status, r.answered_at].map(csvQ).join(','))].join('\n'), 'text/csv;charset=utf-8'); };
+  $('fbAll').onclick = () => dl(`cluster_advisory_feedback_all_sessions_${stamp()}.json`, JSON.stringify({schema: 'cluster_advisory_feedback_v1_all', exported_at: new Date().toISOString(), asset_generated: GEN,
+    sessions: Object.keys(SO.sessions).map(id => sessionJson(id, Object.entries(SO.sessions[id].answers).map(([k, r]) => ({question_id: k, answer: r.answer || '', note: r.note || '', answered_at: r.at || ''}))))}, null, 1), 'application/json');
+  $('fbClear').onclick = () => { if (confirm('이 세션의 응답을 모두 지울까요? 다른 세션은 그대로 남습니다.')) { sCur().answers = {}; sWrite(); location.reload(); } };
+  renderFb();
+
+  // ── ③ 지도 — 공개 사이트 「후보지 찾기」와 같은 레이어 구성(계통 채색 · 산업단지 · 기존 시설) + 21m 단위 전량 ──
+  let lyr = null, cur = {sgg: '44270', fc: null};
+  let gridLayer = null, gridFC = null, gridT = 0, exLayer = null;
+  const IND_C = {'국가산업단지': '#B3261E', '일반산업단지': '#0C356A', '도시첨단산업단지': '#7A4BC9', '농공단지': '#0E8A72'};
+  const TYPES = Object.keys(IND_C); let indGroups = {}, indOn = {};
+  const GSTEP = [0, 0.0001, 2, 8, 20, 50], GLBL = ['포화(0)', '0–2', '2–8', '8–20', '20–50', '50+'];
+  const gstyle = p => {
+    if (p.s === 'unknown') return {color: V55.GRID_UNK_LINE, weight: .8, dashArray: '3 3', fillColor: V55.GRID_UNK, fillOpacity: .35};
+    if (p.s === 'nodata') return {color: '#9AA5B1', weight: .2, fillColor: '#F5F5F2', fillOpacity: .15};
+    const lo = p.lo || 0, selected = gridT > 0 ? lo >= gridT : true;
+    if (!selected) return {color: '#8FA0B0', weight: .25, fillColor: '#FFFFFF', fillOpacity: .04};
+    const fill = lo <= 0 ? V55.GRID_SAT : (V55.GRID_BINS.find(([th]) => lo >= th) || [0, V55.GRID_SAT])[1];
+    return {color: '#5A7A8C', weight: .45, fillColor: fill, fillOpacity: .55};
+  };
+  function gridRefresh() {
+    if (!gridFC) return;
+    const cnt = gridFC.features.filter(f => f.properties.s === 'ok' && (gridT > 0 ? (f.properties.lo || 0) >= gridT : true)).length;
+    $('gridLbl').textContent = gridT >= 1 ? `잔여 ≥ ${gridT} MW 읍면동만 채색 — ${n(cnt)}곳` : gridT > 0 ? `여유가 있는 읍면동만 채색(포화 제외) — ${n(cnt)}곳` : `전체 채색(포화 포함) — ${n(cnt)}곳`;
+    $('gridLegend').innerHTML = V55.gridLegendHTML(gridT);
+    const k = Math.max(0, GSTEP.findIndex((v, i) => gridT <= v || i === GSTEP.length - 1));
+    $('gridBar').querySelectorAll('i').forEach((el, i) => el.classList.toggle('dim', i < k));
+    $('gridBarL').querySelectorAll('span').forEach((el, i) => el.classList.toggle('dim', i < k));
+    if (gridLayer) gridLayer.setStyle(f => gstyle(f.properties));
+  }
+  async function initMap() {
+    await Region.load();
+    map = L.map('map', {center: [36.3, 127.0], zoom: 7, zoomControl: false, preferCanvas: true});
+    L.control.zoom({position: 'topright'}).addTo(map);
+    L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {maxZoom: 18, attribution: 'Imagery © Esri, Maxar, Earthstar Geographics'}).addTo(map);
+    L.control.scale({imperial: false, maxWidth: 140, position: 'bottomright'}).addTo(map);
+    map.createPane('gridPane').style.zIndex = 410; map.createPane('unitPane').style.zIndex = 420;
+    map.createPane('exPane').style.zIndex = 430; map.createPane('complexPane').style.zIndex = 440;
+    // 계통 여유 참고지표(읍면동 채색)
+    gridFC = await V55.gz('data_v4/grid_emd.json.gz');
+    gridLayer = L.geoJSON(gridFC, {pane: 'gridPane', style: f => gstyle(f.properties), onEachFeature: (f, ly) => { const p = f.properties;
+      const val = p.s === 'ok' ? `잔여 연계가능용량 참고지표 ${n(p.lo)}–${n(p.hi)} MW <span style="color:#888;font-size:11px">(균등배분 하한–공유 미조정 상한)</span>` : (p.s === 'unknown' ? '알 수 없음 — 원천 무응답·조회 불가' : '계통 조회값 없음');
+      ly.bindPopup(`<b>${esc(p.n)}</b><br>${val}<br><span style="color:#888;font-size:11px">한전 분산전원 연계정보 스냅숏 · 참고지표 — 실제 접속 가능 용량 아님</span>`); }}).addTo(map);
+    const GCOL = [V55.GRID_SAT, ...V55.GRID_BINS.slice().reverse().map(b => b[1])];
+    $('gridBar').innerHTML = GCOL.map(c => `<i style="background:${c}"></i>`).join(''); $('gridBarL').innerHTML = GLBL.map(l => `<span>${l}</span>`).join('');
+    $('gridStep').addEventListener('input', e => { gridT = GSTEP[+e.target.value]; gridRefresh(); });
+    $('gridTgl').onchange = e => e.target.checked ? map.addLayer(gridLayer) : map.removeLayer(gridLayer);
+    gridRefresh();
+    // 산업단지(유형별 그룹)
+    const indFC = await V55.gz('data_v4/ind_bnd.json.gz');
+    indGroups = Object.fromEntries(TYPES.map(k => [k, L.layerGroup().addTo(map)])); indOn = Object.fromEntries(TYPES.map(k => [k, true]));
+    const cnt = Object.fromEntries(TYPES.map(k => [k, 0]));
+    indFC.features.forEach(f => { const p = f.properties, col = IND_C[p.t] || '#555'; const grp = indGroups[p.t] || indGroups['일반산업단지']; cnt[p.t in cnt ? p.t : '일반산업단지']++;
+      L.geoJSON(f, {pane: 'complexPane', style: {color: col, weight: 1.2, fillColor: col, fillOpacity: .35}}).bindPopup(`<b>${esc(p.n)}</b><br>${esc(p.t)}<span style="color:#888;font-size:11px"> · 경계 표기용</span>`).addTo(grp); });
+    $('indCnt').textContent = `(${n(indFC.features.length)})`;
+    $('indTypes').innerHTML = TYPES.map(k => `<label class="typerow"><input type="checkbox" data-t="${k}" checked><span class="sw" style="background:${IND_C[k]}"></span>${k} (${n(cnt[k])})</label>`).join('');
+    const indSync = () => $('indAll').classList.toggle('on', TYPES.every(k => indOn[k]));
+    $('indTypes').querySelectorAll('input').forEach(cb => cb.onchange = () => { const k = cb.dataset.t; indOn[k] = cb.checked; cb.checked ? map.addLayer(indGroups[k]) : map.removeLayer(indGroups[k]); indSync(); });
+    $('indAll').onclick = () => { const to = !TYPES.every(k => indOn[k]); TYPES.forEach(k => { indOn[k] = to; to ? map.addLayer(indGroups[k]) : map.removeLayer(indGroups[k]); }); $('indTypes').querySelectorAll('input').forEach(cb => cb.checked = to); indSync(); };
+    // 기존 태양광 시설(위치 확인분)
+    $('exTgl').onchange = () => exRefresh();
+    // 대상지 · 시군 선택 · 전국 50MW
+    const SA = await (await fetch('docs/method_advisory/study_areas.json')).json();
+    $('saBtns').innerHTML = SA.areas.map(a => `<button class="btnx ${a.sgg === cur.sgg ? 'on' : ''}" data-sa="${a.sgg}" title="${a.stratum}">${a.name.replace(/^\S+\s/, '')} <span style="font-weight:400;opacity:.75">${a.stratum}</span></button>`).join('');
+    $('saBtns').onclick = e => { const b = e.target.closest('[data-sa]'); if (!b) return; cur.sgg = b.dataset.sa; markSa(); draw(); };
+    $('qrTgl').onchange = () => draw(true);
+    await draw();
+  }
+  function markSa() { $('saBtns').querySelectorAll('button').forEach(x => x.classList.toggle('on', x.dataset.sa === cur.sgg)); }
+  async function exRefresh() {
+    if (exLayer) { map.removeLayer(exLayer); exLayer = null; }
+    const sgg = cur.sgg;
+    let fc = null; try { fc = await V55.gz(`data_v4/existing_parcels/${sgg}.json.gz`); } catch (e) {}
+    if (!fc) { $('exCnt').textContent = `${Region.nameOf(sgg)} — 허가 주소 필지 자산 없음`; return; }
+    const F = fc.features, nrec = F.reduce((a, f) => a + f.properties.n, 0), farm = F.filter(f => ['전', '답', '과수원'].includes(f.properties.jimok)).length, r2 = F.filter(f => f.properties.in_r2).length, indiv = F.filter(f => f.properties.own === '개인').length;
+    $('exCnt').innerHTML = `${Region.nameOf(sgg)} — 허가 주소 필지 <b>${n(F.length)}</b>곳(허가 기록 ${n(nrec)}건) · 지목이 전·답·과수원인 필지 ${n(farm)} · 개인 소유 ${n(indiv)} · 현재 후보 공간(법인·국공유 적격) 안 ${n(r2)}`;
+    if ($('exTgl').checked) {
+      exLayer = L.geoJSON(fc, {pane: 'exPane', style: f => ({color: '#1d1d1d', weight: .8, fillColor: f.properties.kind === 'y' ? '#2E7D4F' : '#3A3A3A', fillOpacity: .62}),
+        onEachFeature: (f, ly) => { const q = f.properties; ly.bindTooltip(`기존 ${q.kind === 'y' ? '영농형' : '일반'} 태양광 — 허가 주소 필지 · 허가 기록 ${q.n}건(가동 중 ${q.op}) · 지목 ${q.jimok || '—'} · 소유 ${q.own || '—'}${q.in_r2 ? ' · 현재 후보 공간 필지' : ''}`); }}).addTo(map);
+    }
+  }
+  async function draw(keep = false) {
+    if (!keep || !cur.fc) cur.fc = await V55.units.load(cur.sgg);
+    const fc = cur.fc; if (lyr) map.removeLayer(lyr);
+    if (!fc) { $('uList').innerHTML = '<div class="it">이 시군의 폴리곤 자산이 없습니다.</div>'; $('mapNote').textContent = ''; exRefresh(); return; }
+    const showReview = $('qrTgl').checked;
+    lyr = V55.units.layer(fc, {pane: 'unitPane', showReview, onClick: (p, ly) => { sel(p.id); map.fitBounds(ly.getBounds(), {maxZoom: 15}); }}).addTo(map);
+    try { map.fitBounds(lyr.getBounds(), {padding: [10, 10]}); } catch (e) {}
+    const feats = fc.features.filter(f => showReview || f.properties.t !== 'quality_review').map(f => f.properties).sort((a, b) => b.a - a.a);
+    const rv = V55.units.reviewCount(fc);
+    $('mapNote').textContent = `${Region.nameOf(cur.sgg)} · 21m 단위 폴리곤 ${feats.length.toLocaleString('ko-KR')}곳 (전량 · 면적 하한 없음${rv ? ` · 품질 검토 ${rv}곳` : ''})`;
+    $('legend').innerHTML = V55.legendHTML(V55.MW_BANDS, '후보 공간 규모(참고 MW · 0.045 kW/㎡ 환산 · 표시용 눈금)');
+    $('uList').innerHTML = feats.slice(0, 400).map(p => `<div class="it" data-id="${p.id}"><b>#${p.id}</b> · ${km2(p.a)} km² ≈ ${V55.mw(p.a)} MW · 필지 ${n(p.n)}${p.ns > 1 ? ' · 시군 경계 걸침' : ''}${p.t === 'quality_review' ? ' · <span class="tag w">품질 검토</span>' : ''}</div>`).join('') + (feats.length > 400 ? `<div class="it adv-note">면적순 400곳까지 표시 · 나머지 ${n(feats.length - 400)}곳은 지도에만</div>` : '');
+    $('uList').querySelectorAll('.it[data-id]').forEach(d => d.onclick = () => { sel(+d.dataset.id); lyr.eachLayer(l => { if (l.feature.properties.id === +d.dataset.id) map.fitBounds(l.getBounds(), {maxZoom: 15}); }); });
+    exRefresh();
+  }
+  function sel(id) { $('uList').querySelectorAll('.it').forEach(d => d.classList.toggle('sel', +d.dataset.id === id)); const d = $('uList').querySelector(`.it[data-id="${id}"]`); if (d) d.scrollIntoView({block: 'nearest'}); }
+  window.__CLU_READY = true;
+})();
+</script>
+</body>
+</html>

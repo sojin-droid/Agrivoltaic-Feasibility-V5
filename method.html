@@ -300,14 +300,19 @@ body[data-sources=full] #story-steps .figbox,body[data-sources=full] .verdict,bo
 
     <div class="figbox" style="margin-top:18px">
       <p style="font-size:13.5px;margin:0"><b>연접 기준</b> — 간격 21m 이내의 필지를 하나의 후보
-      공간으로 묶음. 21m는 필지 간격 자료에서 유도한 <b>분석 기준</b>이며 법정 기준이 아님.</p>
+      공간으로 묶음. 21m는 농지 사이 간격을 만드는 구거·농로의 폭에 근거해 정한 <b>분석 기준</b>이며 법정 기준이 아님.</p>
       <details style="margin-top:8px;font-size:13px">
-        <summary style="cursor:pointer;color:var(--leaf-deep);font-weight:700">자세히 보기 — 연접 기준 21m의 유도 근거</summary>
-        <p style="margin:8px 0 0">전국 적격 필지의 이웃 간격 분포(k-거리 곡선, k=4)에서
-        기울기가 꺾이는 지점이 21m 부근임 — 간격의 실체는 구거(59.6%)·도로(30.0%)라
-        설계상 물길·농로를 건너 하나의 사업 부지로 취급하는 기준임.<br>
+        <summary style="cursor:pointer;color:var(--leaf-deep);font-weight:700">자세히 보기 — 연접 기준 21m의 근거</summary>
+        <p style="margin:8px 0 0">적격 농지 사이의 간격은 대부분 구거와 도로가 만든다(구획 사이 틈 면적의 구거 59.6%·도로 30.0%). 구거·도로의 폭은
+        중앙값 3–4m이고 25m를 넘는 것은 1% 미만이며, 하천은 중앙값 6m에 25m 초과가 4.5%(본류)임. 21m는 이 폭 분포에 근거해
+        <b>구거·농로·소하천은 건너 묶고 폭 넓은 하천 본류·간선도로·철도는 끊는</b> 수준으로 20m 안팎에서 정한 값임.<br>
+        필지 사이 간격 분포(4-최근접 거리)는 2–4m에서 최고점을 이룬 뒤 단조 감소하며 특정 거리에서 꺾이지 않음. k-거리 곡선의 무릎은
+        k 선택에 따라 이동하므로(k=4에서 20.0–21.6m) 범위를 확인하는 보조 근거로만 씀.<br>
         15m·21m·25m 어느 값으로 해도 시나리오 간 크기 순서는 바뀌지 않고, 농업진흥구역에 설치 가능한 경우의
-        총면적(1,038.85 km²)도 같음<sup class="fnref">[12]</sup> — 후보 공간 수만 묶는 간격에 따라 달라짐(상세 통계는 보고서·논문에 수록).</p>
+        총면적(1,038.85 km²)도 같음<sup class="fnref">[12]</sup> — 후보 공간 수와 대규모 후보 공간 수만 묶는 간격에 따라 달라짐.
+        근거 표(간격 지물 구성·지물 폭 실측)·k-거리 곡선·민감도 표는
+        <a href="https://github.com/sojin-droid/Agrivoltaic-Feasibility-V5/blob/main/docs/METHOD_ADVISORY.md" target="_blank" rel="noopener">방법론 자문 자료(docs/METHOD_ADVISORY.md)</a> §3에 수록.
+        최종 클러스터(사업 단위) 정의는 자문 전 미확정이며 이 자료가 자문 의뢰 자료임.</p>
       </details>
     </div>
   </div>

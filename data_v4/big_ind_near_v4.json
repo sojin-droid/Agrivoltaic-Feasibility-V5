@@ -1,5 +1,5 @@
 {
- "generated": "2026-10-01 00:46",
+ "generated": "2026-10-07 14:16",
  "source": "scenario_runs/R2_promo/block_context.parquet (x·y) · sources/ind_complex/damdan.gpkg",
  "method": "정본 block_context 와 같은 대표점 ↔ 산업단지 경계 sjoin_nearest · 거리 = units_big d (게이트 0.01 km)",
  "rows": {

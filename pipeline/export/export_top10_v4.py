@@ -116,7 +116,7 @@ for run in RUNS:
 print(f"G1 통과 — 3축 플래그 = 정본 함수 ({n_g1:,} 시군×칸) · G1b 통과 — 2축 3종 = 정본 함수(축 고정) · G2 통과")
 
 idx = {'generated': datetime.datetime.now().strftime('%Y-%m-%d %H:%M'), 'runs': RUNS, 'cols': COLS,
-       'population': 'block_context 모집단(정본 그대로 · 선언 문턱 min_area_m2 11,111㎡ 이상 — 추가 문턱 없음) — 시군 관여 기준(걸침 후보는 관련 시군마다 등장, 합산 금지)',
+       'population': 'block_context 모집단(정본 그대로 · 2026-10-07 부터 전량 --all · 면적 하한 없음 · ADR-0055) — 시군 관여 기준(걸침 후보는 관련 시군마다 등장, 합산 금지)',
        'fronts': '표시 규모(0·66667·222222·444444·1111111㎡)별 비지배 lab 목록 — 비교 모집단 = 그 규모 이상 전량',
        'flags': {'f3': '면적·계통 여유(lo)·산단 거리 3축 비지배 = query._frontier_mask', 'fab': '면적+계통 2축 비지배(같은 규칙)',
                  'fac': '면적+산단 2축 비지배(같은 규칙)', 'fbc': '계통+산단 2축 비지배(같은 규칙)'},

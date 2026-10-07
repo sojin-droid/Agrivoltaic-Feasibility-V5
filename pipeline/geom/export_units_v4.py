@@ -5,7 +5,7 @@
   = 기존 21m membership(R2_promo · PAPER-FREEZE-001 = production 동일 산출)을 지적 폴리곤에 dissolve 한 것.
   · cluster 가 아니다 — 최종 cluster 정의는 자문 이후로 열어 둔다.
   · 시군·읍면동 경계로 자르지 않는다 — 경계를 넘는 단위는 하나로 유지한다(관여 시군마다 같은 기하가 실린다).
-  · 모집단 = block_context 선언 파라미터 min_area_m2 = 11,111 (숨은 문턱 없음) · 단순화 2 m(선언값).
+  · 모집단 = block_context 선언 부분집합 — 2026-10-07 부터 전량(--all · 면적 하한 없음 · ADR-0055) · 단순화 2 m(선언값).
 여기서는 좌표계 변환(EPSG:5186 → WGS84)과 좌표 반올림(1e-5도 ≈ 1 m)만 한다 — 새 기하 연산·재클러스터링 없음.
 
 속성: id(lab) · a(장부 면적 ㎡) · mw(참고) · n(필지) · ns(관여 시군 수) · sggs · ne(읍면동 수) · emds · q(기하 품질) · ag(기하 면적 ㎡)
@@ -81,7 +81,7 @@ with gzip.open(os.path.join(SITE, 'data_v4', 'units_big.json.gz'), 'wt', encodin
     json.dump({'type': 'FeatureCollection', 'run': 'R2_promo', 'min_m2': BIG_M2, 'features': big}, fo, ensure_ascii=False, separators=(',', ':'))
 a_sum = sum(f['properties']['a'] for f in feats)
 assert abs(a_sum - round(float(attr['area_ledger_m2'].sum()))) <= len(feats), '[FAIL] 면적 합 불일치'
-json.dump({'generated': datetime.datetime.now().strftime('%Y-%m-%d %H:%M'), 'source': 'analysis_unit_v1.gpkg (v9_02 · 2026-09-23) · R2_promo · min_area_m2 11,111 · simplify 2 m',
+json.dump({'generated': datetime.datetime.now().strftime('%Y-%m-%d %H:%M'), 'source': 'analysis_unit_v1.gpkg (v9_02 · 2026-10-07 전량 재산출 · ADR-0055 · ADR-0047 회수 대응표 적용) · R2_promo · 면적 하한 없음 · 단순화 2 m',
            'n_units': len(feats), 'n_big': len(big), 'big_mw_sum': big_mw_sum, 'big_axes_note': 'units_big 의 lo·hi(MW, 읍면동 계통 여유 하한·상한 참고)·d(km, 최근접 산업단지 경계 직선거리) = scenario_runs/R2_promo/block_context 원값(TOP 10 과 같은 값)', 'n_cross_sgg': sum(1 for f in feats if f['properties']['ns'] > 1), 'unit_note': '21m 연접 공간 분석 단위 — cluster 아님(최종 정의 자문 전) · 경계로 자르지 않음',
            'tiers': {t: sum(1 for f in feats if f['properties']['t'] == t) for t in ('default', 'quality_review')},
            'tier_rule': 'display_tier = v9_02(analysis_unit_v1) 값 — default = 기하 면적/장부 면적 0.99–1.01 · quality_review = 그 밖(기하 불완전 · 면적 불일치). 기본 지도는 default 만, quality_review 는 별도 표시로 확인(숨기지 않음).',
