@@ -9,7 +9,7 @@
         (계통 여유 lo/hi·산단 거리·대표점·간척 %·경작 비율) — build_advisory_all_v1.py 가 정본 엔진 block_context.build(take_all) 로 만든 것
         R0_current · R2_promo · R3_zone_all 세 조건
   · Ledger_Rebuild/advisory_all_v1/R2_promo/units.gpkg   같은 전량의 도형(v9_02 절차 그대로 · 기하 품질 등급 포함)
-  · 2026-09-28 사용자 결정 — 11,111㎡(≈0.5MW) 하한은 근거 없는 임의 문턱이라 자문 자산에서 뺐다.
+  · 2026-09-28 사용자 결정 — 11,111㎡(≈0.5MW) 하한은 근거 없는 임의 기준값이라 자문 자산에서 뺐다. 2026-10-07: 규모 눈금에 1MW(22,222㎡)·3MW 추가.
     비지배 플래그는 export_top10_v4.py 와 같은 규칙(전수 쌍별 비교 · query._frontier_mask 대조)으로 이 전량에서 다시 센다.
   · data_v4/existing_pv_v4.json.gz   기존 태양광 시설 위치(VALID 좌표만) — 후보 공간 폴리곤 안의 점 수를 **자문 표시용으로만** 센다
                                 (정본 중첩 산출이 아니다 · 전국 전수 아님 · 점이 없다는 것은 시설 부재가 아니다)
@@ -20,7 +20,6 @@
   · 세 축(A 면적 · B 계통 여유 참고값 lo · C 산단 거리)의 분포 통계와 Pearson·Spearman 상관 — 경기도 R2 고유 후보 공간 기준
   · 읍면동별 후보 공간 수·면적·10/20/50MW 등가 이상 수(관여 기준 — 읍면동끼리 더하지 않는다)
   · 자문 검토 사례: 선정 규칙을 자산에 함께 적는다(“좋은 지역” 선정이 아니다)
-≤1,000m 응축(cc)은 쓰지 않는다 — 폐기된 계보이며 이 자산에 등장하지 않는다.
 사용: python pipeline/export/export_advisory_v4.py
 """
 import os, sys, json, gzip, glob, datetime, math
@@ -36,7 +35,7 @@ OUT = os.path.join(SITE, 'data_v4')
 SIDO = '41'
 RUNS = ['R0_current', 'R2_promo', 'R3_zone_all']
 KW = 0.045                                             # kW/㎡ — 기존 환산 계수(ADR-0012). 새로 만들지 않는다.
-BANDS = {'10': 222222, '20': 444444, '50': 1111111}    # 10·20·50MW 크기 구분(0.045 kW/㎡ 역산) — 법정 기준 아님
+BANDS = {'1': 22222, '3': 66667, '10': 222222, '20': 444444, '50': 1111111}    # 1·3·10·20·50MW 크기 구분(0.045 kW/㎡ 역산) — 법정 기준 아님 · 1MW = 마을 단위 운영 규모
 gz = lambda p: json.load(gzip.open(p, 'rt', encoding='utf-8'))
 
 # 행정 이름 — 법정동코드(bjd_code, 폐지 포함)의 시군 행(코드 뒤 5자리 0)·읍면동 행(뒤 2자리 0)을 그대로 읽는다(이름 추정 없음)
@@ -52,7 +51,7 @@ import pandas as pd, geopandas as gpd
 from pyproj import Transformer
 from shapely.geometry import mapping
 import query as Q
-FILTERS = [0, 66667, 222222, 444444, 1111111]     # 표시 규모 선택지(㎡) — export_top10_v4 와 동일
+FILTERS = [0, 22222, 66667, 222222, 444444, 1111111]     # 표시 규모 선택지(㎡) — export_top10_v4 와 동일
 AXK = {'a': ('area_m2', +1), 'b': ('lo', +1), 'c': ('dist_ind_km', -1)}
 
 
@@ -199,7 +198,7 @@ summary = {
 emd = {}
 for r in V:
     for e in r['emds']:
-        s = emd.setdefault(e, {'e': e, 'name': emd_name(e), 'k': 0, 'a': 0, 'b10': 0, 'b20': 0, 'b50': 0})
+        s = emd.setdefault(e, {'e': e, 'name': emd_name(e), 'k': 0, 'a': 0, **{'b' + k: 0 for k in BANDS}})
         s['k'] += 1; s['a'] += r['a']
         for k, m in BANDS.items():
             if r['a'] >= m:
