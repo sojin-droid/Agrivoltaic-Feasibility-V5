@@ -68,13 +68,25 @@ for run in RUNS:
 run = 'R2_promo'; dst = os.path.join(STAGE, run)
 mem = pd.read_parquet(os.path.join(dst, 'members.parquet'))[['pnu', 'lab']]
 mem['sgg'] = mem.pnu.str[:5]; mem['emd8'] = mem.pnu.str[:8]
+# ADR-0047 회수 대응표 — 원장 pnu(구 법정동 코드)와 지적도 pnu(신 코드)가 다른 필지는 신 pnu 로 지적도를 읽는다
+# (v9_02 와 같은 대응표 · 2026-10-07 부터 정본 적용 — 이 파일 밖의 대응은 만들지 않는다)
+recp = os.path.join(LR, 'engine_cache', 'parcel_geom_pubcorp_recovery.parquet')
+if os.path.exists(recp):
+    rec = pd.read_parquet(recp, columns=['old_pnu', 'new_pnu']).drop_duplicates('old_pnu').set_index('old_pnu')['new_pnu']
+    mem['pnu_geom'] = mem.pnu.map(rec).fillna(mem.pnu)
+else:
+    mem['pnu_geom'] = mem.pnu
+n_rec = int((mem.pnu_geom != mem.pnu).sum())
+mem['sgg_geom'] = mem.pnu_geom.str[:5]
+print(f"\n도형 — 회수 대응표 적용 {n_rec:,}필지", flush=True)
 cl = pd.read_parquet(os.path.join(dst, 'clusters.parquet')).set_index('lab')
 parts, miss_pnu, t0 = [], 0, time.time()
-for s, sub in mem.groupby('sgg'):
+for s, sub in mem.groupby('sgg_geom'):
     fp = os.path.join(CAD, f'{s}.gpkg')
     if not os.path.exists(fp):
         miss_pnu += len(sub); continue
-    g = pyogrio.read_dataframe(fp, columns=['pnu']).merge(sub[['pnu', 'lab']], on='pnu', how='inner')
+    g = (pyogrio.read_dataframe(fp, columns=['pnu']).rename(columns={'pnu': 'pnu_geom'})
+         .merge(sub[['pnu_geom', 'lab']], on='pnu_geom', how='inner'))
     miss_pnu += len(sub) - len(g)
     if len(g):
         parts.append(g.dissolve(by='lab')[['geometry']].reset_index())
@@ -113,7 +125,7 @@ fo = os.path.join(dst, 'units.gpkg')
 if os.path.exists(fo): os.remove(fo)
 G.to_file(fo, layer='unit', driver='GPKG')
 pd.DataFrame({'lab': missing, 'area_m2': [float(cl.area_m2[l]) for l in missing]}).to_parquet(os.path.join(dst, 'units_missing.parquet'), index=False)
-log['geom'] = {'run': run, 'n_poly': int(len(G)), 'n_missing': len(missing), 'missing_parcels': int(miss_pnu), 'simplify_m': TOL,
+log['geom'] = {'run': run, 'n_poly': int(len(G)), 'n_missing': len(missing), 'missing_parcels': int(miss_pnu), 'recovered_parcels': n_rec, 'simplify_m': TOL,
                'tiers': {t: int((G.display_tier == t).sum()) for t in ('default', 'quality_review')}, 'g2_overlap': int(len(cmp_))}
 log['rule'] = ('면적 문턱 없음 — 정본 런의 21m 후보 공간 중 경기도에 필지가 있는 것 전량. 맥락 축은 engine/block_context.build(take_all) 그대로, '
                '도형은 v9_02 절차 그대로. 11,111㎡ 이상 부분은 정본 값과 같음(G1·G2).')
