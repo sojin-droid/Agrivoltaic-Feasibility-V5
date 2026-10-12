@@ -5,7 +5,7 @@
   LR/step4_1_gaps_S1.parquet · LR/step4_1_kneedle_S1.csv          (21m 유도 — k-거리)
   LR/scenario_runs/R2_promo/clusters.parquet                       (21m 연접 단위 전량 388,121 — 면적 하한 없음)
   LR/scenario_runs/R2_promo/block_context.parquet                  (3축 입력 — 2026-10-07 부터 전량 388,496행 · 면적 하한 없음)
-  DuckDB grid_emd_v3                                               (읍면동 계통 참고값)
+  DuckDB grid_emd_v3c (정정판 · ADR-0059)                           (읍면동 계통 참고값)
   SITE/data_v4/ind_bnd.json.gz                                     (산업단지 경계 1,363)
   SITE/data_v4/top10/*.json.gz                                     (시군×칸 비지배 플래그 — 발행 자산)
 출력: docs/method_advisory/fig/*.png · docs/method_advisory/data/*.csv (그림의 수치 그대로)
@@ -176,7 +176,7 @@ write_csv('f06_ind_types', [[t, c] for t, c in pd.Series(types).value_counts().i
 # ── 5. 읍면동 계통 참고값 분포 (grid_emd_v3) ──────────────────────────────
 print('5 grid emd')
 con = duckdb.connect(os.path.join(LR, 'agrivoltaic_ledger_v1.duckdb'), read_only=True)
-ge = con.execute("select emd8, status, n_dl, vol3_equal_mw, vol3_shared_mw from grid_emd_v3").df()
+ge = con.execute("select emd8, status, n_dl, vol3_equal_mw, vol3_shared_mw from grid_emd_v3c").df()  # ADR-0059 정정판
 con.close()
 st = ge.status.value_counts()
 fig, axs = plt.subplots(1, 2, figsize=(9.2, 3.2))
@@ -218,7 +218,7 @@ with open(os.path.join(DATA, 'README.md'), 'w', encoding='utf-8') as f:
     f.write('| 파일 | 내용 | 원천 |\n|---|---|---|\n')
     for n, d_, s in [('f01_*', 'k-거리 곡선 무릎·분위', 'step4_1_gaps_S1.parquet · step4_1_kneedle_S1.csv'), ('f02_*', '4-최근접 간격 누적 비율', 'step4_1_gaps_S1.parquet'),
                      ('f03_*', '21m 단위 면적·필지 수(전량, 하한 없음)', 'scenario_runs/R2_promo/clusters.parquet'), ('f04_*·f05_*', '3축 분위·순위상관(3MW 이상)', 'scenario_runs/R2_promo/block_context.parquet'),
-                     ('f06_*', '반경 안 산업단지 수(탐색)', 'block_context x,y × data_v4/ind_bnd.json.gz'), ('f07_*', '읍면동 계통 참고값', 'DuckDB grid_emd_v3'), ('f08_*', '시군 모집단 대 비지배 비율', 'data_v4/top10/*.json.gz R2_promo')]:
+                     ('f06_*', '반경 안 산업단지 수(탐색)', 'block_context x,y × data_v4/ind_bnd.json.gz'), ('f07_*', '읍면동 계통 참고값', 'DuckDB grid_emd_v3c (정정판)'), ('f08_*', '시군 모집단 대 비지배 비율', 'data_v4/top10/*.json.gz R2_promo')]:
         f.write(f'| {n} | {d_} | {s} |\n')
     f.write('\n점검 로그: ' + ' · '.join(str(x) for x in LOG) + '\n')
 print('LOG', LOG)

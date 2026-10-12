@@ -2,12 +2,13 @@
 """계통·산업단지 탭 데이터 export — data_v4/grid_emd.json.gz · ind_bnd.json.gz · grid_summary.json.
 
 원천(전량 기존 정본 자산):
-  · grid_emd_v3 (DB) — KEPCO 분산전원 연계정보 재구축 v3, 전국 5,066 읍면동
+  · grid_emd_v3c (DB) — KEPCO 분산전원 연계정보 재구축 v3, 전국 5,066 읍면동 · 정정판(v3_07_corrected, ADR-0059:
+    상한을 (읍면동, 선로) 고유로 한 번씩만 합산 — 종전 grid_emd_v3 는 93 동에서 1,279.463 MW 과대)
     (vol3 = 배전선로 잔여 연계가능용량, 설비별 불일치는 최솟값으로 보수 확정,
      equal = 걸친 읍면동 균등배분 / shared = 공유 미조정 상한)
   · sources/emd_bnd/emd_bnd.gpkg — V-World LT_C_ADEMD 읍면동 경계 (표기용, v5_04)
   · sources/ind_complex/damdan.gpkg — V-World LT_C_DAMDAN 산업단지 경계 1,363개 (v5_03)
-게이트: grid_emd_v3 행수·status 분포를 출력하고, 조인 실패(경계 없음/값 없음)를 병기(숨은 배제 금지).
+게이트: grid_emd_v3c 행수·status 분포를 출력하고, 조인 실패(경계 없음/값 없음)를 병기(숨은 배제 금지).
 사용: python pipeline/export/export_grid_v4.py
 """
 import os, sys, json, gzip, datetime
@@ -42,10 +43,10 @@ def gz(fo, obj):
 
 con = Q.db()
 grid = {r[0]: r for r in con.execute("""
-  SELECT emd8, status, ROUND(vol3_equal_mw,1), ROUND(vol3_shared_mw,1) FROM grid_emd_v3""").fetchall()}
+  SELECT emd8, status, ROUND(vol3_equal_mw,1), ROUND(vol3_shared_mw,1) FROM grid_emd_v3c""").fetchall()}
 names = dict(con.execute("SELECT emd8, emd_name FROM kepco_dong_v3").fetchall())
 ind_cnt = dict(con.execute("SELECT cat_nam, COUNT(1) FROM ind_complex_bnd GROUP BY 1").fetchall())
-print(f"grid_emd_v3 {len(grid):,}행 · ok {sum(1 for v in grid.values() if v[1]=='ok'):,}")
+print(f"grid_emd_v3c {len(grid):,}행 · ok {sum(1 for v in grid.values() if v[1]=='ok'):,}")
 
 # ── 신·구 행정코드 대조 (각주 17 선례) ──
 # 계통(수집 2026-07)은 구 코드, 경계(LT_C_ADEMD_INFO)는 2026 신 코드(광주·전남 통합 '12',

@@ -74,7 +74,8 @@ con = Q.db()
 # 여유 합 = 읍면동 균등배분 하한(lo) 합 — 균등배분은 전국 합 보존(64,020MW 실측
 # 일치)이라 동 단위 합산에 설비 이중계상이 없다. DL vol_min 합은 부적합: 변형 간
 # 최솟값이라 포화 변형이 하나라도 있으면 0으로 붕괴 (해남 실측 2026-09-01)
-emd_lo = con.execute("SELECT emd8, vol3_equal_mw FROM grid_emd_v3 WHERE status='ok'")             .fetch_df().set_index('emd8')['vol3_equal_mw']
+# ADR-0059 — 정정판 grid_emd_v3c 를 읽는다(하한은 종전 grid_emd_v3 와 같다)
+emd_lo = con.execute("SELECT emd8, vol3_equal_mw FROM grid_emd_v3c WHERE status='ok'")             .fetch_df().set_index('emd8')['vol3_equal_mw']
 con.close()
 emd = gpd.read_file(os.path.join(LR, 'sources', 'emd_bnd', 'emd_bnd.gpkg')).to_crs(5186)
 emd['emd8'] = emd['emd_cd'].astype(str).str[:8]
