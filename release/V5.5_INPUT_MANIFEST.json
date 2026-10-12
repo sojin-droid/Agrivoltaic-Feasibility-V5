@@ -1,60 +1,20 @@
 {
- "written_at": "2026-10-12T19:07:43",
+ "written_at": "2026-10-12T20:08:12",
  "purpose": "발행 입력 상태 고정 — 동결본(논문 재현)과 라이브 작업 DB 를 구분해 적는다. 추정값 없음.",
  "site_repo": {
   "branch": "v5.5-ggi-review",
-  "head": "fd50de4caa3574203d7933db8f61d2842f15fc0e",
-  "n_dirty": 11,
+  "head": "64b346f1462e0ef77896974b74d6843a7381fa12",
+  "n_dirty": 1,
   "dirty": [
    {
     "status": "M",
-    "path": "about.html"
-   },
-   {
-    "status": "M",
-    "path": "candidates.html"
-   },
-   {
-    "status": "M",
-    "path": "decree.html"
-   },
-   {
-    "status": "M",
-    "path": "estimate.html"
-   },
-   {
-    "status": "M",
-    "path": "evidence.html"
-   },
-   {
-    "status": "M",
-    "path": "insight.html"
-   },
-   {
-    "status": "M",
-    "path": "map.html"
-   },
-   {
-    "status": "M",
     "path": "pipeline/release_manifest.py"
-   },
-   {
-    "status": "M",
-    "path": "proximity.html"
-   },
-   {
-    "status": "M",
-    "path": "release/V5.5_INPUT_MANIFEST.json"
-   },
-   {
-    "status": "??",
-    "path": "pipeline/geom/export_clusters_adr0056.log"
    }
   ]
  },
  "model_repo": {
   "branch": "pr0048-spatial-heterogeneity",
-  "head": "9389e484c68a9107e2e7a77c66cf0b6efb74d13c",
+  "head": "5a93af50240f40c236f20a2a2d2847b3279ff74b",
   "n_dirty": 7,
   "dirty": [
    {
@@ -108,17 +68,15 @@
  "scenario_runs": {
   "R0_current/block_context.parquet": {
    "sha256": "ffb9c264cacd1b39ab491d6418afd2d70cc839771c6e164fa930e1c145c21c06",
-   "freeze": "PAPER-FREEZE-001",
+   "freeze": "PAPER-FREEZE-003",
    "freeze_copy_exists": true,
-   "equals_freeze_copy": false,
-   "difference_reason": "ADR-0055(2026-10-07) 면적 하한 없는 전량 재산출 — 동결본은 하한 있는 판. 논문 세대에 넣지 않는다(ADR-0057 결정 5) — 다른 것이 정상"
+   "equals_freeze_copy": true
   },
   "R0_current/block_context.json": {
    "sha256": "e4d6b40f041f85ecc36a3018818d12cd07013e358aa9475a8df7aacea5be5bd6",
-   "freeze": "PAPER-FREEZE-001",
+   "freeze": "PAPER-FREEZE-003",
    "freeze_copy_exists": true,
-   "equals_freeze_copy": false,
-   "difference_reason": "ADR-0055(2026-10-07) 면적 하한 없는 전량 재산출 — 동결본은 하한 있는 판. 논문 세대에 넣지 않는다(ADR-0057 결정 5) — 다른 것이 정상"
+   "equals_freeze_copy": true
   },
   "R0_current/members.parquet": {
    "sha256": "ec0b05532c3fec22ba107fc11ac38a18d377ae7ee55e93d7e2009bfc1a7a8942",
@@ -140,17 +98,15 @@
   },
   "R0_current_SB/block_context.parquet": {
    "sha256": "94c10d538b720755d724160eb650c6ff3a33e7975af4de85f374598549845c4e",
-   "freeze": "PAPER-FREEZE-002",
-   "freeze_copy_exists": false,
-   "equals_freeze_copy": false,
-   "difference_reason": "ADR-0055(2026-10-07) 면적 하한 없는 전량 재산출 — 동결본은 하한 있는 판. 논문 세대에 넣지 않는다(ADR-0057 결정 5) — 다른 것이 정상"
+   "freeze": "PAPER-FREEZE-003",
+   "freeze_copy_exists": true,
+   "equals_freeze_copy": true
   },
   "R0_current_SB/block_context.json": {
    "sha256": "f67f91266b1cabc944a58b3d20662cd15ff406dac0405179d36b20d3baa4ecf2",
-   "freeze": "PAPER-FREEZE-002",
-   "freeze_copy_exists": false,
-   "equals_freeze_copy": false,
-   "difference_reason": "ADR-0055(2026-10-07) 면적 하한 없는 전량 재산출 — 동결본은 하한 있는 판. 논문 세대에 넣지 않는다(ADR-0057 결정 5) — 다른 것이 정상"
+   "freeze": "PAPER-FREEZE-003",
+   "freeze_copy_exists": true,
+   "equals_freeze_copy": true
   },
   "R0_current_SB/members.parquet": {
    "sha256": "6e897c37f95a8817a4539163564c79c4b5daa50e98fe97d37617f730ca703b70",
@@ -172,17 +128,15 @@
   },
   "R1_protect/block_context.parquet": {
    "sha256": "2a139ce6677c50831a58bedc9051356e5786157a24af234a806f0dfa437225f7",
-   "freeze": "PAPER-FREEZE-001",
+   "freeze": "PAPER-FREEZE-003",
    "freeze_copy_exists": true,
-   "equals_freeze_copy": false,
-   "difference_reason": "ADR-0055(2026-10-07) 면적 하한 없는 전량 재산출 — 동결본은 하한 있는 판. 논문 세대에 넣지 않는다(ADR-0057 결정 5) — 다른 것이 정상"
+   "equals_freeze_copy": true
   },
   "R1_protect/block_context.json": {
    "sha256": "3eaaf4b8c1e41427ab39da166eadd24e8dabff007e8c3a0636de83dd9e48dec9",
-   "freeze": "PAPER-FREEZE-001",
+   "freeze": "PAPER-FREEZE-003",
    "freeze_copy_exists": true,
-   "equals_freeze_copy": false,
-   "difference_reason": "ADR-0055(2026-10-07) 면적 하한 없는 전량 재산출 — 동결본은 하한 있는 판. 논문 세대에 넣지 않는다(ADR-0057 결정 5) — 다른 것이 정상"
+   "equals_freeze_copy": true
   },
   "R1_protect/members.parquet": {
    "sha256": "9f258305f6ed97fd77f20df7cfc27a15565d65726b706dc95ada36bf9851749c",
@@ -204,17 +158,15 @@
   },
   "R1_protect_SB/block_context.parquet": {
    "sha256": "739f3239a86f09a872a828253984ad6ef5a978dd4a40bd78b63aabe5badc6f2f",
-   "freeze": "PAPER-FREEZE-002",
-   "freeze_copy_exists": false,
-   "equals_freeze_copy": false,
-   "difference_reason": "ADR-0055(2026-10-07) 면적 하한 없는 전량 재산출 — 동결본은 하한 있는 판. 논문 세대에 넣지 않는다(ADR-0057 결정 5) — 다른 것이 정상"
+   "freeze": "PAPER-FREEZE-003",
+   "freeze_copy_exists": true,
+   "equals_freeze_copy": true
   },
   "R1_protect_SB/block_context.json": {
    "sha256": "3109530f57956e76b1d8d774b8460d5b387489772b72f4535722d83f012d9682",
-   "freeze": "PAPER-FREEZE-002",
-   "freeze_copy_exists": false,
-   "equals_freeze_copy": false,
-   "difference_reason": "ADR-0055(2026-10-07) 면적 하한 없는 전량 재산출 — 동결본은 하한 있는 판. 논문 세대에 넣지 않는다(ADR-0057 결정 5) — 다른 것이 정상"
+   "freeze": "PAPER-FREEZE-003",
+   "freeze_copy_exists": true,
+   "equals_freeze_copy": true
   },
   "R1_protect_SB/members.parquet": {
    "sha256": "f47bdc721e733d8fbe860d28e927adcfec0efa09b683ece4b85fac1af20535f2",
@@ -236,17 +188,15 @@
   },
   "R2_promo/block_context.parquet": {
    "sha256": "dad6a926333ee8397f38a496ce1a87c6bca9fd38ca37b570012bb873e62da9c8",
-   "freeze": "PAPER-FREEZE-001",
+   "freeze": "PAPER-FREEZE-003",
    "freeze_copy_exists": true,
-   "equals_freeze_copy": false,
-   "difference_reason": "ADR-0055(2026-10-07) 면적 하한 없는 전량 재산출 — 동결본은 하한 있는 판. 논문 세대에 넣지 않는다(ADR-0057 결정 5) — 다른 것이 정상"
+   "equals_freeze_copy": true
   },
   "R2_promo/block_context.json": {
    "sha256": "4e2340c48ea1b586012cfb8d43ec093dbb17de9323514183d45a505fde27aca3",
-   "freeze": "PAPER-FREEZE-001",
+   "freeze": "PAPER-FREEZE-003",
    "freeze_copy_exists": true,
-   "equals_freeze_copy": false,
-   "difference_reason": "ADR-0055(2026-10-07) 면적 하한 없는 전량 재산출 — 동결본은 하한 있는 판. 논문 세대에 넣지 않는다(ADR-0057 결정 5) — 다른 것이 정상"
+   "equals_freeze_copy": true
   },
   "R2_promo/members.parquet": {
    "sha256": "020bee1a2510d04c90c2be3fcf1160fb85fe4390de9e6e453e726832107a7f4c",
@@ -268,17 +218,15 @@
   },
   "R2_promo_SB/block_context.parquet": {
    "sha256": "ac5a4626f32673d35d4ef64ae611260b17295e3df8d57363d7899436cafca5cd",
-   "freeze": "PAPER-FREEZE-002",
-   "freeze_copy_exists": false,
-   "equals_freeze_copy": false,
-   "difference_reason": "ADR-0055(2026-10-07) 면적 하한 없는 전량 재산출 — 동결본은 하한 있는 판. 논문 세대에 넣지 않는다(ADR-0057 결정 5) — 다른 것이 정상"
+   "freeze": "PAPER-FREEZE-003",
+   "freeze_copy_exists": true,
+   "equals_freeze_copy": true
   },
   "R2_promo_SB/block_context.json": {
    "sha256": "5f980ca28457aeaee7480b20446f1356cd09c6fc3ea10eb373ff2d7b91bc8b92",
-   "freeze": "PAPER-FREEZE-002",
-   "freeze_copy_exists": false,
-   "equals_freeze_copy": false,
-   "difference_reason": "ADR-0055(2026-10-07) 면적 하한 없는 전량 재산출 — 동결본은 하한 있는 판. 논문 세대에 넣지 않는다(ADR-0057 결정 5) — 다른 것이 정상"
+   "freeze": "PAPER-FREEZE-003",
+   "freeze_copy_exists": true,
+   "equals_freeze_copy": true
   },
   "R2_promo_SB/members.parquet": {
    "sha256": "6239ee5a990a989513d7eb497ccacb6e0229d43f884b442b3d5f97b421ea7735",
@@ -300,17 +248,15 @@
   },
   "R3_zone_all/block_context.parquet": {
    "sha256": "18c0547ad32c5d9bb2740b53f948d6a27ffaad7d29f7d2ed64a0d85e7339169c",
-   "freeze": "PAPER-FREEZE-001",
+   "freeze": "PAPER-FREEZE-003",
    "freeze_copy_exists": true,
-   "equals_freeze_copy": false,
-   "difference_reason": "ADR-0055(2026-10-07) 면적 하한 없는 전량 재산출 — 동결본은 하한 있는 판. 논문 세대에 넣지 않는다(ADR-0057 결정 5) — 다른 것이 정상"
+   "equals_freeze_copy": true
   },
   "R3_zone_all/block_context.json": {
    "sha256": "bd0fae281501ef7c26fc630034899af9bc8ac3ab8f4d0298a9b83e8e6a347ab4",
-   "freeze": "PAPER-FREEZE-001",
+   "freeze": "PAPER-FREEZE-003",
    "freeze_copy_exists": true,
-   "equals_freeze_copy": false,
-   "difference_reason": "ADR-0055(2026-10-07) 면적 하한 없는 전량 재산출 — 동결본은 하한 있는 판. 논문 세대에 넣지 않는다(ADR-0057 결정 5) — 다른 것이 정상"
+   "equals_freeze_copy": true
   },
   "R3_zone_all/members.parquet": {
    "sha256": "ae45f92fdf28911b9e0a6115db7df4d8465fa27b7330d93a1f6ebb0ab9f8632d",
@@ -332,17 +278,15 @@
   },
   "R3_zone_all_SB/block_context.parquet": {
    "sha256": "c4825040e67f117dc033bcded9fa7f01b83495109b102675a480be4551d93af4",
-   "freeze": "PAPER-FREEZE-002",
-   "freeze_copy_exists": false,
-   "equals_freeze_copy": false,
-   "difference_reason": "ADR-0055(2026-10-07) 면적 하한 없는 전량 재산출 — 동결본은 하한 있는 판. 논문 세대에 넣지 않는다(ADR-0057 결정 5) — 다른 것이 정상"
+   "freeze": "PAPER-FREEZE-003",
+   "freeze_copy_exists": true,
+   "equals_freeze_copy": true
   },
   "R3_zone_all_SB/block_context.json": {
    "sha256": "277b8ff17c81de636731753b3c9cba6849903e6069bc5285c711d72b51bccfe6",
-   "freeze": "PAPER-FREEZE-002",
-   "freeze_copy_exists": false,
-   "equals_freeze_copy": false,
-   "difference_reason": "ADR-0055(2026-10-07) 면적 하한 없는 전량 재산출 — 동결본은 하한 있는 판. 논문 세대에 넣지 않는다(ADR-0057 결정 5) — 다른 것이 정상"
+   "freeze": "PAPER-FREEZE-003",
+   "freeze_copy_exists": true,
+   "equals_freeze_copy": true
   },
   "R3_zone_all_SB/members.parquet": {
    "sha256": "f515edfc16721e90fa177e8dcab158489086200959254062e61d79cf56374f3c",
@@ -651,6 +595,128 @@
   },
   "scope_note": "이격 8런(R0~R3 _SB · @all)만 새로 동결, 나머지는 FREEZE-001 을 sha256 으로 승계(metadata/inherited_from_PAPER-FREEZE-001.csv)"
  },
+ "freeze_003": {
+  "id": "PAPER-FREEZE-003",
+  "adr": "ADR-0058",
+  "checksums_csv_sha256": "c8b49faa8268b2995dd8ef42cd2b23c8014da24ade1d66d7d96b1ebde187bec4",
+  "n_listed": 29,
+  "gates": {
+   "G-A_grid_correction": {
+    "n_ok": 4477,
+    "n_in_topology": 4477,
+    "status_topology_mismatch": 0,
+    "n_emd_hi_changed": 93,
+    "hi_excess_legacy_mw": 1279.463,
+    "lo_max_abs_diff": 1.1368683772161603e-13,
+    "n_dl_diff": 0,
+    "hi_total_corrected_mw": 192844.001,
+    "pass": true
+   },
+   "G-B_block_context": [
+    {
+     "run": "R0_current",
+     "members_equal_freeze": true,
+     "subset_all": true,
+     "copied": true
+    },
+    {
+     "run": "R0_current@all",
+     "members_equal_freeze": true,
+     "subset_all": false,
+     "copied": false,
+     "reason": "ADR-0055 범위(정본 8런 + ADR-0056 재실행 _SB@all) 밖 — 운영판이 하한 승계판이라 복사하지 않는다"
+    },
+    {
+     "run": "R0_current_SB",
+     "members_equal_freeze": true,
+     "subset_all": true,
+     "copied": true
+    },
+    {
+     "run": "R0_current_SB@all",
+     "members_equal_freeze": true,
+     "subset_all": true,
+     "copied": true
+    },
+    {
+     "run": "R1_protect",
+     "members_equal_freeze": true,
+     "subset_all": true,
+     "copied": true
+    },
+    {
+     "run": "R1_protect@all",
+     "members_equal_freeze": true,
+     "subset_all": false,
+     "copied": false,
+     "reason": "ADR-0055 범위(정본 8런 + ADR-0056 재실행 _SB@all) 밖 — 운영판이 하한 승계판이라 복사하지 않는다"
+    },
+    {
+     "run": "R1_protect_SB",
+     "members_equal_freeze": true,
+     "subset_all": true,
+     "copied": true
+    },
+    {
+     "run": "R1_protect_SB@all",
+     "members_equal_freeze": true,
+     "subset_all": true,
+     "copied": true
+    },
+    {
+     "run": "R2_promo",
+     "members_equal_freeze": true,
+     "subset_all": true,
+     "copied": true
+    },
+    {
+     "run": "R2_promo@all",
+     "members_equal_freeze": true,
+     "subset_all": false,
+     "copied": false,
+     "reason": "ADR-0055 범위(정본 8런 + ADR-0056 재실행 _SB@all) 밖 — 운영판이 하한 승계판이라 복사하지 않는다"
+    },
+    {
+     "run": "R2_promo_SB",
+     "members_equal_freeze": true,
+     "subset_all": true,
+     "copied": true
+    },
+    {
+     "run": "R2_promo_SB@all",
+     "members_equal_freeze": true,
+     "subset_all": true,
+     "copied": true
+    },
+    {
+     "run": "R3_zone_all",
+     "members_equal_freeze": true,
+     "subset_all": true,
+     "copied": true
+    },
+    {
+     "run": "R3_zone_all@all",
+     "members_equal_freeze": true,
+     "subset_all": false,
+     "copied": false,
+     "reason": "ADR-0055 범위(정본 8런 + ADR-0056 재실행 _SB@all) 밖 — 운영판이 하한 승계판이라 복사하지 않는다"
+    },
+    {
+     "run": "R3_zone_all_SB",
+     "members_equal_freeze": true,
+     "subset_all": true,
+     "copied": true
+    },
+    {
+     "run": "R3_zone_all_SB@all",
+     "members_equal_freeze": true,
+     "subset_all": true,
+     "copied": true
+    }
+   ]
+  },
+  "scope_note": "계통 상한 정정판(v3_07_corrected) + ADR-0055 전량 block_context 12런. 나머지는 FREEZE-002→001 승계. 사이트 계통 표는 legacy 그대로(ADR-0052 운영 이행 별도)"
+ },
  "manuscript": [
   {
    "id": "PAPER-MANUSCRIPT-FINAL-001",
@@ -664,6 +730,13 @@
    "path": "docs/PAPER_MANUSCRIPT_V0.3.md",
    "generation": "PAPER-FREEZE-002",
    "sha256": "c8aa4e419d576712867b8a1f0e167903e8624cc27f12ed2b7a29973d0ca75d19",
+   "git_tracked": true
+  },
+  {
+   "id": "PAPER-MANUSCRIPT-V0.4",
+   "path": "docs/PAPER_MANUSCRIPT_V0.4.md",
+   "generation": "PAPER-FREEZE-003",
+   "sha256": "33a276d7a2b9258486284327cb493fad14f7f569512740f283ef8a032c29c857",
    "git_tracked": true
   }
  ],
