@@ -98,7 +98,7 @@ input[type=number].coef{width:80px;font:inherit;padding:2px 6px;border:1px solid
         <div class="hint-s" style="margin:10px 0 4px">농업보호구역</div>
         <div class="seg" data-k="prot"><button data-v="0" class="on">현행 유지</button><button data-v="1">설치 가능</button></div></div>
       <div class="cond"><h4>이격거리</h4>
-        <div class="seg" data-k="sb"><button data-v="0" class="on">미적용</button><button data-v="1">적용 (주거 200m)</button></div></div>
+        <div class="seg" data-k="sb"><button data-v="0" class="on">미적용</button><button data-v="1">적용 (주거 200m · 5호 군집)</button></div></div>
       <div class="cond"><h4>매립지(간척) 범위</h4>
         <div class="seg" data-k="scope"><button data-v="0" class="on">전체</button><button data-v="1">간척지만</button><button data-v="2">국가관리간척지</button></div></div>
       <div class="cond" id="cond-decree"><h4>농업회사법인의 사업 위치 제한 여부</h4>
@@ -184,7 +184,7 @@ input[type=number].coef{width:80px;font:inherit;padding:2px 6px;border:1px solid
       </div>
       <div class="sb-toggle" id="sbTgl">
         <button data-sb="0" class="on">이격 미적용</button>
-        <button data-sb="1">이격 적용 (주거 200m)</button>
+        <button data-sb="1">이격 적용 (주거 200m · 5호 군집)</button>
       </div>
       <div id="stats"></div>
       <div class="leg">
@@ -199,7 +199,7 @@ input[type=number].coef{width:80px;font:inherit;padding:2px 6px;border:1px solid
     </div>
   </div>
 
-  <div class="fn" style="margin-bottom:26px">배경 위성 © Esri<sup class="fnref">[19]</sup> · 후보 공간 = 21m 이내로 이어진 필지 묶음<sup class="fnref">[12]</sup> (자료: 지적 원장<sup class="fnref">[1]</sup>·농업진흥지역 경계<sup class="fnref">[5]</sup>) · 이격 적용 = 주거 200m 상한<sup class="fnref">[11]</sup>.</div>
+  <div class="fn" style="margin-bottom:26px">배경 위성 © Esri<sup class="fnref">[19]</sup> · 후보 공간 = 21m 이내로 이어진 필지 묶음<sup class="fnref">[12]</sup> (자료: 지적 원장<sup class="fnref">[1]</sup>·농업진흥지역 경계<sup class="fnref">[5]</sup>) · 이격 적용 = 주거 200m 상한<sup class="fnref">[11]</sup>(주거용 건물 5동 이상이 외벽 간 50m 이내로 모인 곳 기준<sup class="fnref">[30]</sup>).</div>
 
 
   </div>
@@ -526,7 +526,7 @@ input[type=number].coef{width:80px;font:inherit;padding:2px 6px;border:1px solid
     <div class="figbox reveal" id="t32">
       <h3 style="font-family:var(--serif);color:var(--navy);margin-bottom:12px">표 5. 시나리오 × 이격거리별 설치 가능 면적</h3>
       <div style="overflow-x:auto"><table class="v4" id="t-grid"></table></div>
-      <div class="figcap">후보 공간 = 21m 이내로 이어진 필지 묶음<sup class="fnref">[12]</sup> · 이격 적용 = 주거 200m 상한<sup class="fnref">[11]</sup>.<br>
+      <div class="figcap">후보 공간 = 21m 이내로 이어진 필지 묶음<sup class="fnref">[12]</sup> · 이격 적용 = 주거 200m 상한<sup class="fnref">[11]</sup>(주거용 건물 5동 이상이 외벽 간 50m 이내로 모인 곳 기준<sup class="fnref">[30]</sup>).<br>
       <a href="#scnmap" style="color:var(--leaf-deep)"><b>지도에서 후보 공간 직접 보기 →</b></a></div>
     </div>
   </div>

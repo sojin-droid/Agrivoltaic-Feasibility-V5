@@ -136,7 +136,7 @@ body[data-sources=full] #story-steps .figbox,body[data-sources=full] .verdict,bo
       같은 방법·같은 자료로 재어 어느 구역이 규모를 좌우하는지 비교함.
       <a href="scenarios.html#tables" style="color:var(--leaf-deep)">시나리오별 결과</a>의 표 1이 네 시나리오의 결과, 표 3이 구역별로 늘어나는 면적.</div>
     <p style="font-size:13px;color:var(--muted);margin:8px 0 0">본법: 「영농형 태양광 발전사업의 활성화 및 지원에 관한 법률」 법률 제21804호(2026-06-16 공포 · 2026-12-17 시행)<sup class="fnref">[10]</sup>.
-      이격거리는 「재생에너지 개발·이용·보급 촉진법」의 상한(주거 200m)<sup class="fnref">[11]</sup>을 전국에 똑같이 적용한 값을 함께 보임.</p>
+      이격거리는 「재생에너지 개발·이용·보급 촉진법」의 상한(주거 200m)<sup class="fnref">[11]</sup>을 전국에 똑같이 적용한 값을 함께 보임 — 주거용 건물(건축물 용도가 주택) 5동 이상이 외벽 간 50m 이내로 모인 곳(5호 군집)에서 200m 안의 농지를 제외<sup class="fnref">[30]</sup>.</p>
     <div class="art" style="padding:0">
 
   <div class="callout-v4"><b>표기 단서 — 제정안(의견조회판).</b> 아래 시행령·시행규칙
@@ -366,8 +366,8 @@ body[data-sources=full] #story-steps .figbox,body[data-sources=full] .verdict,bo
         <tr><td class="l"><b>기존 태양광 시설</b></td><td class="l">지도의 기존 시설은 공개된 태양광 발전사업 허가 자료 중 위치를 확인할 수 있는 곳만 표시한 것이며,
           전국의 모든 시설이 아니다. 후보 공간으로 표시된 땅이 비어 있다는 뜻도 아니다.</td></tr>
         <tr><td class="l"><b>간척지</b></td><td class="l">한국농어촌공사 원장에 등재된 간척지만 포함했다. 민간이 매립한 땅은 원장에 없어 빠졌다<sup class="fnref">[3]</sup>.</td></tr>
-        <tr><td class="l"><b>이격거리</b></td><td class="l">이격거리 적용 값은 주거 200m 상한<sup class="fnref">[11]</sup>을 전국에 똑같이 적용한 것으로,
-          지자체별 실제 기준이나 측정 방법과 다를 수 있다.</td></tr>
+        <tr><td class="l"><b>이격거리</b></td><td class="l">이격거리 적용 값은 주거 200m 상한<sup class="fnref">[11]</sup>을 전국에 똑같이 적용한 것이다(주거용 건물(건축물 용도가 주택) 5동 이상이 외벽 간 50m 이내로 모인 곳(5호 군집)에서 200m 안의 농지를 제외).
+          주택은 건축물 용도가 등재된 건물만 세므로(용도 미등재 건물 제외<sup class="fnref">[30]</sup>), 지자체별 실제 기준이나 고시될 측정 방법과 다를 수 있다.</td></tr>
         <tr><td class="l"><b>자료 시점</b></td><td class="l">자료마다 수집한 시점이 다르다(2026년 5–9월). 이후 바뀐 지적·용도지역은 반영되지 않았다.</td></tr>
       </table></div>
     </div>
@@ -540,8 +540,8 @@ body[data-sources=full] #story-steps .figbox,body[data-sources=full] .verdict,bo
       법인·국공유만 세면 <b>${V4.n(R.R0_current.ge50)}곳</b>(제주 서귀포 ${V4.n(cpAnchorTop.mw)}MW).`, 'finder.html', '후보지 찾기'],
     ['③', '구역별로 늘어나는 면적', `농업보호구역에 설치 가능하면 +${V4.km2((M.R1['정본'].m2 - M.R0['정본'].m2)/1e6)} km², 농업진흥구역에 설치 가능하면 <b>+${V4.km2((M.R2['정본'].m2 - M.R0['정본'].m2)/1e6)} km²</b>.
       농업진흥구역의 경우 50MW 이상 후보 공간이 <b>${V4.n(R.R2_promo.ge50)}곳(합 약 ${V4.n(R.R2_promo.ge50_mw)}MW)</b>으로 늘고, 그중 ${V4.n(cpBigRec)}곳이 간척 지구.`, 'finder.html', `후보지 찾기 — ${V4.n(R.R2_promo.ge50)}곳의 지도`],
-    ['④', '이격거리를 적용하면', `주거 200m 이격거리를 적용하면 특별법 시행 전 면적은 −${drop('R0_current')}%, 농업진흥구역에 설치 가능한 경우의 면적은 −${drop('R2_promo')}% 줄어든다.
-      <b>50MW 이상은 ${V4.n(R.R2_promo.ge50)} → ${V4.n(R.R2_promo_SB.ge50)}곳</b>(간척 평야는 주거지에서 멀기 때문).`, 'scenarios.html#t32', '시나리오별 결과 표 5'],
+    ['④', '이격거리를 적용하면', `주거 200m 이격거리(5호 군집 기준)를 적용하면 특별법 시행 전 면적은 −${drop('R0_current')}%, 농업진흥구역에 설치 가능한 경우의 면적은 −${drop('R2_promo')}% 줄어든다.
+      <b>50MW 이상은 ${V4.n(R.R2_promo.ge50)} → ${V4.n(R.R2_promo_SB.ge50)}곳</b>.`, 'scenarios.html#t32', '시나리오별 결과 표 5'],
     ['⑤', '간척지와 농업회사법인', `시행령 제정안은 <b>농업회사법인</b>이 쓸 수 있는 부지를 매립지등으로 한정한다 — 해당 면적 <b>${kk(outC.anchor_m2)} → ${kk(inC.anchor_m2)} km²</b>(−${cut(outC.anchor_m2, inC.anchor_m2)}%).
       농업진흥구역에 설치할 수 있게 되어야 간척지 안 법인 소유 ${kk(inC.all_m2)} km²와 빌려 쓸 수 있는 간척지 농지 ${kk(inO.all_m2)} km²가 열리며, 법인·국공유 비중은 전국 ${(100*M.R2['정본'].km2/M.R2['대조군'].km2).toFixed(1)}%인데
       <b>간척지는 ${(100*K.R2['정본'].km2/K.R2['대조군'].km2).toFixed(1)}%</b>다.`, '#law', '아래 2 법·제도 근거 — 시행령 제정안'],
