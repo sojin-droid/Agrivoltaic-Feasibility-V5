@@ -529,6 +529,13 @@ input[type=number].coef{width:80px;font:inherit;padding:2px 6px;border:1px solid
       <div class="figcap">후보 공간 = 21m 이내로 이어진 필지 묶음<sup class="fnref">[12]</sup> · 이격 적용 = 주거 200m 상한<sup class="fnref">[11]</sup>(주거용 건물 5동 이상이 외벽 간 50m 이내로 모인 곳 기준<sup class="fnref">[30]</sup>).<br>
       <a href="#scnmap" style="color:var(--leaf-deep)"><b>지도에서 후보 공간 직접 보기 →</b></a></div>
     </div>
+
+    <div class="figbox reveal" id="t32map">
+      <h3 style="font-family:var(--serif);color:var(--navy);margin-bottom:12px">그림 1. 이격 적용 후 시군별 설치 가능 면적 — 특별법 시행 전 · 소유 구분 없음</h3>
+      <img src="assets/fig/setback_national_wall50m.png" alt="전국 시군별 이격 적용 후 설치 가능 면적 지도 (주거용 건물 5호 군집 기준)" loading="lazy" style="display:block;width:100%;max-width:640px;margin:0 auto">
+      <div class="figcap">농업진흥지역 밖의 농지 중 설치 가능 필지에서, 주거용 건물 5동 이상이 외벽 간 50m 이내로 모인 곳(5호 군집)으로부터 200m 안의 농지를 뺀 면적<sup class="fnref">[11]</sup><sup class="fnref">[30]</sup>.
+        전국 <span id="sbmap-after">—</span> (이격 미적용 <span id="sbmap-before">—</span>). 이 사이트의 기본값(법인·국공유, 표 5)과 달리 개인 소유를 포함한 값으로, 위 지도의 "개인 소유 포함(비교용)"과 같은 범위입니다. 참고 MW는 면적 × 0.045 kW/㎡<sup class="fnref">[13]</sup>.</div>
+    </div>
   </div>
 </section>
 
@@ -613,6 +620,10 @@ input[type=number].coef{width:80px;font:inherit;padding:2px 6px;border:1px solid
       // MW 표기는 표 1과 같은 경로(면적×45 = 0.045kW/㎡)로 통일 — 엔진 합계(m_total_mw)는
       // 구획별 반올림 누적으로 ±1 어긋나 같은 값이 두 표기로 보였음 (2026-09-01 점검)
     }).join('');
+  // 그림 1 캡션 — 전국 합계는 results_v4 에서 (숫자를 본문에 적지 않는다)
+  { const a = res.runs['R0_current_SB@all'], b = res.runs['R0_current@all'];
+    if (a) document.getElementById('sbmap-after').textContent = `${V4.n(a.n_eligible)}필지 · ${V4.km2(a.eligible_area_km2)} km² · 참고 ${V4.n(Math.round(a.eligible_area_km2 * 45))} MW`;
+    if (b) document.getElementById('sbmap-before').textContent = `${V4.n(b.n_eligible)}필지 · ${V4.km2(b.eligible_area_km2)} km²`; }
   // 표 1 각주: 판정 보류 병기 (T14 v7)
   const pz2 = s.anchor.pending_zone_null;
   if (pz2 && pz2.n) document.getElementById('fn-pending').innerHTML =
