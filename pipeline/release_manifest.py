@@ -98,6 +98,9 @@ def main():
             h = sha(lp)
             runs[f'{r}/{f}'] = {'sha256': h, 'freeze': 'PAPER-FREEZE-003' if f.startswith('block_context') else ('PAPER-FREEZE-002' if r.endswith('_SB') else 'PAPER-FREEZE-001'),
                                 'freeze_copy_exists': os.path.exists(fp), 'equals_freeze_copy': (os.path.exists(fp) and sha(fp) == h)}
+            if (f.startswith('grid_link') or f.startswith('block_context')) and not runs[f'{r}/{f}']['equals_freeze_copy']:
+                runs[f'{r}/{f}']['difference_reason'] = ('ADR-0059(2026-10-12) 운영 계통 정정판(grid_emd_v3c, v3_07_corrected) 적용 재실행 — '
+                                                         '동결본 사본은 legacy(v3_06) 계통 값이다. 하한·구획은 같고 상한·조건부/부족 등급만 다르다')
     man['scenario_runs'] = runs
     au = os.path.join(LR, 'analysis_units', 'analysis_unit_v1.gpkg')
     man['analysis_unit_v1_gpkg'] = {'sha256': sha(au), 'bytes': os.path.getsize(au)} if os.path.exists(au) else 'missing'

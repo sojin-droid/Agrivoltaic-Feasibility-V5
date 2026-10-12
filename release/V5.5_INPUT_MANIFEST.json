@@ -1,11 +1,15 @@
 {
- "written_at": "2026-10-12T20:08:12",
+ "written_at": "2026-10-13T00:35:33",
  "purpose": "발행 입력 상태 고정 — 동결본(논문 재현)과 라이브 작업 DB 를 구분해 적는다. 추정값 없음.",
  "site_repo": {
   "branch": "v5.5-ggi-review",
-  "head": "64b346f1462e0ef77896974b74d6843a7381fa12",
-  "n_dirty": 1,
+  "head": "4bfe5f222b6fc1ddd63987d25d2426843c416e43",
+  "n_dirty": 2,
   "dirty": [
+   {
+    "status": "M",
+    "path": "docs/method_advisory/DELIVERABLES.md"
+   },
    {
     "status": "M",
     "path": "pipeline/release_manifest.py"
@@ -14,9 +18,14 @@
  },
  "model_repo": {
   "branch": "pr0048-spatial-heterogeneity",
-  "head": "5a93af50240f40c236f20a2a2d2847b3279ff74b",
-  "n_dirty": 7,
+  "head": "844faf115059c757994729c55443d923aeb13d23",
+  "n_dirty": 11,
   "dirty": [
+   {
+    "status": "??",
+    "path": "model/logs/adr0059_advisory_all.txt",
+    "sha256": "eeef77a54523e92eafdb51e45a7c108fcc672b308ffae861da9cd202ad8875b7"
+   },
    {
     "status": "??",
     "path": "model/logs/touchstones_adr0056.txt",
@@ -34,6 +43,11 @@
    },
    {
     "status": "??",
+    "path": "model/logs/touchstones_adr0059.txt",
+    "sha256": "2c2d0c1990f24be68f66f09f16088c73e576787c741520153ca63941bb491d22"
+   },
+   {
+    "status": "??",
     "path": "model/logs/touchstones_t26.txt",
     "sha256": "d00c072c2b09442d221d706a35dbe1fc04cff45b95adfe840ee8f78686d74fc1"
    },
@@ -41,6 +55,16 @@
     "status": "??",
     "path": "model/logs/v10_01_freeze002.txt",
     "sha256": "69dee8c9186566ebccb9e4bc5602378dfba3cfdfcb4a296b2d53e6aa2cfe2557"
+   },
+   {
+    "status": "??",
+    "path": "model/logs/v3_09_run.txt",
+    "sha256": "0df4bf19cdf406351cb38211992b5940c95c3f19d77d21e697c7cd842a4c15e0"
+   },
+   {
+    "status": "??",
+    "path": "model/logs/v3_09_state.json",
+    "sha256": "8e2bd3bfcc0c7180d0f6dd3508f84655a22a3984b41d5ceb5b9c74a3b83b3beb"
    },
    {
     "status": "??",
@@ -59,24 +83,26 @@
   "role": "live working database (현재 작업 DB — 동결 스냅숏이 아님)",
   "path": "Ledger_Rebuild/agrivoltaic_ledger_v1.duckdb",
   "bytes": 23169871872,
-  "mtime": "2026-10-12T16:30:58",
-  "sha256": "6bf0c4d780e06961dfcf600a13abf2cdb3a2f0d50800a33d3daaa0382d8f2af8",
+  "mtime": "2026-10-13T00:13:14",
+  "sha256": "589efb7fca71c831df7c084333ada32e278381c6c27bede396e42070a2fc5e19",
   "freeze_recorded_sha256": "70ad231ec2e49843d8ec66622a76ee1b1ffb2ea4e2d592f7cd082f2913d5ed61",
   "freeze_recorded_bytes": 23169871872,
   "equals_freeze_snapshot": false
  },
  "scenario_runs": {
   "R0_current/block_context.parquet": {
-   "sha256": "ffb9c264cacd1b39ab491d6418afd2d70cc839771c6e164fa930e1c145c21c06",
+   "sha256": "853c61524ad7c1f30619d493dba10ea1ab708071e9e148ad7974892c19445908",
    "freeze": "PAPER-FREEZE-003",
    "freeze_copy_exists": true,
-   "equals_freeze_copy": true
+   "equals_freeze_copy": false,
+   "difference_reason": "ADR-0059(2026-10-12) 운영 계통 정정판(grid_emd_v3c, v3_07_corrected) 적용 재실행 — 동결본 사본은 legacy(v3_06) 계통 값이다. 하한·구획은 같고 상한·조건부/부족 등급만 다르다"
   },
   "R0_current/block_context.json": {
-   "sha256": "e4d6b40f041f85ecc36a3018818d12cd07013e358aa9475a8df7aacea5be5bd6",
+   "sha256": "c4b45dfa3776f326cda2f711a8263c1374fc7f4401e3cd47b58117a423e75453",
    "freeze": "PAPER-FREEZE-003",
    "freeze_copy_exists": true,
-   "equals_freeze_copy": true
+   "equals_freeze_copy": false,
+   "difference_reason": "ADR-0059(2026-10-12) 운영 계통 정정판(grid_emd_v3c, v3_07_corrected) 적용 재실행 — 동결본 사본은 legacy(v3_06) 계통 값이다. 하한·구획은 같고 상한·조건부/부족 등급만 다르다"
   },
   "R0_current/members.parquet": {
    "sha256": "ec0b05532c3fec22ba107fc11ac38a18d377ae7ee55e93d7e2009bfc1a7a8942",
@@ -91,22 +117,25 @@
    "equals_freeze_copy": true
   },
   "R0_current/grid_link.parquet": {
-   "sha256": "95a6c81e6fadf9f2f8497807ddfef2cb70990e5ea4c3e2a970c212a42382fdc5",
+   "sha256": "dbc5db195a240b4e840ea83309fe19c933a60d951f022321ef6edb957673f734",
    "freeze": "PAPER-FREEZE-001",
    "freeze_copy_exists": true,
-   "equals_freeze_copy": true
+   "equals_freeze_copy": false,
+   "difference_reason": "ADR-0059(2026-10-12) 운영 계통 정정판(grid_emd_v3c, v3_07_corrected) 적용 재실행 — 동결본 사본은 legacy(v3_06) 계통 값이다. 하한·구획은 같고 상한·조건부/부족 등급만 다르다"
   },
   "R0_current_SB/block_context.parquet": {
-   "sha256": "94c10d538b720755d724160eb650c6ff3a33e7975af4de85f374598549845c4e",
+   "sha256": "10e42237f6262547d7d8fd20665d4efba230e7a192f46abd7a9c73c5cbba0392",
    "freeze": "PAPER-FREEZE-003",
    "freeze_copy_exists": true,
-   "equals_freeze_copy": true
+   "equals_freeze_copy": false,
+   "difference_reason": "ADR-0059(2026-10-12) 운영 계통 정정판(grid_emd_v3c, v3_07_corrected) 적용 재실행 — 동결본 사본은 legacy(v3_06) 계통 값이다. 하한·구획은 같고 상한·조건부/부족 등급만 다르다"
   },
   "R0_current_SB/block_context.json": {
-   "sha256": "f67f91266b1cabc944a58b3d20662cd15ff406dac0405179d36b20d3baa4ecf2",
+   "sha256": "95f68feae93c94fc3d03856f2b4762377ef42878631931b00b0a66943e5bc06b",
    "freeze": "PAPER-FREEZE-003",
    "freeze_copy_exists": true,
-   "equals_freeze_copy": true
+   "equals_freeze_copy": false,
+   "difference_reason": "ADR-0059(2026-10-12) 운영 계통 정정판(grid_emd_v3c, v3_07_corrected) 적용 재실행 — 동결본 사본은 legacy(v3_06) 계통 값이다. 하한·구획은 같고 상한·조건부/부족 등급만 다르다"
   },
   "R0_current_SB/members.parquet": {
    "sha256": "6e897c37f95a8817a4539163564c79c4b5daa50e98fe97d37617f730ca703b70",
@@ -121,22 +150,25 @@
    "equals_freeze_copy": true
   },
   "R0_current_SB/grid_link.parquet": {
-   "sha256": "a6b20cbc38f0641e799b1f7d3328d125289255e4ebf9d7dedc3d6e5914f4ca30",
+   "sha256": "bfdb5b0a4f86875ef2649f54f001a8d1c7af4f3525b5edeadc5c3e74ba0d96b0",
    "freeze": "PAPER-FREEZE-002",
    "freeze_copy_exists": true,
-   "equals_freeze_copy": true
+   "equals_freeze_copy": false,
+   "difference_reason": "ADR-0059(2026-10-12) 운영 계통 정정판(grid_emd_v3c, v3_07_corrected) 적용 재실행 — 동결본 사본은 legacy(v3_06) 계통 값이다. 하한·구획은 같고 상한·조건부/부족 등급만 다르다"
   },
   "R1_protect/block_context.parquet": {
-   "sha256": "2a139ce6677c50831a58bedc9051356e5786157a24af234a806f0dfa437225f7",
+   "sha256": "f5acd3f6b2c652cc8fc8d6ac92bef1b5925d52b8b5e0850a97e54fa3ccb0cd13",
    "freeze": "PAPER-FREEZE-003",
    "freeze_copy_exists": true,
-   "equals_freeze_copy": true
+   "equals_freeze_copy": false,
+   "difference_reason": "ADR-0059(2026-10-12) 운영 계통 정정판(grid_emd_v3c, v3_07_corrected) 적용 재실행 — 동결본 사본은 legacy(v3_06) 계통 값이다. 하한·구획은 같고 상한·조건부/부족 등급만 다르다"
   },
   "R1_protect/block_context.json": {
-   "sha256": "3eaaf4b8c1e41427ab39da166eadd24e8dabff007e8c3a0636de83dd9e48dec9",
+   "sha256": "26a4d21d00afcc94cda1581283996b291bb86a84d1532580d7d9d5e6258c6b1c",
    "freeze": "PAPER-FREEZE-003",
    "freeze_copy_exists": true,
-   "equals_freeze_copy": true
+   "equals_freeze_copy": false,
+   "difference_reason": "ADR-0059(2026-10-12) 운영 계통 정정판(grid_emd_v3c, v3_07_corrected) 적용 재실행 — 동결본 사본은 legacy(v3_06) 계통 값이다. 하한·구획은 같고 상한·조건부/부족 등급만 다르다"
   },
   "R1_protect/members.parquet": {
    "sha256": "9f258305f6ed97fd77f20df7cfc27a15565d65726b706dc95ada36bf9851749c",
@@ -151,22 +183,25 @@
    "equals_freeze_copy": true
   },
   "R1_protect/grid_link.parquet": {
-   "sha256": "d9df67bcc0bfc31a2ed30d4b20b2c8a8994999ea4b62800bb6664d0b82709754",
+   "sha256": "5266ec08083b2c3cc3ed38161ca8b2aef9cdbf48c5c16cad14c5ecbf04c39b33",
    "freeze": "PAPER-FREEZE-001",
    "freeze_copy_exists": true,
-   "equals_freeze_copy": true
+   "equals_freeze_copy": false,
+   "difference_reason": "ADR-0059(2026-10-12) 운영 계통 정정판(grid_emd_v3c, v3_07_corrected) 적용 재실행 — 동결본 사본은 legacy(v3_06) 계통 값이다. 하한·구획은 같고 상한·조건부/부족 등급만 다르다"
   },
   "R1_protect_SB/block_context.parquet": {
-   "sha256": "739f3239a86f09a872a828253984ad6ef5a978dd4a40bd78b63aabe5badc6f2f",
+   "sha256": "d2ba635d8a4c2682a9a487cff133bb2cfc954ac49c01622dc6122e9a764f7a7b",
    "freeze": "PAPER-FREEZE-003",
    "freeze_copy_exists": true,
-   "equals_freeze_copy": true
+   "equals_freeze_copy": false,
+   "difference_reason": "ADR-0059(2026-10-12) 운영 계통 정정판(grid_emd_v3c, v3_07_corrected) 적용 재실행 — 동결본 사본은 legacy(v3_06) 계통 값이다. 하한·구획은 같고 상한·조건부/부족 등급만 다르다"
   },
   "R1_protect_SB/block_context.json": {
-   "sha256": "3109530f57956e76b1d8d774b8460d5b387489772b72f4535722d83f012d9682",
+   "sha256": "af12929b0546723a0aa3a62a0d67ba086bf83c830082f5f43e1b3ab04d48b351",
    "freeze": "PAPER-FREEZE-003",
    "freeze_copy_exists": true,
-   "equals_freeze_copy": true
+   "equals_freeze_copy": false,
+   "difference_reason": "ADR-0059(2026-10-12) 운영 계통 정정판(grid_emd_v3c, v3_07_corrected) 적용 재실행 — 동결본 사본은 legacy(v3_06) 계통 값이다. 하한·구획은 같고 상한·조건부/부족 등급만 다르다"
   },
   "R1_protect_SB/members.parquet": {
    "sha256": "f47bdc721e733d8fbe860d28e927adcfec0efa09b683ece4b85fac1af20535f2",
@@ -181,22 +216,25 @@
    "equals_freeze_copy": true
   },
   "R1_protect_SB/grid_link.parquet": {
-   "sha256": "a459977a039ff8e31c368cc4f793aadb36148ef8f1eeae5a7e92b5c699566209",
+   "sha256": "2e53851e1f83ec4031a1f318afe5b4ebd3ac538bcb4ba8d4be357e203747408a",
    "freeze": "PAPER-FREEZE-002",
    "freeze_copy_exists": true,
-   "equals_freeze_copy": true
+   "equals_freeze_copy": false,
+   "difference_reason": "ADR-0059(2026-10-12) 운영 계통 정정판(grid_emd_v3c, v3_07_corrected) 적용 재실행 — 동결본 사본은 legacy(v3_06) 계통 값이다. 하한·구획은 같고 상한·조건부/부족 등급만 다르다"
   },
   "R2_promo/block_context.parquet": {
-   "sha256": "dad6a926333ee8397f38a496ce1a87c6bca9fd38ca37b570012bb873e62da9c8",
+   "sha256": "4d7c4552101b3872bba5ca8db2379a91fe5927419c18091768592ca13a6c1914",
    "freeze": "PAPER-FREEZE-003",
    "freeze_copy_exists": true,
-   "equals_freeze_copy": true
+   "equals_freeze_copy": false,
+   "difference_reason": "ADR-0059(2026-10-12) 운영 계통 정정판(grid_emd_v3c, v3_07_corrected) 적용 재실행 — 동결본 사본은 legacy(v3_06) 계통 값이다. 하한·구획은 같고 상한·조건부/부족 등급만 다르다"
   },
   "R2_promo/block_context.json": {
-   "sha256": "4e2340c48ea1b586012cfb8d43ec093dbb17de9323514183d45a505fde27aca3",
+   "sha256": "236fe9870154d7f2d2170a20bcd37b281b6294343f9f24c4910c820c961b74d9",
    "freeze": "PAPER-FREEZE-003",
    "freeze_copy_exists": true,
-   "equals_freeze_copy": true
+   "equals_freeze_copy": false,
+   "difference_reason": "ADR-0059(2026-10-12) 운영 계통 정정판(grid_emd_v3c, v3_07_corrected) 적용 재실행 — 동결본 사본은 legacy(v3_06) 계통 값이다. 하한·구획은 같고 상한·조건부/부족 등급만 다르다"
   },
   "R2_promo/members.parquet": {
    "sha256": "020bee1a2510d04c90c2be3fcf1160fb85fe4390de9e6e453e726832107a7f4c",
@@ -211,22 +249,25 @@
    "equals_freeze_copy": true
   },
   "R2_promo/grid_link.parquet": {
-   "sha256": "4c90ae6aa7e3da991aff9748ee57a4ee36bae20c294f3343c1e4df63e4de0aa4",
+   "sha256": "31ca0f3ab263c687b6c8ab36d5ce7a41bf866b55d01e583851b85cf8a8fb1405",
    "freeze": "PAPER-FREEZE-001",
    "freeze_copy_exists": true,
-   "equals_freeze_copy": true
+   "equals_freeze_copy": false,
+   "difference_reason": "ADR-0059(2026-10-12) 운영 계통 정정판(grid_emd_v3c, v3_07_corrected) 적용 재실행 — 동결본 사본은 legacy(v3_06) 계통 값이다. 하한·구획은 같고 상한·조건부/부족 등급만 다르다"
   },
   "R2_promo_SB/block_context.parquet": {
-   "sha256": "ac5a4626f32673d35d4ef64ae611260b17295e3df8d57363d7899436cafca5cd",
+   "sha256": "a99f076848d6b49a85cd2744e4c954305ce2de749bdffc705b41c11d06c78927",
    "freeze": "PAPER-FREEZE-003",
    "freeze_copy_exists": true,
-   "equals_freeze_copy": true
+   "equals_freeze_copy": false,
+   "difference_reason": "ADR-0059(2026-10-12) 운영 계통 정정판(grid_emd_v3c, v3_07_corrected) 적용 재실행 — 동결본 사본은 legacy(v3_06) 계통 값이다. 하한·구획은 같고 상한·조건부/부족 등급만 다르다"
   },
   "R2_promo_SB/block_context.json": {
-   "sha256": "5f980ca28457aeaee7480b20446f1356cd09c6fc3ea10eb373ff2d7b91bc8b92",
+   "sha256": "423b63028795d904f177674337f83832f88db08f317ad782aa7b673139172217",
    "freeze": "PAPER-FREEZE-003",
    "freeze_copy_exists": true,
-   "equals_freeze_copy": true
+   "equals_freeze_copy": false,
+   "difference_reason": "ADR-0059(2026-10-12) 운영 계통 정정판(grid_emd_v3c, v3_07_corrected) 적용 재실행 — 동결본 사본은 legacy(v3_06) 계통 값이다. 하한·구획은 같고 상한·조건부/부족 등급만 다르다"
   },
   "R2_promo_SB/members.parquet": {
    "sha256": "6239ee5a990a989513d7eb497ccacb6e0229d43f884b442b3d5f97b421ea7735",
@@ -241,22 +282,25 @@
    "equals_freeze_copy": true
   },
   "R2_promo_SB/grid_link.parquet": {
-   "sha256": "118e8c8d7f5e2ae7cd2788e55516baceabf585845d113d8154759e0bcefac7db",
+   "sha256": "547ae451a8341eec57c4e14f65288b1b7e3df8db7e96b4935154ba455b6808e6",
    "freeze": "PAPER-FREEZE-002",
    "freeze_copy_exists": true,
-   "equals_freeze_copy": true
+   "equals_freeze_copy": false,
+   "difference_reason": "ADR-0059(2026-10-12) 운영 계통 정정판(grid_emd_v3c, v3_07_corrected) 적용 재실행 — 동결본 사본은 legacy(v3_06) 계통 값이다. 하한·구획은 같고 상한·조건부/부족 등급만 다르다"
   },
   "R3_zone_all/block_context.parquet": {
-   "sha256": "18c0547ad32c5d9bb2740b53f948d6a27ffaad7d29f7d2ed64a0d85e7339169c",
+   "sha256": "7b81f5ce017a9fc8fb4a7f729eace9e81524a1bdabe7ebacf51b230f969afa06",
    "freeze": "PAPER-FREEZE-003",
    "freeze_copy_exists": true,
-   "equals_freeze_copy": true
+   "equals_freeze_copy": false,
+   "difference_reason": "ADR-0059(2026-10-12) 운영 계통 정정판(grid_emd_v3c, v3_07_corrected) 적용 재실행 — 동결본 사본은 legacy(v3_06) 계통 값이다. 하한·구획은 같고 상한·조건부/부족 등급만 다르다"
   },
   "R3_zone_all/block_context.json": {
-   "sha256": "bd0fae281501ef7c26fc630034899af9bc8ac3ab8f4d0298a9b83e8e6a347ab4",
+   "sha256": "26a7df522ee43eb8c6aedfdc3b34e9115b65e4014ac24f92f5449cc4b8ac5fce",
    "freeze": "PAPER-FREEZE-003",
    "freeze_copy_exists": true,
-   "equals_freeze_copy": true
+   "equals_freeze_copy": false,
+   "difference_reason": "ADR-0059(2026-10-12) 운영 계통 정정판(grid_emd_v3c, v3_07_corrected) 적용 재실행 — 동결본 사본은 legacy(v3_06) 계통 값이다. 하한·구획은 같고 상한·조건부/부족 등급만 다르다"
   },
   "R3_zone_all/members.parquet": {
    "sha256": "ae45f92fdf28911b9e0a6115db7df4d8465fa27b7330d93a1f6ebb0ab9f8632d",
@@ -271,22 +315,25 @@
    "equals_freeze_copy": true
   },
   "R3_zone_all/grid_link.parquet": {
-   "sha256": "a3e7e2244dc01f8bc081680588b666d993a893868890743a741273ffd50b9163",
+   "sha256": "384e83d9907ab4858efc23ff25491dcbeaa26d53e3482f47c0cb54d45a7e5dd8",
    "freeze": "PAPER-FREEZE-001",
    "freeze_copy_exists": true,
-   "equals_freeze_copy": true
+   "equals_freeze_copy": false,
+   "difference_reason": "ADR-0059(2026-10-12) 운영 계통 정정판(grid_emd_v3c, v3_07_corrected) 적용 재실행 — 동결본 사본은 legacy(v3_06) 계통 값이다. 하한·구획은 같고 상한·조건부/부족 등급만 다르다"
   },
   "R3_zone_all_SB/block_context.parquet": {
-   "sha256": "c4825040e67f117dc033bcded9fa7f01b83495109b102675a480be4551d93af4",
+   "sha256": "21a9d1f085449c328c98ef7a21ecc3e269ea097ed8166fa8b428d571c987281f",
    "freeze": "PAPER-FREEZE-003",
    "freeze_copy_exists": true,
-   "equals_freeze_copy": true
+   "equals_freeze_copy": false,
+   "difference_reason": "ADR-0059(2026-10-12) 운영 계통 정정판(grid_emd_v3c, v3_07_corrected) 적용 재실행 — 동결본 사본은 legacy(v3_06) 계통 값이다. 하한·구획은 같고 상한·조건부/부족 등급만 다르다"
   },
   "R3_zone_all_SB/block_context.json": {
-   "sha256": "277b8ff17c81de636731753b3c9cba6849903e6069bc5285c711d72b51bccfe6",
+   "sha256": "a2d11da0bce2906e8e0caa11f4234b7b81f751b005d9d16f17c8b27a7e9f0215",
    "freeze": "PAPER-FREEZE-003",
    "freeze_copy_exists": true,
-   "equals_freeze_copy": true
+   "equals_freeze_copy": false,
+   "difference_reason": "ADR-0059(2026-10-12) 운영 계통 정정판(grid_emd_v3c, v3_07_corrected) 적용 재실행 — 동결본 사본은 legacy(v3_06) 계통 값이다. 하한·구획은 같고 상한·조건부/부족 등급만 다르다"
   },
   "R3_zone_all_SB/members.parquet": {
    "sha256": "f515edfc16721e90fa177e8dcab158489086200959254062e61d79cf56374f3c",
@@ -301,28 +348,28 @@
    "equals_freeze_copy": true
   },
   "R3_zone_all_SB/grid_link.parquet": {
-   "sha256": "dfd5943025c51c25a547ccecd7f9de73394c99813c44aa6587d40bec927963ca",
+   "sha256": "9b14d348445a1709c37eaedb6725b34f7a6872b6e923d0c24054082bf1e194f3",
    "freeze": "PAPER-FREEZE-002",
    "freeze_copy_exists": true,
-   "equals_freeze_copy": true
+   "equals_freeze_copy": false,
+   "difference_reason": "ADR-0059(2026-10-12) 운영 계통 정정판(grid_emd_v3c, v3_07_corrected) 적용 재실행 — 동결본 사본은 legacy(v3_06) 계통 값이다. 하한·구획은 같고 상한·조건부/부족 등급만 다르다"
   }
  },
  "analysis_unit_v1_gpkg": {
-  "sha256": "292e1bd572c4640082b757ca29a010b5cbf74ac4f0f25424ac46aea6fe72632a",
+  "sha256": "fdc16013485f4995ade94e90745c1b52364a99237c01e8190138b80a6a4956ad",
   "bytes": 199086080
  },
  "freeze": {
   "id": "PAPER-FREEZE-001",
   "checksums_csv_sha256": "845516f61e8fd7746e9ba82b7e4cd71fb9f38b8903c4eab17d5c640e6d2ca427",
   "n_listed": 299,
-  "n_files_in_folder": 5068,
-  "n_not_listed": 4769,
+  "n_files_in_folder": 303,
+  "n_not_listed": 4,
   "not_listed_by_top_folder": {
+   "RERUN_WORKSPACES_MOVED.json": 1,
    "checksums.csv": 1,
    "manifest.json": 1,
-   "paper_freeze_baseline.json": 1,
-   "rerun_A": 2383,
-   "rerun_B": 2383
+   "paper_freeze_baseline.json": 1
   },
   "scope_note": "checksums.csv 등재 범위 = results/ · inputs/ · metadata/ 의 동결 대상. rerun_A/ · rerun_B/ 는 재현 검증 작업공간(그 안의 DB 는 쓰기 가능), checksums.csv · manifest.json · paper_freeze_baseline.json 은 동결 자체의 기록 파일이라 자기 목록에 없다. 등재 밖 파일을 동결본에 더하지 않는다."
  },
@@ -766,8 +813,8 @@
    "sha256": "823f3e0fb69a7e1b61b681b9bcfb3d07d1fd100f9fe08f2da99339524ea46065"
   },
   "grid_summary.json": {
-   "generated": "2026-09-24 01:38",
-   "sha256": "bd8647d5647ec81ea91c0cba05d4ce8ed1f4eab04fd7f8c782c463b183e56b35"
+   "generated": "2026-10-12 23:17",
+   "sha256": "6b26d1946a5ba917ae57e6d5464d2d7995da0e49f72b74b3905d9185024cff58"
   },
   "ind_firms_meta.json": {
    "generated": "2026-09-23 19:39",
@@ -810,12 +857,12 @@
    "sha256": "06e91b12084f4c90780ce478ba5c91b968e53f16efeeb7c34e2a9184155f2adf"
   },
   "top10_index.json": {
-   "generated": "2026-10-12 12:30",
-   "sha256": "e4c0f39eb292ff7aa99227120861981db85c9b1526ea6564f3bf0436bfd4a1c3"
+   "generated": "2026-10-12 23:54",
+   "sha256": "1292bca10866424ca119eb78c9d04d8617ba7781b44d6b8b87242ca29f546d81"
   },
   "units_index.json": {
-   "generated": "2026-10-07 13:51",
-   "sha256": "31e32a71807859972eac33d96d5642927446b91b497ee4c92f3bbaa00946e0d7"
+   "generated": "2026-10-12 23:19",
+   "sha256": "75439a2324c7b94b9886bb5e8800cb80aae6780c6276894962da66bafeb7a058"
   }
  }
 }
