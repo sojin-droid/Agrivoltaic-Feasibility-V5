@@ -2,7 +2,7 @@
 """발행 입력 상태 매니페스트 — 지금 data_v4 를 만든 입력이 정확히 무엇인지 해시로 고정한다 (감사 F-01·F-02·F-21).
 
 왜 필요한가: 발행 저장소의 커밋만으로는 입력을 재현할 수 없다. export 는 저장소 밖의 모델 코드(model/query.py 등 — 미커밋 변경 포함)와
-정본 DuckDB·런 산출물을 읽는다. 동결본(PAPER-FREEZE-001)은 2026-09-20 시점의 DB 해시를 적었고, 라이브 DB 는 그 뒤로 표가 더해져 해시가 다르다.
+정본 DuckDB·런 산출물을 읽는다. 동결본(PAPER-FREEZE-001)은 2026-09-20 시점의 DB 해시를 적었고(이격 런만 바꾼 차이분 세대 PAPER-FREEZE-002 는 2026-10-12, ADR-0057), 라이브 DB 는 그 뒤로 표가 더해져 해시가 다르다.
 그 차이는 오류가 아니라 역할 차이다 — 동결본 = 논문 재현용 스냅숏, 라이브 DB = 현재 작업 DB. 여기서는 둘을 나란히 적어 섞이지 않게 한다.
 
 무엇을 적는가 (전부 실측 — 추정값 없음)
@@ -10,7 +10,8 @@
   · 모델 저장소: branch · HEAD · master · 미커밋·미추적 파일마다 sha256 (export 가 import 하는 코드가 여기 있다)
   · 정본 DuckDB: 현재 sha256 · 크기 · mtime  vs  동결 manifest 의 duckdb_sha256_20260920
   · 런 산출물(scenario_runs 8칸 × block_context/members/clusters/grid_link) sha256 과 동결본 사본 일치 여부
-  · analysis_unit_v1.gpkg sha256 · 동결본 checksums.csv sha256 · 원고 sha256
+    (이격 _SB 런은 PAPER-FREEZE-002 사본, 비이격 런은 PAPER-FREEZE-001 사본과 대조 — ADR-0056 뒤 _SB 는 FREEZE-001 과 다른 것이 정상)
+  · analysis_unit_v1.gpkg sha256 · 동결본 두 세대 checksums.csv sha256 · 원고 V0.2·V0.3 sha256
   · 동결본 파일 범위: checksums.csv 등재 수 vs 폴더 전체 파일 수(등재 범위 밖은 목록으로)
   · data_v4 자산별 'generated' 값(있으면) — 언제 export 됐는지
 
@@ -23,6 +24,7 @@ from paths import SITE, ROOT, LR, OUT
 sys.stdout.reconfigure(encoding='utf-8', errors='replace')
 
 FZ = os.path.join(LR, 'paper_freeze', 'PAPER-FREEZE-001')
+FZ2 = os.path.join(LR, 'paper_freeze', 'PAPER-FREEZE-002')   # ADR-0057 — 이격 8런만 교체한 차이분 세대
 RUNS = ['R0_current', 'R0_current_SB', 'R1_protect', 'R1_protect_SB', 'R2_promo', 'R2_promo_SB', 'R3_zone_all', 'R3_zone_all_SB']
 RUN_FILES = ['block_context.parquet', 'block_context.json', 'members.parquet', 'clusters.parquet', 'grid_link.parquet']
 
@@ -85,11 +87,16 @@ def main():
     for r in RUNS:
         for f in RUN_FILES:
             lp = os.path.join(LR, 'scenario_runs', r, f)
-            fp = os.path.join(FZ, 'results', 'policy_16', r, f)
+            fp = (os.path.join(FZ2, 'results', 'policy_16_SB', r, f) if r.endswith('_SB')
+                  else os.path.join(FZ, 'results', 'policy_16', r, f))
             if not os.path.exists(lp):
                 continue
             h = sha(lp)
-            runs[f'{r}/{f}'] = {'sha256': h, 'equals_freeze_copy': (os.path.exists(fp) and sha(fp) == h)}
+            runs[f'{r}/{f}'] = {'sha256': h, 'freeze': 'PAPER-FREEZE-002' if r.endswith('_SB') else 'PAPER-FREEZE-001',
+                                'freeze_copy_exists': os.path.exists(fp), 'equals_freeze_copy': (os.path.exists(fp) and sha(fp) == h)}
+            if f.startswith('block_context') and not runs[f'{r}/{f}']['equals_freeze_copy']:
+                runs[f'{r}/{f}']['difference_reason'] = ('ADR-0055(2026-10-07) 면적 하한 없는 전량 재산출 — 동결본은 하한 있는 판. '
+                                                         '논문 세대에 넣지 않는다(ADR-0057 결정 5) — 다른 것이 정상')
     man['scenario_runs'] = runs
     au = os.path.join(LR, 'analysis_units', 'analysis_unit_v1.gpkg')
     man['analysis_unit_v1_gpkg'] = {'sha256': sha(au), 'bytes': os.path.getsize(au)} if os.path.exists(au) else 'missing'
@@ -105,15 +112,24 @@ def main():
     for p in outside:
         k = p.split('/')[0] if '/' in p else p
         tops[k] = tops.get(k, 0) + 1
-    ms = os.path.join(ROOT, 'docs', 'PAPER_MANUSCRIPT_V0.2.md')
     man['freeze'] = {'id': 'PAPER-FREEZE-001', 'checksums_csv_sha256': sha(ck),
                      'n_listed': len(listed), 'n_files_in_folder': len(allf),
                      'n_not_listed': len(outside), 'not_listed_by_top_folder': tops,
                      'scope_note': 'checksums.csv 등재 범위 = results/ · inputs/ · metadata/ 의 동결 대상. rerun_A/ · rerun_B/ 는 재현 검증 작업공간(그 안의 DB 는 쓰기 가능), '
                                    'checksums.csv · manifest.json · paper_freeze_baseline.json 은 동결 자체의 기록 파일이라 자기 목록에 없다. 등재 밖 파일을 동결본에 더하지 않는다.'}
-    man['manuscript'] = {'id': 'PAPER-MANUSCRIPT-FINAL-001', 'path': 'docs/PAPER_MANUSCRIPT_V0.2.md',
-                         'sha256': sha(ms) if os.path.exists(ms) else 'missing',
-                         'git_tracked': bool(git(ROOT, 'ls-files', 'docs/PAPER_MANUSCRIPT_V0.2.md'))}
+    m2 = json.load(open(os.path.join(FZ2, 'manifest.json'), encoding='utf-8')) if os.path.exists(os.path.join(FZ2, 'manifest.json')) else None
+    ck2 = os.path.join(FZ2, 'checksums.csv')
+    man['freeze_002'] = ({'id': 'PAPER-FREEZE-002', 'adr': 'ADR-0057', 'checksums_csv_sha256': sha(ck2),
+                          'n_listed': sum(1 for _ in csv.DictReader(open(ck2, encoding='utf-8-sig'))),
+                          'gates': json.load(open(os.path.join(FZ2, 'metadata', 'gates.json'), encoding='utf-8')) if os.path.exists(os.path.join(FZ2, 'metadata', 'gates.json')) else 'missing',
+                          'scope_note': '이격 8런(R0~R3 _SB · @all)만 새로 동결, 나머지는 FREEZE-001 을 sha256 으로 승계(metadata/inherited_from_PAPER-FREEZE-001.csv)'}
+                         if m2 else 'missing')
+    man['manuscript'] = []
+    for mid, rel, gen in (('PAPER-MANUSCRIPT-FINAL-001', 'docs/PAPER_MANUSCRIPT_V0.2.md', 'PAPER-FREEZE-001'),
+                          ('PAPER-MANUSCRIPT-V0.3', 'docs/PAPER_MANUSCRIPT_V0.3.md', 'PAPER-FREEZE-002')):
+        fp = os.path.join(ROOT, *rel.split('/'))
+        man['manuscript'].append({'id': mid, 'path': rel, 'generation': gen, 'sha256': sha(fp) if os.path.exists(fp) else 'missing',
+                                  'git_tracked': bool(git(ROOT, 'ls-files', rel))})
 
     assets = {}
     for fp in sorted(glob.glob(os.path.join(OUT, '*.json'))):
