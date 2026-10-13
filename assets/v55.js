@@ -113,6 +113,7 @@ window.V55 = (() => {
     ['읍면동 경계(표시용)', ['raw:emd_bnd_raw'], 'tbl:emd_bnd'],
     ['시군 전력판매량(참고)', ['raw:kepco_demand_cache'], null],
     ['기존 태양광 시설(공개 자료)', ['src:kpx_plants_raw', 'src:permit_raw'], 'tbl:existing_pv_v1'],
+    ['GIS건물통합정보(주거 이격의 주택 판정)', ['raw:bldginfo', 'raw:setback200_flags'], 'tbl:setback200_flags'],
   ];
   async function dataDates(el, {compact = false} = {}) {
     if (!el) return;

@@ -48,7 +48,8 @@ for name, ne, ek, nl, lk, mw in con.execute(f"""
                   'max_ha': round(s.get('max_ha', 0))}
 
 # ── 소유 × 이격 (필지층) ──
-owner_sb = Q.owner_setback_data()
+# 이격 적용 열(*_sb_m2)은 내보내지 않는다 — 화면이 쓰지 않고, ADR-0056 이격 기준 교체 때 재계산되지 않아 종전 기준 값이 남았었다
+owner_sb = [{k: v for k, v in g.items() if not k.endswith('_sb_m2')} for g in Q.owner_setback_data()]
 
 # ── 대형 구획(무필터)의 소유 구성 — 국공유 = 02/04/05, 법인 = 06 (ADR-0038 코드 확정) ──
 NODES = os.path.join(LR, 'engine_cache', 'nodes.parquet').replace('\\', '/')

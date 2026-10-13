@@ -9,9 +9,9 @@
 <link rel="stylesheet" href="style.css">
 <link rel="stylesheet" href="assets/vendor/leaflet/leaflet.css">
 <script src="assets/vendor/leaflet/leaflet.js"></script>
-<script src="assets/v4.js?v=20261013a"></script>
+<script src="assets/v4.js?v=20261013b"></script>
 <script src="assets/region.js"></script>
-<script src="assets/v55.js?v=20261013a"></script>
+<script src="assets/v55.js?v=20261013b"></script>
 <style>
 :root{--adv-bg:#fff;--adv-ink:#1d2733;--adv-muted:#5d6b7a;--adv-line:#dde3ea;--adv-soft:#f4f7fa;--adv-navy:#0C356A;--adv-warn:#8a5a00;--adv-warnbg:#fff6e0;--adv-hi:#0C356A}
 body{background:var(--adv-bg);color:var(--adv-ink)}
@@ -285,6 +285,8 @@ input[type=range]{width:180px;max-width:100%;accent-color:var(--adv-navy)}
       return t; } });
   const SGG = Object.keys(D.sgg_labels).sort((a, b) => D.sgg_labels[a].localeCompare(D.sgg_labels[b], 'ko'));
   const sName = s => D.sgg_labels[s] || s;
+  // 시군 경계에 걸친 후보 공간은 sggs 첫 칸이 경기 밖일 수 있다 — 이 화면의 시군 목록(경기)에 있는 코드를 고른다
+  const homeSgg = u => u.sggs.find(s => D.sgg_labels[s]) || u.sggs[0];
   const EMD = new Map(D.emd.map(e => [e.e, e]));
   const eName = e => (EMD.get(e) ? EMD.get(e).name : e).replace(/^경기도 /, '');
   const km2 = a => (a / 1e6).toLocaleString('ko-KR', {minimumFractionDigits: 3, maximumFractionDigits: 3});
@@ -459,7 +461,7 @@ input[type=range]{width:180px;max-width:100%;accent-color:var(--adv-navy)}
         계통 — 소재 읍면동의 참고값이며 이 후보 공간만의 값이 아닙니다(같은 읍면동 후보는 같은 값).<br>
         산업단지 거리 — 후보 공간 기준점에서 가장 가까운 산업단지 경계까지의 직선거리.</div></details></div>
       <div class="sec">${fbWidget('unit:' + u.id, '이 후보 공간에 대한 의견')}</div>`;
-    const P = await V55.pnu.load(u.sggs[0]); const R = P && P.runs.R2_promo;
+    const P = await V55.pnu.load(homeSgg(u)); const R = P && P.runs.R2_promo;
     const pn = R ? Object.keys(R.p).filter(k => R.p[k] === id) : [];
     const names = await Promise.all(pn.slice(0, 8).map(p => V55.pnu.nameOf(p)));
     const el = $('dPnus'); if (el) el.textContent = pn.length ? pn.slice(0, 8).map((p, i) => `${p} (${names[i]})`).join(' · ') + (pn.length > 8 ? ` 외 ${pn.length - 8}개` : '') : '기록 없음';
@@ -489,7 +491,7 @@ input[type=range]{width:180px;max-width:100%;accent-color:var(--adv-navy)}
   function renderQs() {
     $('qCases').innerHTML = '<tr><th>사례</th><th>유형</th><th>후보 공간</th><th>위치</th><th>면적 (참고 규모)</th><th style="text-align:left">고른 규칙</th></tr>' +
       QCASES.map(([id, k, f], i) => { const u = UBY.get(id); return `<tr><td><button type="button" class="btnx" data-qcase="${id}">사례 ${i + 1} 지도에서 보기</button></td><td>${k}</td><td>#${id}</td><td>${esc(where(u, 2))}</td><td>${u.a < 10000 ? Math.round(u.a).toLocaleString('ko-KR') + '㎡' : km2(u.a) + ' km²'} (약 ${fmt(u.mw, 1)} MW)</td><td style="white-space:normal;text-align:left;min-width:220px">${esc(f)} · 구성 필지 ${u.n}개</td></tr>`; }).join('');
-    $('qCases').querySelectorAll('[data-qcase]').forEach(b => b.onclick = () => { const u = UBY.get(+b.dataset.qcase); st.sgg = u.sggs[0]; st.emd = ''; $('dSgg').value = st.sgg; fillEmd(); dRender().then(() => dSelect(u.id, true)); });
+    $('qCases').querySelectorAll('[data-qcase]').forEach(b => b.onclick = () => { const u = UBY.get(+b.dataset.qcase); st.sgg = homeSgg(u); st.emd = ''; $('dSgg').value = st.sgg; fillEmd(); dRender().then(() => dSelect(u.id, true)); });
     $('qList').innerHTML =
       qBox(qHead('A1', '위치·경계 현실성 — 이 후보의 위치와 경계를 실제 현황과 비교했을 때 명백히 맞지 않는 부분이 있습니까?') +
         qHint('위성 배경 지도와 근거 레이어를 켜고 보시면 됩니다. 메모에는 위치 / 다르게 보이는 부분 / 판단 근거를 적어 주세요.') +
@@ -671,7 +673,7 @@ input[type=range]{width:180px;max-width:100%;accent-color:var(--adv-navy)}
     $('uList').innerHTML = `<div class="adv-note" style="padding:6px 10px">큰 후보 공간부터 · ${items.length.toLocaleString('ko-KR')}곳${whole ? ' · 경기도 전체는 위치를 점으로 표시(시군·읍면동을 고르면 도형)' : scn !== 'R2_promo' ? ' · 이 조건은 위치를 점으로 표시' : ''}</div>` + items.slice(0, 200).map(x => `<div class="it" data-id="${x.id}" data-lat="${x.lat}" data-lon="${x.lon}"><b>${band(x.a)}</b> · ${km2(x.a)} km²<div class="adv-note">${esc(x.where)} · 계통 여유 참고값 ${x.lo == null ? '알 수 없음' : fmt(x.lo) + ' MW'} · 산업단지까지 ${x.d == null ? '알 수 없음' : fmt(x.d, 1) + ' km'}</div></div>`).join('');
     $('uList').querySelectorAll('.it').forEach(el => el.onclick = () => { if (el.dataset.lat !== 'null') um.setView([+el.dataset.lat, +el.dataset.lon], 15);
       const u = UBY.get(+el.dataset.id); if (u && scn === 'R2_promo') { $('uDet').innerHTML = `<b>${band(u.a)}</b> · ${km2(u.a)} km² · ${esc(where(u, 3))}<br>왜 후보인가: 21m 이내로 이어진 법인·국공유 농지 ${u.n}필지가 판정 조건을 통과해 하나의 후보 공간이 됐습니다(특별법 시행 후 농업진흥구역에 설치할 수 있게 되는 경우).<br>계통 여유 참고값 ${u.lo == null ? '알 수 없음' : fmt(u.lo) + '–' + fmt(u.hi) + ' MW'}(실제 접속 가능 용량 아님) · 가장 가까운 산업단지까지 ${u.d == null ? '알 수 없음' : fmt(u.d, 1) + ' km'} <button class="btnx" data-open="${u.id}">자세히 보기</button>`;
-        $('uDet').querySelector('[data-open]').onclick = () => { st.sgg = u.sggs[0]; st.emd = ''; $('dSgg').value = st.sgg; fillEmd(); document.querySelector('#tabs [data-t=data]').click(); dRender().then(() => dSelect(u.id, true)); }; } });
+        $('uDet').querySelector('[data-open]').onclick = () => { st.sgg = homeSgg(u); st.emd = ''; $('dSgg').value = st.sgg; fillEmd(); document.querySelector('#tabs [data-t=data]').click(); dRender().then(() => dSelect(u.id, true)); }; } });
   }
   $('uPnuGo').onclick = async () => { const out = $('uPnuOut'); const q = $('uPnu').value.trim(); if (!q) return;
     const done = await V55.pnuSearchBox({value: q}, out, {nameOf: sName, minM2: 66667, onGo: s => { us.sgg = s; us.emd = ''; uRender(); }});
@@ -691,7 +693,7 @@ input[type=range]{width:180px;max-width:100%;accent-color:var(--adv-navy)}
   $('cList').innerHTML = D.cases.map((c, i) => { const u = UBY.get(c.id); if (!u) return ''; return `<div class="adv-box"><b>CASE ${String(i + 1).padStart(2, '0')}</b> — ${esc(c.rule)}
     <div>${esc(where(u, 3))} · ${km2(u.a)} km² · ${band(u.a)} · 필지 ${u.n} · 계통 참고값 ${u.lo == null ? '알 수 없음' : fmt(u.lo) + (u.hi != null ? '–' + fmt(u.hi) : '') + ' MW'} · 산업단지 ${fmt(u.d, 2)} km${u.t !== 'default' ? ' · <span class="tag w">' + esc(u.ql) + '</span>' : ''}</div>
     <div style="margin:6px 0"><button class="btnx" data-case="${u.id}">① 탭 지도에서 열기</button></div>${fbWidget('case:' + (i + 1), '이 사례에 대한 의견')}</div>`; }).join('');
-  document.querySelectorAll('[data-case]').forEach(b => b.onclick = () => { const u = UBY.get(+b.dataset.case); st.sgg = u.sggs[0]; st.emd = ''; $('dSgg').value = st.sgg; fillEmd(); document.querySelector('#tabs [data-t=data]').click(); dRender().then(() => dSelect(u.id, true)); });
+  document.querySelectorAll('[data-case]').forEach(b => b.onclick = () => { const u = UBY.get(+b.dataset.case); st.sgg = homeSgg(u); st.emd = ''; $('dSgg').value = st.sgg; fillEmd(); document.querySelector('#tabs [data-t=data]').click(); dRender().then(() => dSelect(u.id, true)); });
 
   // ════════ 수학 요약 ════════
   const S = D.summary;
