@@ -72,6 +72,26 @@ assets/               v4.js · v4.css · 로고
   교정한다(`export_v4.py` 의 `_NOTE_FIX`).
 - 자족형 — 외부 CDN·API 로드 없음.
 
+## 외부 API 키
+
+수집 스크립트(`pipeline/legacy/`)는 API 키를 코드에 담지 않고 환경 변수에서 읽는다.
+직접 돌리려면 각 기관에서 **본인 키를 발급받아** 아래 이름으로 설정한다. 키가 없으면 스크립트가 안내와 함께 멈춘다.
+
+| 환경 변수 | 발급처 | 쓰는 스크립트 |
+|---|---|---|
+| `VWORLD_API_KEY` | 브이월드 오픈API (https://www.vworld.kr → 오픈API → 인증키 발급) | `05_recover_nojimok` · `05b_recover_hwaseong` · `06_fetch_geometry` · `07_build_supplement` · `08_apply_fixes` · `10_collect_new_regions` · `11_assemble_new_regions` · `21b_refetch_boundaries` · `21d_fetch_a_boundaries` · `cross_check` |
+| `KEPCO_API_KEY` | 한전 전력데이터 개방 포털 (https://bigdata.kepco.co.kr → 오픈API → 인증키 신청) | `21c_fetch_b_demand` · `21g_fetch_industry_top3` |
+
+```bash
+export VWORLD_API_KEY="발급받은 키"
+```
+
+```bash
+export KEPCO_API_KEY="발급받은 키"
+```
+
+계속 쓰려면 셸 설정(`~/.zshrc` 등)에 적어 둔다. 키 값은 커밋하지 않는다 — `.env` 파일은 `.gitignore` 로 막아 두었다. 사이트(`data_v4/`)는 키 없이 열린다 — 브라우저는 외부 API를 부르지 않는다.
+
 ## 갱신
 
 ```bash

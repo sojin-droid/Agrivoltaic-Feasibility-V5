@@ -9,7 +9,11 @@ from shapely.geometry import LineString, shape
 
 BASE = r"C:\Users\user\새 폴더"
 CACHE = os.path.join(BASE, "pipeline_out", "cross_cache.sqlite")
-VK = "0EE07B70-6081-3E26-9B73-55E8D29E30AD"
+VK = os.environ.get("VWORLD_API_KEY")  # 브이월드 오픈API(vworld.kr)에서 발급한 본인 키 — 04_cluster 가 import 하므로 여기서 종료하지 않고 호출 시 확인
+def _need_key():
+    raise RuntimeError("VWORLD_API_KEY 환경 변수가 없습니다 — 브이월드 오픈API에서 인증키를 발급받아 설정하세요 (README '외부 API 키')")
+
+
 _TRI = Transformer.from_crs(5186, 4326, always_xy=True)
 _JX = {"도": "도로", "천": "하천", "구": "구거", "철": "철도"}
 _lock = threading.Lock()
@@ -33,12 +37,13 @@ def bridge_crossing(p1, p2):
     pad = 0.0002
     bbox = (f"BOX({min(lon1,lon2)-pad},{min(lat1,lat2)-pad},"
             f"{max(lon1,lon2)+pad},{max(lat1,lat2)+pad})")
+    vk = VK or _need_key()  # 재시도 루프의 except 에 삼켜지지 않도록 밖에서 확인
     types = None
     for _ in range(3):
         try:
             r = _S.get("https://api.vworld.kr/req/data", params={
                 "service": "data", "request": "GetFeature", "data": "LP_PA_CBND_BUBUN",
-                "key": VK, "geomFilter": bbox, "crs": "EPSG:4326", "format": "json",
+                "key": vk, "geomFilter": bbox, "crs": "EPSG:4326", "format": "json",
                 "numOfRows": 100, "domain": "localhost"}, timeout=15)
             resp = r.json().get("response", {})
             if resp.get("status") == "OK":

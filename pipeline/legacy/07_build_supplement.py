@@ -30,7 +30,9 @@ CLEAN = os.path.join(OUT, "parcels_clean")
 SUPP = os.path.join(OUT, "nojimok_repair", "supplement")
 os.makedirs(SUPP, exist_ok=True)
 
-VWORLD_KEY = "0EE07B70-6081-3E26-9B73-55E8D29E30AD"
+VWORLD_KEY = os.environ.get("VWORLD_API_KEY")  # 브이월드 오픈API(vworld.kr)에서 발급한 본인 키
+if not VWORLD_KEY:
+    sys.exit("VWORLD_API_KEY 환경 변수가 없습니다 — 브이월드 오픈API에서 인증키를 발급받아 설정하세요 (README '외부 API 키')")
 DATA_URL = "https://api.vworld.kr/req/data"
 
 # 정정 라벨 (44131=동남구, 44133=서북구 — 행정표준코드 확인 2026-07-13)

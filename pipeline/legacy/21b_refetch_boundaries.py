@@ -7,7 +7,9 @@ from shapely.geometry import shape, mapping
 from shapely.ops import unary_union
 from collections import defaultdict
 
-VK = "0EE07B70-6081-3E26-9B73-55E8D29E30AD"
+VK = os.environ.get("VWORLD_API_KEY")  # 브이월드 오픈API(vworld.kr)에서 발급한 본인 키
+if not VK:
+    sys.exit("VWORLD_API_KEY 환경 변수가 없습니다 — 브이월드 오픈API에서 인증키를 발급받아 설정하세요 (README '외부 API 키')")
 MISS = {"41463":"용인기흥","41465":"용인수지","41273":"안산단원","28200":"인천남동",
         "46230":"광양","46130":"여수","47111":"포항남","47113":"포항북","47190":"구미",
         "31110":"울산중","31140":"울산남","31170":"울산동","31200":"울산북","31710":"울주"}

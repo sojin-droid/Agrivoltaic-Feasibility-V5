@@ -30,3 +30,7 @@ briefs/
 
 # 파이프라인 실행 로그 (재현 기록은 모델 저장소 쪽에 남는다)
 pipeline/**/*.log
+
+# API 키 등 로컬 비밀값 (README '외부 API 키')
+.env
+.env.*

@@ -24,7 +24,9 @@ OUT_DIR = os.path.join(BASE, "pipeline_out", "nojimok_repair")
 DB = os.environ.get("NOJIMOK_DB", os.path.join(OUT_DIR, "ladfrl.sqlite"))
 os.makedirs(OUT_DIR, exist_ok=True)
 
-VWORLD_KEY = "0EE07B70-6081-3E26-9B73-55E8D29E30AD"
+VWORLD_KEY = os.environ.get("VWORLD_API_KEY")  # 브이월드 오픈API(vworld.kr)에서 발급한 본인 키
+if not VWORLD_KEY:
+    sys.exit("VWORLD_API_KEY 환경 변수가 없습니다 — 브이월드 오픈API에서 인증키를 발급받아 설정하세요 (README '외부 API 키')")
 URL = "https://api.vworld.kr/ned/data/ladfrlList"
 WORKERS = int(sys.argv[1]) if len(sys.argv) > 1 else 6
 MAX_CONSEC_ERR = 80

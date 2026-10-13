@@ -9,7 +9,9 @@
 import io, os, sys, json, time, urllib.parse, urllib.request, urllib.error
 sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="utf-8", errors="replace")
 
-KEY = "a34NyPj52OjRf02fswjZU0125148Vaq5eS41A43k"
+KEY = os.environ.get("KEPCO_API_KEY")  # 한전 전력데이터 개방 포털(bigdata.kepco.co.kr)에서 발급한 본인 키
+if not KEY:
+    sys.exit("KEPCO_API_KEY 환경 변수가 없습니다 — 한전 전력데이터 개방 포털에서 API 키를 발급받아 설정하세요 (README '외부 API 키')")
 EP = "https://bigdata.kepco.co.kr/openapi/v1/powerUsage/industryType.do"
 OUT = r"C:\Users\user\새 폴더\pipeline_out\kepco_demand.json"
 

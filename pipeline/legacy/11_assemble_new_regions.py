@@ -22,7 +22,9 @@ LAND = os.path.join(BASE, "Land_Processed", "Land_Processed")
 CADASTRE = os.path.join(BASE, "Base", "Base")
 NR = os.path.join(BASE, "pipeline_out", "new_regions")
 COLLECT = os.path.join(NR, "collect.sqlite")
-VK = "0EE07B70-6081-3E26-9B73-55E8D29E30AD"
+VK = os.environ.get("VWORLD_API_KEY")  # 브이월드 오픈API(vworld.kr)에서 발급한 본인 키
+if not VK:
+    sys.exit("VWORLD_API_KEY 환경 변수가 없습니다 — 브이월드 오픈API에서 인증키를 발급받아 설정하세요 (README '외부 API 키')")
 SGGS = {"44810": "예산", "41461": "용인처인", "41465": "용인수지", "41273": "안산단원"}
 REPAIR_DB = None  # A 지역은 무지목 보완을 이미 반영(당시 collect.sqlite jimok)
 if os.environ.get("B_REGIONS") == "1":  # 2026-07-16 B 완전본 재구축
