@@ -30,8 +30,8 @@ PY = sys.executable
 
 # 수치 — 서로 독립이라 순서는 읽기 좋은 순
 NUM = ['export_v4.py', 'export_results_v4.py', 'export_narrative_v4.py',
-       'export_insights_v4.py', 'export_grid_v4.py', 'export_ind_firms.py',
-       'export_stage_v4.py', 'export_decree_v4.py',
+       'export_grid_v4.py', 'export_ind_firms.py',
+       'export_decree_v4.py',
        # V5.5 (GGI 검토 반영) — TOP 10 모집단·비지배 플래그 · PNU 소속 · 기존 시설(VALID)·provenance
        'export_top10_v4.py', 'export_pnu_v4.py', 'export_existing_v4.py']
 

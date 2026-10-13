@@ -1,11 +1,13 @@
-# 발행 관문 — 모든 push·PR 에서 site_gate(수치·금지어·정합·외부 로드·비밀값)와 JS 문법을 검사한다.
+# 발행 관문 — 모든 push·PR(main 은 pages.yml 안에서) 에서 site_gate(수치·금지어·정합·외부 로드·비밀값)와 JS 문법을 검사한다.
 # 실패하면 커밋에 빨간 X 가 붙고 메일로 알림이 온다. 로컬에서는 같은 명령을 그대로 돌리면 된다:
 #   python pipeline/gate/site_gate.py && python pipeline/gate/check_js.py
 name: site-gate
 
 on:
   push:
+    branches-ignore: [main]   # main 은 pages.yml 이 이 워크플로를 불러 관문 → 배포 순으로 돈다
   pull_request:
+  workflow_call:
   workflow_dispatch:
 
 permissions:

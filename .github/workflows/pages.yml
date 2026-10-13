@@ -1,0 +1,58 @@
+# GitHub Pages 배포 — main 에 push 하면 ① 관문(site-gate.yml) ② 사이트 파일만 모으기 ③ 배포.
+# 관문이 FAIL 이면 배포하지 않는다. 저장소의 pipeline/·publish.py·release/·README 등은 공개 사이트에 올라가지 않는다.
+# (저장소 Settings → Pages → Source = GitHub Actions)
+name: pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  gate:
+    uses: ./.github/workflows/site-gate.yml
+
+  build:
+    needs: gate
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      # 공개 사이트에 들어가는 것만 고른다 — 화면(html)·공용 스크립트·스타일·자산·데이터·자문 화면이 링크하는 공개 문서
+      - name: 사이트 파일 모으기
+        run: |
+          mkdir -p _site
+          cp *.html style.css site.js _site/
+          cp -R assets data_v4 _site/
+          rsync -a --exclude '*.py' docs/ _site/docs/
+          touch _site/.nojekyll
+          du -sh _site
+          find _site -type f | wc -l
+
+      - uses: actions/configure-pages@v5
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
