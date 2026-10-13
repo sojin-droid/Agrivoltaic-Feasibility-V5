@@ -97,6 +97,7 @@ input[type=range]{width:180px;max-width:100%;accent-color:var(--adv-navy)}
   <section class="adv-pane on" id="p-data">
     <div class="adv-box"><b>검토 안내</b> — 이 화면의 목적은 현재 연구에서 확보한 경기도 자료와 산출 결과가 현실을 얼마나 잘 반영하는지 검토받는 것입니다.
       <ul class="adv-note" style="margin:6px 0 0 18px;padding:0">
+        <li><b>질문은 모두 10개입니다</b> — ① 탭 질문 1–3 · ② 탭 질문 4–7 · ③ 탭 질문 8–10. 다 적으신 뒤 "의견 내보내기" 탭에서 파일로 내려받아 보내 주세요.</li>
         <li>최종 사업 가능성, 법적 인허가 가능성, 실제 계통 접속 가능 여부를 판단하는 화면이 아닙니다.</li>
         <li>이번 자문에서 검토받는 것은 자료의 정확성·현실성·신뢰성·완전성·최신성입니다.</li>
         <li>21m 묶음 기준·후보 비교 방식·가중치 같은 분석 방법의 타당성은 별도 자문에서 다룹니다.</li>
@@ -138,7 +139,7 @@ input[type=range]{width:180px;max-width:100%;accent-color:var(--adv-navy)}
         <div class="adv-note" style="margin-top:6px"><span class="legend-sw" style="background:#A8651A"></span>50MW 이상 <span class="legend-sw" style="background:#D98E1B"></span>20–50MW <span class="legend-sw" style="background:#F2B233"></span>10–20MW <span class="legend-sw" style="background:#FFD84D"></span>3–10MW <span class="legend-sw" style="background:#FFF1B8"></span>1–3MW <span class="legend-sw" style="background:#E6E0CF"></span>1MW 미만 · 회색 점선 = 지도 정보가 더 확인 필요한 곳(도형 면적이 장부 면적과 다름) · MW는 면적 환산 참고 규모</div></div>
       <div class="adv-side"><div id="dDet" class="adv-det"></div><div id="dList" class="adv-list"></div></div>
     </div>
-    <div class="adv-box" style="margin-top:12px"><b>A. 데이터·후보 결과 확인</b> — 전체 후보 공간을 모두 보실 필요는 없습니다. 아래 검토 사례를 중심으로 답해 주세요. 사례는 통계적 대표성을 가진 표본이 아니라, 성격이 다른 후보를 빠르게 확인하기 위해 규칙으로 고른 것입니다. 연구 기준에서 제외된 사례는 발행 자료에 없어 제공하지 않습니다. 정답을 여쭙는 것이 아니므로, 판단하기 어려우면 "판단 어려움"을 고르시거나 비워 두셔도 됩니다. 답은 이 브라우저에만 저장됩니다.
+    <div class="adv-box" style="margin-top:12px"><b>질문 1–3. 후보 결과 확인</b> — 전체 후보 공간을 모두 보실 필요는 없습니다. 아래 검토 사례나 잘 아시는 지역을 보시고 답해 주세요. 사례는 통계적 대표성을 가진 표본이 아니라, 성격이 다른 후보를 빠르게 확인하기 위해 규칙으로 고른 것입니다. 연구 기준에서 제외된 사례는 발행 자료에 없어 제공하지 않습니다. 정답을 여쭙는 것이 아니므로, 판단하기 어려우면 "판단 어려움"을 고르시거나 비워 두셔도 됩니다. 답은 이 브라우저에만 저장됩니다.
       <div class="scroll" style="margin-top:6px"><table class="adv" id="qCases"></table></div>
       <div id="qList"></div></div>
   </section>
@@ -163,7 +164,7 @@ input[type=range]{width:180px;max-width:100%;accent-color:var(--adv-navy)}
         <tr><td>21m 후보 공간</td><td class="l">본 연구 구축 — 설치 가능 필지를 21m 이내로 이어 묶은 공간 (면적 하한 없음)</td><td>본 연구</td><td>—</td><td>위 자료의 시점을 따름 (구축 2026-09-23 · 자문용 전량 2026-09-28)</td><td class="l">후보 공간 목록·지도·통계</td></tr>
       </table></div>
       <div class="adv-note" style="margin-top:6px">배경 위성영상(Esri World Imagery)은 분석에 쓰지 않았으며, 위 자료의 기준 시점과 촬영 시점이 다를 수 있습니다.</div></div>
-    <div class="adv-box"><b>B. 데이터 신뢰성·보완 검토</b> — ① 탭의 지도·후보 상세·"데이터 출처 보기"를 보신 뒤 답해 주세요. 판단하기 어려우면 "판단 어려움"을 고르시거나 비워 두셔도 됩니다. 답은 이 브라우저에만 저장됩니다.<div id="mQs"></div></div>
+    <div class="adv-box"><b>질문 4–7. 사용한 자료</b> — 위 표와 ① 탭의 지도·후보 상세를 보신 뒤 답해 주세요. 판단하기 어려우면 "판단 어려움"을 고르시거나 비워 두셔도 됩니다. 답은 이 브라우저에만 저장됩니다.<div id="mQs"></div></div>
     <!-- 방법론 실험 UI(비지배 비교·가중합·민감도)는 이번 데이터 자문에서 쓰지 않는다 — 별도 방법론 자문용으로 코드만 유지하고 화면에서는 숨긴다 -->
     <div id="mLegacy" hidden>
     <div class="adv-box"><b>현재 상태</b> — 21m 단위 = 최소 공간 분석 단위(후보 공간). 최종 클러스터 = 아직 정하지 않음. 아래 비교와 가중치 실험은 자문을 위한 것이며 채택된 방법이 아닙니다.</div>
@@ -215,15 +216,10 @@ input[type=range]{width:180px;max-width:100%;accent-color:var(--adv-navy)}
       <div><div id="uMap" class="adv-map" style="height:54vh"></div></div>
       <div class="adv-side" style="height:54vh"><div id="uDet" class="adv-box" style="margin:8px">목록에서 후보 공간을 누르면 여기에 짧은 설명이 나옵니다.</div><div id="uList" class="adv-list"></div></div>
     </div>
-    <div class="grid2" style="margin-top:12px">
-      <div class="adv-box"><b>필지 번호(PNU) 또는 지번으로 확인하기</b>
-        <div class="adv-ctl" style="margin-top:6px"><input type="text" id="uPnu" placeholder="19자리 필지 번호 또는 '시군 읍면동 리 본번-부번'" style="width:100%"><button id="uPnuGo">확인</button></div>
-        <div id="uPnuOut" class="adv-note"></div></div>
-      <div class="adv-box"><b>C1–C3. 화면 사용해 보기</b> — 화면만 보고 해 보신 뒤 결과를 고르고, 필요하면 메모를 남겨 주세요.<div id="uTasks"></div></div>
-    </div>
-    <div class="adv-box"><b>어디로 먼저 눈이 가셨나요?</b> — 처음 본 순서대로 눌러 주세요(다시 누르면 초기화).
-      <div class="adv-ctl" id="uGlance" style="margin-top:6px"></div><div class="adv-note" id="uGlanceOut">기록 없음</div></div>
-    <div class="adv-box" style="margin-top:12px"><b>C. 화면 사용성·활용성</b> — 판단하기 어려우면 비워 두셔도 됩니다. 답은 이 브라우저에만 저장됩니다.<div id="uQs"></div></div>
+    <div class="adv-box" style="margin-top:12px"><b>필지 번호(PNU) 또는 지번으로 확인하기</b>
+      <div class="adv-ctl" style="margin-top:6px"><input type="text" id="uPnu" placeholder="19자리 필지 번호 또는 '시군 읍면동 리 본번-부번'" style="width:100%"><button id="uPnuGo">확인</button></div>
+      <div id="uPnuOut" class="adv-note"></div></div>
+    <div class="adv-box" style="margin-top:12px"><b>질문 8–10. 활용과 공개</b> — 판단하기 어려우면 비워 두셔도 됩니다. 답은 이 브라우저에만 저장됩니다.<div id="uQs"></div></div>
   </section>
 
   <!-- 사례 -->
@@ -246,7 +242,7 @@ input[type=range]{width:180px;max-width:100%;accent-color:var(--adv-navy)}
   <section class="adv-pane" id="p-fb">
     <div class="adv-box"><b>자문 세션</b> — 자문자 코드 <input type="text" id="sCode" placeholder="예: A03" maxlength="16" style="width:90px"> <button type="button" class="btnx" id="sNew">새 자문 시작</button> <span class="adv-note" id="sInfo"></span>
       <div class="adv-note">자문자 코드는 담당자가 알려 드린 코드를 적어 주세요(성함·소속은 적지 않습니다). 한 브라우저에서 여러 분이 차례로 작성하실 때는 "새 자문 시작"을 눌러 주세요. 이전 응답은 섞이지 않고 따로 보관됩니다.</div></div>
-    <div class="adv-box"><b>D. 종합 의견</b> — 현재 후보 공간과 자료·산출 결과를 실제 지자체·전문가의 입지 검토에 활용한다고 가정했을 때 자유롭게 적어 주세요.<div id="fbCommon"></div></div>
+    <div class="adv-box"><b>그 밖의 의견</b> (선택) — 질문 1–10에서 다루지 못한 의견이 있으면 자유롭게 적어 주세요.<div id="fbCommon"></div></div>
     <details class="adv-box"><summary><b>자문자 배경</b> (선택)</summary><div id="q0"></div></details>
     <div class="adv-box">화면·사례·질문에 남긴 의견은 이 브라우저(localStorage)에만 저장되며 서버로 자동 전송되지 않습니다. <b>의견을 다 적으신 뒤 아래에서 JSON 또는 CSV 파일로 내려받아 담당자에게 보내 주십시오.</b></div>
     <div class="adv-ctl"><button id="fbJson">이 세션 의견 JSON 내려받기</button><button id="fbCsv">이 세션 의견 CSV 내려받기</button><button id="fbAll">보관된 모든 세션 JSON</button><button id="fbClear">이 세션 의견 지우기</button><span class="adv-note" id="fbCount"></span></div>
@@ -476,75 +472,51 @@ input[type=range]{width:180px;max-width:100%;accent-color:var(--adv-navy)}
     [1201439, '작은 규모 사례', '3–10MW 구간에서 면적이 구간 중앙값에 가장 가까운 후보'],
     [1291066, '데이터 예외 사례', '지적 도형 면적과 장부 면적 차이(비율)가 가장 큰 후보'],
     [1037963, '후보 확인 사례', '10MW 이상 후보 중 팜맵 경작 판독 비율이 가장 낮은 후보(0%) — 농지 외 현황이 섞여 있는지 확인이 필요할 수 있음']];
-  const QDATA = ['연속지적도 (2026-07)', '토지 원장 (2026-05-28 수집)', '팜맵 (2025년판 · 촬영 2019–2024)', '농업진흥지역 경계 (2026-08-21 수집)', '한전 분산전원 연계정보 (2026-08-19 조회)', '산업단지 경계 (2026-08-20 수집)', '기존 발전설비·허가 자료 (2026-09-21 수집)'];
-  const REL = ['대체로 신뢰', '일부 확인 필요', '상당 부분 확인 필요', '판단 어려움'];
   const HAS = ['있음', '없음', '판단 어려움'], YN3 = ['없음', '일부 있음', '많음', '판단 어려움'];
   const qHead = (n, t) => `<div style="margin-top:10px"><b>${n}.</b> ${esc(t)}</div>`;
   const qHint = t => `<div class="adv-note" style="color:var(--adv-muted)">${esc(t)}</div>`;
   const qBox = html => `<div class="adv-q">${html}</div>`;
-  const caseName = id => { const c = QCASES.find(x => x[0] === id); return `${c[1]} #${id}`; };
   // 자문자 배경(의견 탭 접이식)
   $('q0').innerHTML = qBox(qHead('Z1', '전문 분야를 골라 주세요. (여러 개 가능)') +
-      fbWidget('Z1', '', ['농업·농지', '공간정보·GIS', '태양광·재생에너지', '전력·계통', '지자체·행정', '환경·규제', '기타'], {multi: true, ph: '기타 분야'})) +
-    qBox(qHead('Z2', '경기도 농지·토지이용 현장 경험은 어느 정도입니까?') +
-      fbWidget('Z2', '', ['많음', '일부 지역 경험', '거의 없음', '판단 어려움'], {memo: false}));
+      fbWidget('Z1', '', ['농업·농지', '공간정보·GIS', '태양광·재생에너지', '전력·계통', '지자체·행정', '환경·규제', '기타'], {multi: true, ph: '기타 분야'}));
+  // 질문은 Q1–Q10 열 개 — ① 탭 1–3 · ② 탭 4–7 · ③ 탭 8–10 (2026-10-13 지자체 자문용으로 A1–D5 30문항을 줄임)
   function renderQs() {
     $('qCases').innerHTML = '<tr><th>사례</th><th>유형</th><th>후보 공간</th><th>위치</th><th>면적 (참고 규모)</th><th style="text-align:left">고른 규칙</th></tr>' +
       QCASES.map(([id, k, f], i) => { const u = UBY.get(id); return `<tr><td><button type="button" class="btnx" data-qcase="${id}">사례 ${i + 1} 지도에서 보기</button></td><td>${k}</td><td>#${id}</td><td>${esc(where(u, 2))}</td><td>${u.a < 10000 ? Math.round(u.a).toLocaleString('ko-KR') + '㎡' : km2(u.a) + ' km²'} (약 ${fmt(u.mw, 1)} MW)</td><td style="white-space:normal;text-align:left;min-width:220px">${esc(f)} · 구성 필지 ${u.n}개</td></tr>`; }).join('');
     $('qCases').querySelectorAll('[data-qcase]').forEach(b => b.onclick = () => { const u = UBY.get(+b.dataset.qcase); st.sgg = homeSgg(u); st.emd = ''; $('dSgg').value = st.sgg; fillEmd(); dRender().then(() => dSelect(u.id, true)); });
     $('qList').innerHTML =
-      qBox(qHead('A1', '위치·경계 현실성 — 이 후보의 위치와 경계를 실제 현황과 비교했을 때 명백히 맞지 않는 부분이 있습니까?') +
-        qHint('위성 배경 지도와 근거 레이어를 켜고 보시면 됩니다. 메모에는 위치 / 다르게 보이는 부분 / 판단 근거를 적어 주세요.') +
-        QCASES.map(([id]) => fbWidget(`A1.${id}`, caseName(id), YN3, {ph: '위치 / 다르게 보이는 부분 / 판단 근거'})).join('')) +
-      qBox(qHead('A2', '후보 내부 현황 — 후보 공간 안에 실제로는 농지가 아닌 것으로 보이는 영역(건물·도로·하천·산림 등)이 섞여 있습니까?') +
-        QCASES.map(([id]) => fbWidget(`A2.${id}`, caseName(id), YN3, {ph: '보이는 것 / 위치'})).join('')) +
-      qBox(qHead('A3', '데이터 예외 — 도형 면적과 장부 면적이 크게 다른 사례에서, 실제 현황과 비교하여 추가 확인이 필요한 부분이 있습니까?') +
-        QCASES.filter(c => c[1] === '데이터 예외 사례').map(([id]) => fbWidget(`A3.${id}`, caseName(id), ['없음', '있음', '판단 어려움'], {ph: '확인이 필요한 부분'})).join('')) +
-      qBox(qHead('A4', '후보이지만 제외가 필요해 보이는 곳 — 현재 후보 공간 중 실제 현황을 아시는 곳이 있다면, 실제 검토에서는 제외하는 것이 맞다고 생각되는 곳이 있습니까?') +
-        qHint('"있음"을 고르셨다면 후보 번호와 이유를 꼭 적어 주세요.') +
-        fbWidget('A4', '', HAS, {ph: '후보 번호 / 이유 (필수)'})) +
-      qBox(qHead('A5', '현장 누락 가능성 — 실제 현황을 보면 후보로 검토해 볼 만한데 화면에 후보 공간이 없는 곳이 있다면 적어 주십시오.') +
-        qHint('연구 기준에서 제외된 사례는 발행 자료에 없어 따로 보여 드리지 못합니다. 위성 지도에서 후보가 없는 농지나, ③ 탭 지번 검색에서 "분석 대상 목록에 없음"으로 나오는 필지를 보시면 됩니다. 개인 소유 농지는 이 연구의 대상이 아닙니다.') +
-        fbWidget('A5', '', [], {ph: '위치 또는 지번 / 이유'}));
+      qBox(qHead('Q1', '전체적으로 보시기에, 후보 공간이 실제 농지 현황을 잘 반영하고 있습니까?') +
+        qHint('위 검토 사례나 잘 아시는 지역을 위성 배경으로 보시면 됩니다.') +
+        fbWidget('Q1', '', ['대체로 잘 반영', '일부 다름', '상당 부분 다름', '판단 어려움'], {ph: '그렇게 보신 이유(선택)'})) +
+      qBox(qHead('Q2', '후보에서 빠져야 할 곳 — 후보로 표시됐지만 실제로는 검토 대상이 되기 어려운 곳(건물·도로·하천·산림이 섞인 곳, 이미 다른 용도로 쓰이는 곳 등)이 있습니까?') +
+        fbWidget('Q2', '', YN3, {ph: '후보 번호 또는 위치 / 이유'})) +
+      qBox(qHead('Q3', '후보에 없는 곳 — 실제로는 검토해 볼 만한데 후보 공간으로 표시되지 않은 곳이 있습니까?') +
+        qHint('이 연구는 법인·국공유 농지만 대상으로 합니다. 개인 소유 농지는 후보에 나오지 않습니다.') +
+        fbWidget('Q3', '', HAS, {ph: '위치 또는 지번 / 이유'}));
   }
   renderQs();
-  // ② 데이터 신뢰성·보완 검토 B1–B9
-  const QSRC = ['농지 관련 자료', '소유·토지 자료', '농업진흥지역 경계 자료', '경사 자료', '법정 제외조건 자료', '행정경계 자료'];
+  // ② 사용한 자료 Q4–Q7
   $('mQs').innerHTML =
-    qBox(qHead('B1', '전반적인 신뢰성 — 현재 화면의 후보 공간이 실제 경기도 농지 현황을 대체로 잘 반영한다고 보십니까?') +
-      fbWidget('B1', '', ['대체로 신뢰할 수 있음', '일부 확인 필요', '상당 부분 확인 필요', '판단 어려움'], {ph: '이유(선택)'})) +
-    qBox(qHead('B2', '후보 생성에 사용된 자료의 신뢰성 — 다음 항목을 각각 평가해 주십시오.') +
-      qHint('이 탭 맨 위 "사용한 자료의 출처와 시점" 표와 후보 상세의 "자료 출처·시점"에서 각 자료의 제공기관과 시점을 보실 수 있습니다. 경사 자료는 단위(15° / 15%)를 확인 중입니다.') +
-      QSRC.map(c => fbWidget(`B2.${c}`, c, REL, {ph: '메모(선택)'})).join('')) +
-    qBox(qHead('B3', '데이터 정의·분류 — 현재 사용한 데이터 중 이름이나 분류의 의미가 실제 행정·현장 용어와 다르게 해석될 가능성이 있는 항목이 있습니까?') +
-      fbWidget('B3', '', HAS, {ph: '있다면 어떤 항목이며, 어떻게 표현·정의하는 것이 적절한지'})) +
-    qBox(qHead('B4', '가장 신뢰가 걱정되는 자료를 골라 주십시오. (여러 개 가능)') +
-      fbWidget('B4', '', ['농지', '소유·토지', '경사', '규제·제외조건', '행정경계', '산업단지', '계통 참고값', '기존 태양광', '기타'], {multi: true, ph: '기타 / 이유'})) +
-    qBox(qHead('B5', '최신성 — 실제 입지 검토에 활용하기 위해 가장 먼저 갱신할 필요가 있다고 보시는 자료를 골라 주십시오. (여러 개 가능)') +
-      fbWidget('B5', '괄호 안은 현재 기준 시점입니다.', QDATA, {multi: true, ph: '이유'})) +
-    qBox(qHead('B6', '완전성 — 현재 자료에 포함되지 않아 후보 결과에서 누락을 만들 수 있다고 생각되는 정보가 있습니까?') +
-      fbWidget('B6', '', HAS, {ph: '어떤 정보인지'})) +
-    qBox(qHead('B7', '기존 태양광 자료 — 현재 확보된 기존 태양광 시설 자료가 실제 현황을 파악하기에 어느 정도 충분하다고 보십니까?') +
-      qHint('위치가 확인된 공개 자료만 표시합니다. 표시되지 않는 시설이 존재할 수 있습니다.') +
-      fbWidget('B7', '', ['충분함', '일부 누락 가능', '상당한 누락 가능', '판단 어려움'], {ph: '메모(선택)'})) +
-    qBox(qHead('B8', '추가로 필요한 공간자료를 골라 주십시오. (여러 개 가능)') +
-      fbWidget('B8', '', ['실제 경작 여부', '농업생산성·작물', '도로·농로', '농업기반시설', '배수·수리시설', '토지이용', '환경·생태', '경관', '재해', '개발계획', '계통', '기타'], {multi: true, ph: '기타'})) +
-    qBox(qHead('B9', '현장과 다른 결과 — 잘 아시는 지역에서 실제 현황과 다르게 보이는 후보 결과가 있다면 후보 번호와 이유를 적어 주십시오.') +
-      fbWidget('B9', '', [], {ph: '후보 번호 / 이유'}));
-  // ③ 화면 사용성·활용성 C4–C7 (C1–C3 = 화면 사용해 보기)
+    qBox(qHead('Q4', '신뢰가 가장 걱정되는 자료를 골라 주십시오. (여러 개 가능)') +
+      qHint('자료별 기준 시점은 이 탭 맨 위 표에 있습니다. 오래되었거나, 부정확하거나, 현장 용어와 뜻이 다른 경우를 모두 포함합니다.') +
+      fbWidget('Q4', '', ['농지(지목·경작 여부)', '소유 구분', '농업진흥지역 경계', '경사', '규제·제외조건', '계통 참고값', '산업단지', '기존 태양광', '기타'], {multi: true, ph: '이유(오래됨 · 부정확 · 뜻이 다름 등)'})) +
+    qBox(qHead('Q5', '기존 태양광 현황 — 지도에 표시된 기존 태양광(영농형 포함) 시설이 실제 현황과 어느 정도 맞습니까?') +
+      qHint('① 탭 근거 레이어에서 "기존 태양광 시설"을 켜면 보입니다. 점은 허가 자료의 주소 위치입니다.') +
+      fbWidget('Q5', '', ['대체로 맞음', '일부 누락·오류', '상당한 누락·오류', '판단 어려움'], {ph: '메모(선택)'})) +
+    qBox(qHead('Q6', '추가로 반영해야 할 자료 — 후보 결과를 실제 검토에 쓰려면 무엇을 더 반영해야 합니까? (여러 개 가능)') +
+      fbWidget('Q6', '', ['실제 경작 여부', '작물·농업생산성', '도로·농로', '배수·수리 등 농업기반시설', '토지이용·개발계획', '환경·생태·경관', '재해', '주민 수용성·민원', '기타'], {multi: true, ph: '기타 / 이유'})) +
+    qBox(qHead('Q7', '귀 기관 보유 자료 — 귀 기관이 갖고 있는 자료 중 이 결과를 보완하는 데 쓸 수 있는 것이 있습니까?') +
+      fbWidget('Q7', '', HAS, {ph: '자료 이름 / 제공 가능 여부'}));
+  // ③ 활용과 공개 Q8–Q10
   $('uQs').innerHTML =
-    qBox(qHead('C4', '1 / 3 / 10 / 20 / 50MW 표시는 무엇을 의미한다고 이해하셨습니까?') +
-      fbWidget('C4', '', ['면적을 기준으로 환산한 참고 규모', '실제 설치 가능 용량', '실제 계통 접속 가능 용량', '기타', '판단 어려움'], {ph: '기타'})) +
-    qBox(qHead('C5', '내부 검토에 필요한 정보 — 현재 화면을 내부 검토에 사용하려면 무엇이 추가되어야 합니까?') +
-      fbWidget('C5', '', [], {ph: '자유롭게 적어 주세요'})) +
-    qBox(qHead('C6', '외부 공개 시 주의할 정보 — 외부 공개 시 오해·민감성 또는 악용 가능성 때문에 제한해야 할 정보가 있다면 무엇입니까?') +
-      fbWidget('C6', '', [], {ph: '자유롭게 적어 주세요'})) +
-    qBox(qHead('C7', '추가 기능·자료 — 실제 업무에 사용한다면 가장 필요할 기능이나 자료는 무엇입니까?') +
-      fbWidget('C7', '', [], {ph: '자유롭게 적어 주세요'}));
-  // D. 종합 의견
-  $('fbCommon').innerHTML = [['D1', '실제 경기도 현황과 비교했을 때, 이 연구에서 가장 먼저 다시 확인해야 할 데이터 또는 후보 결과가 있다면 무엇입니까?'],
-    ['D2', '유지할 부분'], ['D3', '수정 또는 다시 확인할 부분'], ['D4', '추가로 필요한 자료'], ['D5', '추가로 필요한 기능']]
-    .map(([k, t]) => qBox(qHead(k, t) + fbWidget(k, '', [], {ph: '자유롭게 적어 주세요'}))).join('');
+    qBox(qHead('Q8', '1 / 3 / 10 / 20 / 50MW 표시는 무엇을 의미한다고 이해하셨습니까?') +
+      fbWidget('Q8', '', ['면적을 기준으로 환산한 참고 규모', '실제 설치 가능 용량', '실제 계통 접속 가능 용량', '기타', '판단 어려움'], {ph: '기타'})) +
+    qBox(qHead('Q9', '업무 활용 — 이 결과를 업무(입지 검토, 사업 문의 대응, 계획 수립 등)에 쓴다면 어디에 쓸 수 있고, 무엇이 더 있어야 합니까?') +
+      fbWidget('Q9', '', [], {ph: '자유롭게 적어 주세요'})) +
+    qBox(qHead('Q10', '외부 공개 시 주의할 점 — 이 결과를 주민·사업자 등에게 공개한다면 오해·민원·투기 우려 때문에 가리거나 설명을 덧붙여야 할 정보가 있습니까?') +
+      fbWidget('Q10', '', HAS, {ph: '어떤 정보 / 이유'}));
+  // 그 밖의 의견(선택)
+  $('fbCommon').innerHTML = fbWidget('ETC', '그 밖의 의견', [], {ph: '자유롭게 적어 주세요'});
   dRender();
 
   // ════════ ② 방법론 ════════
@@ -679,15 +651,6 @@ input[type=range]{width:180px;max-width:100%;accent-color:var(--adv-navy)}
     const done = await V55.pnuSearchBox({value: q}, out, {nameOf: sName, minM2: 66667, onGo: s => { us.sgg = s; us.emd = ''; uRender(); }});
     out.querySelectorAll('*').forEach(el => el.childNodes.forEach(n => { if (n.nodeType === 3) n.nodeValue = n.nodeValue.replace(/농업진흥지역 전체 개방 가정/g, '농업진흥구역 + 농업보호구역 모두 설치 가능').replace(/농업진흥구역 개방 가정/g, '농업진흥구역에 설치 가능 · 농업보호구역 제외').replace(/([가-힣·]+) 개방 가정/g, '$1에 설치 가능'); }));
     if (!done) out.textContent = '입력 형식을 알 수 없습니다 — 19자리 필지 번호 또는 "시군 읍면동 리 본번-부번"으로 적어 주세요.'; };
-  const UT = [['C1', 'C1. 자신이 잘 아는 시군·읍면동 찾기 — 위의 검색이나 ① 탭의 선택 상자로 찾을 수 있었습니까?'],
-    ['C2', 'C2. 후보 하나 찾기 — 눈에 띄는 후보 하나를 찾고, 왜 후보로 표시됐는지 이해할 수 있었습니까?'],
-    ['C3', 'C3. 지번·PNU 검색 — 지번 또는 필지 번호(PNU)로 원하는 필지를 찾을 수 있었습니까?']];
-  $('uTasks').innerHTML = UT.map(([k, t]) => fbWidget(k, t, ['성공', '헷갈림', '실패'])).join('');
-  const GL = ['① 지도', '② 지역 검색', '③ 규모 카드(50/20/10/3/1MW)', '④ 후보 목록', '⑤ 계통', '⑥ 산업단지'];
-  let order = String((fbLoad().glance || {}).verdict || '').split(' → ').filter(Boolean);
-  const gl = () => { $('uGlance').innerHTML = GL.map(g => `<button class="${order.includes(g) ? 'on' : ''}">${g}</button>`).join(''); $('uGlanceOut').textContent = order.length ? '기록한 순서: ' + order.join(' → ') : '기록 없음';
-    $('uGlance').querySelectorAll('button').forEach(b => b.onclick = () => { order = order.includes(b.textContent) ? [] : [...order, b.textContent]; fbSave('glance', {order, verdict: order.join(' → ')}); gl(); }); };
-  gl();
 
   // ════════ 사례 ════════
   $('cList').innerHTML = D.cases.map((c, i) => { const u = UBY.get(c.id); if (!u) return ''; return `<div class="adv-box"><b>CASE ${String(i + 1).padStart(2, '0')}</b> — ${esc(c.rule)}
