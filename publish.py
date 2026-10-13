@@ -8,7 +8,7 @@
 단계
   1 수치   export/*.py        정본 질의 → data_v4/*.json
   2 지오   geom/*.py          구획 폴리곤 → data_v4/clusters/ (오래 걸림)
-  3 관문   gate/site_gate.py  FAIL 이면 여기서 멈춘다 — 어긋난 값은 발행되지 않는다
+  3 관문   gate/site_gate.py · gate/check_js.py  FAIL 이면 여기서 멈춘다 — 어긋난 값은 발행되지 않는다 (push 때 GitHub Actions 가 같은 검사를 다시 돈다)
   4 커밋   git commit         (--commit 을 준 경우에만)
 
 사용
@@ -18,7 +18,7 @@
   python publish.py --commit "메시지"
 push 는 하지 않는다 — 바깥으로 나가는 일은 사람이 누른다.
 """
-import argparse
+import argparse, shutil
 import os
 import subprocess
 import sys
@@ -75,6 +75,12 @@ def main():
     g = subprocess.run([PY, os.path.join(PIPE, 'gate', 'site_gate.py')], cwd=HERE)
     if g.returncode != 0:
         raise SystemExit("중단: 관문 FAIL — 발행하지 않는다")
+    if shutil.which('node'):
+        print("\n── gate/check_js.py", flush=True)
+        if subprocess.run([PY, os.path.join(PIPE, 'gate', 'check_js.py')], cwd=HERE).returncode != 0:
+            raise SystemExit("중단: JS 문법 FAIL — 발행하지 않는다")
+    else:
+        print("\n── gate/check_js.py 건너뜀 (node 없음 — push 후 GitHub Actions 가 검사)", flush=True)
 
     if a.commit:
         subprocess.run(['git', 'add', '-A'], cwd=HERE, check=True)

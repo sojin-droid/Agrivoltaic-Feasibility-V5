@@ -34,3 +34,12 @@ pipeline/**/*.log
 # API 키 등 로컬 비밀값 (README '외부 API 키')
 .env
 .env.*
+
+# 내부 문서 — 저장소 루트가 곧 공개 Pages 이므로 올리지 않는다 (iCloud 보관)
+REVIEW_*.md
+REWORK_PLAN.md
+docs/*HANDOFF*.md
+docs/*EMAIL_DRAFT*.md
+docs/*PLAN_*.md
+docs/MAC_SETUP.md
+docs/method_advisory/DELIVERABLES.md

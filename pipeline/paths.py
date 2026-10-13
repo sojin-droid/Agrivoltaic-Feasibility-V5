@@ -7,7 +7,7 @@
 """
 import os
 
-ROOT = r"C:\Users\user\새 폴더"              # 자료 뿌리(로컬 — 저장소 밖)
+ROOT = os.environ.get("AGRI_ROOT", r"C:\Users\user\새 폴더")   # 자료 뿌리(로컬 — 저장소 밖). PC 마다 AGRI_ROOT 환경 변수로 지정
 MODEL = os.path.join(ROOT, "model")            # 정본 모델 — 값의 출처
 LR = os.path.join(ROOT, "Ledger_Rebuild")      # 원장·런 산출
 CAD = os.path.join(ROOT, "Cadastre_All")       # 지적 폴리곤

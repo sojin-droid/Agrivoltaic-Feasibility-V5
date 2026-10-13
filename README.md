@@ -1,6 +1,6 @@
 # 영농형 태양광 설치 가능 농지 — 전국 분석 사이트 (V5.5)
 
-> **V5.5 (2026-09-23) — GGI 내부 검토 반영.** 메뉴·용어(후보 공간 = 21m 연접 공간 분석 단위 · cluster/특구 표현 보류) · 시행 전/후 시나리오 표기 · 우리 동네 TOP 10(우선순위 복수 선택 · 1축 정렬 / 2축 이상 비지배 '주요 비교 후보') · PNU·지번 검색 · 기존 시설(위치 VALID) 레이어 · 자료 기준일(provenance) · 방법론 팝업. 반영 기록과 QA는 `REVIEW_GGI_20260923.md`.
+> **V5.5 (2026-09-23) — GGI 내부 검토 반영.** 메뉴·용어(후보 공간 = 21m 연접 공간 분석 단위 · cluster/특구 표현 보류) · 시행 전/후 시나리오 표기 · 우리 동네 TOP 10(우선순위 복수 선택 · 1축 정렬 / 2축 이상 비지배 '주요 비교 후보') · PNU·지번 검색 · 기존 시설(위치 VALID) 레이어 · 자료 기준일(provenance) · 방법론 팝업. 반영 기록과 QA는 내부 문서(비공개).
 
 전국 필지 전수 분석의 결과를 공개하는 정적 사이트.
 데이터 세대는 **격자 선언이 정한다** — 지금은 `ADR-0040+0041` (`grids/adr0041_25.yaml`).
@@ -34,8 +34,8 @@
 
 | 자문 | 범위 | 자료 |
 |---|---|---|
-| 데이터 신뢰성·현실성 (경기도 · 경기연구원) | 자료의 정확성·현실성·완전성·최신성 — 방법론은 묻지 않음 | `advisory.html` · 안내 `docs/ADVISORY_README.md` · 기록 `docs/ADVISORY_HANDOFF.md` |
-| 클러스터링 방법론 (KEI 서면 자문) | 21m 연접 단위의 타당성 · 최종 클러스터 정의의 필요성과 원리 · 무가중 비지배 비교 위에 더할 방법 — 자료 정확성은 묻지 않음 | 화면 `cluster_advisory.html` · 브리프 `docs/METHOD_ADVISORY.md`(그림 `docs/method_advisory/fig/` · 그림 수치 `docs/method_advisory/data/` · 생성 `make_figures.py`) · 메일 초안 `docs/METHOD_ADVISORY_EMAIL_DRAFT.md` · 의뢰 계획 `docs/METHOD_ADVISORY_PLAN_20261007.md` · ③탭 전용 자산 `data_v4/existing_parcels/`(허가 주소 필지 폴리곤 · `export_existing_parcels_v4.py` · 표시 전용) · 방법 비교 재실행 `model/proposals/pr0042/rerun_sites_20261007.py` → `docs/method_advisory/data/method_comparison_sites.csv` |
+| 데이터 신뢰성·현실성 (경기도 · 경기연구원) | 자료의 정확성·현실성·완전성·최신성 — 방법론은 묻지 않음 | `advisory.html` · 안내 `docs/ADVISORY_README.md` |
+| 클러스터링 방법론 (KEI 서면 자문) | 21m 연접 단위의 타당성 · 최종 클러스터 정의의 필요성과 원리 · 무가중 비지배 비교 위에 더할 방법 — 자료 정확성은 묻지 않음 | 화면 `cluster_advisory.html` · 브리프 `docs/METHOD_ADVISORY.md`(그림 `docs/method_advisory/fig/` · 그림 수치 `docs/method_advisory/data/` · 생성 `make_figures.py`) · ③탭 전용 자산 `data_v4/existing_parcels/`(허가 주소 필지 폴리곤 · `export_existing_parcels_v4.py` · 표시 전용) · 방법 비교 재실행 `model/proposals/pr0042/rerun_sites_20261007.py` → `docs/method_advisory/data/method_comparison_sites.csv` |
 
 두 자문 모두 결과를 받기 전에는 방법론·데이터를 바꾸지 않는다(ADR-0054).
 
@@ -52,10 +52,12 @@ pipeline/
   paths.py            경로는 여기서만 정한다 (SITE·OUT·ROOT·MODEL·LR·CAD)
   export/  15개       정본 질의 → data_v4/*.json (수치 · publish.py NUM 11개 + 수동 보조 3개[estimate·parcels·recommend] + 코드 다리 모듈 emd_alias.py)
   geom/    5개        21m 단위 폴리곤 → data_v4/units/ · 등재 런 시군 구간 폴리곤 → data_v4/clusters/ (이름은 구세대 그대로 — 내용은 21m 연접 단위이며 cc 아님)
-  gate/    1개        site_gate — FAIL 이면 발행하지 않는다
+  gate/    3개        site_gate(수치·금지어·정합·외부 로드·비밀값) · check_js(JS 문법) · test_admin_bridge — FAIL 이면 발행하지 않는다
+  paths.py 의 자료 뿌리는 AGRI_ROOT 환경 변수로 정한다(없으면 구 윈도우 경로)
+.github/workflows/site-gate.yml   모든 push·PR 에서 위 관문을 자동 실행 — 실패하면 커밋에 빨간 X
   legacy/  36개       구세대 — 돌리지 않음 (legacy/README.md) · ≤1,000m 응축 계보 자산·스크립트는 2026-09-27 제거(git 이력에만)
 data_v4/              발행 자산 — 브라우저가 받는 유일한 데이터
-assets/               v4.js · v4.css · 로고
+assets/               v4.js · v55.js · region.js · v5.css · v55.css · 로고 · 그림(fig/)
 ```
 
 ## 데이터 규율
@@ -116,4 +118,4 @@ agv grid run adr0041_25
 ```
 
 구세대(2026-07, 21개 분석구역·MW 1차·구 S0/S1/S2) 페이지·데이터는 git 이력에 보존.
-전체 설계와 원칙 4축 13항은 `REWORK_PLAN.md`.
+설계·계획·검토 기록·인수인계·메일 초안·PC 설정 같은 내부 문서는 저장소에 두지 않는다(공개 Pages 에 그대로 노출되므로) — 연구실 iCloud 에 보관.

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """site_gate — 시연·push 전 필수 관문 (REWORK_PLAN 원칙 13).
-검사: ①무효 수치 ②금지어·물결표 ③data_v4 내부 정합(T14·가산성) ④외부 자원 로드 ⑤하드코딩 수치 ⑥폐기된 1km 응축(cc) 참조 ⑦행정코드 다리 회귀.
+검사: ①무효 수치 ②금지어·물결표 ③data_v4 내부 정합(T14·가산성) ④외부 자원 로드 ⑤하드코딩 수치 ⑥폐기된 1km 응축(cc) 참조 ⑦행정코드 다리 회귀 ⑧비밀값 하드코딩.
 새 함정 발견 시 문서에 적기 전에 여기 검사부터 추가한다.
 
 사용: python pipeline/gate/site_gate.py    → PASS면 종료코드 0, 위반 있으면 1
@@ -122,6 +122,33 @@ _pub = open(os.path.join(SITE, 'publish.py'), encoding='utf-8').read()
 for bad in ('export_cand_v4', 'export_emd_v4', 'make_sgg_briefs'):
     if bad in _pub:
         fails.append(f"publish.py: 폐기된 1km 응축 exporter '{bad}' 가 발행 순서에 있음 — ADR-0054")
+
+# ⑧ 비밀값(API 키·토큰) 하드코딩 — 저장소 루트가 곧 공개 Pages 라 커밋되면 누구나 받는다(2026-10-13: VWorld·KEPCO 키 12곳 적발).
+#   키는 환경 변수로만 읽는다(README '외부 API 키'). 값은 출력하지 않고 위치만 알린다.
+SECRET_PATS = [
+    (re.compile(r'\b\w*(?:KEY|TOKEN|SECRET|PASSWORD)\w*\s*=\s*["\'][A-Za-z0-9_\-+/=%.]{12,}["\']', re.I), '키·토큰 문자열 대입'),
+    (re.compile(r'["\'](?:apiKey|serviceKey|key|token)["\']\s*:\s*["\'][A-Za-z0-9_\-+/=%.]{16,}["\']'), '요청 인자에 키 문자열'),
+    (re.compile(r'["\'][0-9A-F]{8}-[0-9A-F]{4}-[0-9A-F]{4}-[0-9A-F]{4}-[0-9A-F]{12}["\']', re.I), 'UUID 형식 키(VWorld 등)'),
+    (re.compile(r'eyJ[A-Za-z0-9_-]{20,}\.[A-Za-z0-9_-]{20,}\.'), 'JWT(Supabase 키 등)'),
+]
+SKIP_DIRS = {'.git', 'data_v4', 'vendor', 'node_modules', '__pycache__', '.claude'}
+for dp, dns, fns in os.walk(SITE):
+    dns[:] = [d for d in dns if d not in SKIP_DIRS]
+    for fn in fns:
+        if not fn.endswith(('.py', '.js', '.html', '.md', '.json', '.yml', '.yaml', '.txt', '.sh', '.css')):
+            continue
+        fp = os.path.join(dp, fn)
+        rel = os.path.relpath(fp, SITE).replace(os.sep, '/')
+        if rel == 'pipeline/gate/site_gate.py':
+            continue
+        try:
+            lines = open(fp, encoding='utf-8').read().splitlines()
+        except (UnicodeDecodeError, OSError):
+            continue
+        for i, line in enumerate(lines, 1):
+            for pat, msg in SECRET_PATS:
+                if pat.search(line):
+                    fails.append(f"{rel}:{i}: 비밀값 하드코딩 의심({msg}) — 환경 변수로 옮길 것")
 
 # ⑦ 행정코드 다리 회귀(감사 NEW-F-03) — 합성 fixture(인천·부산·대전·대구 중구 동명) 검사가 깨지면 FAIL
 import subprocess as _sp
