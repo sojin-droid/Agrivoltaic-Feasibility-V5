@@ -172,7 +172,7 @@ input[type=range]{width:180px;max-width:100%;accent-color:var(--adv-navy)}
     </div>
     <!-- 상세는 목록 위가 아니라 지도 아래 칸에 연다 — 목록 위에 열면 목록이 밀려 다른 후보를 고르려면 스크롤해야 했다 (2026-10-13) -->
     <div id="dDet" class="adv-det adv-box" style="margin-top:12px;padding:0 0 4px;background:#fff"></div>
-    <div class="adv-box" style="margin-top:12px"><b>질문 1–2. 후보 결과 확인</b> — 전체 후보 공간을 모두 보실 필요는 없습니다. 아래 검토 사례나 잘 아시는 지역을 보시고 답해 주세요. 사례는 통계적 대표성을 가진 표본이 아니라, 성격이 다른 후보를 빠르게 확인하기 위해 규칙으로 고른 것입니다. 연구 기준에서 제외된 사례는 발행 자료에 없어 제공하지 않습니다. 정답을 여쭙는 것이 아니므로, 판단하기 어려우면 "판단 어려움"을 고르시거나 비워 두셔도 됩니다. 답은 이 브라우저에만 저장됩니다.
+    <div class="adv-box" style="margin-top:12px"><b>질문 1–2. 후보 결과 확인</b> — 전체 후보 공간을 모두 보실 필요는 없습니다. 아래 검토 사례나 잘 아시는 지역을 보시고 답해 주세요. 사례는 통계적 대표성을 가진 표본이 아니라, 도형이 정상이고 실제로 경작 중인 후보 가운데 규칙으로 고른 대표 사례입니다. 정답을 여쭙는 것이 아니므로, 판단하기 어려우면 "판단 어려움"을 고르시거나 비워 두셔도 됩니다. 답은 이 브라우저에만 저장됩니다.
       <div class="scroll" style="margin-top:6px"><table class="adv" id="qCases"></table></div>
       <div id="qList"></div></div>
   </section>
@@ -257,7 +257,7 @@ input[type=range]{width:180px;max-width:100%;accent-color:var(--adv-navy)}
 
   <!-- 사례 -->
   <section class="adv-pane" id="p-cases">
-    <div class="adv-box">경기도 자료에서 규칙에 따라 자동으로 고른 <b>자문 검토 사례</b>입니다. “좋은 지역”을 고른 것이 아니라, 서로 다른 성격의 후보 공간을 빠르게 검토하기 위한 표본입니다. 사례를 누르면 ① 탭 지도에서 열립니다.</div>
+    <div class="adv-box">경기도 자료에서 규칙에 따라 고른 <b>자문 검토 사례</b>입니다. 도형이 정상이고 실제로 경작 중인(팜맵 경작 판독 비율이 높은) 후보 가운데 규모와 지역이 서로 다른 곳을 골랐습니다. 사례마다 위성 지도가 함께 있어 다른 탭으로 옮기지 않고 보실 수 있습니다.</div>
     <div id="cList"></div>
   </section>
 
@@ -360,7 +360,7 @@ input[type=range]{width:180px;max-width:100%;accent-color:var(--adv-navy)}
     setTimeout(() => { Object.values(maps).forEach(m => m.invalidateSize());
       // 숨은 탭에서 처음 그린 지도는 크기가 0이라 범위 맞춤이 어긋난다 — 처음 열 때 한 번 다시 맞춘다
       // ③ 지도는 탭을 처음 열 때 그린다(후보 공간 전량 5만여 곳 — 숨은 탭에서 미리 그리면 메모리만 쓴다)
-      try { if (b.dataset.t === 'region') rgFit();
+      try { if (b.dataset.t === 'region') rgFit(); if (b.dataset.t === 'cases') cInit();
         // ① 지도는 이제 숨은 채로 처음 그려진다 — 처음 열 때 한 번 범위를 맞춘다(후보를 골라 들어온 경우는 그 후보 위치를 지킨다)
         if (b.dataset.t === 'data' && !dShown) { dShown = true; if (st.sel == null && dLayer.getLayers().length) dm.fitBounds(dLayer.getBounds(), {padding: [20, 20], maxZoom: 14}); } if (b.dataset.t === 'user' && !uDrawn) { uDrawn = true; uRender(); } } catch (e) {} }, 50); };
   let uDrawn = false, dShown = false;
@@ -503,10 +503,13 @@ input[type=range]{width:180px;max-width:100%;accent-color:var(--adv-navy)}
   $('dAll').onclick = () => { st.emd = ''; $('dEmd').value = ''; dRender(); };
   const stepEmd = k => { const es = emdsOf(st.sgg).map(e => e.e); if (!es.length) return; let i = es.indexOf(st.emd); i = i < 0 ? (k > 0 ? 0 : es.length - 1) : (i + k + es.length) % es.length; st.emd = es[i]; $('dEmd').value = st.emd; dRender(); };
   $('dPrev').onclick = () => stepEmd(-1); $('dNext').onclick = () => stepEmd(1);
+  // 검토 사례 = "좋은" 후보만(2026-10-13): 정상 도형 · 3MW 이상 · 팜맵 경작 판독 70% 이상 중 시군에서 가장 큰 곳 + 처음부터 있던 규모 사례 2곳.
+  // 예외 사례(면적 차이 · 경작 0%)는 자문자에게 판단을 떠넘기는 것이라 뺐다. ① 탭 표와 "자문 검토 사례" 탭이 같은 목록을 쓴다.
   const QCASES = [[1007196, '규모 사례', '10–50MW 구간에서 면적이 구간 중앙값에 가장 가까운 후보'],
     [1201439, '작은 규모 사례', '3–10MW 구간에서 면적이 구간 중앙값에 가장 가까운 후보'],
-    [1291066, '데이터 예외 사례', '지적 도형 면적과 장부 면적 차이(비율)가 가장 큰 후보'],
-    [1037963, '후보 확인 사례', '10MW 이상 후보 중 팜맵 경작 판독 비율이 가장 낮은 후보(0%) — 농지 외 현황이 섞여 있는지 확인이 필요할 수 있음']];
+    [1955553, '화성시 사례', '화성시에서 정상 도형 · 경작 판독 70% 이상인 후보 중 가장 큰 곳'],
+    [2188889, '여주시 사례', '여주시에서 정상 도형 · 경작 판독 70% 이상인 후보 중 가장 큰 곳'],
+    [1481770, '파주시 사례', '파주시에서 정상 도형 · 경작 판독 70% 이상인 후보 중 가장 큰 곳']];
   const HAS = ['있음', '없음', '판단 어려움'], YN3 = ['없음', '일부 있음', '많음', '판단 어려움'];
   const qHead = (n, t) => `<div style="margin-top:10px"><b>${n}.</b> ${esc(t)}</div>`;
   const qHint = t => `<div class="adv-note" style="color:var(--adv-muted)">${esc(t)}</div>`;
@@ -738,10 +741,19 @@ input[type=range]{width:180px;max-width:100%;accent-color:var(--adv-navy)}
   rgInit();
 
   // ════════ 사례 ════════
-  $('cList').innerHTML = D.cases.map((c, i) => { const u = UBY.get(c.id); if (!u) return ''; return `<div class="adv-box"><b>CASE ${String(i + 1).padStart(2, '0')}</b> — ${esc(c.rule)}
-    <div>${esc(where(u, 3))} · ${km2(u.a)} km² · ${band(u.a)} · 필지 ${u.n} · 계통 참고값 ${u.lo == null ? '알 수 없음' : fmt(u.lo) + (u.hi != null ? '–' + fmt(u.hi) : '') + ' MW'} · 산업단지 ${fmt(u.d, 2)} km${u.t !== 'default' ? ' · <span class="tag w">' + esc(u.ql) + '</span>' : ''}</div>
-    <div style="margin:6px 0"><button class="btnx" data-case="${u.id}">① 탭 지도에서 열기</button></div>${fbWidget('case:' + (i + 1), '이 사례에 대한 의견')}</div>`; }).join('');
-  document.querySelectorAll('[data-case]').forEach(b => b.onclick = () => { const u = UBY.get(+b.dataset.case); st.sgg = homeSgg(u); st.emd = ''; $('dSgg').value = st.sgg; fillEmd(); document.querySelector('#tabs [data-t=data]').click(); dRender().then(() => dSelect(u.id, true)); });
+  const cMaps = [];
+  $('cList').innerHTML = QCASES.map(([id, k, f], i) => { const u = UBY.get(id); if (!u) return ''; return `<div class="adv-box"><b>사례 ${i + 1}</b> — ${esc(k)} · ${esc(f)}
+    <div>${esc(where(u, 3))} · ${u.a < 10000 ? Math.round(u.a).toLocaleString('ko-KR') + '㎡' : km2(u.a) + ' km²'} · ${band(u.a)} · 필지 ${u.n} · 경작 판독 ${u.farm == null ? '—' : Math.round(u.farm * 100) + '%'} · 계통 참고값 ${u.lo == null ? '알 수 없음' : fmt(u.lo) + (u.hi != null ? '–' + fmt(u.hi) : '') + ' MW'} · 산업단지 ${fmt(u.d, 2)} km</div>
+    <div class="adv-map" id="cMap${id}" style="height:340px;min-height:0;margin:8px 0"></div>${fbWidget('case:' + id, '이 사례에 대한 의견')}</div>`; }).join('');
+  // 사례 지도는 탭을 처음 열 때 그린다(숨은 탭에서 그리면 크기가 0)
+  async function cInit() {
+    if (cMaps.length) { cMaps.forEach(m => m.invalidateSize()); return; }
+    for (const [id] of QCASES) { const u = UBY.get(id); if (!u) continue; await loadGeom(homeSgg(u));
+      const m = L.map('cMap' + id, {scrollWheelZoom: false, preferCanvas: true});
+      L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {maxZoom: 18, attribution: '© Esri'}).addTo(m); cMaps.push(m);
+      if (u.geometry) { const ly = L.geoJSON(u.geometry, {style: () => ({color: '#0C356A', weight: 3, fillColor: COLOR(u.a), fillOpacity: .35})}).addTo(m); m.fitBounds(ly.getBounds(), {padding: [24, 24], maxZoom: 16}); }
+      else if (u.lat) m.setView([u.lat, u.lon], 15); }
+  }
 
   // ════════ 수학 요약 ════════
   const S = D.summary;
