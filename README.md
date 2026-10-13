@@ -12,7 +12,7 @@
 > - 경기도 데이터 검토 (경기연구원): https://sojin-droid.github.io/Agrivoltaic-Feasibility-V5/advisory.html — 별도 저장소 사본 https://sojin-droid.github.io/agrivoltaic-advisory-gg/advisory.html (`agrivoltaic-advisory-gg`, `pipeline/export/sync_advisory_gg.py` 로 동기화)
 > - 클러스터링 방법론 (KEI): https://sojin-droid.github.io/Agrivoltaic-Feasibility-V5/cluster_advisory.html — 문서판 [docs/METHOD_ADVISORY.md](docs/METHOD_ADVISORY.md) · 데이터 패키지 [Release cluster-advisory-20261007](https://github.com/sojin-droid/Agrivoltaic-Feasibility-V5/releases/tag/cluster-advisory-20261007)
 
-## 페이지 — V5.1 5탭 + 우리동네 (레포 루트 = Pages 루트)
+## 페이지 — 6탭 + 외부 자문 2쪽 (레포 루트 = Pages 루트)
 
 | 화면 | 파일 | 질문 · 내용 |
 |---|---|---|
@@ -41,21 +41,21 @@
 
 구 탭은 리다이렉트 스텁으로만 남아 있다(링크 보호):
 `proximity.html`·`map.html`·`candidates.html` → 후보지 찾기 ·
-`evidence.html` → 정책 시나리오 · `estimate.html` → 정책 시나리오 `#builder` · `decree.html` → 정책 시나리오 `#decree` ·
-`about.html` → 근거와 방법 `#caveats` · `insight.html` → 한눈에 보기.
+`evidence.html` → 시나리오별 결과 · `estimate.html` → 시나리오별 결과 `#builder` · `decree.html` → 근거와 방법 `#law` ·
+`about.html` → 근거와 방법 `#caveats` · `insight.html` → 전국 모아보기.
 
 ## 구조
 
 ```
 publish.py            발행 오케스트레이션 — 순서를 사람이 아니라 코드가 안다
 pipeline/
-  paths.py            경로는 여기서만 정한다 (SITE·OUT·ROOT·MODEL·LR·CAD)
-  export/  15개       정본 질의 → data_v4/*.json (수치 · publish.py NUM 11개 + 수동 보조 3개[estimate·parcels·recommend] + 코드 다리 모듈 emd_alias.py)
+  paths.py            경로는 여기서만 정한다 (SITE·OUT·ROOT·MODEL·LR·CAD) — 자료 뿌리 ROOT 는 AGRI_ROOT 환경 변수(없으면 구 윈도우 경로)
+  export/  24개       정본 질의 → data_v4/*.json (publish.py 가 순서대로 부르는 것 + 수동 보조[estimate·parcels·recommend 등] + 코드 다리 모듈 emd_alias.py)
   geom/    5개        21m 단위 폴리곤 → data_v4/units/ · 등재 런 시군 구간 폴리곤 → data_v4/clusters/ (이름은 구세대 그대로 — 내용은 21m 연접 단위이며 cc 아님)
   gate/    3개        site_gate(수치·금지어·정합·외부 로드·비밀값) · check_js(JS 문법) · test_admin_bridge — FAIL 이면 발행하지 않는다
-  paths.py 의 자료 뿌리는 AGRI_ROOT 환경 변수로 정한다(없으면 구 윈도우 경로)
-.github/workflows/site-gate.yml   모든 push·PR 에서 위 관문을 자동 실행 — 실패하면 커밋에 빨간 X
   legacy/  36개       구세대 — 돌리지 않음 (legacy/README.md) · ≤1,000m 응축 계보 자산·스크립트는 2026-09-27 제거(git 이력에만)
+.github/workflows/
+  site-gate.yml       모든 push·PR 에서 gate/ 를 자동 실행 — 실패하면 커밋에 빨간 X
 data_v4/              발행 자산 — 브라우저가 받는 유일한 데이터
 assets/               v4.js · v55.js · region.js · v5.css · v55.css · 로고 · 그림(fig/)
 ```

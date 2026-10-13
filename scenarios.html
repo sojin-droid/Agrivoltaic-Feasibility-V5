@@ -9,13 +9,13 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=Inter:wght@400;500;700&family=JetBrains+Mono:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/vendor/pretendard/pretendardvariable-dynamic-subset.css">
-<link rel="stylesheet" href="style.css">
-<link rel="stylesheet" href="assets/v5.css">
+<link rel="stylesheet" href="style.css?v=20261013b">
+<link rel="stylesheet" href="assets/v5.css?v=20261013b">
 <link rel="stylesheet" href="assets/vendor/leaflet/leaflet.css">
 <script src="assets/vendor/leaflet/leaflet.js"></script>
 <script src="assets/v4.js?v=20261013b"></script>
-<script src="assets/region.js"></script>
-<link rel="stylesheet" href="assets/v55.css">
+<script src="assets/region.js?v=20261013b"></script>
+<link rel="stylesheet" href="assets/v55.css?v=20261013b">
 <script src="assets/v55.js?v=20261013b"></script>
 <style>
 /* 페이지 전용 배치 — 색·서체는 전부 :root 토큰(style.css)만 사용 */
@@ -746,23 +746,22 @@ input[type=number].coef{width:80px;font:inherit;padding:2px 6px;border:1px solid
 
     if (big) {
       const v = f ? (big.sgg[f] || [0, 0, 0]) : [big.n50, 0, big.n3];
-      put('r-b3', `${V4.n(v[2])}<small>곳</small>`); put('r-b50', `${V4.n(v[0])}<small>곳</small>`); setNote(''); return;
+      put('r-b50', `${V4.n(v[0])}<small>곳</small>`); setNote(''); return;
     }
     const rn = effScope() === 0 ? runName() : null;
     if (!rn || !D.runs[rn]) {
-      put('r-b3', '—'); put('r-b50', '—');
+      put('r-b50', '—');
       setNote('이 조건 조합은 50MW 이상 대규모 후보 공간 수를 계산해 두지 않았습니다. 설치 가능 면적만 표시합니다.'); return;
     }
     if (!f) {
-      const rr = RES.runs[rn], b3 = band(rr, 6.6667), b50 = band(rr, 111.1111);
-      put('r-b3', b3 ? `${V4.n(b3.n)}<small>곳</small>` : '—'); put('r-b50', b50 ? `${V4.n(b50.n)}<small>곳</small>` : '—'); setNote(''); return;
+      const rr = RES.runs[rn], b50 = band(rr, 111.1111);
+      put('r-b50', b50 ? `${V4.n(b50.n)}<small>곳</small>` : '—'); setNote(''); return;
     }
-    put('r-b3', '…'); put('r-b50', '…'); setNote('');
+    put('r-b50', '…'); setNote('');
     const gj = await Region.gz(`data_v4/clusters/${f}_${rn}.json.gz`);
     if (my !== seq) return;
-    if (!gj) { put('r-b3', '—'); put('r-b50', '—'); setNote('이 시군은 이 조건에서 후보 공간이 없습니다.'); return; }
+    if (!gj) { put('r-b50', '—'); setNote('이 시군은 이 조건에서 후보 공간이 없습니다.'); return; }
     const A = x => x.properties.m != null ? x.properties.m / 1e6 : x.properties.a || 0;   // km² — ㎡ 원값(m)이 있으면 그것
-    put('r-b3', `${V4.n(gj.features.filter(x => A(x) >= 0.0667).length)}<small>곳</small>`);
     put('r-b50', `${V4.n(gj.features.filter(x => A(x) >= 1.111).length)}<small>곳</small>`);
   }
 
@@ -781,6 +780,6 @@ input[type=number].coef{width:80px;font:inherit;padding:2px 6px;border:1px solid
   calc(); setTimeout(syncMap, 1500);
 })();
 </script>
-<script src="site.js"></script>
+<script src="site.js?v=20261013b"></script>
 </body>
 </html>
