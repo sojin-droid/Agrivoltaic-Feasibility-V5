@@ -42,6 +42,8 @@ runs = {}
 for name, ne, ek, nc, ck, mw in con.execute("""
     SELECT name, n_eligible, eligible_area_km2, n_component, component_area_km2, m_total_mw
     FROM scenario_runs WHERE theta_ha IS NULL""").fetchall():
+    if name.endswith('@pubcorp_clan'):   # 종중·종교 포함 범위 폐지 — 화면에 내보내지 않는다
+        continue
     runs[name] = {'n': ne, 'km2': ek, 'n_comp': nc, 'comp_km2': ck, 'mw': mw}
 con.close()
 print(f"등재 런 {len(runs)}종")
@@ -56,8 +58,7 @@ out = {'built': datetime.date.today().isoformat(),
        'zones': ZONES, 'recls': RECLS,
        'own_labels': OWN_LABELS,
        'coef_default': 0.045,
-       'universes': {'pubcorp': ['02', '04', '05', '06'],
-                     'pubcorp_clan': ['02', '04', '05', '06', '07', '08']},
+       'universes': {'pubcorp': ['02', '04', '05', '06']},   # 종중·종교 포함 범위는 폐지 — 넓히려면 '전체(개인 포함)'를 본다
        'sgg_labels': labels,
        'runs': runs,
        'rows': rows}

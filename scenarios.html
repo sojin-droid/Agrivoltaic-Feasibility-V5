@@ -13,10 +13,10 @@
 <link rel="stylesheet" href="assets/v5.css">
 <link rel="stylesheet" href="assets/vendor/leaflet/leaflet.css">
 <script src="assets/vendor/leaflet/leaflet.js"></script>
-<script src="assets/v4.js?v=20261012a"></script>
+<script src="assets/v4.js?v=20261013a"></script>
 <script src="assets/region.js"></script>
 <link rel="stylesheet" href="assets/v55.css">
-<script src="assets/v55.js?v=20261012a"></script>
+<script src="assets/v55.js?v=20261013a"></script>
 <style>
 /* 페이지 전용 배치 — 색·서체는 전부 :root 토큰(style.css)만 사용 */
 .est-grid{display:grid;grid-template-columns:340px 1fr;gap:18px}
@@ -105,7 +105,7 @@ input[type=number].coef{width:80px;font:inherit;padding:2px 6px;border:1px solid
         <div class="seg" data-k="decree"><button data-v="0" class="on">미제한</button><button data-v="1">제한</button></div>
         <div class="hint-s">시행령 제정안 §7 6호 — 농업회사법인의 부지를 국가관리간척지(매립지 등 미매각분)로 한정합니다.</div></div>
       <div class="cond"><h4>소유</h4>
-        <div class="seg" data-k="uni"><button data-v="pubcorp" class="on">법인·국공유</button><button data-v="pubcorp_clan">+종중·종교</button><button data-v="all">전체(개인 포함)</button></div>
+        <div class="seg" data-k="uni"><button data-v="pubcorp" class="on">법인·국공유</button><button data-v="all">전체(개인 포함)</button></div>
         <div class="hint-s">이 프로젝트의 대상지는 법인 및 국공유지입니다.</div></div>
       <div class="cond"><h4>면적당 환산 계수</h4>
         <label style="font-size:13px">kW/㎡ <input type="number" class="coef" id="eCoef" value="0.045" step="0.005" min="0.005" max="0.2" style="width:80px;font:inherit;padding:2px 6px;border:1px solid var(--line);border-radius:6px"></label>
@@ -428,15 +428,16 @@ input[type=number].coef{width:80px;font:inherit;padding:2px 6px;border:1px solid
                       dashArray: f.properties.sp ? '5 4' : null,
                       fillColor: st.fill,
                       fillOpacity: kind === 'ctrl' ? .3 : (kind === 'base' ? .8 : .75)}),
-        onEachFeature: (f, ly) => ly.bindPopup(
-          `<b>${st.label} · 후보 공간 ${V4.km2(f.properties.a, 2)} km²</b> (${V4.n(Math.round(f.properties.a * 1e6))} ㎡)` +
+        // 면적: ㎡ 원값(m)이 있으면 그것, 없으면 km²(소수 둘째 자리) 기록값. 0.00 km² 로만 기록된 작은 공간은 ㎡ 로 표기하거나(원값 있음) '5,000 ㎡ 미만'으로 둔다
+        onEachFeature: (f, ly) => { const p = f.properties, m2 = p.m != null ? p.m : p.a ? p.a * 1e6 : null; ly.bindPopup(
+          `<b>${st.label} · 후보 공간 ${m2 == null ? '5,000 ㎡ 미만' : V4.area(m2)}</b>${m2 != null && m2 >= 5000 ? ` (${V4.n(Math.round(m2))} ㎡)` : ''}` +
           (kind === 'ctrl'
             ? '<br><b>개인 소유 포함(비교용)</b> — 개인 필지가 섞여 있어 기본 표시에는 없는 자리'
               + ''
             : '') +
-          `<br>이 시군 구간 ${V4.n(f.properties.n)}필지 · 참고 ${V4.n(Math.round(f.properties.a * 45))} MW` +
+          `<br>이 시군 구간 ${V4.n(f.properties.n)}필지 · 참고 ${m2 == null ? '0.2 MW 미만' : V55.mw(m2) + ' MW'}` +
           (f.properties.sp ? '<br><b>시군 경계 걸침</b> — 면적은 구획 전체 기준' : '') +
-          `<br><span style="color:#888;font-size:11px">후보 공간 #${f.properties.id} · 21m 연접 단위 · 환산 0.045 kW/㎡</span>`)
+          `<br><span style="color:#888;font-size:11px">후보 공간 #${f.properties.id} · 21m 연접 단위 · 환산 0.045 kW/㎡</span>`); }
       }).addTo(map));
     }
     parcelLayers.forEach(l => map.removeLayer(l));
@@ -691,7 +692,7 @@ input[type=number].coef{width:80px;font:inherit;padding:2px 6px;border:1px solid
   document.getElementById('eCoef').addEventListener('input', e => { state.coef = +e.target.value || 0.045; calc(); });
 
   const cellOf = () => state.promo && state.prot ? 'R3_zone_all' : state.promo ? 'R2_promo' : state.prot ? 'R1_protect' : 'R0_current';
-  const runName = () => cellOf() + (state.sb ? '_SB' : '') + (state.uni === 'pubcorp' ? '' : state.uni === 'all' ? '@all' : '@pubcorp_clan');
+  const runName = () => cellOf() + (state.sb ? '_SB' : '') + (state.uni === 'all' ? '@all' : '');
   const ownSet = () => new Set(state.uni === 'all' ? CODES : D.universes[state.uni]);
   const band = (rr, ha) => ((rr && rr.size_bands) || []).find(x => Math.abs(x.min_ha - ha) < 0.01);
   const CELL_LABEL = {R0_current: '특별법 시행 전 (농업진흥지역이 아닌 농지)', R1_protect: '농업보호구역에 설치 가능할 경우 (농업진흥구역 제외)',
@@ -759,7 +760,7 @@ input[type=number].coef{width:80px;font:inherit;padding:2px 6px;border:1px solid
     const gj = await Region.gz(`data_v4/clusters/${f}_${rn}.json.gz`);
     if (my !== seq) return;
     if (!gj) { put('r-b3', '—'); put('r-b50', '—'); setNote('이 시군은 이 조건에서 후보 공간이 없습니다.'); return; }
-    const A = x => x.properties.a || 0;
+    const A = x => x.properties.m != null ? x.properties.m / 1e6 : x.properties.a || 0;   // km² — ㎡ 원값(m)이 있으면 그것
     put('r-b3', `${V4.n(gj.features.filter(x => A(x) >= 0.0667).length)}<small>곳</small>`);
     put('r-b50', `${V4.n(gj.features.filter(x => A(x) >= 1.111).length)}<small>곳</small>`);
   }
