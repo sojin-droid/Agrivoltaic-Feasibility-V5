@@ -51,6 +51,8 @@ const V4 = {
   n(x) { return x.toLocaleString('ko-KR'); },
   km2(x, d = 1) { return x.toLocaleString('ko-KR', {minimumFractionDigits: d, maximumFractionDigits: d}); },
   mw(m2) { return Math.round(m2 * 0.045 / 1000).toLocaleString('ko-KR'); }, // 참고 환산: ㎡ 원값 기준
+  // 면적 표기(단위 포함) — km² 로 d 자리에서 0 으로 반올림되는 작은 값만 ㎡ 로 쓴다 (예: 0.12 km² · 3,210 ㎡)
+  area(m2, d = 2) { if (m2 == null) return '—'; return m2 < 0.5 * Math.pow(10, 6 - d) ? `${Math.round(m2).toLocaleString('ko-KR')} ㎡` : `${this.km2(m2 / 1e6, d)} km²`; },
   // 카운트업 — 동적 삽입 수치용 (site.js .count는 정적 DOM 전용이라 별도 구현)
   countup(el, target, decimals = 0) {
     if (matchMedia('(prefers-reduced-motion: reduce)').matches) {

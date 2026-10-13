@@ -14,9 +14,9 @@
 <link rel="stylesheet" href="assets/v55.css">
 <link rel="stylesheet" href="assets/vendor/leaflet/leaflet.css">
 <script src="assets/vendor/leaflet/leaflet.js"></script>
-<script src="assets/v4.js?v=20261012a"></script>
+<script src="assets/v4.js?v=20261013a"></script>
 <script src="assets/region.js"></script>
-<script src="assets/v55.js?v=20261012a"></script>
+<script src="assets/v55.js?v=20261013a"></script>
 <style>
 .cond3{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
 .cond3 .cond h4{margin-bottom:8px}
@@ -198,7 +198,7 @@
     const drawTable = qual => V55.top10.table($('recTbl'), sel, rows, {nameOf, pickId: st.pick, onPick: r => pick(r), qual, missing: miss});
     drawTable(null);
     const unk = sel.mode === 'rank' ? rows.filter(r => r[V55.top10.AXES[sel.axis].key] == null) : [];
-    $('recCtl').innerHTML = `${unk.length ? `<b>값을 알 수 없는 후보</b>(${V55.top10.AXES[sel.axis].name} 결측 · 숨기지 않음): ${unk.slice(0, 12).map(r => `#${r.lab} ${V55.km2(r.a, 2)} km²`).join(' · ')}${unk.length > 12 ? ` 외 ${unk.length - 12}곳` : ''}.<br>` : ''}
+    $('recCtl').innerHTML = `${unk.length ? `<b>값을 알 수 없는 후보</b>(${V55.top10.AXES[sel.axis].name} 결측 · 숨기지 않음): ${unk.slice(0, 12).map(r => `#${r.lab} ${V55.areaOf(r)}`).join(' · ')}${unk.length > 12 ? ` 외 ${unk.length - 12}곳` : ''}.<br>` : ''}
       계통 여유 = 소재 읍면동 잔여 연계가능용량 하한(한전 연계정보 스냅숏) — 참고지표이며 실제 접속 가능 용량이 아님<sup class="fnref">[22]</sup> · 산단 거리 = 최근접 산업단지 경계까지 직선거리<sup class="fnref">[23]</sup> · 전력판매량 대비 = MW × 1,314h ÷ 시군 연간 전력판매량(표기 전용)<sup class="fnref">[28]</sup>.`;
     // 지도
     const ids = new Set(sel.list.map(r => r.lab));

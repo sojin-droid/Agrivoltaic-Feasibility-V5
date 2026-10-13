@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""구획 색인 재작성 + 경계 걸침(sp) 표시 — **압축본(.json.gz)도 읽는다**.
+"""구획 색인 재작성 + 경계 걸침(sp) · ㎡ 원값(m) 표시 — **압축본(.json.gz)도 읽는다**.
 
 왜 따로 두는가: export_clusters_v4 의 색인 단계가 `{sgg}_{cell}.json` 만 찾았다.
 정본은 이미 압축(.json.gz)돼 있어 그 단계에서 통째로 빠지고, 색인에 대조군만 남는다.
@@ -76,6 +76,11 @@ for i, sgg in enumerate(sggs, 1):
             if f['properties'].get('sp', None) != sp:
                 f['properties']['sp'] = sp
                 changed = True
+            # ㎡ 정수 원값 — 도형을 다시 굽지 않고 채운다(a 는 km² 둘째 자리라 작은 공간이 0.00)
+            m2 = int(round(float(comp_area[c].get(f['properties']['id'], 0.0)) * 1e6))
+            if f['properties'].get('m', None) != m2:
+                f['properties']['m'] = m2
+                changed = True
         if changed:
             save(d, path, gz)
             rewrote += 1
@@ -89,5 +94,5 @@ for i, sgg in enumerate(sggs, 1):
 fo = os.path.join(SITE, 'data_v4', 'clusters_index.json')
 json.dump(index, io.open(fo, 'w', encoding='utf-8'), ensure_ascii=False, indent=0)
 miss = [c for c in CELLS if not any(c in e for e in index['sgg'].values())]
-print(f"색인 {len(index['sgg'])}시군 · sp 갱신 {rewrote}파일 · {GEN}")
+print(f"색인 {len(index['sgg'])}시군 · sp·m 갱신 {rewrote}파일 · {GEN}")
 print('빠진 칸: ' + (', '.join(miss) if miss else '없음'))

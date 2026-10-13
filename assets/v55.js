@@ -6,9 +6,13 @@ window.V55 = (() => {
   const n = x => x == null ? '—' : Number(x).toLocaleString('ko-KR');
   const km2 = (m2, d = 1) => m2 == null ? '—' : (m2 / 1e6).toLocaleString('ko-KR', {minimumFractionDigits: d, maximumFractionDigits: d});
   // MW 표시: 발행 자산에 참고 MW(mw)가 있으면 그 값을 쓴다(mwOf). mw(㎡)는 발행 값이 없는 곳의 0.045 kW/㎡ 환산 표시용.
+  // 면적 표기(단위 포함) — km² 로 d 자리에서 0 이 되는 작은 값만 ㎡. lt = clusters/ 폴백에서 ㎡ 원값(m)이 없고 0.00 km² 로만 기록된 경우(5,000 ㎡ 미만)
+  const area = (m2, d = 2) => m2 == null ? '—' : m2 < 0.5 * Math.pow(10, 6 - d) ? `${n(Math.round(m2))} ㎡` : `${km2(m2, d)} km²`;
+  const areaOf = p => p && p.lt ? '5,000 ㎡ 미만' : area(p && p.a);
   const fmtMW = v => v == null ? '—' : Number(v).toLocaleString('ko-KR', {maximumFractionDigits: v >= 10 ? 0 : 1});
-  const mwOf = o => o && o.mw != null ? fmtMW(o.mw) : mw(o && o.a);
-  const mw = m2 => m2 == null ? '—' : (m2 * 0.045 / 1000).toLocaleString('ko-KR', {maximumFractionDigits: m2 * 0.045 / 1000 >= 10 ? 0 : 1});
+  const mwOf = o => o && o.mw != null ? fmtMW(o.mw) : o && o.lt ? `${mw(5000)} 미만` : mw(o && o.a);
+  // 작은 공간이 '0 MW' 로 보이지 않게 — 0.1 MW 미만은 소수 둘째 자리, 0.005 MW 미만은 '<0.01'
+  const mw = m2 => { if (m2 == null) return '—'; const v = m2 * 0.045 / 1000; return v > 0 && v < 0.005 ? '<0.01' : v.toLocaleString('ko-KR', {maximumFractionDigits: v >= 10 ? 0 : v >= 0.1 ? 1 : 2}); };
   async function gz(path) { const r = await fetch(path); if (!r.ok) return null; const ds = r.body.pipeThrough(new DecompressionStream('gzip')); return JSON.parse(await new Response(ds).text()); }
 
   // ── 시나리오 표기 — 사용자 화면에는 R0~R3 코드를 쓰지 않는다 ──
@@ -163,17 +167,17 @@ window.V55 = (() => {
                        : {color: hi ? '#0C356A' : '#6B4E16', weight: hi ? 3 : (p.ns > 1 ? 1.6 : .8), dashArray: p.ns > 1 ? '5 4' : null, fillColor: b[1], fillOpacity: .78}; },
         onEachFeature: (f, ly) => { const p = f.properties;
           const qn = p.t === 'quality_review' ? ` · <b>기하 품질 검토(${p.ql})</b> — 도형 면적 ${km2(p.ag, 2)} km² ≠ 장부 면적. 도형은 위치 참고용이며 면적 수치는 장부 기준` : '';
-          ly.bindTooltip((tooltip ? tooltip(p) : `후보 공간 #${p.id} · ${km2(p.a, 2)} km² ≈ ${mwOf(p)} MW · 필지 ${n(p.n)}${p.ns > 1 ? ' · 시군 경계 걸침(하나로 유지)' : ''}`) + qn);
+          ly.bindTooltip((tooltip ? tooltip(p) : `후보 공간 #${p.id} · ${areaOf(p)} ≈ ${mwOf(p)} MW · 필지 ${n(p.n)}${p.ns > 1 ? ' · 시군 경계 걸침(하나로 유지)' : ''}`) + qn);
           if (onClick) ly.on('click', () => onClick(p, ly)); }});
     },
     reviewToggleHTML: (k, on) => k ? `<label class="v55-hint" style="display:block;margin-top:4px"><input type="checkbox" id="qrTgl" ${on ? 'checked' : ''}> 기하 품질 검토 도형 ${n(k)}개 표시(회색 점선 · 도형 면적이 장부 면적과 1% 넘게 다름 — 후보 공간 자체는 표·수치에 그대로 포함)</label>` : '',
     // 다른 시나리오(시행 전·이격) 는 등재 런의 시군 구간 폴리곤 파일(clusters/)로 폴백 — 시군 경계 걸침은 sp 로 표기
     async loadRun(sgg, run) { const gj = await gz(`data_v4/clusters/${sgg}_${run}.json.gz`); if (!gj) return null;
-      gj.features.forEach(f => { const p = f.properties; p.a = Math.round((p.a || 0) * 1e6); p.ns = p.sp ? 2 : 1; }); return gj; },
+      gj.features.forEach(f => { const p = f.properties; p.lt = p.m == null && !p.a; p.a = p.m != null ? p.m : Math.round((p.a || 0) * 1e6); p.ns = p.sp ? 2 : 1; }); return gj; },
   };
 
   // ── TOP 10 엔진 — data_v4/top10/{sgg}.json.gz (전량 + 비지배 플래그) ──
-  const AXES = {a: {name: '발전 규모', key: 'a', dir: -1, unit: (r) => `${km2(r.a, 2)} km² ≈ ${mwOf(r)} MW`},
+  const AXES = {a: {name: '발전 규모', key: 'a', dir: -1, unit: (r) => `${areaOf(r)} ≈ ${mwOf(r)} MW`},
                 b: {name: '계통 여유(참고)', key: 'lo', dir: -1, unit: (r) => r.lo == null ? '알 수 없음' : `${n(r.lo)} MW`},
                 c: {name: '산업단지 거리', key: 'd', dir: +1, unit: (r) => r.d == null ? '알 수 없음' : `${r.d.toFixed(1)} km`}};
   const FLAG = {'ab': 'fab', 'ac': 'fac', 'bc': 'fbc', 'abc': 'f3'};
@@ -301,7 +305,7 @@ window.V55 = (() => {
       // 감사 NEW-F-05 — 면적순(기준 미선택)은 표시 제한이지 비교 집합이 아니다. '주요 비교 후보' 표지를 붙이지 않는다.
       const lead = isRank ? `<span class="rk">${r.rank}</span>` : sel.mode === 'compare' ? `<span class="cmp">주요 비교 후보</span> <span style="color:var(--muted);font-size:11px">${i + 1}</span>` : `<span style="color:var(--muted);font-size:11px">면적순 ${i + 1} · 순위 아님</span>`;
       return `<tr class="rowbtn ${r.lab === pickId ? 'pick' : ''}" data-lab="${r.lab}"><td class="l">${lead}<div style="font-size:11px;color:var(--muted)">후보 공간 번호 ${r.lab} · 면적 ${R.ra ?? '—'}위 · 계통 ${R.rb ?? '—'}위 · 산단 ${R.rc ?? '—'}위${geomTag(r.lab)}</div></td>` +
-        cell('a', `${km2(r.a, 2)} km²`) + `<td>${mwOf(r)}</td>` + cell('b', r.lo == null ? '<span class="unk">알 수 없음</span>' : n(r.lo)) + cell('c', r.d == null ? '<span class="unk">알 수 없음</span>' : r.d.toFixed(1)) +
+        cell('a', areaOf(r)) + `<td>${mwOf(r)}</td>` + cell('b', r.lo == null ? '<span class="unk">알 수 없음</span>' : n(r.lo)) + cell('c', r.d == null ? '<span class="unk">알 수 없음</span>' : r.d.toFixed(1)) +
         `<td>${r.recl == null ? '—' : n(r.recl)}</td><td>${r.dsh == null ? '—' : r.dsh}</td><td>${n(r.n)}</td><td>${r.ne > 1 ? `읍면동 ${r.ne}곳` : '—'}</td></tr>`; }).join('');
     el.innerHTML = hdr + (body || `<tr><td colspan="9" class="l" style="color:var(--muted)">이 조건에 해당하는 후보 공간이 없음 — 법인·국공유 소유 농지를 21m로 이은 결과가 이 규모에 못 미친다는 뜻이며, 이 지역 농지에 설치할 수 없다는 뜻이 아님</td></tr>`);
     el.querySelectorAll('tr.rowbtn').forEach(tr => tr.onclick = () => onPick && onPick(sel.list.find(r => r.lab === +tr.dataset.lab)));
@@ -311,7 +315,7 @@ window.V55 = (() => {
     sel.list.forEach((r, i) => { if (r.lat == null) return; coords.push([r.lat, r.lon]);
       const isRank = sel.mode === 'rank';
       L.marker([r.lat, r.lon], {icon: L.divIcon({className: 'v55-mk' + (isRank ? '' : ' cmp'), html: isRank ? `${r.rank}` : `${i + 1}`, iconSize: [24, 24], iconAnchor: [12, 12]}), keyboard: false})
-        .bindTooltip(`${isRank ? r.rank + '위' : sel.mode === 'compare' ? `주요 비교 후보 ${i + 1} (순위 아님)` : `면적순 ${i + 1} (순위 아님)`} · ${km2(r.a, 2)} km² ≈ ${mwOf(r)} MW · 후보 공간 번호 ${r.lab}`).on('click', () => onPick && onPick(r)).addTo(group); });
+        .bindTooltip(`${isRank ? r.rank + '위' : sel.mode === 'compare' ? `주요 비교 후보 ${i + 1} (순위 아님)` : `면적순 ${i + 1} (순위 아님)`} · ${areaOf(r)} ≈ ${mwOf(r)} MW · 후보 공간 번호 ${r.lab}`).on('click', () => onPick && onPick(r)).addTo(group); });
     return coords;
   };
   // 축 다중 선택 컨트롤
@@ -351,7 +355,7 @@ window.V55 = (() => {
     const rowHTML = (label, run) => { const c = pnu.classify(data, pnuStr, run, minM2); const C = pnu.CLS[c.cls] || ['—', '자료 없음', '#999'];
       const c1 = pnu.classify(data, pnuStr, run, 22222); const alt = (c.cls === 1 || c.cls === 2) && c1.cls !== c.cls ? ` · 1MW(22,222㎡) 기준으로는 ${pnu.CLS[c1.cls][0]} ${pnu.CLS[c1.cls][1]}` : (c.cls === 1 || c.cls === 2) ? ' · 1MW 기준도 같음' : '';
       const noGeom = run === 'R2_promo' && c.lab != null && _miss.has(c.lab) ? ' · <b>후보 공간 도형 없음</b>(소속 필지의 지적 폴리곤이 없어 지도에 그리지 못함 — 설치 가능 판정과 소속은 그대로이며 설치 불가라는 뜻은 아님)' : '';
-      return `<div class="row"><div class="s">${label}</div><div><span class="v55-cls" style="background:${C[2]}">${C[0]}</span>${C[1]}${c.lab != null ? `<div class="v55-hint">후보 공간 #${c.lab} · ${km2(c.a, 2)} km² ≈ ${mw(c.a)} MW · 필지 ${n(c.n)} · 규모 기준 ${km2(minM2, 3)} km²(${mw(minM2)}MW)${alt}${noGeom}</div>` : ''}</div></div>`; };
+      return `<div class="row"><div class="s">${label}</div><div><span class="v55-cls" style="background:${C[2]}">${C[0]}</span>${C[1]}${c.lab != null ? `<div class="v55-hint">후보 공간 #${c.lab} · ${area(c.a)} ≈ ${mw(c.a)} MW · 필지 ${n(c.n)} · 규모 기준 ${km2(minM2, 3)} km²(${mw(minM2)}MW)${alt}${noGeom}</div>` : ''}</div></div>`; };
     const c2 = pnu.classify(data, pnuStr, 'R2_promo', minM2);
     el.innerHTML = `<div class="v55-pnu"><div class="h">PNU ${pnuStr} · 시군 ${nameOf(sgg)}</div><div class="nm">${nm}</div>${brNote}
       ${rowHTML('특별법 시행 전<br><small>(농업진흥지역에 설치 불가)</small>', 'R0_current')}${rowHTML('특별법 시행 후<br><small>(농업진흥구역에도 설치 가능)</small>', 'R2_promo')}${rowHTML('특별법 시행 후<br><small>(농업진흥구역·농업보호구역에도 설치 가능)</small>', 'R3_zone_all')}
@@ -371,5 +375,5 @@ window.V55 = (() => {
     }
     return false;
   }
-  return {n, km2, mw, gz, SCN, scn, openModal, methodButton, METHOD, dataDates, EXISTING_NOTE, GRID_NOTE, MW_BANDS, BIG_BANDS, bandOf, legendHTML, GRID_BINS, GRID_SAT, GRID_UNK, GRID_UNK_LINE, gridLegendHTML, units, top10, pnu, existing, axesControl, seg, pnuCard, pnuSearchBox};
+  return {n, km2, area, areaOf, mw, gz, SCN, scn, openModal, methodButton, METHOD, dataDates, EXISTING_NOTE, GRID_NOTE, MW_BANDS, BIG_BANDS, bandOf, legendHTML, GRID_BINS, GRID_SAT, GRID_UNK, GRID_UNK_LINE, gridLegendHTML, units, top10, pnu, existing, axesControl, seg, pnuCard, pnuSearchBox};
 })();

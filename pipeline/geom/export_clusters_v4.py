@@ -149,6 +149,8 @@ for i, sgg in enumerate(sggs, 1):
                                                'coordinates': _rnd(list(gj['coordinates']))},
                                   'properties': {'id': int(lab),
                                                  'a': round(float(comp_area[c].get(lab, 0.0)), 2),
+                                                 # ㎡ 정수 원값 — a(km² 둘째 자리)가 0.00 이 되는 작은 공간도 화면이 ㎡ 로 표기
+                                                 'm': int(round(float(comp_area[c].get(lab, 0.0)) * 1e6)),
                                                  'n': int(n_by.get(lab, 0))}})
         tmp = fo + '.tmp'
         json.dump({'type': 'FeatureCollection', 'cell': c, 'sgg': sgg,

@@ -10,9 +10,9 @@
 <link rel="stylesheet" href="assets/vendor/leaflet/leaflet.css">
 <link rel="stylesheet" href="assets/v55.css">
 <script src="assets/vendor/leaflet/leaflet.js"></script>
-<script src="assets/v4.js?v=20261012a"></script>
+<script src="assets/v4.js?v=20261013a"></script>
 <script src="assets/region.js"></script>
-<script src="assets/v55.js?v=20261012a"></script>
+<script src="assets/v55.js?v=20261013a"></script>
 <style>
 :root{--adv-bg:#fff;--adv-ink:#1d2733;--adv-muted:#5d6b7a;--adv-line:#dde3ea;--adv-soft:#f4f7fa;--adv-navy:#0C356A;--adv-warn:#8a5a00;--adv-warnbg:#fff6e0}
 body{background:var(--adv-bg);color:var(--adv-ink)}
@@ -521,7 +521,7 @@ table.adv th{background:var(--adv-soft)}
     const rv = V55.units.reviewCount(fc);
     $('mapNote').textContent = `${Region.nameOf(cur.sgg)} · 21m 단위 폴리곤 ${feats.length.toLocaleString('ko-KR')}곳 (전량 · 면적 하한 없음${rv ? ` · 품질 검토 ${rv}곳` : ''})`;
     $('legend').innerHTML = V55.legendHTML(V55.MW_BANDS, '후보 공간 규모(참고 MW · 0.045 kW/㎡ 환산 · 표시용 눈금)');
-    $('uList').innerHTML = feats.slice(0, 400).map(p => `<div class="it" data-id="${p.id}"><b>#${p.id}</b> · ${km2(p.a)} km² ≈ ${V55.mw(p.a)} MW · 필지 ${n(p.n)}${p.ns > 1 ? ' · 시군 경계 걸침' : ''}${p.t === 'quality_review' ? ' · <span class="tag w">품질 검토</span>' : ''}</div>`).join('') + (feats.length > 400 ? `<div class="it adv-note">면적순 400곳까지 표시 · 나머지 ${n(feats.length - 400)}곳은 지도에만</div>` : '');
+    $('uList').innerHTML = feats.slice(0, 400).map(p => `<div class="it" data-id="${p.id}"><b>#${p.id}</b> · ${V55.area(p.a)} ≈ ${V55.mw(p.a)} MW · 필지 ${n(p.n)}${p.ns > 1 ? ' · 시군 경계 걸침' : ''}${p.t === 'quality_review' ? ' · <span class="tag w">품질 검토</span>' : ''}</div>`).join('') + (feats.length > 400 ? `<div class="it adv-note">면적순 400곳까지 표시 · 나머지 ${n(feats.length - 400)}곳은 지도에만</div>` : '');
     $('uList').querySelectorAll('.it[data-id]').forEach(d => d.onclick = () => { sel(+d.dataset.id); lyr.eachLayer(l => { if (l.feature.properties.id === +d.dataset.id) map.fitBounds(l.getBounds(), {maxZoom: 15}); }); });
     exRefresh();
   }
