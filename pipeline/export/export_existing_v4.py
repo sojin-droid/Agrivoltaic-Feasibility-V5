@@ -46,9 +46,8 @@ meta = {'generated': datetime.datetime.now().strftime('%Y-%m-%d %H:%M'), 'n_reco
 _emds = sorted({p[7] for p in pts if p[7]})
 meta['emd_names'] = dict(con.execute("SELECT SUBSTR(code10,1,8), name_full FROM bjd_code WHERE SUBSTR(code10,9,2)='00' AND SUBSTR(code10,1,8) IN (" + ','.join("'%s'" % e for e in _emds) + ")").fetchall())
 print(f"읍면동 이름 {len(meta['emd_names'])}/{len(_emds)}")
-with gzip.open(os.path.join(SITE, 'data_v4', 'existing_pv_v4.json.gz'), 'wt', encoding='utf-8') as fo:
-    json.dump({'meta': meta, 'pts': pts, 'by_sgg': by}, fo, ensure_ascii=False, separators=(',', ':'))
-print(f"existing_pv_v4: VALID 점 {len(pts):,} · 시군 집계 {len(by)} · 원천 {tot[2]} · 총 {tot[0]:,}행(영농형 표기 {tot[1]})")
+# 2026-10-13: existing_pv_v4.json.gz 는 export_existing_pv.py(원천 전량 재수집 · 위치 등급)가 만든다 — 여기서 VALID 판으로 덮어쓰지 않는다.
+print(f"(참고) VALID 점 {len(pts):,} · 시군 집계 {len(by)} · 원천 {tot[2]} · 총 {tot[0]:,}행 — existing_pv_v4 는 쓰지 않음")
 
 # 감사 F-10·F-18 — 날짜·판을 의미별로 따로 싣는다: 수집일(collection_date) · 취득 시각(retrieved_at) · 공식 릴리스(source_release_version)
 #   · 내부 스냅숏(internal_snapshot_version) · 구축일(built_at) · 변환(transform_version). 화면은 이 구분을 그대로 보인다.

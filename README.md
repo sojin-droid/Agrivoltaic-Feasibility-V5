@@ -82,7 +82,8 @@ assets/               v4.js · v55.js · region.js · v5.css · v55.css · 로�
 
 | 환경 변수 | 발급처 | 쓰는 스크립트 |
 |---|---|---|
-| `VWORLD_API_KEY` | 브이월드 오픈API (https://www.vworld.kr → 오픈API → 인증키 발급) | `05_recover_nojimok` · `05b_recover_hwaseong` · `06_fetch_geometry` · `07_build_supplement` · `08_apply_fixes` · `10_collect_new_regions` · `11_assemble_new_regions` · `21b_refetch_boundaries` · `21d_fetch_a_boundaries` · `cross_check` |
+| `VWORLD_API_KEY` | 브이월드 오픈API (https://www.vworld.kr → 오픈API → 인증키 발급) | `05_recover_nojimok` · `05b_recover_hwaseong` · `06_fetch_geometry` · `07_build_supplement` · `08_apply_fixes` · `10_collect_new_regions` · `11_assemble_new_regions` · `21b_refetch_boundaries` · `21d_fetch_a_boundaries` · `cross_check` · `pipeline/export/export_existing_pv.py`(좌표 없는 시설의 주소 검색 — 없으면 건너뜀) |
+| `DATA_GO_KR_API_KEY` | 공공데이터포털 (https://www.data.go.kr → 「전국태양광발전소전기사업허가정보표준데이터」(15107742) 활용신청 → 마이페이지 일반 인증키(Decoding)) | `pipeline/collect/collect_existing_pv.py` |
 | `KEPCO_API_KEY` | 한전 전력데이터 개방 포털 (https://bigdata.kepco.co.kr → 오픈API → 인증키 신청) | `21c_fetch_b_demand` · `21g_fetch_industry_top3` |
 
 ```bash
@@ -91,6 +92,10 @@ export VWORLD_API_KEY="발급받은 키"
 
 ```bash
 export KEPCO_API_KEY="발급받은 키"
+```
+
+```bash
+export DATA_GO_KR_API_KEY="발급받은 키"
 ```
 
 계속 쓰려면 셸 설정(`~/.zshrc` 등)에 적어 둔다. 키 값은 커밋하지 않는다 — `.env` 파일은 `.gitignore` 로 막아 두었다. 사이트(`data_v4/`)는 키 없이 열린다 — 브라우저는 외부 API를 부르지 않는다.
@@ -111,6 +116,16 @@ python publish.py --commit "메시지"
 
 기본은 수치만 다시 만든다(빠름). `--geom` 은 구획 폴리곤까지 다시 굽는다(수십 분).
 `publish.py` 는 push 하지 않는다 — 바깥으로 나가는 일은 사람이 누른다.
+
+기존 태양광 시설 점(`existing_pv_v4.json.gz`)은 원천을 직접 다시 받아 만든다 — 원천은 저장소 밖 `AGRI_ROOT`(기본 `~/Developer/agri-data`)에 날짜별로 보관.
+
+```bash
+uv run pipeline/collect/collect_existing_pv.py
+```
+
+```bash
+uv run pipeline/export/export_existing_pv.py
+```
 
 값 자체를 다시 만들려면 모델 쪽에서 격자를 돌린 뒤 발행한다.
 

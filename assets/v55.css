@@ -123,3 +123,5 @@ table.v55-top td.hi{background:#FFF6D6}
 .v55-pv.off{background:#7A7A7A;color:#E6E6E6}
 .leaflet-marker-icon.v55-mk,.leaflet-marker-icon.v55-pv{display:flex!important}   /* leaflet 의 display:block 이 가운데 정렬을 깨지 않게 — 지도 표지에만 */
 .v55-pv.agri{background:#1F6F43;color:#FFE27A}   /* 영농형 태양광 — 초록 바탕 */
+.v55-pv.float{background:#1E5FA8;color:#FFE27A}  /* 수상 태양광 — 파랑 바탕 */
+.v55-pv.approx{opacity:.55;border-style:dashed}   /* 위치가 확인되지 않음(좌표 참고·주소로 찾은 위치) — 흐리게·점선 */

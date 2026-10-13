@@ -268,28 +268,32 @@ window.V55 = (() => {
     async load() { if (!this._d) this._d = await gz('data_v4/existing_pv_v4.json.gz'); return this._d; },
     SRC: {std_15107742: '공공데이터포털 전국태양광발전소 전기사업허가정보', 'sido_전북2026_15138599': '전라북도 태양광 발전사업 허가 현황(2026)'},
     count(d, sgg = null) { return d ? (sgg ? d.pts.filter(p => p[6] === sgg).length : d.pts.length) : 0; },
-    // 종류 — 원천 표기 기준: 영농형(시설 이름에 '영농형'이 적힌 경우) · 일반 태양광
-    kinds(d, sgg = null) { const k = {p: 0, y: 0}; if (d) (sgg ? d.pts.filter(p => p[6] === sgg) : d.pts).forEach(p => { if (p[3] === 'y') k.y++; else k.p++; }); return k; },
+    // 종류 — 원천 표기 기준: 영농형(이름에 '영농') · 수상(설치 위치·이름에 '수상') · 일반 태양광
+    kinds(d, sgg = null) { const k = {p: 0, y: 0, f: 0}; if (d) (sgg ? d.pts.filter(p => p[6] === sgg) : d.pts).forEach(p => { if (p[3] === 'y') k.y++; else if (p[3] === 'f') k.f++; else k.p++; }); return k; },
     kindLabel(d, sgg = null) { const k = this.kinds(d, sgg), ny = d.meta && d.meta.n_yeongnong_records;
-      // 영농형 0곳은 자료가 없다는 뜻이 아니라, 원천 기록 중 위치를 검증할 수 있는 점이 없다는 뜻 — 전국 표기일 때 기록 건수를 함께 적는다
-      return `일반 태양광 ${n(k.p)}곳 · 영농형 태양광 ${n(k.y)}곳${!sgg && k.y === 0 && ny ? ` (원천 기록 ${n(ny)}건 · 위치 확인된 곳 없음)` : ''}`; },
+      // 영농형 0곳은 자료가 없다는 뜻이 아니라, 원천 기록 중 위치를 찾을 수 있는 점이 없다는 뜻 — 전국 표기일 때 기록 건수를 함께 적는다
+      return `일반 태양광 ${n(k.p)}곳 · 영농형 태양광 ${n(k.y)}곳 · 수상 태양광 ${n(k.f)}곳${!sgg && k.y === 0 && ny ? ` (영농형 원천 기록 ${n(ny)}건 · 위치 확인된 곳 없음)` : ''}`; },
+    // 위치 등급(pts[8]) — v 위치 확인 · c 좌표 참고(주소 읍면동과 다름) · g 주소로 찾은 위치. 등급이 없는 옛 자료는 v
+    GRADE: {v: '위치 확인(원천 좌표가 주소의 읍면동 안)', c: '좌표 참고 — 원천 좌표가 주소의 읍면동과 다름', g: '주소로 찾은 위치 — 원천에 좌표가 없어 지번 주소의 필지 위치에 표시'},
     layer(d, {pane, sgg = null} = {}) { const g = L.layerGroup(); if (!d) return g;
       const pts = sgg ? d.pts.filter(p => p[6] === sgg) : d.pts;
-      const tip = ([, , kw, t, st, src, , emd]) => `<b>기존 ${t === 'y' ? '영농형 태양광' : '일반 태양광'} 시설</b>${(d.meta.emd_names || {})[emd] ? ' · ' + d.meta.emd_names[emd] : ''}<br>상태: ${d.meta.status_codes[st] || st}${kw ? ` · ${n(kw)} kW` : ''}<br><span style="font-size:11px">표시 위치: 허가 자료의 주소(지번) 위치 · 출처: ${this.SRC[src] || src}</span>`;
+      const KIND = {y: '영농형 태양광', f: '수상 태양광'};
+      const tip = ([, , kw, t, st, src, , emd, gr]) => `<b>기존 ${KIND[t] || '일반 태양광'} 시설</b>${(d.meta.emd_names || {})[emd] ? ' · ' + d.meta.emd_names[emd] : ''}<br>상태: ${d.meta.status_codes[st] || st}${kw ? ` · ${n(kw)} kW` : ''}<br><span style="font-size:11px">위치: ${this.GRADE[gr || 'v']} · 출처: ${this.SRC[src] || src}</span>`;
       if (pts.length <= 3000) {        // 시군 단위 — 태양광 표지(☀). 가동 중이 아닌 곳은 회색
-        pts.forEach(p => L.marker([p[1], p[0]], {pane, keyboard: false, icon: L.divIcon({className: 'v55-pv' + (p[3] === 'y' ? ' agri' : '') + (p[4] === 'op' ? '' : ' off'), html: '☀', iconSize: [16, 16], iconAnchor: [8, 8]})})
+        pts.forEach(p => L.marker([p[1], p[0]], {pane, keyboard: false, icon: L.divIcon({className: 'v55-pv' + (p[3] === 'y' ? ' agri' : p[3] === 'f' ? ' float' : '') + (p[4] === 'op' ? '' : ' off') + (p[8] && p[8] !== 'v' ? ' approx' : ''), html: '☀', iconSize: [16, 16], iconAnchor: [8, 8]})})
           .bindTooltip(tip(p)).addTo(g));
       } else {                          // 전국 — 점이 많아 캔버스 원(같은 색 규칙)
         const canvas = L.canvas({pane, padding: .3});
-        pts.forEach(p => L.circleMarker([p[1], p[0]], {renderer: canvas, pane, radius: 3.5, weight: 1.2, color: '#5A3E00', fillColor: p[4] !== 'op' ? '#B9B9B9' : p[3] === 'y' ? '#3CCB6E' : '#FFC21A', fillOpacity: .95})
+        pts.forEach(p => L.circleMarker([p[1], p[0]], {renderer: canvas, pane, radius: 3.5, weight: 1.2, color: '#5A3E00', dashArray: p[8] && p[8] !== 'v' ? '2 2' : null, fillColor: p[4] !== 'op' ? '#B9B9B9' : p[3] === 'y' ? '#3CCB6E' : p[3] === 'f' ? '#3B8FD9' : '#FFC21A', fillOpacity: p[8] && p[8] !== 'v' ? .55 : .95})
           .bindTooltip(tip(p)).addTo(g));
       }
       return g; },
     summaryHTML(d, sgg) { if (!d) return ''; const s = d.by_sgg[sgg];
       if (!s) return `<div class="v55-hint">이 시군에는 확보한 기존 태양광 시설 기록이 없음(시설이 없다는 뜻은 아님).</div>`;
       const k = this.count(d, sgg);
-      return `<div class="v55-hint">이 시군의 기존 태양광 시설 기록 ${n(s.n)}건 중 위치를 확인할 수 있는 <b>${n(k)}곳</b>을 지도에 표시 — ${this.kindLabel(d, sgg)}.
-        ☀ 노랑 = 일반 태양광 · 초록 = 영농형 태양광 · 회색 = 가동중단·폐기.</div>`; },
+      const gr = s.geo != null ? ` (위치 확인 ${n(s.valid)} · 좌표 참고 ${n(s.cond)} · 주소로 찾은 위치 ${n(s.geo)} · 위치 못 찾음 ${n(s.nolocstatus)})` : '';
+      return `<div class="v55-hint">이 시군의 기존 태양광 시설 기록 ${n(s.n)}건 중 <b>${n(k)}곳</b>을 지도에 표시${gr} — ${this.kindLabel(d, sgg)}.
+        ☀ 남색 = 일반 태양광 · 초록 = 영농형 · 파랑 = 수상 · 회색 = 가동중단·폐기 · 흐린 표지 = 위치가 확인되지 않음(좌표 참고·주소로 찾은 위치).</div>`; },
   };
 
   // ── TOP 10 표 · 마커 렌더(두 화면 공용) ──

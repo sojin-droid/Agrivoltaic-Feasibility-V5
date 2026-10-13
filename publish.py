@@ -32,7 +32,7 @@ PY = sys.executable
 NUM = ['export_v4.py', 'export_results_v4.py', 'export_narrative_v4.py',
        'export_grid_v4.py', 'export_ind_firms.py',
        'export_decree_v4.py',
-       # V5.5 (GGI 검토 반영) — TOP 10 모집단·비지배 플래그 · PNU 소속 · 기존 시설(VALID)·provenance
+       # V5.5 (GGI 검토 반영) — TOP 10 모집단·비지배 플래그 · PNU 소속 · provenance (기존 시설 점은 export_existing_pv.py — 맥·uv, README '갱신')
        'export_top10_v4.py', 'export_pnu_v4.py', 'export_existing_v4.py']
 
 # 지오메트리 — **순서가 뜻을 갖는다**
