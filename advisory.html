@@ -488,7 +488,7 @@ input[type=range]{width:180px;max-width:100%;accent-color:var(--adv-navy)}
     if (pan) { const ly = dPolys.get(id); if (ly) dm.fitBounds(ly.getBounds(), {padding: [40, 40], maxZoom: 16}); else if (u.lat) dm.setView([u.lat, u.lon], 15); }
     const ratio = u.ag && u.a ? u.ag / u.a : null;
     $('dDet').innerHTML = `<h3>후보 공간 상세</h3>
-      <div class="sec"><span class="k">위치</span> — 경기도 ${esc(u.emds.length ? u.emds.map(eName).join(' · ') : u.sggs.map(sName).join(' · '))}
+      <div class="sec"><span class="k">위치</span> — ${u.ext ? '' : '경기도 '}${esc(u.emds.length ? u.emds.map(eName).join(' · ') : u.sggs.map(sName).join(' · '))}
         <div class="adv-note">후보 공간 번호 #${u.id} · 구성 필지 번호(PNU) 일부: <span id="dPnus">불러오는 중…</span></div>${srcHTML('admin')}</div>
       <div class="sec"><span class="k">공간</span> — 면적 <b>${km2(u.a)} km²</b>(${Math.round(u.a).toLocaleString('ko-KR')}㎡) · 구성 필지 ${u.n.toLocaleString('ko-KR')}개 · 걸친 읍면동 ${u.ne || u.emds.length}곳
         <div>지도 도형: ${u.t === 'default' ? '정상(도형 면적 ≈ 장부 면적)' : u.t === 'missing' ? '<span class="tag w">도형 없음</span> 소속 필지의 지적 폴리곤이 없어 지도에 그리지 못함 — 설치 불가라는 뜻은 아님' : `<span class="tag w">지도 정보가 더 확인 필요한 곳</span> ${esc(u.ql)} — 도형 면적 ${km2(u.ag)} km²는 장부 면적의 ${fmt(ratio * 100, 0)}%`}</div>${srcHTML('geom')}</div>
@@ -541,9 +541,20 @@ input[type=range]{width:180px;max-width:100%;accent-color:var(--adv-navy)}
         <div class="cv"><b>약 ${fmt(u.mw, 1)} MW</b> · ${u.a < 10000 ? Math.round(u.a).toLocaleString('ko-KR') + '㎡' : km2(u.a) + ' km²'} · 필지 ${u.n.toLocaleString('ko-KR')}개</div>
         <div class="cr">${esc(f.replace(/ — 지역별 지도의 1번.*$/, ''))}${u.ext ? ' · 경기 자료 밖 — 지역별 지도 탭에서 봄' : ''}</div></button>`; }).join('');
     $('qCases').querySelectorAll('[data-qcase]').forEach(b => b.onclick = () => { const u = UBY.get(+b.dataset.qcase);
-      if (u.ext) { document.querySelector('#tabs [data-t=region]').click();   // 보령 — ① 탭(경기 전용) 대신 지역별 지도의 보령 지도에서 그 후보로
-        setTimeout(() => { const li = document.querySelector(`#rgL${u.sggs[0]} li[data-id="${u.id}"]`), el = $('rgM' + u.sggs[0]); if (el) el.scrollIntoView({behavior: 'smooth', block: 'center'}); if (li) li.click(); }, 400); return; }
-      st.sgg = homeSgg(u); st.emd = ''; $('dSgg').value = st.sgg; fillEmd(); dRender().then(() => dSelect(u.id, true)); });
+      if (u.ext) { showExt(u); return; }   // 보령 — 경기 자문 자료 밖이라 이 후보 하나를 ① 탭 지도에 그린다
+      st.sgg = homeSgg(u); st.emd = ''; $('dSgg').value = st.sgg; fillEmd();
+      // 시군 전체로 맞춘 직후 후보로 다시 맞추면 두 이동이 겹쳐 타일이 비는 때가 있다 — 시군 맞춤은 생략하고 후보로 한 번만 간다
+      dRender(false).then(() => dSelect(u.id, true)); });
+  }
+  // 경기 자문 자료(gg_v1) 밖의 사례(보령) — 시군 목록·필지 자료가 ① 탭에 없으므로 그 후보 하나만 그리고 상세를 연다
+  function showExt(u) {
+    st.sgg = u.sggs[0]; st.emd = ''; st.sel = null; $('dSgg').value = ''; $('dEmd').innerHTML = '<option value="">(시군 전체)</option>';
+    dLayer.clearLayers(); dEmdL.clearLayers(); dPolys = new Map();
+    const ly = L.geoJSON(u.geometry, {style: () => polyStyle(u, true)}).addTo(dLayer);
+    ly.bindTooltip(`후보 공간 · ${km2(u.a)} km² · ${band(u.a)}`); dPolys.set(u.id, ly);
+    $('dSum').innerHTML = `<b>충남 보령시</b> — 경기 자문 자료 밖이라 이 사례 후보 하나만 표시합니다 · ${km2(u.a)} km² · 참고 ${fmt(u.mw, 1)} MW · 필지 ${u.n.toLocaleString('ko-KR')}개<div class="adv-note">보령시의 다른 후보 공간은 지역별 지도 탭의 보령 지도에서 보실 수 있습니다.</div>`;
+    $('dList').innerHTML = `<div class="adv-note" style="padding:6px 10px">보령시 사례 1곳</div><div class="it sel" data-id="${u.id}"><b>${km2(u.a)} km²</b> · ${band(u.a)} · 필지 ${u.n.toLocaleString('ko-KR')}<div class="adv-note">${esc(u.emds.map(eName).join(' · '))}</div></div>`;
+    dSelect(u.id, true);
   }
   function renderQs() {
     renderQCases();
@@ -711,7 +722,7 @@ input[type=range]{width:180px;max-width:100%;accent-color:var(--adv-navy)}
     $('uList').innerHTML = `<div class="adv-note" style="padding:6px 10px">큰 후보 공간부터 · ${items.length.toLocaleString('ko-KR')}곳${whole ? ' · 경기도 전체는 위치를 점으로 표시(시군·읍면동을 고르면 도형)' : scn !== 'R2_promo' ? ' · 이 조건은 위치를 점으로 표시' : ''}</div>` + items.slice(0, 200).map(x => `<div class="it" data-id="${x.id}" data-lat="${x.lat}" data-lon="${x.lon}"><b>${band(x.a)}</b> · ${km2(x.a)} km²<div class="adv-note">${esc(x.where)} · 계통 여유 참고값 ${x.lo == null ? '알 수 없음' : fmt(x.lo) + ' MW'} · 산업단지까지 ${x.d == null ? '알 수 없음' : fmt(x.d, 1) + ' km'}</div></div>`).join('');
     $('uList').querySelectorAll('.it').forEach(el => el.onclick = () => { if (el.dataset.lat !== 'null') um.setView([+el.dataset.lat, +el.dataset.lon], 15);
       const u = UBY.get(+el.dataset.id); if (u && scn === 'R2_promo') { $('uDet').innerHTML = `<b>${band(u.a)}</b> · ${km2(u.a)} km² · ${esc(where(u, 3))}<br>왜 후보인가: 21m 이내로 이어진 법인·국공유 농지 ${u.n}필지가 판정 조건을 통과해 하나의 후보 공간이 됐습니다(특별법 시행 후 농업진흥구역에 설치할 수 있게 되는 경우).<br>계통 여유 참고값 ${u.lo == null ? '알 수 없음' : fmt(u.lo) + '–' + fmt(u.hi) + ' MW'}(실제 접속 가능 용량 아님) · 가장 가까운 산업단지까지 ${u.d == null ? '알 수 없음' : fmt(u.d, 1) + ' km'} <button class="btnx" data-open="${u.id}">자세히 보기</button>`;
-        $('uDet').querySelector('[data-open]').onclick = () => { st.sgg = homeSgg(u); st.emd = ''; $('dSgg').value = st.sgg; fillEmd(); document.querySelector('#tabs [data-t=data]').click(); dRender().then(() => dSelect(u.id, true)); }; } });
+        $('uDet').querySelector('[data-open]').onclick = () => { st.sgg = homeSgg(u); st.emd = ''; $('dSgg').value = st.sgg; fillEmd(); document.querySelector('#tabs [data-t=data]').click(); dRender(false).then(() => dSelect(u.id, true)); }; } });
   }
   $('uPnuGo').onclick = async () => { const out = $('uPnuOut'); const q = $('uPnu').value.trim(); if (!q) return;
     const done = await V55.pnuSearchBox({value: q}, out, {nameOf: sName, minM2: 66667, onGo: s => { us.sgg = s; us.emd = ''; uRender(); }});
@@ -756,7 +767,7 @@ input[type=range]{width:180px;max-width:100%;accent-color:var(--adv-navy)}
         return `<li data-id="${p.id}"><span class="rg-n">${i + 1}</span><span><b>약 ${fmt(p.mw, 1)} MW</b> · ${km2(p.a)} km² · ${esc(p.emds.map(emdName).slice(0, 2).join(' · '))} · 필지 ${p.n}개${inGG ? ` · <a href="#" data-go="${p.id}">① 탭에서 상세</a>` : ''}</span></li>`; }).join('')
         : '<li style="cursor:default">3MW 이상 후보 공간이 없습니다.</li>';
       $('rgL' + s).querySelectorAll('li[data-id]').forEach(li => li.onclick = e => { const id = +li.dataset.id;
-        if (e.target.dataset.go) { e.preventDefault(); const u = UBY.get(id); st.sgg = homeSgg(u); st.emd = ''; $('dSgg').value = st.sgg; fillEmd(); document.querySelector('#tabs [data-t=data]').click(); dRender().then(() => dSelect(id, true)); return; }
+        if (e.target.dataset.go) { e.preventDefault(); const u = UBY.get(id); st.sgg = homeSgg(u); st.emd = ''; $('dSgg').value = st.sgg; fillEmd(); document.querySelector('#tabs [data-t=data]').click(); dRender(false).then(() => dSelect(id, true)); return; }
         const l = lay.get(id); m.fitBounds(l.getBounds(), {maxZoom: 15, padding: [20, 20]}); l.openTooltip(); });
       const bb = sL.getBounds(); if (bL.getLayers().length) bb.extend(bL.getBounds());
       const r = {m, bounds: bb.isValid() ? bb : eL.getBounds(), fitted: false}; rgMaps.push(r);
