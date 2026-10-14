@@ -9,7 +9,7 @@
 > **공개 사이트 (GitHub Pages)**: https://sojin-droid.github.io/Agrivoltaic-Feasibility-V5/
 
 > **외부 자문 화면** (같은 Pages 안 · 모든 화면 푸터에서 연결)
-> - 경기도 데이터 검토 (경기연구원): https://sojin-droid.github.io/Agrivoltaic-Feasibility-V5/advisory.html — 별도 저장소 사본 https://sojin-droid.github.io/agrivoltaic-advisory-gg/advisory.html (`agrivoltaic-advisory-gg`, `pipeline/export/sync_advisory_gg.py` 로 동기화)
+> - 재생에너지지구 내에 영농형 태양광 클러스터 위치 연구 — 자료 신뢰성 자문 (경기연구원 · 파주·여주·보령): https://sojin-droid.github.io/Agrivoltaic-Feasibility-V5/advisory.html — 별도 저장소 사본 https://sojin-droid.github.io/agrivoltaic-advisory-gg/advisory.html (`agrivoltaic-advisory-gg`, `pipeline/export/sync_advisory_gg.py` 로 동기화)
 > - 클러스터링 방법론 (KEI): https://sojin-droid.github.io/Agrivoltaic-Feasibility-V5/cluster_advisory.html — 문서판 [docs/METHOD_ADVISORY.md](docs/METHOD_ADVISORY.md) · 데이터 패키지 [Release cluster-advisory-20261007](https://github.com/sojin-droid/Agrivoltaic-Feasibility-V5/releases/tag/cluster-advisory-20261007)
 
 ## 페이지 — 6탭 + 외부 자문 2쪽 (Pages 는 GitHub Actions 배포 — html·style.css·site.js·assets·data_v4·docs(공개 문서)만 올라간다)
@@ -21,7 +21,7 @@
 | 시나리오별 결과 | `scenarios.html` | 조건을 바꾸면 어떻게 달라지는가 — 광역→시군 2단계 선택 × 제약 조건 조합(진흥·보호 개방, 이격, 매립지 범위, **시행령 고려/미고려**, 소유) → 필지·구획·규모 눈금 결과 + 미고려/고려 비교표 · 증분 지도 · 요약표(시행령 고려 표 포함) |
 | 우리 동네 TOP 10 | `regions.html` | 시군 안 후보 공간 비교 — 제도(시행 전/후)·이격·최소 규모 + 우선순위 복수 선택(발전 규모·계통·산업단지): 1축 = 정렬 순위, 2축 이상 = 비지배 '주요 비교 후보'(`data_v4/top10/` 사전 계산) · PNU·지번 검색 |
 | 우리 동네 영농형 태양광, 어디가 좋을까? | `local.html` | 이름·PNU·지번 입력 → 6단계 위저드(지역·제도·이격·우선순위·규모·실행) → 후보 공간 지도·TOP 10/주요 비교 후보 표 → 인쇄용 보고서 — 지자체·주민·비영리 |
-| 자문용 검토(ADVISORY) | `advisory.html` | 외부 자문 전용(경기연구원) — 경기도 데이터 검증(근거 레이어·출처) · 지자체 사용성 과제 · 데이터 신뢰성 문항 A–D. 최종 방법·추천을 정하지 않음 · 의견은 브라우저에만 저장 |
+| 재생에너지지구 내에 영농형 태양광 클러스터 위치 연구 (자문) | `advisory.html` | 외부 자문 전용(경기연구원 · 파주·여주·보령) — 경기도 데이터 검증(근거 레이어·출처) · 지자체 사용성 과제 · 데이터 신뢰성 질문(필수 7 + 선택 2). 최종 방법·추천을 정하지 않음 · 의견은 브라우저에만 저장 |
 | 클러스터링 방법론 자문 | `cluster_advisory.html` | 외부 자문 전용(KEI) — 21m 연접 거리 산정 근거·후보 공간 분포, 묶음 방법 비교, 무가중 비지배와 축 원자료 분포, 전국 21m 단위 지도(시군 선택), M1–M9 문항 입력·내보내기. 데이터 정확성은 묻지 않음 |
 | 근거와 방법 | `method.html` | 이 숫자와 방법은 어디에서 왔는가 — 1 배경(핵심 결과 다섯 가지) · 2 법·제도 근거(`#law`, 시행령 조문·함의) · 3 공간분석 방법(판정 조건·`#datarules`·검증·`#caveats`) · 4 우선 후보 선정(`#ranking`) · 5 데이터 출처 · 6 Sources(`#fnsec`, 전 화면의 출처를 여기로 통합) |
 
