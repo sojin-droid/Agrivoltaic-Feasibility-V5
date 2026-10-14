@@ -57,7 +57,11 @@ cols = ['dataset_id', 'kind', 'asset_class', 'provider', 'source_name', 'collect
         'internal_snapshot_version', 'built_at', 'transform_version',
         'checksum_kind', 'provenance_status', 'layer', 'is_canon']
 prov = con.execute("SELECT " + ", ".join(cols) + " FROM provenance_v1 ORDER BY dataset_id").fetchall()
+# 기록 밖에서 사람이 확인한 값(근거 포함)은 provenance_overrides.json 에서 덮어쓴다 — 2026-10-14
+from apply_provenance_overrides import apply_rows
+cols, prov = apply_rows(cols, [list(r) for r in prov])
 json.dump({'generated': meta['generated'], 'source': 'provenance_v1 (v9_01_quality_gate.py · ADR-0053) — 값을 지어내지 않는다: 없으면 unknown',
+           'overrides': 'pipeline/export/provenance_overrides.json — 기록 밖에서 확인한 값(행마다 override_evidence)',
            'cols': cols, 'rows': [list(r) for r in prov]},
           open(os.path.join(SITE, 'data_v4', 'provenance_v4.json'), 'w', encoding='utf-8'), ensure_ascii=False, indent=0)
 print(f"provenance_v4: {len(prov)} datasets")

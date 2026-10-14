@@ -238,7 +238,7 @@ P = json.load(open(os.path.join(OUT, 'provenance_v4.json'), encoding='utf-8'))
 PC = P['cols']
 PROV_IDS = ['raw:cadastre_all', 'raw:land_processed_zip', 'raw:agpromo_raw', 'raw:farmmap_2025', 'raw:regulation_composite',
             'raw:kepco_raw_v4', 'tbl:kepco_record_v3', 'raw:damdan_raw', 'tbl:ind_complex_bnd', 'raw:emd_bnd_raw',
-            'tbl:analysis_unit_v1', 'tbl:existing_pv_v1', 'src:kpx_plants_raw', 'src:permit_raw', 'tbl:bjd_code']
+            'tbl:analysis_unit_v1', 'tbl:existing_pv_v1', 'src:kpx_plants_raw', 'src:permit_raw', 'tbl:bjd_code', 'raw:slope']
 prov = {r[0]: dict(zip(PC, r)) for r in P['rows'] if r[0] in PROV_IDS}
 
 out = {'generated': datetime.datetime.now().strftime('%Y-%m-%d %H:%M'), 'mode': 'ADVISORY — 자문용 검토 자산(최종 판정·순위가 아님)',

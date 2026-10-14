@@ -20,7 +20,8 @@
 "checksum_kind",
 "provenance_status",
 "layer",
-"is_canon"
+"is_canon",
+"override_evidence"
 ],
 "rows": [
 [
@@ -42,7 +43,8 @@
 "names_sizes_fingerprint",
 "COMPLETE",
 "L0",
-false
+false,
+null
 ],
 [
 "raw:adjacency_edges_delta",
@@ -63,7 +65,8 @@ false
 "names_sizes_fingerprint",
 "COMPLETE",
 "L0",
-false
+false,
+null
 ],
 [
 "raw:agpromo_raw",
@@ -76,7 +79,7 @@ false
 "2026-08-21",
 "2026-08-21",
 "unknown",
-"unknown",
+"2026-08-21 조회 시점 현황",
 "원고 Table 1 의 2026-08-21 은 수집일 — 판 아님",
 "FREEZE-PAPER-FREEZE-001:agpromo_raw",
 "unknown",
@@ -84,7 +87,8 @@ false
 "names_sizes_fingerprint",
 "COMPLETE",
 "L0",
-false
+false,
+"V-World API 응답에 갱신일 없음 — 수집일(provenance collection_date 2026-08-21)의 현황."
 ],
 [
 "raw:agpromo_tag",
@@ -105,7 +109,8 @@ false
 "names_sizes_fingerprint",
 "COMPLETE",
 "L0",
-false
+false,
+null
 ],
 [
 "raw:asset",
@@ -126,7 +131,8 @@ false
 "content_sha256",
 "INCOMPLETE",
 "L0",
-false
+false,
+null
 ],
 [
 "raw:cadastre_all",
@@ -147,7 +153,8 @@ false
 "names_sizes_fingerprint",
 "COMPLETE",
 "L0",
-false
+false,
+null
 ],
 [
 "raw:damdan_raw",
@@ -160,7 +167,7 @@ false
 "2026-08-20",
 "2026-08-20",
 "unknown",
-"unknown",
+"2026-08-20 조회 시점 현황",
 "원고 Table 1 의 2026-08-20 은 수집일 — 판 아님",
 "FREEZE-PAPER-FREEZE-001:damdan_raw",
 "unknown",
@@ -168,7 +175,8 @@ false
 "names_sizes_fingerprint",
 "COMPLETE",
 "L0",
-false
+false,
+"수집일 2026-08-20 · 원시 JSON 에는 fetched_at 만 있음(meta_v4 lineage ind_complex_bnd)."
 ],
 [
 "raw:duckdb",
@@ -189,20 +197,21 @@ false
 "content_sha256",
 "INCOMPLETE",
 "L0",
-false
+false,
+null
 ],
 [
 "raw:emd_bnd_raw",
 "raw_source",
 "EXTERNAL_DOWNLOADED",
-"unknown",
+"V-World 데이터 API",
 "emd_bnd_raw",
 "2026-08-27",
 "meta_versions(emd_bnd).built 2026-08-27 — 표 생성일이며 수집일이라는 근거는 없다 [meta_versions]",
 "2026-08-27",
 "unknown",
 "unknown",
-"unknown",
+"2026-08-27 조회 시점 현황",
 "unknown",
 "FREEZE-PAPER-FREEZE-001:emd_bnd_raw",
 "unknown",
@@ -210,7 +219,8 @@ false
 "names_sizes_fingerprint",
 "COMPLETE",
 "L0",
-false
+false,
+"meta_v4 lineage emd_bnd 'V-World LT_C_ADEMD_INFO' · 수집일 2026-08-27."
 ],
 [
 "raw:exclusion_reason",
@@ -231,7 +241,8 @@ false
 "names_sizes_fingerprint",
 "COMPLETE",
 "L0",
-false
+false,
+null
 ],
 [
 "raw:farmmap_2019_shp",
@@ -252,7 +263,8 @@ false
 "content_sha256",
 "INCOMPLETE",
 "L0",
-false
+false,
+null
 ],
 [
 "raw:farmmap_2025",
@@ -273,7 +285,8 @@ false
 "names_sizes_fingerprint",
 "COMPLETE",
 "L0",
-false
+false,
+null
 ],
 [
 "raw:ind_firms_raw",
@@ -294,7 +307,8 @@ false
 "names_sizes_fingerprint",
 "INCOMPLETE",
 "L0",
-false
+false,
+null
 ],
 [
 "raw:kepco_demand_cache",
@@ -315,7 +329,8 @@ false
 "names_sizes_fingerprint",
 "COMPLETE",
 "L0",
-false
+false,
+null
 ],
 [
 "raw:kepco_nat_20260814",
@@ -336,7 +351,8 @@ false
 "names_sizes_fingerprint",
 "COMPLETE",
 "L0",
-false
+false,
+null
 ],
 [
 "raw:kepco_raw",
@@ -357,7 +373,8 @@ false
 "names_sizes_fingerprint",
 "INCOMPLETE",
 "L0",
-false
+false,
+null
 ],
 [
 "raw:kepco_raw_v4",
@@ -378,20 +395,21 @@ false
 "names_sizes_fingerprint",
 "COMPLETE",
 "L0",
-false
+false,
+null
 ],
 [
 "raw:land_processed_db",
 "raw_source",
 "EXTERNAL_DOWNLOADED",
-"not_documented",
+"회사 보유 자료(기존 수집분) — 일반 수집 경로: 국토교통부 국가공간정보포털 토지임야정보·토지소유정보",
 "land_processed_db",
 "2026-05-28",
 "원고 Table 1 'local snapshot 2026-05-28' 전사 [docs/PAPER_MANUSCRIPT_V0.2.md:87]",
 "2026-05-28",
 "2026-05 basis",
 "unknown",
-"unknown",
+"2026-05-28 수령 시점",
 "원고 Table 1 \"2026-05 basis\" 는 파일 날짜에서 온 표기로 원천 근거 없음 — 판·기준 시점 모두 기록 없음",
 "FREEZE-PAPER-FREEZE-001:land_processed_db",
 "unknown",
@@ -399,7 +417,8 @@ false
 "content_sha256",
 "COMPLETE",
 "L0",
-false
+false,
+"raw:land_processed_zip 과 같은 자료(zip 안의 시군별 DB)."
 ],
 [
 "raw:land_processed_db_TOTAL",
@@ -420,20 +439,21 @@ false
 "none",
 "COMPLETE",
 "L0",
-false
+false,
+null
 ],
 [
 "raw:land_processed_zip",
 "raw_source",
 "EXTERNAL_DOWNLOADED",
-"not_documented",
+"회사 보유 자료(기존 수집분) — 일반 수집 경로: 국토교통부 국가공간정보포털 토지임야정보·토지소유정보",
 "land_processed_zip",
 "2026-05-28",
 "원고 Table 1 'local snapshot 2026-05-28' 전사 [docs/PAPER_MANUSCRIPT_V0.2.md:87]",
 "2026-05-28",
 "2026-05 basis",
 "unknown",
-"unknown",
+"2026-05-28 수령 시점",
 "원고 Table 1 \"2026-05 basis\" 는 파일 날짜에서 온 표기로 원천 근거 없음 — 판·기준 시점 모두 기록 없음",
 "FREEZE-PAPER-FREEZE-001:land_processed_zip",
 "unknown",
@@ -441,20 +461,21 @@ false
 "content_sha256",
 "COMPLETE",
 "L0",
-false
+false,
+"수령일 = provenance retrieved_at 2026-05-28. 회사 보유 = agrivoltaic-model 58_metadata_and_github.py:31-37 (발급처 Planit Institute)."
 ],
 [
 "raw:regulation_composite",
 "raw_source",
 "EXTERNAL_DOWNLOADED",
-"not_documented",
-"unknown",
-"unknown",
+"회사 보유 자료(기존 통합분) — 일반 수집 경로: V-World 데이터 API 용도지역지구·문화유산·야생동식물·백두대간·자연공원 레이어 · 국가공간정보포털(제주 보전지역)",
+"D_Regulation.gpkg — 13개 구성 레이어(도시계획시설 녹지·공원·광장·공공공지 · 취락지구 · 자연환경보전지역 · 문화유산 보호구역 · 야생동·식물보호구역 · 백두대간 · 국립·도립·군립공원 · 제주 절대·상대보전지역 · DMZ 10km · 경사 15° 초과 · 표고 1,000m 초과)",
+"2025-07-27 이전(회사 보유분)",
 "원고 Table 1 이 취득일을 'not documented' 로 명시한다 — 추정하지 않는다 [docs/PAPER_MANUSCRIPT_V0.2.md:91]",
 "unknown",
 "last change 2025-07-27",
 "unknown",
-"unknown",
+"2025-07-27 파일 시점",
 "\"last change 2025-07-27\" 은 gpkg_contents.last_change(파일 메타데이터 시각)이라 판·기준 시점이 아님",
 "DECLARED-IN-EVIDENCE-MAP",
 "unknown",
@@ -462,7 +483,8 @@ false
 "content_sha256",
 "INCOMPLETE",
 "L0",
-false
+false,
+"레이어 = agrivoltaic-model/model/data/reason_map.csv source_layer 13종. 날짜 = gpkg_contents.last_change 2025-07-27(파일 메타 — 이 시점 이전에 조립). 회사 보유 = 58_metadata_and_github.py:38-44 (발급처 Planit Institute)."
 ],
 [
 "raw:setback200_flags",
@@ -483,7 +505,30 @@ false
 "names_sizes_fingerprint",
 "COMPLETE",
 "L0",
-false
+false,
+null
+],
+[
+"raw:slope",
+"raw_source",
+"INTERNAL_DERIVED",
+"자체 산출(수치표고모델 DEM 기반) — 일반 수집 경로: 국토지리정보원 수치표고모델",
+"korea_slope.gpkg — 팜맵 필지 단위 경사값 slope_mean(°) · 판정 문턱 15°",
+"2025-07-27 이전(회사 보유분)",
+"unknown",
+"unknown",
+"unknown",
+"unknown",
+"2025-07-27 이전 회사 보유분",
+"unknown",
+"unknown",
+"unknown",
+"unknown",
+"unknown",
+"INCOMPLETE",
+"L0",
+false,
+"자체 계산 = 58_metadata_and_github.py:53-58 ('DEM + PNU zonal'). 단위 ° = pipeline/legacy/02_derive_attrs.py:208. 날짜는 같이 쓰인 규제 합성본(slope_over_15 레이어)의 파일 시점 이전. assets/v55.js:110 이 참조하던 빈 행."
 ],
 [
 "raw:source_L0",
@@ -504,7 +549,8 @@ false
 "content_sha256",
 "COMPLETE",
 "L0",
-false
+false,
+null
 ],
 [
 "raw:spatial_v2",
@@ -525,7 +571,8 @@ false
 "names_sizes_fingerprint",
 "COMPLETE",
 "L0",
-false
+false,
+null
 ],
 [
 "src:agrivoltaic_installs_raw",
@@ -546,7 +593,8 @@ false
 "content_sha256",
 "COMPLETE",
 "L0",
-false
+false,
+null
 ],
 [
 "src:kepco_subst_loc_raw",
@@ -567,7 +615,8 @@ false
 "content_sha256",
 "COMPLETE",
 "L0",
-false
+false,
+null
 ],
 [
 "src:kpx_capacity_published",
@@ -588,7 +637,8 @@ false
 "content_sha256",
 "COMPLETE",
 "L0",
-false
+false,
+null
 ],
 [
 "src:kpx_plants_raw",
@@ -601,7 +651,7 @@ false
 "2026-09-21T00:13:22+09:00 – 2026-09-21T00:13:31+09:00",
 "unknown",
 "unknown",
-"unknown",
+"2026-09-21 조회 시점 현황",
 "unknown",
 "SNAP-20260921-kpx_plants_r",
 "unknown",
@@ -609,7 +659,8 @@ false
 "content_sha256",
 "COMPLETE",
 "L0",
-false
+false,
+"retrieved_at 2026-09-21T00:13 · 원자료 키 kpx_epsis_20260805(existing_pv_v4 meta.sources)."
 ],
 [
 "src:permit_raw",
@@ -622,7 +673,7 @@ false
 "2026-09-21T00:13:32+09:00 – 2026-09-21T00:16:38+09:00",
 "unknown",
 "unknown",
-"unknown",
+"2026-09-21 조회 시점 현황",
 "unknown",
 "SNAP-20260921-permit_raw",
 "unknown",
@@ -630,7 +681,8 @@ false
 "content_sha256",
 "COMPLETE",
 "L0",
-false
+false,
+"retrieved_at 2026-09-21T00:13–00:16."
 ],
 [
 "tbl:agpromo_bnd",
@@ -651,7 +703,8 @@ false
 "content_sha256",
 "COMPLETE",
 "L0",
-true
+true,
+null
 ],
 [
 "tbl:agpromo_tag",
@@ -672,7 +725,8 @@ true
 "none",
 "COMPLETE",
 "L1",
-true
+true,
+null
 ],
 [
 "tbl:analysis_unit_axes_v1",
@@ -693,7 +747,8 @@ true
 "none",
 "COMPLETE",
 "",
-true
+true,
+null
 ],
 [
 "tbl:analysis_unit_missing_v1",
@@ -714,13 +769,14 @@ true
 "none",
 "COMPLETE",
 "L2",
-true
+true,
+null
 ],
 [
 "tbl:analysis_unit_v1",
 "canon_table",
 "INTERNAL_DERIVED",
-"unknown",
+"본 연구(플랜잇) 구축",
 "analysis_unit_v1",
 "NOT_APPLICABLE",
 "파생 표 — 원천 수집일 개념이 없다(구축일은 built_at)",
@@ -735,20 +791,21 @@ true
 "none",
 "COMPLETE",
 "L2",
-true
+true,
+"내부 파생 표."
 ],
 [
 "tbl:bjd_code",
 "canon_table",
 "INTERNAL_DERIVED",
-"unknown",
+"행정안전부 행정표준코드관리시스템 (code.go.kr)",
 "bjd_code",
-"NOT_APPLICABLE",
+"2026-08-19",
 "파생 표 — 원천 수집일 개념이 없다(구축일은 built_at)",
 "unknown",
 "unknown",
 "unknown",
-"unknown",
+"2026-08-19 현행 코드(폐지 코드 포함)",
 "unknown",
 "meta_versions.built=2026-08-19",
 "2026-08-19",
@@ -756,7 +813,8 @@ true
 "none",
 "COMPLETE",
 "L0",
-true
+true,
+"meta_v4 lineage bjd_code '행정표준코드 법정동코드 전체자료 (code.go.kr, 2026-08-19 다운로드, 폐지 포함)'."
 ],
 [
 "tbl:demand_sgg_month_v2",
@@ -777,7 +835,8 @@ true
 "none",
 "COMPLETE",
 "L1",
-true
+true,
+null
 ],
 [
 "tbl:demand_sgg_v2",
@@ -798,7 +857,8 @@ true
 "none",
 "COMPLETE",
 "L1",
-true
+true,
+null
 ],
 [
 "tbl:elig_v2",
@@ -819,7 +879,8 @@ true
 "none",
 "COMPLETE",
 "L1",
-true
+true,
+null
 ],
 [
 "tbl:emd_bnd",
@@ -840,7 +901,8 @@ true
 "content_sha256",
 "COMPLETE",
 "L0",
-true
+true,
+null
 ],
 [
 "tbl:emd_existing_v1",
@@ -861,7 +923,8 @@ true
 "none",
 "COMPLETE",
 "L2",
-true
+true,
+null
 ],
 [
 "tbl:exclusion_reason",
@@ -882,7 +945,8 @@ true
 "none",
 "COMPLETE",
 "L1",
-true
+true,
+null
 ],
 [
 "tbl:existing_pv_parcel_overlap_v1",
@@ -903,7 +967,8 @@ true
 "none",
 "COMPLETE",
 "L2",
-true
+true,
+null
 ],
 [
 "tbl:existing_pv_parcel_profile_v1",
@@ -924,7 +989,8 @@ true
 "none",
 "COMPLETE",
 "L2",
-true
+true,
+null
 ],
 [
 "tbl:existing_pv_parcel_v1",
@@ -945,13 +1011,14 @@ true
 "none",
 "COMPLETE",
 "L1",
-true
+true,
+null
 ],
 [
 "tbl:existing_pv_v1",
 "canon_table",
 "INTERNAL_DERIVED",
-"unknown",
+"본 연구(플랜잇) 구축",
 "existing_pv_v1",
 "NOT_APPLICABLE",
 "파생 표 — 원천 수집일 개념이 없다(구축일은 built_at)",
@@ -966,7 +1033,8 @@ true
 "none",
 "COMPLETE",
 "L1",
-true
+true,
+"내부 파생 표."
 ],
 [
 "tbl:fm2025",
@@ -987,7 +1055,8 @@ true
 "none",
 "COMPLETE",
 "L0",
-true
+true,
+null
 ],
 [
 "tbl:geocode_audit_v1",
@@ -1008,7 +1077,8 @@ true
 "none",
 "COMPLETE",
 "L1",
-true
+true,
+null
 ],
 [
 "tbl:ggd_cluster_indprox_v4",
@@ -1029,7 +1099,8 @@ true
 "none",
 "COMPLETE",
 "L2",
-true
+true,
+null
 ],
 [
 "tbl:grid_cascade_v3",
@@ -1050,7 +1121,8 @@ true
 "none",
 "COMPLETE",
 "L2",
-true
+true,
+null
 ],
 [
 "tbl:grid_city_check_v4",
@@ -1071,7 +1143,8 @@ true
 "none",
 "COMPLETE",
 "L2",
-true
+true,
+null
 ],
 [
 "tbl:grid_cluster_range_v4",
@@ -1092,7 +1165,8 @@ true
 "none",
 "COMPLETE",
 "L2",
-true
+true,
+null
 ],
 [
 "tbl:grid_connection_v1",
@@ -1113,7 +1187,8 @@ true
 "none",
 "COMPLETE",
 "L1",
-true
+true,
+null
 ],
 [
 "tbl:grid_dl_physical_v1",
@@ -1134,7 +1209,8 @@ true
 "none",
 "COMPLETE",
 "L1",
-true
+true,
+null
 ],
 [
 "tbl:grid_dl_v3",
@@ -1155,7 +1231,8 @@ true
 "none",
 "COMPLETE",
 "L2",
-true
+true,
+null
 ],
 [
 "tbl:grid_emd_granularity_v1",
@@ -1176,7 +1253,8 @@ true
 "none",
 "COMPLETE",
 "L2",
-true
+true,
+null
 ],
 [
 "tbl:grid_emd_v3",
@@ -1197,7 +1275,8 @@ true
 "none",
 "COMPLETE",
 "L2",
-true
+true,
+null
 ],
 [
 "tbl:grid_pool",
@@ -1218,7 +1297,8 @@ true
 "none",
 "COMPLETE",
 "L1",
-true
+true,
+null
 ],
 [
 "tbl:grid_snapshot_stability_v1",
@@ -1239,7 +1319,8 @@ true
 "none",
 "COMPLETE",
 "L2",
-true
+true,
+null
 ],
 [
 "tbl:grid_unknown_cause_v1",
@@ -1260,7 +1341,8 @@ true
 "none",
 "COMPLETE",
 "L2",
-true
+true,
+null
 ],
 [
 "tbl:ind_complex",
@@ -1281,13 +1363,14 @@ true
 "none",
 "COMPLETE",
 "L0",
-true
+true,
+null
 ],
 [
 "tbl:ind_complex_bnd",
 "canon_table",
 "INTERNAL_DERIVED",
-"unknown",
+"본 연구(플랜잇) 구축",
 "ind_complex_bnd",
 "NOT_APPLICABLE",
 "파생 표 — 원천 수집일 개념이 없다(구축일은 built_at)",
@@ -1302,7 +1385,8 @@ true
 "none",
 "COMPLETE",
 "L0",
-true
+true,
+"내부 파생 표(원천 raw:damdan_raw)."
 ],
 [
 "tbl:ind_firms",
@@ -1323,7 +1407,8 @@ true
 "none",
 "INCOMPLETE",
 "L0",
-true
+true,
+null
 ],
 [
 "tbl:jimok_apply_v7",
@@ -1344,7 +1429,8 @@ true
 "none",
 "INCOMPLETE",
 "L1",
-true
+true,
+null
 ],
 [
 "tbl:jimok_recovered",
@@ -1365,7 +1451,8 @@ true
 "none",
 "COMPLETE",
 "L1",
-true
+true,
+null
 ],
 [
 "tbl:kepco_demand_emd_probe_v1",
@@ -1386,7 +1473,8 @@ true
 "none",
 "COMPLETE",
 "L0",
-true
+true,
+null
 ],
 [
 "tbl:kepco_dl_v3",
@@ -1407,7 +1495,8 @@ true
 "none",
 "COMPLETE",
 "L1",
-true
+true,
+null
 ],
 [
 "tbl:kepco_dong_v3",
@@ -1428,7 +1517,8 @@ true
 "none",
 "COMPLETE",
 "L0",
-true
+true,
+null
 ],
 [
 "tbl:kepco_dong_v5",
@@ -1449,7 +1539,8 @@ true
 "none",
 "COMPLETE",
 "L0",
-true
+true,
+null
 ],
 [
 "tbl:kepco_mtr_v3",
@@ -1470,13 +1561,14 @@ true
 "none",
 "COMPLETE",
 "L1",
-true
+true,
+null
 ],
 [
 "tbl:kepco_record_v3",
 "canon_table",
 "INTERNAL_DERIVED",
-"unknown",
+"본 연구(플랜잇) 구축",
 "kepco_record_v3",
 "NOT_APPLICABLE",
 "파생 표 — 원천 수집일 개념이 없다(구축일은 built_at)",
@@ -1491,7 +1583,8 @@ true
 "none",
 "COMPLETE",
 "L0",
-true
+true,
+"내부 파생 표(원천 raw:kepco_raw_v4)."
 ],
 [
 "tbl:kepco_record_v5",
@@ -1512,7 +1605,8 @@ true
 "none",
 "COMPLETE",
 "L0",
-true
+true,
+null
 ],
 [
 "tbl:kepco_subst_v3",
@@ -1533,7 +1627,8 @@ true
 "none",
 "COMPLETE",
 "L1",
-true
+true,
+null
 ],
 [
 "tbl:kepco_topo_v3",
@@ -1554,7 +1649,8 @@ true
 "none",
 "COMPLETE",
 "L1",
-true
+true,
+null
 ],
 [
 "tbl:policy_setback_cap",
@@ -1575,7 +1671,8 @@ true
 "none",
 "INCOMPLETE",
 "L0",
-true
+true,
+null
 ],
 [
 "tbl:provenance_v1",
@@ -1596,7 +1693,8 @@ true
 "none",
 "COMPLETE",
 "L1",
-true
+true,
+null
 ],
 [
 "tbl:reclaim_tag",
@@ -1617,7 +1715,8 @@ true
 "none",
 "COMPLETE",
 "L1",
-true
+true,
+null
 ],
 [
 "tbl:scenario_runs_edition1",
@@ -1638,7 +1737,8 @@ true
 "none",
 "INCOMPLETE",
 "L2",
-true
+true,
+null
 ],
 [
 "tbl:setback200_flags",
@@ -1659,7 +1759,8 @@ true
 "content_sha256",
 "COMPLETE",
 "L1",
-true
+true,
+null
 ],
 [
 "tbl:sgg_unit_summary_v1",
@@ -1680,7 +1781,8 @@ true
 "none",
 "COMPLETE",
 "",
-true
+true,
+null
 ],
 [
 "tbl:size_bands_rebands_v9_06",
@@ -1701,7 +1803,8 @@ true
 "none",
 "COMPLETE",
 "L2",
-true
+true,
+null
 ],
 [
 "tbl:spatial_attribution_v1",
@@ -1722,7 +1825,8 @@ true
 "none",
 "COMPLETE",
 "L1",
-true
+true,
+null
 ],
 [
 "tbl:spatial_v2",
@@ -1743,7 +1847,9 @@ true
 "none",
 "COMPLETE",
 "L1",
-true
+true,
+null
 ]
-]
+],
+"overrides": "pipeline/export/provenance_overrides.json — 기록 밖에서 확인한 값(행마다 override_evidence)"
 }
