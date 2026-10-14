@@ -100,10 +100,9 @@ input[type=range]{width:180px;max-width:100%;accent-color:var(--adv-navy)}
   <div class="adv-head"><h1>재생에너지지구 내에 영농형 태양광 클러스터 위치 연구 — 자문: 자료 신뢰성·현실성 검토</h1><span class="adv-note" id="genStamp">—</span></div>
   <nav class="adv-tabs" id="tabs">
     <button data-t="region" class="on">지역별 지도</button>
-    <button data-t="data">① 경기도 데이터·후보 결과 확인</button>
+    <button data-t="data">① 클러스터 후보 결과 확인</button>
     <button data-t="method">② 데이터 신뢰성·보완 검토</button>
     <button data-t="user">③ 화면 사용성·활용성</button>
-    <button data-t="cases">자문 검토 사례</button>
     <button data-t="math">자료·산출 설명</button>
     <button data-t="fb">의견 내보내기</button>
   </nav>
@@ -255,11 +254,6 @@ input[type=range]{width:180px;max-width:100%;accent-color:var(--adv-navy)}
     <div class="adv-box" style="margin-top:12px"><b>질문 4–7. 표시 방식과 활용</b> — 판단하기 어려우면 비워 두셔도 됩니다. 답은 이 브라우저에만 저장됩니다.<div id="uQs"></div></div>
   </section>
 
-  <!-- 사례 -->
-  <section class="adv-pane" id="p-cases">
-    <div class="adv-box"><b>자문 검토 사례</b>입니다. 지역별 지도 탭과 같은 규칙으로, 각 시군에서 규모(면적)가 가장 큰 후보 공간(지도의 1번)을 골랐습니다 — 경기도에서 큰 후보가 많은 3개 시군(평택·화성·이천)과 자문 지역(파주·여주·보령). 도형 확인이 필요한 후보는 빼고, 경작 여부는 고르는 기준에 넣지 않았습니다. 사례마다 위성 지도가 함께 있어 다른 탭으로 옮기지 않고 보실 수 있습니다.</div>
-    <div id="cList"></div>
-  </section>
 
   <!-- 수학 요약 -->
   <section class="adv-pane" id="p-math">
@@ -362,7 +356,7 @@ input[type=range]{width:180px;max-width:100%;accent-color:var(--adv-navy)}
     setTimeout(() => { Object.values(maps).forEach(m => m.invalidateSize());
       // 숨은 탭에서 처음 그린 지도는 크기가 0이라 범위 맞춤이 어긋난다 — 처음 열 때 한 번 다시 맞춘다
       // ③ 지도는 탭을 처음 열 때 그린다(후보 공간 전량 5만여 곳 — 숨은 탭에서 미리 그리면 메모리만 쓴다)
-      try { if (b.dataset.t === 'region') rgFit(); if (b.dataset.t === 'cases') cInit();
+      try { if (b.dataset.t === 'region') rgFit();
         // ① 지도는 이제 숨은 채로 처음 그려진다 — 처음 열 때 한 번 범위를 맞춘다(후보를 골라 들어온 경우는 그 후보 위치를 지킨다)
         if (b.dataset.t === 'data' && !dShown) { dShown = true; if (st.sel == null && dLayer.getLayers().length) dm.fitBounds(dLayer.getBounds(), {padding: [20, 20], maxZoom: 14}); } if (b.dataset.t === 'user' && !uDrawn) { uDrawn = true; uRender(); } } catch (e) {} }, 50); };
   let uDrawn = false, dShown = false;
@@ -510,7 +504,7 @@ input[type=range]{width:180px;max-width:100%;accent-color:var(--adv-navy)}
   $('dPrev').onclick = () => stepEmd(-1); $('dNext').onclick = () => stepEmd(1);
   // 검토 사례(2026-10-14): 지역별 지도 탭과 같은 규칙 — 시군에서 면적이 가장 큰 후보(도형 확인 필요 후보 제외 · 경작 여부는 기준 아님).
   //   경기 상위 3개 시군(3MW 이상 수) + 자문 지역 파주·여주, 보령(충남)은 경기 자료 밖이라 아래 extReady 에서 시군별 자료로 붙인다.
-  //   ① 탭 표와 "자문 검토 사례" 탭이 같은 목록을 쓴다.
+  //   ① 탭 사례 표가 이 목록을 쓴다(2026-10-14 사례 탭 폐지).
   const QCASES = [[1037963, '평택시 사례', '평택시에서 규모가 가장 큰 후보 — 지역별 지도의 1번'],
     [1955553, '화성시 사례', '화성시에서 규모가 가장 큰 후보 — 지역별 지도의 1번'],
     [1543370, '이천시 사례', '이천시에서 규모가 가장 큰 후보 — 지역별 지도의 1번'],
@@ -528,7 +522,8 @@ input[type=range]{width:180px;max-width:100%;accent-color:var(--adv-navy)}
     $('qCases').innerHTML = '<tr><th>사례</th><th>유형</th><th>후보 공간</th><th>위치</th><th>면적 (참고 규모)</th><th style="text-align:left">고른 규칙</th></tr>' +
       QCASES.map(([id, k, f], i) => { const u = UBY.get(id); return `<tr><td><button type="button" class="btnx" data-qcase="${id}">사례 ${i + 1} 지도에서 보기</button></td><td>${k}</td><td>#${id}</td><td>${esc(where(u, 2))}</td><td>${u.a < 10000 ? Math.round(u.a).toLocaleString('ko-KR') + '㎡' : km2(u.a) + ' km²'} (약 ${fmt(u.mw, 1)} MW)</td><td style="white-space:normal;text-align:left;min-width:220px">${esc(f)} · 구성 필지 ${u.n}개</td></tr>`; }).join('');
     $('qCases').querySelectorAll('[data-qcase]').forEach(b => b.onclick = () => { const u = UBY.get(+b.dataset.qcase);
-      if (u.ext) { document.querySelector('#tabs [data-t=cases]').click(); setTimeout(() => { const el = $('cMap' + u.id); if (el) el.scrollIntoView({behavior: 'smooth', block: 'center'}); }, 400); return; }
+      if (u.ext) { document.querySelector('#tabs [data-t=region]').click();   // 보령 — ① 탭(경기 전용) 대신 지역별 지도의 보령 지도에서 그 후보로
+        setTimeout(() => { const li = document.querySelector(`#rgL${u.sggs[0]} li[data-id="${u.id}"]`), el = $('rgM' + u.sggs[0]); if (el) el.scrollIntoView({behavior: 'smooth', block: 'center'}); if (li) li.click(); }, 400); return; }
       st.sgg = homeSgg(u); st.emd = ''; $('dSgg').value = st.sgg; fillEmd(); dRender().then(() => dSelect(u.id, true)); });
   }
   function renderQs() {
@@ -738,7 +733,7 @@ input[type=range]{width:180px;max-width:100%;accent-color:var(--adv-navy)}
       tops.forEach((f, i) => L.marker(lay.get(f.properties.id).getBounds().getCenter(), {icon: L.divIcon({className: '', html: `<div class="rg-pin">${i + 1}</div>`, iconSize: [22, 22], iconAnchor: [11, 11]}), interactive: false}).addTo(m));
       // 경기 읍면동 이름은 후보 공간과 같은 (구 개편 전) 코드를 쓰는 자문 자료(gg_v1)에서 먼저 찾는다 — 화성 41590xxx
       const emdName = c => { if (EMD.get(c)) return eName(c).replace(/^\S+[시군] /, ''); const e = emdIx.find(x => x.code === c); return e ? e.name : c; };
-      $('rgL' + s).innerHTML = tops.length ? tops.map((f, i) => { const p = f.properties, inGG = UBY.has(p.id);
+      $('rgL' + s).innerHTML = tops.length ? tops.map((f, i) => { const p = f.properties, inGG = UBY.has(p.id) && !UBY.get(p.id).ext;   // 보령 사례(ext)는 ① 탭(경기 전용)에 없다
         return `<li data-id="${p.id}"><span class="rg-n">${i + 1}</span><span><b>약 ${fmt(p.mw, 1)} MW</b> · ${km2(p.a)} km² · ${esc(p.emds.map(emdName).slice(0, 2).join(' · '))} · 필지 ${p.n}개${inGG ? ` · <a href="#" data-go="${p.id}">① 탭에서 상세</a>` : ''}</span></li>`; }).join('')
         : '<li style="cursor:default">3MW 이상 후보 공간이 없습니다.</li>';
       $('rgL' + s).querySelectorAll('li[data-id]').forEach(li => li.onclick = e => { const id = +li.dataset.id;
@@ -754,8 +749,7 @@ input[type=range]{width:180px;max-width:100%;accent-color:var(--adv-navy)}
   rgInit();
   document.addEventListener('visibilitychange', () => { if (!document.hidden) rgFit(); });   // 백그라운드 탭에서 열었다가 볼 때 다시 맞춘다
 
-  // ════════ 사례 ════════
-  const cMaps = [];
+  // ════════ 사례 — 보령 ════════
   // 보령(충남) 사례 — 경기 자문 자료(gg_v1) 밖이라 시군별 자료(top10 축 값 · units 도형)로 같은 모양의 항목을 만든다. 지역별 지도의 보령 1번과 같은 후보
   const extReady = (async () => { try {
     const s = '44180', [T, F, ix] = await Promise.all([V55.gz(`data_v4/top10/${s}.json.gz`), V55.units.load(s), Region.load().then(() => Region.emdIndex())]);
@@ -763,25 +757,9 @@ input[type=range]{width:180px;max-width:100%;accent-color:var(--adv-navy)}
     const p = f.properties, c = n => T.cols.indexOf(n), r = T.runs.R2_promo.rows.find(x => x[c('lab')] === p.id) || [];
     p.emds.forEach(e => { if (!EMD.has(e)) { const m = ix.find(x => x.code === e); if (m) EMD.set(e, {name: (/보령/.test(m.name) ? '' : '보령시 ') + m.name}); } });   // 읍면동 이름에 시군이 없으면 붙인다
     UBY.set(p.id, {id: p.id, ext: true, sggs: [s], emds: p.emds, a: p.a, mw: p.mw, n: p.n, farm: null, lo: r[c('lo')] ?? null, hi: r[c('hi')] ?? null, d: r[c('d')] ?? null, recl: r[c('recl')] ?? null, lat: r[c('lat')], lon: r[c('lon')], geometry: f.geometry});
-    QCASES.push([p.id, '보령시 사례', '보령시(충남)에서 규모가 가장 큰 후보 — 지역별 지도의 1번 · 경기 자료 밖이라 ① 탭에는 없음']);
-    renderCases(); renderQCases();
+    QCASES.push([p.id, '보령시 사례', '보령시(충남)에서 규모가 가장 큰 후보 — 지역별 지도의 1번 · 경기 자료 밖이라 지역별 지도 탭의 보령 지도에서 봄']);
+    renderQCases();
   } catch (e) { console.error(e); } })();
-  function renderCases() {
-  $('cList').innerHTML = QCASES.map(([id, k, f], i) => { const u = UBY.get(id); if (!u) return ''; return `<div class="adv-box"><b>사례 ${i + 1}</b> — ${esc(k)} · ${esc(f)}
-    <div>${esc(where(u, 3))} · ${u.a < 10000 ? Math.round(u.a).toLocaleString('ko-KR') + '㎡' : km2(u.a) + ' km²'} · ${band(u.a)} · 필지 ${u.n} · 경작 판독 ${u.farm == null ? '—' : Math.round(u.farm * 100) + '%'} · 계통 참고값 ${u.lo == null ? '알 수 없음' : fmt(u.lo) + (u.hi != null ? '–' + fmt(u.hi) : '') + ' MW'} · 산업단지 ${fmt(u.d, 2)} km</div>
-    <div class="adv-map" id="cMap${id}" style="height:340px;min-height:0;margin:8px 0"></div>${fbWidget('case:' + id, '이 사례에 대한 의견')}</div>`; }).join('');
-  }
-  renderCases();
-  // 사례 지도는 탭을 처음 열 때 그린다(숨은 탭에서 그리면 크기가 0)
-  async function cInit() {
-    await extReady;   // 보령 사례가 붙은 뒤에 그린다
-    if (cMaps.length) { cMaps.forEach(m => m.invalidateSize()); return; }
-    for (const [id] of QCASES) { const u = UBY.get(id); if (!u) continue; if (!u.ext) await loadGeom(homeSgg(u));   // 보령은 도형을 이미 갖고 있다(경기 자문 도형 폴더 밖)
-      const m = L.map('cMap' + id, {scrollWheelZoom: false, preferCanvas: true});
-      L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {maxZoom: 18, attribution: '© Esri'}).addTo(m); cMaps.push(m);
-      if (u.geometry) { const ly = L.geoJSON(u.geometry, {style: () => ({color: '#0C356A', weight: 3, fillColor: COLOR(u.a), fillOpacity: .35})}).addTo(m); m.fitBounds(ly.getBounds(), {padding: [24, 24], maxZoom: 16}); }
-      else if (u.lat) m.setView([u.lat, u.lon], 15); }
-  }
 
   // ════════ 수학 요약 ════════
   const S = D.summary;
