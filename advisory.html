@@ -172,7 +172,7 @@ input[type=range]{width:180px;max-width:100%;accent-color:var(--adv-navy)}
     </div>
     <!-- 상세는 목록 위가 아니라 지도 아래 칸에 연다 — 목록 위에 열면 목록이 밀려 다른 후보를 고르려면 스크롤해야 했다 (2026-10-13) -->
     <div id="dDet" class="adv-det adv-box" style="margin-top:12px;padding:0 0 4px;background:#fff"></div>
-    <div class="adv-box" style="margin-top:12px"><b>질문 1–2. 후보 결과 확인</b> — 전체 후보 공간을 모두 보실 필요는 없습니다. 아래 검토 사례나 잘 아시는 지역을 보시고 답해 주세요. 사례는 통계적 대표성을 가진 표본이 아니라, 도형이 정상이고 팜맵 경작 판독 비율이 낮은(30% 미만) 후보 가운데 규칙으로 고른 대표 사례입니다. 영농형 태양광은 생산성이 낮아 경작이 줄었거나 쉬고 있는 농지에 설치해 전력 생산과 농업 생산을 함께 늘리는 것을 목표로 합니다(잘 경작되는 농지에 설치하면 그만큼 작물 생산이 줄어 권하지 않습니다). 정답을 여쭙는 것이 아니므로, 판단하기 어려우면 "판단 어려움"을 고르시거나 비워 두셔도 됩니다. 답은 이 브라우저에만 저장됩니다.
+    <div class="adv-box" style="margin-top:12px"><b>질문 1–2. 후보 결과 확인</b> — 전체 후보 공간을 모두 보실 필요는 없습니다. 아래 검토 사례나 잘 아시는 지역을 보시고 답해 주세요. 사례는 통계적 대표성을 가진 표본이 아닙니다. 지역별 지도 탭과 같은 규칙으로, 각 시군에서 규모(면적)가 가장 큰 후보 공간(지도의 1번)을 골랐습니다 — 경기도에서 큰 후보가 많은 3개 시군(평택·화성·이천)과 자문 지역(파주·여주·보령). 도형 확인이 필요한 후보는 빼고, 경작 여부는 고르는 기준에 넣지 않았습니다. 정답을 여쭙는 것이 아니므로, 판단하기 어려우면 "판단 어려움"을 고르시거나 비워 두셔도 됩니다. 답은 이 브라우저에만 저장됩니다.
       <div class="scroll" style="margin-top:6px"><table class="adv" id="qCases"></table></div>
       <div id="qList"></div></div>
   </section>
@@ -257,7 +257,7 @@ input[type=range]{width:180px;max-width:100%;accent-color:var(--adv-navy)}
 
   <!-- 사례 -->
   <section class="adv-pane" id="p-cases">
-    <div class="adv-box">경기도 자료에서 규칙에 따라 고른 <b>자문 검토 사례</b>입니다. 도형이 정상이고 <b>팜맵 경작 판독 비율이 낮은(30% 미만)</b> 후보 가운데 규모와 지역이 서로 다른 곳을 골랐습니다. 영농형 태양광은 생산성이 낮아 경작이 줄었거나 쉬고 있는 농지에 설치해 전력 생산과 농업 생산을 함께 늘리는 것을 목표로 합니다(잘 경작되는 농지에 설치하면 그만큼 작물 생산이 줄어 권하지 않습니다). 경작 판독이 낮게 나온 곳이 실제로 휴경·저이용 농지인지, 시설·창고 등 다른 용도로 쓰이는 곳인지 현장 사정을 알려 주시면 가장 도움이 됩니다. 사례마다 위성 지도가 함께 있어 다른 탭으로 옮기지 않고 보실 수 있습니다.</div>
+    <div class="adv-box"><b>자문 검토 사례</b>입니다. 지역별 지도 탭과 같은 규칙으로, 각 시군에서 규모(면적)가 가장 큰 후보 공간(지도의 1번)을 골랐습니다 — 경기도에서 큰 후보가 많은 3개 시군(평택·화성·이천)과 자문 지역(파주·여주·보령). 도형 확인이 필요한 후보는 빼고, 경작 여부는 고르는 기준에 넣지 않았습니다. 사례마다 위성 지도가 함께 있어 다른 탭으로 옮기지 않고 보실 수 있습니다.</div>
     <div id="cList"></div>
   </section>
 
@@ -505,14 +505,14 @@ input[type=range]{width:180px;max-width:100%;accent-color:var(--adv-navy)}
   $('dAll').onclick = () => { st.emd = ''; $('dEmd').value = ''; dRender(); };
   const stepEmd = k => { const es = emdsOf(st.sgg).map(e => e.e); if (!es.length) return; let i = es.indexOf(st.emd); i = i < 0 ? (k > 0 ? 0 : es.length - 1) : (i + k + es.length) % es.length; st.emd = es[i]; $('dEmd').value = st.emd; dRender(); };
   $('dPrev').onclick = () => stepEmd(-1); $('dNext').onclick = () => stepEmd(1);
-  // 검토 사례(2026-10-14): 정상 도형 · 팜맵 경작 판독 30% 미만 — 영농형 태양광은 생산성이 낮아 경작이 줄었거나 쉬는 농지에 설치하는 것이 목표라서
-  //   (잘 경작되는 농지는 작물 생산이 줄어 권하지 않음). 규모 사례 2곳 + 시군별 가장 큰 곳. ① 탭 표와 "자문 검토 사례" 탭이 같은 목록을 쓴다.
-  //   경기도 3MW 이상 147곳 중 경작 판독 30% 미만 63곳 · 30–70% 39곳 · 70% 이상 45곳 (gg_v1 · 2026-10-13)
-  const QCASES = [[1016949, '규모 사례', '10–50MW 구간 · 정상 도형 · 경작 판독 30% 미만 후보 중 면적이 구간 중앙값에 가장 가까운 곳'],
-    [2400609, '작은 규모 사례', '3–10MW 구간 · 정상 도형 · 경작 판독 30% 미만 후보 중 면적이 구간 중앙값에 가장 가까운 곳'],
-    [1964317, '화성시 사례', '화성시에서 정상 도형 · 경작 판독 30% 미만인 후보 중 가장 큰 곳'],
-    [2170137, '여주시 사례', '여주시에서 정상 도형 · 경작 판독 30% 미만인 후보 중 가장 큰 곳'],
-    [1419292, '파주시 사례', '파주시에서 정상 도형 · 경작 판독 30% 미만인 후보 중 가장 큰 곳']];
+  // 검토 사례(2026-10-14): 지역별 지도 탭과 같은 규칙 — 시군에서 면적이 가장 큰 후보(도형 확인 필요 후보 제외 · 경작 여부는 기준 아님).
+  //   경기 상위 3개 시군(3MW 이상 수) + 자문 지역 파주·여주, 보령(충남)은 경기 자료 밖이라 아래 extReady 에서 시군별 자료로 붙인다.
+  //   ① 탭 표와 "자문 검토 사례" 탭이 같은 목록을 쓴다.
+  const QCASES = [[1037963, '평택시 사례', '평택시에서 규모가 가장 큰 후보 — 지역별 지도의 1번'],
+    [1955553, '화성시 사례', '화성시에서 규모가 가장 큰 후보 — 지역별 지도의 1번'],
+    [1543370, '이천시 사례', '이천시에서 규모가 가장 큰 후보 — 지역별 지도의 1번'],
+    [1440241, '파주시 사례', '파주시에서 규모가 가장 큰 후보 — 지역별 지도의 1번'],
+    [2170137, '여주시 사례', '여주시에서 규모가 가장 큰 후보 — 지역별 지도의 1번']];
   const HAS = ['있음', '없음', '판단 어려움'], YN3 = ['없음', '일부 있음', '많음', '판단 어려움'];
   const qHead = (n, t) => `<div style="margin-top:10px"><b>${n}.</b> ${esc(t)}</div>`;
   const qHint = t => `<div class="adv-note" style="color:var(--adv-muted)">${esc(t)}</div>`;
@@ -521,10 +521,15 @@ input[type=range]{width:180px;max-width:100%;accent-color:var(--adv-navy)}
   $('q0').innerHTML = qBox(qHead('Z1', '전문 분야를 골라 주세요. (여러 개 가능)') +
       fbWidget('Z1', '', ['농업·농지', '공간정보·GIS', '태양광·재생에너지', '전력·계통', '지자체·행정', '환경·규제', '기타'], {multi: true, ph: '기타 분야'}));
   // 질문은 Q1–Q10 열 개 — ① 탭 1–3 · ② 탭 4–7 · ③ 탭 8–10 (2026-10-13 지자체 자문용으로 A1–D5 30문항을 줄임)
-  function renderQs() {
+  function renderQCases() {
     $('qCases').innerHTML = '<tr><th>사례</th><th>유형</th><th>후보 공간</th><th>위치</th><th>면적 (참고 규모)</th><th style="text-align:left">고른 규칙</th></tr>' +
       QCASES.map(([id, k, f], i) => { const u = UBY.get(id); return `<tr><td><button type="button" class="btnx" data-qcase="${id}">사례 ${i + 1} 지도에서 보기</button></td><td>${k}</td><td>#${id}</td><td>${esc(where(u, 2))}</td><td>${u.a < 10000 ? Math.round(u.a).toLocaleString('ko-KR') + '㎡' : km2(u.a) + ' km²'} (약 ${fmt(u.mw, 1)} MW)</td><td style="white-space:normal;text-align:left;min-width:220px">${esc(f)} · 구성 필지 ${u.n}개</td></tr>`; }).join('');
-    $('qCases').querySelectorAll('[data-qcase]').forEach(b => b.onclick = () => { const u = UBY.get(+b.dataset.qcase); st.sgg = homeSgg(u); st.emd = ''; $('dSgg').value = st.sgg; fillEmd(); dRender().then(() => dSelect(u.id, true)); });
+    $('qCases').querySelectorAll('[data-qcase]').forEach(b => b.onclick = () => { const u = UBY.get(+b.dataset.qcase);
+      if (u.ext) { document.querySelector('#tabs [data-t=cases]').click(); setTimeout(() => { const el = $('cMap' + u.id); if (el) el.scrollIntoView({behavior: 'smooth', block: 'center'}); }, 400); return; }
+      st.sgg = homeSgg(u); st.emd = ''; $('dSgg').value = st.sgg; fillEmd(); dRender().then(() => dSelect(u.id, true)); });
+  }
+  function renderQs() {
+    renderQCases();
     $('qList').innerHTML =
       qBox(qHead('Q1', '전체적으로 보시기에, 후보 공간이 실제 농지 현황을 잘 반영하고 있습니까?') +
         qHint('"지역별 지도" 탭이나 위 검토 사례, 잘 아시는 지역을 위성 배경으로 보시면 됩니다.') +
@@ -748,13 +753,27 @@ input[type=range]{width:180px;max-width:100%;accent-color:var(--adv-navy)}
 
   // ════════ 사례 ════════
   const cMaps = [];
+  // 보령(충남) 사례 — 경기 자문 자료(gg_v1) 밖이라 시군별 자료(top10 축 값 · units 도형)로 같은 모양의 항목을 만든다. 지역별 지도의 보령 1번과 같은 후보
+  const extReady = (async () => { try {
+    const s = '44180', [T, F, ix] = await Promise.all([V55.gz(`data_v4/top10/${s}.json.gz`), V55.units.load(s), Region.load().then(() => Region.emdIndex())]);
+    const f = F && F.features.filter(x => x.properties.t !== 'quality_review').sort((a, b) => b.properties.a - a.properties.a)[0]; if (!f || !T) return;
+    const p = f.properties, c = n => T.cols.indexOf(n), r = T.runs.R2_promo.rows.find(x => x[c('lab')] === p.id) || [];
+    p.emds.forEach(e => { if (!EMD.has(e)) { const m = ix.find(x => x.code === e); if (m) EMD.set(e, {name: (/보령/.test(m.name) ? '' : '보령시 ') + m.name}); } });   // 읍면동 이름에 시군이 없으면 붙인다
+    UBY.set(p.id, {id: p.id, ext: true, sggs: [s], emds: p.emds, a: p.a, mw: p.mw, n: p.n, farm: null, lo: r[c('lo')] ?? null, hi: r[c('hi')] ?? null, d: r[c('d')] ?? null, recl: r[c('recl')] ?? null, lat: r[c('lat')], lon: r[c('lon')], geometry: f.geometry});
+    QCASES.push([p.id, '보령시 사례', '보령시(충남)에서 규모가 가장 큰 후보 — 지역별 지도의 1번 · 경기 자료 밖이라 ① 탭에는 없음']);
+    renderCases(); renderQCases();
+  } catch (e) { console.error(e); } })();
+  function renderCases() {
   $('cList').innerHTML = QCASES.map(([id, k, f], i) => { const u = UBY.get(id); if (!u) return ''; return `<div class="adv-box"><b>사례 ${i + 1}</b> — ${esc(k)} · ${esc(f)}
     <div>${esc(where(u, 3))} · ${u.a < 10000 ? Math.round(u.a).toLocaleString('ko-KR') + '㎡' : km2(u.a) + ' km²'} · ${band(u.a)} · 필지 ${u.n} · 경작 판독 ${u.farm == null ? '—' : Math.round(u.farm * 100) + '%'} · 계통 참고값 ${u.lo == null ? '알 수 없음' : fmt(u.lo) + (u.hi != null ? '–' + fmt(u.hi) : '') + ' MW'} · 산업단지 ${fmt(u.d, 2)} km</div>
     <div class="adv-map" id="cMap${id}" style="height:340px;min-height:0;margin:8px 0"></div>${fbWidget('case:' + id, '이 사례에 대한 의견')}</div>`; }).join('');
+  }
+  renderCases();
   // 사례 지도는 탭을 처음 열 때 그린다(숨은 탭에서 그리면 크기가 0)
   async function cInit() {
+    await extReady;   // 보령 사례가 붙은 뒤에 그린다
     if (cMaps.length) { cMaps.forEach(m => m.invalidateSize()); return; }
-    for (const [id] of QCASES) { const u = UBY.get(id); if (!u) continue; await loadGeom(homeSgg(u));
+    for (const [id] of QCASES) { const u = UBY.get(id); if (!u) continue; if (!u.ext) await loadGeom(homeSgg(u));   // 보령은 도형을 이미 갖고 있다(경기 자문 도형 폴더 밖)
       const m = L.map('cMap' + id, {scrollWheelZoom: false, preferCanvas: true});
       L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {maxZoom: 18, attribution: '© Esri'}).addTo(m); cMaps.push(m);
       if (u.geometry) { const ly = L.geoJSON(u.geometry, {style: () => ({color: '#0C356A', weight: 3, fillColor: COLOR(u.a), fillOpacity: .35})}).addTo(m); m.fitBounds(ly.getBounds(), {padding: [24, 24], maxZoom: 16}); }
