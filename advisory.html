@@ -87,6 +87,17 @@ table.adv th{background:var(--adv-soft);position:sticky;top:0}
 input[type=range]{width:180px;max-width:100%;accent-color:var(--adv-navy)}
 .wrow{display:flex;align-items:center;gap:8px;font-size:13px;margin:4px 0;flex-wrap:wrap}
 .wrow b{min-width:120px}
+.case-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:0 0 10px}
+@media (max-width:760px){.case-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.case-card{border:1px solid var(--adv-line);border-radius:8px;background:#fff;padding:10px 12px;cursor:pointer;min-width:0;text-align:left;font:inherit}
+.case-card:hover{background:var(--adv-soft)}.case-card.on{border-color:var(--adv-navy);box-shadow:inset 0 0 0 1px var(--adv-navy)}
+.case-card .cn{display:inline-block;min-width:20px;height:20px;line-height:20px;border-radius:10px;background:var(--adv-navy);color:#fff;text-align:center;font-size:11.5px;font-weight:700;margin-right:6px}
+.case-card .ct{font-weight:700;color:var(--adv-navy);font-size:14px}
+.case-card .cv{font-size:13px;margin-top:3px}.case-card .cv b{font-size:15px}
+.case-card .cr{font-size:11.5px;color:var(--adv-muted);margin-top:3px;line-height:1.5}
+.adv-more{border:1px solid var(--adv-line);border-radius:8px;background:#fff;padding:8px 12px}
+.adv-more>summary{cursor:pointer;font-size:13px;color:var(--adv-navy)}
+.adv-more[open]>summary{margin-bottom:8px}
 .lyr{display:flex;flex-wrap:wrap;gap:4px 12px;font-size:12.5px;margin:6px 0}.lyr label{cursor:pointer}.lyr .na{color:#9aa4ae}
 .task-side{max-height:none}
 .legend-sw{display:inline-block;width:11px;height:11px;border-radius:2px;vertical-align:-1px;margin-right:3px}
@@ -125,7 +136,8 @@ input[type=range]{width:180px;max-width:100%;accent-color:var(--adv-navy)}
   </section>
 
   <section class="adv-pane" id="p-data">
-    <div class="adv-box"><b>검토 안내</b> — 이 화면의 목적은 현재 연구에서 확보한 경기도 자료와 산출 결과가 현실을 얼마나 잘 반영하는지 검토받는 것입니다.
+    <div class="adv-box"><b>이 탭에서 하실 일</b> — 아래 <b>사례 6곳</b>(각 시군에서 규모가 가장 큰 후보)이나 잘 아시는 지역을 위성 지도로 보시고, 지도 아래 <b>질문 2개</b>에 답해 주세요. 사례를 누르면 지도가 그곳으로 이동합니다.
+      <details style="margin-top:6px"><summary class="adv-note"><b>검토 범위와 읽을 때 주의할 점</b></summary>
       <ul class="adv-note" style="margin:6px 0 0 18px;padding:0">
         <li><b>질문은 모두 7개입니다</b> — ① 탭 질문 1–2 · ② 탭 질문 3 · ③ 탭 질문 4–7. ② 탭의 선택 질문은 아시는 경우에만 답해 주세요. 다 적으신 뒤 "의견 내보내기" 탭에서 파일로 내려받아 보내 주세요.</li>
         <li>최종 사업 가능성, 법적 인허가 가능성, 실제 계통 접속 가능 여부를 판단하는 화면이 아닙니다.</li>
@@ -135,28 +147,40 @@ input[type=range]{width:180px;max-width:100%;accent-color:var(--adv-navy)}
         <li>실제 현장을 잘 아시는 지역이 있다면 후보 번호와 함께 알려 주십시오. 판단하기 어려운 항목은 "판단 어려움"으로 답하시거나 비워 두셔도 됩니다.</li>
         <li><b>화면에 없는 요소가 중요하더라도 그것이 곧 현재 분석이 잘못되었다는 의미는 아닙니다. 현재 결과를 실제 검토에 활용하기 위해 추가로 필요한 자료나 확인해야 할 사항으로 의견을 남겨 주세요.</b></li>
       </ul>
-      <details style="margin-top:6px"><summary class="adv-note"><b>자료를 읽을 때 주의할 점</b></summary><ul class="adv-note" style="margin:4px 0 0 18px;padding:0">
+      <div class="adv-note" style="margin-top:8px"><b>자료를 읽을 때 주의할 점</b></div><ul class="adv-note" style="margin:4px 0 0 18px;padding:0">
         <li>MW — 0.045 kW/㎡를 적용해 면적을 환산한 참고 규모입니다(1MW = 22,222㎡ · 마을 단위 운영 규모 · 3MW = 66,667㎡ · 50MW = 1,111,111㎡). 실제 설치 가능 용량, 실제 발전량, 실제 계통 접속 가능 용량이 아닙니다.</li>
         <li>계통 — 한전 공표 자료를 바탕으로 한 읍면동 단위 참고값입니다. 후보 공간 자체의 접속 가능 용량을 의미하지 않습니다.</li>
         <li>기존 태양광 — 발전사업 허가 자료 중 위치를 확인할 수 있는 곳만 표시합니다. 점은 허가 자료에 적힌 <b>주소(지번) 위치</b>이며 패널이 실제로 놓인 자리가 아닙니다 — 정수장·공장처럼 넓은 부지에서는 건물 옥상이나 숲에 찍힐 수 있습니다. 표시되지 않는 시설이 존재할 수 있습니다.</li>
         <li>위성 — 배경 위성영상은 분석에 사용한 원자료의 기준 시점과 다를 수 있으며, 현황 확인을 위한 참고자료입니다.</li>
         <li>규제 — 이 화면에 발행되지 않은 용도지역·주요 규제 레이어는 현재 자문 화면에서 직접 검토할 수 없습니다.</li>
       </ul></details></div>
+    <div class="case-grid" id="qCases"></div>
+    <div class="adv-box" id="dSum">—</div>
+    <div class="adv-split">
+      <div><div id="dMap" class="adv-map"></div>
+        <div class="adv-note" style="margin-top:6px"><span class="legend-sw" style="background:#A8651A"></span>50MW 이상 <span class="legend-sw" style="background:#D98E1B"></span>20–50MW <span class="legend-sw" style="background:#F2B233"></span>10–20MW <span class="legend-sw" style="background:#FFD84D"></span>3–10MW <span class="legend-sw" style="background:#FFF1B8"></span>1–3MW <span class="legend-sw" style="background:#E6E0CF"></span>1MW 미만 · 회색 점선 = 지도 정보가 더 확인 필요한 곳(도형 면적이 장부 면적과 다름) · MW는 면적 환산 참고 규모</div></div>
+      <div class="adv-side"><div id="dList" class="adv-list"></div></div>
+    </div>
+    <div class="adv-note" style="margin-top:4px">회색 점선 = 지도 확인이 필요한 곳(도형 면적이 장부 면적과 다름) · 목록을 누르면 지도에서 강조됩니다.</div>
+    <!-- 상세는 목록 위가 아니라 지도 아래 칸에 연다 — 목록 위에 열면 목록이 밀려 다른 후보를 고르려면 스크롤해야 했다 (2026-10-13) -->
+    <div id="dDet" class="adv-det adv-box" style="margin-top:12px;padding:0 0 4px;background:#fff"></div>
+    <div class="adv-box" style="margin-top:12px"><b>질문 1–2</b> — 사례나 잘 아시는 지역을 보신 느낌대로 답해 주세요. 판단하기 어려우면 "판단 어려움"을 고르시거나 비워 두셔도 됩니다. 답은 이 브라우저에만 저장됩니다.
+      <div id="qList"></div></div>
+    <details class="adv-more" style="margin-top:12px"><summary><b>직접 찾아보기 · 지도 설정</b> — 시군·읍면동을 골라 보거나, 지도에 농지 필지·산업단지·계통·기존 시설을 함께 띄울 수 있습니다</summary>
     <div class="adv-ctl">
       <label>시군 <select id="dSgg"></select></label>
       <label>읍면동 <select id="dEmd"><option value="">(시군 전체)</option></select></label>
       <button id="dAll">시군 전체 보기</button>
       <button id="dPrev">◀ 이전 읍면동</button><button id="dNext">다음 읍면동 ▶</button>
-      <span class="adv-note">분석 조건: 특별법 시행 후 — 농업진흥구역에 영농형 태양광을 설치할 수 있게 되는 경우(농업보호구역 제외) · 법인·국공유 소유 농지. 후보 표시는 법적 사업 가능 여부 또는 인허가 가능 여부를 판단한 결과가 아닙니다.</span>
+      <span class="adv-note" style="flex-basis:100%">분석 조건: 특별법 시행 후 — 농업진흥구역에 영농형 태양광을 설치할 수 있게 되는 경우(농업보호구역 제외) · 법인·국공유 소유 농지. 후보 표시는 법적 사업 가능 여부 또는 인허가 가능 여부를 판단한 결과가 아닙니다.</span>
     </div>
-    <div class="adv-box" id="dSum">—</div>
-    <div class="adv-box"><b>근거 레이어</b> — 켜고 끄며 후보 공간과 비교해 보세요(발행된 자료만 표시 · 없는 자료는 만들지 않음)
+    <div class="adv-box" style="margin-top:8px"><b>지도에 함께 보기</b> — 켜고 끄며 후보 공간과 비교해 보세요(발행된 자료만 표시)
       <div class="lyr" id="lyrs">
         <label><input type="checkbox" data-l="units" checked> 후보 공간</label>
-        <label><input type="checkbox" data-l="parcels"> 판정을 통과한 농지 필지(법인·국공유 · 소유 구분 색)</label>
-        <label><input type="checkbox" data-l="emd" checked> 행정경계(읍면동)</label>
+        <label><input type="checkbox" data-l="parcels"> 분석 대상 농지 필지(법인·국공유 · 소유 구분 색)</label>
+        <label><input type="checkbox" data-l="emd" checked> 읍면동 경계</label>
         <label><input type="checkbox" data-l="ind"> 산업단지 경계</label>
-        <label><input type="checkbox" data-l="grid"> 계통 여유 참고값(읍면동 채색 · 자홍 점선 = 조회 불가)</label>
+        <label><input type="checkbox" data-l="grid"> 계통 여유 참고값(읍면동별 색 · 자홍 점선 = 조회 불가)</label>
         <label><input type="checkbox" data-l="ex"> 기존 태양광 시설 <span style="color:var(--muted);font-size:12px">(노랑 = 일반 태양광 · 초록 = 영농형 · 회색 = 가동중단·폐기)</span></label>
         <span class="na" title="발행 자산에 없는 레이어">☐ 용도지역 — 발행 자료 없음</span>
         <span class="na" title="발행 자산에 없는 레이어">☐ 주요 제외조건(규제) — 발행 자료 없음</span>
@@ -164,16 +188,7 @@ input[type=range]{width:180px;max-width:100%;accent-color:var(--adv-navy)}
       <div class="lyr">배경 지도 <label><input type="radio" name="base" value="sat" checked> 위성</label><label><input type="radio" name="base" value="satl"> 위성 + 지명·경계</label><label><input type="radio" name="base" value="topo"> 지형도</label>
         <span class="adv-note" id="lyrNote"></span></div>
       <div class="adv-note">판정 조건 중 용도지역·규제 레이어는 원본 GIS로만 있고 이 화면용으로 발행되지 않았습니다 — 필요하면 자문 과제 메모로 알려 주세요. 읍면동 경계는 V-World 읍면동 경계(2026-08-27 수집)를 화면 표시용으로 약 8 m 범위에서 단순화한 선입니다. 필지 점 = 진흥구역에도 설치할 수 있게 되는 조건에서 판정을 통과한 법인·국공유 농지의 위치 점(필지마다 1개 · 후보 공간 크기와 무관하게 전량).</div></div>
-    <div class="adv-split">
-      <div><div id="dMap" class="adv-map"></div>
-        <div class="adv-note" style="margin-top:6px"><span class="legend-sw" style="background:#A8651A"></span>50MW 이상 <span class="legend-sw" style="background:#D98E1B"></span>20–50MW <span class="legend-sw" style="background:#F2B233"></span>10–20MW <span class="legend-sw" style="background:#FFD84D"></span>3–10MW <span class="legend-sw" style="background:#FFF1B8"></span>1–3MW <span class="legend-sw" style="background:#E6E0CF"></span>1MW 미만 · 회색 점선 = 지도 정보가 더 확인 필요한 곳(도형 면적이 장부 면적과 다름) · MW는 면적 환산 참고 규모</div></div>
-      <div class="adv-side"><div id="dList" class="adv-list"></div></div>
-    </div>
-    <!-- 상세는 목록 위가 아니라 지도 아래 칸에 연다 — 목록 위에 열면 목록이 밀려 다른 후보를 고르려면 스크롤해야 했다 (2026-10-13) -->
-    <div id="dDet" class="adv-det adv-box" style="margin-top:12px;padding:0 0 4px;background:#fff"></div>
-    <div class="adv-box" style="margin-top:12px"><b>질문 1–2. 후보 결과 확인</b> — 전체 후보 공간을 모두 보실 필요는 없습니다. 아래 검토 사례나 잘 아시는 지역을 보시고 답해 주세요. 사례는 통계적 대표성을 가진 표본이 아닙니다. 지역별 지도 탭과 같은 규칙으로, 각 시군에서 규모(면적)가 가장 큰 후보 공간(지도의 1번)을 골랐습니다 — 경기도에서 큰 후보가 많은 3개 시군(평택·화성·이천)과 자문 지역(파주·여주·보령). 도형 확인이 필요한 후보는 빼고, 경작 여부는 고르는 기준에 넣지 않았습니다. 정답을 여쭙는 것이 아니므로, 판단하기 어려우면 "판단 어려움"을 고르시거나 비워 두셔도 됩니다. 답은 이 브라우저에만 저장됩니다.
-      <div class="scroll" style="margin-top:6px"><table class="adv" id="qCases"></table></div>
-      <div id="qList"></div></div>
+    </details>
   </section>
 
   <!-- ② 방법론 -->
@@ -358,7 +373,7 @@ input[type=range]{width:180px;max-width:100%;accent-color:var(--adv-navy)}
       // ③ 지도는 탭을 처음 열 때 그린다(후보 공간 전량 5만여 곳 — 숨은 탭에서 미리 그리면 메모리만 쓴다)
       try { if (b.dataset.t === 'region') rgFit();
         // ① 지도는 이제 숨은 채로 처음 그려진다 — 처음 열 때 한 번 범위를 맞춘다(후보를 골라 들어온 경우는 그 후보 위치를 지킨다)
-        if (b.dataset.t === 'data' && !dShown) { dShown = true; if (st.sel == null && dLayer.getLayers().length) dm.fitBounds(dLayer.getBounds(), {padding: [20, 20], maxZoom: 14}); } if (b.dataset.t === 'user' && !uDrawn) { uDrawn = true; uRender(); } } catch (e) {} }, 50); };
+        if (b.dataset.t === 'data' && !dShown) { dShown = true; if (st.sel == null) { const c = QCASES[0] && UBY.get(QCASES[0][0]); if (c && dPolys.has(c.id)) dSelect(c.id, true); else if (dLayer.getLayers().length) dm.fitBounds(dLayer.getBounds(), {padding: [20, 20], maxZoom: 14}); } } /* 처음 열면 사례 1 로 */ if (b.dataset.t === 'user' && !uDrawn) { uDrawn = true; uRender(); } } catch (e) {} }, 50); };
   let uDrawn = false, dShown = false;
   const mkMap = id => { const m = L.map(id, {center: [37.4, 127.1], zoom: 9, scrollWheelZoom: true, preferCanvas: true});
     L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {maxZoom: 18, attribution: '© Esri'}).addTo(m); maps[id] = m; return m; };
@@ -436,7 +451,7 @@ input[type=range]{width:180px;max-width:100%;accent-color:var(--adv-navy)}
     const uOn = on('units'); uOn ? dLayer.addTo(dm) : dm.removeLayer(dLayer);
   }
   document.querySelectorAll('#lyrs input').forEach(cb => cb.onchange = () => drawEvidence());
-  const st = {sgg: SGG.includes('41590') ? '41590' : SGG[0], emd: '', sel: null};
+  const st = {sgg: SGG.includes('41220') ? '41220' : SGG[0], emd: '', sel: null};   // 처음 보이는 시군 = 사례 1(평택)
   $('dSgg').innerHTML = SGG.map(s => `<option value="${s}">${esc(sName(s))}</option>`).join('');
   const emdsOf = s => D.emd.filter(e => e.e.startsWith(s)).sort((a, b) => a.name.localeCompare(b.name, 'ko'));
   function fillEmd() { $('dEmd').innerHTML = '<option value="">(시군 전체)</option>' + emdsOf(st.sgg).map(e => `<option value="${e.e}">${esc(eName(e.e))} (${e.k})</option>`).join(''); $('dEmd').value = st.emd; }
@@ -452,9 +467,10 @@ input[type=range]{width:180px;max-width:100%;accent-color:var(--adv-navy)}
     drawEvidence();
     const b = dLayer.getLayers().length ? dLayer.getBounds() : null; if (fit && b) dm.fitBounds(b, {padding: [20, 20], maxZoom: 14});
     const tot = list.reduce((s, u) => s + u.a, 0), cnt = k => list.filter(u => u.a >= B[k]).length, e = st.emd ? EMD.get(st.emd) : null;
-    $('dSum').innerHTML = `<b>${esc(st.emd ? eName(st.emd) : sName(st.sgg))}</b> — 후보 공간 <b>${list.length.toLocaleString('ko-KR')}</b>곳 · 총 면적 <b>${km2(tot)}</b> km² · 1MW 이상 ${cnt('1')} · 3MW 이상 ${cnt('3')} · 10MW 이상 ${cnt('10')} · 20MW 이상 ${cnt('20')} · 50MW 이상 ${cnt('50')}` +
-      (list.length ? `<div>면적 상위 후보: ${list.slice(0, 3).map(u => `<a href="#" data-go="${u.id}">${km2(u.a)} km² · ${esc(where(u, 1))}</a>`).join(' · ')}</div>` : '') +
-      `<div class="adv-note">50/20/10/3/1MW는 0.045 kW/㎡를 적용해 면적을 환산한 참고 규모이며, 실제 설치 가능 용량·발전량·계통 접속 가능 용량이 아닙니다. 후보 공간이 시군·읍면동 경계를 넘으면 걸친 곳마다 한 번씩 보입니다(지역끼리 더하지 않음). 도형이 없는 후보 공간 ${list.filter(u => !u.hg).length}곳은 목록에만 있습니다(지적 폴리곤이 없음 — 설치 불가라는 뜻은 아님).</div>`;
+    const top = list[0];
+    $('dSum').innerHTML = `<b>${esc(st.emd ? eName(st.emd) : sName(st.sgg))}</b> — 후보 공간 <b>${list.length.toLocaleString('ko-KR')}</b>곳 · 3MW 이상 <b>${cnt('3')}</b>곳 · 가장 큰 곳 <b>${top ? fmt(top.mw, 1) : '—'}</b> MW` +
+      (list.length ? ` · 면적 상위: ${list.slice(0, 3).map(u => `<a href="#" data-go="${u.id}">${km2(u.a)} km² ${esc(where(u, 1))}</a>`).join(' · ')}` : '') +
+      `<div class="adv-note">MW는 면적에 0.045 kW/㎡를 적용한 참고 규모이며 실제 설치·접속 가능 용량이 아닙니다. 시군·읍면동 경계를 넘는 후보는 걸친 곳마다 한 번씩 보입니다. 도형이 없는 후보 ${list.filter(u => !u.hg).length}곳은 목록에만 있습니다.</div>`;
     $('dList').innerHTML = `<div class="adv-note" style="padding:6px 10px">면적 큰 순 · ${list.length}곳 — 누르면 지도에서 강조</div>` + list.map(u =>
       `<div class="it ${u.id === st.sel ? 'sel' : ''}" data-id="${u.id}"><b>${km2(u.a)} km²</b> · ${band(u.a)} · 필지 ${u.n.toLocaleString('ko-KR')}${u.t !== 'default' ? ' <span class="tag w">' + (u.t === 'missing' ? '도형 없음' : '지도 정보 확인 필요') + '</span>' : ''}<div class="adv-note">${esc(u.emds.map(eName).join(' · ') || '읍면동 정보 없음')}</div></div>`).join('');
     $('dList').querySelectorAll('.it').forEach(el => el.onclick = () => dSelect(+el.dataset.id, true));
@@ -465,6 +481,7 @@ input[type=range]{width:180px;max-width:100%;accent-color:var(--adv-navy)}
     const prev = st.sel; st.sel = id; const u = UBY.get(id); if (!u) return;
     [prev, id].forEach(k => { const ly = dPolys.get(k), uu = UBY.get(k); if (ly && uu) ly.setStyle(polyStyle(uu, k === id)); });
     document.querySelectorAll('#dList .it').forEach(el => el.classList.toggle('sel', +el.dataset.id === id));
+    document.querySelectorAll('#qCases .case-card').forEach(el => el.classList.toggle('on', +el.dataset.qcase === id));
     const row = document.querySelector(`#dList .it[data-id="${id}"]`); if (row && !pan) row.scrollIntoView({block: 'nearest'});
     // 후보를 고르면 판정 근거(필지·행정경계)를 함께 켠다 — "왜 여기가 후보인가"를 한 화면에서
     ['parcels', 'emd'].forEach(k => { const cb = document.querySelector(`#lyrs [data-l=${k}]`); if (cb && !cb.checked) cb.checked = true; }); drawEvidence();
@@ -519,8 +536,10 @@ input[type=range]{width:180px;max-width:100%;accent-color:var(--adv-navy)}
       fbWidget('Z1', '', ['농업·농지', '공간정보·GIS', '태양광·재생에너지', '전력·계통', '지자체·행정', '환경·규제', '기타'], {multi: true, ph: '기타 분야'}));
   // 질문은 Q1–Q10 열 개 — ① 탭 1–3 · ② 탭 4–7 · ③ 탭 8–10 (2026-10-13 지자체 자문용으로 A1–D5 30문항을 줄임)
   function renderQCases() {
-    $('qCases').innerHTML = '<tr><th>사례</th><th>유형</th><th>후보 공간</th><th>위치</th><th>면적 (참고 규모)</th><th style="text-align:left">고른 규칙</th></tr>' +
-      QCASES.map(([id, k, f], i) => { const u = UBY.get(id); return `<tr><td><button type="button" class="btnx" data-qcase="${id}">사례 ${i + 1} 지도에서 보기</button></td><td>${k}</td><td>#${id}</td><td>${esc(where(u, 2))}</td><td>${u.a < 10000 ? Math.round(u.a).toLocaleString('ko-KR') + '㎡' : km2(u.a) + ' km²'} (약 ${fmt(u.mw, 1)} MW)</td><td style="white-space:normal;text-align:left;min-width:220px">${esc(f)} · 구성 필지 ${u.n}개</td></tr>`; }).join('');
+    $('qCases').innerHTML = QCASES.map(([id, k, f], i) => { const u = UBY.get(id); if (!u) return '';
+      return `<button type="button" class="case-card ${u.id === st.sel ? 'on' : ''}" data-qcase="${id}"><span class="cn">${i + 1}</span><span class="ct">${esc(k.replace(/ 사례$/, ''))}</span> <span class="adv-note">${esc(where(u, 1))}</span>
+        <div class="cv"><b>약 ${fmt(u.mw, 1)} MW</b> · ${u.a < 10000 ? Math.round(u.a).toLocaleString('ko-KR') + '㎡' : km2(u.a) + ' km²'} · 필지 ${u.n.toLocaleString('ko-KR')}개</div>
+        <div class="cr">${esc(f.replace(/ — 지역별 지도의 1번.*$/, ''))}${u.ext ? ' · 경기 자료 밖 — 지역별 지도 탭에서 봄' : ''}</div></button>`; }).join('');
     $('qCases').querySelectorAll('[data-qcase]').forEach(b => b.onclick = () => { const u = UBY.get(+b.dataset.qcase);
       if (u.ext) { document.querySelector('#tabs [data-t=region]').click();   // 보령 — ① 탭(경기 전용) 대신 지역별 지도의 보령 지도에서 그 후보로
         setTimeout(() => { const li = document.querySelector(`#rgL${u.sggs[0]} li[data-id="${u.id}"]`), el = $('rgM' + u.sggs[0]); if (el) el.scrollIntoView({behavior: 'smooth', block: 'center'}); if (li) li.click(); }, 400); return; }
