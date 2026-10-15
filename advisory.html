@@ -95,6 +95,14 @@ input[type=range]{width:180px;max-width:100%;accent-color:var(--adv-navy)}
 .case-card .ct{font-weight:700;color:var(--adv-navy);font-size:14px}
 .case-card .cv{font-size:13px;margin-top:3px}.case-card .cv b{font-size:15px}
 .case-card .cr{font-size:11.5px;color:var(--adv-muted);margin-top:3px;line-height:1.5}
+.sg-block{margin:6px 0 18px}
+.sg-head{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap}
+.sg-head h3{margin:0;font-size:16px;color:var(--adv-navy)}
+.sg-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:8px}
+@media (max-width:700px){.sg-grid{grid-template-columns:1fr}}
+.sg-card{border:1px solid var(--adv-line);border-radius:8px;overflow:hidden;background:#fff;min-width:0}
+.sg-map{height:250px;border-bottom:1px solid var(--adv-line)}
+.sg-cap{padding:8px 10px;font-size:13px;line-height:1.6}
 .adv-more{border:1px solid var(--adv-line);border-radius:8px;background:#fff;padding:8px 12px}
 .adv-more>summary{cursor:pointer;font-size:13px;color:var(--adv-navy)}
 .adv-more[open]>summary{margin-bottom:8px}
@@ -137,7 +145,7 @@ input[type=range]{width:180px;max-width:100%;accent-color:var(--adv-navy)}
   </section>
 
   <section class="adv-pane" id="p-data">
-    <div class="adv-box"><b>이 탭에서 하실 일</b> — 아래 <b>사례 6곳</b>(각 시군에서 규모가 가장 큰 후보)이나 잘 아시는 지역을 위성 지도로 보시고, 지도 아래 <b>질문 2개</b>에 답해 주세요. 사례를 누르면 지도가 그곳으로 이동합니다.
+    <div class="adv-box"><b>이 탭에서 하실 일</b> — 아래 6개 시군(경기 평택·화성·이천 + 자문 지역 파주·여주·보령)의 <b>큰 후보 공간 1–4위</b>를 확대한 위성 지도를 보시고, 맨 아래 <b>질문 2개</b>에 답해 주세요. 시군 전체 후보 지도는 "우리 동네 TOP 10 전체 지도 열기"를 누르면 새 창으로 열립니다. 잘 아시는 다른 지역은 맨 아래 "직접 찾아보기"에서 고를 수 있습니다.
       <details style="margin-top:6px"><summary class="adv-note"><b>검토 범위와 읽을 때 주의할 점</b></summary>
       <ul class="adv-note" style="margin:6px 0 0 18px;padding:0">
         <li><b>질문은 모두 7개입니다</b> — ① 탭 질문 1–2 · ② 탭 질문 3 · ③ 탭 질문 4–7. ② 탭의 선택 질문은 아시는 경우에만 답해 주세요. 다 적으신 뒤 "의견 내보내기" 탭에서 파일로 내려받아 보내 주세요.</li>
@@ -155,17 +163,8 @@ input[type=range]{width:180px;max-width:100%;accent-color:var(--adv-navy)}
         <li>위성 — 배경 위성영상은 분석에 사용한 원자료의 기준 시점과 다를 수 있으며, 현황 확인을 위한 참고자료입니다.</li>
         <li>규제 — 이 화면에 발행되지 않은 용도지역·주요 규제 레이어는 현재 자문 화면에서 직접 검토할 수 없습니다.</li>
       </ul></details></div>
-    <div class="case-grid" id="qCases"></div>
-    <div class="adv-box" id="dSum">—</div>
-    <div class="adv-split">
-      <div><div id="dMap" class="adv-map"></div>
-        <div class="adv-note" style="margin-top:6px"><span class="legend-sw" style="background:#A8651A"></span>50MW 이상 <span class="legend-sw" style="background:#D98E1B"></span>20–50MW <span class="legend-sw" style="background:#F2B233"></span>10–20MW <span class="legend-sw" style="background:#FFD84D"></span>3–10MW <span class="legend-sw" style="background:#FFF1B8"></span>1–3MW <span class="legend-sw" style="background:#E6E0CF"></span>1MW 미만 · 회색 점선 = 지도 정보가 더 확인 필요한 곳(도형 면적이 장부 면적과 다름) · MW는 면적 환산 참고 규모</div></div>
-      <div class="adv-side"><div id="dList" class="adv-list"></div></div>
-    </div>
-    <div class="adv-note" style="margin-top:4px">회색 점선 = 지도 확인이 필요한 곳(도형 면적이 장부 면적과 다름) · 목록을 누르면 지도에서 강조됩니다.</div>
-    <!-- 상세는 목록 위가 아니라 지도 아래 칸에 연다 — 목록 위에 열면 목록이 밀려 다른 후보를 고르려면 스크롤해야 했다 (2026-10-13) -->
-    <div id="dDet" class="adv-det adv-box" style="margin-top:12px;padding:0 0 4px;background:#fff"></div>
-    <div class="adv-box" style="margin-top:12px"><b>질문 1–2</b> — 사례나 잘 아시는 지역을 보신 느낌대로 답해 주세요. 판단하기 어려우면 "판단 어려움"을 고르시거나 비워 두셔도 됩니다. 답은 이 브라우저에만 저장됩니다.
+    <div id="sggBlocks"><div class="adv-note" style="padding:10px">지도를 준비하는 중…</div></div>
+    <div class="adv-box" style="margin-top:12px"><b>질문 1–2</b> — 위 지도나 잘 아시는 지역을 보신 느낌대로 답해 주세요. 판단하기 어려우면 "판단 어려움"을 고르시거나 비워 두셔도 됩니다. 답은 이 브라우저에만 저장됩니다.
       <div id="qList"></div></div>
     <details class="adv-more" style="margin-top:12px"><summary><b>직접 찾아보기 · 지도 설정</b> — 시군·읍면동을 골라 보거나, 지도에 농지 필지·산업단지·계통·기존 시설을 함께 띄울 수 있습니다</summary>
     <div class="adv-ctl">
@@ -189,6 +188,17 @@ input[type=range]{width:180px;max-width:100%;accent-color:var(--adv-navy)}
       <div class="lyr">배경 지도 <label><input type="radio" name="base" value="sat" checked> 위성</label><label><input type="radio" name="base" value="satl"> 위성 + 지명·경계</label><label><input type="radio" name="base" value="topo"> 지형도</label>
         <span class="adv-note" id="lyrNote"></span></div>
       <div class="adv-note">판정 조건 중 용도지역·규제 레이어는 원본 GIS로만 있고 이 화면용으로 발행되지 않았습니다 — 필요하면 자문 과제 메모로 알려 주세요. 읍면동 경계는 V-World 읍면동 경계(2026-08-27 수집)를 화면 표시용으로 약 8 m 범위에서 단순화한 선입니다. 필지 점 = 진흥구역에도 설치할 수 있게 되는 조건에서 판정을 통과한 법인·국공유 농지의 위치 점(필지마다 1개 · 후보 공간 크기와 무관하게 전량).</div></div>
+    <div class="adv-note" style="margin:12px 0 4px"><b>후보 하나씩 자세히 보기</b> — 아래 사례 카드를 누르거나 목록에서 고르면 지도가 그곳으로 이동하고 상세가 열립니다.</div>
+    <div class="case-grid" id="qCases"></div>
+    <div class="adv-box" id="dSum">—</div>
+    <div class="adv-split">
+      <div><div id="dMap" class="adv-map"></div>
+        <div class="adv-note" style="margin-top:6px"><span class="legend-sw" style="background:#A8651A"></span>50MW 이상 <span class="legend-sw" style="background:#D98E1B"></span>20–50MW <span class="legend-sw" style="background:#F2B233"></span>10–20MW <span class="legend-sw" style="background:#FFD84D"></span>3–10MW <span class="legend-sw" style="background:#FFF1B8"></span>1–3MW <span class="legend-sw" style="background:#E6E0CF"></span>1MW 미만 · 회색 점선 = 지도 정보가 더 확인 필요한 곳(도형 면적이 장부 면적과 다름) · MW는 면적 환산 참고 규모</div></div>
+      <div class="adv-side"><div id="dList" class="adv-list"></div></div>
+    </div>
+    <div class="adv-note" style="margin-top:4px">회색 점선 = 지도 확인이 필요한 곳(도형 면적이 장부 면적과 다름) · 목록을 누르면 지도에서 강조됩니다.</div>
+    <!-- 상세는 목록 위가 아니라 지도 아래 칸에 연다 — 목록 위에 열면 목록이 밀려 다른 후보를 고르려면 스크롤해야 했다 (2026-10-13) -->
+    <div id="dDet" class="adv-det adv-box" style="margin-top:12px;padding:0 0 4px;background:#fff"></div>
     </details>
   </section>
 
@@ -384,7 +394,7 @@ input[type=range]{width:180px;max-width:100%;accent-color:var(--adv-navy)}
     setTimeout(() => { Object.values(maps).forEach(m => m.invalidateSize());
       // 숨은 탭에서 처음 그린 지도는 크기가 0이라 범위 맞춤이 어긋난다 — 처음 열 때 한 번 다시 맞춘다
       // ③ 지도는 탭을 처음 열 때 그린다(후보 공간 전량 5만여 곳 — 숨은 탭에서 미리 그리면 메모리만 쓴다)
-      try { if (b.dataset.t === 'region') rgFit();
+      try { if (b.dataset.t === 'region') rgFit(); if (b.dataset.t === 'data') sggInit();
         // ① 지도는 이제 숨은 채로 처음 그려진다 — 처음 열 때 한 번 범위를 맞춘다(후보를 골라 들어온 경우는 그 후보 위치를 지킨다)
         if (b.dataset.t === 'data' && !dShown) { dShown = true; if (st.sel == null) { const c = QCASES[0] && UBY.get(QCASES[0][0]); if (c && dPolys.has(c.id)) dSelect(c.id, true); else if (dLayer.getLayers().length) dm.fitBounds(dLayer.getBounds(), {padding: [20, 20], maxZoom: 14}); } } /* 처음 열면 사례 1 로 */ if (b.dataset.t === 'user' && !uDrawn) { uDrawn = true; uRender(); } } catch (e) {} }, 50); };
   let uDrawn = false, dShown = false;
@@ -748,6 +758,36 @@ input[type=range]{width:180px;max-width:100%;accent-color:var(--adv-navy)}
   // ════════ 지역별 지도 ════════
   // 경기 상위 3개 시군(big_sgg_v4 R2_promo 의 3MW 이상 수 → 1MW 이상 수 순) + 자문 지역 3곳. 도형은 사이트와 같은 data_v4/units/{시군}.json.gz(R2_promo)
   const RG_ADV = ['41480', '41670', '44180'], RG_TOP_N = 5, BIG3 = 66667;
+  // ── ① 탭: 시군별 큰 후보 1–4위 확대 지도 + 사이트 '우리 동네 TOP 10' 연결 (2026-10-15 사용자 지시: 사례 카드·단일 지도 대체) ──
+  const SG_SGG = ['41220', '41590', '41500', '41480', '41670', '44180'], SG_TOP = 4;
+  const ESRI_SAT = 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}';
+  let sgDone = false;
+  async function sggInit() {
+    if (sgDone) return; sgDone = true;
+    const emdIx = await Region.emdIndex().catch(() => []);
+    const nameOf = c => { if (EMD.get(c)) return eName(c).replace(/^\S+[시군] /, ''); const e = emdIx.find(x => x.code === c); return e ? e.name : c; };
+    $('sggBlocks').innerHTML = '';
+    for (const s of SG_SGG) {
+      const host = document.createElement('div'); host.className = 'sg-block'; $('sggBlocks').appendChild(host);
+      try {
+        const [fc, W] = await Promise.all([V55.units.load(s), W10_ON ? V55.gz(`data_v4/advisory/w10/${s}.json.gz`).catch(() => null) : null]);
+        if (!fc) { host.innerHTML = `<h3>${esc(Region.nameOf(s))}</h3><div class="adv-note">자료를 불러오지 못했습니다.</div>`; continue; }
+        if (W) fc.features.forEach(f => { const r = W[f.properties.id]; if (!r) return; f.properties.a0 = f.properties.a; f.properties.a = r.a; f.properties.mw = r.mw; f.properties.drop = r.drop; f.properties.method = r.method; if (r.g) f.geometry = r.g; });
+        const all0 = fc.features.filter(f => f.properties.t !== 'quality_review'), fs = all0.filter(f => f.properties.a > 0).sort((a, b) => b.properties.a - a.properties.a);
+        const tops = fs.slice(0, SG_TOP);
+        host.innerHTML = `<div class="sg-head"><h3>${esc(Region.nameOf(s))} <span class="adv-note">후보 공간 ${all0.length.toLocaleString('ko-KR')}곳${W ? ` · 띠 제외 후 ${fs.length.toLocaleString('ko-KR')}곳` : ''} · 3MW 이상 ${fs.filter(f => f.properties.a >= BIG3).length}곳 ${W ? W10_TAG : ''}</span></h3>
+            <a class="btnx" href="regions.html?sgg=${s}" target="_blank" rel="noopener">우리 동네 TOP 10 전체 지도 열기 ↗</a></div>
+          <div class="sg-grid">${tops.map((f, i) => { const p = f.properties; return `<div class="sg-card"><div class="sg-map" id="sm${s}_${i}"></div>
+            <div class="sg-cap"><b>${i + 1}위 · 약 ${fmt(p.mw, 1)} MW</b> · ${km2(p.a)} km² · 필지 ${p.n.toLocaleString('ko-KR')}개${p.drop > 0.005 ? ` <span class="tag w">${p.method === 'road' ? '도로' : '띠'} 제외 −${Math.round(p.drop * 100)}%</span>` : ''}
+            <div class="adv-note">${esc(p.emds.map(nameOf).slice(0, 2).join(' · '))} · 후보 공간 #${p.id} · <a href="regions.html?sgg=${s}&lab=${p.id}" target="_blank" rel="noopener">TOP 10에서 보기 ↗</a></div></div></div>`; }).join('')}</div>`;
+        tops.forEach((f, i) => { const m = L.map(`sm${s}_${i}`, {scrollWheelZoom: false, preferCanvas: true, zoomControl: false});
+          L.tileLayer(ESRI_SAT, {maxZoom: 18, attribution: '© Esri'}).addTo(m); L.control.zoom({position: 'bottomright'}).addTo(m);
+          const ly = L.geoJSON(f.geometry, {style: () => ({color: '#0C356A', weight: 3, fillColor: COLOR(f.properties.a), fillOpacity: .35})}).addTo(m);
+          ly.bindTooltip(`#${f.properties.id} · 약 ${fmt(f.properties.mw, 1)} MW · ${km2(f.properties.a)} km²`);
+          m.fitBounds(ly.getBounds(), {padding: [16, 16], maxZoom: 16}); setTimeout(() => m.invalidateSize(), 300); });
+      } catch (e) { console.error(e); host.innerHTML = `<h3>${esc(Region.nameOf(s))}</h3><div class="adv-note">지도를 그리지 못했습니다.</div>`; }
+    }
+  }
   const rgMaps = [];
   // 숨긴 탭·접힌 창에서 열리면 지도 상자 폭이 0이라 범위를 맞출 수 없다 — 폭이 생기는 순간(ResizeObserver) 다시 시도한다
   const rgFit = () => rgMaps.forEach(r => { r.m.invalidateSize(false); if (!r.fitted && r.m.getSize().x > 0) { r.m.fitBounds(r.bounds, {padding: [8, 8], animate: false}); r.fitted = true; } });
