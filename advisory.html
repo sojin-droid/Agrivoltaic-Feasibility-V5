@@ -209,7 +209,7 @@ input[type=range]{width:180px;max-width:100%;accent-color:var(--adv-navy)}
         <tr><td>법정동 이름</td><td class="l">법정동코드표 (폐지된 코드 포함)</td><td>행정안전부 행정표준코드관리시스템 (code.go.kr)</td><td>2026-08-19</td><td>2026-08-19 현행 코드</td><td class="l">시군·읍면동 이름 · 지번 검색</td></tr>
         <tr><td>기존 태양광 (지도 점)</td><td class="l">「전국태양광발전소전기사업허가정보표준데이터」 (공공데이터포털 15107742 · 지자체 발전사업 허가 대장) 외</td><td>공공데이터포털 (www.data.go.kr) · www.korec.go.kr</td><td>2026-09-21</td><td>2026-09-21 조회 시점 현황</td><td class="l">기존 태양광 시설 점 — 점 위치는 허가 자료에 적힌 주소(지번) 위치(패널 위치 아님) · 위치를 확인할 수 있는 곳만 · 영농형은 시설 이름에 "영농형"이 적힌 경우만 구분</td></tr>
         <tr><td>기존 발전설비 목록</td><td class="l">전력통계정보시스템(EPSIS) 발전설비 목록</td><td>한국전력거래소</td><td>2026-09-21</td><td>2026-09-21 조회 시점 현황</td><td class="l">좌표가 없어 지도에 표시하지 않음 — 건수 대조에만 사용</td></tr>
-        <tr><td>21m 후보 공간</td><td class="l">본 연구 구축 — 설치 가능 필지를 21m 이내로 이어 묶은 공간 (면적 하한 없음)</td><td>본 연구</td><td>—</td><td>위 자료의 시점을 따름 (구축 2026-09-23 · 자문용 전량 2026-09-28)</td><td class="l">후보 공간 목록·지도·통계</td></tr>
+        <tr><td>21m 후보 공간</td><td class="l">본 연구 구축 — 설치 가능 필지를 21m 이내로 이어 묶은 공간 (면적 하한 없음)</td><td>본 연구</td><td>—</td><td>위 자료의 시점을 따름 (구축 2026-10-07 · 자문 자산 생성 2026-10-13)</td><td class="l">후보 공간 목록·지도·통계</td></tr>
       </table></div>
       <div class="adv-note" style="margin-top:6px">배경 위성영상(Esri World Imagery)은 분석에 쓰지 않았으며, 위 자료의 기준 시점과 촬영 시점이 다를 수 있습니다.</div></div>
     <div class="adv-box"><b>질문 3. 사용한 자료</b> — 위 표와 ① 탭의 지도·후보 상세를 보신 뒤 답해 주세요. 판단하기 어려우면 "판단 어려움"을 고르시거나 비워 두셔도 됩니다. 답은 이 브라우저에만 저장됩니다.<div id="mQs"></div></div>
@@ -717,10 +717,11 @@ input[type=range]{width:180px;max-width:100%;accent-color:var(--adv-navy)}
   const ALT = D.alt, AC = D.alt_cols;
   async function uRender() {
     const scn = $('uScn').value;
-    $('uWhere').textContent = (us.emd ? eName(us.emd) : us.sgg ? sName(us.sgg) : '경기도 전체') + (us.emd && scn !== 'R2_promo' ? ' — 이 조건의 자료에는 읍면동 구분이 없어 ' + sName(us.sgg) + ' 전체 기준으로 보입니다' : '');
-    const whole = !us.sgg; if (scn === 'R2_promo' && !whole) await loadGeom(us.sgg);
+    $('uWhere').innerHTML = esc(us.emd ? eName(us.emd) : us.sgg ? sName(us.sgg) : '경기도 전체') + (scn === 'R2_promo' && W10_ON ? ' ' + W10_TAG : '') + esc((us.emd && scn !== 'R2_promo' ? ' — 이 조건의 자료에는 읍면동 구분이 없어 ' + sName(us.sgg) + ' 전체 기준으로 보입니다' : ''));
+    const whole = !us.sgg; if (scn === 'R2_promo' && !whole) await Promise.all([loadGeom(us.sgg), loadW10(us.sgg)]);
+    if (scn === 'R2_promo' && whole && W10_ON) await Promise.all(SGG.map(loadW10));   // 경기 전체 카드·목록도 잠정 값으로
     let items;
-    if (scn === 'R2_promo') items = U.filter(u => inSgg(u, us.sgg) && (!us.emd || u.emds.includes(us.emd))).map(u => ({id: u.id, a: u.a, lat: u.lat, lon: u.lon, lo: u.lo, d: u.d, geom: whole ? null : u.geometry, where: u.emds.map(eName).join(' · ')}));
+    if (scn === 'R2_promo') items = U.filter(u => inSgg(u, us.sgg) && (!us.emd || u.emds.includes(us.emd))).filter(u => ua(u) > 0).map(u => ({id: u.id, a: ua(u), lat: u.lat, lon: u.lon, lo: u.lo, d: u.d, geom: whole ? null : ugeom(u), where: u.emds.map(eName).join(' · ')}));
     else { const seen = new Map(); Object.entries(ALT[scn]).forEach(([s, rs]) => { if (us.sgg && s !== us.sgg) return; rs.forEach(r => { const o = Object.fromEntries(AC.map((c, i) => [c, r[i]])); if (!seen.has(o.lab)) seen.set(o.lab, {id: o.lab, a: o.a, lat: o.lat, lon: o.lon, lo: o.lo, d: o.d, geom: null, where: sName(s)}); }); });
       items = [...seen.values()]; }
     items.sort((a, b) => b.a - a.a);
@@ -748,7 +749,9 @@ input[type=range]{width:180px;max-width:100%;accent-color:var(--adv-navy)}
   // 경기 상위 3개 시군(big_sgg_v4 R2_promo 의 3MW 이상 수 → 1MW 이상 수 순) + 자문 지역 3곳. 도형은 사이트와 같은 data_v4/units/{시군}.json.gz(R2_promo)
   const RG_ADV = ['41480', '41670', '44180'], RG_TOP_N = 5, BIG3 = 66667;
   const rgMaps = [];
-  const rgFit = () => rgMaps.forEach(r => { r.m.invalidateSize(); if (!r.fitted && r.m.getSize().x) { r.m.fitBounds(r.bounds, {padding: [8, 8]}); r.fitted = true; } });
+  // 숨긴 탭·접힌 창에서 열리면 지도 상자 폭이 0이라 범위를 맞출 수 없다 — 폭이 생기는 순간(ResizeObserver) 다시 시도한다
+  const rgFit = () => rgMaps.forEach(r => { r.m.invalidateSize(false); if (!r.fitted && r.m.getSize().x > 0) { r.m.fitBounds(r.bounds, {padding: [8, 8], animate: false}); r.fitted = true; } });
+  if (window.ResizeObserver) new ResizeObserver(() => rgFit()).observe(document.getElementById('p-region'));
   async function rgInit() {
     const [BS] = await Promise.all([fetch('data_v4/big_sgg_v4.json').then(r => r.ok ? r.json() : null), Region.load()]);
     const emdIx = await Region.emdIndex();
@@ -815,6 +818,7 @@ input[type=range]{width:180px;max-width:100%;accent-color:var(--adv-navy)}
   $('xHead').innerHTML = `<div class="adv-note" style="margin-bottom:6px">이 탭은 화면의 값이 어떤 자료와 산출 방식으로 만들어졌는지 설명하는 참고 자료입니다. 자문 평가 대상이 아니며, 분석 방법의 타당성은 별도 자문에서 다룹니다.</div><b>대상 범위</b> — ${esc(String(S.population).replace(/특별법 시행 후\(농업진흥구역 개방 가정, R2_promo\)/, '특별법 시행 후(농업진흥구역에 설치 가능 · 농업보호구역 제외)'))}<br>후보 공간 <b>${S.n_units.toLocaleString('ko-KR')}</b>곳 · 전체 면적 <b>${fmt(S.area_km2, 3)}</b> km² · 도형 상태: 정상 ${S.geom.default} · 지도 정보 확인 필요 ${S.geom.quality_review} · 도형 없음 ${S.geom.missing}` +
     `<div class="adv-note">단위 — 후보 공간 면적: ${esc(S.axes.A.unit)} · 계통 여유 참고값: ${esc(S.axes.B.unit)} · 산업단지까지 거리: ${esc(S.axes.C.unit)}</div>`;
   renderStats('xStats', 'xCorr', U, true);
+  if (W10_ON) $('xHead').insertAdjacentHTML('beforeend', '<div class="adv-note" style="margin-top:4px"><b>이 탭의 표는 띠 제외 전 원 값 기준</b>입니다 — 자료가 어떻게 만들어졌는지 설명하는 탭이라 발행 수치를 그대로 둡니다. 띠 제외(잠정) 값은 지역별 지도·①·③ 탭에서 보입니다.</div>');
   // 표 머리글 풀이 — 통계 용어를 모르는 분도 읽을 수 있게(예시는 위 표의 실제 값)
   { const A = S.axes.A.stats, km = v => fmt(v * 1e6, 0), mwOf = v => fmt(v * 1e6 * 0.045 / 1000, 2);   // 예시는 표와 같은 ㎡ 단위
     $('xGloss').innerHTML = `<b>표 머리글 읽는 법</b><ul style="margin:6px 0 0 18px;padding:0;line-height:1.75">
