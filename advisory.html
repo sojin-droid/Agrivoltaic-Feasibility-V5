@@ -760,6 +760,8 @@ input[type=range]{width:180px;max-width:100%;accent-color:var(--adv-navy)}
   const RG_ADV = ['41480', '41670', '44180'], RG_TOP_N = 5, BIG3 = 66667;
   // ── ① 탭: 시군별 큰 후보 1–4위 확대 지도 + 사이트 '우리 동네 TOP 10' 연결 (2026-10-15 사용자 지시: 사례 카드·단일 지도 대체) ──
   const SG_SGG = ['41220', '41590', '41500', '41480', '41670', '44180'], SG_TOP = 4;
+  // TOP 10 은 사이트 페이지다 — 경기연구원 자문 저장소에는 regions.html 이 없으므로 두 곳 모두 사이트 주소로 연다
+  const TOP10_URL = 'https://sojin-droid.github.io/Agrivoltaic-Feasibility-V5/regions.html';
   const ESRI_SAT = 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}';
   let sgDone = false;
   async function sggInit() {
@@ -776,10 +778,10 @@ input[type=range]{width:180px;max-width:100%;accent-color:var(--adv-navy)}
         const all0 = fc.features.filter(f => f.properties.t !== 'quality_review'), fs = all0.filter(f => f.properties.a > 0).sort((a, b) => b.properties.a - a.properties.a);
         const tops = fs.slice(0, SG_TOP);
         host.innerHTML = `<div class="sg-head"><h3>${esc(Region.nameOf(s))} <span class="adv-note">후보 공간 ${all0.length.toLocaleString('ko-KR')}곳${W ? ` · 띠 제외 후 ${fs.length.toLocaleString('ko-KR')}곳` : ''} · 3MW 이상 ${fs.filter(f => f.properties.a >= BIG3).length}곳 ${W ? W10_TAG : ''}</span></h3>
-            <a class="btnx" href="regions.html?sgg=${s}" target="_blank" rel="noopener">우리 동네 TOP 10 전체 지도 열기 ↗</a></div>
+            <a class="btnx" href="${TOP10_URL}?sgg=${s}" target="_blank" rel="noopener">우리 동네 TOP 10 전체 지도 열기 ↗</a></div>
           <div class="sg-grid">${tops.map((f, i) => { const p = f.properties; return `<div class="sg-card"><div class="sg-map" id="sm${s}_${i}"></div>
             <div class="sg-cap"><b>${i + 1}위 · 약 ${fmt(p.mw, 1)} MW</b> · ${km2(p.a)} km² · 필지 ${p.n.toLocaleString('ko-KR')}개${p.drop > 0.005 ? ` <span class="tag w">${p.method === 'road' ? '도로' : '띠'} 제외 −${Math.round(p.drop * 100)}%</span>` : ''}
-            <div class="adv-note">${esc(p.emds.map(nameOf).slice(0, 2).join(' · '))} · 후보 공간 #${p.id} · <a href="regions.html?sgg=${s}&lab=${p.id}" target="_blank" rel="noopener">TOP 10에서 보기 ↗</a></div></div></div>`; }).join('')}</div>`;
+            <div class="adv-note">${esc(p.emds.map(nameOf).slice(0, 2).join(' · '))} · 후보 공간 #${p.id} · <a href="${TOP10_URL}?sgg=${s}&lab=${p.id}" target="_blank" rel="noopener">TOP 10에서 보기 ↗</a></div></div></div>`; }).join('')}</div>`;
         tops.forEach((f, i) => { const m = L.map(`sm${s}_${i}`, {scrollWheelZoom: false, preferCanvas: true, zoomControl: false});
           L.tileLayer(ESRI_SAT, {maxZoom: 18, attribution: '© Esri'}).addTo(m); L.control.zoom({position: 'bottomright'}).addTo(m);
           const ly = L.geoJSON(f.geometry, {style: () => ({color: '#0C356A', weight: 3, fillColor: COLOR(f.properties.a), fillOpacity: .35})}).addTo(m);
