@@ -49,8 +49,6 @@
       <a href="finder.html" data-i18n="nav-finder">후보지 찾기</a>
       <a href="scenarios.html" data-i18n="nav-scn">시나리오별 결과</a>
       <a class="active" aria-current="page" href="regions.html" data-i18n="nav-regions">우리 동네 TOP 10</a>
-      <a href="nonfarm.html" data-i18n="nav-nonfarm">비농지 검토</a>
-      <a href="nonfarm_cases.html" data-i18n="nav-cases">제외 사례</a>
       <a href="method.html" data-i18n="nav-method">근거와 방법</a>
     </nav>
     <div style="display:flex;gap:12px;align-items:center">
@@ -220,7 +218,7 @@
     const fc = render._units.fc;
     if (fc) { const dim = $('allTgl').checked ? st.minM2 : 0; const shown = $('allTgl').checked ? fc : {type: 'FeatureCollection', features: fc.features.filter(f => f.properties.a >= st.minM2)};
       lyrUnits.addLayer(V55.units.layer(shown, {pane: 'unitPane', dimBelow: dim, highlight: ids, showReview: st.showReview, onClick: p => { const r = rows.find(x => x.lab === p.id); if (r) pick(r); }}));
-      $('mapLegend').innerHTML = V55.legendHTML(V55.MW_BANDS, '후보 공간 규모(참고 MW)') + '<div class="v55-hint">면적·MW·도형은 위성사진 육안 검토로 비농지(도로·건물·하천 둔치·수면 등)로 판독한 필지를 뺀 값 — 검토 범위는 진흥구역 개방 조건 1MW 이상 후보 공간의 필지이며 같은 필지는 모든 조건에 똑같이 반영됨. <a href="nonfarm.html" style="color:var(--leaf-deep);font-weight:700">비농지 검토 결과 →</a></div>' + (run !== 'R2_promo' ? '<div class="v55-hint">이 조건의 도형은 등재 런의 시군 구간 폴리곤(15m 단순화)이며 시군 경계에 걸친 부분은 점선으로 표기 — 진흥구역 개방 조건에서는 경계로 자르지 않은 단위 도형을 씀.</div>' : '<div class="v55-hint">도형 = 21m 연접 단위(지적 폴리곤 합집합 · 2m 단순화) · 시군·읍면동 경계로 자르지 않음 · 점선 테두리 = 시군 경계 걸침.</div>' + V55.units.reviewToggleHTML(V55.units.reviewCount(fc), st.showReview));
+      $('mapLegend').innerHTML = V55.legendHTML(V55.MW_BANDS, '후보 공간 규모(참고 MW)') + '<div class="v55-hint">면적·MW·도형은 위성사진 육안 검토로 비농지(도로·건물·하천 둔치·수면 등)로 판독한 필지를 뺀 값 — 검토 범위는 진흥구역 개방 조건 1MW 이상 후보 공간의 필지이며 같은 필지는 모든 조건에 똑같이 반영됨. <a href="method.html#nonfarm" style="color:var(--leaf-deep);font-weight:700">비농지 검토 결과 →</a></div>' + (run !== 'R2_promo' ? '<div class="v55-hint">이 조건의 도형은 등재 런의 시군 구간 폴리곤(15m 단순화)이며 시군 경계에 걸친 부분은 점선으로 표기 — 진흥구역 개방 조건에서는 경계로 자르지 않은 단위 도형을 씀.</div>' : '<div class="v55-hint">도형 = 21m 연접 단위(지적 폴리곤 합집합 · 2m 단순화) · 시군·읍면동 경계로 자르지 않음 · 점선 테두리 = 시군 경계 걸침.</div>' + V55.units.reviewToggleHTML(V55.units.reviewCount(fc), st.showReview));
       const qt = document.getElementById('qrTgl'); if (qt) qt.onchange = e => { st.showReview = e.target.checked; render(false); };
       if (run === 'R2_promo') drawTable(V55.units.quality(fc)); }
     else $('mapLegend').innerHTML = '<div class="v55-hint">이 시군·조건의 후보 공간 도형 파일이 없음.</div>';

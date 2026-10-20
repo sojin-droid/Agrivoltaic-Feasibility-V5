@@ -3,8 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>PLANiT · 제외 사례 — 왜 이 땅을 뺐나</title>
-<meta name="description" content="비농지 제외 유형(도로·건물·산림·하천 둔치·섞임)별 위성사진 전후 비교와 예시 지역 — 지목상 후보 자리와 실제 설치 가능 공간">
+<title>비농지 제외 방법 자문</title>
+<meta name="robots" content="noindex,nofollow">
+<meta name="description" content="경기연구원 자문용 — 위성사진 육안 검토로 비농지를 뺀 방법과 사례, 오판 정정 사례, 더 나은 방법에 대한 질문">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=Inter:wght@400;500;700&family=JetBrains+Mono:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
@@ -14,6 +15,14 @@
 <script src="assets/v4.js?v=20261014b"></script>
 <script src="assets/region.js?v=20261013b"></script>
 <style>
+.adv-band{background:#fff6e0;border-bottom:1px solid #f0d9a0;color:#6b4a00;font-size:13px;padding:9px 0}
+.pbtn{margin-left:10px;padding:4px 10px;border:1px solid var(--navy);background:#fff;color:var(--navy);border-radius:6px;font-weight:700;cursor:pointer}
+ol.qs{font-size:15px;line-height:1.85;margin:0 0 0 20px;word-break:keep-all}ol.qs li{margin-bottom:10px}
+body.pres .adv-band{position:fixed;bottom:0;left:0;right:0;z-index:50}
+body.pres .slide{display:none}body.pres .slide.on{display:block;min-height:calc(100vh - 50px)}
+body.pres #types section>.wrap>.sec-head,body.pres #types .lede,body.pres #corr>.wrap>.sec-head,body.pres #corr .lede,body.pres #srcNote,body.pres footer{display:none}
+body.pres .cs.slide.on{max-width:1200px;margin:20px auto}
+body.pres .cs .cs-ab img{max-height:34vh;object-fit:cover}body.pres .cs figure.c img,body.pres #corr .cs img{max-height:72vh;width:auto;max-width:100%;margin:0 auto;object-fit:contain}
 .cs{border:1px solid var(--line);border-radius:14px;background:var(--card);padding:16px;margin:14px 0 22px}
 .cs-h{display:flex;flex-wrap:wrap;gap:8px 14px;align-items:baseline;margin-bottom:10px}
 .cs-h h3{margin:0;font-size:18px;color:var(--navy)}
@@ -35,47 +44,50 @@
 </head>
 <body>
 
-<div class="topbar">
+<div class="adv-band"><div class="wrap"><b>자문용 · 비공개 링크</b> — 경기연구원 방법 자문을 위한 화면입니다. 사이트 메뉴에는 없으며, 수치는 검토 진행 중인 값입니다. <button type="button" id="present" class="pbtn">발표 모드 ▶</button></div></div>
+
+<div class="page-hero slide">
   <div class="wrap">
-    <span data-i18n="tb-tag">Agrivoltaic · PLANiT Institute의 영농형 태양광 섹터</span>
-    <span><a href="https://planit.institute/" data-i18n="tb-link">← planit.institute 메인으로</a></span>
+    <p class="eyebrow">경기연구원 자문 · 비농지 제외 방법</p>
+    <h1>지목은 농지지만 실제로는 아닌 땅 — 어떻게 걸러야 할까요?</h1>
+    <p class="lede">영농형 태양광 후보 공간은 지적 장부의 지목(전·답·과수원)으로 고른 필지를 21m 안에서 묶은 것입니다. 그런데 장부에는 농지로 남아 있어도 실제로는 도로·제방·하천 둔치·건물·숲인 땅이 많았습니다.
+      그래서 <b>자동 제외</b>(도로 중심선·건물 외곽선·폭 10m 미만 띠)와 <b>위성사진 육안 검토</b>로 이런 땅을 뺐습니다. 1MW 이상 후보 공간 기준으로 전국 18,591 MW → 13,751 MW, 경기도는 1,946 MW → 1,097 MW로 줄었습니다.</p>
+    <p class="lede" style="margin-top:8px">이 화면은 그 방법을 보여 드리고, <b>더 나은 방법이 있는지</b> 여쭙기 위한 것입니다. 아래 질문 다섯 가지에 의견을 주시면 됩니다.</p>
+    <div style="margin-top:14px" id="pills"><a class="pill" href="#q">질문 5가지</a> <a class="pill" href="#types">유형별 제외 사례</a> <a class="pill" href="#corr">다시 보니 농지였던 곳</a></div>
   </div>
 </div>
-
-<header class="nav">
-  <div class="wrap">
-    <a class="brand" href="index.html"><img class="mark-img" src="assets/planit_logo.png" alt="PLANiT"><span class="sector" data-i18n="brand-sector">영농형 태양광</span></a>
-    <nav class="menu" id="menu">
-      <a href="index.html" data-i18n="nav-index">전국 모아보기</a>
-      <a href="finder.html" data-i18n="nav-finder">후보지 찾기</a>
-      <a href="scenarios.html" data-i18n="nav-scn">시나리오별 결과</a>
-      <a href="regions.html" data-i18n="nav-regions">우리 동네 TOP 10</a>
-      <a href="nonfarm.html" data-i18n="nav-nonfarm">비농지 검토</a>
-      <a class="active" aria-current="page" href="nonfarm_cases.html" data-i18n="nav-cases">제외 사례</a>
-      <a href="method.html" data-i18n="nav-method">근거와 방법</a>
-    </nav>
-    <div style="display:flex;gap:12px;align-items:center">
-      <div class="lang-toggle" role="group" aria-label="Language">
-        <button type="button" data-lang="ko">KO</button>
-        <button type="button" data-lang="en">EN</button>
-      </div>
-      <a class="nav-cta" href="local.html">우리 동네 분석하기</a>
-      <button class="hamburger" aria-label="메뉴 열기" onclick="document.getElementById('menu').classList.toggle('open')">☰</button>
-    </div>
-  </div>
-</header>
-
-<div class="page-hero">
-  <div class="wrap">
-    <p class="eyebrow">Review · 제외 사례</p>
-    <h1>제외 사례 — 왜 이 땅을 뺐나</h1>
-    <p class="lede">장부(지목)로는 논·밭이지만 위성사진으로 보면 농지가 아닌 땅이 후보 공간에 섞여 있었음. 유형별로 검토 전 후보 자리와 검토 후 남은 실제 설치 가능 공간을 같은 위성사진 위에서 비교함.
-      <b>지목 대비 실제 설치 가능 %</b> = 남은 설치 가능 면적 ÷ 지목상 후보 면적.</p>
-    <p style="font-size:13px;color:var(--muted);margin-top:8px"><span class="lg"></span>지목상 후보 자리 · <span class="lg d"></span>검토 전 자리 · <span class="lg b"></span>남은 실제 설치 가능 공간 · 사진을 누르면 크게 봄 · 전체 통계는 <a href="nonfarm.html" style="color:var(--leaf-deep);font-weight:700">비농지 검토 결과 →</a></p>
-    <div style="margin-top:14px" id="pills"></div>
-  </div>
-</div>
+<section id="q" class="slide"><div class="wrap">
+  <div class="sec-head"><div><p class="eyebrow">질문</p><h2>여쭙고 싶은 것</h2></div></div>
+  <ol class="qs">
+    <li><b>자동화 방법</b> — 육안 검토 대신(또는 앞 단계로) 쓸 수 있는 자료나 방법이 있을까요? 예: 환경부 토지피복지도, 위성영상 자동 분류, 하천구역·홍수관리구역 경계, 연속수치지형도의 도로·제방 면.</li>
+    <li><b>휴경지 판단</b> — 아래 "다시 보니 농지였던 곳"처럼 묵은 논·밭이 숲·공사장으로 잘못 판정되는 일이 있었습니다. 휴경지와 비농지를 가르는 기준이나 자료(예: 팜맵 갱신분, 농지 이용실태 조사)를 아시나요?</li>
+    <li><b>하천 둔치와 제방</b> — 지목이 농지인 하천 둔치 안 경작지는 설치 대상에서 빼고 있습니다. 경기도에서 이 판단에 쓰는 기준이 있나요?</li>
+    <li><b>비닐하우스·둠벙</b> — 비닐하우스는 하우스형 영농형, 둠벙은 수상태양광 후보로 따로 모으고 있습니다. 이렇게 나누는 것이 정책에서 의미가 있나요? 따로 볼 다른 유형이 있을까요?</li>
+    <li><b>검증</b> — 육안 판정의 정확도를 어떻게 확인하면 좋을까요? 예: 표본 현장 조사, 지자체 담당자 확인, 두 사람 교차 판정.</li>
+  </ol>
+  <p class="figcap">답은 메일이나 구글 폼으로 주시면 됩니다. 수치는 법인·국공유 농지 · 특별법 시행 후 농업진흥구역에 설치할 수 있게 되는 조건 기준이며 검토 진행 중입니다.</p>
+</div></section>
 <div id="types"></div>
+<section id="corr"><div class="wrap"><div class="sec-head slide-in"><div><p class="eyebrow">오판 정정</p><h2>다시 보니 농지였던 곳</h2></div></div>
+<p class="lede" style="max-width:none">처음 육안 검토에서 비농지로 뺐다가, 다시 보니 휴경지·묵은 논밭이었던 곳입니다. 질문 2의 배경입니다.</p><div class="cs slide"><div class="cs-h"><h3>경남 김해시</h3><span class="id">후보 #10657762 · 처음 판정 공사부지(건물)</span></div>
+      <div class="cs-num"><span class="pct lo">지목 대비 19%</span> → <span class="pct hi">노지 78% · 하우스형 14% · 수상 3%</span><span class="ref">휴경지·둠벙·비닐하우스가 섞인 간척지 — 영상 시점 차이로 공사장처럼 보였음</span></div>
+      <figure><a href="assets/nonfarm_cases/corrections/48250_10657762.jpg" target="_blank" rel="noopener"><img src="assets/nonfarm_cases/corrections/48250_10657762.jpg" loading="lazy" alt="정정안 — 경남 김해시"></a>
+      <figcaption>초록 = 노지 영농형으로 되살림 · 보라 = 비닐하우스(하우스형 후보로 따로 수집) · 하늘색 = 둠벙(수상태양광 후보로 따로 수집) · 주황 = 제외 유지 · 파랑 = 처음부터 남은 곳</figcaption></figure></div><div class="cs slide"><div class="cs-h"><h3>충남 서천군</h3><span class="id">후보 #4501952 · 처음 판정 일부 비농지</span></div>
+      <div class="cs-num"><span class="pct lo">지목 대비 64%</span> → <span class="pct hi">노지 100%</span><span class="ref">갈대·잡목이 자란 묵은 논</span></div>
+      <figure><a href="assets/nonfarm_cases/corrections/44770_4501952.jpg" target="_blank" rel="noopener"><img src="assets/nonfarm_cases/corrections/44770_4501952.jpg" loading="lazy" alt="정정안 — 충남 서천군"></a>
+      <figcaption>초록 = 노지 영농형으로 되살림 · 보라 = 비닐하우스(하우스형 후보로 따로 수집) · 하늘색 = 둠벙(수상태양광 후보로 따로 수집) · 주황 = 제외 유지 · 파랑 = 처음부터 남은 곳</figcaption></figure></div><div class="cs slide"><div class="cs-h"><h3>경북 영주시</h3><span class="id">후보 #8571886 · 처음 판정 산림</span></div>
+      <div class="cs-num"><span class="pct lo">지목 대비 1%</span> → <span class="pct hi">노지 100%</span><span class="ref">풀로 덮인 골짜기 논을 숲으로 봄</span></div>
+      <figure><a href="assets/nonfarm_cases/corrections/47210_8571886.jpg" target="_blank" rel="noopener"><img src="assets/nonfarm_cases/corrections/47210_8571886.jpg" loading="lazy" alt="정정안 — 경북 영주시"></a>
+      <figcaption>초록 = 노지 영농형으로 되살림 · 보라 = 비닐하우스(하우스형 후보로 따로 수집) · 하늘색 = 둠벙(수상태양광 후보로 따로 수집) · 주황 = 제외 유지 · 파랑 = 처음부터 남은 곳</figcaption></figure></div><div class="cs slide"><div class="cs-h"><h3>대전 유성구</h3><span class="id">후보 #650306 · 처음 판정 비농지(대부분)</span></div>
+      <div class="cs-num"><span class="pct lo">지목 대비 2%</span> → <span class="pct hi">노지 90%</span><span class="ref">비닐하우스 옆 묵은 밭 — 제방 띠만 비농지</span></div>
+      <figure><a href="assets/nonfarm_cases/corrections/30200_650306.jpg" target="_blank" rel="noopener"><img src="assets/nonfarm_cases/corrections/30200_650306.jpg" loading="lazy" alt="정정안 — 대전 유성구"></a>
+      <figcaption>초록 = 노지 영농형으로 되살림 · 보라 = 비닐하우스(하우스형 후보로 따로 수집) · 하늘색 = 둠벙(수상태양광 후보로 따로 수집) · 주황 = 제외 유지 · 파랑 = 처음부터 남은 곳</figcaption></figure></div><div class="cs slide"><div class="cs-h"><h3>대구 군위군</h3><span class="id">후보 #314670 · 처음 판정 농로 띠</span></div>
+      <div class="cs-num"><span class="pct lo">지목 대비 1%</span> → <span class="pct hi">노지 83% · 하우스형 17%</span><span class="ref">농로를 따라 이어진 밭·하우스</span></div>
+      <figure><a href="assets/nonfarm_cases/corrections/27720_314670.jpg" target="_blank" rel="noopener"><img src="assets/nonfarm_cases/corrections/27720_314670.jpg" loading="lazy" alt="정정안 — 대구 군위군"></a>
+      <figcaption>초록 = 노지 영농형으로 되살림 · 보라 = 비닐하우스(하우스형 후보로 따로 수집) · 하늘색 = 둠벙(수상태양광 후보로 따로 수집) · 주황 = 제외 유지 · 파랑 = 처음부터 남은 곳</figcaption></figure></div><div class="cs slide"><div class="cs-h"><h3>대구 군위군</h3><span class="id">후보 #315308 · 처음 판정 농로 띠</span></div>
+      <div class="cs-num"><span class="pct lo">지목 대비 2%</span> → <span class="pct hi">노지 99% · 하우스형 1%</span><span class="ref">같은 들판의 밭·과수원</span></div>
+      <figure><a href="assets/nonfarm_cases/corrections/27720_315308.jpg" target="_blank" rel="noopener"><img src="assets/nonfarm_cases/corrections/27720_315308.jpg" loading="lazy" alt="정정안 — 대구 군위군"></a>
+      <figcaption>초록 = 노지 영농형으로 되살림 · 보라 = 비닐하우스(하우스형 후보로 따로 수집) · 하늘색 = 둠벙(수상태양광 후보로 따로 수집) · 주황 = 제외 유지 · 파랑 = 처음부터 남은 곳</figcaption></figure></div></div></section>
 <section><div class="wrap"><div class="figcap" id="srcNote">—</div></div></section>
 <script>
 (async () => {
@@ -84,8 +96,8 @@
   const km2 = a => (a / 1e6).toLocaleString('ko-KR', {minimumFractionDigits: 3, maximumFractionDigits: 3});
   const f1 = v => Number(v).toLocaleString('ko-KR', {maximumFractionDigits: 1});
   const cls = v => v < 0.3 ? 'lo' : v < 0.9 ? 'mid' : 'hi';
-  document.getElementById('pills').innerHTML = d.types.map((t, i) => `<a class="pill" href="#t-${t.key}">${i + 1} ${esc(t.label)}</a>`).join(' ');
-  const card = c => `<div class="cs"><div class="cs-h"><h3>${esc(c.sgg_name)}</h3><span class="id">검토 당시 후보 공간 #${c.id_before} · 필지 ${c.before.n.toLocaleString('ko-KR')}개</span></div>
+  document.getElementById('pills').insertAdjacentHTML('beforeend', ' · ' + d.types.map(t => `<a class="pill" href="#t-${t.key}">${esc(t.label)}</a>`).join(' '));
+  const card = c => `<div class="cs slide"><div class="cs-h"><h3>${esc(c.sgg_name)}</h3><span class="id">검토 당시 후보 공간 #${c.id_before} · 필지 ${c.before.n.toLocaleString('ko-KR')}개</span></div>
     <div class="cs-num"><span class="big">${c.after.a <= 0 ? '설치 가능 공간 없음' : `${km2(c.after.a)} <small>km²</small> · 약 ${f1(c.after.mw)} <small>MW</small>`}</span>
       <span class="ref">(지목상 ${km2(c.before.a)} km² · ${f1(c.before.mw)} MW)</span><span class="pct ${cls(c.after.share)}">지목 대비 실제 설치 가능 ${Math.round(c.after.share * 100)}%</span></div>
     <div class="cs-ab"><figure><a href="${c.img.a}" target="_blank" rel="noopener"><img src="${c.img.a}" loading="lazy" alt="검토 전 — ${esc(c.sgg_name)}"></a><figcaption><b>검토 전</b> — 노란 선 = 지목상 후보 자리</figcaption></figure>
@@ -97,6 +109,14 @@
     <p class="lede" style="max-width:none">${esc(t.desc)} 예시 지역: ${cs.map(c => esc(c.sgg_name)).join(' · ')}</p>${cs.map(card).join('')}</div></section>`; }).join('');
   document.getElementById('srcNote').textContent = `${d.rule}. ${d.source}. 사례는 위성 육안 감사 판정과 최종(필지 단위) 결과가 같은 방향인 후보만 고름. 생성 ${d.generated}.`;
   if (window.V4 && V4.footer) V4.footer();
+  // 발표 모드 — 한 화면에 한 장(첫 화면 · 질문 · 사례마다 한 장), ←/→ 로 넘김, Esc 로 끝
+  let k = 0; const sl = () => [...document.querySelectorAll('.slide')];
+  const show = () => { sl().forEach((e, i) => e.classList.toggle('on', i === k)); window.scrollTo(0, 0); };
+  document.getElementById('present').onclick = () => { const on = document.body.classList.toggle('pres'); document.getElementById('present').textContent = on ? '발표 모드 끝내기 ✕' : '발표 모드 ▶'; k = 0; if (on) show(); };
+  document.addEventListener('keydown', e => { if (!document.body.classList.contains('pres')) return;
+    if (['ArrowRight', 'PageDown', ' '].includes(e.key)) { k = Math.min(k + 1, sl().length - 1); show(); e.preventDefault(); }
+    if (['ArrowLeft', 'PageUp'].includes(e.key)) { k = Math.max(k - 1, 0); show(); e.preventDefault(); }
+    if (e.key === 'Escape') document.getElementById('present').click(); });
 })();
 </script>
 <script src="site.js?v=20261013b"></script>

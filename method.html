@@ -42,6 +42,23 @@ table.mx th{font-size:12px;color:var(--muted);font-weight:700}
 table.mx td.l,table.mx th.l{text-align:left;white-space:normal}
 table.mx tr.hl td{background:var(--sky)}
 table.mx .ref{color:var(--muted)}
+
+/* 3-4 비농지 제외 결과(옛 nonfarm.html 통합 2026-10-20) */
+.dk{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:12px 0 18px}
+@media(max-width:760px){.dk{grid-template-columns:1fr}}
+.dk>div{background:var(--sky);border:1px solid var(--leaf);border-radius:12px;padding:13px;text-align:center}
+.dk b{display:block;font-family:var(--serif);font-size:clamp(24px,2.8vw,32px);font-weight:700;color:var(--navy);line-height:1.15;margin-bottom:3px}
+.dk b small{font-family:var(--mono);font-size:13px;color:var(--muted);font-weight:400}
+.dk>div>span{font-size:11.5px;color:var(--muted);line-height:1.5}
+.dk>div.hl{background:var(--card);border-color:var(--gold)}
+.tbl-wrap{overflow-x:auto}
+table.mx{width:100%;border-collapse:collapse;font-size:13px;font-variant-numeric:tabular-nums}
+table.mx th,table.mx td{padding:8px 10px;border-bottom:1px solid var(--line);text-align:right;white-space:nowrap}
+table.mx th{font-size:12px;color:var(--muted);font-weight:700}
+table.mx td.l,table.mx th.l{text-align:left;white-space:normal}
+table.mx tr.tot td{font-weight:700;background:var(--sky)}
+table.mx .cut{color:#B4442B}
+.bar-in{display:inline-block;height:8px;border-radius:4px;background:#B4442B;opacity:.7;vertical-align:middle;margin-left:6px}
 </style><style>
 .dk{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:12px 0 18px}
 @media(max-width:760px){.dk{grid-template-columns:1fr}}
@@ -74,8 +91,6 @@ body[data-sources=full] #story-steps .figbox,body[data-sources=full] .verdict,bo
       <a href="finder.html" data-i18n="nav-finder">후보지 찾기</a>
       <a href="scenarios.html" data-i18n="nav-scn">시나리오별 결과</a>
       <a href="regions.html" data-i18n="nav-regions">우리 동네 TOP 10</a>
-      <a href="nonfarm.html" data-i18n="nav-nonfarm">비농지 검토</a>
-      <a href="nonfarm_cases.html" data-i18n="nav-cases">제외 사례</a>
       <a class="active" aria-current="page" href="method.html" data-i18n="nav-method">근거와 방법</a>
     </nav>
     <div style="display:flex;gap:12px;align-items:center">
@@ -341,8 +356,31 @@ body[data-sources=full] #story-steps .figbox,body[data-sources=full] .verdict,bo
         <tr><td class="l"><b>Esri World Imagery</b></td><td class="l">위성사진 판독(주)</td><td class="l" id="nf-s4">—</td></tr>
         <tr><td class="l"><b>V-World 영상</b></td><td class="l">위성사진 판독(대조 · 계절·그림자로 Esri 가 안 보일 때)</td><td class="l" id="nf-s5">—</td></tr>
       </table></div>
-      <div class="figcap">표 2. 비농지 제외에 쓴 자료와 판·시점. 규모 구간·제외 사유·시도별 현황은 <a href="nonfarm.html" style="color:var(--leaf-deep);font-weight:700">비농지 검토 결과 →</a></div>
+      <div class="figcap">표 2. 비농지 제외에 쓴 자료와 판·시점.</div>
     </div>
+    <h3 class="art-h" style="font-size:17px;margin-top:26px">검토 결과 — 검토 전후 발전용량</h3>
+    <p style="font-size:14px;line-height:1.8;margin:4px 0 0">대상: 농업진흥구역에도 설치할 수 있는 조건(법인·국공유)의 1MW 이상 후보 공간 <b id="s-n">—</b>곳.</p>
+    <div class="dk">
+      <div><b><span id="s-mw0">—</span> <small>MW</small></b><span>검토 전 · 후보 공간 면적 기준</span></div>
+      <div><b><span id="s-mwa">—</span> <small>MW</small></b><span>자동 제외 후 · 도로·건물 외곽선과 폭 10m 미만 띠 제외</span></div>
+      <div class="hl"><b><span id="s-mwf">—</span> <small>MW</small></b><span>위성사진 육안 검토 후 · 최종</span></div>
+    </div>
+    <div class="dk">
+      <div><b><span id="s-cut">—</span> <small>%</small></b><span>검토 전 대비 감소 · <span id="s-cutmw">—</span> MW</span></div>
+      <div><b><span id="s-nr">—</span> <small>곳</small></b><span>육안 검토 완료 · 나머지 <span id="s-nu">—</span>곳은 자동 제외만</span></div>
+      <div><b><span id="s-n1">—</span> <small>곳</small></b><span>검토 후에도 1MW 이상 · 남은 땅 없음 <span id="s-gone">—</span>곳</span></div>
+    </div>
+    <div class="figcap" id="s-read"></div>
+    <div class="figbox" style="margin-top:14px"><div class="tbl-wrap"><table class="mx" id="t-bands"></table></div>
+      <div class="figcap">표 3. 규모 구간별 감소 — 구간은 검토 전 MW 기준. 3MW 이상은 전부 육안 검토했고, 1–3MW는 예상 감소량이 큰 후보부터 검토함.</div></div>
+    <div class="figbox" style="margin-top:14px">
+      <div class="tbl-wrap"><table class="mx" id="t-eye"></table></div>
+      <div class="figcap">표 4. 위성사진 육안 검토로 뺀 사유별 필지·면적·MW.</div>
+      <div class="tbl-wrap" style="margin-top:14px"><table class="mx" id="t-auto"></table></div>
+      <div class="figcap">표 5. 자동 제외 사유별. <span id="r-note"></span></div></div>
+    <details class="figbox" style="margin-top:14px"><summary style="cursor:pointer;font-weight:700;color:var(--navy)">표 6. 시도별 감소 (펼치기)</summary>
+      <div class="tbl-wrap" style="margin-top:8px"><table class="mx" id="t-sido"></table></div>
+      <div class="figcap">시도 = 후보 공간이 속한 대표 시군 기준. 시도 경계에 걸친 후보 공간은 한 시도에만 셈.</div></details>
   </div>
 </section>
 <section>
@@ -398,7 +436,8 @@ body[data-sources=full] #story-steps .figbox,body[data-sources=full] .verdict,bo
           주택은 건축물 용도가 등재된 건물만 세므로(용도 미등재 건물 제외<sup class="fnref">[30]</sup>), 지자체별 실제 기준이나 고시될 측정 방법과 다를 수 있다.</td></tr>
         <tr><td class="l"><b>비농지 검토 범위</b></td><td class="l">위성사진으로 확인한 필지는 진흥구역 개방 조건의 1MW 이상 후보 공간 필지뿐임.
           그 밖의 필지(농업보호구역에서 추가되는 필지·개인 소유 필지·1MW 미만 후보 공간의 필지)는 비농지가 섞여 있어도 값이 그대로임.
-          1–3MW 구간 일부는 자동 제외만 반영함. 위성사진 촬영 이후의 토지 이용 변화는 반영되지 않음.</td></tr>
+          <span id="l-unrev"></span> 위성사진 촬영 이후의 토지 이용 변화는 반영되지 않음.</td></tr>
+        <tr><td class="l"><b>비농지 사유별 MW</b></td><td class="l">한 후보 공간에서 뺀 MW를 사유별 제외 면적 비율로 나눈 값의 합. 필지 수는 사유별 기록 건수이며, 한 필지가 자동 제외와 육안 검토에 함께 기록되면 양쪽에 셈. 필지가 빠지면 21m 연접을 다시 계산하므로 한 후보 공간이 여러 곳으로 나뉠 수 있음 — 표 3–6 의 후보 공간 수는 검토 당시(제외 전) 기준.</td></tr>
         <tr><td class="l"><b>자료 시점</b></td><td class="l">자료마다 수집한 시점이 다르다(2026년 5–10월). 이후 바뀐 지적·용도지역은 반영되지 않았다.</td></tr>
       </table></div>
     </div>
@@ -601,6 +640,36 @@ body[data-sources=full] #story-steps .figbox,body[data-sources=full] .verdict,bo
   put('nf-s1', S.nodelink); put('nf-s2', S.osm); put('nf-s3', S.building);
   put('nf-s4', `후보 공간마다 촬영일이 다름(${ph.year_min}–${ph.year_max}년) — 검토한 ${V4.n(ph.n_reviewed)}곳 중 가장 최근 사진이 2023년 이후인 곳 ${ph.share_ge2023_pct}% · 2025년 이후 ${ph.share_ge2025_pct}% (Esri 촬영일 정보 기준)`);
   put('nf-s5', ph.vworld);
+})();
+</script>
+<script>
+(async () => {
+  const d = await V4.data('nonfarm_v1');
+  const n = V4.n, f1 = x => x.toLocaleString('ko-KR', {minimumFractionDigits: 1, maximumFractionDigits: 1}),
+        mw = x => n(Math.round(x)), pct = (a, b) => a ? f1(100 * (a - b) / a) : '—';
+  const T = d.total, R = d.reviewed, U = d.unreviewed;
+  const set = (id, v) => { const el = document.getElementById(id); if (el) el.textContent = v; };
+  set('s-n', n(T.n)); set('s-mw0', mw(T.mw0)); set('s-mwa', mw(T.mw_auto)); set('s-mwf', mw(T.mw_final));
+  set('s-cut', pct(T.mw0, T.mw_final)); set('s-cutmw', mw(T.mw0 - T.mw_final));
+  set('s-nr', n(R.n)); set('s-nu', n(U.n)); set('s-n1', n(d.n_ge1_after)); set('s-gone', n(d.n_gone_all));
+  document.getElementById('s-read').innerHTML =
+    `면적 기준 ${V4.km2(T.km2_0, 1)} km² → ${V4.km2(T.km2_final, 1)} km². 자동 제외로 ${mw(T.mw0 - T.mw_auto)} MW, 육안 검토로 ${mw(T.mw_auto - T.mw_final)} MW를 뺌.` +
+    ` 육안 검토한 ${n(R.n)}곳의 판정: 대부분 농지 ${n(R.verdict.ok || 0)}곳 · 일부 비농지 ${n(R.verdict.partial || 0)}곳 · 대부분 비농지 ${n(R.verdict.mostly_nonfarm || 0)}곳.`;
+  const head = '<tr><th class="l">{k}</th><th>후보 공간</th><th>육안 검토</th><th>검토 전 MW</th><th>자동 제외 후 MW</th><th>검토 후 MW</th><th>감소</th></tr>';
+  const row = (lab, r, cls = '') => `<tr class="${cls}"><td class="l">${lab}</td><td>${n(r.n)}</td><td>${n(r.n_reviewed)}</td><td>${mw(r.mw0)}</td><td>${mw(r.mw_auto)}</td>` +
+    `<td><b>${mw(r.mw_final)}</b></td><td class="cut">−${pct(r.mw0, r.mw_final)}%<span class="bar-in" style="width:${Math.round(0.6 * 100 * (r.mw0 - r.mw_final) / r.mw0)}px"></span></td></tr>`;
+  document.getElementById('t-bands').innerHTML = head.replace('{k}', '규모 구간') + d.bands.map(b => row(b.label, b)).join('') + row('합계', T, 'tot');
+  document.getElementById('t-sido').innerHTML = head.replace('{k}', '시도') + d.sido.map(s => row(s.sido, s)).join('') + row('합계', T, 'tot');
+  const rt = (rows, tot) => '<tr><th class="l">사유</th><th>필지(건)</th><th>면적 km²</th><th>MW</th><th>비중</th></tr>' +
+    rows.map(r => `<tr><td class="l">${r.reason}</td><td>${n(r.parcels)}</td><td>${V4.km2(r.km2, 2)}</td><td>${mw(r.mw)}</td><td>${f1(100 * r.mw / tot)}%</td></tr>`).join('') +
+    `<tr class="tot"><td class="l">합계</td><td>${n(rows.reduce((s, r) => s + r.parcels, 0))}</td><td>${V4.km2(rows.reduce((s, r) => s + r.km2, 0), 2)}</td><td>${mw(tot)}</td><td>100%</td></tr>`;
+  const se = d.reasons_eye.reduce((s, r) => s + r.mw, 0), sa = d.reasons_auto.reduce((s, r) => s + r.mw, 0);
+  document.getElementById('t-eye').innerHTML = rt(d.reasons_eye, se);
+  document.getElementById('t-auto').innerHTML = rt(d.reasons_auto, sa);
+  document.getElementById('r-note').innerHTML = `뺀 필지 기록 ${n(d.parcels_removed.auto + d.parcels_removed.eye)}건 · 서로 다른 필지 ${n(d.parcels_removed.unique)}개.` +
+    ' 임야화 = 지목은 농지이나 사진에서 나무가 자라 숲이 된 필지. 하천 둔치 = 제방 바깥 하천 구역 안의 땅.';
+  { const el = document.getElementById('l-unrev'); if (el) el.innerHTML = `1–3MW 구간 후보 공간 ${n(U.n)}곳(검토 전 ${mw(U.mw0)} MW)은 육안 검토 전이며 자동 제외만 반영함(${mw(U.mw_auto)} MW).` +
+    ' 검토한 후보에서 육안 검토로 더 빠진 비율을 보면 실제 남은 땅은 이보다 적을 수 있음.'; }
 })();
 </script>
 <script src="site.js?v=20261013b"></script>

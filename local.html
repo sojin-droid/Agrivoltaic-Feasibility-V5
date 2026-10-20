@@ -43,8 +43,6 @@
       <a href="finder.html" data-i18n="nav-finder">후보지 찾기</a>
       <a href="scenarios.html" data-i18n="nav-scn">시나리오별 결과</a>
       <a href="regions.html" data-i18n="nav-regions">우리 동네 TOP 10</a>
-      <a href="nonfarm.html" data-i18n="nav-nonfarm">비농지 검토</a>
-      <a href="nonfarm_cases.html" data-i18n="nav-cases">제외 사례</a>
       <a href="method.html" data-i18n="nav-method">근거와 방법</a>
     </nav>
     <div style="display:flex;gap:12px;align-items:center">
@@ -273,7 +271,7 @@
     $('exCnt').textContent = EX ? `(${V55.existing.kindLabel(EX, st.sgg)})` : '';
     const coords = V55.top10.markers(lyrMk, sel, {onPick: r => pick(r)});
     $('mapLegend').innerHTML = V55.legendHTML(V55.MW_BANDS, '후보 공간 규모(참고 MW)');
-    put('rMapCap', `면적·MW·도형은 위성사진 육안 검토로 비농지(도로·건물·하천 둔치·수면 등)로 판독한 필지를 뺀 값 — 검토 범위는 진흥구역 개방 조건 1MW 이상 후보 공간의 필지이며 같은 필지는 모든 조건에 똑같이 반영됨. <a href="nonfarm.html" style="color:var(--leaf-deep);font-weight:700">비농지 검토 결과 →</a> · 채움 = 후보 공간 규모 · 굵은 남색 테두리 = 표에 오른 후보 · 흐린 회색 = 최소 표시 규모 미만(숨기지 않음) · 흰 점선 = 읍·면·동 경계(배경${st.emd ? ' · 붉은 점선 = 선택 읍면동' : ''}) · ${rn === 'R2_promo' ? '도형 = 21m 연접 단위(지적 합집합 · 2m 단순화 · 경계로 자르지 않음)' : '도형 = 등재 런의 시군 구간 폴리곤(15m 단순화) · 점선 = 시군 경계 걸침'}${rn === 'R2_promo' && V55.units.reviewCount(fc) ? ` · 기하 품질 검토 도형 ${V55.n(V55.units.reviewCount(fc))}개(도형 면적 ≠ 장부 면적)는 지도에서 빼고 표에 상태를 적음` : ''} · 위성 배경 © Esri<sup class="fnref">[19]</sup>.`);
+    put('rMapCap', `면적·MW·도형은 위성사진 육안 검토로 비농지(도로·건물·하천 둔치·수면 등)로 판독한 필지를 뺀 값 — 검토 범위는 진흥구역 개방 조건 1MW 이상 후보 공간의 필지이며 같은 필지는 모든 조건에 똑같이 반영됨. <a href="method.html#nonfarm" style="color:var(--leaf-deep);font-weight:700">비농지 검토 결과 →</a> · 채움 = 후보 공간 규모 · 굵은 남색 테두리 = 표에 오른 후보 · 흐린 회색 = 최소 표시 규모 미만(숨기지 않음) · 흰 점선 = 읍·면·동 경계(배경${st.emd ? ' · 붉은 점선 = 선택 읍면동' : ''}) · ${rn === 'R2_promo' ? '도형 = 21m 연접 단위(지적 합집합 · 2m 단순화 · 경계로 자르지 않음)' : '도형 = 등재 런의 시군 구간 폴리곤(15m 단순화) · 점선 = 시군 경계 걸침'}${rn === 'R2_promo' && V55.units.reviewCount(fc) ? ` · 기하 품질 검토 도형 ${V55.n(V55.units.reviewCount(fc))}개(도형 면적 ≠ 장부 면적)는 지도에서 빼고 표에 상태를 적음` : ''} · 위성 배경 © Esri<sup class="fnref">[19]</sup>.`);
     setTimeout(() => { map.invalidateSize(); if (st.lab && rows.find(r => r.lab === st.lab)) pick(rows.find(r => r.lab === st.lab)); else if (bounds && bounds.isValid()) map.fitBounds(bounds, {padding: [20, 20], maxZoom: 13}); else if (coords.length) map.fitBounds(coords, {padding: [30, 30], maxZoom: 12}); else map.setView([36.3, 127.0], 8); }, 200);
     // 방법·기준
     put('rMethod', `<b>판정</b> — 전국 지적 원장 전수에서 지목(전·답·과수원) → 구조·입지 제외 → 경사 15 초과 제외(단위 기록 정리 전) → 용도지역 3종(개발제한·보전관리·보전녹지) 제외 → 농업진흥지역 구분의 다섯 검사를 필지 단위로 적용했습니다. 소유는 법인·국공유(02·04·05·06)만 세며 개인 소유 농지는 대조군으로 병기합니다.<br>

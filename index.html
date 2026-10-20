@@ -42,8 +42,6 @@
       <a href="finder.html" data-i18n="nav-finder">후보지 찾기</a>
       <a href="scenarios.html" data-i18n="nav-scn">시나리오별 결과</a>
       <a href="regions.html" data-i18n="nav-regions">우리 동네 TOP 10</a>
-      <a href="nonfarm.html" data-i18n="nav-nonfarm">비농지 검토</a>
-      <a href="nonfarm_cases.html" data-i18n="nav-cases">제외 사례</a>
       <a href="method.html" data-i18n="nav-method">근거와 방법</a>
     </nav>
     <div style="display:flex;gap:12px;align-items:center">
@@ -208,7 +206,7 @@
       `<b>비농지 제외 반영</b> — 위 카드와 모든 화면의 면적·MW는 위성사진 육안 검토로 도로·건물·하천 둔치·수면 등 비농지로 판독한 필지를 뺀 값임. ` +
       `검토 범위: 진흥구역 개방 조건(법인·국공유)의 1MW 이상 후보 공간 ${V4.n(t.n)}곳 — 이 범위에서 ${mw(t.mw0)} MW → ${mw(t.mw_final)} MW(−${(100 * (t.mw0 - t.mw_final) / t.mw0).toFixed(1)}%). ` +
       `같은 필지는 모든 조건에 똑같이 반영되며, 검토 범위 밖의 필지(농업보호구역 추가분·개인 소유·1MW 미만 후보 공간)는 값 그대로임. ` +
-      `<a href="nonfarm.html" style="color:var(--leaf-deep);font-weight:700">비농지 검토 결과 →</a>`; }).catch(() => {});
+      `<a href="method.html#nonfarm" style="color:var(--leaf-deep);font-weight:700">비농지 검토 결과 →</a>`; }).catch(() => {});
   V55.methodButton(document.getElementById('cta'), 'index');
   document.getElementById('existing-note').textContent = V55.EXISTING_NOTE;
   V4.footer();
