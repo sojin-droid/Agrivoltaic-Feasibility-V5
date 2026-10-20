@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PLANiT · 제외 사례 — 왜 이 땅을 뺐나</title>
+<meta name="description" content="비농지 제외 유형(도로·건물·산림·하천 둔치·섞임)별 위성사진 전후 비교와 예시 지역 — 지목상 후보 자리와 실제 설치 가능 공간">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=Inter:wght@400;500;700&family=JetBrains+Mono:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/vendor/pretendard/pretendardvariable-dynamic-subset.css">
+<link rel="stylesheet" href="style.css?v=20261013b">
+<link rel="stylesheet" href="assets/v5.css?v=20261013b">
+<script src="assets/v4.js?v=20261014b"></script>
+<script src="assets/region.js?v=20261013b"></script>
+<style>
+.cs{border:1px solid var(--line);border-radius:14px;background:var(--card);padding:16px;margin:14px 0 22px}
+.cs-h{display:flex;flex-wrap:wrap;gap:8px 14px;align-items:baseline;margin-bottom:10px}
+.cs-h h3{margin:0;font-size:18px;color:var(--navy)}
+.cs-h .id{font-family:var(--mono);font-size:12px;color:var(--muted)}
+.cs-num{display:flex;flex-wrap:wrap;gap:6px 18px;align-items:baseline;margin:2px 0 12px}
+.cs-num .big{font-family:var(--serif);font-size:26px;font-weight:700;color:var(--navy)}
+.cs-num .big small{font-family:var(--mono);font-size:13px;color:var(--muted);font-weight:400}
+.cs-num .ref{font-size:13px;color:var(--muted)}
+.pct{display:inline-block;padding:3px 10px;border-radius:12px;font-weight:700;font-size:13px;color:#fff}
+.pct.lo{background:#a33a3a}.pct.mid{background:#b7791f}.pct.hi{background:#2e7d4f}
+.cs-ab{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+@media(max-width:760px){.cs-ab{grid-template-columns:1fr}}
+.cs figure{margin:0}.cs img{width:100%;height:auto;display:block;border-radius:8px;border:1px solid var(--line);cursor:zoom-in}
+.cs figcaption{font-size:12.5px;color:var(--muted);margin-top:4px;line-height:1.6}
+.cs .c{margin-top:10px}
+.lg{display:inline-block;width:22px;height:0;border-top:3px solid #FFE14D;vertical-align:middle;margin:0 4px}
+.lg.d{border-top-style:dashed}.lg.b{height:10px;border:1.5px solid #2a6fe0;background:rgba(61,139,255,.5);border-radius:2px}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="wrap">
+    <span data-i18n="tb-tag">Agrivoltaic · PLANiT Institute의 영농형 태양광 섹터</span>
+    <span><a href="https://planit.institute/" data-i18n="tb-link">← planit.institute 메인으로</a></span>
+  </div>
+</div>
+
+<header class="nav">
+  <div class="wrap">
+    <a class="brand" href="index.html"><img class="mark-img" src="assets/planit_logo.png" alt="PLANiT"><span class="sector" data-i18n="brand-sector">영농형 태양광</span></a>
+    <nav class="menu" id="menu">
+      <a href="index.html" data-i18n="nav-index">전국 모아보기</a>
+      <a href="finder.html" data-i18n="nav-finder">후보지 찾기</a>
+      <a href="scenarios.html" data-i18n="nav-scn">시나리오별 결과</a>
+      <a href="regions.html" data-i18n="nav-regions">우리 동네 TOP 10</a>
+      <a href="nonfarm.html" data-i18n="nav-nonfarm">비농지 검토</a>
+      <a class="active" aria-current="page" href="nonfarm_cases.html" data-i18n="nav-cases">제외 사례</a>
+      <a href="method.html" data-i18n="nav-method">근거와 방법</a>
+    </nav>
+    <div style="display:flex;gap:12px;align-items:center">
+      <div class="lang-toggle" role="group" aria-label="Language">
+        <button type="button" data-lang="ko">KO</button>
+        <button type="button" data-lang="en">EN</button>
+      </div>
+      <a class="nav-cta" href="local.html">우리 동네 분석하기</a>
+      <button class="hamburger" aria-label="메뉴 열기" onclick="document.getElementById('menu').classList.toggle('open')">☰</button>
+    </div>
+  </div>
+</header>
+
+<div class="page-hero">
+  <div class="wrap">
+    <p class="eyebrow">Review · 제외 사례</p>
+    <h1>제외 사례 — 왜 이 땅을 뺐나</h1>
+    <p class="lede">장부(지목)로는 논·밭이지만 위성사진으로 보면 농지가 아닌 땅이 후보 공간에 섞여 있었음. 유형별로 검토 전 후보 자리와 검토 후 남은 실제 설치 가능 공간을 같은 위성사진 위에서 비교함.
+      <b>지목 대비 실제 설치 가능 %</b> = 남은 설치 가능 면적 ÷ 지목상 후보 면적.</p>
+    <p style="font-size:13px;color:var(--muted);margin-top:8px"><span class="lg"></span>지목상 후보 자리 · <span class="lg d"></span>검토 전 자리 · <span class="lg b"></span>남은 실제 설치 가능 공간 · 사진을 누르면 크게 봄 · 전체 통계는 <a href="nonfarm.html" style="color:var(--leaf-deep);font-weight:700">비농지 검토 결과 →</a></p>
+    <div style="margin-top:14px" id="pills"></div>
+  </div>
+</div>
+<div id="types"></div>
+<section><div class="wrap"><div class="figcap" id="srcNote">—</div></div></section>
+<script>
+(async () => {
+  const d = await fetch('data_v4/nonfarm_cases_v1.json').then(r => r.ok ? r.json() : null); if (!d) return;
+  const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;'}[c]));
+  const km2 = a => (a / 1e6).toLocaleString('ko-KR', {minimumFractionDigits: 3, maximumFractionDigits: 3});
+  const f1 = v => Number(v).toLocaleString('ko-KR', {maximumFractionDigits: 1});
+  const cls = v => v < 0.3 ? 'lo' : v < 0.9 ? 'mid' : 'hi';
+  document.getElementById('pills').innerHTML = d.types.map((t, i) => `<a class="pill" href="#t-${t.key}">${i + 1} ${esc(t.label)}</a>`).join(' ');
+  const card = c => `<div class="cs"><div class="cs-h"><h3>${esc(c.sgg_name)}</h3><span class="id">검토 당시 후보 공간 #${c.id_before} · 필지 ${c.before.n.toLocaleString('ko-KR')}개</span></div>
+    <div class="cs-num"><span class="big">${c.after.a <= 0 ? '설치 가능 공간 없음' : `${km2(c.after.a)} <small>km²</small> · 약 ${f1(c.after.mw)} <small>MW</small>`}</span>
+      <span class="ref">(지목상 ${km2(c.before.a)} km² · ${f1(c.before.mw)} MW)</span><span class="pct ${cls(c.after.share)}">지목 대비 실제 설치 가능 ${Math.round(c.after.share * 100)}%</span></div>
+    <div class="cs-ab"><figure><a href="${c.img.a}" target="_blank" rel="noopener"><img src="${c.img.a}" loading="lazy" alt="검토 전 — ${esc(c.sgg_name)}"></a><figcaption><b>검토 전</b> — 노란 선 = 지목상 후보 자리</figcaption></figure>
+      <figure><a href="${c.img.b}" target="_blank" rel="noopener"><img src="${c.img.b}" loading="lazy" alt="검토 후 — ${esc(c.sgg_name)}"></a><figcaption><b>검토 후</b> — 파란 면 = 남은 실제 설치 가능 공간 · 노란 점선 = 검토 전 자리</figcaption></figure></div>
+    <figure class="c"><a href="${c.img.c}" target="_blank" rel="noopener"><img src="${c.img.c}" loading="lazy" alt="확대 — ${esc(c.sgg_name)}"></a><figcaption><b>확대</b> — 가장 크게 빠진 곳(확대 수준 ${c.detail.zoom}) · 노란 점선 안에서 파란 면이 없는 곳이 뺀 땅
+      ${c.after.ids.length ? ` · <a href="regions.html?sgg=${c.sgg}&lab=${c.after.ids[0]}" style="color:var(--leaf-deep);font-weight:700">우리 동네 TOP 10 지도에서 보기 →</a>` : ''}</figcaption></figure></div>`;
+  document.getElementById('types').innerHTML = d.types.map((t, i) => { const cs = d.cases.filter(c => c.type === t.key); return `<section id="t-${t.key}"><div class="wrap">
+    <div class="sec-head"><div><p class="eyebrow">${i + 1} · 제외 유형</p><h2>${esc(t.label)}</h2></div></div>
+    <p class="lede" style="max-width:none">${esc(t.desc)} 예시 지역: ${cs.map(c => esc(c.sgg_name)).join(' · ')}</p>${cs.map(card).join('')}</div></section>`; }).join('');
+  document.getElementById('srcNote').textContent = `${d.rule}. ${d.source}. 사례는 위성 육안 감사 판정과 최종(필지 단위) 결과가 같은 방향인 후보만 고름. 생성 ${d.generated}.`;
+  if (window.V4 && V4.footer) V4.footer();
+})();
+</script>
+<script src="site.js?v=20261013b"></script>
+</body>
+</html>

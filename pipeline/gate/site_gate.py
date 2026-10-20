@@ -12,7 +12,7 @@ from paths import SITE, OUT, CLUSTERS, ROOT, MODEL, LR, CAD   # 경로는 한 �
 
 # 전 탭 스캔 — 새 탭 추가 시 반드시 여기에도 추가 (2026-08-26: map·insight·candidates 누락 적발)
 PAGES = ['index.html', 'finder.html', 'scenarios.html', 'regions.html', 'local.html', 'method.html', 'advisory.html', 'cluster_advisory.html',
-         'nonfarm.html', 'evidence.html', 'map.html', 'candidates.html', 'proximity.html', 'decree.html', 'insight.html', 'about.html']
+         'nonfarm.html', 'nonfarm_cases.html', 'evidence.html', 'map.html', 'candidates.html', 'proximity.html', 'decree.html', 'insight.html', 'about.html']
 DATA = os.path.join(SITE, 'data_v4')
 
 # ① 무효·구세대 수치 (원칙 3) — 발견 즉시 FAIL. 새 무효값 확정 시 여기에 추가.
@@ -171,7 +171,7 @@ if os.path.exists(nfp):
 _sm = os.path.getmtime(sfp) if os.path.exists(sfp) else None
 if _sm:
     _ref = set()
-    for _pg in ['index.html', 'finder.html', 'scenarios.html', 'regions.html', 'local.html', 'method.html', 'nonfarm.html', 'decree.html']:
+    for _pg in ['index.html', 'finder.html', 'scenarios.html', 'regions.html', 'local.html', 'method.html', 'nonfarm.html', 'nonfarm_cases.html', 'decree.html']:
         _tx = open(os.path.join(SITE, _pg), encoding='utf-8').read()
         _ref |= {m + '.json' for m in re.findall(r"V4\.data\('([a-z0-9_]+)'\)", _tx)}
         _ref |= set(re.findall(r"data_v4/([a-z0-9_]+\.json(?:\.gz)?)", _tx))
