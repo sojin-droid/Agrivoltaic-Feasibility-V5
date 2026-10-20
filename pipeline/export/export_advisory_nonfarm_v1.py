@@ -35,7 +35,7 @@ EXAMPLES = [
     ('for', '51780', 13055015, 'FOR', '철원 — 산지 계곡', 'assets/advisory/nonfarm/51780_13055015.jpg'),
     ('wat', '41670', 2170137, 'WAT', '여주 — 남한강 강변 둔치·도로 띠', 'assets/advisory/nonfarm/41670_2170137.jpg'),
     ('wat', '27710', 247488, 'WAT', '대구 달성 — 낙동강 강둑 띠', 'assets/advisory/nonfarm/27710_247488.jpg'),
-    ('mix', '41590', 1938290, 'MIX', '화성 장안 — 논 + 축사·비닐하우스 섞임', 'assets/advisory/nonfarm/41590_1938290.jpg'),
+    ('mix', '41590', 1938290, 'MIX', '화성 장안 — 논 + 축사 섞임(축사 필지만 제외)', 'assets/advisory/nonfarm/41590_1938290.jpg'),
     ('ok', '44180', 3681887, 'OK', '보령 웅천 — 간척 논', 'assets/advisory/nonfarm/44180_3681887.jpg'),
     ('ok', '41590', 1955553, 'OK', '화성 정남 — 논', 'assets/advisory/nonfarm/41590_1955553.jpg'),
 ]
