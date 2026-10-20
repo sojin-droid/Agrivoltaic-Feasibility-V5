@@ -80,14 +80,20 @@ n_rec = int((mem.pnu_geom != mem.pnu).sum())
 mem['sgg_geom'] = mem.pnu_geom.str[:5]
 print(f"\n도형 — 회수 대응표 적용 {n_rec:,}필지", flush=True)
 cl = pd.read_parquet(os.path.join(dst, 'clusters.parquet')).set_index('lab')
+# 비농지 제외(ADR-0060) — 일부만 남은 필지는 남은 도형으로 dissolve(v9_02 와 같은 자료 · 원장 pnu 키). 전부 제외된 필지는 이미 구성 필지가 아니다.
+PKEEP = gpd.read_file(os.path.join(LR, 'nonfarm_keep_v1', 'parcel_keep_v1.gpkg'), layer='partial').set_index('pnu').geometry
 parts, miss_pnu, t0 = [], 0, time.time()
 for s, sub in mem.groupby('sgg_geom'):
     fp = os.path.join(CAD, f'{s}.gpkg')
     if not os.path.exists(fp):
         miss_pnu += len(sub); continue
     g = (pyogrio.read_dataframe(fp, columns=['pnu']).rename(columns={'pnu': 'pnu_geom'})
-         .merge(sub[['pnu_geom', 'lab']], on='pnu_geom', how='inner'))
+         .merge(sub[['pnu', 'pnu_geom', 'lab']], on='pnu_geom', how='inner'))
     miss_pnu += len(sub) - len(g)
+    _pk = g.pnu.isin(PKEEP.index)
+    if _pk.any():
+        g.loc[_pk, 'geometry'] = PKEEP.reindex(g.loc[_pk, 'pnu']).values
+    g = g.drop(columns=['pnu'])
     if len(g):
         parts.append(g.dissolve(by='lab')[['geometry']].reset_index())
 P = pd.concat(parts, ignore_index=True)
