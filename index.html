@@ -13,7 +13,7 @@
 <link rel="stylesheet" href="assets/v5.css?v=20261013b">
 <link rel="stylesheet" href="assets/v55.css?v=20261013b">
 <script src="assets/v4.js?v=20261014b"></script>
-<script src="assets/v55.js?v=20261014b"></script>
+<script src="assets/v55.js?v=20261019a"></script>
 <style>
 .card.local{border-color:var(--gold);background:linear-gradient(180deg,#FFF9E8,#fff)}
 .hero-two{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:28px;align-items:start}
@@ -42,6 +42,7 @@
       <a href="finder.html" data-i18n="nav-finder">후보지 찾기</a>
       <a href="scenarios.html" data-i18n="nav-scn">시나리오별 결과</a>
       <a href="regions.html" data-i18n="nav-regions">우리 동네 TOP 10</a>
+      <a href="nonfarm.html" data-i18n="nav-nonfarm">비농지 검토</a>
       <a href="method.html" data-i18n="nav-method">근거와 방법</a>
     </nav>
     <div style="display:flex;gap:12px;align-items:center">
@@ -96,6 +97,9 @@
             <div class="d"><b>시행 전 <span id="c3b">—</span>곳 → <span id="c3a">—</span>곳</b> · 면적 <b><span id="c3k">—</span> km² (+<span id="c3kd">—</span> km²)</b><span class="before">합 약 <span id="c3mw">—</span> MW · 1곳 = <span id="c3th">—</span>㎡(≈50MW 등가) 이상의 후보 공간</span></div>
           </div>
         </div>
+
+        <!-- 비농지 검토(ADR-0060) — 카드 값은 이미 비농지 제외 후. 검토 규모 요약은 data_v4/nonfarm_v1.json -->
+        <div class="callout-v4" id="nf-note" style="margin-top:14px;word-break:keep-all"></div>
 
         <div class="v55-flow" aria-label="분석 흐름">
           <b>필지 판정</b>
@@ -197,6 +201,13 @@
     `법인·국공유 소유 농지만 21m 이내로 이어 붙였을 때의 값(합 약 ${V4.n(R[CELL_RUN[AFTER]].ge50_mw)} MW).` +
     ((N.cp_big || []).length ? ` 참고 — 다른 조건(농업진흥구역에도 설치 가능 · 농업보호구역 제외)에서 50MW 이상 후보 공간은 ${V4.n(N.cp_big.length)}곳이며 그중 ${V4.n(cpBigRec)}곳은 간척 지구에 있음(후보지 찾기 지도가 이 조건을 씀).` : '') +
     ` 후보 공간은 21m 연접 공간 분석 단위이며 최종 사업 단위·특구 정의가 아님(자문 후 확정).`;
+  // 비농지 제외(ADR-0060) — 카드 값은 이미 반영된 정본. 아래 문장은 검토 범위·규모만 알린다(검토 고정본 nonfarm_v1.json)
+  V4.data('nonfarm_v1').then(nf => { const t = nf.total, mw = x => V4.n(Math.round(x));
+    document.getElementById('nf-note').innerHTML =
+      `<b>비농지 제외 반영</b> — 위 카드와 모든 화면의 면적·MW는 위성사진 육안 검토로 도로·건물·하천 둔치·수면 등 비농지로 판독한 필지를 뺀 값임. ` +
+      `검토 범위: 진흥구역 개방 조건(법인·국공유)의 1MW 이상 후보 공간 ${V4.n(t.n)}곳 — 이 범위에서 ${mw(t.mw0)} MW → ${mw(t.mw_final)} MW(−${(100 * (t.mw0 - t.mw_final) / t.mw0).toFixed(1)}%). ` +
+      `같은 필지는 모든 조건에 똑같이 반영되며, 검토 범위 밖의 필지(농업보호구역 추가분·개인 소유·1MW 미만 후보 공간)는 값 그대로임. ` +
+      `<a href="nonfarm.html" style="color:var(--leaf-deep);font-weight:700">비농지 검토 결과 →</a>`; }).catch(() => {});
   V55.methodButton(document.getElementById('cta'), 'index');
   document.getElementById('existing-note').textContent = V55.EXISTING_NOTE;
   V4.footer();

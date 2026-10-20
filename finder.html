@@ -15,7 +15,7 @@
 <link rel="stylesheet" href="assets/vendor/leaflet/leaflet.css">
 <script src="assets/vendor/leaflet/leaflet.js"></script>
 <script src="assets/v4.js?v=20261014b"></script>
-<script src="assets/v55.js?v=20261014b"></script>
+<script src="assets/v55.js?v=20261019a"></script>
 <style>
 #proxmap{height:76vh;min-height:560px;border:1px solid var(--line);border-radius:12px;background:var(--map-bg)}
 .panel h3{font-family:var(--serif);color:var(--navy);font-size:15px;margin-bottom:8px}
@@ -88,6 +88,7 @@ input[type=range]{accent-color:var(--navy)}
       <a class="active" aria-current="page" href="finder.html" data-i18n="nav-finder">후보지 찾기</a>
       <a href="scenarios.html" data-i18n="nav-scn">시나리오별 결과</a>
       <a href="regions.html" data-i18n="nav-regions">우리 동네 TOP 10</a>
+      <a href="nonfarm.html" data-i18n="nav-nonfarm">비농지 검토</a>
       <a href="method.html" data-i18n="nav-method">근거와 방법</a>
     </nav>
     <div style="display:flex;gap:12px;align-items:center">
@@ -110,7 +111,8 @@ input[type=range]{accent-color:var(--navy)}
     <p class="lede-s"><b>약 50MW 이상의 영농형 태양광을 설치할 수 있는 대규모 후보 공간 <span id="p-n">—</span>곳의 위치</b><br>
       법인·국공유 소유 농지 기준 · <b>특별법 시행 후(농업진흥구역에도 설치 가능)</b> — 재생에너지지구에 농업진흥구역이 포함되는 경우. 전국 모아보기 카드는 농업진흥구역·농업보호구역에 모두 설치할 수 있는 조건이라 값이 다를 수 있음.<br>
       <span style="color:var(--muted)">후보 공간 = 21m 이내로 이어진 필지를 하나로 묶은 공간 분석 단위. 계통 여유·산업단지는 비교용 배경 레이어이며 이 <span id="p-n2">—</span>곳의 선별에는 쓰지 않음.
-      후보 공간은 <b>현재 비어 있는 땅이라는 뜻이 아님</b> — 기존 시설 설치 여부를 판별하지 않았고, 확보한 기존 시설 자료는 전국 전수가 아님. 계통 여유는 참고지표이며 실제 접속 가능 용량이 아님.</span></p>
+      후보 공간은 <b>현재 비어 있는 땅이라는 뜻이 아님</b> — 기존 시설 설치 여부를 판별하지 않았고, 확보한 기존 시설 자료는 전국 전수가 아님. 계통 여유는 참고지표이며 실제 접속 가능 용량이 아님.</span><br>
+      <span style="color:var(--muted)">면적·MW·지도 폴리곤은 위성사진 육안 검토로 비농지(도로·건물·하천 둔치·수면 등)로 판독한 필지를 뺀 값 — <a href="nonfarm.html" style="color:var(--leaf-deep);font-weight:700">비농지 검토 결과 →</a></span></p>
     <div id="p-method"></div>
 
     <div class="grp"><div class="gt">후보 공간 <span id="candCnt" style="font-weight:400;color:var(--muted)"></span>

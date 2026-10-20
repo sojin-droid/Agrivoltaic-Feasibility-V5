@@ -74,6 +74,7 @@ body[data-sources=full] #story-steps .figbox,body[data-sources=full] .verdict,bo
       <a href="finder.html" data-i18n="nav-finder">후보지 찾기</a>
       <a href="scenarios.html" data-i18n="nav-scn">시나리오별 결과</a>
       <a href="regions.html" data-i18n="nav-regions">우리 동네 TOP 10</a>
+      <a href="nonfarm.html" data-i18n="nav-nonfarm">비농지 검토</a>
       <a class="active" aria-current="page" href="method.html" data-i18n="nav-method">근거와 방법</a>
     </nav>
     <div style="display:flex;gap:12px;align-items:center">
@@ -238,8 +239,9 @@ body[data-sources=full] #story-steps .figbox,body[data-sources=full] .verdict,bo
           <text x="87" y="136" font-weight="700" fill="#16233A">농업진흥지역·간척지</text>
           <text x="87" y="156" fill="#6C757D">경계·원장 표시</text>
           <rect x="212" y="62" width="160" height="72" rx="9" fill="#EAF3FB" stroke="#7FA8C9"/>
-          <text x="292" y="88" font-weight="700" fill="#16233A">필지 판정 5조건</text>
-          <text x="292" y="108" fill="#6C757D">지목·구조·경사·용도지역</text>
+          <text x="292" y="84" font-weight="700" fill="#16233A">필지 판정 6조건</text>
+          <text x="292" y="103" fill="#6C757D">지목·구조·경사·용도지역</text>
+          <text x="292" y="121" fill="#6C757D">비농지 제외(위성사진)</text>
           <rect x="422" y="62" width="170" height="72" rx="9" fill="#EAF3FB" stroke="#7FA8C9"/>
           <text x="507" y="84" font-weight="700" fill="#16233A">시나리오 4가지</text>
           <text x="507" y="103" fill="#6C757D">× 이격거리 적용 여부</text>
@@ -293,8 +295,10 @@ body[data-sources=full] #story-steps .figbox,body[data-sources=full] .verdict,bo
           (<a href="#datarules" style="color:var(--leaf-deep)">아래 데이터 처리 규칙</a>)</td><td class="l">용도지역 원장<sup class="fnref">[1]</sup> · 배제 근거 법문<sup class="fnref">[6]</sup></td></tr>
         <tr><td class="l"><b>농업진흥지역</b></td><td class="l">특별법 시행 전은 농업진흥지역이 아닌 농지만. 농업보호구역·농업진흥구역에 설치할 수 있게 되는 경우는
           따로 계산해 네 가지 시나리오로 비교함(<a href="scenarios.html" style="color:var(--leaf-deep)">시나리오별 결과 탭</a>)</td><td class="l">진흥지역 경계<sup class="fnref">[5]</sup>(필지 대표점 교차)</td></tr>
+        <tr><td class="l"><b>비농지 제외</b></td><td class="l">지목은 농지이나 실제로는 도로·건물·하천 둔치·수면·철도·공사장 등인 필지(또는 그 부분) 제외.
+          필지 전체가 비농지이면 판정에서 빼고, 일부만 걸치면 남은 면적만 셈(<a href="#nonfarm" style="color:var(--leaf-deep)">아래 3-4</a>)</td><td class="l">도로 중심선(표준노드링크·OpenStreetMap) · 건물 외곽선(GIS건물통합정보) · 위성사진(Esri·V-World) 판독 대장</td></tr>
       </table></div>
-      <div class="figcap">표 1. 필지별 판정 조건 — 다섯 검사와 각 검사의 근거 자료.<br>판정은 필지마다 같은 규칙을 적용하므로,
+      <div class="figcap">표 1. 필지별 판정 조건 — 여섯 검사와 각 검사의 근거 자료.<br>판정은 필지마다 같은 규칙을 적용하므로,
       지번(PNU)만 있으면 어느 필지든 같은 결과를 다시 확인할 수 있음 — <a href="local.html" style="color:var(--leaf-deep)">우리 동네 탭의 필지 검색</a><sup class="fnref">[12]</sup>.</div>
     </div>
 
@@ -309,17 +313,40 @@ body[data-sources=full] #story-steps .figbox,body[data-sources=full] .verdict,bo
         필지 사이 간격 분포(4-최근접 거리)는 2–4m에서 최고점을 이룬 뒤 단조 감소하며 특정 거리에서 꺾이지 않음. k-거리 곡선의 무릎은
         k 선택에 따라 이동하므로(k=4에서 20.0–21.6m) 범위를 확인하는 보조 근거로만 씀.<br>
         15m·21m·25m 어느 값으로 해도 시나리오 간 크기 순서는 바뀌지 않고, 농업진흥구역에 설치 가능한 경우의
-        총면적(1,038.85 km²)도 같음<sup class="fnref">[12]</sup> — 후보 공간 수와 대규모 후보 공간 수만 묶는 간격에 따라 달라짐.
+        총면적(930.99 km²)도 같음<sup class="fnref">[12]</sup> — 후보 공간 수와 대규모 후보 공간 수만 묶는 간격에 따라 달라짐.
         근거 표(간격 지물 구성·지물 폭 실측)·k-거리 곡선·민감도 표는
         <a href="https://github.com/sojin-droid/Agrivoltaic-Feasibility-V5/blob/main/docs/METHOD_ADVISORY.md" target="_blank" rel="noopener">방법론 자문 자료(docs/METHOD_ADVISORY.md)</a> §3에 수록.
         최종 클러스터(사업 단위) 정의는 자문 전 미확정이며 이 자료가 자문 의뢰 자료임.</p>
       </details>
     </div>
+
+    <div class="sec-head" style="margin-top:30px" id="nonfarm"><div><p class="eyebrow">3-4 · 비농지 제외</p><h2>비농지 제외 — 위성사진 검토</h2></div></div>
+    <div class="figbox">
+      <ul style="font-size:14px;line-height:1.85;margin:0 0 0 18px;word-break:keep-all">
+        <li>지적 원장의 지목만으로는 농지로 남는 도로 부지·하천 둔치·공장 마당 등을 걸러 내지 못함. 이를 위해 1MW 이상 후보 공간의 필지를 위성사진으로 확인해 비농지를 뺌.</li>
+        <li><b>대상</b> — 농업진흥구역에도 설치할 수 있는 조건(법인·국공유)의 1MW 이상 후보 공간 <span id="nf-u">—</span>곳의 구성 필지 <span id="nf-p">—</span>개.</li>
+        <li><b>자동 제외</b> — 도로 중심선에 도로 폭(차로 수 × 3.5m + 3m, OpenStreetMap 은 폭 태그 또는 도로 등급별 기본 폭)을 적용한 면과 건물 외곽선(1m 여유)을 필지에서 뺌.
+          남은 땅 가운데 폭 10m 미만 띠와 200㎡ 미만 조각도 뺌.</li>
+        <li><b>위성사진 육안 검토</b> — 필지 경계와 번호를 겹친 두 출처의 위성사진을 대조해 비농지 필지를 사유와 함께 필지 단위로 기록함. 두 사진의 촬영 시점이 다르면 더 최근 사진을 따름.
+          V-World 영상이 군사시설 등을 가린 곳은 Esri 사진으로 판단함. 판단이 갈리는 필지(하천 둔치·휴경지·비닐하우스 등)는 사진 묶음으로 따로 모아 <span id="nf-r">—</span>차례 확인해 확정함.</li>
+        <li><b>결과</b> — 필지 <span id="nf-d">—</span>개는 전부 비농지로 판독해 제외하고, <span id="nf-pt">—</span>개는 비농지 부분만 뺌. 줄어든 장부 면적은 <span id="nf-km">—</span> km²임.</li>
+        <li><b>반영 방식</b> — 제외 결과는 필지 단위로 넣었으므로 같은 필지라면 어느 시나리오에서든 같은 값이 적용됨. 필지가 빠진 뒤 21m 연접을 다시 계산하므로 한 후보 공간이 여러 곳으로 나뉠 수 있음.</li>
+      </ul>
+      <div style="overflow-x:auto;margin-top:14px"><table class="v4">
+        <tr><th style="text-align:left">자료</th><th style="text-align:left">용도</th><th style="text-align:left">판·시점</th></tr>
+        <tr><td class="l"><b>표준노드링크</b></td><td class="l">도로 중심선·차로 수 → 도로 부지</td><td class="l" id="nf-s1">—</td></tr>
+        <tr><td class="l"><b>OpenStreetMap 도로</b></td><td class="l">표준노드링크에 없는 농로·마을 길 → 도로 부지</td><td class="l" id="nf-s2">—</td></tr>
+        <tr><td class="l"><b>GIS건물통합정보</b></td><td class="l">건물 외곽선 → 건물 부지</td><td class="l" id="nf-s3">—</td></tr>
+        <tr><td class="l"><b>Esri World Imagery</b></td><td class="l">위성사진 판독(주)</td><td class="l" id="nf-s4">—</td></tr>
+        <tr><td class="l"><b>V-World 영상</b></td><td class="l">위성사진 판독(대조 · 계절·그림자로 Esri 가 안 보일 때)</td><td class="l" id="nf-s5">—</td></tr>
+      </table></div>
+      <div class="figcap">표 2. 비농지 제외에 쓴 자료와 판·시점. 규모 구간·제외 사유·시도별 현황은 <a href="nonfarm.html" style="color:var(--leaf-deep);font-weight:700">비농지 검토 결과 →</a></div>
+    </div>
   </div>
 </section>
 <section>
   <div class="wrap">
-    <div class="sec-head"><div><p class="eyebrow">3-4 · 데이터 처리 규칙</p><h2>확인할 수 없는 정보를 다루는 방법</h2></div></div>
+    <div class="sec-head"><div><p class="eyebrow">3-5 · 데이터 처리 규칙</p><h2>확인할 수 없는 정보를 다루는 방법</h2></div></div>
     <div class="figbox" style="margin-top:18px" id="datarules">
       <div style="overflow-x:auto"><table class="v4">
         <tr><th style="text-align:left">항목</th><th style="text-align:left">처리</th></tr>
@@ -344,13 +371,13 @@ body[data-sources=full] #story-steps .figbox,body[data-sources=full] .verdict,bo
 </section>
 <section class="alt">
   <div class="wrap">
-    <div class="sec-head"><div><p class="eyebrow">3-5 · 단위·환산 가정</p><h2>단위·환산 가정</h2></div></div>
+    <div class="sec-head"><div><p class="eyebrow">3-6 · 단위·환산 가정</p><h2>단위·환산 가정</h2></div></div>
     <div class="figbox reveal"><div style="font-size:14.5px;word-break:keep-all;line-height:1.8" id="unit-note"></div></div>
   </div>
 </section>
 <section id="caveats">
   <div class="wrap">
-    <div class="sec-head"><div><p class="eyebrow">3-6 · 한계</p><h2>이 결과를 읽을 때 알아야 할 점</h2></div></div>
+    <div class="sec-head"><div><p class="eyebrow">3-7 · 한계</p><h2>이 결과를 읽을 때 알아야 할 점</h2></div></div>
     <div class="figbox reveal">
       <div style="overflow-x:auto"><table class="v4">
         <tr><th style="text-align:left">항목</th><th style="text-align:left">내용</th></tr>
@@ -368,6 +395,9 @@ body[data-sources=full] #story-steps .figbox,body[data-sources=full] .verdict,bo
         <tr><td class="l"><b>간척지</b></td><td class="l">한국농어촌공사 원장에 등재된 간척지만 포함했다. 민간이 매립한 땅은 원장에 없어 빠졌다<sup class="fnref">[3]</sup>.</td></tr>
         <tr><td class="l"><b>이격거리</b></td><td class="l">이격거리 적용 값은 주거 200m 상한<sup class="fnref">[11]</sup>을 전국에 똑같이 적용한 것이다(주거용 건물(건축물 용도가 주택) 5동 이상이 외벽 간 50m 이내로 모인 곳(5호 군집)에서 200m 안의 농지를 제외).
           주택은 건축물 용도가 등재된 건물만 세므로(용도 미등재 건물 제외<sup class="fnref">[30]</sup>), 지자체별 실제 기준이나 고시될 측정 방법과 다를 수 있다.</td></tr>
+        <tr><td class="l"><b>비농지 검토 범위</b></td><td class="l">위성사진으로 확인한 필지는 진흥구역 개방 조건의 1MW 이상 후보 공간 필지뿐임.
+          그 밖의 필지(농업보호구역에서 추가되는 필지·개인 소유 필지·1MW 미만 후보 공간의 필지)는 비농지가 섞여 있어도 값이 그대로임.
+          1–3MW 구간 일부는 자동 제외만 반영함. 위성사진 촬영 이후의 토지 이용 변화는 반영되지 않음.</td></tr>
         <tr><td class="l"><b>자료 시점</b></td><td class="l">자료마다 수집한 시점이 다르다(2026년 5–10월). 이후 바뀐 지적·용도지역은 반영되지 않았다.</td></tr>
       </table></div>
     </div>
@@ -558,6 +588,18 @@ body[data-sources=full] #story-steps .figbox,body[data-sources=full] .verdict,bo
   put('t-datasrc', '<tr><th style="text-align:left">번호</th><th style="text-align:left">자료 (발행처 · 자료명 · 판)</th><th style="text-align:left">이 분석에서의 용도</th></tr>' +
     DATA_IDS.filter(n => FOOTNOTES[n]).map(n => `<tr><td class="l"><a href="#fn-${n}" style="color:var(--leaf-deep);font-weight:700">[${n}]</a></td>
       <td class="l" style="white-space:normal">${strip(FOOTNOTES[n])}</td><td class="l" style="white-space:normal;font-size:12.5px">${use(FOOTNOTES[n])}</td></tr>`).join(''));
+})();
+</script>
+<script>
+(async () => {   // 3-4 비농지 제외 — 값은 data_v4/nonfarm_v1.json (검토 고정본 · ADR-0060 필지 단위 표)
+  const d = await V4.data('nonfarm_v1'), k = d.keep, ph = d.photo_dates, S = d.sources;
+  if (!k || !ph || !S) return;   // 옛 판 파일(캐시)이면 빈칸 유지
+  const put = (id, v) => { const el = document.getElementById(id); if (el) el.textContent = v; };
+  put('nf-u', V4.n(d.total.n)); put('nf-p', V4.n(k.n_parcel)); put('nf-r', d.user_rounds);
+  put('nf-d', V4.n(k.n_drop)); put('nf-pt', V4.n(k.n_partial)); put('nf-km', V4.km2(k.a_ledger_km2 - k.a_keep_km2, 2));
+  put('nf-s1', S.nodelink); put('nf-s2', S.osm); put('nf-s3', S.building);
+  put('nf-s4', `후보 공간마다 촬영일이 다름(${ph.year_min}–${ph.year_max}년) — 검토한 ${V4.n(ph.n_reviewed)}곳 중 가장 최근 사진이 2023년 이후인 곳 ${ph.share_ge2023_pct}% · 2025년 이후 ${ph.share_ge2025_pct}% (Esri 촬영일 정보 기준)`);
+  put('nf-s5', ph.vworld);
 })();
 </script>
 <script src="site.js?v=20261013b"></script>

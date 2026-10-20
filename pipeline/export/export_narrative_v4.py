@@ -18,8 +18,8 @@ con = Q.db()
 # ── 게이트: 대조군 R0 = 상수 · 정본 R0 = 매트릭스 정본과 일치 ──
 a = con.execute("""SELECT n_eligible, eligible_area_km2
                    FROM scenario_runs WHERE name='R0_current@all'""").fetchone()
-assert a and a[0] == Q.R0_ALL_N and abs(a[1] - Q.R0_ALL_M2/1e6) < 0.01, \
-    f"[FAIL] R0 대조군 ≠ 상수(ADR-0040): {a}"
+assert a and a[0] == Q.R0_ALL_NF_N and abs(a[1] - Q.R0_ALL_NF_M2/1e6) < 0.01, \
+    f"[FAIL] R0 대조군 ≠ 상수(ADR-0040 · 비농지 제외 후 ADR-0060): {a}"
 b = con.execute("""SELECT n_eligible, eligible_area_km2
                    FROM scenario_runs WHERE name='R0_current'""").fetchone()
 _mx = [r for r in Q.matrix_data(universe='pubcorp')

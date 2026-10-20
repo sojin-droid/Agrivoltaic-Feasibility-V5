@@ -11,6 +11,7 @@ ROOT = os.environ.get("AGRI_ROOT", r"C:\Users\user\새 폴더")   # 자료 뿌�
 MODEL = os.path.join(ROOT, "model")            # 정본 모델 — 값의 출처
 LR = os.path.join(ROOT, "Ledger_Rebuild")      # 원장·런 산출
 CAD = os.path.join(ROOT, "Cadastre_All")       # 지적 폴리곤
+NF = os.path.join(LR, "experiments", "nonfarm_review")   # 1MW 이상 후보 공간 비농지 제외(자동 + 위성사진 육안 검토) — freeze_v1.py 산출만 읽는다
 
 
 def _root(start):

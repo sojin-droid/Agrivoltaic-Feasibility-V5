@@ -1,5 +1,5 @@
 {
- "generated": "2026-09-07 21:18",
+ "generated": "2026-10-20 02:44",
  "data_generation": "ADR-0040+0041 · adr0041_25 · 분석 기준 필지 = 법인·국공유(02·04·05·06) · θ 없음(연접 구획 전량) · 계통 결합 분리",
  "grid": {
   "name": "adr0041_25",
@@ -47,8 +47,14 @@
   },
   {
    "tbl": "ind_firms",
-   "built": "2026-08-31",
-   "source": "한국산업단지공단 전국등록공장현황(2024-12-31, data.go.kr 15105482) — 산단 입주 84,111사 중 79,424사를 경계 단지명과 대조(별칭·유형 힌트), 기업명 검색 표기용(판정 불사용). 원시 sources/ind_complex/firms",
+   "built": "2026-09-23",
+   "source": "한국산업단지공단 전국등록공장현황(2024-12-31, data.go.kr 15105482) — 산단 입주 84,111사 중 59,231사를 경계 단지명과 대조(별칭·유형 힌트), 기업명 검색 표기용(판정 불사용). 원시 sources/ind_complex/firms",
+   "layer": "L0"
+  },
+  {
+   "tbl": "kepco_demand_emd_probe_v1",
+   "built": "2026-09-21",
+   "source": "A1 읍면동 파라미터 지원 시험 13건 (당진 44/270 · 2025-12) — 판정 not_in_source. powerUsage/industryType.do 가이드 원문 요청 인자는 year·month·metroCd·cityCd·bizCd·apiKey·returnType 뿐이고 읍면동 인자가 없다(원문 사본 _probe/_guide_industryType.html). 시험한 인자 8종(addrLidong·emdCd·dongCd·addrCd·admCd·legalDongCd·lglDngCd·addrDong) 전부 응답 본문 sha256 이 기준과 동일 = 인자 무시. 양성 대조 bizCd=C 는 19행→1행으로 반응. 판정 범위는 시험한 인자명에 한한다(문서에 없는 다른 인자명 가능성은 unknown). 일 호출 한도 정보는 헤더·문서에 없음(unknown). PR-0049 WP-A 안 A1 표본 · v8_03_demand_emd_probe",
    "layer": "L0"
   },
   {
@@ -58,9 +64,21 @@
    "layer": "L0"
   },
   {
+   "tbl": "kepco_dong_v5",
+   "built": "2026-09-21",
+   "source": "KEPCO 분산전원 연계정보 v5 스냅숏 동별 상태 5,066 — C:\\Users\\user\\새 폴더\\Ledger_Rebuild\\kepco_raw_v5_20260921. 수집 2026-09-21T00:07:51~2026-09-21T00:54:05(main) · pass2 2026-09-21T11:23:40 · pass2_errors_only 2026-09-21T11:26:26 · 최종 ok 4,480 · notfound 586 · fail 0 · fetched_at 2026-09-21T00:07:52~2026-09-21T11:26:26(하루 안). err='NOTFOUND' = KEPCO 주소사전 미등재(not_in_source) — '계통 없음' 아님. fallback_kind='시도 폴백' 60동은 도 전체에서 같은 이름을 모은 응답이라 읍면동 단위가 아니다(not_normalized). v4(2026-08-19) 대조: ok 4480 vs 4477 · v5 신규 4 · v5 유실 1(41590262 남양읍 — v4 는 ri_sweep 산출, v5 는 그 스윕 미실행 = 절차 차이). ri_sweep 실적 표기 주의: manifest 는 n_target 590·resolved 1 이지만 **실제로 리 단위 질의를 받은 동은 19개**이고 (ri_results 보유 파일 19 · 수신 1 = 남양읍) 나머지 571동은 법정리가 없어 질의 없이 건너뛰어졌다. '590 중 1 해소' 로 인용하지 말 것 — 시험된 분모는 19다(결론 '리 재질의 기대치 낮음' 은 유지). PR-0049 WP-C 안 C3 · ADR-0050 · v4_01_kepco_snapshot --out",
+   "layer": "L0"
+  },
+  {
    "tbl": "kepco_record_v3",
    "built": "2026-08-19",
    "source": "kepco_raw_v4/*.json 5,066파일 — 2026-08-19 14:30~15:27 단일 시점 스냅샷(PR-0017). fetched_at·요청원문·폴백이력 내장. v4_01 수집 + v3_05 --raw kepco_raw_v4",
+   "layer": "L0"
+  },
+  {
+   "tbl": "kepco_record_v5",
+   "built": "2026-09-21",
+   "source": "v5 스냅숏 레코드 단위 27,526행 — 열 구성은 kepco_record_v3 와 동일(v4↔v5 비교용). dl_key=subst_cd:dl_cd · mtr_key=subst_cd:mtr_no. 단위 kW. ⚠️ 집계 축을 먼저 말한다 — 단독 'Σ DL vol3' 표기 금지. ① 전국 총량은 **DL 축**(dl_key 로 전국 1회): 'DL 여유 하한 합' = Σ_dl MIN(vol3) = 63,715.886 MW(v5) · 64,020.362 MW(v4 = kepco_dl_v3 Σvol_min) · 'DL 여유 상한 합' = Σ_dl MAX(vol3) = 63,724.886 MW(v5) · 64,029.362 MW(v4). 차 9.000 MW = vol3 가 레코드마다 갈리는 DL 9개(v4·v5 동일). **규범은 하한(MIN)** — grid_dl_physical_v1·lo_equal·T-C1b·원고와 같은 기준. ② EMD 내부는 **EMD 축**((emd8, dl_key) 중복 제거 · 같은 키 반복 시 최댓값 1개 · 행 단순합 금지). 이 값을 전국으로 더하면 여러 EMD 를 지나는 선로가 중복 계상된다(v5 191,948.954 · v4 192,875.001 MW) — 전국 계통 여유가 아니며 읍면동 배분의 분모로만 쓴다. v4 대비 변화는 층별로만 인용한다: 혼합 -0.21% · 동일조건 -0.62%(4,239동) · DL단위 -0.63% · DL집합변동 5.87%(127동). 단독 인용 금지. ④ 127동은 증가 집단이 아니다 — 증가 91 · 감소 36 이 섞였고 5.87 % 는 추가 쌍 +1,178,967 · 제거 쌍 -440,603 · 유지 쌍 값변동 -46,838 kW 의 순합 691,526 kW 다. 추가 (EMD,선로) 쌍 100 는 **전부** v4 우주(7,491)에 없던 dl_key 이고 고유 키는 37 개다(한 키가 최대 11개 EMD 에 부착 · 평균 2.7 · 최다 2445:17). 그중 2키(2200:01·5180:12)는 07-27 스냅숏에 있다 08-19 에서 빠진 뒤 재등장한 것으로 추가 쌍 12 · +73,656 kW(6.2 %)를 차지하고, 나머지 35키는 세 구 스냅숏 어디에도 없다. 신설 배전선로인지 주소사전 신규 등재인지는 원문으로 판별 불가(**unknown** · 제6조) — 어느 쪽으로도 단정 금지. 매핑 이동은 추가 쪽 0 · 제거 쪽 4 쌍뿐이다(제거 43 중 39 는 완전 소멸). 이 분해는 **INTERNAL ONLY — 계통 증설로 읽지 말 것**: ① 변동으로 선별된 선택 조건부 부분집합 · ② 신규 37키 성격 unknown · ③ 증가의 6.2 % 는 스냅숏 불안정. (2026-09-21 철회: 종전 '매핑 이동 63 · 주소사전·매핑 변동 혼재' 서술은 단위 혼동이었다 — 폐기.) 선로 수 차이는 우주를 밝힌다: v4 only 31(전체 7,491 기준) vs 16(양쪽 수신 4,476동 제한 기준). 층별 비교는 **EMD 축 · MAX** 기준이고, 전국 인용은 위 ① 의 DL 축 하한/상한 표기를 쓴다. v8_04_demand_kepco_v5_verify",
    "layer": "L0"
   },
   {
@@ -76,6 +94,18 @@
    "layer": "L1"
   },
   {
+   "tbl": "demand_sgg_month_v2",
+   "built": "2026-09-21",
+   "source": "시군·월 수요 원장 9,072행(252 시군 × 36개월) — demand_sgg_v2 의 근거. src ∈ {'cache_v1': 8135, 'refetch_v2': 936, 'not_in_source': 1}. metro·city = 그 달에 채택한 KEPCO 코드(시/구 분절 때문에 시군마다 월별로 다를 수 있다). total_kwh·manuf_kwh(strip 규칙)·manuf_kwh_z81rule(정확일치 규칙) 은 월 원값(kWh). 연평균 = 36개월합/3/1e6. 같은 (metro,city,month) 가 여러 sgg 에 쓰인 조합 432 — 시군 간 합산 금지. 제조업 라벨 영향 범위 = manuf_kwh <> manuf_kwh_z81rule 인 (시군,월) 2,016 = 252 비승계 시군 × 8개월 = 2016 (월 2023-01·2023-02·2023-03·2023-05·2023-06·2023-07·2023-08·2023-09) · 해당 건 z81 규칙값 전부 0. 이와 구분할 것: v1 실제 과소분 1,643 (시군,월) — z81 이 시군당 코드 1개를 고정 채택한 기준이라 그 시점 캐시가 없던 승계 21곳을 포함하지 않는다. 참고 단위는 (코드,월): v1 캐시 1,555 · v1+v2 합집합 1,664 · 뒤공백 응답 행 1,760 — '시군·월' 로 읽지 말 것. 폐기값 1,739(조회처 누락 산식 오류). v8_02_demand_refetch_missing",
+   "layer": "L1"
+  },
+  {
+   "tbl": "demand_sgg_v2",
+   "built": "2026-09-21",
+   "source": "시군 연평균 전력수요 v2 — KEPCO powerUsage/industryType 2023.01~2025.12 36개월합/3/1e6 GWh. 기준: z81 캐시(2026-09-05) + v8_02 결손 재질의(2026-09-20T23:57~09-21T00:03) + ADR-0051 L5 승계 재수집(2026-09-21T17). 월별 채택 = 후보 코드 중 총사용량 최대 1개(합산 금지). coverage_flag ∈ {'full': 251, 'partial': 1}. ⚠️ 분모는 전 행 고정 3(=36개월/12)이다 — partial 행은 관측월이 36 미만이라 과소다: 36110 관측 35개월 · 고정분모 3226.07 vs 관측월 기준 3318.24 (2.78 % 과소). 대안값은 total_gwh_year_observed_denom 열에 병기했다(산식 자체는 v1 비교 가능성 때문에 바꾸지 않았다). 승계(seeded) 21곳은 ADR-0051 L5 로 36개월 원문을 새로 수집해 **관측으로 승격**했다(현재 seeded 0). 총수요는 seed 와 전 시군 완전 일치(최대 차 0.0 %) — 21c 승계 계보가 원문으로 확인됐다. 제조업은 seed 가 strip 규칙과 같은 곳 12 · z81 정확일치(과소) 규칙과 같은 곳 9 로 갈리며 측정된 차는 28,217.8 GWh/년이다. 승계값은 덮어쓰지 않고 total_gwh_year_seed · manuf_gwh_year_seed 에 병기했다. 재질의 기여는 두 갈래다: ① A3 결손 보충 — 51 시군 대상이었으나 새 응답이 실제로 채운 곳은 17 시군 180개월이고 나머지는 코드 사슬 확장 + 월별 최댓값 채택으로 기존 v1 캐시에서 해소됐다. ② ADR-0051 L5 승계 재수집 — 21 시군 756개월 전량이 새 응답이다. 두 수를 같은 문장에 쓰지 말 것. ⚠️ 행 합산 금지 — 구가 있는 시는 여러 sgg 행이 같은 시 전체 값을 공유한다(codes_used 복제 12조합 · 35행 · 최대 5 sgg 공용 · (코드,월) 432조합 · 단순 합 599,961.7 vs 중복 제거 450,634.8 GWh/년). manuf_gwh_year = biz.strip()=='제조업', manuf_gwh_year_z81rule = z81 정확일치. 당진 44270 = 6362.56 은 seed 와 오늘 관측이 일치한 값이다(total_gwh_year_seed 에 계보 보존). 산식 앵커는 46820(694.13/163.38)·47130(3698.23/1986.80). 결손 잔존 = 세종 36110 2023-11 not_in_source. 원천: PR-0049 WP-A 안 A3 · ADR-0050 · v8_02_demand_refetch_missing",
+   "layer": "L1"
+  },
+  {
    "tbl": "elig_v2",
    "built": "2026-08-25",
    "source": "ratio=true_farm/calculatedarea(2025) + elig_nat 구조플래그 승계(지목 v7 적용분 포함). 공식은 v1 역설계 검증본, model/stages/v2_03_elig.py",
@@ -85,6 +115,36 @@
    "tbl": "exclusion_reason",
    "built": "2026-08-19",
    "source": "필지×배제사유 롱폼 — Cadastre_All × D_Regulation.gpkg 공간조인(intersects). reason_key = layer/uname 원문(빈 uname은 MNUM 지역지구 코드). 해석 없음 — constraint_registry와 별도 매핑. v5_01",
+   "layer": "L1"
+  },
+  {
+   "tbl": "existing_pv_parcel_v1",
+   "built": "2026-09-28",
+   "source": "v9_05_existing_pv_parcel.py — 기존 태양광 허가·설비 기록의 **지번을 PNU 로** 맞춘 표. v8_08 V-World 응답 캐시를 오프라인 재현(geocode_one 코드 그대로 · G1 등급 재현 일치)해 PARCEL 채택 행의 level4LC 를 쓰고, v8_07.Geo.canon 으로 구 코드에 되돌렸다. match = parcel_exact | address_text(원천 지번 주소를 법정동코드표 이름과 정확 일치 · G3 일치율 실측) | parcel_refined(API 가 다른 지번으로 바꿔 답함 — 따로 센다). 도로명 채택 행은 지번이 없어 매칭 안 함. 주소·시설 이름은 저장하지 않는다(PII). 전수 아님 · 허가 ≠ 설치(status_class) · 대표 지번 하나만 적은 다필지 사업은 과소.",
+   "layer": "L1"
+  },
+  {
+   "tbl": "existing_pv_v1",
+   "built": "2026-09-22",
+   "source": "PR-0049 WP-B L1 provisional — Auditor 검증 대기 · v8_07_existing_pv.py · L0 kpx_plants_raw/epsis_genmachine_solar_20260805.csv(188,594) + permit_raw/std_providers 140 CSV(130,404) + permit_raw/sido 11 CSV(48,427) + korec_3mw PDF 833/834쪽(5,345행) · 출처 간 식별자 없음 → 중복 제거 불가, dedup_status=not_normalized, **출처 간 합산 금지** · 경북 15138623 은 15068271 과 바이트 동일 파일 → dedup_status=duplicate_of:sido_경북_15068271 (합산 시 제외) · korec 은 허가·변경 이력 대장(src_semantics=permit_amendment_ledger) — 같은 사업이 변경 행으로 반복, 행 합계는 설비 총량 아님 · 단위 판정 = 열 이름·README 근거만(std·세종·전북 설비용량 not_normalized) · capacity_flag 로 파싱 불가·대장 범위 밖 이상치 표시(이상치는 원문 값 보존·capacity_kw 내림) · PII(상호·발전소명 등) 읽되 미저장 · pv_type 영농형 = '영농형' 정확 표기만(영농조합·영농법인 상호는 법인 형태이므로 제외) · emd8 = 좌표 pip(emd_bnd, 신코드 12→구코드 이름 다리) 또는 주소 명칭 정확일치(address_text) — emd8 자체는 지오코딩을 쓰지 않는다(지오코딩은 *_geo 별도 열) · EPSIS 합계는 이 파일의 자기 합이며 외부 공표 총량 대조는 미수행 · ADR-0051 L8 · v8_08_existing_pv_geocode.py — existing_pv_v1 주소 행 V-World 지오코딩 보조 좌표. 기존 x·y·loc_precision·emd8·emd_basis 무변경 · 지오코딩 좌표는 원 좌표와 같은 등급이 아니다(제6조 inferred 계열). geo_basis ∈ {vworld_parcel, vworld_road, vworld_emd_fallback, failed, not_attempted} · geo_level ∈ {parcel, road, none} · geo_confidence 는 V-World 가 준 점수가 아니라 refined.text 대조 등급이다. **읍면동 폴백(vworld_emd_fallback)은 채택하지 않았다** — 역검증 n=145 중앙 3,524.7 m · p90 7,045.3 m · 100 m 이내 0.0% · 1 km 초과 94.5%(V-World 가 읍면동 질의에 그 읍면동의 임의 첫 지번을 돌려준다. 중심점조차 아니다). 해당 행은 x_geo·y_geo·emd8_geo 를 NULL 로 두고 geo_level='none' · geo_confidence='emd_first_parcel_excluded' 로 시도 사실만 남긴다 — 후보지 중첩에 없는 적중을 만들지 않기 위해서다. geo_expected_err_m = 역검증 등급별 오차 중앙값(m, n=9,995 시드 20260921): parcel_exact 4.69 · parcel_refined 6.19 · road_exact 7.81 · road_refined 5.18 — 역검증 대상이 아닌 행은 이 값으로 등급 필터를 건다(행별 실측값이 아니라 **등급 기대값**이다). 등급 기대값을 이 모집단에 적용하는 근거: 역검증 모집단과 지오코딩 대상의 exact:refined 비가 76:24 vs **32:68**(parcel_exact 25,689 : parcel_refined 54,143)로 뒤집히지만, 원인은 **치환이 아니라 주소 표기 형식**이다 — 도로명형 16.5→29.3% · 다필지 13.7→25.8% · '번지' 표기 4.0→14.3% 로 늘어난 반면 실제 치환 비중은 두 모집단이 거의 같다(11.1% vs 10.7%, Auditor 전수 검증 2026-09-22). 따라서 parcel_refined 6.19 m 의 대상 적용은 방어 가능하다. 실패 사유 2종: not_found(지오코더가 못 찾음) · **not_an_address**(주소가 아닌 문자열이라 질의하지 않음 — 전부 korec PDF 위치 셀이다: 공유수면 해상 사업의 도분초 꼭짓점 나열, 그리고 행정구역 이름 없이 지번 조각만 남은 표 이어짐 행. 이 조각들을 질의하면 V-World 가 **맥락 없이 아무 필지나** 돌려주므로 거른다 — 거르기 전에는 그런 '성공'이 71건 있었다. 판정 규칙은 길이 상한·도분초 표기·한글 1자 이상, 사다리 단계별 적용). geo_validated_dist_m 은 원 좌표를 가진 역검증 표본 행에만 있는 **실측 대조 거리**이며 10,153행이다 — n=200·2,000·10,000 세 차례 역검증 실행의 **합집합**이라 geocode_audit_v1.sample_n=10000 과 모집단이 다르다. 응답 원문 캐시 Ledger_Rebuild/geocode_cache/vworld_addr/*.jsonl · 역검증은 geocode_audit_v1 · v8_07 재실행 시 이 열은 사라지므로 v8_08 을 다시 실행한다",
+   "layer": "L1"
+  },
+  {
+   "tbl": "geocode_audit_v1",
+   "built": "2026-09-22",
+   "source": "ADR-0051 L8 · v8_08_existing_pv_geocode.py 역검증 — 원 좌표를 이미 가진 행의 **주소를 같은 방법으로 지오코딩**해 원 좌표와 대조한 결과. 거리 단위 m(EPSG:5186 평면) · 분모는 지오코딩 성공 행 · 표본은 무작위 비복원(시드 기록). V-World getcoord 는 후보 목록도 신뢰도 점수도 주지 않는다 — geo_confidence 는 refined.text 대조로 **우리가** 매긴 등급이다. emd_fallback 행은 읍면동의 임의 첫 지번이라 필지 수준 근거가 아니다. 원 좌표(std 위·경도)는 crs_basis='inferred_wgs84' 로 그 자체의 정확도 메타데이터가 없다 — 이 거리는 '지오코딩 오차'가 아니라 **두 출처 좌표의 불일치**다. scope='far_disagreement_adjudication' 은 **심판이 아니라 성격 분해**다 — emd8_addr 은 지오코더와 같은 주소 문자열에서 나오므로 독립 근거가 아니다. L0 std 원천에 주소↔좌표가 어긋난 **꼬리**가 실재한다 (역검증 9,997행 중 >100 m 536행 5.36% · >1 km 139행 1.39%. std 53,238행의 고유 좌표는 36,087개뿐이다). **'행 대응이 밀렸다'는 근거는 철회한다**(감사 2026-09-22) — 꼬리 139행 중 68행이 같은 파일 다른 행 좌표와 100 m 이내지만, 자기 행을 제외해 질문을 맞춘 **대조군 기저율은 76%**(정상 행 3표본 75.1·76.3·76.6%)로 더 높고, 오프셋도 |off|=1 이 꼬리 8.8% 대 대조군 43% 라 단일 시프트가 아니며 파일 안 변위 벡터도 상수가 아니다. **주소 열 어긋남(H1)은 기각**된다 — 같은 행의 독립 제3열 '허가기관' 시군이 꼬리 124행에서 100% 주소와 일치하고(정상 행 97.56%), 지번·도로명 두 주소의 시군도 꼬리에서 100% 일치한다. 남는 판정은 '주소 블록은 행의 다른 열들과 정합하고 좌표만 정합하지 않는다' 이며, 그래도 **'원 좌표가 틀렸다'로 쓰지 않는다**(원 좌표의 정확도 메타데이터 부재). 이 분해의 건수는 실행마다 재계산된다(DB 의 emd8_geo 를 쓰면 여러 실행의 합집합이라 3·60 처럼 달라진다)",
+   "layer": "L1"
+  },
+  {
+   "tbl": "grid_connection_v1",
+   "built": "2026-09-21",
+   "source": "접속(연계) 포화도(B1) dl·mtr·subst — connection_saturation = cap_kw/(cap_kw+vol_min_kw) = 누적연계/(누적연계+여유). js_kw = 설비 용량(js*Pwr, 원문 전량 0 = 미기재 → capacity_ratio 전량 NULL · js_status=not_in_source). 한도(limit_kw_inferred = cap+vol)만 추론 — 항등 100% 성립. vol=0 인 dl 1,043·mtr 292·subst 74 는 saturation 1.0 이 하한 가정(saturation_basis). limit 이 천단위가 아닌 건: dl 6(전부 3,600 kW 한도 선로 — n_variants_cap>1 아님) · mtr 3 · subst 39(둘은 n_variants_cap>1 혼합 효과). 분모는 MAX(*Pwr)+MIN(vol) 집계이므로 키 안에서 레코드별 한도가 갈리는 dl 9·mtr 53·subst 94 는 상한 쪽 혼합값이다. 단위 kW(원문 무단위 · 근거: vol + *Pwr = 상수 한도 항등 100% 성립; mod-1000 검정만 보면 3,600kW 한도 선로 7건이 빠져 vol3 99.97%[vol3>0] · vol2+mtrPwr 100.00% · vol1+substPwr 100.00%). 필드 의미는 한전 API 명세 정의: js*Pwr = 설비 용량(3 스냅숏 전량 0 = 미기재 → js_status=not_in_source) · *Pwr = 누적 연계용량 · vol = 여유. v8_01_grid_physics",
+   "layer": "L1"
+  },
+  {
+   "tbl": "grid_dl_physical_v1",
+   "built": "2026-09-21",
+   "source": "DL 별 물리량 — kepco_raw_v4(2026-08-19) 레코드 + kepco_topo_v3·kepco_mtr_v3·kepco_subst_v3, 등장 스냅숏 = kepco_raw(07-27/28)·kepco_nat_20260814·kepco_raw_v4. vol3 min/med/max·n_variants, 상위 캡 = vol2/vol1 min. ⚠️ 집계 축을 먼저 말한다 — 단독 'Σ DL vol3' 표기 금지. ① 전국 총량은 **DL 축**(dl_key 를 전국에서 1회): 'DL 여유 하한 합' = Σ_dl MIN(vol3) = 64,020.362 MW (**규범** — lo_equal·T-C1b·원고 §2 가 이 값을 쓴다) · 'DL 여유 상한 합' = Σ_dl MAX(vol3) = 64,029.362 MW · 차 9.000 MW = vol3 가 레코드마다 갈리는 DL 9개(전부 스프레드 1,000 kW). ② EMD 내부는 **EMD 축**((emd8, dl_key) 중복 제거 · 같은 키 반복 시 최댓값 1개 · 행 단순합 금지). 이 축의 값을 전국으로 더하면 여러 EMD 를 지나는 선로가 중복 계상된다(192,875.001 MW) — 전국 계통 여유가 아니라 읍면동 배분의 분모일 뿐이다. 단위 kW(원문 무단위 · 근거: vol + *Pwr = 상수 한도 항등 100% 성립; mod-1000 검정만 보면 3,600kW 한도 선로 7건이 빠져 vol3 99.97%[vol3>0] · vol2+mtrPwr 100.00% · vol1+substPwr 100.00%). 필드 의미는 한전 API 명세 정의: js*Pwr = 설비 용량(3 스냅숏 전량 0 = 미기재 → js_status=not_in_source) · *Pwr = 누적 연계용량 · vol = 여유. PR-0049 C1·B1 · v8_01_grid_physics",
    "layer": "L1"
   },
   {
@@ -130,9 +190,33 @@
    "layer": "L1"
   },
   {
+   "tbl": "nonfarm_keep_v1",
+   "built": "2026-10-20",
+   "source": "ADR-0060 — 필지별 비농지 제외(자동: 표준 노드·링크·OSM 도로 면, V-World 건물통합정보 외곽선 1 m, 폭 10 m 미만 띠·200㎡ 미만 조각 / 위성사진 육안 검토: Esri·V-World 두 사진 대조, 사용자 판정 4회). 대상 R2_promo 1MW 이상 후보 공간 5,645곳의 구성 필지 289,906개 — 그 밖의 필지는 검토 밖(nf_f=1). nf_f = 면적(필지 ∩ 남긴 땅) ÷ 면적(필지) · nf_drop = 남긴 부분 1㎡ 미만. VIEW elig_v2nf 가 장부 면적에 곱한다. 고정본 experiments/nonfarm_review nonfarm_review_v1 (2026-10-19 23:19, 사용자 판정 4회)",
+   "layer": "L1"
+  },
+  {
+   "tbl": "provenance_v1",
+   "built": "2026-10-13",
+   "source": "CANON 품질 게이트 — dataset 단위 provenance 레지스트리. v9_01_quality_gate.py · 필수 6필드(collection_date · version_identity · raw_location · raw_file · checksum · transform_version) 충족 여부를 provenance_status 로 판정한다. **없는 값을 지어내지 않는다** — 없으면 unknown, 파일 mtime 을 수집일로 승격하지 않는다. original_source_version 과 internal_snapshot_version 을 분리한다(원천이 릴리스 버전을 주지 않는 경우가 대부분이며, 버전이 없다는 사실 자체가 완전성을 만족시키지 않는다). 근거: 조달 매니페스트 5종 · PAPER-FREEZE-001 raw_checksums.csv · meta_versions. 이 표는 무엇이 추적 가능한지 기록할 뿐 원자료·정본을 바꾸지 않는다",
+   "layer": "L1"
+  },
+  {
    "tbl": "reclaim_tag",
    "built": "2026-08-14",
    "source": "농어촌공사 지구공구 토지정보(2025) data.go.kr 15116438 + 국가관리 13지구 고시(농식품부 25.6)",
+   "layer": "L1"
+  },
+  {
+   "tbl": "setback200_flags",
+   "built": "2026-10-08",
+   "source": "ADR-0056 — Ledger_Rebuild/setback200/flags/{sgg}.parquet (pnu, n_house_200m, setback200). 주거용 건물(GIS건물통합정보 V-World LT_C_BLDGINFO 2026-10-08 전국 수집, 용도 01xxx·02xxx 주택) 외벽 25 m 버퍼 디졸브 5호 군집(외벽 간 50 m 연결) → 농지 필지 경계 200 m 안 군집 주택 외벽 → 배제. 생성 Setback-House-Rule-Study/national/12_run_sgg.py --buffer 25 --defs H3_building. 종전(대지 중심점, v6_01) 은 flags_v1_dae_point_20260825/ 보존",
+   "layer": "L1"
+  },
+  {
+   "tbl": "spatial_attribution_v1",
+   "built": "2026-09-22",
+   "source": "CANON 품질 게이트 — 좌표 보유 레코드의 공간 귀속 등급. v9_01_quality_gate.py · VALID = 원 좌표 + **행 단위** 독립 검증(주소 지오코딩 100 m 이내) + 읍면동 일치. CONDITIONAL = 읍면동 수준 일치만 있거나(원 좌표) 행 단위 검증이 원리적으로 불가한 주소→필지 지오코딩(원 좌표 부재). UNVERIFIED = 도로명 지오코딩(지번 대조 불가). UNKNOWN = 원 좌표와 주소 지오코딩이 100 m 넘게 어긋나거나 독립 근거가 없다 — **어느 쪽이 틀렸는지는 판정하지 않는다**(제6조). 원 좌표는 읽기만 하며 덮어쓰지 않는다. 공간분석 투입 자격은 VALID 만 — UNKNOWN·UNVERIFIED 는 보존하되 격리한다",
    "layer": "L1"
   },
   {
@@ -142,9 +226,39 @@
    "layer": "L1"
   },
   {
+   "tbl": "analysis_unit_missing_v1",
+   "built": "2026-10-20",
+   "source": "V5.2 공간 분석 단위 중 **폴리곤을 만들지 못한 구획** — v9_02_analysis_unit_polygon.py · 지적(Cadastre_All)에서 구성 필지를 하나도 찾지 못했다. 조용히 빼지 않고 값으로 남긴다. 원인은 동결본이 이미 기록한 기하 결손(block_context.json geometry_missing_parcels=1,205)과 같다. 이 구획들은 지도에 그릴 수 없으나 원장에는 존재한다 — '없는 곳'이 아니라 '그릴 수 없는 곳'이다",
+   "layer": "L2"
+  },
+  {
+   "tbl": "analysis_unit_v1",
+   "built": "2026-10-20",
+   "source": "V5.2 21m 연접 **공간 분석 단위**(후보 공간) 폴리곤 — v9_02_analysis_unit_polygon.py · 기존 21m membership(R2_promo/members.parquet)을 지적(Cadastre_All EPSG:5186)에 dissolve. **cluster 가 아니다** — 최종 cluster 정의는 자문 이후로 열어 둔다(V5.2 §1·§17). ≤1000 m 응축 cc(ADR-0046)는 쓰지 않았다 — 2026-09-23 ADR-0054 로 활성 계보에서 폐기(엔진·산출물 제거). 대상 = block_context 선언 부분집합 전량(--all · 면적 하한 없음) 승계(숨은 문턱 없음, ADR-0041 · 2026-10-07 전량 재산출으로 11,111㎡ 하한 폐기). 입력 production. 지적도 읽기에 ADR-0047 회수 대응표 적용(3,606필지 · 구 pnu→신 pnu). 행정경계로 자르지 않는다 — 시군을 넘는 349개는 하나로 합쳤다. 단순화 허용오차 2.0 m(선언값) · 면적 변화 -0.419% · 원면적(area_geom_m2)과 단순화 면적을 둘 다 보존. mw_ref = 원장 면적 × 0.045 kW/㎡(ADR-0012 기존 계수). 속성은 block_context 를 조인해 쓰고 중복 필드를 만들지 않는다 · **품질 플래그 geom_quality** — 원장 면적과 지적 폴리곤 면적이 1% 넘게 어긋나는 단위를 geom_smaller(기하 모자람 · 지적 미발견 필지 원인) / geom_larger(원장 면적이 더 작음 · 원인 미특정, 산 지번 아님) 로 표시한다. 어느 쪽이 옳은지 판정하지 않는다(제6조). 지적에서 구성 필지를 하나도 못 찾아 폴리곤이 없는 구획은 별도 표 analysis_unit_missing_v1 에 남긴다 · **표시 등급 display_tier** (V5.2 CP1 결정 2026-09-23) — 기본 지도는 display_tier='default'(= geom_quality ok) 만 정상 후보 공간으로 표시한다. geom_smaller·geom_larger 는 'quality_review' 로 보존하며 필터에서만 나온다. 필터 어휘 quality_label = 정상 기하 / 기하 불완전 / 면적 불일치, 폴리곤을 만들 수 없는 것은 '기하 없음'(analysis_unit_missing_v1). **geom_larger 를 정상 후보 공간으로 표시하지 않는다** — 그러나 '잘못된 필지'라고 단정하지도 않는다(원인 미특정, 제6조)",
+   "layer": "L2"
+  },
+  {
+   "tbl": "emd_existing_v1",
+   "built": "2026-09-21",
+   "source": "PR-0049 WP-B L1 provisional — Auditor 검증 대기 · v8_07_existing_pv.py · L0 kpx_plants_raw/epsis_genmachine_solar_20260805.csv(188,594) + permit_raw/std_providers 140 CSV(130,404) + permit_raw/sido 11 CSV(48,427) + korec_3mw PDF 833/834쪽(5,345행) · 출처 간 식별자 없음 → 중복 제거 불가, dedup_status=not_normalized, **출처 간 합산 금지** · 경북 15138623 은 15068271 과 바이트 동일 파일 → dedup_status=duplicate_of:sido_경북_15068271 (합산 시 제외) · korec 은 허가·변경 이력 대장(src_semantics=permit_amendment_ledger) — 같은 사업이 변경 행으로 반복, 행 합계는 설비 총량 아님 · 단위 판정 = 열 이름·README 근거만(std·세종·전북 설비용량 not_normalized) · capacity_flag 로 파싱 불가·대장 범위 밖 이상치 표시(이상치는 원문 값 보존·capacity_kw 내림) · PII(상호·발전소명 등) 읽되 미저장 · pv_type 영농형 = '영농형' 정확 표기만(영농조합·영농법인 상호는 법인 형태이므로 제외) · emd8 = 좌표 pip(emd_bnd, 신코드 12→구코드 이름 다리) 또는 주소 명칭 정확일치(address_text) · 지오코딩 없음 · EPSIS 합계는 이 파일의 자기 합이며 외부 공표 총량 대조는 미수행 · emd8×src×emd_basis 집계, pip 와 address_text 를 합치지 않음",
+   "layer": "L2"
+  },
+  {
+   "tbl": "existing_pv_parcel_overlap_v1",
+   "built": "2026-09-28",
+   "source": "시나리오 런 설치 가능 필지(members)와 existing_pv_parcel_v1 의 PNU 겹침 집계 — match × status_set × scope(nation|41). 제외 판정 아님(표시·집계) — 제외 여부는 사용자 결정. v9_05_existing_pv_parcel.py — 기존 태양광 허가·설비 기록의 **지번을 PNU 로**",
+   "layer": "L2"
+  },
+  {
+   "tbl": "existing_pv_parcel_profile_v1",
+   "built": "2026-09-28",
+   "source": "기존 시설 필지의 원장 지목·소유 × R2_promo@all 설치 가능 여부 — 왜 후보에 없는지 보는 윤곽",
+   "layer": "L2"
+  },
+  {
    "tbl": "ggd_cluster_indprox_v4",
    "built": "2026-08-19",
-   "source": "경기 안정·조건부 등재 구획 × 공업지역(KLIP_004 UQ111 중 전용·일반·준공업 세분, 용도지역 — 산업단지 법정경계 아님) 최근접 거리. 1차 UQ113(농림지역) 오인판은 무효·교체(2026-08-19). v4_05",
+   "source": "경기 안정·조건부 등재 구획 × 공업지역(KLIP_004 UQ111 중 전용·일반·준공업 세분, 용도지역 — 산업단지 법정경계 아님) 최근접 거리. 1차 UQ113(농림지역) 오인판은 무효·교체(2026-08-19). v4_05 · calculation_version=v3_06_legacy (ADR-0052 — grid_emd_v3 의 legacy 상한에서 파생된 grid_hi_mw 를 담는다. 정정 시 이 표도 함께 재산출해야 한다 — 다른 계산 버전과 결합 금지, T-D8)",
    "layer": "L2"
   },
   {
@@ -162,19 +276,43 @@
   {
    "tbl": "grid_cluster_range_v4",
    "built": "2026-08-19",
-   "source": "등재 구획별 계통 여유 구간 [균등배분 합, 공유 미조정 합] — 근사·개별 참고용, 구획 간 합산 금지. 무응답 동 걸침은 has_unknown. v4_04",
+   "source": "등재 구획별 계통 여유 구간 [균등배분 합, 공유 미조정 합] — 근사·개별 참고용, 구획 간 합산 금지. 무응답 동 걸침은 has_unknown. v4_04 · calculation_version=v3_06_legacy (ADR-0052 — grid_emd_v3 의 legacy 상한에서 파생된 grid_hi_mw 를 담는다. 정정 시 이 표도 함께 재산출해야 한다 — 다른 계산 버전과 결합 금지, T-D8)",
    "layer": "L2"
   },
   {
    "tbl": "grid_dl_v3",
    "built": "2026-08-19",
-   "source": "선로별 여유·배후 적격면적(equal/whole). elig_v2 × kepco_topo_v3. v3_06",
+   "source": "선로별 여유·배후 적격면적(equal/whole). elig_v2 × kepco_topo_v3. v3_06 · calculation_version=v3_06_legacy (ADR-0052 — 상한 vol3_shared_mw 는 agg 조인이 (emd8,dl_key) 중복을 합산하는 legacy 산식이다: 93 EMD · +1,279.463 MW. 하한 vol3_equal_mw 는 중복이 균일해 불변. 동결 재현 전용이며 정정 산식은 다음 세대 v3_07 로 분리한다. 다른 계산 버전의 산출물과 결합 금지 — T-D8)",
+   "layer": "L2"
+  },
+  {
+   "tbl": "grid_emd_granularity_v1",
+   "built": "2026-09-21",
+   "source": "EMD 매핑 입도 — grid_emd_v3(status·n_dl·vol3_equal_mw 그대로) + kepco_topo_v3×kepco_dl_v3(max_single_dl·sum_dl_vol3). lo_per_dl = lo/n_dl. unknown 동은 NULL. 단위 MW(=kW/1000). PR-0049 C1 · v8_01_grid_physics",
    "layer": "L2"
   },
   {
    "tbl": "grid_emd_v3",
    "built": "2026-08-19",
-   "source": "동별 3상태(ok/unknown) — 무응답은 NULL(알 수 없음), 판정 불가 적격 100.2km² 별도. v3_06",
+   "source": "동별 3상태(ok/unknown) — 무응답은 NULL(알 수 없음), 판정 불가 적격 100.2km² 별도. v3_06 · calculation_version=v3_06_legacy (ADR-0052 — 상한 vol3_shared_mw 는 agg 조인이 (emd8,dl_key) 중복을 합산하는 legacy 산식이다: 93 EMD · +1,279.463 MW. 하한 vol3_equal_mw 는 중복이 균일해 불변. 동결 재현 전용이며 정정 산식은 다음 세대 v3_07 로 분리한다. 다른 계산 버전의 산출물과 결합 금지 — T-D8)",
+   "layer": "L2"
+  },
+  {
+   "tbl": "grid_emd_v3c",
+   "built": "2026-10-12",
+   "source": "stages/v3_08_grid_emd_corrected.py — 동별 계통 여유 정정판. calculation_version=v3_07_corrected (ADR-0052·ADR-0059: 상한을 (emd8, dl_key) 고유 선로로 한 번씩만 합산 — 원자료 kepco_topo_v3 · kepco_dl_v3 · kepco_dong_v3 에서 산출). 하한·선로 수·상태는 종전과 같고 상한만 93 동에서 합 1,279.463 MW 낮아진다. 운영(grid_link · 사이트) 정본",
+   "layer": "L2"
+  },
+  {
+   "tbl": "grid_snapshot_stability_v1",
+   "built": "2026-09-21",
+   "source": "3 스냅숏(07-27/28 · 08-14 · 08-19) 모두 응답한 EMD 3,295곳 — EMD 별 DL vol3(kW) 합의 CV(모표준편차/평균)·min·max·방향 반전·순위 이동. 시각 근거 s0727:not_normalized · s0814:folder_date:2026-08-14 · s0819:fetched_at (07월분·08-14분 파일에 fetched_at 없음 → not_normalized/폴더 날짜). 시도 폴백(metro_used) 응답 포함 여부 fallback_* 로 표기. v8_01_grid_physics",
+   "layer": "L2"
+  },
+  {
+   "tbl": "grid_unknown_cause_v1",
+   "built": "2026-09-21",
+   "source": "grid_emd_v3.status='unknown' 589 EMD 원인 — kepco_raw_v4 attempts/err · v4_01 RENAME·폴백 사슬 · manifest pass2/ri_sweep · bjd_code 리 보유 · grid_city_check_v4 시군 공란 대조 · 구 스냅숏 응답 유무. cause ∈ {not_in_source, not_normalized, unknown}(제6조), 근거 없으면 unknown. in_population = emd_analysis_population.parquet. v8_01_grid_physics",
    "layer": "L2"
   },
   {
@@ -182,6 +320,42 @@
    "built": "2026-08-25",
    "source": "1판(ADR-0034 자산) 런 기록 아카이브 — 판 개정(ADR-0035)으로 현역 테이블 초기화. 차이 보고용",
    "layer": "L2"
+  },
+  {
+   "tbl": "scenario_runs_retired",
+   "built": "2026-10-12",
+   "source": "stages/v6_08_retire_legacy_sb.py — 퇴역 런 등록부. 런 폴더는 Ledger_Rebuild/retired_setback_v1/ 로 이동, scenario_runs 행은 보존(T16-④). 시금석 T26 이 재유입을 막는다",
+   "layer": "L2"
+  },
+  {
+   "tbl": "size_bands_rebands_v9_06",
+   "built": "2026-10-07",
+   "source": "표시 기준 대역에 1MW 등가(2.2222 ha) 추가 — 34런 재집계, 기존 대역 값 불변 확인. 정의가 아니라 보고용 눈금(ADR-0041 §4).",
+   "layer": "L2"
+  },
+  {
+   "tbl": "cc_existing_overlap_geo_trial_v1",
+   "built": "2026-09-22",
+   "source": "[RETIRED 2026-09-27 — ≤1,000m 응축 폐기: 정본 DB 에서 제거, 보관본 Ledger_Rebuild/retired_1km/cc_existing_overlap_geo_trial_v1.parquet] ADR-0051 L8 **시산 전용** — 지오코딩 보조 좌표(geo_level parcel·road)로 cc 멤버 필지 정확 포함을 다시 본 값. cc_existing_overlap_v1(원 좌표 기준 · 정본)을 대체하지 않는다. 채택 판단은 Orchestrator 몫. 좌표원을 분리해 담는다: n_sites_in_orig(원 좌표) · n_sites_in_geocoded(지오코딩) · n_sites_in_addr_verified(적중 필지 지번이 질의 주소에 실재). '원 좌표만' 팔 176곳은 정본 detected 176곳을 그대로 재현한 음성 대조군이다(T-B2G8·T-B2G9 가 고정). 승인된 중복 출처(dedup_status=duplicate_of:…)는 점 수 과대를 막기 위해 선별에서 제외한다. **대외 표기는 다섯 값을 함께 쓴다 — 하나만 인용하지 않는다**(Orchestrator 채택 2026-09-22): 176(정본) · **447(필지 수준 증거로 방어 가능 — 채택된 시산값)** · 476(모호 포함 대역) · 559(상한) · 264(하한). 447 와 476 의 차이는 **'번지 N호' 해석 62점**이다 — 840-6 인지 840번지의 6호 건물인지 원천이 말하지 않으므로 ambiguous 로 둔다(제6조): yes 로 읽으면 없는 근거가, no 로 읽으면 없는 반증이 생긴다. 산 지번과 일반 지번도 서로 다른 필지라 구분한다 — 이 구분을 풀면 475 가 되지만 없는 근거를 만드는 쪽이라 **475 는 Auditor 대역 값으로만 남기고 정본으로 쓰지 않는다**. 정확일치만(298)은 **쓰지 않는다** — 지번으로 확인된 parcel_refined 를 버리면서 지번 대조가 원리적으로 불가능한 road_exact 는 남겨 라벨과 내용이 어긋난다. geo_confidence='parcel_refined' 는 치환을 뜻하지 않는다: 적중 578건 중 428건(74.0%)은 적중 필지의 지번이 질의 주소에 문자 그대로 있고, refined 가 붙은 이유는 대부분 시도 접두 추가·다필지 첫 지번 채택 같은 군더더기 정규화다. **공통 한계** ① 확인된 것은 '등록 주소의 필지가 cc 멤버'이지 '설비가 물리적으로 그 필지 위'가 아니다(표본에 옥상·건물 상부 설치가 섞여 있다) · ② L0 std 원천에 주소↔좌표가 어긋난 꼬리가 실재한다 (>100 m 5.36% · >1 km 1.39%). 주소 열 어긋남 가설(H1)은 독립 제3열(허가기관) 검정으로 기각됐으므로 '지오코딩 팔 전체 오염' 경로는 근거가 없고, 어느 쪽이 옳은지는 미증명이라 이 값은 오염률이 아니라 불일치 상한이다. 교차행 근접 근거는 대조군 기저율 76% 와 함께만 쓴다(감사 2026-09-22). 읍면동 폴백은 좌표가 없으므로 애초에 들어오지 않는다. 지오코딩 좌표는 inferred 계열이며 역검증 오차 분포는 geocode_audit_v1 에 있다",
+   "layer": "RETIRED"
+  },
+  {
+   "tbl": "cc_existing_overlap_v1",
+   "built": "2026-09-21",
+   "source": "[RETIRED 2026-09-27 — ≤1,000m 응축 폐기: 정본 DB 에서 제거, 보관본 Ledger_Rebuild/retired_1km/cc_existing_overlap_v1.parquet] PR-0049 WP-B L1 provisional — Auditor 검증 대기 · v8_07_existing_pv.py · L0 kpx_plants_raw/epsis_genmachine_solar_20260805.csv(188,594) + permit_raw/std_providers 140 CSV(130,404) + permit_raw/sido 11 CSV(48,427) + korec_3mw PDF 833/834쪽(5,345행) · 출처 간 식별자 없음 → 중복 제거 불가, dedup_status=not_normalized, **출처 간 합산 금지** · 경북 15138623 은 15068271 과 바이트 동일 파일 → dedup_status=duplicate_of:sido_경북_15068271 (합산 시 제외) · korec 은 허가·변경 이력 대장(src_semantics=permit_amendment_ledger) — 같은 사업이 변경 행으로 반복, 행 합계는 설비 총량 아님 · 단위 판정 = 열 이름·README 근거만(std·세종·전북 설비용량 not_normalized) · capacity_flag 로 파싱 불가·대장 범위 밖 이상치 표시(이상치는 원문 값 보존·capacity_kw 내림) · PII(상호·발전소명 등) 읽되 미저장 · pv_type 영농형 = '영농형' 정확 표기만(영농조합·영농법인 상호는 법인 형태이므로 제외) · emd8 = 좌표 pip(emd_bnd, 신코드 12→구코드 이름 다리) 또는 주소 명칭 정확일치(address_text) · 지오코딩 없음 · EPSIS 합계는 이 파일의 자기 합이며 외부 공표 총량 대조는 미수행 · cc = PAPER-FREEZE-001 R2_promo cc_table_R2 163,291 · overlap 값 3종 detected/not_detected/unknown (구 키 yes/no 폐기) — not_detected 는 미검출이며 설비 없음이 아니다 · not_detected 문턱 = 읍면동 좌표 근거 5행 이상, 미달은 unknown(thin_coord_evidence) · detected 는 커버리지 하한이며 개별 적중은 필지 수준 미확증(dist_boundary_* 열) · 비율 인용은 판정 가능분 분모 우선",
+   "layer": "RETIRED"
+  },
+  {
+   "tbl": "analysis_unit_axes_v1",
+   "built": "2026-10-20",
+   "source": "ADR-0054 §9·§12 — 순위 엔진 입력. 후보 공간(21m 연접 lab) × 시군 touch 행. 축 = block_context.parquet(R2_promo) 의 area_m2 ↑ · lo ↑ · dist_ind_km ↓ — 기존 정의·기존 지배 규칙(query._frontier_mask) 그대로이고 새 score·weight·threshold 는 없다. 바뀐 것은 비교 객체뿐이다: cc(≤1,000m 응축) 폐기 → analysis_unit_v1. lo 는 vol3_equal 합의 참고지표이지 접속 가능 용량이 아니다. display_tier='no_geometry' 는 폴리곳을 그릴 수 없는 후보 공간(값은 보존, 지도 미표시).",
+   "layer": ""
+  },
+  {
+   "tbl": "sgg_unit_summary_v1",
+   "built": "2026-10-20",
+   "source": "ADR-0054 §8 — V5.5 시군 요약. 입력 analysis_unit_v1(21m 연접 공간 분석 단위 폴리곳 · v9_02) · ≤1,000m 응축(cc) 사용 안 함(폐기). 시군 귀속 = touch(경계 걸침 후보 공간은 관여 시군마다 1) → **시군 값을 전국 합계로 더하지 않는다**. def_* = display_tier='default'(정상 기하) · qr_* = quality_review(기하 불완·면적 불일치) — 품질 검토분을 숨기지 않고 분리해 담는다(CP1 결정). mw_ref 는 0.045 kW/㎡ 환산 참고값 — 판정·선별 미사용. 단위 명칭은 '후보 공간' — cluster 라 부르지 않는다(최종 cluster 정의는 자문 대기 BLANK). 전국 고유 기준 ≥50/20/10MW = 23/106/192 · 시군 합(걸침 중복) = 23/107/193",
+   "layer": ""
   }
  ]
 }

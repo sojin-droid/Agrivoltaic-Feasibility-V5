@@ -12,7 +12,7 @@ from paths import SITE, OUT, CLUSTERS, ROOT, MODEL, LR, CAD   # 경로는 한 �
 
 # 전 탭 스캔 — 새 탭 추가 시 반드시 여기에도 추가 (2026-08-26: map·insight·candidates 누락 적발)
 PAGES = ['index.html', 'finder.html', 'scenarios.html', 'regions.html', 'local.html', 'method.html', 'advisory.html', 'cluster_advisory.html',
-         'evidence.html', 'map.html', 'candidates.html', 'proximity.html', 'decree.html', 'insight.html', 'about.html']
+         'nonfarm.html', 'evidence.html', 'map.html', 'candidates.html', 'proximity.html', 'decree.html', 'insight.html', 'about.html']
 DATA = os.path.join(SITE, 'data_v4')
 
 # ① 무효·구세대 수치 (원칙 3) — 발견 즉시 FAIL. 새 무효값 확정 시 여기에 추가.
@@ -110,7 +110,7 @@ for name in os.listdir(DATA) if os.path.isdir(DATA) else []:
 #   LEGACY 자산(data_v4/cand/ · recommend_cc_v4 · recommend_emd_v4 · assets/cand.js)은 파일로 남아 있어도 되지만, 부르면 FAIL.
 CC_REF = [r'assets/cand\.js', r'cand\.css', r'recommend_cc_v4', r'recommend_emd_v4', r'data_v4/cand/', r'cand_index', r'\bCand\.']
 ACTIVE_JS = ['assets/v4.js', 'assets/v55.js', 'assets/region.js', 'site.js']
-for rel in ['index.html', 'finder.html', 'scenarios.html', 'regions.html', 'local.html', 'method.html', 'advisory.html'] + ACTIVE_JS:
+for rel in ['index.html', 'finder.html', 'scenarios.html', 'regions.html', 'local.html', 'method.html', 'nonfarm.html', 'advisory.html'] + ACTIVE_JS:
     fp = os.path.join(SITE, rel)
     if not os.path.exists(fp):
         continue
@@ -149,6 +149,37 @@ for dp, dns, fns in os.walk(SITE):
             for pat, msg in SECRET_PATS:
                 if pat.search(line):
                     fails.append(f"{rel}:{i}: 비밀값 하드코딩 의심({msg}) — 환경 변수로 옮길 것")
+
+# ⑨ 비농지 검토 결과(2026-10-19 · ADR-0060) — 검토 통계 정합 · 사이트 단계 덮어쓰기 재도입 차단
+#   nonfarm_v1.json 구간·시도 합 = 전체 · 검토+미검토 = 전체
+nfp = os.path.join(DATA, 'nonfarm_v1.json')
+if os.path.exists(nfp):
+    nf = json.load(open(nfp, encoding='utf-8')); t = nf['total']
+    for part in ('bands', 'sido'):
+        if sum(x['n'] for x in nf[part]) != t['n'] or abs(sum(x['mw_final'] for x in nf[part]) - t['mw_final']) > 1:
+            fails.append(f"nonfarm_v1: {part} 합 ≠ 전체")
+    if nf['reviewed']['n'] + nf['unreviewed']['n'] != t['n'] or abs(nf['reviewed']['mw_final'] + nf['unreviewed']['mw_final'] - t['mw_final']) > 0.5:
+        fails.append("nonfarm_v1: 검토 + 미검토 ≠ 전체")
+    # 값 반영은 정본(ADR-0060)이 한다 — 사이트 단계의 R2 덮어쓰기(2026-10-19 임시)가 되살아나면 이중 차감이다
+    for rel in ('pipeline/export/export_top10_v4.py', 'publish.py'):
+        if re.search(r'NF1\.adjust|apply_nonfarm_v1', open(os.path.join(SITE, rel), encoding='utf-8').read()):
+            fails.append(f"{rel}: 폐기된 사이트 단계 비농지 덮어쓰기 참조 — 정본(ADR-0060)과 이중 차감")
+
+# ⑩ 발행 순서 누락(2026-10-20 ADR-0060 재발행에서 big_sgg·estimate·parcels 가 옛 값으로 남은 사고)
+#   주요 화면이 V4.data()/V55.gz() 로 읽는 data_v4 최상위 자료는 summary_v4.json 과 같은 발행에서 나와야 한다.
+#   summary 보다 하루 넘게 오래된 자료는 publish.py 순서에 빠진 것이다.
+_sm = os.path.getmtime(sfp) if os.path.exists(sfp) else None
+if _sm:
+    _ref = set()
+    for _pg in ['index.html', 'finder.html', 'scenarios.html', 'regions.html', 'local.html', 'method.html', 'nonfarm.html', 'decree.html']:
+        _tx = open(os.path.join(SITE, _pg), encoding='utf-8').read()
+        _ref |= {m + '.json' for m in re.findall(r"V4\.data\('([a-z0-9_]+)'\)", _tx)}
+        _ref |= set(re.findall(r"data_v4/([a-z0-9_]+\.json(?:\.gz)?)", _tx))
+    STATIC_OK = {'ind_firms_meta.json'}   # 원천이 바뀔 때만 다시 만든다
+    for _f in sorted(_ref - STATIC_OK):
+        _fp = os.path.join(DATA, _f)
+        if os.path.exists(_fp) and os.path.getmtime(_fp) < _sm - 86400:
+            fails.append(f"data_v4/{_f}: summary_v4.json 보다 하루 넘게 오래됨 — publish.py 발행 순서에서 빠졌는지 확인")
 
 # ⑦ 행정코드 다리 회귀(감사 NEW-F-03) — 합성 fixture(인천·부산·대전·대구 중구 동명) 검사가 깨지면 FAIL
 import subprocess as _sp

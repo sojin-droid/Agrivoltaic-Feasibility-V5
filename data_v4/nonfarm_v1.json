@@ -1,0 +1,401 @@
+{
+ "generated": "2026-10-20 10:24",
+ "run": "R2_promo",
+ "review_built_at": "2026-10-19 23:19",
+ "user_rounds": 4,
+ "kw_per_m2": 0.045,
+ "min_m2": 22222,
+ "total": {
+  "n": 5645,
+  "n_reviewed": 2867,
+  "mw0": 18591.1,
+  "mw_auto": 16464.5,
+  "mw_final": 13750.6,
+  "km2_0": 413.28,
+  "km2_final": 305.57
+ },
+ "reviewed": {
+  "n": 2867,
+  "n_reviewed": 2867,
+  "mw0": 14491.1,
+  "mw_auto": 13126.6,
+  "mw_final": 10412.9,
+  "km2_0": 322.05,
+  "km2_final": 231.4,
+  "verdict": {
+   "partial": 1449,
+   "mostly_nonfarm": 732,
+   "ok": 686
+  },
+  "n_below_1mw": 1402,
+  "n_gone": 283
+ },
+ "unreviewed": {
+  "n": 2778,
+  "n_reviewed": 0,
+  "mw0": 4100.0,
+  "mw_auto": 3337.9,
+  "mw_final": 3337.7,
+  "km2_0": 91.22,
+  "km2_final": 74.17
+ },
+ "n_gone_all": 284,
+ "n_ge1_after": 3341,
+ "n_ge50_before": 25,
+ "n_ge50_after": 24,
+ "bands": [
+  {
+   "band": "50+",
+   "label": "50MW 이상",
+   "n": 25,
+   "n_reviewed": 25,
+   "mw0": 2450.0,
+   "mw_auto": 2432.7,
+   "mw_final": 2415.2,
+   "km2_0": 54.44,
+   "km2_final": 53.67
+  },
+  {
+   "band": "20-50",
+   "label": "20–50MW",
+   "n": 97,
+   "n_reviewed": 97,
+   "mw0": 3089.4,
+   "mw_auto": 3041.1,
+   "mw_final": 2825.8,
+   "km2_0": 68.65,
+   "km2_final": 62.8
+  },
+  {
+   "band": "10-20",
+   "label": "10–20MW",
+   "n": 121,
+   "n_reviewed": 121,
+   "mw0": 1698.1,
+   "mw_auto": 1607.1,
+   "mw_final": 1370.3,
+   "km2_0": 37.74,
+   "km2_final": 30.45
+  },
+  {
+   "band": "3-10",
+   "label": "3–10MW",
+   "n": 898,
+   "n_reviewed": 898,
+   "mw0": 4262.4,
+   "mw_auto": 3609.9,
+   "mw_final": 2501.4,
+   "km2_0": 94.72,
+   "km2_final": 55.59
+  },
+  {
+   "band": "1-3",
+   "label": "1–3MW",
+   "n": 4504,
+   "n_reviewed": 1726,
+   "mw0": 7091.2,
+   "mw_auto": 5773.6,
+   "mw_final": 4638.0,
+   "km2_0": 157.72,
+   "km2_final": 103.07
+  }
+ ],
+ "reasons_eye": [
+  {
+   "reason": "도로부지",
+   "parcels": 26242,
+   "km2": 13.22,
+   "mw": 607.2
+  },
+  {
+   "reason": "하천 둔치",
+   "parcels": 9799,
+   "km2": 10.36,
+   "mw": 469.8
+  },
+  {
+   "reason": "임야화",
+   "parcels": 5698,
+   "km2": 8.84,
+   "mw": 400.0
+  },
+  {
+   "reason": "기타",
+   "parcels": 4100,
+   "km2": 5.88,
+   "mw": 266.5
+  },
+  {
+   "reason": "공사장",
+   "parcels": 3310,
+   "km2": 5.2,
+   "mw": 237.1
+  },
+  {
+   "reason": "수면·하천·수로",
+   "parcels": 2794,
+   "km2": 4.15,
+   "mw": 187.9
+  },
+  {
+   "reason": "철도부지",
+   "parcels": 5428,
+   "km2": 3.41,
+   "mw": 158.9
+  },
+  {
+   "reason": "군사시설",
+   "parcels": 929,
+   "km2": 2.35,
+   "mw": 106.3
+  },
+  {
+   "reason": "공장·창고·야적장",
+   "parcels": 1125,
+   "km2": 1.73,
+   "mw": 78.5
+  },
+  {
+   "reason": "건물·마당",
+   "parcels": 1216,
+   "km2": 1.61,
+   "mw": 74.3
+  },
+  {
+   "reason": "주차장·포장면",
+   "parcels": 1482,
+   "km2": 1.64,
+   "mw": 74.1
+  },
+  {
+   "reason": "기존 태양광",
+   "parcels": 351,
+   "km2": 1.2,
+   "mw": 54.8
+  },
+  {
+   "reason": "묘지",
+   "parcels": 5,
+   "km2": 0.01,
+   "mw": 0.5
+  }
+ ],
+ "reasons_auto": [
+  {
+   "reason": "도로",
+   "parcels": 118497,
+   "km2": 29.39,
+   "mw": 1321.9
+  },
+  {
+   "reason": "건물",
+   "parcels": 3988,
+   "km2": 2.67,
+   "mw": 121.6
+  },
+  {
+   "reason": "폭 10m 미만 띠·200㎡ 미만 조각",
+   "parcels": 132631,
+   "km2": 15.21,
+   "mw": 684.1
+  }
+ ],
+ "sido": [
+  {
+   "sido": "전남",
+   "n": 1017,
+   "n_reviewed": 526,
+   "mw0": 5523.9,
+   "mw_auto": 5209.1,
+   "mw_final": 4809.7,
+   "km2_0": 122.74,
+   "km2_final": 106.88
+  },
+  {
+   "sido": "충남",
+   "n": 1024,
+   "n_reviewed": 466,
+   "mw0": 4754.1,
+   "mw_auto": 4263.2,
+   "mw_final": 3907.3,
+   "km2_0": 105.69,
+   "km2_final": 86.83
+  },
+  {
+   "sido": "경기",
+   "n": 878,
+   "n_reviewed": 496,
+   "mw0": 1945.7,
+   "mw_auto": 1520.2,
+   "mw_final": 1096.5,
+   "km2_0": 43.27,
+   "km2_final": 24.37
+  },
+  {
+   "sido": "전북",
+   "n": 556,
+   "n_reviewed": 251,
+   "mw0": 1343.2,
+   "mw_auto": 1152.9,
+   "mw_final": 876.5,
+   "km2_0": 29.84,
+   "km2_final": 19.48
+  },
+  {
+   "sido": "경북",
+   "n": 575,
+   "n_reviewed": 277,
+   "mw0": 1250.7,
+   "mw_auto": 1060.6,
+   "mw_final": 733.3,
+   "km2_0": 27.81,
+   "km2_final": 16.3
+  },
+  {
+   "sido": "경남",
+   "n": 492,
+   "n_reviewed": 264,
+   "mw0": 1115.5,
+   "mw_auto": 905.0,
+   "mw_final": 605.2,
+   "km2_0": 24.8,
+   "km2_final": 13.45
+  },
+  {
+   "sido": "강원",
+   "n": 487,
+   "n_reviewed": 263,
+   "mw0": 1074.2,
+   "mw_auto": 948.8,
+   "mw_final": 677.5,
+   "km2_0": 23.89,
+   "km2_final": 15.06
+  },
+  {
+   "sido": "충북",
+   "n": 372,
+   "n_reviewed": 160,
+   "mw0": 743.7,
+   "mw_auto": 622.3,
+   "mw_final": 475.6,
+   "km2_0": 16.54,
+   "km2_final": 10.57
+  },
+  {
+   "sido": "제주",
+   "n": 91,
+   "n_reviewed": 51,
+   "mw0": 335.4,
+   "mw_auto": 327.9,
+   "mw_final": 312.8,
+   "km2_0": 7.45,
+   "km2_final": 6.95
+  },
+  {
+   "sido": "인천",
+   "n": 24,
+   "n_reviewed": 15,
+   "mw0": 163.7,
+   "mw_auto": 157.6,
+   "mw_final": 147.9,
+   "km2_0": 3.64,
+   "km2_final": 3.29
+  },
+  {
+   "sido": "대구",
+   "n": 36,
+   "n_reviewed": 33,
+   "mw0": 128.0,
+   "mw_auto": 123.4,
+   "mw_final": 32.9,
+   "km2_0": 2.85,
+   "km2_final": 0.73
+  },
+  {
+   "sido": "광주",
+   "n": 28,
+   "n_reviewed": 24,
+   "mw0": 80.7,
+   "mw_auto": 67.5,
+   "mw_final": 17.1,
+   "km2_0": 1.8,
+   "km2_final": 0.38
+  },
+  {
+   "sido": "울산",
+   "n": 20,
+   "n_reviewed": 12,
+   "mw0": 40.1,
+   "mw_auto": 30.5,
+   "mw_final": 14.3,
+   "km2_0": 0.89,
+   "km2_final": 0.32
+  },
+  {
+   "sido": "세종",
+   "n": 17,
+   "n_reviewed": 10,
+   "mw0": 32.3,
+   "mw_auto": 26.4,
+   "mw_final": 22.3,
+   "km2_0": 0.72,
+   "km2_final": 0.5
+  },
+  {
+   "sido": "대전",
+   "n": 9,
+   "n_reviewed": 5,
+   "mw0": 27.2,
+   "mw_auto": 25.9,
+   "mw_final": 11.6,
+   "km2_0": 0.61,
+   "km2_final": 0.26
+  },
+  {
+   "sido": "부산",
+   "n": 14,
+   "n_reviewed": 10,
+   "mw0": 21.2,
+   "mw_auto": 14.1,
+   "mw_final": 7.4,
+   "km2_0": 0.47,
+   "km2_final": 0.16
+  },
+  {
+   "sido": "서울",
+   "n": 5,
+   "n_reviewed": 4,
+   "mw0": 11.5,
+   "mw_auto": 9.1,
+   "mw_final": 2.7,
+   "km2_0": 0.25,
+   "km2_final": 0.06
+  }
+ ],
+ "parcels_removed": {
+  "auto": 255116,
+  "eye": 62479,
+  "unique": 208073
+ },
+ "keep": {
+  "n_parcel": 289906,
+  "n_drop": 155464,
+  "n_partial": 56590,
+  "a_ledger_km2": 413.278,
+  "a_keep_km2": 305.416,
+  "built_at": "2026-10-20T05:15:58"
+ },
+ "photo_dates": {
+  "n_reviewed": 2867,
+  "year_min": 2010,
+  "year_max": 2026,
+  "share_ge2023_pct": 63.7,
+  "share_ge2025_pct": 45.2,
+  "vworld": "2026-10-16–19 조회 시점에 V-World가 제공하던 최신 영상 사용(영상에 촬영일 정보 없음)"
+ },
+ "sources": {
+  "nodelink": "국토교통부 표준노드링크 2026-07-16판",
+  "osm": "OpenStreetMap — Geofabrik 대한민국 추출본(2026-10-06 기준)",
+  "building": "V-World GIS건물통합정보(LT_C_BLDGINFO) — 2026-10-08 전국 수집"
+ }
+}

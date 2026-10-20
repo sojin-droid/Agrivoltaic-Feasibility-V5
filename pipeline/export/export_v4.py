@@ -89,7 +89,7 @@ save('summary_v4.json', {
                'touchstone': '정본 R0 = R0_current 런 산출과 일치 검증 · 대조군 R0 = 상수 정확 일치',
                'control': {'n': _r0c['n'], 'km2': round(_r0c['m2']/1e6, 2),
                            'def': '무필터(전 소유) 대조군 — 정본 아님, 병기 전용'},
-               'legacy': {'n': Q.R0_ALL_LEGACY_N, 'km2': round(Q.R0_ALL_LEGACY_M2/1e6, 2),
+               'legacy': {'n': Q.R0_ALL_NF_LEGACY_N, 'km2': round(Q.R0_ALL_NF_LEGACY_M2/1e6, 2),   # 비농지 제외 후(ADR-0060)
                           'def': '구 정의 ρ≥0.30 — 폐지(참고값, 정책 인용 금지)'},
                'pending_zone_null': pend},
     'matrix': matrix,          # 독립 조합 R0–R3 · 각 정본/대조군 — 누적 사다리 아님

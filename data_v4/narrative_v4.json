@@ -1,5 +1,5 @@
 {
- "generated": "2026-10-12 11:22",
+ "generated": "2026-10-20 03:31",
  "edition": "3판 — 우주 = 법인·국공유(ADR-0040) · 등재 문턱 폐지(ADR-0041) · 실경작 비율은 적격 조건 아님(ADR-0039)",
  "universe": {
   "정본": "pubcorp — 국공유(02·04·05)+법인(06)",
@@ -14,254 +14,254 @@
  },
  "runs": {
   "R0_current": {
-   "n_eligible": 1011491,
-   "eligible_km2": 490.71,
-   "n_component": 297801,
-   "component_km2": 490.71,
-   "mw": 22082,
+   "n_eligible": 925220,
+   "eligible_km2": 427.57,
+   "n_component": 298227,
+   "component_km2": 427.57,
+   "mw": 19241,
    "ge50": 1,
    "ge100": 1,
    "ge50_km2": 2.4,
-   "ge50_mw": 107,
-   "max_ha": 237
-  },
-  "R1_protect": {
-   "n_eligible": 1080808,
-   "eligible_km2": 530.23,
-   "n_component": 316184,
-   "component_km2": 530.23,
-   "mw": 23860,
-   "ge50": 1,
-   "ge100": 1,
-   "ge50_km2": 2.4,
-   "ge50_mw": 107,
-   "max_ha": 237
-  },
-  "R3_zone_all": {
-   "n_eligible": 1563683,
-   "eligible_km2": 1078.38,
-   "n_component": 403254,
-   "component_km2": 1078.38,
-   "mw": 48527,
-   "ge50": 25,
-   "ge100": 8,
-   "ge50_km2": 54.5,
-   "ge50_mw": 2451,
-   "max_ha": 579
-  },
-  "R2_promo": {
-   "n_eligible": 1494366,
-   "eligible_km2": 1038.85,
-   "n_component": 388121,
-   "component_km2": 1038.85,
-   "mw": 46748,
-   "ge50": 25,
-   "ge100": 8,
-   "ge50_km2": 54.4,
-   "ge50_mw": 2450,
-   "max_ha": 579
-  },
-  "R0_current@all": {
-   "n_eligible": 5719511,
-   "eligible_km2": 5582.55,
-   "n_component": 570080,
-   "component_km2": 5582.55,
-   "mw": 251215,
-   "ge50": 161,
-   "ge100": 38,
-   "ge50_km2": 386.3,
-   "ge50_mw": 17385,
-   "max_ha": 3399
-  },
-  "R1_protect@all": {
-   "n_eligible": 6200066,
-   "eligible_km2": 6158.37,
-   "n_component": 571655,
-   "component_km2": 6158.37,
-   "mw": 277126,
-   "ge50": 211,
-   "ge100": 49,
-   "ge50_km2": 480.1,
-   "ge50_mw": 21606,
-   "max_ha": 3399
-  },
-  "R2_promo@all": {
-   "n_eligible": 8790833,
-   "eligible_km2": 11395.85,
-   "n_component": 509338,
-   "component_km2": 11395.85,
-   "mw": 512814,
-   "ge50": 1649,
-   "ge100": 640,
-   "ge50_km2": 4494.5,
-   "ge50_mw": 202254,
-   "max_ha": 3399
-  },
-  "R3_zone_all@all": {
-   "n_eligible": 9271388,
-   "eligible_km2": 11971.67,
-   "n_component": 500651,
-   "component_km2": 11971.67,
-   "mw": 538725,
-   "ge50": 1733,
-   "ge100": 709,
-   "ge50_km2": 5059.4,
-   "ge50_mw": 227672,
-   "max_ha": 3517
+   "ge50_mw": 106,
+   "max_ha": 236
   },
   "R0_current_SB": {
-   "n_eligible": 489583,
-   "eligible_km2": 305.74,
-   "n_component": 153837,
-   "component_km2": 305.74,
-   "mw": 13758,
+   "n_eligible": 439893,
+   "eligible_km2": 263.74,
+   "n_component": 153158,
+   "component_km2": 263.74,
+   "mw": 11868,
    "ge50": 1,
    "ge100": 0,
    "ge50_km2": 1.8,
    "ge50_mw": 81,
-   "max_ha": 180
+   "max_ha": 179
+  },
+  "R1_protect": {
+   "n_eligible": 994537,
+   "eligible_km2": 467.1,
+   "n_component": 316762,
+   "component_km2": 467.1,
+   "mw": 21019,
+   "ge50": 1,
+   "ge100": 1,
+   "ge50_km2": 2.4,
+   "ge50_mw": 106,
+   "max_ha": 236
   },
   "R1_protect_SB": {
-   "n_eligible": 531938,
-   "eligible_km2": 331.91,
-   "n_component": 166474,
-   "component_km2": 331.91,
-   "mw": 14936,
+   "n_eligible": 482248,
+   "eligible_km2": 289.91,
+   "n_component": 165872,
+   "component_km2": 289.91,
+   "mw": 13046,
    "ge50": 1,
    "ge100": 0,
    "ge50_km2": 1.8,
    "ge50_mw": 81,
-   "max_ha": 180
+   "max_ha": 179
+  },
+  "R2_promo": {
+   "n_eligible": 1338902,
+   "eligible_km2": 930.99,
+   "n_component": 393981,
+   "component_km2": 930.99,
+   "mw": 41895,
+   "ge50": 24,
+   "ge100": 8,
+   "ge50_km2": 51.7,
+   "ge50_mw": 2328,
+   "max_ha": 575
   },
   "R2_promo_SB": {
-   "n_eligible": 823071,
-   "eligible_km2": 743.18,
-   "n_component": 222253,
-   "component_km2": 743.18,
-   "mw": 33443,
-   "ge50": 25,
+   "n_eligible": 722649,
+   "eligible_km2": 666.79,
+   "n_component": 224553,
+   "component_km2": 666.79,
+   "mw": 30005,
+   "ge50": 24,
    "ge100": 7,
-   "ge50_km2": 53.0,
-   "ge50_mw": 2383,
-   "max_ha": 578
+   "ge50_km2": 50.3,
+   "ge50_mw": 2262,
+   "max_ha": 574
+  },
+  "R3_zone_all": {
+   "n_eligible": 1408219,
+   "eligible_km2": 970.52,
+   "n_component": 409364,
+   "component_km2": 970.52,
+   "mw": 43673,
+   "ge50": 24,
+   "ge100": 8,
+   "ge50_km2": 51.7,
+   "ge50_mw": 2329,
+   "max_ha": 575
   },
   "R3_zone_all_SB": {
-   "n_eligible": 865426,
-   "eligible_km2": 769.35,
-   "n_component": 232926,
-   "component_km2": 769.35,
-   "mw": 34621,
-   "ge50": 25,
+   "n_eligible": 765004,
+   "eligible_km2": 692.96,
+   "n_component": 235362,
+   "component_km2": 692.96,
+   "mw": 31183,
+   "ge50": 24,
    "ge100": 7,
-   "ge50_km2": 53.0,
-   "ge50_mw": 2383,
-   "max_ha": 578
+   "ge50_km2": 50.3,
+   "ge50_mw": 2262,
+   "max_ha": 574
+  },
+  "R0_current@all": {
+   "n_eligible": 5633240,
+   "eligible_km2": 5519.41,
+   "n_component": 573252,
+   "component_km2": 5519.41,
+   "mw": 248374,
+   "ge50": 152,
+   "ge100": 34,
+   "ge50_km2": 365.5,
+   "ge50_mw": 16445,
+   "max_ha": 3399
   },
   "R0_current_SB@all": {
-   "n_eligible": 2837720,
-   "eligible_km2": 3141.4,
-   "n_component": 371713,
-   "component_km2": 3141.4,
-   "mw": 141363,
-   "ge50": 44,
+   "n_eligible": 2788030,
+   "eligible_km2": 3099.4,
+   "n_component": 372994,
+   "component_km2": 3099.4,
+   "mw": 139473,
+   "ge50": 41,
    "ge100": 17,
-   "ge50_km2": 131.7,
-   "ge50_mw": 5927,
+   "ge50_km2": 126.4,
+   "ge50_mw": 5690,
    "max_ha": 2542
+  },
+  "R1_protect@all": {
+   "n_eligible": 6113795,
+   "eligible_km2": 6095.23,
+   "n_component": 574882,
+   "component_km2": 6095.23,
+   "mw": 274285,
+   "ge50": 202,
+   "ge100": 45,
+   "ge50_km2": 458.6,
+   "ge50_mw": 20639,
+   "max_ha": 3399
   },
   "R1_protect_SB@all": {
-   "n_eligible": 3123492,
-   "eligible_km2": 3489.04,
-   "n_component": 381386,
-   "component_km2": 3489.04,
-   "mw": 157007,
-   "ge50": 52,
-   "ge100": 18,
-   "ge50_km2": 147.9,
-   "ge50_mw": 6655,
+   "n_eligible": 3073802,
+   "eligible_km2": 3447.04,
+   "n_component": 382723,
+   "component_km2": 3447.04,
+   "mw": 155117,
+   "ge50": 51,
+   "ge100": 17,
+   "ge50_km2": 143.1,
+   "ge50_mw": 6438,
    "max_ha": 2542
+  },
+  "R2_promo@all": {
+   "n_eligible": 8635369,
+   "eligible_km2": 11287.99,
+   "n_component": 513794,
+   "component_km2": 11287.99,
+   "mw": 507960,
+   "ge50": 1631,
+   "ge100": 612,
+   "ge50_km2": 4292.7,
+   "ge50_mw": 193173,
+   "max_ha": 3399
   },
   "R2_promo_SB@all": {
-   "n_eligible": 4841820,
-   "eligible_km2": 7162.11,
-   "n_component": 367233,
-   "component_km2": 7162.11,
-   "mw": 322295,
-   "ge50": 796,
-   "ge100": 234,
-   "ge50_km2": 1762.7,
-   "ge50_mw": 79321,
+   "n_eligible": 4741398,
+   "eligible_km2": 7085.71,
+   "n_component": 369997,
+   "component_km2": 7085.71,
+   "mw": 318857,
+   "ge50": 760,
+   "ge100": 217,
+   "ge50_km2": 1647.6,
+   "ge50_mw": 74140,
    "max_ha": 2542
   },
+  "R3_zone_all@all": {
+   "n_eligible": 9115924,
+   "eligible_km2": 11863.81,
+   "n_component": 505000,
+   "component_km2": 11863.81,
+   "mw": 533871,
+   "ge50": 1721,
+   "ge100": 679,
+   "ge50_km2": 4858.5,
+   "ge50_mw": 218633,
+   "max_ha": 3501
+  },
   "R3_zone_all_SB@all": {
-   "n_eligible": 5127592,
-   "eligible_km2": 7509.75,
-   "n_component": 368524,
-   "component_km2": 7509.75,
-   "mw": 337939,
-   "ge50": 852,
-   "ge100": 259,
-   "ge50_km2": 1939.7,
-   "ge50_mw": 87286,
+   "n_eligible": 5027170,
+   "eligible_km2": 7433.35,
+   "n_component": 371276,
+   "component_km2": 7433.35,
+   "mw": 334501,
+   "ge50": 817,
+   "ge100": 245,
+   "ge50_km2": 1825.2,
+   "ge50_mw": 82134,
    "max_ha": 2542
   }
  },
  "owner_setback": [
   {
    "group": "간척지 내 법인",
-   "all_m2": 120979367.7199998,
-   "anchor_m2": 3558888.6599999988
+   "all_m2": 119913388.34736088,
+   "anchor_m2": 3346727.1922005173
   },
   {
    "group": "간척지 내 비법인",
-   "all_m2": 131279787.89999987,
-   "anchor_m2": 6325988.930000004
+   "all_m2": 130475188.43554802,
+   "anchor_m2": 5677726.637368987
   },
   {
    "group": "간척지 외 법인",
-   "all_m2": 784106738.0799999,
-   "anchor_m2": 159870860.65000018
+   "all_m2": 767714516.4921303,
+   "anchor_m2": 148643495.86359203
   }
  ],
  "big_composition": {
   "R0_current@all": {
-   "ge50": 161,
-   "majority_op": 3,
-   "indiv_share_pct": 92.0
+   "ge50": 152,
+   "majority_op": 2,
+   "indiv_share_pct": 93.0
   },
   "R2_promo@all": {
-   "ge50": 1649,
-   "majority_op": 27,
+   "ge50": 1631,
+   "majority_op": 23,
    "indiv_share_pct": 90.0
   }
  },
  "cp_big": [
   {
-   "id": 4203320,
-   "mw": 260,
-   "n": 330,
-   "reclaim_pct": 95,
+   "id": 4265591,
+   "mw": 259,
+   "n": 314,
+   "reclaim_pct": 99,
    "district": "석문",
    "sgg": "44270"
   },
   {
-   "id": 4213118,
-   "mw": 209,
-   "n": 431,
+   "id": 4275395,
+   "mw": 208,
+   "n": 430,
    "reclaim_pct": 100,
    "district": "대호지구",
    "sgg": "44270"
   },
   {
-   "id": 3931859,
-   "mw": 175,
-   "n": 388,
+   "id": 3989992,
+   "mw": 170,
+   "n": 347,
    "reclaim_pct": 0,
    "district": null,
    "sgg": "44210"
   },
   {
-   "id": 4582870,
+   "id": 4650392,
    "mw": 159,
    "n": 379,
    "reclaim_pct": 100,
@@ -269,111 +269,103 @@
    "sgg": "44770"
   },
   {
-   "id": 5963926,
-   "mw": 137,
+   "id": 6041787,
+   "mw": 136,
    "n": 208,
    "reclaim_pct": 100,
    "district": "고흥지구",
    "sgg": "46770"
   },
   {
-   "id": 6757824,
+   "id": 6843376,
    "mw": 115,
-   "n": 268,
+   "n": 267,
    "reclaim_pct": 99,
    "district": "영산강(3-2)지구",
    "sgg": "46820"
   },
   {
-   "id": 5963927,
-   "mw": 110,
-   "n": 179,
+   "id": 6041788,
+   "mw": 109,
+   "n": 174,
    "reclaim_pct": 100,
    "district": "고흥지구",
    "sgg": "46770"
   },
   {
-   "id": 12299579,
-   "mw": 107,
+   "id": 12435191,
+   "mw": 106,
    "n": 89,
    "reclaim_pct": 0,
    "district": null,
    "sgg": "50130"
   },
   {
-   "id": 4010391,
+   "id": 4351520,
    "mw": 97,
-   "n": 264,
-   "reclaim_pct": 0,
-   "district": null,
-   "sgg": "44210"
-  },
-  {
-   "id": 4288916,
-   "mw": 97,
-   "n": 113,
+   "n": 112,
    "reclaim_pct": 100,
    "district": "석문",
    "sgg": "44270"
   },
   {
-   "id": 411414,
-   "mw": 86,
-   "n": 272,
+   "id": 414918,
+   "mw": 84,
+   "n": 269,
    "reclaim_pct": 0,
    "district": null,
    "sgg": "28710"
   },
   {
-   "id": 5962314,
-   "mw": 83,
-   "n": 138,
+   "id": 6040149,
+   "mw": 76,
+   "n": 122,
    "reclaim_pct": 100,
    "district": "고흥지구",
    "sgg": "46770"
   },
   {
-   "id": 6750896,
-   "mw": 73,
+   "id": 6836402,
+   "mw": 72,
    "n": 167,
    "reclaim_pct": 100,
    "district": "영산강(3-2)지구",
    "sgg": "46820"
   },
   {
-   "id": 6007175,
-   "mw": 71,
-   "n": 114,
+   "id": 6085505,
+   "mw": 70,
+   "n": 110,
    "reclaim_pct": 98,
    "district": "고흥지구",
    "sgg": "46770"
   },
   {
-   "id": 4015443,
-   "mw": 70,
-   "n": 180,
-   "reclaim_pct": 0,
-   "district": null,
-   "sgg": "44210"
-  },
-  {
-   "id": 5987909,
-   "mw": 70,
-   "n": 139,
-   "reclaim_pct": 81,
-   "district": "고흥지구",
-   "sgg": "46770"
-  },
-  {
-   "id": 6717526,
-   "mw": 70,
+   "id": 6802997,
+   "mw": 69,
    "n": 164,
    "reclaim_pct": 100,
    "district": "영산강(3-1)지구",
    "sgg": "46820"
   },
   {
-   "id": 4206982,
+   "id": 6066192,
+   "mw": 68,
+   "n": 120,
+   "reclaim_pct": 91,
+   "district": "고흥지구",
+   "sgg": "46770"
+  },
+  {
+   "id": 4070080,
+   "mw": 68,
+   "n": 133,
+   "reclaim_pct": 0,
+   "district": null,
+   "sgg": "44210"
+  },
+  {
+   "id": 4269249,
    "mw": 66,
    "n": 79,
    "reclaim_pct": 100,
@@ -381,15 +373,15 @@
    "sgg": "44270"
   },
   {
-   "id": 3889925,
-   "mw": 65,
-   "n": 496,
+   "id": 3947704,
+   "mw": 64,
+   "n": 491,
    "reclaim_pct": 0,
    "district": null,
    "sgg": "44210"
   },
   {
-   "id": 6758313,
+   "id": 6843866,
    "mw": 59,
    "n": 135,
    "reclaim_pct": 100,
@@ -397,7 +389,15 @@
    "sgg": "46820"
   },
   {
-   "id": 6787308,
+   "id": 4076209,
+   "mw": 57,
+   "n": 119,
+   "reclaim_pct": 0,
+   "district": null,
+   "sgg": "44210"
+  },
+  {
+   "id": 6872941,
    "mw": 56,
    "n": 128,
    "reclaim_pct": 100,
@@ -405,7 +405,7 @@
    "sgg": "46820"
   },
   {
-   "id": 6055673,
+   "id": 6134177,
    "mw": 55,
    "n": 320,
    "reclaim_pct": 17,
@@ -413,25 +413,17 @@
    "sgg": "46770"
   },
   {
-   "id": 3681887,
-   "mw": 54,
-   "n": 720,
+   "id": 3732959,
+   "mw": 53,
+   "n": 690,
    "reclaim_pct": 0,
    "district": null,
    "sgg": "44180"
   },
   {
-   "id": 5962315,
-   "mw": 54,
-   "n": 91,
-   "reclaim_pct": 100,
-   "district": "고흥지구",
-   "sgg": "46770"
-  },
-  {
-   "id": 3928137,
+   "id": 3986325,
    "mw": 51,
-   "n": 64,
+   "n": 62,
    "reclaim_pct": 0,
    "district": null,
    "sgg": "44210"
@@ -439,31 +431,31 @@
  ],
  "cp_big_sb": [
   {
-   "id": 4386311,
-   "mw": 260,
-   "n": 324,
-   "reclaim_pct": 95,
+   "id": 4426492,
+   "mw": 258,
+   "n": 311,
+   "reclaim_pct": 99,
    "district": "석문",
    "sgg": "44270"
   },
   {
-   "id": 4396295,
+   "id": 4436475,
    "mw": 191,
-   "n": 394,
+   "n": 393,
    "reclaim_pct": 100,
    "district": "대호지구",
    "sgg": "44270"
   },
   {
-   "id": 4102864,
-   "mw": 175,
-   "n": 388,
+   "id": 4139991,
+   "mw": 170,
+   "n": 347,
    "reclaim_pct": 0,
    "district": null,
    "sgg": "44210"
   },
   {
-   "id": 4777541,
+   "id": 4821305,
    "mw": 158,
    "n": 377,
    "reclaim_pct": 100,
@@ -471,55 +463,39 @@
    "sgg": "44770"
   },
   {
-   "id": 6193355,
-   "mw": 137,
+   "id": 6244178,
+   "mw": 136,
    "n": 208,
    "reclaim_pct": 100,
    "district": "고흥지구",
    "sgg": "46770"
   },
   {
-   "id": 7007792,
+   "id": 7063602,
    "mw": 111,
-   "n": 259,
+   "n": 258,
    "reclaim_pct": 99,
    "district": "영산강(3-2)지구",
    "sgg": "46820"
   },
   {
-   "id": 6193356,
-   "mw": 110,
-   "n": 179,
+   "id": 6244179,
+   "mw": 109,
+   "n": 174,
    "reclaim_pct": 100,
    "district": "고흥지구",
    "sgg": "46770"
   },
   {
-   "id": 4183276,
+   "id": 4513742,
    "mw": 97,
-   "n": 264,
-   "reclaim_pct": 0,
-   "district": null,
-   "sgg": "44210"
-  },
-  {
-   "id": 4473329,
-   "mw": 97,
-   "n": 113,
+   "n": 112,
    "reclaim_pct": 100,
    "district": "석문",
    "sgg": "44270"
   },
   {
-   "id": 6191721,
-   "mw": 83,
-   "n": 138,
-   "reclaim_pct": 100,
-   "district": "고흥지구",
-   "sgg": "46770"
-  },
-  {
-   "id": 12722196,
+   "id": 12808479,
    "mw": 81,
    "n": 75,
    "reclaim_pct": 0,
@@ -527,55 +503,63 @@
    "sgg": "50130"
   },
   {
-   "id": 423054,
-   "mw": 74,
-   "n": 230,
-   "reclaim_pct": 0,
-   "district": null,
-   "sgg": "28710"
+   "id": 6242518,
+   "mw": 76,
+   "n": 122,
+   "reclaim_pct": 100,
+   "district": "고흥지구",
+   "sgg": "46770"
   },
   {
-   "id": 7000716,
-   "mw": 73,
+   "id": 7056483,
+   "mw": 72,
    "n": 167,
    "reclaim_pct": 100,
    "district": "영산강(3-2)지구",
    "sgg": "46820"
   },
   {
-   "id": 6238212,
-   "mw": 71,
-   "n": 114,
+   "id": 425935,
+   "mw": 72,
+   "n": 228,
+   "reclaim_pct": 0,
+   "district": null,
+   "sgg": "28710"
+  },
+  {
+   "id": 6289215,
+   "mw": 70,
+   "n": 110,
    "reclaim_pct": 98,
    "district": "고흥지구",
    "sgg": "46770"
   },
   {
-   "id": 4188481,
-   "mw": 70,
-   "n": 180,
-   "reclaim_pct": 0,
-   "district": null,
-   "sgg": "44210"
-  },
-  {
-   "id": 6218616,
-   "mw": 70,
-   "n": 139,
-   "reclaim_pct": 81,
-   "district": "고흥지구",
-   "sgg": "46770"
-  },
-  {
-   "id": 6966667,
-   "mw": 70,
+   "id": 7022400,
+   "mw": 69,
    "n": 164,
    "reclaim_pct": 100,
    "district": "영산강(3-1)지구",
    "sgg": "46820"
   },
   {
-   "id": 4390064,
+   "id": 6269595,
+   "mw": 68,
+   "n": 120,
+   "reclaim_pct": 91,
+   "district": "고흥지구",
+   "sgg": "46770"
+  },
+  {
+   "id": 4221625,
+   "mw": 68,
+   "n": 133,
+   "reclaim_pct": 0,
+   "district": null,
+   "sgg": "44210"
+  },
+  {
+   "id": 4430238,
    "mw": 66,
    "n": 79,
    "reclaim_pct": 100,
@@ -583,15 +567,15 @@
    "sgg": "44270"
   },
   {
-   "id": 4059951,
-   "mw": 63,
-   "n": 480,
+   "id": 4096813,
+   "mw": 62,
+   "n": 477,
    "reclaim_pct": 0,
    "district": null,
    "sgg": "44210"
   },
   {
-   "id": 7008305,
+   "id": 7064116,
    "mw": 59,
    "n": 135,
    "reclaim_pct": 100,
@@ -599,7 +583,15 @@
    "sgg": "46820"
   },
   {
-   "id": 6287438,
+   "id": 4227940,
+   "mw": 57,
+   "n": 119,
+   "reclaim_pct": 0,
+   "district": null,
+   "sgg": "44210"
+  },
+  {
+   "id": 6338558,
    "mw": 55,
    "n": 320,
    "reclaim_pct": 17,
@@ -607,33 +599,25 @@
    "sgg": "46770"
   },
   {
-   "id": 7037911,
-   "mw": 55,
+   "id": 7093784,
+   "mw": 54,
    "n": 123,
    "reclaim_pct": 100,
    "district": "영산강(3-2)지구",
    "sgg": "46820"
   },
   {
-   "id": 6191722,
-   "mw": 54,
-   "n": 91,
-   "reclaim_pct": 100,
-   "district": "고흥지구",
-   "sgg": "46770"
-  },
-  {
-   "id": 4099080,
+   "id": 4136262,
    "mw": 51,
-   "n": 64,
+   "n": 62,
    "reclaim_pct": 0,
    "district": null,
    "sgg": "44210"
   },
   {
-   "id": 3841466,
-   "mw": 51,
-   "n": 674,
+   "id": 3873641,
+   "mw": 50,
+   "n": 655,
    "reclaim_pct": 0,
    "district": null,
    "sgg": "44180"
@@ -641,8 +625,8 @@
  ],
  "cp_big_anchor": [
   {
-   "id": 12637461,
-   "mw": 107,
+   "id": 12709414,
+   "mw": 106,
    "n": 89,
    "reclaim_pct": 0,
    "district": null,

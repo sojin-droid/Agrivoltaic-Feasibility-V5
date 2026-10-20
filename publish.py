@@ -33,7 +33,12 @@ NUM = ['export_v4.py', 'export_results_v4.py', 'export_narrative_v4.py',
        'export_grid_v4.py', 'export_ind_firms.py',
        'export_decree_v4.py',
        # V5.5 (GGI 검토 반영) — TOP 10 모집단·비지배 플래그 · PNU 소속 · 기존 시설(VALID)·provenance
-       'export_top10_v4.py', 'export_pnu_v4.py', 'export_existing_v4.py']
+       'export_top10_v4.py', 'export_pnu_v4.py', 'export_existing_v4.py',
+       # 2026-10-19 — 1MW 이상 후보 공간 비농지 검토 고정본 통계 · 검토 결과 페이지(nonfarm.html)가 읽는다(값 반영은 정본 ADR-0060)
+       'export_nonfarm_v1.py',
+       # 2026-10-20 ADR-0060 재발행에서 빠져 있던 것을 발견 — 화면이 읽는데 순서에 없어 옛 값이 남았다
+       #   big_sgg 는 narrative·results 와 대조하므로 그 뒤 · estimate = 잠재량 큐브 · parcels = 적격 필지 점 레이어(R2_promo members)
+       'export_big_sgg_v4.py', 'export_estimate_v4.py', 'export_parcels_v4.py']
 
 # 지오메트리 — **순서가 뜻을 갖는다**
 #   export_clusters_v4 가 끝에 rebuild_cluster_index 를 부른다(걸침 표시 + 색인).

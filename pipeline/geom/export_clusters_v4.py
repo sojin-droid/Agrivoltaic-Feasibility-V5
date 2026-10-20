@@ -53,6 +53,13 @@ if os.path.exists(_recp):
     REC_MAP = dict(zip(_r['old_pnu'], _r['new_pnu']))
     print(f"회수 대응 {len(REC_MAP):,}필지 (ADR-0047 · {os.path.basename(_recp)})", flush=True)
 
+# ── 비농지 제외(ADR-0060) — 일부만 남은 필지는 남은 도형으로 그린다(nonfarm_keep_v1 · 원장 pnu 키). 전부 제외된 필지는 이미 멤버가 아니다.
+_pkp = os.path.join(LR, 'nonfarm_keep_v1', 'parcel_keep_v1.gpkg')
+PKEEP = gpd.read_file(_pkp, layer='partial').set_index('pnu').geometry if os.path.exists(_pkp) else None
+if PKEEP is None:
+    raise SystemExit(f'중단: {_pkp} 없음 — model/stages/v11_01_nonfarm_keep.py --write 먼저(ADR-0060)')
+print(f"비농지 제외 — 일부만 남은 필지 도형 {len(PKEEP):,} (ADR-0060)", flush=True)
+
 # ── 멤버·면적 적재 (한 번) ──
 nodes = pd.read_parquet(os.path.join(LR, 'engine_cache', 'nodes.parquet'),
                         columns=['pnu', 'area'])
@@ -90,8 +97,12 @@ for i, sgg in enumerate(sggs, 1):
             # 구 pnu 가 회수 대응표에 있으면 신 pnu 로 지적도를 찾는다(식별자 조정 — 값·lab 은 그대로)
             _keys = ms['pnu'].map(lambda _p: REC_MAP.get(_p, _p)).values if REC_MAP else ms['pnu'].values
             sub = g.reindex(_keys)
-            ok = sub.geometry.notna().values
-            geoms = sub.geometry.values[ok]
+            _gv = sub.geometry.values.copy()
+            _pk = ms['pnu'].isin(PKEEP.index).values
+            if _pk.any():
+                _gv[_pk] = PKEEP.reindex(ms['pnu'].values[_pk]).values   # 비농지로 잘린 필지는 남은 도형(ADR-0060)
+            ok = ~pd.isna(_gv)
+            geoms = _gv[ok]
             labs = ms['lab'].values[ok]
             if len(geoms):
                 # ── 구획별 합집합을 한 번에 (구획 수가 30만이라 파이썬 루프는 못 버틴다) ──
