@@ -68,6 +68,20 @@ table.adv th{background:var(--adv-soft);position:sticky;top:0}
 .srch-res{max-width:440px;margin:6px auto 0;text-align:left}
 .srch-res div{padding:6px 10px;border:1px solid var(--adv-line);border-top:0;background:#fff;cursor:pointer;font-size:13px}
 .srch-res div:first-child{border-top:1px solid var(--adv-line)}
+.nf-page{border:1px solid var(--adv-line);border-radius:10px;background:#fff;margin:10px 0 14px;overflow:hidden}
+.nf-head{display:flex;flex-wrap:wrap;gap:8px;align-items:baseline;padding:10px 14px;border-bottom:1px solid var(--adv-line)}
+.nf-head h4{margin:0;font-size:15px;color:var(--adv-navy)}
+.nf-kind{font:700 11.5px inherit;padding:2px 8px;border-radius:10px;color:#fff}
+.nf-kind.keep{background:#2e7d4f}.nf-kind.partial{background:#b7791f}.nf-kind.drop{background:#a33a3a}
+.nf-body{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr) minmax(220px,.8fr);gap:12px;padding:12px 14px}
+@media (max-width:900px){.nf-body{grid-template-columns:1fr}}
+.nf-fig{margin:0;min-width:0}.nf-fig img{width:100%;height:300px;object-fit:cover;border-radius:6px;display:block;border:1px solid var(--adv-line)}
+.nf-fig figcaption{font-size:12px;color:var(--adv-muted);margin-top:4px}
+.nf-map{height:300px;border-radius:6px;border:1px solid var(--adv-line)}
+.nf-num .big{font:700 26px/1.2 inherit;color:var(--adv-ink)}.nf-num .big small{font-size:14px;color:var(--adv-muted);font-weight:600}
+.nf-num .ref{font-size:12.5px;color:var(--adv-muted);margin-top:2px}
+.nf-num .lab{font-size:12px;color:var(--adv-muted);margin-top:10px}
+.nf-tbl td.v,.nf-tbl th{text-align:left}.nf-tbl td.v b{font-size:14px}.nf-tbl td.v span{color:var(--adv-muted);font-size:12px}
 .rg-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:8px 0 16px}
 @media (max-width:1100px){.rg-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media (max-width:700px){.rg-grid{grid-template-columns:1fr}}
@@ -117,7 +131,6 @@ input[type=range]{width:180px;max-width:100%;accent-color:var(--adv-navy)}
 <div class="adv-banner"><div class="adv-wrap"><b>ADVISORY · 자문용 검토 화면</b> — 이 화면은 연구 결과를 최종 확정하기 위한 화면이 아니라, 현재 경기도 자료와 그 자료로 만든 후보 결과가 실제 지역 현황을 얼마나 잘 반영하는지 전문가께 검토받기 위한 자문용 화면입니다. 사업 가능성·인허가 가능성·계통 접속 가능 여부를 판단하는 화면이 아닙니다. 이번 자문에서 검토받는 것은 자료의 정확성·현실성·신뢰성·완전성·최신성입니다. 21m 묶음 기준·후보 비교 방식·가중치 같은 분석 방법의 타당성은 별도 자문에서 다룹니다. 의견은 서버로 자동 전송되지 않고 이 브라우저에만 저장됩니다.</div></div>
 <div class="adv-wrap">
   <div class="adv-head"><h1>재생에너지지구 내에 영농형 태양광 클러스터 위치 연구 — 자문: 자료 신뢰성·현실성 검토</h1><span class="adv-note" id="genStamp">—</span></div>
-  <div class="adv-box" style="margin-top:8px;background:#eef4fb;border-color:#9bbbe8"><label style="cursor:pointer"><input type="checkbox" id="w10Tgl"> <b>폭 10 m 미만 띠(농로·배수로·제방 가장자리) 제외</b> — 잠정 근사</label> <span class="adv-note">지목만 농지로 남은 좁은 띠 필지를 농지로 세지 않기로 했습니다(2026-10-14). 지금 보시는 면적·MW·도형은 발행 도형에 그 규칙을 근사 적용한 값이고, 필지 단위 정본 결과는 뒤에 다시 반영됩니다. 필지 수는 원 값 그대로입니다.</span></div>
   <nav class="adv-tabs" id="tabs">
     <button data-t="region" class="on">지역별 지도</button>
     <button data-t="data">① 클러스터 후보 결과 확인</button>
@@ -136,6 +149,12 @@ input[type=range]{width:180px;max-width:100%;accent-color:var(--adv-navy)}
         <li>번호는 그 시군에서 면적이 큰 순서입니다. 목록을 누르면 지도가 그 후보로 이동합니다.</li>
         <li>보령시는 충청남도라 ① 탭(경기도 자료)에는 없고 이 지도에서만 보실 수 있습니다.</li>
       </ul></div>
+    <div class="adv-box" style="background:#fff"><b>위성영상 검토 — 실제 설치 가능 공간</b> — 후보 공간은 장부 지목이 농지인 필지를 묶은 것이라, 지목만 농지로 남은 도로·하천 둔치·건물·산림이 섞여 있었습니다. 연구진이 위성영상으로 후보를 하나씩 보고 이런 땅을 뺀 뒤 남은 곳만 <b>실제 설치 가능 공간</b>으로 셉니다. 이 화면의 모든 지도와 수치는 검토 후 값이며, <span class="adv-note">괄호 안의 지목상 값은 참고용</span>입니다.
+      <div class="adv-note" style="margin-top:4px">아래 세 곳은 검토할 때 실제로 보고 판단한 화면입니다(노란 선 = 검토 전 후보 자리). 오른쪽 지도의 파란 면이 검토 후 남은 설치 가능 공간입니다.</div></div>
+    <div id="nfPages"></div>
+    <h3 style="margin:14px 0 2px;color:var(--adv-navy);font-size:16px">같은 기준으로 센 지역별 실제 설치 가능 공간</h3>
+    <div class="scroll"><table class="adv nf-tbl" id="nfTbl"></table></div>
+    <div class="adv-note" id="nfRule" style="margin-bottom:14px"></div>
     <h3 style="margin:14px 0 2px;color:var(--adv-navy);font-size:16px">경기도 — 큰 후보 공간이 많은 3개 시군</h3>
     <div class="adv-note" id="rgRule">3MW 이상 후보 공간 수 기준</div>
     <div class="rg-grid" id="rgTop"></div>
@@ -213,6 +232,11 @@ input[type=range]{width:180px;max-width:100%;accent-color:var(--adv-navy)}
         <tr><td>경작 판독</td><td class="l">팜맵 2025 (공공데이터포털 15104481 등)</td><td>농림축산식품부</td><td>2026-08-14</td><td>영상 촬영 2019–2024 (필지마다 다름)</td><td class="l">경작 판독 비율 — 확인용 참고값(판정에 쓰지 않음)</td></tr>
         <tr><td>제외 조건(규제)</td><td class="l">법정 규제 레이어 합성본 (13개 구성 레이어) — 도시계획시설(녹지·공원·광장·공공공지) · 취락지구 · 자연환경보전지역 · 문화유산 보호구역 · 야생동·식물보호구역 · 백두대간 · 국립·도립·군립공원 · 제주 절대·상대보전지역 · DMZ 10km · 경사 15° 초과 · 표고 1,000m 초과</td><td>회사 보유 자료(기존 통합분) — 일반 수집 경로: V-World 데이터 API 용도지역지구·문화유산·야생동식물·백두대간·자연공원 레이어 · 국가공간정보포털(제주 보전지역)</td><td>회사 보유분 (파일 최종 변경 2025-07-27)</td><td>2025-07-27 파일 시점</td><td class="l">법정 제외 조건 판정</td></tr>
         <tr><td>경사</td><td class="l">필지별 경사값(korea_slope · 팜맵 필지 단위 slope_mean) + 규제 합성본의 경사 15° 초과 레이어</td><td>자체 산출(수치표고모델 DEM 기반) — 일반 수집 경로: 국토지리정보원 수치표고모델</td><td>회사 보유분 (규제 합성본과 함께 · 2025-07-27 이전)</td><td>2025-07-27 이전 회사 보유분</td><td class="l">경사 15°(도) 초과 필지 제외 — 둘 중 하나라도 해당하면 제외</td></tr>
+        <tr><td>비농지 제외 — 도로</td><td class="l">국토교통부 표준노드링크 (도로 중심선·차로 수)</td><td>국토교통부</td><td>2026-07-16판</td><td>2026-07-16판</td><td class="l">도로 부지 자동 제외 — 중심선에 도로 폭(차로 수 × 3.5m + 3m)을 적용한 면</td></tr>
+        <tr><td>비농지 제외 — 마을 길·농로</td><td class="l">OpenStreetMap 도로 (Geofabrik 대한민국 추출본)</td><td>OpenStreetMap (Geofabrik)</td><td>2026-10-06 추출본</td><td>2026-10-06 기준</td><td class="l">표준노드링크에 없는 농로·마을 길 → 도로 부지 자동 제외</td></tr>
+        <tr><td>비농지 제외 — 건물</td><td class="l">V-World GIS건물통합정보 (LT_C_BLDGINFO)</td><td>V-World 데이터 API</td><td>2026-10-08</td><td>2026-10-08 조회 시점 현황</td><td class="l">건물 외곽선(1m 여유) → 건물 부지 자동 제외</td></tr>
+        <tr><td>위성영상 판독 (주)</td><td class="l">Esri World Imagery</td><td>Esri</td><td>2026-10-15–19 (검토 기간 조회)</td><td>촬영 2010–2026년 — 후보마다 다름(2023년 이후 사진 63.7%)</td><td class="l">비농지 필지 육안 판독 · 이 화면의 검토 사례 화면</td></tr>
+        <tr><td>위성영상 판독 (대조)</td><td class="l">V-World 영상</td><td>V-World</td><td>2026-10-16–19</td><td>조회 시점 최신 영상(영상에 촬영일 정보 없음)</td><td class="l">Esri 사진이 계절·그림자·가림으로 안 보일 때 대조</td></tr>
         <tr><td>계통</td><td class="l">한전 분산전원 연계정보 (온라인 조회 · 읍면동별 남은 연계 가능 용량)</td><td>한국전력공사</td><td>2026-08-19 (14:30–15:27 한 차례 조회)</td><td>조회 시점 현황</td><td class="l">계통 여유 참고값 — 전국 5,066 읍면동 · 원자료 26,801건 보존</td></tr>
         <tr><td>산업단지</td><td class="l">V-World 산업단지 경계 (LT_C_DAMDAN · 전국 1,363곳)</td><td>V-World 데이터 API</td><td>2026-08-20</td><td>2026-08-20 조회 시점 현황</td><td class="l">가장 가까운 산업단지까지 거리 · 산업단지 경계 레이어</td></tr>
         <tr><td>읍면동 경계</td><td class="l">V-World 읍면동 경계 (LT_C_ADEMD_INFO)</td><td>V-World 데이터 API</td><td>2026-08-27</td><td>2026-08-27 조회 시점 현황</td><td class="l">읍면동 경계선 · 계통 여유 채색 — 화면 표시용으로 약 8 m 범위에서 단순화</td></tr>
@@ -321,18 +345,8 @@ input[type=range]{width:180px;max-width:100%;accent-color:var(--adv-navy)}
   if (!D) { document.body.insertAdjacentHTML('beforeend', '<p style="padding:20px">자문 자산(data_v4/advisory/gg_v1.json.gz)을 불러오지 못했습니다.</p>'); return; }
   $('genStamp').textContent = `자문 자산 생성 ${D.generated} · 후보 공간 ${D.summary.n_units.toLocaleString('ko-KR')}곳`;
   const U = D.units, UBY = new Map(U.map(u => [u.id, u]));
-  // ── 폭 10 m 미만 띠(농로·배수로·제방 가장자리) 제외 — 잠정 근사 (PR-0047 · 사용자 결정 2026-10-14) ──
-  // 정본은 모델의 필지 단위 narrow10 런(데이터 PC). 그 전에 자문자가 띠 없는 모습을 보도록 발행 도형에 근사를 적용한
-  // data_v4/advisory/w10/{sgg}.json.gz 를 읽는다. 켜짐이 기본 · ?w10=0 으로 끈다. 값은 모두 '잠정' 표시를 단다.
-  const W10_ON = new URLSearchParams(location.search).get('w10') !== '0';
-  const _w10 = new Map();
-  const loadW10 = sgg => { if (!sgg) return Promise.resolve(null); if (!_w10.has(sgg)) _w10.set(sgg, V55.gz(`data_v4/advisory/w10/${sgg}.json.gz`).then(M => { if (M) for (const k in M) { const u = UBY.get(+k); if (u) u.w10 = M[k]; } return M || {}; }).catch(() => ({})));
-    return _w10.get(sgg); };
-  const ua = u => (W10_ON && u.w10) ? u.w10.a : u.a;                       // 표시 면적(㎡)
-  const umw = u => (W10_ON && u.w10) ? u.w10.mw : u.mw;
-  const ugeom = u => (W10_ON && u.w10 && u.w10.g) ? u.w10.g : u.geometry;
-  const uDrop = u => (W10_ON && u.w10 && u.w10.drop > 0.005) ? ` <span class="tag w" title="${u.w10.method === 'road' ? '도로 부지(OSM 도로 폭)를 뺀 잠정 근사' : '폭 10 m 미만 띠를 뺀 잠정 근사'} — 원 값 ${km2(u.a)} km²">${u.w10.method === 'road' ? '도로 제외' : '띠 제외'} −${Math.round(u.w10.drop * 100)}%</span>` : '';
-  const W10_TAG = W10_ON ? '<span class="tag" style="background:#e9f2ff;border-color:#9bbbe8;color:#1b4f93">띠 제외 · 잠정</span>' : '';
+  // 비농지 제외(ADR-0060)는 정본 모델에 들어가 gg_v1·units 값이 이미 제외 후 값이다 — 2026-10-14 의 띠 제외 잠정 근사(w10)는 2026-10-20 걷어냄
+  const ua = u => u.a, umw = u => u.mw, ugeom = u => u.geometry;
   // 도형은 시군별 파일에 있다 — 그 시군을 처음 볼 때 읽어 후보 공간에 붙인다(전량을 한꺼번에 들고 있지 않는다)
   const _gl = new Map();
   const loadGeom = sgg => { if (!sgg) return Promise.resolve(); if (!_gl.has(sgg)) _gl.set(sgg, V55.gz(`${D.geom_dir}/${sgg}.json.gz`).then(G => { if (G) for (const k in G.g) { const u = UBY.get(+k); if (u) u.geometry = G.g[k]; } }));
@@ -482,20 +496,20 @@ input[type=range]{width:180px;max-width:100%;accent-color:var(--adv-navy)}
     : {color: hi ? '#0C356A' : '#6B4E16', weight: hi ? 4 : .9, fillColor: COLOR(u.a), fillOpacity: hi ? .9 : .75};
   let dPolys = new Map();
   async function dRender(fit = true) {
-    await Promise.all([loadGeom(st.sgg), loadW10(st.sgg)]);
+    await loadGeom(st.sgg);
     const list = U.filter(u => inSgg(u, st.sgg) && (!st.emd || u.emds.includes(st.emd))).sort((a, b) => ua(b) - ua(a));
     dLayer.clearLayers(); dEmdL.clearLayers(); dPolys = new Map();
     list.forEach(u => { const g = ugeom(u); if (!g) return; const ly = L.geoJSON(g, {style: () => polyStyle(u, u.id === st.sel)}).addTo(dLayer);
-      ly.bindTooltip(`후보 공간 · ${km2(ua(u))} km² · ${band(ua(u))}${W10_ON && u.w10 ? ' (띠 제외 잠정)' : ''}`); ly.on('click', () => dSelect(u.id, false)); dPolys.set(u.id, ly); });
+      ly.bindTooltip(`후보 공간 · ${km2(ua(u))} km² · ${band(ua(u))}`); ly.on('click', () => dSelect(u.id, false)); dPolys.set(u.id, ly); });
     drawEvidence();
     const b = dLayer.getLayers().length ? dLayer.getBounds() : null; if (fit && b) dm.fitBounds(b, {padding: [20, 20], maxZoom: 14});
     const tot = list.reduce((s, u) => s + ua(u), 0), cnt = k => list.filter(u => ua(u) >= B[k]).length, e = st.emd ? EMD.get(st.emd) : null;
     const top = list[0];
-    $('dSum').innerHTML = `<b>${esc(st.emd ? eName(st.emd) : sName(st.sgg))}</b> — 후보 공간 <b>${list.length.toLocaleString('ko-KR')}</b>곳 · 3MW 이상 <b>${cnt('3')}</b>곳 · 가장 큰 곳 <b>${top ? fmt(umw(top), 1) : '—'}</b> MW ${W10_TAG}` +
+    $('dSum').innerHTML = `<b>${esc(st.emd ? eName(st.emd) : sName(st.sgg))}</b> — 후보 공간 <b>${list.length.toLocaleString('ko-KR')}</b>곳 · 3MW 이상 <b>${cnt('3')}</b>곳 · 가장 큰 곳 <b>${top ? fmt(umw(top), 1) : '—'}</b> MW` +
       (list.length ? ` · 면적 상위: ${list.slice(0, 3).map(u => `<a href="#" data-go="${u.id}">${km2(ua(u))} km² ${esc(where(u, 1))}</a>`).join(' · ')}` : '') +
       `<div class="adv-note">MW는 면적에 0.045 kW/㎡를 적용한 참고 규모이며 실제 설치·접속 가능 용량이 아닙니다. 시군·읍면동 경계를 넘는 후보는 걸친 곳마다 한 번씩 보입니다. 도형이 없는 후보 ${list.filter(u => !u.hg).length}곳은 목록에만 있습니다.</div>`;
     $('dList').innerHTML = `<div class="adv-note" style="padding:6px 10px">면적 큰 순 · ${list.length}곳 — 누르면 지도에서 강조</div>` + list.map(u =>
-      `<div class="it ${u.id === st.sel ? 'sel' : ''}" data-id="${u.id}"><b>${km2(ua(u))} km²</b> · ${band(ua(u))} · 필지 ${u.n.toLocaleString('ko-KR')}${uDrop(u)}${u.t !== 'default' ? ' <span class="tag w">' + (u.t === 'missing' ? '도형 없음' : '지도 정보 확인 필요') + '</span>' : ''}<div class="adv-note">${esc(u.emds.map(eName).join(' · ') || '읍면동 정보 없음')}</div></div>`).join('');
+      `<div class="it ${u.id === st.sel ? 'sel' : ''}" data-id="${u.id}"><b>${km2(ua(u))} km²</b> · ${band(ua(u))} · 필지 ${u.n.toLocaleString('ko-KR')}${u.t !== 'default' ? ' <span class="tag w">' + (u.t === 'missing' ? '도형 없음' : '지도 정보 확인 필요') + '</span>' : ''}<div class="adv-note">${esc(u.emds.map(eName).join(' · ') || '읍면동 정보 없음')}</div></div>`).join('');
     $('dList').querySelectorAll('.it').forEach(el => el.onclick = () => dSelect(+el.dataset.id, true));
     $('dSum').querySelectorAll('[data-go]').forEach(a => a.onclick = ev => { ev.preventDefault(); dSelect(+a.dataset.go, true); });
     if (!list.find(u => u.id === st.sel)) $('dDet').innerHTML = '<div class="adv-note" style="padding:10px">오른쪽 목록이나 지도에서 후보 공간을 누르면 상세 정보가 이 칸에 열립니다.</div>';
@@ -513,9 +527,9 @@ input[type=range]{width:180px;max-width:100%;accent-color:var(--adv-navy)}
     $('dDet').innerHTML = `<h3>후보 공간 상세</h3>
       <div class="sec"><span class="k">위치</span> — ${u.ext ? '' : '경기도 '}${esc(u.emds.length ? u.emds.map(eName).join(' · ') : u.sggs.map(sName).join(' · '))}
         <div class="adv-note">후보 공간 번호 #${u.id} · 구성 필지 번호(PNU) 일부: <span id="dPnus">불러오는 중…</span></div>${srcHTML('admin')}</div>
-      <div class="sec"><span class="k">공간</span> — 면적 <b>${km2(ua(u))} km²</b>(${Math.round(ua(u)).toLocaleString('ko-KR')}㎡)${W10_ON && u.w10 ? ` <span class="adv-note">${u.w10.method === 'road' ? '도로 제외 잠정(' + esc(u.w10.note || '') + ')' : '띠 제외 잠정'} — 원 값 ${km2(u.a)} km², 빠진 비율 ${Math.round(u.w10.drop * 100)}%${u.w10.parts > 1 ? ` · ${u.w10.method === 'road' ? `도로로 끊겨 ${u.w10.parts}개 묶음으로 나뉨(남는 땅 전부 표시)` : `띠를 빼면 ${u.w10.parts}개 묶음으로 나뉘고 가장 큰 묶음만 표시`}` : ''}</span>` : ''} · 구성 필지 ${u.n.toLocaleString('ko-KR')}개 · 걸친 읍면동 ${u.ne || u.emds.length}곳
+      <div class="sec"><span class="k">공간</span> — 면적 <b>${km2(ua(u))} km²</b>(${Math.round(ua(u)).toLocaleString('ko-KR')}㎡) · 구성 필지 ${u.n.toLocaleString('ko-KR')}개 · 걸친 읍면동 ${u.ne || u.emds.length}곳
         <div>지도 도형: ${u.t === 'default' ? '정상(도형 면적 ≈ 장부 면적)' : u.t === 'missing' ? '<span class="tag w">도형 없음</span> 소속 필지의 지적 폴리곤이 없어 지도에 그리지 못함 — 설치 불가라는 뜻은 아님' : `<span class="tag w">지도 정보가 더 확인 필요한 곳</span> ${esc(u.ql)} — 도형 면적 ${km2(u.ag)} km²는 장부 면적의 ${fmt(ratio * 100, 0)}%`}</div>${srcHTML('geom')}</div>
-      <div class="sec"><span class="k">환산 규모</span> — <b>${band(ua(u))}</b> (참고 ${fmt(umw(u))} MW${W10_ON && u.w10 ? ' · 띠 제외 잠정' : ''})<div class="adv-note">50/20/10/3/1MW는 0.045 kW/㎡를 적용해 면적을 환산한 참고 규모이며, 실제 설치 가능 용량·발전량·계통 접속 가능 용량이 아닙니다.</div></div>
+      <div class="sec"><span class="k">환산 규모</span> — <b>${band(ua(u))}</b> (참고 ${fmt(umw(u))} MW)<div class="adv-note">50/20/10/3/1MW는 0.045 kW/㎡를 적용해 면적을 환산한 참고 규모이며, 실제 설치 가능 용량·발전량·계통 접속 가능 용량이 아닙니다.</div></div>
       <div class="sec"><span class="k">분석 조건·농지 조건</span> — 특별법 시행 후 — 농업진흥구역에 영농형 태양광을 설치할 수 있게 되는 경우(농업보호구역 제외) · 법적 사업·인허가 가능 여부를 판단한 결과가 아님 · 법인·국공유 소유 농지만 · 판정 조건(지목·구조·경사·용도지역) 통과 필지
         <div>경작 판독 비율(팜맵) ${u.farm == null ? '기록 없음' : fmt(u.farm * 100, 0) + '%'} · 간척 필지 비중 ${u.recl == null ? '—' : fmt(u.recl, 0) + '%'}</div>${srcHTML('policy')}${srcHTML('area')}</div>
       <div class="sec"><span class="k">계통</span> — 인근 분산전원 계통 여유 참고값 <b>${u.lo == null ? '알 수 없음' : fmt(u.lo) + (u.hi != null ? '–' + fmt(u.hi) : '') + ' MW'}</b>
@@ -561,7 +575,7 @@ input[type=range]{width:180px;max-width:100%;accent-color:var(--adv-navy)}
   function renderQCases() {
     $('qCases').innerHTML = QCASES.map(([id, k, f], i) => { const u = UBY.get(id); if (!u) return '';
       return `<button type="button" class="case-card ${u.id === st.sel ? 'on' : ''}" data-qcase="${id}"><span class="cn">${i + 1}</span><span class="ct">${esc(k.replace(/ 사례$/, ''))}</span> <span class="adv-note">${esc(where(u, 1))}</span>
-        <div class="cv"><b>약 ${fmt(umw(u), 1)} MW</b> · ${ua(u) < 10000 ? Math.round(ua(u)).toLocaleString('ko-KR') + '㎡' : km2(ua(u)) + ' km²'} · 필지 ${u.n.toLocaleString('ko-KR')}개${uDrop(u)}</div>
+        <div class="cv"><b>약 ${fmt(umw(u), 1)} MW</b> · ${ua(u) < 10000 ? Math.round(ua(u)).toLocaleString('ko-KR') + '㎡' : km2(ua(u)) + ' km²'} · 필지 ${u.n.toLocaleString('ko-KR')}개</div>
         <div class="cr">${esc(f.replace(/ — 지역별 지도의 1번.*$/, ''))}${u.ext ? ' · 경기 자료 밖 — 지역별 지도 탭에서 봄' : ''}</div></button>`; }).join('');
     $('qCases').querySelectorAll('[data-qcase]').forEach(b => b.onclick = () => { const u = UBY.get(+b.dataset.qcase);
       if (u.ext) { showExt(u); return; }   // 보령 — 경기 자문 자료 밖이라 이 후보 하나를 ① 탭 지도에 그린다
@@ -571,12 +585,11 @@ input[type=range]{width:180px;max-width:100%;accent-color:var(--adv-navy)}
   }
   // 경기 자문 자료(gg_v1) 밖의 사례(보령) — 시군 목록·필지 자료가 ① 탭에 없으므로 그 후보 하나만 그리고 상세를 연다
   async function showExt(u) {
-    await loadW10(u.sggs[0]);
     st.sgg = u.sggs[0]; st.emd = ''; st.sel = null; $('dSgg').value = ''; $('dEmd').innerHTML = '<option value="">(시군 전체)</option>';
     dLayer.clearLayers(); dEmdL.clearLayers(); dPolys = new Map();
     const ly = L.geoJSON(ugeom(u), {style: () => polyStyle(u, true)}).addTo(dLayer);
     ly.bindTooltip(`후보 공간 · ${km2(ua(u))} km² · ${band(ua(u))}`); dPolys.set(u.id, ly);
-    $('dSum').innerHTML = `<b>충남 보령시</b> — 경기 자문 자료 밖이라 이 사례 후보 하나만 표시합니다 · ${km2(ua(u))} km² · 참고 ${fmt(umw(u), 1)} MW ${W10_TAG} · 필지 ${u.n.toLocaleString('ko-KR')}개<div class="adv-note">보령시의 다른 후보 공간은 지역별 지도 탭의 보령 지도에서 보실 수 있습니다.</div>`;
+    $('dSum').innerHTML = `<b>충남 보령시</b> — 경기 자문 자료 밖이라 이 사례 후보 하나만 표시합니다 · ${km2(ua(u))} km² · 참고 ${fmt(umw(u), 1)} MW · 필지 ${u.n.toLocaleString('ko-KR')}개<div class="adv-note">보령시의 다른 후보 공간은 지역별 지도 탭의 보령 지도에서 보실 수 있습니다.</div>`;
     $('dList').innerHTML = `<div class="adv-note" style="padding:6px 10px">보령시 사례 1곳</div><div class="it sel" data-id="${u.id}"><b>${km2(ua(u))} km²</b> · ${band(ua(u))} · 필지 ${u.n.toLocaleString('ko-KR')}<div class="adv-note">${esc(u.emds.map(eName).join(' · '))}</div></div>`;
     dSelect(u.id, true);
   }
@@ -591,7 +604,7 @@ input[type=range]{width:180px;max-width:100%;accent-color:var(--adv-navy)}
         fbWidget('Q2', '', HAS, {ph: '위치 또는 지번 / 이유'}));
   }
   renderQs();
-  Promise.all(['41220', '41590', '41500', '41480', '41670'].map(loadW10)).then(() => renderQCases());
+  renderQCases();
   // ② 사용한 자료 Q3 + 선택 질문(아시는 경우만) S1–S2
   $('mQs').innerHTML =
     qBox(qHead('Q3', '추가로 반영하면 좋을 자료 — 후보 결과를 실제 검토에 쓰려면 어떤 자료를 더 반영해야 합니까? (여러 개 가능)') +
@@ -727,9 +740,8 @@ input[type=range]{width:180px;max-width:100%;accent-color:var(--adv-navy)}
   const ALT = D.alt, AC = D.alt_cols;
   async function uRender() {
     const scn = $('uScn').value;
-    $('uWhere').innerHTML = esc(us.emd ? eName(us.emd) : us.sgg ? sName(us.sgg) : '경기도 전체') + (scn === 'R2_promo' && W10_ON ? ' ' + W10_TAG : '') + esc((us.emd && scn !== 'R2_promo' ? ' — 이 조건의 자료에는 읍면동 구분이 없어 ' + sName(us.sgg) + ' 전체 기준으로 보입니다' : ''));
-    const whole = !us.sgg; if (scn === 'R2_promo' && !whole) await Promise.all([loadGeom(us.sgg), loadW10(us.sgg)]);
-    if (scn === 'R2_promo' && whole && W10_ON) await Promise.all(SGG.map(loadW10));   // 경기 전체 카드·목록도 잠정 값으로
+    $('uWhere').innerHTML = esc(us.emd ? eName(us.emd) : us.sgg ? sName(us.sgg) : '경기도 전체') + esc((us.emd && scn !== 'R2_promo' ? ' — 이 조건의 자료에는 읍면동 구분이 없어 ' + sName(us.sgg) + ' 전체 기준으로 보입니다' : ''));
+    const whole = !us.sgg; if (scn === 'R2_promo' && !whole) await loadGeom(us.sgg);
     let items;
     if (scn === 'R2_promo') items = U.filter(u => inSgg(u, us.sgg) && (!us.emd || u.emds.includes(us.emd))).filter(u => ua(u) > 0).map(u => ({id: u.id, a: ua(u), lat: u.lat, lon: u.lon, lo: u.lo, d: u.d, geom: whole ? null : ugeom(u), where: u.emds.map(eName).join(' · ')}));
     else { const seen = new Map(); Object.entries(ALT[scn]).forEach(([s, rs]) => { if (us.sgg && s !== us.sgg) return; rs.forEach(r => { const o = Object.fromEntries(AC.map((c, i) => [c, r[i]])); if (!seen.has(o.lab)) seen.set(o.lab, {id: o.lab, a: o.a, lat: o.lat, lon: o.lon, lo: o.lo, d: o.d, geom: null, where: sName(s)}); }); });
@@ -772,15 +784,14 @@ input[type=range]{width:180px;max-width:100%;accent-color:var(--adv-navy)}
     for (const s of SG_SGG) {
       const host = document.createElement('div'); host.className = 'sg-block'; $('sggBlocks').appendChild(host);
       try {
-        const [fc, W] = await Promise.all([V55.units.load(s), W10_ON ? V55.gz(`data_v4/advisory/w10/${s}.json.gz`).catch(() => null) : null]);
+        const fc = await V55.units.load(s);
         if (!fc) { host.innerHTML = `<h3>${esc(Region.nameOf(s))}</h3><div class="adv-note">자료를 불러오지 못했습니다.</div>`; continue; }
-        if (W) fc.features.forEach(f => { const r = W[f.properties.id]; if (!r) return; f.properties.a0 = f.properties.a; f.properties.a = r.a; f.properties.mw = r.mw; f.properties.drop = r.drop; f.properties.method = r.method; if (r.g) f.geometry = r.g; });
         const all0 = fc.features.filter(f => f.properties.t !== 'quality_review'), fs = all0.filter(f => f.properties.a > 0).sort((a, b) => b.properties.a - a.properties.a);
         const tops = fs.slice(0, SG_TOP);
-        host.innerHTML = `<div class="sg-head"><h3>${esc(Region.nameOf(s))} <span class="adv-note">후보 공간 ${all0.length.toLocaleString('ko-KR')}곳${W ? ` · 띠 제외 후 ${fs.length.toLocaleString('ko-KR')}곳` : ''} · 3MW 이상 ${fs.filter(f => f.properties.a >= BIG3).length}곳 ${W ? W10_TAG : ''}</span></h3>
+        host.innerHTML = `<div class="sg-head"><h3>${esc(Region.nameOf(s))} <span class="adv-note">후보 공간 ${all0.length.toLocaleString('ko-KR')}곳 · 3MW 이상 ${fs.filter(f => f.properties.a >= BIG3).length}곳 </span></h3>
             <a class="btnx" href="${TOP10_URL}?sgg=${s}" target="_blank" rel="noopener">우리 동네 TOP 10 전체 지도 열기 ↗</a></div>
           <div class="sg-grid">${tops.map((f, i) => { const p = f.properties; return `<div class="sg-card"><div class="sg-map" id="sm${s}_${i}"></div>
-            <div class="sg-cap"><b>${i + 1}위 · 약 ${fmt(p.mw, 1)} MW</b> · ${km2(p.a)} km² · 필지 ${p.n.toLocaleString('ko-KR')}개${p.drop > 0.005 ? ` <span class="tag w">${p.method === 'road' ? '도로' : '띠'} 제외 −${Math.round(p.drop * 100)}%</span>` : ''}
+            <div class="sg-cap"><b>${i + 1}위 · 약 ${fmt(p.mw, 1)} MW</b> · ${km2(p.a)} km² · 필지 ${p.n.toLocaleString('ko-KR')}개
             <div class="adv-note">${esc(p.emds.map(nameOf).slice(0, 2).join(' · '))} · 후보 공간 #${p.id} · <a href="${TOP10_URL}?sgg=${s}&lab=${p.id}" target="_blank" rel="noopener">TOP 10에서 보기 ↗</a></div></div></div>`; }).join('')}</div>`;
         tops.forEach((f, i) => { const m = L.map(`sm${s}_${i}`, {scrollWheelZoom: false, preferCanvas: true, zoomControl: false});
           L.tileLayer(ESRI_SAT, {maxZoom: 18, attribution: '© Esri'}).addTo(m); L.control.zoom({position: 'bottomright'}).addTo(m);
@@ -803,12 +814,10 @@ input[type=range]{width:180px;max-width:100%;accent-color:var(--adv-navy)}
     $('rgTop').innerHTML = top.map(card).join('');
     $('rgAdv').innerHTML = RG_ADV.map(card).join('');
     const one = async s => {
-      const [fc, W] = await Promise.all([V55.units.load(s), W10_ON ? V55.gz(`data_v4/advisory/w10/${s}.json.gz`).catch(() => null) : null]); if (!fc) { $('rgS' + s).textContent = '자료를 불러오지 못했습니다.'; return; }
-      // 띠 제외(잠정): 면적·MW·도형을 근사 값으로 바꾼다. 원 값은 a0·mw0 로 남긴다
-      if (W) fc.features.forEach(f => { const r = W[f.properties.id]; if (!r) return; f.properties.a0 = f.properties.a; f.properties.mw0 = f.properties.mw; f.properties.a = r.a; f.properties.mw = r.mw; f.properties.drop = r.drop; if (r.g) f.geometry = r.g; });
+      const fc = await V55.units.load(s); if (!fc) { $('rgS' + s).textContent = '자료를 불러오지 못했습니다.'; return; }
       const fs = fc.features.filter(f => f.properties.t !== 'quality_review' && f.properties.a > 0).sort((a, b) => b.properties.a - a.properties.a), big = fs.filter(f => f.properties.a >= BIG3).sort((a, b) => b.properties.a - a.properties.a);
       const n10 = big.filter(f => f.properties.a >= 222222).length, maxMw = big.length ? big[0].properties.mw : Math.max(0, ...fs.map(f => f.properties.mw));
-      $('rgS' + s).innerHTML = `3MW 이상 <b>${big.length}</b>곳 · 10MW 이상 <b>${n10}</b>곳 · 가장 큰 곳 <b>${fmt(maxMw, 1)}</b> MW · 전체 후보 공간 ${fs.length.toLocaleString('ko-KR')}곳 ${W ? W10_TAG : ''}`;
+      $('rgS' + s).innerHTML = `3MW 이상 <b>${big.length}</b>곳 · 10MW 이상 <b>${n10}</b>곳 · 가장 큰 곳 <b>${fmt(maxMw, 1)}</b> MW · 전체 후보 공간 ${fs.length.toLocaleString('ko-KR')}곳 `;
       const m = L.map('rgM' + s, {scrollWheelZoom: false, preferCanvas: true, zoomControl: true}).setView([36.6, 127.4], 7);   // 먼저 보기 상태를 둔다 — 백그라운드 탭에서 열려 크기가 0이어도 나중에 invalidateSize·범위 맞춤이 동작하게
       const gray = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}', {maxZoom: 16, attribution: '© Esri'}).addTo(m);
       const sat = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {maxZoom: 18, attribution: '© Esri'});
@@ -839,7 +848,35 @@ input[type=range]{width:180px;max-width:100%;accent-color:var(--adv-navy)}
     rgFit();
   }
   rgInit();
-  { const t = $('w10Tgl'); t.checked = W10_ON; t.onchange = () => { const q = new URLSearchParams(location.search); if (t.checked) q.delete('w10'); else q.set('w10', '0'); location.search = q.toString(); }; }
+
+  // ════════ 위성영상 검토 — 실제 설치 가능 공간(ADR-0060) ════════
+  // 대표 사례 3곳(유지 · 일부 제외 · 전부 제외)과 시군 합계. 값은 data_v4/advisory/nonfarm_examples_v1.json(export_advisory_nonfarm_v1.py)
+  (async () => { try {
+    const NF = await fetch('data_v4/advisory/nonfarm_examples_v1.json').then(r => r.ok ? r.json() : null); if (!NF) return;
+    await Region.load();
+    const KIND = {keep: '유지 — 비농지 없음', partial: '일부 제외', drop: '전부 제외'};
+    const amt = (a, mw) => a <= 0 ? '없음' : `${km2(a)} km² · 약 ${fmt(mw, 1)} MW`;
+    $('nfPages').innerHTML = NF.examples.map((e, i) => `<div class="nf-page"><div class="nf-head"><span class="nf-kind ${e.kind}">${KIND[e.kind]}</span><h4>사례 ${i + 1} · ${esc(Region.nameOf(e.sgg))}</h4><span class="adv-note">${esc(e.note)}</span></div>
+      <div class="nf-body"><figure class="nf-fig"><img src="${esc(e.image)}" alt="검토 화면 — ${esc(Region.nameOf(e.sgg))} 후보 #${e.id_before}" loading="lazy"><figcaption>검토할 때 본 화면 · 노란 선 = 검토 전 후보 자리 · © Esri</figcaption></figure>
+        <div><div class="nf-map" id="nfM${i}"></div><div class="adv-note" style="margin-top:4px">검토 후 · 파란 면 = 남은 설치 가능 공간 · 노란 점선 = 검토 전 자리</div></div>
+        <div class="nf-num"><div class="lab">실제 설치 가능 공간</div><div class="big">${e.after.a <= 0 ? '없음' : `${km2(e.after.a)} <small>km²</small>`}</div>
+          ${e.after.a > 0 ? `<div style="font-size:15px;font-weight:600">약 ${fmt(e.after.mw, 1)} MW</div>` : ''}
+          <div class="ref">(지목상 ${km2(e.before.a)} km² · ${fmt(e.before.mw, 1)} MW)</div>
+          <div class="lab">남은 비율</div><div style="font-size:18px;font-weight:700">${Math.round(e.after.share * 100)}%</div></div></div></div>`).join('');
+    NF.examples.forEach(async (e, i) => {
+      const m = L.map('nfM' + i, {scrollWheelZoom: false, preferCanvas: true}).setView([36.6, 127.4], 7);
+      L.tileLayer(ESRI_SAT, {maxZoom: 18, attribution: '© Esri'}).addTo(m);
+      const before = L.geoJSON(e.geom_before, {style: {color: '#FFD84D', weight: 2, dashArray: '4 4', fill: false}, interactive: false}).addTo(m);
+      const fc = e.after.ids.length ? await V55.units.load(e.sgg) : null, ids = new Set(e.after.ids);
+      if (fc) L.geoJSON({type: 'FeatureCollection', features: fc.features.filter(f => ids.has(f.properties.id))}, {style: {color: '#1b4f93', weight: 2, fillColor: '#3d7fd6', fillOpacity: .45}}).addTo(m);
+      rgMaps.push({m, bounds: before.getBounds(), fitted: false}); rgFit();
+    });
+    const T = NF.totals, rows = [['41', '경기도 전체'], ['41220'], ['41590'], ['41500'], ['41480'], ['41670'], ['44180']];
+    const cell = (a, b, k, km, mw) => `<td class="v l"><b>${a[k].toLocaleString('ko-KR')}곳</b> · ${fmt(a[km], 2)} km² · 약 ${fmt(a[mw], 0)} MW<br><span>(지목상 ${b[k].toLocaleString('ko-KR')}곳 · ${fmt(b[km], 2)} km² · ${fmt(b[mw], 0)} MW)</span></td>`;
+    $('nfTbl').innerHTML = '<tr><th style="text-align:left">지역</th><th style="text-align:left">1MW 이상 실제 설치 가능 공간</th><th style="text-align:left">3MW 이상 실제 설치 가능 공간</th></tr>' +
+      rows.map(([s, nm]) => { const t = T[s]; return t ? `<tr><td class="l"><b>${esc(nm || Region.nameOf(s))}</b></td>${cell(t.after, t.before, 'n1', 'km2_1', 'mw1')}${cell(t.after, t.before, 'n3', 'km2_3', 'mw3')}</tr>` : ''; }).join('');
+    $('nfRule').textContent = `실제 설치 가능 = ${NF.rule.after}. 지목상 = ${NF.rule.before}. 각 칸은 1MW(22,222㎡)·3MW(66,667㎡) 이상으로 남은 후보 공간의 수와 면적이며, MW는 면적 × 0.045 kW/㎡ 참고 규모입니다.`;
+  } catch (e) { console.error(e); } })();
   document.addEventListener('visibilitychange', () => { if (!document.hidden) rgFit(); });   // 백그라운드 탭에서 열었다가 볼 때 다시 맞춘다
 
   // ════════ 사례 — 보령 ════════
@@ -851,7 +888,6 @@ input[type=range]{width:180px;max-width:100%;accent-color:var(--adv-navy)}
     p.emds.forEach(e => { if (!EMD.has(e)) { const m = ix.find(x => x.code === e); if (m) EMD.set(e, {name: (/보령/.test(m.name) ? '' : '보령시 ') + m.name}); } });   // 읍면동 이름에 시군이 없으면 붙인다
     UBY.set(p.id, {id: p.id, ext: true, sggs: [s], emds: p.emds, a: p.a, mw: p.mw, n: p.n, farm: null, lo: r[c('lo')] ?? null, hi: r[c('hi')] ?? null, d: r[c('d')] ?? null, recl: r[c('recl')] ?? null, lat: r[c('lat')], lon: r[c('lon')], geometry: f.geometry});
     QCASES.push([p.id, '보령시 사례', '보령시(충남)에서 규모가 가장 큰 후보 — 지역별 지도의 1번 · 경기 자료 밖이라 지역별 지도 탭의 보령 지도에서 봄']);
-    await loadW10(s);   // 보령 띠 제외(잠정) 값도 카드에
     renderQCases();
   } catch (e) { console.error(e); } })();
 
@@ -860,7 +896,6 @@ input[type=range]{width:180px;max-width:100%;accent-color:var(--adv-navy)}
   $('xHead').innerHTML = `<div class="adv-note" style="margin-bottom:6px">이 탭은 화면의 값이 어떤 자료와 산출 방식으로 만들어졌는지 설명하는 참고 자료입니다. 자문 평가 대상이 아니며, 분석 방법의 타당성은 별도 자문에서 다룹니다.</div><b>대상 범위</b> — ${esc(String(S.population).replace(/특별법 시행 후\(농업진흥구역 개방 가정, R2_promo\)/, '특별법 시행 후(농업진흥구역에 설치 가능 · 농업보호구역 제외)'))}<br>후보 공간 <b>${S.n_units.toLocaleString('ko-KR')}</b>곳 · 전체 면적 <b>${fmt(S.area_km2, 3)}</b> km² · 도형 상태: 정상 ${S.geom.default} · 지도 정보 확인 필요 ${S.geom.quality_review} · 도형 없음 ${S.geom.missing}` +
     `<div class="adv-note">단위 — 후보 공간 면적: ${esc(S.axes.A.unit)} · 계통 여유 참고값: ${esc(S.axes.B.unit)} · 산업단지까지 거리: ${esc(S.axes.C.unit)}</div>`;
   renderStats('xStats', 'xCorr', U, true);
-  if (W10_ON) $('xHead').insertAdjacentHTML('beforeend', '<div class="adv-note" style="margin-top:4px"><b>이 탭의 표는 띠 제외 전 원 값 기준</b>입니다 — 자료가 어떻게 만들어졌는지 설명하는 탭이라 발행 수치를 그대로 둡니다. 띠 제외(잠정) 값은 지역별 지도·①·③ 탭에서 보입니다.</div>');
   // 표 머리글 풀이 — 통계 용어를 모르는 분도 읽을 수 있게(예시는 위 표의 실제 값)
   { const A = S.axes.A.stats, km = v => fmt(v * 1e6, 0), mwOf = v => fmt(v * 1e6 * 0.045 / 1000, 2);   // 예시는 표와 같은 ㎡ 단위
     $('xGloss').innerHTML = `<b>표 머리글 읽는 법</b><ul style="margin:6px 0 0 18px;padding:0;line-height:1.75">

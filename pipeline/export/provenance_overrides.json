@@ -58,9 +58,82 @@
    "source_reference_date": "2026-08-19 현행 코드(폐지 코드 포함)",
    "evidence": "meta_v4 lineage bjd_code '행정표준코드 법정동코드 전체자료 (code.go.kr, 2026-08-19 다운로드, 폐지 포함)'."
   },
-  "tbl:analysis_unit_v1": {"provider": "본 연구(플랜잇) 구축", "evidence": "내부 파생 표."},
-  "tbl:existing_pv_v1": {"provider": "본 연구(플랜잇) 구축", "evidence": "내부 파생 표."},
-  "tbl:ind_complex_bnd": {"provider": "본 연구(플랜잇) 구축", "evidence": "내부 파생 표(원천 raw:damdan_raw)."},
-  "tbl:kepco_record_v3": {"provider": "본 연구(플랜잇) 구축", "evidence": "내부 파생 표(원천 raw:kepco_raw_v4)."}
+  "tbl:analysis_unit_v1": {
+   "provider": "본 연구(플랜잇) 구축",
+   "evidence": "내부 파생 표."
+  },
+  "tbl:existing_pv_v1": {
+   "provider": "본 연구(플랜잇) 구축",
+   "evidence": "내부 파생 표."
+  },
+  "tbl:ind_complex_bnd": {
+   "provider": "본 연구(플랜잇) 구축",
+   "evidence": "내부 파생 표(원천 raw:damdan_raw)."
+  },
+  "tbl:kepco_record_v3": {
+   "provider": "본 연구(플랜잇) 구축",
+   "evidence": "내부 파생 표(원천 raw:kepco_raw_v4)."
+  },
+  "raw:nodelink": {
+   "kind": "raw_source",
+   "asset_class": "EXTERNAL_DOWNLOADED",
+   "provenance_status": "COMPLETE",
+   "layer": "L0",
+   "dataset_id": "raw:nodelink",
+   "provider": "국토교통부 (표준노드링크)",
+   "source_name": "표준노드링크 — 도로 중심선·차로 수",
+   "collection_date": "2026-07-16판",
+   "source_release_version": "2026-07-16",
+   "source_reference_date": "2026-07-16판",
+   "evidence": "data_v4/nonfarm_v1.json sources · photo_dates (export_nonfarm_v1.py:78-81) — ADR-0060 비농지 제외에 쓴 자료"
+  },
+  "raw:osm_roads": {
+   "kind": "raw_source",
+   "asset_class": "EXTERNAL_DOWNLOADED",
+   "provenance_status": "COMPLETE",
+   "layer": "L0",
+   "dataset_id": "raw:osm_roads",
+   "provider": "OpenStreetMap (Geofabrik 대한민국 추출본)",
+   "source_name": "OSM 도로",
+   "collection_date": "2026-10-06 추출본",
+   "source_reference_date": "2026-10-06 기준",
+   "evidence": "data_v4/nonfarm_v1.json sources · photo_dates (export_nonfarm_v1.py:78-81) — ADR-0060 비농지 제외에 쓴 자료"
+  },
+  "raw:bldginfo": {
+   "kind": "raw_source",
+   "asset_class": "EXTERNAL_DOWNLOADED",
+   "provenance_status": "COMPLETE",
+   "layer": "L0",
+   "dataset_id": "raw:bldginfo",
+   "provider": "V-World 데이터 API",
+   "source_name": "GIS건물통합정보 LT_C_BLDGINFO",
+   "collection_date": "2026-10-08",
+   "source_reference_date": "2026-10-08 조회 시점 현황",
+   "evidence": "data_v4/nonfarm_v1.json sources · photo_dates (export_nonfarm_v1.py:78-81) — ADR-0060 비농지 제외에 쓴 자료"
+  },
+  "raw:sat_esri": {
+   "kind": "raw_source",
+   "asset_class": "EXTERNAL_DOWNLOADED",
+   "provenance_status": "COMPLETE",
+   "layer": "L0",
+   "dataset_id": "raw:sat_esri",
+   "provider": "Esri World Imagery",
+   "source_name": "위성사진 판독(주)",
+   "collection_date": "2026-10-15–19 (검토 기간 조회)",
+   "source_reference_date": "촬영 2010–2026년 — 후보마다 다름(2023년 이후 63.7%)",
+   "evidence": "data_v4/nonfarm_v1.json sources · photo_dates (export_nonfarm_v1.py:78-81) — ADR-0060 비농지 제외에 쓴 자료"
+  },
+  "raw:sat_vworld": {
+   "kind": "raw_source",
+   "asset_class": "EXTERNAL_DOWNLOADED",
+   "provenance_status": "COMPLETE",
+   "layer": "L0",
+   "dataset_id": "raw:sat_vworld",
+   "provider": "V-World",
+   "source_name": "위성사진 판독(대조)",
+   "collection_date": "2026-10-16–19",
+   "source_reference_date": "조회 시점 최신 영상(촬영일 정보 없음)",
+   "evidence": "data_v4/nonfarm_v1.json sources · photo_dates (export_nonfarm_v1.py:78-81) — ADR-0060 비농지 제외에 쓴 자료"
+  }
  }
 }
