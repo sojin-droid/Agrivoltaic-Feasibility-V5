@@ -81,6 +81,16 @@ table.adv th{background:var(--adv-soft);position:sticky;top:0}
 .nf-num .big{font:700 26px/1.2 inherit;color:var(--adv-ink)}.nf-num .big small{font-size:14px;color:var(--adv-muted);font-weight:600}
 .nf-num .ref{font-size:12.5px;color:var(--adv-muted);margin-top:2px}
 .nf-num .lab{font-size:12px;color:var(--adv-muted);margin-top:10px}
+.nf-grp{margin:14px 0 4px;font-size:15px;color:var(--adv-navy)}
+.nf-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+@media (max-width:900px){.nf-grid{grid-template-columns:1fr}}
+.nf-card{border:1px solid var(--adv-line);border-radius:10px;background:#fff;overflow:hidden;display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr)}
+@media (max-width:560px){.nf-card{grid-template-columns:1fr}}
+.nf-card img{width:100%;height:100%;min-height:220px;max-height:300px;object-fit:cover;display:block}
+.nf-card .nf-num{padding:10px 12px}
+.nf-pct{display:inline-block;margin-top:8px;padding:3px 9px;border-radius:12px;font:700 13px inherit;color:#fff}
+.nf-pct.lo{background:#a33a3a}.nf-pct.mid{background:#b7791f}.nf-pct.hi{background:#2e7d4f}
+.nf-card .nf-map{grid-column:1/-1;height:260px;border:0;border-top:1px solid var(--adv-line);border-radius:0}
 .nf-tbl td.v,.nf-tbl th{text-align:left}.nf-tbl td.v b{font-size:14px}.nf-tbl td.v span{color:var(--adv-muted);font-size:12px}
 .rg-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:8px 0 16px}
 @media (max-width:1100px){.rg-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
@@ -150,7 +160,7 @@ input[type=range]{width:180px;max-width:100%;accent-color:var(--adv-navy)}
         <li>보령시는 충청남도라 ① 탭(경기도 자료)에는 없고 이 지도에서만 보실 수 있습니다.</li>
       </ul></div>
     <div class="adv-box" style="background:#fff"><b>위성영상 검토 — 실제 설치 가능 공간</b> — 후보 공간은 장부 지목이 농지인 필지를 묶은 것이라, 지목만 농지로 남은 도로·하천 둔치·건물·산림이 섞여 있었습니다. 연구진이 위성영상으로 후보를 하나씩 보고 이런 땅을 뺀 뒤 남은 곳만 <b>실제 설치 가능 공간</b>으로 셉니다. 이 화면의 모든 지도와 수치는 검토 후 값이며, <span class="adv-note">괄호 안의 지목상 값은 참고용</span>입니다.
-      <div class="adv-note" style="margin-top:4px">아래 세 곳은 검토할 때 실제로 보고 판단한 화면입니다(노란 선 = 검토 전 후보 자리). 오른쪽 지도의 파란 면이 검토 후 남은 설치 가능 공간입니다.</div></div>
+      <div class="adv-note" style="margin-top:4px">아래 사례 사진은 제외를 판단할 때 실제로 본 위성 화면입니다(노란 선 = 검토 전 후보 자리). <b>지목 대비 실제 설치 가능 %</b> = 실제 설치 가능 면적 ÷ 지목상 면적 — 그 자리에서 실제로 설치할 수 있는 땅이 얼마나 남았는지입니다. "검토 후 지도 보기"를 누르면 남은 곳(파란 면)을 볼 수 있습니다.</div></div>
     <div id="nfPages"></div>
     <h3 style="margin:14px 0 2px;color:var(--adv-navy);font-size:16px">같은 기준으로 센 지역별 실제 설치 가능 공간</h3>
     <div class="scroll"><table class="adv nf-tbl" id="nfTbl"></table></div>
@@ -854,28 +864,32 @@ input[type=range]{width:180px;max-width:100%;accent-color:var(--adv-navy)}
   (async () => { try {
     const NF = await fetch('data_v4/advisory/nonfarm_examples_v1.json').then(r => r.ok ? r.json() : null); if (!NF) return;
     await Region.load();
-    const KIND = {keep: '유지 — 비농지 없음', partial: '일부 제외', drop: '전부 제외'};
-    const amt = (a, mw) => a <= 0 ? '없음' : `${km2(a)} km² · 약 ${fmt(mw, 1)} MW`;
-    $('nfPages').innerHTML = NF.examples.map((e, i) => `<div class="nf-page"><div class="nf-head"><span class="nf-kind ${e.kind}">${KIND[e.kind]}</span><h4>사례 ${i + 1} · ${esc(Region.nameOf(e.sgg))}</h4><span class="adv-note">${esc(e.note)}</span></div>
-      <div class="nf-body"><figure class="nf-fig"><img src="${esc(e.image)}" alt="검토 화면 — ${esc(Region.nameOf(e.sgg))} 후보 #${e.id_before}" loading="lazy"><figcaption>검토할 때 본 화면 · 노란 선 = 검토 전 후보 자리 · © Esri</figcaption></figure>
-        <div><div class="nf-map" id="nfM${i}"></div><div class="adv-note" style="margin-top:4px">검토 후 · 파란 면 = 남은 설치 가능 공간 · 노란 점선 = 검토 전 자리</div></div>
-        <div class="nf-num"><div class="lab">실제 설치 가능 공간</div><div class="big">${e.after.a <= 0 ? '없음' : `${km2(e.after.a)} <small>km²</small>`}</div>
-          ${e.after.a > 0 ? `<div style="font-size:15px;font-weight:600">약 ${fmt(e.after.mw, 1)} MW</div>` : ''}
-          <div class="ref">(지목상 ${km2(e.before.a)} km² · ${fmt(e.before.mw, 1)} MW)</div>
-          <div class="lab">남은 비율</div><div style="font-size:18px;font-weight:700">${Math.round(e.after.share * 100)}%</div></div></div></div>`).join('');
-    NF.examples.forEach(async (e, i) => {
-      const m = L.map('nfM' + i, {scrollWheelZoom: false, preferCanvas: true}).setView([36.6, 127.4], 7);
-      L.tileLayer(ESRI_SAT, {maxZoom: 18, attribution: '© Esri'}).addTo(m);
+    const pctCls = v => v < 0.3 ? 'lo' : v < 0.9 ? 'mid' : 'hi';
+    const card = (e, i) => `<div class="nf-card"><img src="${esc(e.image)}" alt="검토 화면 — ${esc(e.note)}" loading="lazy">
+      <div class="nf-num"><div style="font-weight:700;color:var(--adv-navy)">${esc(Region.nameOf(e.sgg))}</div><div class="adv-note">${esc(e.note)} · 감사 판정 ${esc(e.code)}</div>
+        <div class="lab">실제 설치 가능 공간</div><div class="big">${e.after.a <= 0 ? '없음' : `${km2(e.after.a)} <small>km²</small>`}</div>
+        ${e.after.a > 0 ? `<div style="font-size:15px;font-weight:600">약 ${fmt(e.after.mw, 1)} MW</div>` : ''}
+        <div class="ref">(지목상 ${km2(e.before.a)} km² · ${fmt(e.before.mw, 1)} MW)</div>
+        <span class="nf-pct ${pctCls(e.after.share)}">지목 대비 실제 설치 가능 ${Math.round(e.after.share * 100)}%</span>
+        <div style="margin-top:8px"><button type="button" class="btnx" data-nfmap="${i}">검토 후 지도 보기</button></div>
+        <div class="adv-note" style="margin-top:4px">사진: 검토할 때 본 화면 · © Esri</div></div>
+      <div class="nf-map" id="nfM${i}" hidden></div></div>`;
+    $('nfPages').innerHTML = NF.groups.map(g => { const L_ = NF.examples.map((e, i) => [e, i]).filter(([e]) => e.group === g.key); return L_.length ?
+      `<h4 class="nf-grp">${esc(g.label)}</h4><div class="nf-grid">${L_.map(([e, i]) => card(e, i)).join('')}</div>` : ''; }).join('');
+    // 검토 후 지도는 누를 때 그린다(사례마다 위성 지도를 미리 띄우지 않는다)
+    $('nfPages').querySelectorAll('[data-nfmap]').forEach(b => b.onclick = async () => { const i = +b.dataset.nfmap, e = NF.examples[i], el = $('nfM' + i);
+      el.hidden = !el.hidden; b.textContent = el.hidden ? '검토 후 지도 보기' : '검토 후 지도 닫기'; if (el.hidden || el.dataset.ok) return; el.dataset.ok = 1;
+      const m = L.map(el, {scrollWheelZoom: false, preferCanvas: true}); L.tileLayer(ESRI_SAT, {maxZoom: 18, attribution: '© Esri'}).addTo(m);
       const before = L.geoJSON(e.geom_before, {style: {color: '#FFD84D', weight: 2, dashArray: '4 4', fill: false}, interactive: false}).addTo(m);
+      m.fitBounds(before.getBounds(), {padding: [12, 12]});
       const fc = e.after.ids.length ? await V55.units.load(e.sgg) : null, ids = new Set(e.after.ids);
       if (fc) L.geoJSON({type: 'FeatureCollection', features: fc.features.filter(f => ids.has(f.properties.id))}, {style: {color: '#1b4f93', weight: 2, fillColor: '#3d7fd6', fillOpacity: .45}}).addTo(m);
-      rgMaps.push({m, bounds: before.getBounds(), fitted: false}); rgFit();
-    });
+      m.attributionControl.addAttribution('파란 면 = 남은 설치 가능 공간 · 노란 점선 = 검토 전 자리'); });
     const T = NF.totals, rows = [['41', '경기도 전체'], ['41220'], ['41590'], ['41500'], ['41480'], ['41670'], ['44180']];
-    const cell = (a, b, k, km, mw) => `<td class="v l"><b>${a[k].toLocaleString('ko-KR')}곳</b> · ${fmt(a[km], 2)} km² · 약 ${fmt(a[mw], 0)} MW<br><span>(지목상 ${b[k].toLocaleString('ko-KR')}곳 · ${fmt(b[km], 2)} km² · ${fmt(b[mw], 0)} MW)</span></td>`;
+    const cell = (a, b, k, km, mw) => `<td class="v l"><b>${a[k].toLocaleString('ko-KR')}곳</b> · ${fmt(a[km], 2)} km² · 약 ${fmt(a[mw], 0)} MW <span class="nf-pct ${pctCls(b[km] ? a[km] / b[km] : 0)}" style="margin:0 0 0 4px;font-size:11.5px;padding:1px 7px">지목 대비 ${b[km] ? Math.round(a[km] / b[km] * 100) : 0}%</span><br><span>(지목상 ${b[k].toLocaleString('ko-KR')}곳 · ${fmt(b[km], 2)} km² · ${fmt(b[mw], 0)} MW)</span></td>`;
     $('nfTbl').innerHTML = '<tr><th style="text-align:left">지역</th><th style="text-align:left">1MW 이상 실제 설치 가능 공간</th><th style="text-align:left">3MW 이상 실제 설치 가능 공간</th></tr>' +
       rows.map(([s, nm]) => { const t = T[s]; return t ? `<tr><td class="l"><b>${esc(nm || Region.nameOf(s))}</b></td>${cell(t.after, t.before, 'n1', 'km2_1', 'mw1')}${cell(t.after, t.before, 'n3', 'km2_3', 'mw3')}</tr>` : ''; }).join('');
-    $('nfRule').textContent = `실제 설치 가능 = ${NF.rule.after}. 지목상 = ${NF.rule.before}. 각 칸은 1MW(22,222㎡)·3MW(66,667㎡) 이상으로 남은 후보 공간의 수와 면적이며, MW는 면적 × 0.045 kW/㎡ 참고 규모입니다.`;
+    $('nfRule').textContent = `실제 설치 가능 = ${NF.rule.after}. 지목상 = ${NF.rule.before}. ${NF.rule.share}. 각 칸은 1MW(22,222㎡)·3MW(66,667㎡) 이상으로 남은 후보 공간의 수와 면적이며, MW는 면적 × 0.045 kW/㎡ 참고 규모입니다.`;
   } catch (e) { console.error(e); } })();
   document.addEventListener('visibilitychange', () => { if (!document.hidden) rgFit(); });   // 백그라운드 탭에서 열었다가 볼 때 다시 맞춘다
 
