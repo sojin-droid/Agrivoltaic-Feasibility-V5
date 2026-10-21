@@ -337,6 +337,8 @@ input[type=range]{width:180px;max-width:100%;accent-color:var(--adv-navy)}
     <div class="adv-ctl"><button id="fbJson">이 세션 의견 JSON 내려받기</button><button id="fbCsv">이 세션 의견 CSV 내려받기</button><button id="fbAll">보관된 모든 세션 JSON</button><button id="fbClear">이 세션 의견 지우기</button><span class="adv-note" id="fbCount"></span></div>
     <div class="scroll"><table class="adv" id="fbTbl"></table></div>
   </section>
+  <!-- 경기연구원 패키지 전용(data-pkg="gg") — 비농지 제외 방법 자문 화면(nonfarm_cases.html)을 그대로 불러온다. V5 에서는 비어 있고 탭도 없다 -->
+  <section class="adv-pane" id="p-nonfarm"></section>
   <p class="adv-note" style="margin:18px 0">자료: 발행 자산(data_v4) 중 경기도 부분만 읽습니다 — 21m 후보 공간 · 시군별 후보 공간 표 · 기존 태양광 시설 · 자료 출처와 시점. 이 화면은 값을 새로 판정하지 않습니다.</p>
 </div>
 
@@ -640,6 +642,34 @@ input[type=range]{width:180px;max-width:100%;accent-color:var(--adv-navy)}
       fbWidget('Q7', '', [], {ph: '자유롭게 적어 주세요'}));
   // 그 밖의 의견(선택)
   $('fbCommon').innerHTML = fbWidget('ETC', '그 밖의 의견', [], {ph: '자유롭게 적어 주세요'});
+
+  // ── 경기연구원 패키지 — 탭 두 개(데이터 신뢰성·보완 검토 · 비농지 제외 방법)만 (2026-10-21 사용자 결정) ──
+  //   sync_advisory_gg.py 가 복사할 때 <html data-pkg="gg"> 를 붙인다. V5(지자체용)는 그대로 여섯 탭.
+  if (document.documentElement.dataset.pkg === 'gg') {
+    document.querySelectorAll('#tabs button').forEach(b => { if (b.dataset.t === 'method') b.textContent = '1. 데이터 신뢰성·보완 검토'; else b.hidden = true; });
+    $('tabs').insertAdjacentHTML('beforeend', '<button data-t="nonfarm">2. 비농지 제외 방법</button>');
+    const mq = $('mQs').closest('.adv-box').querySelector('b'); if (mq) mq.textContent = '질문 1. 사용한 자료';
+    mq?.parentNode.childNodes.forEach(n => { if (n.nodeType === 3 && n.textContent.includes('① 탭의 지도·후보 상세를')) n.textContent = n.textContent.replace('위 표와 ① 탭의 지도·후보 상세를', '위 표를'); });
+    // 선택 질문 S2(지도의 기존 태양광)는 지도 탭이 없어 묻지 않는다
+    document.querySelectorAll('#p-method .adv-q').forEach(q => { const h = q.querySelector('b'); if (h && h.textContent.trim() === 'S2.') q.hidden = true; if (h && h.textContent.trim() === 'Q3.') h.textContent = '1.'; });   // 응답 키(Q3)는 그대로
+    // 의견 저장·내려받기는 첫 탭 아래로 옮긴다
+    const fb = $('p-fb'); fb.querySelectorAll('.adv-box b').forEach(x => { if (x.textContent === '그 밖의 의견') x.parentNode.childNodes.forEach(n => { if (n.nodeType === 3) n.textContent = n.textContent.replace('질문 1–7에서', '위 질문에서'); }); });
+    $('p-method').insertAdjacentHTML('beforeend', '<h3 style="margin:18px 0 6px;color:var(--adv-navy);font-size:16px">의견 저장·내려받기</h3>');
+    [...fb.children].forEach(c => $('p-method').appendChild(c));
+    const nf = $('p-nonfarm');
+    nf.innerHTML = '<iframe id="nfFrame" src="nonfarm_cases.html" title="비농지 제외 방법 자문" style="width:100%;border:0;min-height:80vh;display:block"></iframe>';
+    const fr = $('nfFrame');
+    fr.onload = () => { try {
+      const d = fr.contentDocument;
+      // 사례·꼬리말은 자료를 받은 뒤 그려지므로 그릴 때마다 정리한다 — 자문용 띠·꼬리말, 지자체용 V5 지도 링크(이 패키지에는 없다)
+      const clean = () => { d.querySelectorAll('.adv-band, footer').forEach(x => { x.style.display = 'none'; });   // 지우면 그 페이지 스크립트가 버튼을 못 찾는다 — 숨긴다
+        d.querySelectorAll('a[href^="regions.html"]').forEach(a => { const p = a.previousSibling; if (p && p.nodeType === 3) p.textContent = p.textContent.replace(/ · $/, ''); a.remove(); }); };
+      d.documentElement.style.overflow = 'hidden';
+      const fit = () => { fr.style.height = d.documentElement.scrollHeight + 'px'; };
+      clean(); fit(); new MutationObserver(clean).observe(d.body, {childList: true, subtree: true}); new ResizeObserver(fit).observe(d.body);
+    } catch (e) { console.error(e); } };
+    document.querySelector('#tabs button[data-t="method"]').click();
+  }
   dRender();
 
   // ════════ ② 방법론 ════════

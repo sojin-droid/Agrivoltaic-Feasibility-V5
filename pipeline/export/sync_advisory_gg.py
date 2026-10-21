@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""경기연구원 자문 정적 패키지 동기화 — V5 저장소의 자문 자산을 별도 공개 저장소(agrivoltaic-advisory-gg)에 바이트 동일 복사.
+"""경기연구원 자문 정적 패키지 동기화 — V5 저장소의 자문 자산을 별도 공개 저장소(agrivoltaic-advisory-gg)에 바이트 동일 복사(advisory.html 만 경기연구원 표시를 붙임).
 
 대상 파일 = 저장소의 PACKAGE_MANIFEST.json 'files' 목록(경로는 두 저장소에서 같다) + 새로 생긴 data_v4/advisory/* 파일.
 복사 후 manifest 의 sha256·bytes 를 다시 적고 revision 문구를 남긴다. push 는 하지 않는다(사람이 확인 뒤).
@@ -19,6 +19,15 @@ import re
 for p in glob.glob(os.path.join(SITE, 'data_v4', 'advisory', '*.json')):
     for rel in re.findall(r'"(assets/advisory/[^"]+)"', open(p, encoding='utf-8').read()):
         files.add(rel)
+# 비농지 제외 방법 자문 탭(2026-10-21 — 경기연구원 화면은 '데이터 신뢰성·보완 검토'와 이 탭 두 개) — advisory.html 이 nonfarm_cases.html 을 불러온다
+files |= {'nonfarm_cases.html', 'site.js', 'assets/v5.css', 'data_v4/nonfarm_cases_v1.json', 'data_v4/meta_v4.json', 'data_v4/results_v4.json'}
+for p in (os.path.join(SITE, 'nonfarm_cases.html'), os.path.join(SITE, 'data_v4', 'nonfarm_cases_v1.json')):
+    for rel in re.findall(r'(assets/nonfarm_cases/[^"\s]+\.(?:jpg|png))', open(p, encoding='utf-8').read()):
+        files.add(rel)
+# 경기연구원 패키지 표시 — advisory.html 은 <html data-pkg="gg"> 일 때 탭 두 개만 보인다(나머지는 바이트 동일 복사)
+# 경기연구원 저장소에만 다른 원본을 쓰는 파일 — 저장소 경로: V5 원본 경로(V5 의 같은 이름 파일은 지자체용으로 그대로 둔다)
+SRC_OF = {'docs/ADVISORY_README.md': 'docs/ADVISORY_README_GG.md'}
+TRANSFORM = {'advisory.html': lambda b: b.replace(b'<html lang="ko">', b'<html lang="ko" data-pkg="gg">', 1)}
 def sha(p):
     h = hashlib.sha256()
     with open(p, 'rb') as f:
@@ -26,9 +35,16 @@ def sha(p):
     return h.hexdigest()
 changed, missing = [], []
 for rel in sorted(files):
-    src = os.path.join(SITE, rel); dst = os.path.join(GG, rel)
+    src = os.path.join(SITE, SRC_OF.get(rel, rel)); dst = os.path.join(GG, rel)
     if not os.path.exists(src): missing.append(rel); continue
     os.makedirs(os.path.dirname(dst), exist_ok=True)
+    if rel in TRANSFORM:
+        body = TRANSFORM[rel](open(src, 'rb').read())
+        assert b'data-pkg="gg"' in body, f'{rel}: 경기연구원 표시를 붙이지 못함 — <html lang="ko"> 확인'
+        s = hashlib.sha256(body).hexdigest()
+        if not os.path.exists(dst) or sha(dst) != s: open(dst, 'wb').write(body); changed.append(rel)
+        man['files'][rel] = {'bytes': len(body), 'sha256': s}
+        continue
     before = sha(dst) if os.path.exists(dst) else None; s = sha(src)
     if before != s: shutil.copy2(src, dst); changed.append(rel)
     man['files'][rel] = {'bytes': os.path.getsize(src), 'sha256': s}
