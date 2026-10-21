@@ -14,6 +14,11 @@ mp = os.path.join(GG, 'PACKAGE_MANIFEST.json'); man = json.load(open(mp, encodin
 files = set(man['files'].keys())
 for p in glob.glob(os.path.join(SITE, 'data_v4', 'advisory', '**', '*'), recursive=True):
     if os.path.isfile(p): files.add(os.path.relpath(p, SITE).replace(os.sep, '/'))
+# 자문 자료가 가리키는 사진(assets/advisory/**) — 2026-10-21 전까지 빠져 경기 저장소에서 비농지 사례 사진이 404 였다
+import re
+for p in glob.glob(os.path.join(SITE, 'data_v4', 'advisory', '*.json')):
+    for rel in re.findall(r'"(assets/advisory/[^"]+)"', open(p, encoding='utf-8').read()):
+        files.add(rel)
 def sha(p):
     h = hashlib.sha256()
     with open(p, 'rb') as f:
