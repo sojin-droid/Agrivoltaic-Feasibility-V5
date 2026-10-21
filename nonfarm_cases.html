@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>비농지 제외 방법 자문</title>
 <meta name="robots" content="noindex,nofollow">
-<meta name="description" content="경기연구원 자문용 — 위성사진 육안 검토로 비농지를 뺀 방법과 사례, 오판 정정 사례, 더 나은 방법에 대한 질문">
+<meta name="description" content="경기연구원 자문용 — 위성사진 육안 검토로 비농지를 뺀 방법과 사례, 오판 정정 사례, 더 나은 방법·데이터 신뢰성·영상 전처리에 대한 질문">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=Inter:wght@400;500;700&family=JetBrains+Mono:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
@@ -53,8 +53,8 @@ body.pres .cs .cs-ab img{max-height:34vh;object-fit:cover}body.pres .cs figure.c
     <p class="lede">영농형 태양광 후보 공간은 지적 장부의 지목(전·답·과수원)으로 고른 필지를 21m 안에서 묶은 것입니다. 그런데 장부에는 농지로 남아 있어도 실제로는 도로·제방·하천 둔치·건물·숲인 땅이 많았습니다.
       그래서 <b>자동 제외</b>(도로 중심선·건물 외곽선·폭 10m 미만 띠)와 <b>위성사진 육안 검토</b>로 이런 땅을 뺐습니다. 1MW 이상 후보 공간 기준으로 전국 18,591 MW → 13,751 MW, 경기도는 1,946 MW → 1,097 MW로 줄었습니다.</p>
     <p class="lede" style="margin-top:8px"><b>2026-10-20 정정 반영</b> — 다시 보니 농지였던 6곳(아래)을 되살려 사이트 전체 수치에 반영했습니다. 1MW 이상 후보 공간의 검토 후 설치 가능 규모는 전국 13,750.6 MW에서 <b>13,796.4 MW</b>로 45.8 MW 늘었습니다. 비닐하우스 0.063 km²(약 2.8 MW)는 농지로 셈하고 하우스형 후보 위치로도 따로 기록했고, 둠벙 0.012 km²는 영농형 면적에서 빼고 수상태양광 후보 위치로 기록했습니다. 6곳 모두 경기도 밖이라 경기도 수치는 그대로입니다.</p>
-    <p class="lede" style="margin-top:8px">이 화면은 그 방법을 보여 드리고, <b>더 나은 방법이 있는지</b> 여쭙기 위한 것입니다. 아래 질문 여섯 가지에 의견을 주시면 됩니다. 시간이 짧으면 1–3번을 먼저 봐 주십시오.</p>
-    <div style="margin-top:14px" id="pills"><a class="pill" href="#q">질문 6가지</a> <a class="pill" href="#types">유형별 제외 사례</a> <a class="pill" href="#corr">다시 보니 농지였던 곳</a></div>
+    <p class="lede" style="margin-top:8px">이 화면은 그 방법을 보여 드리고, <b>더 나은 방법이 있는지</b> 여쭙기 위한 것입니다. 아래 질문 열한 가지에 의견을 주시면 됩니다. 시간이 짧으면 1–3번과 7번을 먼저 봐 주십시오.</p>
+    <div style="margin-top:14px" id="pills"><a class="pill" href="#q">질문 11가지</a> <a class="pill" href="#types">유형별 제외 사례</a> <a class="pill" href="#corr">다시 보니 농지였던 곳</a></div>
   </div>
 </div>
 <section id="q" class="slide"><div class="wrap">
@@ -66,6 +66,23 @@ body.pres .cs .cs-ab img{max-height:34vh;object-fit:cover}body.pres .cs figure.c
     <li><b>소하천과 하천 둔치</b> — 하천변 농지를 둔치로 볼지 경작지로 볼지가 가장 어려웠습니다. 경기도의 소하천·하천구역 자료를 쓸 수 있을까요? 하천변 경작지는 어떻게 다루는 게 맞을까요?</li>
     <li><b>비닐하우스와 둠벙</b> — 비닐하우스는 하우스형 영농형, 둠벙은 수상태양광 후보로 따로 모으고 있습니다. 비오톱 분류에서도 이런 시설·습지를 따로 보시나요? 생태 관점에서 둠벙을 태양광 후보로 두는 데 우려는 없을까요?</li>
     <li><b>검증</b> — 육안 판정이 맞는지 확인하려면 표본 현장 조사, 시군 담당자 확인, 시민 참여 중 어떤 방식이 현실적일까요?</li>
+  </ol>
+  <h3 style="margin:26px 0 6px;color:var(--navy);font-size:18px">데이터 신뢰성 · 영상 전처리</h3>
+  <p class="lede" style="max-width:none;margin-bottom:8px">경기연구원에서 라이다 영상을 다루실 때 거치신 전처리·검증 과정을 여쭙고자 합니다. 비교하실 수 있도록 저희가 위성사진을 처리한 방식을 먼저 적습니다.</p>
+  <ul class="qs" style="list-style:disc;font-size:14px;line-height:1.75">
+    <li><b>사진 두 종</b> — Esri 세계 영상(지점별 촬영일 확인 가능 — 검토한 후보 공간 2,867곳 중 가장 최근 촬영이 2023년 이후인 곳 64 %, 2025년 이후 45 %, 나머지는 2010–2022년)과 V-World 항공사진(2026년 10월 조회 시점의 최신 영상, 촬영일 정보 없음). 해상도는 픽셀당 약 0.5 m, 큰 후보 공간은 약 1 m.</li>
+    <li><b>가림</b> — V-World는 군사 보안 지역을 숲 무늬로 가립니다(평택 오산 기지). 가려진 곳은 Esri 사진으로 판정했습니다.</li>
+    <li><b>계절·그림자·시점 차이</b> — 겨울 사진의 그림자·맨땅 때문에 둘 중 어느 한쪽이라도 논밭이면 남겼고, 공사·새 건물·새 도로처럼 땅이 바뀐 곳은 촬영일이 최근인 사진을 따랐습니다.</li>
+    <li><b>자동 제외 뒤 육안 검토</b> — 도로 중심선·건물 외곽선·폭 10 m 미만 띠로 먼저 빼고(약 25.5만 필지), 남은 필지만 사람이 봤습니다(약 6.2만 필지 제외).</li>
+    <li><b>기록</b> — 뺀 필지마다 지번 고유번호(PNU)·사유·사진 파일·촬영일·메모를 대장에 남겼습니다. 판정별 신뢰도 등급은 두지 않았습니다.</li>
+    <li><b>판단 기준 보완</b> — 애매한 유형은 사진을 보고 네 차례 기준을 정했습니다(습지가 된 묵은 논·성토지는 휴경지로 남김, 하천 둔치는 뺌 등). 그래도 휴경지를 산림·공사장으로 뺀 곳이 나와 6곳을 되살렸습니다(아래).</li>
+  </ul>
+  <ol class="qs" start="7">
+    <li><b>라이다 전처리</b> — 라이다 영상을 쓰실 때 촬영 시기(잎이 있는 철·없는 철), 점 밀도 차이, 지면·비지면 분류 오류는 어떻게 다루셨나요? 저희의 계절·그림자 규칙과 비교해 보고 싶습니다.</li>
+    <li><b>가림·누락 구역</b> — 보안 지역, 구름·그림자, 자료가 없는 구역은 결과에서 어떻게 표시하고 처리하셨나요?</li>
+    <li><b>판독 신뢰도 기록</b> — 판독·분류 결과마다 신뢰도(확실·애매)나 근거(자료·촬영 시점)를 남기셨나요? 남기셨다면 어떤 형식이었나요?</li>
+    <li><b>정확도 검증</b> — 라이다 기반 분류의 정확도는 무엇과 대조해 재셨나요(현장 조사·정사영상·기존 주제도)? 표본은 어떻게 뽑으셨나요?</li>
+    <li><b>기준 시점 맞추기</b> — 지적(장부)·영상·라이다의 기준 시점이 서로 다를 때 어느 것을 기준으로 맞추셨나요?</li>
   </ol>
   <p class="figcap">답은 메일이나 구글 폼으로 주시면 됩니다. 수치는 법인·국공유 농지 · 특별법 시행 후 농업진흥구역에 설치할 수 있게 되는 조건 기준이며 검토 진행 중입니다.</p>
 </div></section>
