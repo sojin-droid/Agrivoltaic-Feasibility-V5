@@ -1,5 +1,5 @@
 {
- "generated": "2026-10-20 10:24",
+ "generated": "2026-10-21 10:27",
  "run": "R2_promo",
  "review_built_at": "2026-10-19 23:19",
  "user_rounds": 4,
@@ -10,24 +10,24 @@
   "n_reviewed": 2867,
   "mw0": 18591.1,
   "mw_auto": 16464.5,
-  "mw_final": 13750.6,
+  "mw_final": 13796.4,
   "km2_0": 413.28,
-  "km2_final": 305.57
+  "km2_final": 306.59
  },
  "reviewed": {
   "n": 2867,
   "n_reviewed": 2867,
   "mw0": 14491.1,
   "mw_auto": 13126.6,
-  "mw_final": 10412.9,
+  "mw_final": 10458.7,
   "km2_0": 322.05,
-  "km2_final": 231.4,
+  "km2_final": 232.42,
   "verdict": {
    "partial": 1449,
    "mostly_nonfarm": 732,
    "ok": 686
   },
-  "n_below_1mw": 1402,
+  "n_below_1mw": 1398,
   "n_gone": 283
  },
  "unreviewed": {
@@ -40,7 +40,7 @@
   "km2_final": 74.17
  },
  "n_gone_all": 284,
- "n_ge1_after": 3341,
+ "n_ge1_after": 3345,
  "n_ge50_before": 25,
  "n_ge50_after": 24,
  "bands": [
@@ -62,9 +62,9 @@
    "n_reviewed": 97,
    "mw0": 3089.4,
    "mw_auto": 3041.1,
-   "mw_final": 2825.8,
+   "mw_final": 2846.8,
    "km2_0": 68.65,
-   "km2_final": 62.8
+   "km2_final": 63.26
   },
   {
    "band": "10-20",
@@ -73,9 +73,9 @@
    "n_reviewed": 121,
    "mw0": 1698.1,
    "mw_auto": 1607.1,
-   "mw_final": 1370.3,
+   "mw_final": 1382.0,
    "km2_0": 37.74,
-   "km2_final": 30.45
+   "km2_final": 30.71
   },
   {
    "band": "3-10",
@@ -84,9 +84,9 @@
    "n_reviewed": 898,
    "mw0": 4262.4,
    "mw_auto": 3609.9,
-   "mw_final": 2501.4,
+   "mw_final": 2513.1,
    "km2_0": 94.72,
-   "km2_final": 55.59
+   "km2_final": 55.85
   },
   {
    "band": "1-3",
@@ -95,9 +95,9 @@
    "n_reviewed": 1726,
    "mw0": 7091.2,
    "mw_auto": 5773.6,
-   "mw_final": 4638.0,
+   "mw_final": 4639.4,
    "km2_0": 157.72,
-   "km2_final": 103.07
+   "km2_final": 103.1
   }
  ],
  "reasons_eye": [
@@ -105,43 +105,43 @@
    "reason": "도로부지",
    "parcels": 26242,
    "km2": 13.22,
-   "mw": 607.2
+   "mw": 605.2
   },
   {
    "reason": "하천 둔치",
    "parcels": 9799,
    "km2": 10.36,
-   "mw": 469.8
+   "mw": 462.7
   },
   {
    "reason": "임야화",
    "parcels": 5698,
    "km2": 8.84,
-   "mw": 400.0
+   "mw": 385.6
   },
   {
    "reason": "기타",
    "parcels": 4100,
    "km2": 5.88,
-   "mw": 266.5
+   "mw": 266.4
   },
   {
    "reason": "공사장",
    "parcels": 3310,
    "km2": 5.2,
-   "mw": 237.1
+   "mw": 217.6
   },
   {
    "reason": "수면·하천·수로",
    "parcels": 2794,
    "km2": 4.15,
-   "mw": 187.9
+   "mw": 187.8
   },
   {
    "reason": "철도부지",
    "parcels": 5428,
    "km2": 3.41,
-   "mw": 158.9
+   "mw": 156.9
   },
   {
    "reason": "군사시설",
@@ -153,19 +153,19 @@
    "reason": "공장·창고·야적장",
    "parcels": 1125,
    "km2": 1.73,
-   "mw": 78.5
+   "mw": 78.3
   },
   {
    "reason": "건물·마당",
    "parcels": 1216,
    "km2": 1.61,
-   "mw": 74.3
+   "mw": 74.2
   },
   {
    "reason": "주차장·포장면",
    "parcels": 1482,
    "km2": 1.64,
-   "mw": 74.1
+   "mw": 74.0
   },
   {
    "reason": "기존 태양광",
@@ -217,9 +217,9 @@
    "n_reviewed": 466,
    "mw0": 4754.1,
    "mw_auto": 4263.2,
-   "mw_final": 3907.3,
+   "mw_final": 3910.4,
    "km2_0": 105.69,
-   "km2_final": 86.83
+   "km2_final": 86.9
   },
   {
    "sido": "경기",
@@ -247,9 +247,9 @@
    "n_reviewed": 277,
    "mw0": 1250.7,
    "mw_auto": 1060.6,
-   "mw_final": 733.3,
+   "mw_final": 754.3,
    "km2_0": 27.81,
-   "km2_final": 16.3
+   "km2_final": 16.76
   },
   {
    "sido": "경남",
@@ -257,9 +257,9 @@
    "n_reviewed": 264,
    "mw0": 1115.5,
    "mw_auto": 905.0,
-   "mw_final": 605.2,
+   "mw_final": 616.9,
    "km2_0": 24.8,
-   "km2_final": 13.45
+   "km2_final": 13.71
   },
   {
    "sido": "강원",
@@ -307,9 +307,9 @@
    "n_reviewed": 33,
    "mw0": 128.0,
    "mw_auto": 123.4,
-   "mw_final": 32.9,
+   "mw_final": 37.2,
    "km2_0": 2.85,
-   "km2_final": 0.73
+   "km2_final": 0.83
   },
   {
    "sido": "광주",
@@ -347,9 +347,9 @@
    "n_reviewed": 5,
    "mw0": 27.2,
    "mw_auto": 25.9,
-   "mw_final": 11.6,
+   "mw_final": 17.2,
    "km2_0": 0.61,
-   "km2_final": 0.26
+   "km2_final": 0.38
   },
   {
    "sido": "부산",
@@ -379,11 +379,56 @@
  },
  "keep": {
   "n_parcel": 289906,
-  "n_drop": 155464,
-  "n_partial": 56590,
+  "n_drop": 154599,
+  "n_partial": 57179,
   "a_ledger_km2": 413.278,
-  "a_keep_km2": 305.416,
-  "built_at": "2026-10-20T05:15:58"
+  "a_keep_km2": 306.435,
+  "built_at": "2026-10-20T22:55:38"
+ },
+ "corrections": {
+  "files": [
+   "nonfarm_corrections_2026-10-20.geojson"
+  ],
+  "greenhouse": "restore",
+  "water": "drop",
+  "units": [
+   {
+    "lab": 4501952,
+    "sgg": "44770",
+    "mw_before": 5.8,
+    "mw_after": 9.0
+   },
+   {
+    "lab": 314670,
+    "sgg": "27720",
+    "mw_before": 0.0,
+    "mw_after": 2.9
+   },
+   {
+    "lab": 650306,
+    "sgg": "30200",
+    "mw_before": 0.1,
+    "mw_after": 5.8
+   },
+   {
+    "lab": 10657762,
+    "sgg": "48250",
+    "mw_before": 3.1,
+    "mw_after": 14.7
+   },
+   {
+    "lab": 8571886,
+    "sgg": "47210",
+    "mw_before": 0.2,
+    "mw_after": 21.2
+   },
+   {
+    "lab": 315308,
+    "sgg": "27720",
+    "mw_before": 0.0,
+    "mw_after": 1.5
+   }
+  ]
  },
  "photo_dates": {
   "n_reviewed": 2867,

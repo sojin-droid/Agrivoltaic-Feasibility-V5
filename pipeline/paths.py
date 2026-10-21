@@ -29,3 +29,19 @@ def _root(start):
 SITE = _root(__file__)
 OUT = os.path.join(SITE, 'data_v4')
 CLUSTERS = os.path.join(OUT, 'clusters')
+
+
+# ── gzip 결정성 (ADR-0061, 2026-10-20) ─────────────────────────────────────────
+# gzip 머리글에 저장 시각이 들어가면 내용이 같아도 파일 바이트가 매번 달라져, 정정 한 번에 전국 파일이 '바뀜'으로 잡힌다
+# (git 이력·자문 저장소 동기화가 불필요하게 커진다). 이 모듈을 읽는 발행 스크립트 전부에서 저장 시각을 0 으로 고정한다.
+import gzip as _gzip
+_gz_init = _gzip.GzipFile.__init__
+
+
+def _gz_init_det(self, filename=None, mode=None, compresslevel=9, fileobj=None, mtime=None):
+    _gz_init(self, filename, mode, compresslevel, fileobj, 0 if mtime is None else mtime)
+
+
+if not getattr(_gzip.GzipFile, '_agv_deterministic', False):
+    _gzip.GzipFile.__init__ = _gz_init_det
+    _gzip.GzipFile._agv_deterministic = True

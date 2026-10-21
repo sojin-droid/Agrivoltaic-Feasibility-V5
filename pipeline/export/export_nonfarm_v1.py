@@ -8,7 +8,7 @@
 """
 import os, sys, json, datetime
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-from paths import SITE, NF
+from paths import SITE, NF, LR
 sys.stdout.reconfigure(encoding='utf-8', errors='replace')
 import numpy as np
 import pandas as pd
@@ -19,6 +19,22 @@ KB = json.load(open(os.path.join(os.path.dirname(NF), '..', 'nonfarm_keep_v1', '
 PD = json.load(open(os.path.join(NF, 'esri_dates_summary.json'), encoding='utf-8'))
 L = pd.read_parquet(os.path.join(NF, 'nonfarm_ledger.parquet'))
 ST = json.load(open(os.path.join(NF, 'nonfarm_review_v1.json'), encoding='utf-8'))
+# 사용자 확정 정정(ADR-0061 · model/data/visual_audit/corrections_*) — 정정한 후보는 검토 고정본 a_final 대신
+#   정본 필지 단위 남은 면적(nonfarm_keep_v1.f × 장부 면적)을 쓴다. 정정 밖 후보는 고정본 값 그대로(G2 차 0.05 % 이내).
+CORR = KB.get('corrections') or {}
+corr_rows = []
+if CORR.get('units'):
+    import duckdb
+    _c = duckdb.connect(os.path.join(LR, 'agrivoltaic_ledger_v1.duckdb'), read_only=True)
+    _c.register('u', pd.DataFrame({'lab': CORR['units']}))
+    K = _c.execute("""SELECT k.lab_r2 AS lab, SUM(e.calculatedarea * k.f) AS a_keep
+                       FROM nonfarm_keep_v1 k JOIN elig_v2 e USING(pnu) JOIN u ON u.lab = k.lab_r2 GROUP BY 1""").fetch_df().set_index('lab')['a_keep']
+    _c.close()
+    for lab, a_new in K.items():
+        i = T.index[T.lab == lab]
+        corr_rows.append({'lab': int(lab), 'sgg': str(T.loc[i, 'sgg'].iloc[0]), 'mw_before': round(float(T.loc[i, 'mw_final'].iloc[0]), 1),
+                          'mw_after': round(float(a_new) * 0.045 / 1000, 1)})
+        T.loc[i, 'a_final'] = int(round(float(a_new))); T.loc[i, 'mw_final'] = float(a_new) * 0.045 / 1000   # 고정본 a_final 은 ㎡ 정수
 T['cut_auto'] = T.mw0 - T.mw_auto
 T['cut_eye'] = T.mw_auto - T.mw_final            # 사용자가 자동 제외를 되살린 후보는 음수일 수 있다
 
@@ -74,6 +90,8 @@ out = {
     'parcels_removed': {'auto': int((L.stage == '자동').sum()), 'eye': int((L.stage == '눈 검토').sum()), 'unique': int(L.pnu.nunique())},
     # 정본 반영(ADR-0060) — 필지 단위 남은 비율 표 nonfarm_keep_v1 의 집계(model/stages/v11_01_nonfarm_keep.py build.json)
     'keep': {k: KB[k] for k in ('n_parcel', 'n_drop', 'n_partial', 'a_ledger_km2', 'a_keep_km2', 'built_at')},
+    # 사용자 확정 정정(ADR-0061) — 후보별 검토 후 MW 정정 전·후 · 비닐하우스·둠벙 처리
+    'corrections': {'files': CORR.get('files', []), 'greenhouse': CORR.get('greenhouse'), 'water': CORR.get('water'), 'units': corr_rows},
     # 위성사진 촬영 시점 — Esri 는 후보마다 가장 최근 촬영 연도의 분포, V-World 는 촬영일 미제공
     'photo_dates': {k: PD[k] for k in ('n_reviewed', 'year_min', 'year_max', 'share_ge2023_pct', 'share_ge2025_pct', 'vworld')},
     # 자동 제외에 쓴 자료의 판·시점(근거와 방법 페이지가 그대로 적는다)

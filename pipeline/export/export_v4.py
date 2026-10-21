@@ -77,6 +77,7 @@ if os.path.exists(_asp):
 
 _r0 = cell('전국', 'R0', '본값')
 _r0c = cell('전국', 'R0', '본값', rows_ctl)
+_leg = cell('전국', 'R0', '구정의', rows_ctl)   # 구 정의(ρ≥0.30) 참고값 — 비농지 제외 후(ADR-0061: 상수 대신 매트릭스 칸)
 save('summary_v4.json', {
     'generated': GEN,
     'unit_note': '1차 단위 km². 참고 MW = 면적(㎡)×0.045/1000 (GCR 0.225×효율 0.20 가정) — 표시 시 가정 병기',
@@ -89,7 +90,7 @@ save('summary_v4.json', {
                'touchstone': '정본 R0 = R0_current 런 산출과 일치 검증 · 대조군 R0 = 상수 정확 일치',
                'control': {'n': _r0c['n'], 'km2': round(_r0c['m2']/1e6, 2),
                            'def': '무필터(전 소유) 대조군 — 정본 아님, 병기 전용'},
-               'legacy': {'n': Q.R0_ALL_NF_LEGACY_N, 'km2': round(Q.R0_ALL_NF_LEGACY_M2/1e6, 2),   # 비농지 제외 후(ADR-0060)
+               'legacy': {'n': _leg['n'], 'km2': round(_leg['m2']/1e6, 2),   # 비농지 제외 후 · 매트릭스 구정의 칸(ADR-0061)
                           'def': '구 정의 ρ≥0.30 — 폐지(참고값, 정책 인용 금지)'},
                'pending_zone_null': pend},
     'matrix': matrix,          # 독립 조합 R0–R3 · 각 정본/대조군 — 누적 사다리 아님

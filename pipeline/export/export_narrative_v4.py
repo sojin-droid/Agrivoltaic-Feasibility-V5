@@ -15,11 +15,12 @@ import query as Q
 
 
 con = Q.db()
-# ── 게이트: 대조군 R0 = 상수 · 정본 R0 = 매트릭스 정본과 일치 ──
+# ── 게이트: 대조군·정본 R0 런 = 매트릭스(질의 경로) — 비농지 제외 후 값은 상수로 박지 않는다(ADR-0061) ──
 a = con.execute("""SELECT n_eligible, eligible_area_km2
                    FROM scenario_runs WHERE name='R0_current@all'""").fetchone()
-assert a and a[0] == Q.R0_ALL_NF_N and abs(a[1] - Q.R0_ALL_NF_M2/1e6) < 0.01, \
-    f"[FAIL] R0 대조군 ≠ 상수(ADR-0040 · 비농지 제외 후 ADR-0060): {a}"
+_mxa = [r for r in Q.matrix_data(universe='all') if r['pop'] == '전국' and r['cell'] == 'R0' and r['phase'] == '본값'][0]
+assert a and a[0] == _mxa['n'] and abs(a[1] - _mxa['m2'] / 1e6) < 0.01, \
+    f"[FAIL] R0 대조군 런 ≠ 매트릭스 대조군: {a} vs {_mxa['n']}"
 b = con.execute("""SELECT n_eligible, eligible_area_km2
                    FROM scenario_runs WHERE name='R0_current'""").fetchone()
 _mx = [r for r in Q.matrix_data(universe='pubcorp')

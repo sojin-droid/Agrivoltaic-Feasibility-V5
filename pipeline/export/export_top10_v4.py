@@ -57,6 +57,13 @@ if derr:
 
 out_dir = os.path.join(SITE, 'data_v4', 'top10')
 os.makedirs(out_dir, exist_ok=True)
+# 부분 갱신(ADR-0061) — 비농지 정정처럼 일부 후보만 바뀌면 그 후보가 걸친 시군만 다시 계산한다.
+#   --sgg 41220,44270 : 이 시군만 다시 계산(비지배 플래그는 시군 안 비교라 다른 시군 파일은 그대로 맞다)
+#   --relabel-dir D   : 나머지 시군 파일의 후보 번호를 D/{run}.parquet(old_lab, new_lab)로 바꿔 쓴다(번호 체계 이행 때만)
+import argparse
+_ap = argparse.ArgumentParser(); _ap.add_argument('--sgg', default=None); _ap.add_argument('--relabel-dir', default=None)
+_A = _ap.parse_args()
+ONLY = set(_A.sgg.split(',')) if _A.sgg else None
 per_sgg = {}          # sgg → {run: {n, rows}}
 labels = {}
 stamps = {}
@@ -73,6 +80,8 @@ for run in RUNS:
     lon, lat = T.transform(df['x'].to_numpy(float), df['y'].to_numpy(float))
     df = df.assign(lon=lon, lat=lat)
     for sgg, d in df.groupby('sgg'):
+        if ONLY is not None and sgg not in ONLY:
+            continue
         d = d.sort_values('area_m2', ascending=False).reset_index(drop=True)
         f3 = nondominated(d, 'abc')
         # G1 — 정본 함수와 동일한지 재현
@@ -115,6 +124,7 @@ for run in RUNS:
         labels[sgg] = Q._sgg_label(sgg)
 print(f"G1 통과 — 3축 플래그 = 정본 함수 ({n_g1:,} 시군×칸) · G1b 통과 — 2축 3종 = 정본 함수(축 고정) · G2 통과")
 
+_old_idx = json.load(open(os.path.join(SITE, 'data_v4', 'top10_index.json'), encoding='utf-8')) if ONLY is not None else None
 idx = {'generated': datetime.datetime.now().strftime('%Y-%m-%d %H:%M'), 'runs': RUNS, 'cols': COLS,
        'population': 'block_context 모집단(정본 그대로 · 2026-10-07 부터 전량 --all · 면적 하한 없음 · ADR-0055) — 시군 관여 기준(걸침 후보는 관련 시군마다 등장, 합산 금지)',
        'fronts': '표시 규모(0·22222·66667·222222·444444·1111111㎡)별 비지배 lab 목록 — 비교 모집단 = 그 규모 이상 전량',
@@ -123,6 +133,35 @@ idx = {'generated': datetime.datetime.now().strftime('%Y-%m-%d %H:%M'), 'runs': 
        'dsh': 'MW×1,314h ÷ 시군 연간 전력판매량(GWh) % — 표기 전용(PR-0030), 판정 불사용',
        'stamps': stamps, 'sgg': {}}
 tot = 0
+if ONLY is not None:
+    # 다시 계산하지 않은 시군은 이전 색인 값을 그대로 잇는다(그 시군 후보는 바뀌지 않았다)
+    for _s, _v in _old_idx['sgg'].items():
+        if _s not in per_sgg:
+            idx['sgg'][_s] = _v
+    if _A.relabel_dir:
+        _maps = {}
+        for _r in RUNS:
+            _mp = os.path.join(_A.relabel_dir, f'{_r}.parquet')
+            if os.path.exists(_mp):
+                _m = pd.read_parquet(_mp); _maps[_r] = dict(zip(_m['old_lab'].astype(int), _m['new_lab'].astype(int)))
+        _nrl = 0
+        for _s in list(idx['sgg']):
+            if _s in per_sgg:
+                continue
+            _fp = os.path.join(out_dir, f'{_s}.json.gz')
+            _d = json.load(gzip.open(_fp, 'rt', encoding='utf-8'))
+            for _r, _v in _d['runs'].items():
+                _mm = _maps.get(_r)
+                if not _mm:
+                    continue
+                for _row in _v['rows']:
+                    _row[0] = _mm[_row[0]]
+                for _k, _fr in _v.get('fronts', {}).items():
+                    _v['fronts'][_k] = {f: [_mm[x] for x in xs] for f, xs in _fr.items()}
+            with gzip.open(_fp, 'wt', encoding='utf-8') as f:
+                json.dump(_d, f, ensure_ascii=False, separators=(',', ':'), allow_nan=False)
+            _nrl += 1
+        print(f"번호만 바꿔 쓴 시군 {_nrl}")
 for sgg, runs in per_sgg.items():
     with gzip.open(os.path.join(out_dir, f'{sgg}.json.gz'), 'wt', encoding='utf-8') as f:
         json.dump({'sgg': sgg, 'label': labels[sgg], 'cols': COLS, 'runs': runs}, f, ensure_ascii=False, separators=(',', ':'), allow_nan=False)

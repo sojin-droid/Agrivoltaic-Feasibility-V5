@@ -1,5 +1,5 @@
 {
- "generated": "2026-10-20 05:06",
+ "generated": "2026-10-20 23:48",
  "runs": [
   "R0_current",
   "R2_promo",
@@ -7,19 +7,19 @@
  ],
  "gates": {
   "R0_current": {
-   "n_members": 925220,
-   "n_units": 298227,
-   "area_km2": 427.57
+   "n_members": 925414,
+   "n_units": 298229,
+   "area_km2": 427.77
   },
   "R2_promo": {
-   "n_members": 1338902,
-   "n_units": 393981,
-   "area_km2": 930.99
+   "n_members": 1339767,
+   "n_units": 393973,
+   "area_km2": 932.01
   },
   "R3_zone_all": {
-   "n_members": 1408219,
-   "n_units": 409364,
-   "area_km2": 970.52
+   "n_members": 1409084,
+   "n_units": 409354,
+   "area_km2": 971.54
   }
  },
  "n_sgg": 249,

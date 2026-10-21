@@ -9,6 +9,8 @@
 게이트: 시군별 점 수 = members 필지 수 정확 일치(좌표 결손은 건수 보고).
 """
 import os, sys, json, gzip
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+import paths  # noqa: F401 — gzip 결정성(ADR-0061)
 import duckdb
 import numpy as np
 from pyproj import Transformer

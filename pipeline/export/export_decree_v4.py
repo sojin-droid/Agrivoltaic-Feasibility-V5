@@ -29,34 +29,29 @@ def cell(src, pop, code):
     return {'n': r['n'], 'km2': round(r['m2'] / 1e6, 2), 'm2': round(r['m2'], 2)}
 
 
-# ── 대조값 — ADR-0060(2026-10-20 비농지 제외) 재산출값. query.matrix_data 와 엔진 런(R3_zone_all · R3_zone_all@all ·
-#    R0_current@all)의 필지·km² 가 정확히 같음을 확인하고 등재했다(감사 미실시 — 다음 감사 대상).
-#    종전 2026-08-31 auditor 감사 통과값(장부 기준 · 비농지 제외 전)은 이력:
-#      국가관리간척지 R0 all 1,200·6.05 / R1 1,242·6.10 / R2 20,330·156.01 / R3 20,372·156.06 ·
-#      pubcorp R0 627·4.31 / R1 655·4.33 / R2 10,034·102.65 / R3 10,062·102.68 ·
-#      전국 R3 all 9,271,388·11,971.67 · pubcorp 1,563,683·1,078.38 · 간척 R3 all 237.42 · pubcorp 123.10 · 전국 R0 all 5,719,511·5,582.55
-#    자산이 변하면 여기서 멈춘다.
-AUDITED = [
-    # (pop, cell, universe, n, km2)
-    ('국가관리간척지', 'R0', 'all', 1_107, 5.32),
-    ('국가관리간척지', 'R1', 'all', 1_149, 5.37),
-    ('국가관리간척지', 'R2', 'all', 20_128, 154.43),
-    ('국가관리간척지', 'R3', 'all', 20_170, 154.48),
-    ('국가관리간척지', 'R0', 'pubcorp', 534, 3.57),
-    ('국가관리간척지', 'R1', 'pubcorp', 562, 3.60),
-    ('국가관리간척지', 'R2', 'pubcorp', 9_832, 101.07),
-    ('국가관리간척지', 'R3', 'pubcorp', 9_860, 101.10),
-    ('전국', 'R3', 'all', 9_115_924, 11_863.81),
-    ('전국', 'R3', 'pubcorp', 1_408_219, 970.52),
-    ('간척', 'R3', 'all', None, 235.55),
-    ('간척', 'R3', 'pubcorp', None, 121.23),
-    ('전국', 'R0', 'all', 5_633_240, 5_519.41),
-]
-for pop, code, uni, xn, xkm2 in AUDITED:
+# ── 게이트(ADR-0061) — 비농지 정정이 잦아 칸 값을 상수로 박지 않는다. 대신
+#   ① 전국 칸 = 같은 판의 엔진 런(R0·R3 × 정본·대조군) — 질의 경로와 엔진 경로가 만나는가
+#   ② 포함관계 — 국가관리간척지 ≤ 간척 ≤ 전국 · R0 ≤ R1 ≤ R3 · R0 ≤ R2 ≤ R3 (필지·면적, 정본·대조군)
+#   이력: 2026-08-31 auditor 감사 통과값(장부 기준) 국가관리간척지 R3 무필터 20,372·156.06 / 정본 10,062·102.68 ·
+#         ADR-0060 1차(2026-10-20 오전) 무필터 20,170·154.48 / 정본 9,860·101.10.
+_con = Q.db()
+for (pop, code, uni), run in {('전국', 'R0', 'all'): 'R0_current@all', ('전국', 'R0', 'pubcorp'): 'R0_current',
+                              ('전국', 'R3', 'all'): 'R3_zone_all@all', ('전국', 'R3', 'pubcorp'): 'R3_zone_all'}.items():
     c = cell(rows_all if uni == 'all' else rows_pub, pop, code)
-    if (xn is not None and c['n'] != xn) or abs(c['km2'] - xkm2) > 0.005:
-        raise SystemExit(f"[FAIL] {pop} {code}({uni}) {c['n']:,}·{c['km2']:,.2f}km² ≠ "
-                         f"대조값 {xn}·{xkm2} — 자산 변동, export 중단")
+    r = _con.execute("SELECT n_eligible, eligible_area_km2 FROM scenario_runs WHERE name = ?", [run]).fetchone()
+    if not r or r[0] != c['n'] or abs(r[1] - c['m2'] / 1e6) > 0.01:
+        raise SystemExit(f"[FAIL] {pop} {code}({uni}) 질의 {c['n']:,}·{c['km2']:,.2f} ≠ 엔진 {run} {r} — export 중단")
+_con.close()
+for rows, uni in ((rows_all, 'all'), (rows_pub, 'pubcorp')):
+    for code, _, _ in Q.MATRIX_ZONES:
+        a_, b_, c_ = (cell(rows, p_, code) for p_ in ('국가관리간척지', '간척', '전국'))
+        if not (a_['n'] <= b_['n'] <= c_['n'] and a_['m2'] <= b_['m2'] + 1e-6 and b_['m2'] <= c_['m2'] + 1e-6):
+            raise SystemExit(f"[FAIL] 포함관계 위반 {code}({uni}) 국가관리 ≤ 간척 ≤ 전국")
+    for pop in ('국가관리간척지', '간척', '전국'):
+        v = {code: cell(rows, pop, code) for code, _, _ in Q.MATRIX_ZONES}
+        if not (v['R0']['m2'] <= v['R1']['m2'] + 1e-6 and v['R1']['m2'] <= v['R3']['m2'] + 1e-6
+                and v['R0']['m2'] <= v['R2']['m2'] + 1e-6 and v['R2']['m2'] <= v['R3']['m2'] + 1e-6):
+            raise SystemExit(f"[FAIL] 포함관계 위반 {pop}({uni}) R0 ≤ R1·R2 ≤ R3")
 
 matrix = {code: {'name': name,
                  '정본': cell(rows_pub, '국가관리간척지', code),

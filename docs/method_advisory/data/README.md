@@ -12,4 +12,4 @@
 | f07_* | 읍면동 계통 참고값 | DuckDB grid_emd_v3c (정정판) |
 | f08_* | 시군 모집단 대 비지배 비율 | data_v4/top10/*.json.gz R2_promo |
 
-점검 로그: ('d4 n', 7106500) · ('block_context n', 394330, 'min area', 0.0) · ('ind nearest recompute median abs diff km', 0.003)
+점검 로그: ('d4 n', 7106500) · ('block_context n', 394322, 'min area', 0.0) · ('ind nearest recompute median abs diff km', 0.003)
