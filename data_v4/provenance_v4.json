@@ -1,5 +1,5 @@
 {
-"generated": "2026-10-20 23:48",
+"generated": "2026-10-21 17:12",
 "source": "provenance_v1 (v9_01_quality_gate.py · ADR-0053) — 값을 지어내지 않는다: 없으면 unknown",
 "overrides": "pipeline/export/provenance_overrides.json — 기록 밖에서 확인한 값(행마다 override_evidence)",
 "cols": [

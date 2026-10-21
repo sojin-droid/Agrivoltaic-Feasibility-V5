@@ -135,9 +135,17 @@ idx = {'generated': datetime.datetime.now().strftime('%Y-%m-%d %H:%M'), 'runs': 
 tot = 0
 if ONLY is not None:
     # 다시 계산하지 않은 시군은 이전 색인 값을 그대로 잇는다(그 시군 후보는 바뀌지 않았다)
+    # 다시 계산하라고 했는데 후보가 하나도 안 남은 시군은 색인·파일에서 뺀다(2026-10-21 띠 제외 때 처음 생김)
+    _gone = sorted(s_ for s_ in _old_idx['sgg'] if s_ in ONLY and s_ not in per_sgg)
     for _s, _v in _old_idx['sgg'].items():
-        if _s not in per_sgg:
+        if _s not in per_sgg and _s not in ONLY:
             idx['sgg'][_s] = _v
+    for _s in _gone:
+        _fp = os.path.join(out_dir, f'{_s}.json.gz')
+        if os.path.exists(_fp):
+            os.remove(_fp)
+    if _gone:
+        print(f"후보가 없어져 뺀 시군 {_gone}")
     if _A.relabel_dir:
         _maps = {}
         for _r in RUNS:

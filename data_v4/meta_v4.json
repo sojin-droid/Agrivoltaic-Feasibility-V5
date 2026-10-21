@@ -1,11 +1,11 @@
 {
- "generated": "2026-10-20 23:46",
- "data_generation": "ADR-0040+0041 · adr0041_25 · 분석 기준 필지 = 법인·국공유(02·04·05·06) · θ 없음(연접 구획 전량) · 계통 결합 분리",
+ "generated": "2026-10-21 17:08",
+ "data_generation": "ADR-0040+0041+0060(narrow10) · adr0047_w10 · 분석 기준 필지 = 법인·국공유(02·04·05·06) · θ 없음 · 계통 결합 분리 · 폭 10 m 미만 띠 필지 제외(기본 적격)",
  "grid": {
-  "name": "adr0041_25",
-  "edition": "ADR-0040+0041",
-  "sha12": "b3b25860ef5b",
-  "n_runs": 25
+  "name": "adr0047_w10",
+  "edition": "ADR-0040+0041+0060(narrow10)",
+  "sha12": "c5c4fc42863c",
+  "n_runs": 24
  },
  "verification": "export 시 앵커 상수 정확 일치 검증 통과 (T16-①)",
  "lineage": [
@@ -190,8 +190,14 @@
    "layer": "L1"
   },
   {
+   "tbl": "narrow_strip_v1",
+   "built": "2026-10-21",
+   "source": "ADR-0062 — 폭 10 m 미만 띠 필지(지적 폴리곤 최소외접사각형 짧은 변 < 10 m). 대상 elig_v2.L1_jimok 전량. 출처 {'cadastre': 15695384, 'no_geom': 181301, 'cadastre_recovered': 3892} (cadastre_recovered = ADR-0047 대응표로 신 PNU 지적에서 판정 · no_geom = 지적 없음, 띠로 보지 않음).",
+   "layer": "L1"
+  },
+  {
    "tbl": "nonfarm_keep_v1",
-   "built": "2026-10-20",
+   "built": "2026-10-21",
    "source": "ADR-0060 — 필지별 비농지 제외(자동: 표준 노드·링크·OSM 도로 면, V-World 건물통합정보 외곽선 1 m, 폭 10 m 미만 띠·200㎡ 미만 조각 / 위성사진 육안 검토: Esri·V-World 두 사진 대조, 사용자 판정 4회). 대상 R2_promo 1MW 이상 후보 공간 5,645곳의 구성 필지 289,906개 — 그 밖의 필지는 검토 밖(nf_f=1). nf_f = 면적(필지 ∩ 남긴 땅) ÷ 면적(필지) · nf_drop = 남긴 부분 1㎡ 미만. VIEW elig_v2nf 가 장부 면적에 곱한다. 고정본 experiments/nonfarm_review nonfarm_review_v1 (2026-10-19 23:19, 사용자 판정 4회)",
    "layer": "L1"
   },
@@ -227,14 +233,14 @@
   },
   {
    "tbl": "analysis_unit_missing_v1",
-   "built": "2026-10-20",
+   "built": "2026-10-21",
    "source": "V5.2 공간 분석 단위 중 **폴리곤을 만들지 못한 구획** — v9_02_analysis_unit_polygon.py · 지적(Cadastre_All)에서 구성 필지를 하나도 찾지 못했다. 조용히 빼지 않고 값으로 남긴다. 원인은 동결본이 이미 기록한 기하 결손(block_context.json geometry_missing_parcels=1,205)과 같다. 이 구획들은 지도에 그릴 수 없으나 원장에는 존재한다 — '없는 곳'이 아니라 '그릴 수 없는 곳'이다",
    "layer": "L2"
   },
   {
    "tbl": "analysis_unit_v1",
-   "built": "2026-10-20",
-   "source": "V5.2 21m 연접 **공간 분석 단위**(후보 공간) 폴리곤 — v9_02_analysis_unit_polygon.py · 기존 21m membership(R2_promo/members.parquet)을 지적(Cadastre_All EPSG:5186)에 dissolve. **cluster 가 아니다** — 최종 cluster 정의는 자문 이후로 열어 둔다(V5.2 §1·§17). ≤1000 m 응축 cc(ADR-0046)는 쓰지 않았다 — 2026-09-23 ADR-0054 로 활성 계보에서 폐기(엔진·산출물 제거). 대상 = block_context 선언 부분집합 전량(--all · 면적 하한 없음) 승계(숨은 문턱 없음, ADR-0041 · 2026-10-07 전량 재산출으로 11,111㎡ 하한 폐기). 입력 production. 지적도 읽기에 ADR-0047 회수 대응표 적용(3,606필지 · 구 pnu→신 pnu). 행정경계로 자르지 않는다 — 시군을 넘는 0개는 하나로 합쳤다. 단순화 허용오차 2.0 m(선언값) · 면적 변화 -0.418% · 원면적(area_geom_m2)과 단순화 면적을 둘 다 보존. mw_ref = 원장 면적 × 0.045 kW/㎡(ADR-0012 기존 계수). 속성은 block_context 를 조인해 쓰고 중복 필드를 만들지 않는다 · **품질 플래그 geom_quality** — 원장 면적과 지적 폴리곤 면적이 1% 넘게 어긋나는 단위를 geom_smaller(기하 모자람 · 지적 미발견 필지 원인) / geom_larger(원장 면적이 더 작음 · 원인 미특정, 산 지번 아님) 로 표시한다. 어느 쪽이 옳은지 판정하지 않는다(제6조). 지적에서 구성 필지를 하나도 못 찾아 폴리곤이 없는 구획은 별도 표 analysis_unit_missing_v1 에 남긴다 · **표시 등급 display_tier** (V5.2 CP1 결정 2026-09-23) — 기본 지도는 display_tier='default'(= geom_quality ok) 만 정상 후보 공간으로 표시한다. geom_smaller·geom_larger 는 'quality_review' 로 보존하며 필터에서만 나온다. 필터 어휘 quality_label = 정상 기하 / 기하 불완전 / 면적 불일치, 폴리곤을 만들 수 없는 것은 '기하 없음'(analysis_unit_missing_v1). **geom_larger 를 정상 후보 공간으로 표시하지 않는다** — 그러나 '잘못된 필지'라고 단정하지도 않는다(원인 미특정, 제6조)",
+   "built": "2026-10-21",
+   "source": "V5.2 21m 연접 **공간 분석 단위**(후보 공간) 폴리곤 — v9_02_analysis_unit_polygon.py · 기존 21m membership(R2_promo/members.parquet)을 지적(Cadastre_All EPSG:5186)에 dissolve. **cluster 가 아니다** — 최종 cluster 정의는 자문 이후로 열어 둔다(V5.2 §1·§17). ≤1000 m 응축 cc(ADR-0046)는 쓰지 않았다 — 2026-09-23 ADR-0054 로 활성 계보에서 폐기(엔진·산출물 제거). 대상 = block_context 선언 부분집합 전량(--all · 면적 하한 없음) 승계(숨은 문턱 없음, ADR-0041 · 2026-10-07 전량 재산출으로 11,111㎡ 하한 폐기). 입력 production. 지적도 읽기에 ADR-0047 회수 대응표 적용(1,648필지 · 구 pnu→신 pnu). 행정경계로 자르지 않는다 — 시군을 넘는 148개는 하나로 합쳤다. 단순화 허용오차 2.0 m(선언값) · 면적 변화 -0.260% · 원면적(area_geom_m2)과 단순화 면적을 둘 다 보존. mw_ref = 원장 면적 × 0.045 kW/㎡(ADR-0012 기존 계수). 속성은 block_context 를 조인해 쓰고 중복 필드를 만들지 않는다 · **품질 플래그 geom_quality** — 원장 면적과 지적 폴리곤 면적이 1% 넘게 어긋나는 단위를 geom_smaller(기하 모자람 · 지적 미발견 필지 원인) / geom_larger(원장 면적이 더 작음 · 원인 미특정, 산 지번 아님) 로 표시한다. 어느 쪽이 옳은지 판정하지 않는다(제6조). 지적에서 구성 필지를 하나도 못 찾아 폴리곤이 없는 구획은 별도 표 analysis_unit_missing_v1 에 남긴다 · **표시 등급 display_tier** (V5.2 CP1 결정 2026-09-23) — 기본 지도는 display_tier='default'(= geom_quality ok) 만 정상 후보 공간으로 표시한다. geom_smaller·geom_larger 는 'quality_review' 로 보존하며 필터에서만 나온다. 필터 어휘 quality_label = 정상 기하 / 기하 불완전 / 면적 불일치, 폴리곤을 만들 수 없는 것은 '기하 없음'(analysis_unit_missing_v1). **geom_larger 를 정상 후보 공간으로 표시하지 않는다** — 그러나 '잘못된 필지'라고 단정하지도 않는다(원인 미특정, 제6조)",
    "layer": "L2"
   },
   {
@@ -347,14 +353,14 @@
   },
   {
    "tbl": "analysis_unit_axes_v1",
-   "built": "2026-10-20",
+   "built": "2026-10-21",
    "source": "ADR-0054 §9·§12 — 순위 엔진 입력. 후보 공간(21m 연접 lab) × 시군 touch 행. 축 = block_context.parquet(R2_promo) 의 area_m2 ↑ · lo ↑ · dist_ind_km ↓ — 기존 정의·기존 지배 규칙(query._frontier_mask) 그대로이고 새 score·weight·threshold 는 없다. 바뀐 것은 비교 객체뿐이다: cc(≤1,000m 응축) 폐기 → analysis_unit_v1. lo 는 vol3_equal 합의 참고지표이지 접속 가능 용량이 아니다. display_tier='no_geometry' 는 폴리곳을 그릴 수 없는 후보 공간(값은 보존, 지도 미표시).",
    "layer": ""
   },
   {
    "tbl": "sgg_unit_summary_v1",
-   "built": "2026-10-20",
-   "source": "ADR-0054 §8 — V5.5 시군 요약. 입력 analysis_unit_v1(21m 연접 공간 분석 단위 폴리곳 · v9_02) · ≤1,000m 응축(cc) 사용 안 함(폐기). 시군 귀속 = touch(경계 걸침 후보 공간은 관여 시군마다 1) → **시군 값을 전국 합계로 더하지 않는다**. def_* = display_tier='default'(정상 기하) · qr_* = quality_review(기하 불완·면적 불일치) — 품질 검토분을 숨기지 않고 분리해 담는다(CP1 결정). mw_ref 는 0.045 kW/㎡ 환산 참고값 — 판정·선별 미사용. 단위 명칭은 '후보 공간' — cluster 라 부르지 않는다(최종 cluster 정의는 자문 대기 BLANK). 전국 고유 기준 ≥50/20/10MW = 23/107/194 · 시군 합(걸침 중복) = 23/108/195",
+   "built": "2026-10-21",
+   "source": "ADR-0054 §8 — V5.5 시군 요약. 입력 analysis_unit_v1(21m 연접 공간 분석 단위 폴리곳 · v9_02) · ≤1,000m 응축(cc) 사용 안 함(폐기). 시군 귀속 = touch(경계 걸침 후보 공간은 관여 시군마다 1) → **시군 값을 전국 합계로 더하지 않는다**. def_* = display_tier='default'(정상 기하) · qr_* = quality_review(기하 불완·면적 불일치) — 품질 검토분을 숨기지 않고 분리해 담는다(CP1 결정). mw_ref 는 0.045 kW/㎡ 환산 참고값 — 판정·선별 미사용. 단위 명칭은 '후보 공간' — cluster 라 부르지 않는다(최종 cluster 정의는 자문 대기 BLANK). 전국 고유 기준 ≥50/20/10MW = 23/107/191 · 시군 합(걸침 중복) = 23/108/192",
    "layer": ""
   }
  ]

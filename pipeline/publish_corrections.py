@@ -52,7 +52,8 @@ def main():
     # 1) 수치 — 동시에
     NUM = ['export/export_v4.py', 'export/export_results_v4.py', 'export/export_narrative_v4.py', 'export/export_decree_v4.py',
            'export/export_estimate_v4.py', 'export/export_pnu_v4.py', 'export/export_parcels_v4.py', 'export/export_existing_v4.py',
-           'export/export_nonfarm_v1.py']
+           'export/export_nonfarm_v1.py',
+           'export/export_grid_v4.py', 'export/export_ind_firms.py']   # 이 둘은 내용이 그대로지만 관문이 summary 보다 하루 넘게 오래된 파일을 막는다(2026-10-21)
     if start <= 1:
         with ThreadPoolExecutor(2) as ex:   # 수치 export 하나가 4–5 GB — RAM 16 GB 에서 둘까지(2026-10-20 리소스 부족 사고)
             for rel, dt in ex.map(run, NUM):
@@ -64,36 +65,60 @@ def main():
         args = ['--sgg', ','.join(sorted(sg_top10)) or 'none', '--relabel-dir', os.path.join(arch, 'relabel')]
         say('2) {} {:.0f}s'.format(*run('export/export_top10_v4.py', *args)))
 
-    # 3) 조건별 지도 도형 — 다시 돌려도 안전하게(2026-10-21: 이 단계 도중 세션이 끊겨 일부 칸만 번호가 바뀐 사고)
-    #   파일 번호가 모두 새 런 번호면 이미 끝난 것 → 건너뜀 · 옛 번호면 바뀐 시군은 지우고(다시 만듦) 나머지는 번호만 바꿔 쓴다
+    # 3) 조건별 지도 도형 — 다시 돌려도 안전하게.
+    #   '이미 끝남' = 파일이 그 런 산출(members.parquet)보다 나중에 쓰였다. 번호가 고정(ADR-0061)이라 번호만으로는
+    #   구성이 바뀐 후보를 가려낼 수 없다(2026-10-21 수정 — 처음 판은 번호로 판정했다).
+    #   아니면: 바뀐 시군 파일은 지우고(다시 만듦) · 나머지는 번호 대응이 항등이 아니면 번호만 바꿔 쓴다.
     n_del = n_rl = n_ok = 0
-    for c in CELLS:
+    for c in (CELLS if start <= 3 else []):
         mm = maps.get(c, {})
-        newlabs = set(pd.read_parquet(os.path.join(RUNS_DIR, c, 'members.parquet'), columns=['lab'])['lab'].unique().tolist())
+        ident = all(k == v for k, v in mm.items())
+        t_run = os.path.getmtime(os.path.join(RUNS_DIR, c, 'members.parquet'))
         for fp in glob.glob(os.path.join(CLUSTERS, f'*_{c}.json.gz')):
             sgg = os.path.basename(fp).split('_', 1)[0]
-            d = json.load(gzip.open(fp, 'rt', encoding='utf-8'))
-            ids = [int(f['properties']['id']) for f in d['features']]
-            if all(i in newlabs for i in ids):
+            if os.path.getmtime(fp) >= t_run:
                 n_ok += 1; continue
             if sgg in sg_cell[c]:
                 os.remove(fp); n_del += 1; continue
-            if not all(i in mm for i in ids):
-                raise SystemExit(f'중단: {os.path.basename(fp)} 번호가 옛 체계도 새 체계도 아니다 — 확인 필요')
+            if ident:
+                n_ok += 1; continue
+            d = json.load(gzip.open(fp, 'rt', encoding='utf-8'))
+            if not all(int(f['properties']['id']) in mm for f in d['features']):
+                raise SystemExit(f'중단: {os.path.basename(fp)} 번호가 대응표에 없다 — 확인 필요')
             for f in d['features']:
                 f['properties']['id'] = mm[int(f['properties']['id'])]
             with gzip.open(fp + '.tmp', 'wb', compresslevel=9) as z:
                 z.write(json.dumps(d, ensure_ascii=False, separators=(',', ':')).encode('utf-8'))
             os.replace(fp + '.tmp', fp); n_rl += 1
-    say(f'3) 지도 도형 — 다시 만들 파일 {n_del} · 번호만 바꾼 파일 {n_rl} · 이미 새 번호 {n_ok}')
-    for rel in ('geom/export_clusters_v4.py', 'geom/compress_clusters.py'):
+    say(f'3) 지도 도형 — 다시 만들 파일 {n_del} · 번호만 바꾼 파일 {n_rl} · 이미 끝남·그대로 {n_ok}')
+    if n_del > 400:   # 정본 규칙이 바뀌어 거의 전국을 다시 그릴 때 — 두 몫을 동시에(파일 단위 체크포인트라 겹치지 않음)
+        t = time.time()
+        ps = [subprocess.Popen([PY, os.path.join(PIPE, 'geom/export_clusters_v4.py')], cwd=SITE,
+                               env={**os.environ, 'PYTHONIOENCODING': 'utf-8', 'AGV_SHARD': f'{k}/2'},
+                               stdout=subprocess.DEVNULL, stderr=subprocess.PIPE, text=True, encoding='utf-8', errors='replace') for k in (0, 1)]
+        errs = [p_.communicate()[1] for p_ in ps]
+        if any(p_.returncode for p_ in ps):
+            print(*[e[-2000:] for e in errs], flush=True)
+            raise SystemExit('실패: export_clusters_v4 (몫 실행) — 다시 돌리면 만든 파일은 건너뛴다')
+        say(f'3) 지도 도형 두 몫 {time.time() - t:.0f}s')
+    for rel in (('geom/export_clusters_v4.py', 'geom/compress_clusters.py') if start <= 3 else ()):
         say('3) {} {:.0f}s'.format(*run(rel)))
 
     # 4) 후보 공간 도형 · 대규모 후보 산단
-    for rel in ('geom/export_units_v4.py', 'export/export_big_ind_near_v4.py'):
+    for rel in (('geom/export_units_v4.py', 'export/export_big_ind_near_v4.py') if start <= 4 else ()):
         say('4) {} {:.0f}s'.format(*run(rel)))
 
     # 5) 자문
+    if start <= 5:
+        _advisory(sg_cell)
+
+    # 6) 관문
+    for rel in ('gate/site_gate.py', 'gate/check_js.py'):
+        run(rel); say(f'6) {rel} 통과')
+    say('완료')
+
+
+def _advisory(sg_cell):
     gg = any(s.startswith('41') for s in sg_cell['R2_promo'] | sg_cell['R0_current'] | sg_cell['R3_zone_all'])
     if gg:
         for rel in ('export/build_advisory_all_v1.py', 'export/export_advisory_v4.py'):
@@ -112,10 +137,6 @@ def main():
         say('5) {} {:.0f}s'.format(*run(rel)))
     say('5) KEI 문서·화면의 숫자(METHOD_ADVISORY.md · cluster_advisory.html · STUDY_AREAS.md)는 CSV 와 대조해 고친다')
 
-    # 6) 관문
-    for rel in ('gate/site_gate.py', 'gate/check_js.py'):
-        run(rel); say(f'6) {rel} 통과')
-    say('완료')
 
 
 if __name__ == '__main__':

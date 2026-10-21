@@ -304,6 +304,9 @@ body[data-sources=full] #story-steps .figbox,body[data-sources=full] .verdict,bo
       <div style="overflow-x:auto"><table class="v4">
         <tr><th style="text-align:left">조건</th><th style="text-align:left">내용</th><th style="text-align:left">근거 자료</th></tr>
         <tr><td class="l"><b>지목</b></td><td class="l">전·답·과수원</td><td class="l">지적 원장<sup class="fnref">[1]</sup></td></tr>
+        <tr><td class="l"><b>폭 10m 미만 띠</b></td><td class="l">지적도 필지 경계를 감싸는 가장 작은 사각형의 짧은 변이 10m 미만인 필지 제외 —
+          지목은 농지로 남아 있으나 실제로는 농로·배수로·제방 가장자리인 띠. 전국 모든 필지에 같은 규칙을 적용함.
+          위성사진 대조에서 띠의 실제 폭은 대부분 8m 이하였고, 기준을 20m로 넓히면 폭 15–20m의 좁고 긴 논이 깎여 10m로 정함</td><td class="l">지적도 경계(지적 원장<sup class="fnref">[1]</sup>)</td></tr>
         <tr><td class="l"><b>구조·입지 제외</b></td><td class="l">건축물·수역·산업단지가 아니고, 다른 법에서 설치를 막는 지역(하천·군사기지 등)이 아님</td><td class="l">토지 특성 원장<sup class="fnref">[1]</sup></td></tr>
         <tr><td class="l"><b>경사</b></td><td class="l">경사 15 초과 제외 — 단위(도/퍼센트)가 자료마다 다르게 적혀 있어 확인 중</td><td class="l">경사 판정 레이어<sup class="fnref">[21]</sup></td></tr>
         <tr><td class="l"><b>용도지역 3종</b></td><td class="l">개발제한구역 · 보전관리지역 · 보전녹지지역 제외
@@ -314,7 +317,7 @@ body[data-sources=full] #story-steps .figbox,body[data-sources=full] .verdict,bo
         <tr><td class="l"><b>비농지 제외</b></td><td class="l">지목은 농지이나 실제로는 도로·건물·하천 둔치·수면·철도·공사장 등인 필지(또는 그 부분) 제외.
           필지 전체가 비농지이면 판정에서 빼고, 일부만 걸치면 남은 면적만 셈(<a href="#nonfarm" style="color:var(--leaf-deep)">아래 3-4</a>)</td><td class="l">도로 중심선(표준노드링크·OpenStreetMap) · 건물 외곽선(GIS건물통합정보) · 위성사진(Esri·V-World) 판독 대장</td></tr>
       </table></div>
-      <div class="figcap">표 1. 필지별 판정 조건 — 여섯 검사와 각 검사의 근거 자료.<br>판정은 필지마다 같은 규칙을 적용하므로,
+      <div class="figcap">표 1. 필지별 판정 조건 — 일곱 검사와 각 검사의 근거 자료.<br>판정은 필지마다 같은 규칙을 적용하므로,
       지번(PNU)만 있으면 어느 필지든 같은 결과를 다시 확인할 수 있음 — <a href="local.html" style="color:var(--leaf-deep)">우리 동네 탭의 필지 검색</a><sup class="fnref">[12]</sup>.</div>
     </div>
 
@@ -329,7 +332,7 @@ body[data-sources=full] #story-steps .figbox,body[data-sources=full] .verdict,bo
         필지 사이 간격 분포(4-최근접 거리)는 2–4m에서 최고점을 이룬 뒤 단조 감소하며 특정 거리에서 꺾이지 않음. k-거리 곡선의 무릎은
         k 선택에 따라 이동하므로(k=4에서 20.0–21.6m) 범위를 확인하는 보조 근거로만 씀.<br>
         15m·21m·25m 어느 값으로 해도 시나리오 간 크기 순서는 바뀌지 않고, 농업진흥구역에 설치 가능한 경우의
-        총면적(932.01 km²)도 같음<sup class="fnref">[12]</sup> — 후보 공간 수와 대규모 후보 공간 수만 묶는 간격에 따라 달라짐.
+        총면적(859.18 km²)도 같음<sup class="fnref">[12]</sup> — 후보 공간 수와 대규모 후보 공간 수만 묶는 간격에 따라 달라짐.
         근거 표(간격 지물 구성·지물 폭 실측)·k-거리 곡선·민감도 표는
         <a href="https://github.com/sojin-droid/Agrivoltaic-Feasibility-V5/blob/main/docs/METHOD_ADVISORY.md" target="_blank" rel="noopener">방법론 자문 자료(docs/METHOD_ADVISORY.md)</a> §3에 수록.
         최종 클러스터(사업 단위) 정의는 자문 전 미확정이며 이 자료가 자문 의뢰 자료임.</p>

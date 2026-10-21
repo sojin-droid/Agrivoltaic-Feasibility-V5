@@ -1,5 +1,5 @@
 {
- "generated": "2026-10-20 23:48",
+ "generated": "2026-10-21 17:12",
  "runs": [
   "R0_current",
   "R2_promo",
@@ -7,21 +7,21 @@
  ],
  "gates": {
   "R0_current": {
-   "n_members": 925414,
-   "n_units": 298229,
-   "area_km2": 427.77
+   "n_members": 405702,
+   "n_units": 178535,
+   "area_km2": 381.61
   },
   "R2_promo": {
-   "n_members": 1339767,
-   "n_units": 393973,
-   "area_km2": 932.01
+   "n_members": 626602,
+   "n_units": 259717,
+   "area_km2": 859.18
   },
   "R3_zone_all": {
-   "n_members": 1409084,
-   "n_units": 409354,
-   "area_km2": 971.54
+   "n_members": 659871,
+   "n_units": 271881,
+   "area_km2": 894.94
   }
  },
- "n_sgg": 249,
+ "n_sgg": 246,
  "class_rule": "① 적격 + 규모 기준 이상 단위 포함 · ② 적격이나 규모 기준 미달 · ③ 분석 기준 적격 목록에 없음(부적격 단정 아님)"
 }

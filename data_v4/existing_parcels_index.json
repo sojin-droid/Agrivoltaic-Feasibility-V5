@@ -1,5 +1,5 @@
 {
- "generated": "2026-10-21 10:19",
+ "generated": "2026-10-21 19:26",
  "source": "existing_pv_parcel_v1(2026-09-28) × Cadastre_All · 허가 주소 필지 · 표시 전용",
  "sgg": {
   "44270": {
@@ -8,7 +8,7 @@
    "n_records": 1115,
    "n_geom": 801,
    "n_missing_geom": 3,
-   "in_r2": 15,
+   "in_r2": 14,
    "farm_jimok": 404,
    "indiv": 672,
    "jimok_top": {
@@ -104,7 +104,7 @@
    "n_records": 4687,
    "n_geom": 3689,
    "n_missing_geom": 2,
-   "in_r2": 29,
+   "in_r2": 28,
    "farm_jimok": 856,
    "indiv": 3329,
    "jimok_top": {
@@ -152,7 +152,7 @@
    "n_records": 1086,
    "n_geom": 1001,
    "n_missing_geom": 0,
-   "in_r2": 6,
+   "in_r2": 5,
    "farm_jimok": 261,
    "indiv": 814,
    "jimok_top": {
@@ -213,8 +213,8 @@
    "own_top": {
     "개인": 477,
     "법인": 118,
-    "군유지": 5,
     "국유지": 5,
+    "군유지": 5,
     "기타단체": 5
    }
   },
@@ -236,9 +236,9 @@
    "own_top": {
     "법인": 3,
     "개인": 2,
+    "군유지": 1,
     "종중": 1,
-    "국유지": 1,
-    "군유지": 1
+    "국유지": 1
    }
   }
  }

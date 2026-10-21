@@ -77,7 +77,13 @@ for c in CELLS:
     print(f"{c}: 멤버 {len(m):,} · 등재 구획 {m['lab'].nunique():,}", flush=True)
 
 sggs = sorted(set().union(*[set(m['sgg'].unique()) for m in mem.values()]))
-print(f"대상 시군 {len(sggs)}", flush=True)
+# 나눠 돌리기(2026-10-21) — AGV_SHARD="k/n" 이면 시군 순번 % n == k 인 시군만 굽고 색인은 만들지 않는다(파일 단위 체크포인트라 겹치지 않는다).
+#   전량 재발행(정본 규칙 변경) 때 publish_corrections.py 가 두 몫을 동시에 돌린 뒤 색인은 한 번만 만든다.
+_SHARD = os.environ.get('AGV_SHARD')
+if _SHARD:
+    _k, _n = (int(x) for x in _SHARD.split('/'))
+    sggs = [s_ for j, s_ in enumerate(sggs) if j % _n == _k]
+print(f"대상 시군 {len(sggs)}" + (f" (몫 {_SHARD})" if _SHARD else ''), flush=True)
 
 for i, sgg in enumerate(sggs, 1):
     outs = {c: os.path.join(OUT, f'{sgg}_{c}.json') for c in CELLS}
@@ -175,7 +181,8 @@ for i, sgg in enumerate(sggs, 1):
 # ── 걸침 표시 + 색인 ──
 # 여기서 만들지 않는다. 색인 단계는 확장자에 무관해야 하는데(정본은 이미 .json.gz),
 # 이 안에서 하면 압축본을 못 읽고 색인에서 통째로 빠진다 — 지도가 빈 화면이 된다.
-subprocess.run([sys.executable,
-                os.path.join(os.path.dirname(os.path.abspath(__file__)),
-                             'rebuild_cluster_index.py')], check=True)
+if not _SHARD:
+    subprocess.run([sys.executable,
+                    os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                                 'rebuild_cluster_index.py')], check=True)
 print(f"완료 — clusters/ {len(glob.glob(os.path.join(OUT, '*.json*'))):,}파일 ({GEN})", flush=True)

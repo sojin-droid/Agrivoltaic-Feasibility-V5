@@ -1,5 +1,5 @@
 {
- "generated": "2026-10-21 10:27",
+ "generated": "2026-10-21 17:12",
  "run": "R2_promo",
  "review_built_at": "2026-10-19 23:19",
  "user_rounds": 4,
@@ -383,7 +383,7 @@
   "n_partial": 57179,
   "a_ledger_km2": 413.278,
   "a_keep_km2": 306.435,
-  "built_at": "2026-10-20T22:55:38"
+  "built_at": "2026-10-21T12:20:45"
  },
  "corrections": {
   "files": [
@@ -393,10 +393,10 @@
   "water": "drop",
   "units": [
    {
-    "lab": 4501952,
-    "sgg": "44770",
-    "mw_before": 5.8,
-    "mw_after": 9.0
+    "lab": 650306,
+    "sgg": "30200",
+    "mw_before": 0.1,
+    "mw_after": 5.8
    },
    {
     "lab": 314670,
@@ -405,10 +405,10 @@
     "mw_after": 2.9
    },
    {
-    "lab": 650306,
-    "sgg": "30200",
-    "mw_before": 0.1,
-    "mw_after": 5.8
+    "lab": 8571886,
+    "sgg": "47210",
+    "mw_before": 0.2,
+    "mw_after": 21.2
    },
    {
     "lab": 10657762,
@@ -417,16 +417,16 @@
     "mw_after": 14.7
    },
    {
-    "lab": 8571886,
-    "sgg": "47210",
-    "mw_before": 0.2,
-    "mw_after": 21.2
-   },
-   {
     "lab": 315308,
     "sgg": "27720",
     "mw_before": 0.0,
     "mw_after": 1.5
+   },
+   {
+    "lab": 4501952,
+    "sgg": "44770",
+    "mw_before": 5.8,
+    "mw_after": 9.0
    }
   ]
  },
