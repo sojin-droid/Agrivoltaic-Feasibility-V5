@@ -56,3 +56,5 @@ jobs:
     steps:
       - id: deployment
         uses: actions/deploy-pages@v4
+        with:
+          timeout: 1800000   # 기본 10분. GitHub 쪽 파일 동기화가 늦어 두 번 시간 초과(2026-11-10) — 30분으로 늘림
