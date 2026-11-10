@@ -284,3 +284,16 @@ body[data-sources=full] #law p,body[data-sources=full] .callout-v4{max-width:72c
 .scn-settings .cond h4{margin-bottom:6px}
 .scn-settings .cond .hint-s{font-size:11px;line-height:1.45}
 .scn-settings .seg button{min-height:32px;font-size:12px;padding:5px 4px}
+
+/* 2026-11-10 디자인 정돈: 페이지 머리 가운데 정렬 (우리 동네 분석하기 화면과 통일) */
+.page-hero .wrap{text-align:center}
+.page-hero .eyebrow{justify-content:center}
+.page-hero h1{margin-left:auto;margin-right:auto}
+.page-hero .lede{max-width:780px;margin-left:auto;margin-right:auto}
+.page-hero .v55-steps{text-align:center;margin-left:auto;margin-right:auto}
+.page-hero .v55-steps > div{display:flex;flex-direction:column;align-items:center;justify-content:center}
+.page-hero #heroBtns,.page-hero .hero-btns{justify-content:center}
+.page-hero ol,.page-hero ul{display:inline-block;text-align:left}
+/* 근거와 방법 바로가기 단추 (정의가 없어 글자로만 보이던 것) */
+a.pill{display:inline-block;margin:4px 3px;padding:6px 14px;border:1px solid var(--line);border-radius:999px;background:#fff;color:var(--navy);font-size:14px;font-weight:600;text-decoration:none;transition:background .15s,border-color .15s}
+a.pill:hover{background:var(--surface-band, #eef2f7);border-color:var(--navy)}

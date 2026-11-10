@@ -3,16 +3,16 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>PLANiT · 근거와 방법 — 배경·법령·방법·데이터·출처</title>
+<title>PLANiT · 근거와 방법: 배경·법령·방법·데이터·출처</title>
 <meta name="description" content="전국 필지 전수 분석의 데이터 출처, 판정 기준, 기준값 자동 검증과 공개 전 품질검사 — 전 과정이 코드로 재현됨.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=Inter:wght@400;500;700&family=JetBrains+Mono:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/vendor/pretendard/pretendardvariable-dynamic-subset.css">
-<link rel="stylesheet" href="style.css?v=20261013b">
-<link rel="stylesheet" href="assets/v5.css?v=20261013b">
+<link rel="stylesheet" href="style.css?v=20261110b">
+<link rel="stylesheet" href="assets/v5.css?v=20261110b">
 <script src="assets/v4.js?v=20261014b"></script>
-<script src="assets/region.js?v=20261013b"></script>
+<script src="assets/region.js?v=20261110b"></script>
 <style>
 .vcard{cursor:pointer}
 .modal-bg{display:none;position:fixed;inset:0;background:rgba(12,53,106,.45);z-index:100;
@@ -107,7 +107,7 @@ body[data-sources=full] #story-steps .figbox,body[data-sources=full] .verdict,bo
 <div class="page-hero">
   <div class="wrap">
     <p class="eyebrow">Method · 근거와 방법</p>
-    <h1>근거와 방법 — 배경·법령·방법·데이터·출처</h1>
+    <h1>근거와 방법: 배경·법령·방법·데이터·출처</h1>
     <p class="lede">분석 화면은 결과에 집중하고, 배경·법령·방법·데이터·출처는 이 한 페이지에 모아 둠.</p>
     <div style="margin-top:14px">
       <a class="pill" href="#background">1 배경</a>
@@ -134,7 +134,7 @@ body[data-sources=full] #story-steps .figbox,body[data-sources=full] .verdict,bo
       <p style="margin:0"><b>분석 대상</b> — 이 프로젝트의 대상지는 법인 및 국공유지입니다<sup class="fnref">[12]</sup>.
       <b>설치 가능 농지</b>는 이 분석의 판정 조건을 통과한 땅이며, 실제 인허가가 가능하다는 뜻이 아님.</p>
     </div>
-    <div class="sec-head" style="margin-top:22px"><div><p class="eyebrow">1-2 · 핵심 결과 요약</p><h2>다섯 가지 핵심 결과</h2></div></div>
+    <div class="sec-head" style="margin-top:22px"><div><p class="eyebrow">1.2 · 핵심 결과 요약</p><h2>다섯 가지 핵심 결과</h2></div></div>
     <div class="verdict reveal" style="margin-bottom:12px"><span class="vh">한 줄 결론</span><span id="one-liner" style="font-size:14.5px;line-height:1.8">—</span></div>
     <div id="story-steps" style="display:flex;flex-direction:column;gap:10px"></div>
   </div>
@@ -145,7 +145,7 @@ body[data-sources=full] #story-steps .figbox,body[data-sources=full] .verdict,bo
   <div class="wrap">
     <div class="sec-head"><div><p class="eyebrow">2 · 법·제도적 근거</p><h2>법령과 시나리오 설계 근거</h2></div>
       <span style="font-size:12.5px;color:var(--muted)">법률·시행령·시행규칙·고시 원문은 아래 Sources [4]–[11]·[15]·[16]·[25]–[27]·[29]</span></div>
-    <h3 class="art-h" style="font-size:17px">2-1. 네 가지 시나리오의 설계 근거</h3>
+    <h3 class="art-h" style="font-size:17px">2.1 네 가지 시나리오의 설계 근거</h3>
     <div class="callout-v4" style="margin-top:8px">영농형태양광법 제6조제1항은 발전사업 부지를 두 갈래로 정함 —
       ① 농업진흥지역이 아닌 농지, ② 재생에너지지구로 지정된 농지<sup class="fnref">[10]</sup>.
       ②의 지정 범위에 <b>농업보호구역</b>과 <b>농업진흥구역</b>을 각각 넣느냐가 하위법령에서 정할 부분이다.
@@ -160,7 +160,7 @@ body[data-sources=full] #story-steps .figbox,body[data-sources=full] .verdict,bo
   조문은 2026년 7월 관계기관 의견조회판<sup class="fnref">[25]</sup><sup class="fnref">[26]</sup>
   기준임. 입법예고 전 초안이므로 확정 조문이 아니며, 조문이 바뀌면 이 분석의 전제도 바뀜.</div>
 
-  <h3 class="art-h" style="font-size:17px">2-2. 시행령 제정안 — 조문 구조</h3>
+  <h3 class="art-h" style="font-size:17px">2.2 시행령 제정안: 조문 구조</h3>
   <div class="figbox" style="padding:14px;margin:10px 0 16px">
     <svg viewBox="0 0 900 120" style="width:100%;height:auto;display:block" font-family="var(--sans)" font-size="12.5" text-anchor="middle">
       <defs><marker id="da" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto">
@@ -210,12 +210,12 @@ body[data-sources=full] #story-steps .figbox,body[data-sources=full] .verdict,bo
   </details>
 
   <p style="font-size:13px;color:var(--muted)">국가관리간척지 안의 시나리오별 면적은 <a href="scenarios.html#tables" style="color:var(--leaf-deep)">시나리오별 결과의 "시행령 고려" 표</a>와 조건 설정에서 비교할 수 있음.</p>
-<h3 class="art-h" style="font-size:17px">2-3. 정책적 인사이트</h3>
+<h3 class="art-h" style="font-size:17px">2.3 정책적 인사이트</h3>
   <div id="analysis" style="font-size:13.5px;line-height:1.9;word-break:keep-all">—</div>
 
 
 
-  <h3 class="art-h" style="font-size:17px">2-4. 시행령 분석의 한계</h3>
+  <h3 class="art-h" style="font-size:17px">2.4 시행령 분석의 한계</h3>
   <div class="figbox" style="font-size:13px;line-height:1.85;word-break:keep-all">
   ① 매립지등 정의에 포함된 <b>개간지·취토장은 필지 데이터가 없어</b> 이 표에 없음 — 대상
   범위를 과소 계상하는 방향임<sup class="fnref">[3]</sup>.<br>
@@ -242,7 +242,7 @@ body[data-sources=full] #story-steps .figbox,body[data-sources=full] .verdict,bo
 </section>
 <section>
   <div class="wrap">
-    <div class="sec-head"><div><p class="eyebrow">3-1 · 분석 흐름</p><h2>분석 흐름 한 장</h2></div></div>
+    <div class="sec-head"><div><p class="eyebrow">3.1 · 분석 흐름</p><h2>분석 흐름 한 장</h2></div></div>
     <div class="figbox" style="padding:16px">
       <svg viewBox="0 0 980 210" style="width:100%;height:auto;display:block" font-family="var(--sans)" font-size="12.5">
         <defs><marker id="ar" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto">
@@ -288,7 +288,7 @@ body[data-sources=full] #story-steps .figbox,body[data-sources=full] .verdict,bo
 </section>
 <section>
   <div class="wrap">
-    <div class="sec-head"><div><p class="eyebrow">3-2 · 필지 선별</p><h2>필지 선별 단계 (전국)</h2></div></div>
+    <div class="sec-head"><div><p class="eyebrow">3.2 · 필지 선별</p><h2>필지 선별 단계 (전국)</h2></div></div>
     <div class="figbox reveal">
       <div id="funnel"></div>
       <div class="figcap">그림 1. 필지 선별 단계(전국) — 전체 필지에서 특별법 시행 전 설치 가능한 법인·국공유 농지까지 네 단계의 필지 수<sup class="fnref">[12]</sup>.
@@ -299,7 +299,7 @@ body[data-sources=full] #story-steps .figbox,body[data-sources=full] .verdict,bo
 </section>
 <section class="alt">
   <div class="wrap">
-    <div class="sec-head"><div><p class="eyebrow">3-3 · 판정 조건과 연접 기준</p><h2>판정 조건 — 한 필지가 통과해야 하는 검사</h2></div></div>
+    <div class="sec-head"><div><p class="eyebrow">3.3 · 판정 조건과 연접 기준</p><h2>판정 조건: 한 필지가 통과해야 하는 검사</h2></div></div>
     <div class="figbox reveal">
       <div style="overflow-x:auto"><table class="v4">
         <tr><th style="text-align:left">조건</th><th style="text-align:left">내용</th><th style="text-align:left">근거 자료</th></tr>
@@ -339,7 +339,7 @@ body[data-sources=full] #story-steps .figbox,body[data-sources=full] .verdict,bo
       </details>
     </div>
 
-    <div class="sec-head" style="margin-top:30px" id="nonfarm"><div><p class="eyebrow">3-4 · 비농지 제외</p><h2>비농지 제외 — 위성사진 검토</h2></div></div>
+    <div class="sec-head" style="margin-top:30px" id="nonfarm"><div><p class="eyebrow">3.4 · 비농지 제외</p><h2>비농지 제외: 위성사진 검토</h2></div></div>
     <div class="figbox">
       <ul style="font-size:14px;line-height:1.85;margin:0 0 0 18px;word-break:keep-all">
         <li>지적 원장의 지목만으로는 농지로 남는 도로 부지·하천 둔치·공장 마당 등을 걸러 내지 못함. 이를 위해 1MW 이상 후보 공간의 필지를 위성사진으로 확인해 비농지를 뺌.</li>
@@ -361,7 +361,7 @@ body[data-sources=full] #story-steps .figbox,body[data-sources=full] .verdict,bo
       </table></div>
       <div class="figcap">표 2. 비농지 제외에 쓴 자료와 판·시점.</div>
     </div>
-    <h3 class="art-h" style="font-size:17px;margin-top:26px">검토 결과 — 검토 전후 발전용량</h3>
+    <h3 class="art-h" style="font-size:17px;margin-top:26px">검토 결과: 검토 전후 발전용량</h3>
     <p style="font-size:14px;line-height:1.8;margin:4px 0 0">대상: 농업진흥구역에도 설치할 수 있는 조건(법인·국공유)의 1MW 이상 후보 공간 <b id="s-n">—</b>곳.</p>
     <div class="dk">
       <div><b><span id="s-mw0">—</span> <small>MW</small></b><span>검토 전 · 후보 공간 면적 기준</span></div>
@@ -388,7 +388,7 @@ body[data-sources=full] #story-steps .figbox,body[data-sources=full] .verdict,bo
 </section>
 <section>
   <div class="wrap">
-    <div class="sec-head"><div><p class="eyebrow">3-5 · 데이터 처리 규칙</p><h2>확인할 수 없는 정보를 다루는 방법</h2></div></div>
+    <div class="sec-head"><div><p class="eyebrow">3.5 · 데이터 처리 규칙</p><h2>확인할 수 없는 정보를 다루는 방법</h2></div></div>
     <div class="figbox" style="margin-top:18px" id="datarules">
       <div style="overflow-x:auto"><table class="v4">
         <tr><th style="text-align:left">항목</th><th style="text-align:left">처리</th></tr>
@@ -413,13 +413,13 @@ body[data-sources=full] #story-steps .figbox,body[data-sources=full] .verdict,bo
 </section>
 <section class="alt">
   <div class="wrap">
-    <div class="sec-head"><div><p class="eyebrow">3-6 · 단위·환산 가정</p><h2>단위·환산 가정</h2></div></div>
+    <div class="sec-head"><div><p class="eyebrow">3.6 · 단위·환산 가정</p><h2>단위·환산 가정</h2></div></div>
     <div class="figbox reveal"><div style="font-size:14.5px;word-break:keep-all;line-height:1.8" id="unit-note"></div></div>
   </div>
 </section>
 <section id="caveats">
   <div class="wrap">
-    <div class="sec-head"><div><p class="eyebrow">3-7 · 한계</p><h2>이 결과를 읽을 때 알아야 할 점</h2></div></div>
+    <div class="sec-head"><div><p class="eyebrow">3.7 · 한계</p><h2>이 결과를 읽을 때 알아야 할 점</h2></div></div>
     <div class="figbox reveal">
       <div style="overflow-x:auto"><table class="v4">
         <tr><th style="text-align:left">항목</th><th style="text-align:left">내용</th></tr>
@@ -675,6 +675,6 @@ body[data-sources=full] #story-steps .figbox,body[data-sources=full] .verdict,bo
     ' 검토한 후보에서 육안 검토로 더 빠진 비율을 보면 실제 남은 땅은 이보다 적을 수 있음.'; }
 })();
 </script>
-<script src="site.js?v=20261013b"></script>
+<script src="site.js?v=20261110b"></script>
 </body>
 </html>

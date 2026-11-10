@@ -108,3 +108,21 @@ document.querySelectorAll('#menu a').forEach(a =>
   window.__setLang = apply;
   apply(initial());
 })();
+
+/* 2026-11-10 휴대폰 화면: TOP 10 표를 카드로 보이게 칸마다 머리글을 data-label 로 붙인다 (CSS 가 640px 이하에서만 사용) */
+(function () {
+  function label(tbl) {
+    var heads = [];
+    var hr = tbl.querySelector('tr');
+    if (!hr || !hr.querySelector('th')) return;
+    hr.querySelectorAll('th').forEach(function (th) { heads.push(Array.prototype.map.call(th.childNodes, function (n) { return n.textContent.trim(); }).filter(Boolean).join(' ').replace(/\s+/g, ' ')); });
+    tbl.querySelectorAll('tr').forEach(function (tr) {
+      if (tr.querySelector('th')) return;
+      tr.querySelectorAll('td').forEach(function (td, i) { if (heads[i] && !td.hasAttribute('data-label')) td.setAttribute('data-label', heads[i]); });
+    });
+  }
+  function scan() { document.querySelectorAll('table.v55-top').forEach(label); }
+  var mo = new MutationObserver(function () { scan(); });
+  function start() { scan(); mo.observe(document.body, { childList: true, subtree: true }); }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start); else start();
+})();

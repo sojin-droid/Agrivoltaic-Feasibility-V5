@@ -123,3 +123,17 @@ table.v55-top td.hi{background:#FFF6D6}
 .v55-pv.off{background:#7A7A7A;color:#E6E6E6}
 .leaflet-marker-icon.v55-mk,.leaflet-marker-icon.v55-pv{display:flex!important}   /* leaflet 의 display:block 이 가운데 정렬을 깨지 않게 — 지도 표지에만 */
 .v55-pv.agri{background:#1F6F43;color:#FFE27A}   /* 영농형 태양광 — 초록 바탕 */
+/* 2026-11-10 휴대폰: TOP 10 표를 후보별 카드로 (컴퓨터에서는 표 그대로) */
+@media(max-width:640px){
+  table.v55-top,table.v55-top tbody,table.v55-top tr,table.v55-top td{display:block;width:100%}
+  table.v55-top thead,table.v55-top tr:has(th){display:none}
+  table.v55-top tr{border:1px solid var(--line);border-radius:12px;margin:0 0 10px;padding:10px 14px;background:#fff}
+  table.v55-top tr.pick{outline:2px solid var(--navy)}
+  table.v55-top tr.pick td{outline:none}
+  table.v55-top td{display:flex;justify-content:space-between;align-items:baseline;gap:12px;border:0;padding:5px 0;white-space:normal;font-size:14px}
+  table.v55-top td::before{content:attr(data-label);color:var(--muted);font-size:12.5px;font-weight:600;text-align:left}
+  table.v55-top td.l{display:block;text-align:center;padding:2px 0 8px;margin-bottom:4px;border-bottom:1px solid var(--line)}
+  table.v55-top td.l::before{content:none}
+  table.v55-top td.hi{background:#FFF6D6;border-radius:6px;padding:5px 8px}
+  table.v55-top td:empty{display:none}
+}
