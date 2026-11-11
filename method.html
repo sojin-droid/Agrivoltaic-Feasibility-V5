@@ -518,7 +518,7 @@ body[data-sources=full] #story-steps .figbox,body[data-sources=full] .verdict,bo
   document.getElementById('unit-note').innerHTML =
     `1차 단위는 <b>면적(km²)</b> — 근거 법령<sup class="fnref">[10]</sup>이 사업 규모를 부지면적부터 쓰고,
      발전용량(MW)은 환산 계수를 곱한 값이기 때문<sup class="fnref">[13]</sup>.<br>
-     참고 MW = 면적(㎡) × 0.045 kW/㎡ ÷ 1,000 — 설치밀도 0.225 × 모듈 효율 0.20 (솔라시도 400MW 사업계획과 오차 0.6%).<br>
+     참고 MW = 면적(㎡) × 0.045 kW/㎡ ÷ 1,000 — 설치밀도 0.225 × 모듈 효율 0.20 (영암군 영농형 실증: 논 1,000㎡ · 45 kW).<br>
      특별법 시행 전 설치 가능한 법인·국공유 농지: <b>${V4.n(R0.n)}필지 · ${V4.km2(R0.km2, 2)} km²</b>.`;
   try {
     const fu = (await V4.data('funnel_v4')).national;
