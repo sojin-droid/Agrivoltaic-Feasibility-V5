@@ -3,8 +3,9 @@ window.Region = (() => {
   const METRO_ORDER = ['서울','부산','대구','인천','광주','대전','울산','세종',
                        '경기','강원','충북','충남','전북','전남','경북','경남','제주'];
   // 읍면동 경계(V-World)의 구 시도코드(12 = 구 전남·광주)는 시군 접미가 현행 코드와 대응하지 않아
-  // 접두 치환으로는 시군을 맞출 수 없다(예: 산이면 12790 → 46790 화순 ✗, 실제 해남). 직접 일치만 쓰고
-  // 나머지(914곳)는 사용자가 함께 적은 시군명 또는 1단계 선택으로 귀속한다.
+  // 접두 치환으로는 시군을 맞출 수 없다(예: 산이면 12790 → 46790 화순 ✗, 실제 해남). 그래서 파이프라인
+  // (pipeline/export/patch_emd_sgg.py)이 현행 시군 코드를 경계 자료의 'g' 로 붙여 두고 화면은 그 값을 쓴다.
+  // 'g' 가 없을 때만 직접 일치로 맞추고, 그래도 없으면 사용자가 함께 적은 시군명 또는 1단계 선택으로 귀속한다.
   let _codes = null, _groups = null, _emd = null;
 
   async function gz(path) {
@@ -63,7 +64,7 @@ window.Region = (() => {
     const [fc] = await Promise.all([gz('data_v4/grid_emd.json.gz'), load()]);
     _emd = fc.features.map(f => {
       const c = f.properties.c, s5 = c.slice(0, 5);
-      return {name: f.properties.n, sgg: _codes[s5] ? s5 : null, code: c, feat: f};
+      return {name: f.properties.n, sgg: f.properties.g || (_codes[s5] ? s5 : null), code: c, feat: f};
     });
     return _emd;
   }

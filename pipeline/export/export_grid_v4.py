@@ -129,3 +129,8 @@ summary = {
 json.dump(summary, open(os.path.join(OUT, 'grid_summary.json'), 'w', encoding='utf-8'),
           ensure_ascii=False, indent=1)
 print('grid_summary:', summary)
+
+# ── 읍면동 → 현행 시군 코드 'g' (신 코드 경계가 시군 지도에서 빠지지 않게, 2026-11-13) ──
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import patch_emd_sgg
+patch_emd_sgg.main()
