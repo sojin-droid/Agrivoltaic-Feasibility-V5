@@ -99,7 +99,9 @@ print(f"읍면동 {len(feats):,} — 계통값 없음(경계만) {no_grid:,} · 
 
 # ── 산업단지 경계 ──
 d = gpd.read_file(os.path.join(LR, 'sources', 'ind_complex', 'damdan.gpkg'))
-d = d.drop_duplicates('dan_id')          # 수집 중복 제거 — DB ind_complex_bnd(1,363)와 일치
+# 같은 dan_id 의 도형은 중복이 아니라 별개 구역(91단지 222도형, 서로 겹치지 않음)이다 — 버리지 않고 단지별로 합친다(정본 ADR-0063).
+#   피처 수는 단지 수 1,363 그대로(첫 등장 순서) — export_big_ind_near_v4 의 피처 번호와 같은 식을 쓴다.
+d = d.dissolve(by='dan_id', sort=False, aggfunc='first').reset_index()
 d = d.to_crs(5186)
 d['geometry'] = d.geometry.simplify(SIMPLIFY_IND)
 d = d.to_crs(4326)

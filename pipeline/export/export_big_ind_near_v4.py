@@ -7,7 +7,7 @@ GGI 검토의견(2026-10-01, 표 3-4 "각 대규모 클러스터별 시군의 �
 
 정본 방법(model/engine/block_context.py): 후보 공간 대표점(필지 대표점의 면적 가중 평균, EPSG:5186 x·y)
   ↔ damdan.gpkg 산업단지 경계, gpd.sjoin_nearest 거리 = dist_ind_m.
-여기서: 같은 대표점(R2 block_context 의 x·y) ↔ damdan.gpkg(dan_id 중복 제거 — ind_bnd.json.gz 와 같은 순서)
+여기서: 같은 대표점(R2 block_context 의 x·y) ↔ damdan.gpkg(단지별 구역 합침 — ind_bnd.json.gz 와 같은 순서 · 정본 ADR-0063)
   → 최근접 산단 이름·유형·거리·ind_bnd 피처 번호.
 게이트: 다시 구한 거리가 발행값(units_big.json.gz 의 d, km 소수 둘째 자리)과 0.01 km 안에서 같아야 한다.
 출력: data_v4/big_ind_near_v4.json — {generated, source, method, rows: {후보 공간 번호: {n, t, km, fi}}}
@@ -29,7 +29,7 @@ assert len(bc) == len(ids), f'대표점 {len(bc)} ≠ 후보 {len(ids)}'
 pts = gpd.GeoDataFrame(bc, geometry=gpd.points_from_xy(bc.x, bc.y), crs=5186)
 
 dan = gpd.read_file(os.path.join(LR, 'sources', 'ind_complex', 'damdan.gpkg'))
-dan = dan.drop_duplicates('dan_id').reset_index(drop=True).to_crs(5186)   # export_grid_v4 의 ind_bnd 와 같은 행·순서
+dan = dan.dissolve(by='dan_id', sort=False, aggfunc='first').reset_index().to_crs(5186)   # export_grid_v4 의 ind_bnd 와 같은 행·순서 — 단지별 구역 합침(정본 ADR-0063)
 dan['fi'] = dan.index
 near = gpd.sjoin_nearest(pts, dan[['dan_name', 'cat_nam', 'fi', 'geometry']], how='left', distance_col='dist_m')
 near = near.sort_values('dist_m').drop_duplicates('lab')                  # 같은 거리 동률이면 첫 행

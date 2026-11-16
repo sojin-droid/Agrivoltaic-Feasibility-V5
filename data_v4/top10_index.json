@@ -1,5 +1,5 @@
 {
- "generated": "2026-10-21 17:48",
+ "generated": "2026-11-16 14:41",
  "runs": [
   "R0_current",
   "R0_current_SB",
@@ -39,99 +39,99 @@
  "dsh": "MW×1,314h ÷ 시군 연간 전력판매량(GWh) % — 표기 전용(PR-0030), 판정 불사용",
  "stamps": {
   "R0_current": {
-   "built_at": "2026-10-21T12:28:49",
+   "built_at": "2026-11-16T14:03:50",
    "min_area_m2": null,
-   "n_block": 178535,
-   "n_block_sgg_pair": 178612,
+   "n_block": 178536,
+   "n_block_sgg_pair": 178613,
    "grid_link": "linked",
    "assets": {
     "damdan_gpkg_sha": "a88825b7a9a6",
-    "clusters_mtime": "2026-10-21T12:21:47",
-    "grid_link_mtime": "2026-10-21T12:21:51"
+    "clusters_mtime": "2026-11-13T18:45:47",
+    "grid_link_mtime": "2026-11-13T18:45:52"
    }
   },
   "R0_current_SB": {
-   "built_at": "2026-10-21T12:28:57",
+   "built_at": "2026-11-16T14:03:54",
    "min_area_m2": null,
-   "n_block": 102059,
-   "n_block_sgg_pair": 102098,
+   "n_block": 102060,
+   "n_block_sgg_pair": 102099,
    "grid_link": "linked",
    "assets": {
     "damdan_gpkg_sha": "a88825b7a9a6",
-    "clusters_mtime": "2026-10-21T12:21:58",
-    "grid_link_mtime": "2026-10-21T12:22:02"
+    "clusters_mtime": "2026-11-13T18:46:02",
+    "grid_link_mtime": "2026-11-13T18:46:07"
    }
   },
   "R1_protect": {
-   "built_at": "2026-10-21T12:29:09",
+   "built_at": "2026-11-16T14:04:00",
    "min_area_m2": null,
-   "n_block": 192136,
-   "n_block_sgg_pair": 192217,
+   "n_block": 192137,
+   "n_block_sgg_pair": 192218,
    "grid_link": "linked",
    "assets": {
     "damdan_gpkg_sha": "a88825b7a9a6",
-    "clusters_mtime": "2026-10-21T12:22:10",
-    "grid_link_mtime": "2026-10-21T12:22:14"
+    "clusters_mtime": "2026-11-13T18:46:16",
+    "grid_link_mtime": "2026-11-13T18:46:21"
    }
   },
   "R1_protect_SB": {
-   "built_at": "2026-10-21T12:29:17",
+   "built_at": "2026-11-16T14:04:04",
    "min_area_m2": null,
-   "n_block": 111191,
-   "n_block_sgg_pair": 111232,
+   "n_block": 111192,
+   "n_block_sgg_pair": 111233,
    "grid_link": "linked",
    "assets": {
     "damdan_gpkg_sha": "a88825b7a9a6",
-    "clusters_mtime": "2026-10-21T12:22:22",
-    "grid_link_mtime": "2026-10-21T12:22:26"
+    "clusters_mtime": "2026-11-13T18:46:30",
+    "grid_link_mtime": "2026-11-13T18:46:35"
    }
   },
   "R2_promo": {
-   "built_at": "2026-10-21T12:29:32",
+   "built_at": "2026-11-16T14:04:11",
    "min_area_m2": null,
-   "n_block": 259717,
-   "n_block_sgg_pair": 259927,
+   "n_block": 259718,
+   "n_block_sgg_pair": 259928,
    "grid_link": "linked",
    "assets": {
     "damdan_gpkg_sha": "a88825b7a9a6",
-    "clusters_mtime": "2026-10-21T12:22:34",
-    "grid_link_mtime": "2026-10-21T12:22:38"
+    "clusters_mtime": "2026-11-16T13:56:54",
+    "grid_link_mtime": "2026-11-16T13:57:00"
    }
   },
   "R2_promo_SB": {
-   "built_at": "2026-10-21T12:29:42",
+   "built_at": "2026-11-16T14:04:16",
    "min_area_m2": null,
-   "n_block": 160727,
-   "n_block_sgg_pair": 160868,
+   "n_block": 160728,
+   "n_block_sgg_pair": 160869,
    "grid_link": "linked",
    "assets": {
     "damdan_gpkg_sha": "a88825b7a9a6",
-    "clusters_mtime": "2026-10-21T12:22:46",
-    "grid_link_mtime": "2026-10-21T12:22:50"
+    "clusters_mtime": "2026-11-16T13:57:09",
+    "grid_link_mtime": "2026-11-16T13:57:14"
    }
   },
   "R3_zone_all": {
-   "built_at": "2026-10-21T12:29:57",
+   "built_at": "2026-11-16T14:04:23",
    "min_area_m2": null,
-   "n_block": 271881,
-   "n_block_sgg_pair": 272097,
+   "n_block": 271882,
+   "n_block_sgg_pair": 272098,
    "grid_link": "linked",
    "assets": {
     "damdan_gpkg_sha": "a88825b7a9a6",
-    "clusters_mtime": "2026-10-21T12:22:58",
-    "grid_link_mtime": "2026-10-21T12:23:02"
+    "clusters_mtime": "2026-11-16T13:57:23",
+    "grid_link_mtime": "2026-11-16T13:57:28"
    }
   },
   "R3_zone_all_SB": {
-   "built_at": "2026-10-21T12:30:08",
+   "built_at": "2026-11-16T14:04:29",
    "min_area_m2": null,
-   "n_block": 168958,
-   "n_block_sgg_pair": 169102,
+   "n_block": 168959,
+   "n_block_sgg_pair": 169103,
    "grid_link": "linked",
    "assets": {
     "damdan_gpkg_sha": "a88825b7a9a6",
-    "clusters_mtime": "2026-10-21T12:23:10",
-    "grid_link_mtime": "2026-10-21T12:23:14"
+    "clusters_mtime": "2026-11-16T13:57:37",
+    "grid_link_mtime": "2026-11-16T13:57:42"
    }
   }
  },
@@ -3498,41 +3498,6 @@
     5
    ]
   },
-  "41480": {
-   "label": "경기 41480",
-   "R0_current": [
-    1247,
-    23
-   ],
-   "R0_current_SB": [
-    659,
-    19
-   ],
-   "R1_protect": [
-    1292,
-    23
-   ],
-   "R1_protect_SB": [
-    692,
-    19
-   ],
-   "R2_promo": [
-    1445,
-    27
-   ],
-   "R2_promo_SB": [
-    814,
-    26
-   ],
-   "R3_zone_all": [
-    1487,
-    27
-   ],
-   "R3_zone_all_SB": [
-    847,
-    26
-   ]
-  },
   "41500": {
    "label": "경기 41500",
    "R0_current": [
@@ -3776,41 +3741,6 @@
    "R3_zone_all_SB": [
     1525,
     26
-   ]
-  },
-  "41670": {
-   "label": "경기 41670",
-   "R0_current": [
-    1846,
-    17
-   ],
-   "R0_current_SB": [
-    1298,
-    13
-   ],
-   "R1_protect": [
-    1973,
-    18
-   ],
-   "R1_protect_SB": [
-    1390,
-    14
-   ],
-   "R2_promo": [
-    2843,
-    20
-   ],
-   "R2_promo_SB": [
-    2098,
-    16
-   ],
-   "R3_zone_all": [
-    2953,
-    19
-   ],
-   "R3_zone_all_SB": [
-    2175,
-    17
    ]
   },
   "41800": {
@@ -5561,41 +5491,6 @@
    "R3_zone_all_SB": [
     1742,
     24
-   ]
-  },
-  "46870": {
-   "label": "전남 46870",
-   "R0_current": [
-    1325,
-    17
-   ],
-   "R0_current_SB": [
-    853,
-    15
-   ],
-   "R1_protect": [
-    1636,
-    17
-   ],
-   "R1_protect_SB": [
-    1093,
-    15
-   ],
-   "R2_promo": [
-    2164,
-    28
-   ],
-   "R2_promo_SB": [
-    1545,
-    28
-   ],
-   "R3_zone_all": [
-    2457,
-    28
-   ],
-   "R3_zone_all_SB": [
-    1771,
-    28
    ]
   },
   "46880": {
@@ -8536,6 +8431,111 @@
    "R3_zone_all_SB": [
     1370,
     11
+   ]
+  },
+  "41480": {
+   "label": "경기 41480",
+   "R0_current": [
+    1247,
+    21
+   ],
+   "R0_current_SB": [
+    659,
+    21
+   ],
+   "R1_protect": [
+    1292,
+    21
+   ],
+   "R1_protect_SB": [
+    692,
+    21
+   ],
+   "R2_promo": [
+    1445,
+    25
+   ],
+   "R2_promo_SB": [
+    814,
+    31
+   ],
+   "R3_zone_all": [
+    1487,
+    25
+   ],
+   "R3_zone_all_SB": [
+    847,
+    31
+   ]
+  },
+  "41670": {
+   "label": "경기 41670",
+   "R0_current": [
+    1846,
+    17
+   ],
+   "R0_current_SB": [
+    1298,
+    13
+   ],
+   "R1_protect": [
+    1973,
+    18
+   ],
+   "R1_protect_SB": [
+    1390,
+    14
+   ],
+   "R2_promo": [
+    2843,
+    20
+   ],
+   "R2_promo_SB": [
+    2098,
+    16
+   ],
+   "R3_zone_all": [
+    2953,
+    19
+   ],
+   "R3_zone_all_SB": [
+    2175,
+    17
+   ]
+  },
+  "46870": {
+   "label": "전남 46870",
+   "R0_current": [
+    1326,
+    17
+   ],
+   "R0_current_SB": [
+    854,
+    15
+   ],
+   "R1_protect": [
+    1637,
+    17
+   ],
+   "R1_protect_SB": [
+    1094,
+    15
+   ],
+   "R2_promo": [
+    2165,
+    28
+   ],
+   "R2_promo_SB": [
+    1546,
+    28
+   ],
+   "R3_zone_all": [
+    2458,
+    28
+   ],
+   "R3_zone_all_SB": [
+    1772,
+    28
    ]
   }
  }

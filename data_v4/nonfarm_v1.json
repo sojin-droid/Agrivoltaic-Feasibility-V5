@@ -1,5 +1,5 @@
 {
- "generated": "2026-10-21 17:12",
+ "generated": "2026-11-16 14:35",
  "run": "R2_promo",
  "review_built_at": "2026-10-19 23:19",
  "user_rounds": 4,
@@ -10,24 +10,24 @@
   "n_reviewed": 2867,
   "mw0": 18591.1,
   "mw_auto": 16464.5,
-  "mw_final": 13796.4,
+  "mw_final": 13785.6,
   "km2_0": 413.28,
-  "km2_final": 306.59
+  "km2_final": 306.35
  },
  "reviewed": {
   "n": 2867,
   "n_reviewed": 2867,
   "mw0": 14491.1,
   "mw_auto": 13126.6,
-  "mw_final": 10458.7,
+  "mw_final": 10450.3,
   "km2_0": 322.05,
-  "km2_final": 232.42,
+  "km2_final": 232.23,
   "verdict": {
    "partial": 1449,
    "mostly_nonfarm": 732,
    "ok": 686
   },
-  "n_below_1mw": 1398,
+  "n_below_1mw": 1403,
   "n_gone": 283
  },
  "unreviewed": {
@@ -35,12 +35,12 @@
   "n_reviewed": 0,
   "mw0": 4100.0,
   "mw_auto": 3337.9,
-  "mw_final": 3337.7,
+  "mw_final": 3335.3,
   "km2_0": 91.22,
-  "km2_final": 74.17
+  "km2_final": 74.12
  },
  "n_gone_all": 284,
- "n_ge1_after": 3345,
+ "n_ge1_after": 3338,
  "n_ge50_before": 25,
  "n_ge50_after": 24,
  "bands": [
@@ -84,9 +84,9 @@
    "n_reviewed": 898,
    "mw0": 4262.4,
    "mw_auto": 3609.9,
-   "mw_final": 2513.1,
+   "mw_final": 2510.9,
    "km2_0": 94.72,
-   "km2_final": 55.85
+   "km2_final": 55.8
   },
   {
    "band": "1-3",
@@ -95,9 +95,9 @@
    "n_reviewed": 1726,
    "mw0": 7091.2,
    "mw_auto": 5773.6,
-   "mw_final": 4639.4,
+   "mw_final": 4630.8,
    "km2_0": 157.72,
-   "km2_final": 103.1
+   "km2_final": 102.91
   }
  ],
  "reasons_eye": [
@@ -117,7 +117,7 @@
    "reason": "임야화",
    "parcels": 5698,
    "km2": 8.84,
-   "mw": 385.6
+   "mw": 388.1
   },
   {
    "reason": "기타",
@@ -147,7 +147,7 @@
    "reason": "군사시설",
    "parcels": 929,
    "km2": 2.35,
-   "mw": 106.3
+   "mw": 108.5
   },
   {
    "reason": "공장·창고·야적장",
@@ -159,7 +159,7 @@
    "reason": "건물·마당",
    "parcels": 1216,
    "km2": 1.61,
-   "mw": 74.2
+   "mw": 75.8
   },
   {
    "reason": "주차장·포장면",
@@ -207,9 +207,9 @@
    "n_reviewed": 526,
    "mw0": 5523.9,
    "mw_auto": 5209.1,
-   "mw_final": 4809.7,
+   "mw_final": 4808.1,
    "km2_0": 122.74,
-   "km2_final": 106.88
+   "km2_final": 106.85
   },
   {
    "sido": "충남",
@@ -227,9 +227,9 @@
    "n_reviewed": 496,
    "mw0": 1945.7,
    "mw_auto": 1520.2,
-   "mw_final": 1096.5,
+   "mw_final": 1087.2,
    "km2_0": 43.27,
-   "km2_final": 24.37
+   "km2_final": 24.16
   },
   {
    "sido": "전북",
@@ -379,42 +379,37 @@
  },
  "keep": {
   "n_parcel": 289906,
-  "n_drop": 154599,
-  "n_partial": 57179,
+  "n_drop": 154607,
+  "n_partial": 57245,
   "a_ledger_km2": 413.278,
-  "a_keep_km2": 306.435,
-  "built_at": "2026-10-21T12:20:45"
+  "a_keep_km2": 306.194,
+  "built_at": "2026-11-13T18:44:37"
  },
  "corrections": {
   "files": [
-   "nonfarm_corrections_2026-10-20.geojson"
+   "nonfarm_corrections_2026-10-20.geojson",
+   "nonfarm_corrections_2026-11-13.geojson"
   ],
   "greenhouse": "restore",
   "water": "drop",
   "units": [
    {
-    "lab": 650306,
-    "sgg": "30200",
-    "mw_before": 0.1,
-    "mw_after": 5.8
+    "lab": 2165281,
+    "sgg": "41670",
+    "mw_before": 1.9,
+    "mw_after": 2.0
    },
    {
-    "lab": 314670,
-    "sgg": "27720",
-    "mw_before": 0.0,
-    "mw_after": 2.9
+    "lab": 2253515,
+    "sgg": "41670",
+    "mw_before": 1.3,
+    "mw_after": 1.3
    },
    {
-    "lab": 8571886,
-    "sgg": "47210",
-    "mw_before": 0.2,
-    "mw_after": 21.2
-   },
-   {
-    "lab": 10657762,
-    "sgg": "48250",
-    "mw_before": 3.1,
-    "mw_after": 14.7
+    "lab": 2183739,
+    "sgg": "41670",
+    "mw_before": 1.0,
+    "mw_after": 0.0
    },
    {
     "lab": 315308,
@@ -423,10 +418,112 @@
     "mw_after": 1.5
    },
    {
+    "lab": 1419327,
+    "sgg": "41480",
+    "mw_before": 2.6,
+    "mw_after": 0.0
+   },
+   {
+    "lab": 1459075,
+    "sgg": "41480",
+    "mw_before": 1.1,
+    "mw_after": 1.1
+   },
+   {
+    "lab": 1479183,
+    "sgg": "41480",
+    "mw_before": 1.1,
+    "mw_after": 0.0
+   },
+   {
+    "lab": 7219639,
+    "sgg": "46870",
+    "mw_before": 1.8,
+    "mw_after": 1.8
+   },
+   {
+    "lab": 8571886,
+    "sgg": "47210",
+    "mw_before": 0.2,
+    "mw_after": 21.2
+   },
+   {
+    "lab": 1419292,
+    "sgg": "41480",
+    "mw_before": 2.2,
+    "mw_after": 0.0
+   },
+   {
     "lab": 4501952,
     "sgg": "44770",
     "mw_before": 5.8,
     "mw_after": 9.0
+   },
+   {
+    "lab": 2183421,
+    "sgg": "41670",
+    "mw_before": 1.3,
+    "mw_after": 0.0
+   },
+   {
+    "lab": 2199719,
+    "sgg": "41670",
+    "mw_before": 1.1,
+    "mw_after": 1.1
+   },
+   {
+    "lab": 10657762,
+    "sgg": "48250",
+    "mw_before": 3.1,
+    "mw_after": 14.7
+   },
+   {
+    "lab": 7213496,
+    "sgg": "46870",
+    "mw_before": 2.6,
+    "mw_after": 2.6
+   },
+   {
+    "lab": 7181522,
+    "sgg": "46870",
+    "mw_before": 1.6,
+    "mw_after": 0.0
+   },
+   {
+    "lab": 1409824,
+    "sgg": "41480",
+    "mw_before": 1.9,
+    "mw_after": 1.9
+   },
+   {
+    "lab": 7230042,
+    "sgg": "46870",
+    "mw_before": 1.3,
+    "mw_after": 1.3
+   },
+   {
+    "lab": 1439191,
+    "sgg": "41480",
+    "mw_before": 1.2,
+    "mw_after": 0.1
+   },
+   {
+    "lab": 1464965,
+    "sgg": "41480",
+    "mw_before": 1.5,
+    "mw_after": 1.5
+   },
+   {
+    "lab": 314670,
+    "sgg": "27720",
+    "mw_before": 0.0,
+    "mw_after": 2.9
+   },
+   {
+    "lab": 650306,
+    "sgg": "30200",
+    "mw_before": 0.1,
+    "mw_after": 5.8
    }
   ]
  },
