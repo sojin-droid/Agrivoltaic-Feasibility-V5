@@ -1,15 +1,15 @@
 {
- "generated": "2026-11-16 14:57",
+ "generated": "2026-11-20 15:03",
  "source": "analysis_unit_v1.gpkg (v9_02 · 2026-10-07 전량 재산출 · ADR-0055 · ADR-0047 회수 대응표 적용) · R2_promo · 면적 하한 없음 · 단순화 2 m",
- "n_units": 254557,
+ "n_units": 254567,
  "n_big": 24,
- "big_mw_sum": 2325.6,
+ "big_mw_sum": 2325.2,
  "big_axes_note": "units_big 의 lo·hi(MW, 읍면동 계통 여유 하한·상한 참고)·d(km, 최근접 산업단지 경계 직선거리) = scenario_runs/R2_promo/block_context 원값(TOP 10 과 같은 값)",
  "n_cross_sgg": 210,
  "unit_note": "21m 연접 공간 분석 단위 — cluster 아님(최종 정의 자문 전) · 경계로 자르지 않음",
  "tiers": {
-  "default": 248940,
-  "quality_review": 5617
+  "default": 248951,
+  "quality_review": 5616
  },
  "tier_rule": "display_tier = v9_02(analysis_unit_v1) 값 — default = 기하 면적/장부 면적 0.99–1.01 · quality_review = 그 밖(기하 불완전 · 면적 불일치). 기본 지도는 default 만, quality_review 는 별도 표시로 확인(숨기지 않음).",
  "missing": [
@@ -36143,6 +36143,21 @@
  ],
  "missing_note": "analysis_unit_missing_v1 — 소속 필지의 지적 폴리곤이 없어 도형을 만들지 못한 단위. 적격·소속은 그대로이며 지도에만 없다(부적격 아님).",
  "sgg": {
+  "44180": {
+   "k": 2138,
+   "km2": 11.05,
+   "cross": 3
+  },
+  "44270": {
+   "k": 2785,
+   "km2": 33.15,
+   "cross": 9
+  },
+  "44810": {
+   "k": 2543,
+   "km2": 8.96,
+   "cross": 18
+  },
   "41480": {
    "k": 1437,
    "km2": 3.89,
@@ -36798,11 +36813,6 @@
    "km2": 7.77,
    "cross": 5
   },
-  "44180": {
-   "k": 2132,
-   "km2": 11.14,
-   "cross": 3
-  },
   "44200": {
    "k": 2801,
    "km2": 11.31,
@@ -36822,11 +36832,6 @@
    "k": 200,
    "km2": 0.57,
    "cross": 0
-  },
-  "44270": {
-   "k": 2781,
-   "km2": 33.31,
-   "cross": 9
   },
   "44710": {
    "k": 1492,
@@ -36852,11 +36857,6 @@
    "k": 2074,
    "km2": 9.14,
    "cross": 9
-  },
-  "44810": {
-   "k": 2543,
-   "km2": 8.98,
-   "cross": 18
   },
   "44825": {
    "k": 2334,
