@@ -44,14 +44,14 @@
     const box = document.createElement('span');
     box.id = 'nf-chip'; box.setAttribute('role', 'group'); box.setAttribute('aria-label', '값 기준');
     box.style.cssText = 'display:inline-flex;margin-left:10px;border:1px solid var(--line,#cfd6cf);border-radius:16px;overflow:hidden;vertical-align:middle;white-space:nowrap';
-    // 커서를 올리면 뜨는 설명 카드 — 같은 곳(경기 평택 후보 공간)의 전후 위성사진
+    // 커서를 올리면 뜨는 설명 카드 — 같은 곳(경기 화성 후보 공간)의 전후 위성사진
     const TIP = {
       parcel: {title: '지목 기준 — 넓게 잡은 값', img: 'assets/nf_hover_jimok.jpg',
         lines: ['지목상 농지(전·답·과수원) 필지를 모두 셈', '도로·건물·숲이 된 필지도 들어 있음'],
-        cap: '노란 선 = 지목상 농지 필지 전부(고속도로 아래 띠 필지 포함)'},
+        cap: '노란 선 = 지목상 농지 필지 전부(건물이 들어선 필지 포함)'},
       sat: {title: '위성 기준 — 보수적으로 잡은 값', img: 'assets/nf_hover_sat.jpg',
         lines: ['위성사진 검토로 도로·건물·숲·물가 필지를 뺌', '휴경지 등을 함께 뺐을 수 있음', '검토 범위: 진흥구역 개방 조건 · 법인·국공유 · 1MW 이상 후보 공간'],
-        cap: '파란 칠 = 남긴 농지 · 노란 점선 = 뺀 비농지 필지'}
+        cap: '파란 칠 = 남긴 농지 · 빨간 칠 = 뺀 필지(건물이 들어선 땅)'}
     };
     const pop = document.createElement('div');
     pop.id = 'nf-tip'; pop.setAttribute('role', 'tooltip');
@@ -62,7 +62,7 @@
       const t = TIP[k], r = el.getBoundingClientRect();
       pop.innerHTML = `<div style="font-weight:700;margin-bottom:6px">${t.title}</div>`
         + `<img src="${t.img}" alt="" style="display:block;width:100%;border-radius:6px;margin-bottom:6px">`
-        + `<div style="color:#5b6b60;font-size:11.5px;margin-bottom:6px">경기 평택 후보 공간 예 · ${t.cap}</div>`
+        + `<div style="color:#5b6b60;font-size:11.5px;margin-bottom:6px">경기 화성 후보 공간 예 · ${t.cap}</div>`
         + t.lines.map(s => `<div>· ${s}</div>`).join('')
         + '<div style="margin-top:6px;color:#5b6b60;font-size:11.5px">실제 설치 가능 면적은 두 값 사이일 가능성이 큼</div>';
       pop.style.display = 'block';
