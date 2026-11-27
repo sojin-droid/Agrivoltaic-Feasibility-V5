@@ -55,7 +55,7 @@ const V4 = {
     const d = document.createElement('div');
     d.id = 'v4-loadfail'; d.setAttribute('role', 'alert');
     d.style.cssText = 'background:#FDECEA;color:#8A1C12;border-bottom:1px solid #F3B8B0;padding:10px 16px;font-size:13.5px;text-align:center';
-    d.textContent = `일부 데이터(${name})를 불러오지 못해 수치가 비어 보일 수 있습니다. 잠시 후 새로고침해 주세요.`;
+    d.textContent = `일부 데이터(${name})를 불러오지 못해 수치가 비어 보일 수 있음. 잠시 후 새로고침 필요.`;
     document.body.prepend(d);
   },
   n(x) { return x.toLocaleString('ko-KR'); },
@@ -82,7 +82,7 @@ const V4 = {
     }, {threshold: .5});
     io.observe(el);
   },
-  // 각주 목록 — 모든 페이지 최하단(푸터 앞) 자동 삽입. 본문의 [n] 마커가 여기로 앵커된다.
+  // 각주 목록 — 모든 페이지 최하단(푸터 앞) 자동 삽입. 본문의 [n] 마커가 여기로 앵커됨.
   footnotes() {
     const ftr = document.querySelector('footer.v4');
     if (!ftr || document.getElementById('fnsec')) return;

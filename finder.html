@@ -127,7 +127,7 @@ input[type=range]{accent-color:var(--navy)}
       <div id="indTypes"></div></div>
 
     <div class="grp"><div class="gt">계통 여유 참고지표 — 표시 하한</div>
-      <div class="gopt">잔여 연계가능용량이 클수록 짙은 푸른색으로 채색됩니다. 표시 하한을 올리면 그 값 이상인 읍면동만 채색됩니다.</div>
+      <div class="gopt">잔여 연계가능용량이 클수록 짙은 푸른색으로 채색됨. 표시 하한을 올리면 그 값 이상인 읍면동만 채색됨.</div>
       <div class="gstep">
         <input type="range" id="gridStep" min="0" max="5" step="1" value="5" aria-label="계통 여유 표시 하한(구간)">
         <div class="gbar" id="gridBar"></div><div class="gbar-l" id="gridBarL"></div></div>
@@ -331,7 +331,7 @@ input[type=range]{accent-color:var(--navy)}
   // ── 기존 태양광 시설(VALID 좌표만) — 전수 아님 ──
   const EX = await V55.existing.load();
   put('exCnt', EX ? `${V55.existing.kindLabel(EX)}` : '자료 없음');
-  document.getElementById('exNote').textContent = V55.EXISTING_NOTE + ' 지도에는 공개된 태양광 발전사업 허가 자료 중 위치를 확인할 수 있는 곳만 표시합니다.';
+  document.getElementById('exNote').textContent = V55.EXISTING_NOTE + ' 지도에는 공개된 태양광 발전사업 허가 자료 중 위치를 확인할 수 있는 곳만 표시함.';
   let exLayer = null;
   document.getElementById('exToggle').onchange = e => { if (e.target.checked) { if (!exLayer) exLayer = V55.existing.layer(EX, {pane: 'exPane'}); map.addLayer(exLayer); } else if (exLayer) map.removeLayer(exLayer); };
 
