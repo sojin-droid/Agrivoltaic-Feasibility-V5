@@ -35,7 +35,7 @@ jobs:
         run: |
           mkdir -p _site
           cp *.html style.css site.js _site/
-          cp -R assets data_v4 _site/
+          cp -R assets data_v4 data_v4_base _site/
           rsync -a --exclude '*.py' docs/ _site/docs/
           touch _site/.nojekyll
           du -sh _site

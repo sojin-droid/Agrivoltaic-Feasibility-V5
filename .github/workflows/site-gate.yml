@@ -37,6 +37,7 @@ jobs:
             !/data_v4/parcels/
             !/data_v4/existing_parcels/
             !/data_v4/advisory/
+            !/data_v4_base/
 
       - uses: actions/setup-python@v5
         with:
