@@ -36,18 +36,28 @@
     if (fixed || document.getElementById('nf-chip')) return;
     const host = document.querySelector('header.nav .menu') || document.querySelector('header.nav') || document.querySelector('nav');
     if (!host) return;
-    const b = document.createElement('button');
-    b.id = 'nf-chip'; b.type = 'button';
-    b.setAttribute('aria-pressed', on ? 'true' : 'false');
-    b.title = on ? '지금: 비농지 제외 사례 반영 값 — 누르면 지목 기준 값으로' : '지금: 지목 기준 값 — 누르면 비농지 제외 사례 반영 값으로';
-    b.textContent = '비농지 제외 ' + (on ? '켬' : '끔');
-    b.style.cssText = 'margin-left:10px;padding:4px 10px;border-radius:14px;font:inherit;font-size:12px;cursor:pointer;white-space:nowrap;'
-      + (on ? 'background:var(--leaf-deep,#2f6b3a);color:#fff;border:1px solid var(--leaf-deep,#2f6b3a)' : 'background:transparent;color:inherit;border:1px solid currentColor');
-    b.addEventListener('click', () => {
-      try { localStorage.setItem(KEY, on ? '0' : '1'); } catch (e) { /* 무시 */ }
-      const u = new URL(location.href); u.searchParams.delete('nf'); location.href = u.toString();
+    // 두 칸 단추: 필지 모양 = 지목 기준 · 위성 모양 = 위성사진으로 비농지를 거른 값
+    const ICON = {
+      parcel: '<svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M3 5l8-2 2 7-9 3z"/><path d="M11 3l9 3-2 7-5-3"/><path d="M4 13l9-3 5 3-3 8-9-2z"/></svg>',
+      sat: '<svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="6" height="6" rx="1" transform="rotate(45 12 12)"/><path d="M8.5 8.5l-4-4M6.2 2.8L2.8 6.2"/><path d="M15.5 15.5l4 4M17.8 21.2l3.4-3.4"/><path d="M16 4.5a4 4 0 0 1 3.5 3.5M16 1.5a7 7 0 0 1 6.5 6.5"/></svg>'
+    };
+    const box = document.createElement('span');
+    box.id = 'nf-chip'; box.setAttribute('role', 'group'); box.setAttribute('aria-label', '값 기준');
+    box.style.cssText = 'display:inline-flex;margin-left:10px;border:1px solid var(--line,#cfd6cf);border-radius:16px;overflow:hidden;vertical-align:middle;white-space:nowrap';
+    [['parcel', false, '지목', '지목 기준 값 — 지목상 농지 필지로 계산'], ['sat', true, '위성', '위성사진으로 비농지 필지를 거른 값(비농지 제외 사례)']].forEach(([k, val, label, tip]) => {
+      const b = document.createElement('button');
+      b.type = 'button'; b.title = tip; b.setAttribute('aria-pressed', on === val ? 'true' : 'false');
+      b.innerHTML = ICON[k] + '<span style="margin-left:4px">' + label + '</span>';
+      b.style.cssText = 'display:inline-flex;align-items:center;padding:4px 10px;border:0;font:inherit;font-size:12px;cursor:pointer;'
+        + (on === val ? 'background:var(--leaf-deep,#2f6b3a);color:#fff' : 'background:transparent;color:inherit');
+      b.addEventListener('click', () => {
+        if (on === val) return;
+        try { localStorage.setItem(KEY, val ? '1' : '0'); } catch (e) { /* 무시 */ }
+        const u = new URL(location.href); u.searchParams.delete('nf'); location.href = u.toString();
+      });
+      box.appendChild(b);
     });
-    host.appendChild(b);
+    host.appendChild(box);
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', chip); else chip();
 })();
