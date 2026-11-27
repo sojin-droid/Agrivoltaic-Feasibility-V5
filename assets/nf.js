@@ -44,9 +44,37 @@
     const box = document.createElement('span');
     box.id = 'nf-chip'; box.setAttribute('role', 'group'); box.setAttribute('aria-label', '값 기준');
     box.style.cssText = 'display:inline-flex;margin-left:10px;border:1px solid var(--line,#cfd6cf);border-radius:16px;overflow:hidden;vertical-align:middle;white-space:nowrap';
-    [['parcel', false, '지목', '지목 기준 값 — 지목상 농지 필지로 계산'], ['sat', true, '위성', '위성사진으로 비농지 필지를 거른 값(비농지 제외 사례)']].forEach(([k, val, label, tip]) => {
+    // 커서를 올리면 뜨는 설명 카드 — 같은 곳(경기 평택 후보 공간)의 전후 위성사진
+    const TIP = {
+      parcel: {title: '지목 기준 — 넓게 잡은 값', img: 'assets/nf_hover_jimok.jpg',
+        lines: ['지목상 농지(전·답·과수원) 필지를 모두 셈', '도로·건물·숲이 된 필지도 들어 있음'],
+        cap: '노란 선 = 지목상 농지 필지 전부(고속도로 아래 띠 필지 포함)'},
+      sat: {title: '위성 기준 — 보수적으로 잡은 값', img: 'assets/nf_hover_sat.jpg',
+        lines: ['위성사진 검토로 도로·건물·숲·물가 필지를 뺌', '휴경지 등을 함께 뺐을 수 있음', '검토 범위: 진흥구역 개방 조건 · 법인·국공유 · 1MW 이상 후보 공간'],
+        cap: '파란 칠 = 남긴 농지 · 노란 점선 = 뺀 비농지 필지'}
+    };
+    const pop = document.createElement('div');
+    pop.id = 'nf-tip'; pop.setAttribute('role', 'tooltip');
+    pop.style.cssText = 'position:fixed;z-index:9999;display:none;width:300px;padding:10px 12px;background:#fff;color:#1d2a22;'
+      + 'border:1px solid var(--line,#cfd6cf);border-radius:10px;box-shadow:0 6px 24px rgba(0,0,0,.18);font-size:12.5px;line-height:1.5;text-align:left';
+    document.body.appendChild(pop);
+    const show = (k, el) => {
+      const t = TIP[k], r = el.getBoundingClientRect();
+      pop.innerHTML = `<div style="font-weight:700;margin-bottom:6px">${t.title}</div>`
+        + `<img src="${t.img}" alt="" style="display:block;width:100%;border-radius:6px;margin-bottom:6px">`
+        + `<div style="color:#5b6b60;font-size:11.5px;margin-bottom:6px">경기 평택 후보 공간 예 · ${t.cap}</div>`
+        + t.lines.map(s => `<div>· ${s}</div>`).join('')
+        + '<div style="margin-top:6px;color:#5b6b60;font-size:11.5px">실제 설치 가능 면적은 두 값 사이일 가능성이 큼</div>';
+      pop.style.display = 'block';
+      const left = Math.min(Math.max(8, r.left + r.width / 2 - 150), innerWidth - 308);
+      pop.style.left = left + 'px'; pop.style.top = (r.bottom + 8) + 'px';
+    };
+    const hide = () => { pop.style.display = 'none'; };
+    [['parcel', false, '지목'], ['sat', true, '위성']].forEach(([k, val, label]) => {
       const b = document.createElement('button');
-      b.type = 'button'; b.title = tip; b.setAttribute('aria-pressed', on === val ? 'true' : 'false');
+      b.type = 'button'; b.setAttribute('aria-pressed', on === val ? 'true' : 'false'); b.setAttribute('aria-describedby', 'nf-tip');
+      b.addEventListener('mouseenter', () => show(k, b)); b.addEventListener('focus', () => show(k, b));
+      b.addEventListener('mouseleave', hide); b.addEventListener('blur', hide);
       b.innerHTML = ICON[k] + '<span style="margin-left:4px">' + label + '</span>';
       b.style.cssText = 'display:inline-flex;align-items:center;padding:4px 10px;border:0;font:inherit;font-size:12px;cursor:pointer;'
         + (on === val ? 'background:var(--leaf-deep,#2f6b3a);color:#fff' : 'background:transparent;color:inherit');
